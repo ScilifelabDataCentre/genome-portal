@@ -20,23 +20,34 @@ SPECIES := $(SPECIES:%:{%})
 CONFIGS := $(shell find $(CONFIG_DIR)/$(SPECIES) -type f -name 'config.yml')
 JBROWSE_CONFIGS := $(patsubst $(CONFIG_DIR)/%,$(DATA_DIR)/%,$(CONFIGS:.yml=.json))
 
-# Files to download for further processing (typically compressing and indexing)
-EXPORT := SWG_DATA_DIR=$(SWG_DATA_DIR) SWG_CONFIG_DIR=$(SWG_CONFIG_DIR)
-DOWNLOAD_TARGETS := $(shell $(EXPORT) ./scripts/make_download_targets $(CONFIGS) 2>/dev/null)
+# Files to download for further processing (typically compressing and
+# indexing).
+#
+# Each download target ends with a compression format
+# extension, for example .zip, .gz or even .nozip when the file is not
+# compressed.
+export := SWG_DATA_DIR=$(SWG_DATA_DIR) SWG_CONFIG_DIR=$(SWG_CONFIG_DIR)
+DOWNLOAD_TARGETS := $(shell $(export) ./scripts/make_download_targets $(CONFIGS) 2>/dev/null)
+unzipped := $(basename $(DOWNLOAD_TARGETS))
 
-# Assumes that each download target ends with a compression format
-# extension, for example .zip or .gz
-LOCAL_FILES := $(addsuffix .bgz,$(basename $(DOWNLOAD_TARGETS)))
-FASTA_INDICES := $(addsuffix .fai,$(filter %.fna.bgz,$(LOCAL_FILES)))
+# Fasta files and indices
+FASTA := $(addsuffix .bgz, $(filter %.fna,$(unzipped)))
+FASTA_INDICES := $(addsuffix .fai,$(FASTA))
 FASTA_GZINDICES := $(FASTA_INDICES:.fai=.gzi)
-GFF_INDICES := $(addsuffix .tbi,$(filter %.gff.bgz,$(LOCAL_FILES)))
+
+# GFF files and indices
+GFF := $(addsuffix .bgz, $(filter %.gff,$(unzipped)))
+GFF_INDICES := $(addsuffix .tbi,$(GFF))
+
+# GTF files
+GTF := $(filter %.gtf,$(unzipped)) 
+
+LOCAL_FILES := $(GFF) $(GFF_INDICES) \
+	$(FASTA) $(FASTA_INDICES) $(FASTA_GZINDICES) \
+	$(GTF) 
 
 # Files to install
-INSTALLED_FILES := $(patsubst $(DATA_DIR)/%,$(INSTALL_DIR)/%,\
-	$(LOCAL_FILES) \
-	$(FASTA_INDICES) $(FASTA_GZINDICES) \
-	$(GFF_INDICES) \
-	$(JBROWSE_CONFIGS))
+INSTALLED_FILES := $(patsubst $(DATA_DIR)/%,$(INSTALL_DIR)/%, $(LOCAL_FILES) $(JBROWSE_CONFIGS))
 
 # Formatting
 INFO := '\x1b[0;46m'
@@ -59,14 +70,14 @@ all: build install
 	$(greet)
 
 .PHONY: build
-build: download index-gff index-fasta jbrowse-config
+build: download recompress index-gff index-fasta jbrowse-config
 
 .PHONY: debug
 debug:
 	$(call log_list, "Configuration files :", $(CONFIGS))
 	$(call log_list, "JBrowse configuration files :", $(JBROWSE_CONFIGS))
 	$(call log_list, "Files to download :", $(DOWNLOAD_TARGETS))
-	$(call log_list, "Compressed files :", $(LOCAL_FILES))
+	$(call log_list, "Recompressed files :", $(FASTA) $(GFF) $(GTF))
 	$(call log_list, "FASTA indices :", $(FASTA_INDICES) $(FASTA_GZINDICES))
 	$(call log_list, "GFF indices :", $(GFF_INDICES))
 	$(call log_list, "Files to install :", $(INSTALLED_FILES))
@@ -94,9 +105,9 @@ clean-config:
 	rm -f $(JBROWSE_CONFIGS)
 
 # Remove built data files
-.PHONY: clean-local
+.PHONY: clean-local 
 clean-local:
-	rm -f $(LOCAL_FILES) $(FASTA_INDICES) $(FASTA_GZINDICES) $(GFF_INDICES)
+	rm -f $(LOCAL_FILES)  
 
 
 # Remove all artifacts
@@ -104,8 +115,8 @@ clean-local:
 clean: clean-upstream clean-local clean-config
 
 
-.PHONY: compress
-compress: $(LOCAL_FILES);
+.PHONY: recompress
+recompress: $(GFF) $(FASTA) $(GTF);
 
 # Copy data and configuration to hugo static folder
 .PHONY: install
@@ -167,5 +178,8 @@ $(DOWNLOAD_TARGETS): $(DATA_DIR)/%:| $(DATA_DIR)/.downloads/%
 # expansion
 _pattern = %
 .SECONDEXPANSION:
-$(LOCAL_FILES): %.bgz: $$(filter $$*$$(_pattern),$$(DOWNLOAD_TARGETS))
+$(FASTA) $(GFF): %.bgz: $$(filter $$*$$(_pattern),$$(DOWNLOAD_TARGETS))
 	@$(SHELL) -o pipefail -c "zcat -f < $< | ./scripts/filter $(<F) | bgzip > $@"
+
+$(GTF): $$(filter $$@$$(_pattern),$$(DOWNLOAD_TARGETS))
+	@$(SHELL) -o pipefail -c "zcat -f < $< > $@"

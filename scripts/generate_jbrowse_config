@@ -29,8 +29,13 @@ ensure_local() {
     # Downloaded files are recompressed with bgzip(1), hence the --bgz
     # flag to normalize the file name with the .bgz extension
     local_file="$(normalize_filename --bgz "${filename}")"
-
-    if ! [[ -e "${SPECIES_DATA_DIR}/${local_file}" ]]; then
+    if [[ -e "${SPECIES_DATA_DIR}/${local_file}" ]]; then
+	:
+    # Another possibility is that the downloaded file was simply
+    # unzipped (GTF files for example)
+    elif [[ -e "${SPECIES_DATA_DIR}/${local_file/.bgz}" ]]; then
+	local_file="${local_file/.bgz}"
+    else
 	args_ref=("$URL")
 	echo "Using remote file $URL" >&2
 	return
