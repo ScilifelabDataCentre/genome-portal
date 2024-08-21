@@ -1,0 +1,8 @@
+organism: "Krill mitochondrion"
+assembly:
+  name: mito_krill
+  accession: XXX12345
+  url: "http://fixtures/mito_krill/krill_mitochondrial_assembly_truncated.fasta"
+tracks:
+  - name: "Functional annotation (test of BED file)"
+    url: "http://fixtures/mito_krill/krill_mitochondrial_annotation_truncated.bed"
