@@ -52,9 +52,9 @@ In the subsections below we have collected specific recommendations for some com
 
 One of the most common formats for storing annotations for genomic features is GFF (General Feature Format). NCBI for instance uses this for protein-coding genes. JBrowse 2 specifically supports the GFF3 version, and older GFF formats thus need to be converted to GFF3 as described below.
 
-GTF is another format for storing annotations that is very similar to GFF. However, JBrowse 2 does support GTF files and they therefore also need to be converted to GFF3.
+GTF is another format for storing annotations that is very similar to GFF. JBrowse 2 does not natively support GTF files, but can be made to do so by installing the GtfAdapter plugin. The Genome Portal uses GtfAdapter and is thus able to display GTF tracks.
 
-There are several bioinformatics tools that can convert GTF and older GFF versions to GFF3. We recommend using <a href="https://agat.readthedocs.io">AGAT</a>. This is a command line toolkit designed by the NBIS bioinformatics platform at SciLifeLab. The AGAT script `agat_convert_sp_gxf2gxf.pl` is used to achieve conversions from GFF and GTF to GFF3.
+Another solution would be to convert the GTF files to GFF3; this would for instance be useful if a user wants to download the the files for loading them in a local JBrowse 2 desktop client. There are several bioinformatics tools that can convert GTF and older GFF versions to GFF3. We recommend using <a href="https://agat.readthedocs.io">AGAT</a>. This is a command line toolkit designed by the NBIS bioinformatics platform at SciLifeLab. The AGAT script `agat_convert_sp_gxf2gxf.pl` is used to achieve conversions from GFF and GTF to GFF3.
 
 ```
 # Usage example based on the AGAT documentation
