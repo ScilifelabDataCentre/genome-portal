@@ -30,6 +30,7 @@ fi
 if [[ "$1" == "--dev" ]]; then
     docker run -d  \
 	   -p "${SWG_PORT}":1313 \
+	   -p 1313:1313 \
 	   -v "$(pwd)/hugo":"/src" \
 	   --name "${SWG_NAME}" \
 	   "${SWG_HUGO_IMAGE}:${SWG_HUGO_TAG}" serve
