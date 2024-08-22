@@ -53,15 +53,15 @@ ensure_local() {
 
 add_assemblies() {
     local -a file_args
-    while IFS=';' read -r url name aliases filename; do
-	args=(--name="$name")
+    while IFS=';' read -r url name displayName aliases filename; do
+	args=(--name="$name" --displayName="${displayName:-name}")
 	if [[ -n "$aliases" ]]; then
 	    args+=(--refNameAliases="$aliases")
 	fi
 	file_args=()
 	ensure_local "$url" "$filename" file_args
 	jbrowse add-assembly "${JBROWSE_ARGS[@]}" "${args[@]}" "${file_args[@]}"
-    done < <(yq '.assembly | [.url, .name, .aliases // "", .fileName // ""] | join(";")' "$1")
+    done < <(yq '.assembly | [.url, .name, .displayName // "", .aliases // "", .fileName // ""] | join(";")' "$1")
 }
 
 add_tracks () {

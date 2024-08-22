@@ -1,6 +1,7 @@
 organism: "Clupea harengus"
 assembly:
   name: Ch_v2.0.2
+  displayName: "Atlantic herring"
   url: "https://hgdownload.soe.ucsc.edu/hubs/GCF/900/700/415/GCF_900700415.2/GCF_900700415.2.2bit"
 tracks:
   - name: "Protein coding genes"
