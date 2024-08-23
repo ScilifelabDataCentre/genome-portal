@@ -1,0 +1,75 @@
+{
+  "defaultSession": {
+    "id": "ABCDE12345",
+    "name": "Krill mitochondrion, truncated genome assembly",
+    "widgets": {
+
+      "hierarchicalTrackSelector": {
+        "id": "hierarchicalTrackSelector",
+        "type": "HierarchicalTrackSelectorWidget",
+        "view": "ABCDE12345_view",
+        "faceted": {
+          "showSparse": false,
+          "showFilters": true,
+          "showOptions": false,
+          "panelWidth": 400
+        }
+      }
+    },
+    "activeWidgets": {
+      "hierarchicalTrackSelector": "hierarchicalTrackSelector"
+    },
+    "views": [
+      {
+        "id": "ABCDE12345_view",
+        "minimized": false,
+        "type": "LinearGenomeView",
+        "offsetPx": 0,
+        "bpPerPx": 3.5,
+        "displayedRegions": [
+          {
+            "refName": "seq_m_1",
+            "start": 0,
+            "end": 5433,
+            "reversed": false,
+            "assemblyName": "mito_krill"
+          }
+        ],
+        "tracks": [
+          {
+            "id": "FGHIJ67890",
+            "type": "FeatureTrack",
+            "configuration": "krill_mitochondrial_annotation_truncated",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "FGHIJ67890_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 180,
+                "configuration": "krill_mitochondrial_annotation_truncated-LinearBasicDisplay"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "comment": "NOTE: defaultSession config ends here, below is the track configuration. To set a track to be on be default, it needs to be added to the defaultSession configuration too, as in the example above",
+  "tracks": [
+  {
+    "type": "FeatureTrack",
+    "trackId": "krill_mitochondrial_annotation_truncated",
+    "name": "Functional annotation (test of BED file)",
+    "adapter": {
+      "type": "BedAdapter",
+      "bedLocation": {
+        "uri": "https://raw.githubusercontent.com/ScilifelabDataCentre/swedgene/main/tests/fixtures/mito_krill/krill_mitochondrial_annotation_truncated.bed",
+        "locationType": "UriLocation"
+      }
+    },
+    "assemblyNames": [
+      "mito_krill"
+    ]
+  }
+  ]
+}
