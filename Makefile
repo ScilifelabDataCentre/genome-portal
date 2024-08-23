@@ -42,9 +42,14 @@ GFF_INDICES := $(addsuffix .tbi,$(GFF))
 # GTF files
 GTF := $(filter %.gtf,$(unzipped)) 
 
+# BED files
+BED := $(addsuffix .bgz,$(filter %.bed,$(unzipped)))
+BED_INDICES := $(addsuffix .tbi,$(BED))
+
 LOCAL_FILES := $(GFF) $(GFF_INDICES) \
 	$(FASTA) $(FASTA_INDICES) $(FASTA_GZINDICES) \
-	$(GTF) 
+	$(GTF) \
+	$(BED) $(BED_INDICES)
 
 # Files to install
 INSTALLED_FILES := $(patsubst $(DATA_DIR)/%,$(INSTALL_DIR)/%, $(LOCAL_FILES) $(JBROWSE_CONFIGS))
@@ -77,9 +82,10 @@ debug:
 	$(call log_list, "Configuration files :", $(CONFIGS))
 	$(call log_list, "JBrowse configuration files :", $(JBROWSE_CONFIGS))
 	$(call log_list, "Files to download :", $(DOWNLOAD_TARGETS))
-	$(call log_list, "Recompressed files :", $(FASTA) $(GFF) $(GTF))
+	$(call log_list, "Recompressed files :", $(FASTA) $(GFF) $(GTF) $(BED)) 
 	$(call log_list, "FASTA indices :", $(FASTA_INDICES) $(FASTA_GZINDICES))
 	$(call log_list, "GFF indices :", $(GFF_INDICES))
+	$(call log_list, "BED indices :", $(BED_INDICES))
 	$(call log_list, "Files to install :", $(INSTALLED_FILES))
 
 .PHONY: jbrowse-config
@@ -116,7 +122,7 @@ clean: clean-upstream clean-local clean-config
 
 
 .PHONY: recompress
-recompress: $(GFF) $(FASTA) $(GTF);
+recompress: $(GFF) $(FASTA) $(GTF) $(BED);
 
 # Copy data and configuration to hugo static folder
 .PHONY: install
@@ -140,11 +146,20 @@ ifneq ($(FASTA_INDICES),)
 	@printf '  - %s\n' $(FASTA_INDICES:.fai='.{fai,gzi}')
 endif
 
+
 .PHONY: index-gff
 index-gff: $(GFF_INDICES)
 ifneq ($(GFF_INDICES),)
 	$(call log_info,'Indexed GFF files')
 	@printf '  - %s\n' $(GFF_INDICES)
+endif
+
+
+.PHONY: index-bed
+index-gff: $(BED_INDICES)
+ifneq ($(BED_INDICES),)
+	$(call log_info,'Indexed BED files')
+	@printf '  - %s\n' $(BED_INDICES)
 endif
 
 
@@ -159,6 +174,11 @@ $(FASTA_INDICES): %.fai: %
 
 $(GFF_INDICES): %.tbi: %
 	@$(SHELL) scripts/index_gff.sh $<
+
+
+$(BED_INDICES): %.tbi: %
+	@echo "Indexing BED file $@"; tabix -p bed $<
+
 
 # Order-only prerequisite to avoid re-downloading everything if data/.downloads
 # directory gets accidentally deleted. Downside: if an upstream file changes,
@@ -178,7 +198,7 @@ $(DOWNLOAD_TARGETS): $(DATA_DIR)/%:| $(DATA_DIR)/.downloads/%
 # expansion
 _pattern = %
 .SECONDEXPANSION:
-$(FASTA) $(GFF): %.bgz: $$(filter $$*$$(_pattern),$$(DOWNLOAD_TARGETS))
+$(FASTA) $(GFF) $(BED): %.bgz: $$(filter $$*$$(_pattern),$$(DOWNLOAD_TARGETS))
 	@$(SHELL) -o pipefail -c "zcat -f < $< | ./scripts/filter $(<F) | bgzip > $@"
 
 $(GTF): $$(filter $$@$$(_pattern),$$(DOWNLOAD_TARGETS))
