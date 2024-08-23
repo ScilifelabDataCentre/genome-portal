@@ -4,7 +4,7 @@ title: "*Parnassius mnemosyne*"
 subtitle: "Clouded apollo butterfly"
 summary: "Genome assembly, genome annotation and 4 data tracks."
 
-last_updated: "24/05/2024"
+last_updated: "17/07/2024"
 contact_person: "First Name Surname (firstname.surname@scilifelab.se)"
 
 cover_image: "/img/species/clouded_apollo.webp"
@@ -49,7 +49,7 @@ The genome assembly hosted in the portal was generated in a study by Höglund et
 
 If you use the data presented in the genome portal from this species in your research, please cite the original publication(s):
 
-- <p> Höglund, J., Dias, G., Olsen, R. A., Soares, A., Bunikis, I., Talla, V., & Backström, N. (2024). A Chromosome-Level Genome Assembly and Annotation for the Clouded Apollo Butterfly (*Parnassius mnemosyne*): A Species of Global Conservation Concern. Genome Biology and Evolution, 16(2), evae031. <https://doi.org/10.1093/gbe/evae031> </p>
+- <p> Höglund, J., Dias, G., Olsen, R. A., Soares, A., Bunikis, I., Talla, V., & Backström, N. (2024). A Chromosome-Level Genome Assembly and Annotation for the Clouded Apollo Butterfly (*Parnassius mnemosyne*): A Species of Global Conservation Concern. Genome Biology and Evolution, 16(2), evae031. <a href="https://doi.org/10.1093/gbe/evae031"> https://doi.org/10.1093/gbe/evae031</a> </p>
 
 #### References
 
