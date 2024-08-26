@@ -148,10 +148,13 @@ ifneq ($(GFF_INDICES),)
 endif
 
 
-$(JBROWSE_CONFIGS): $(DATA_DIR)/%.json: $(CONFIG_DIR)/%.yml
-	@echo "Generating JBrowse configuration for $(*D)"
-	@$(SHELL) scripts/generate_jbrowse_config $@ $<
+$(JBROWSE_CONFIGS): $(DATA_DIR)/%/config.json: $(CONFIG_DIR)/%/config.yml $(CONFIG_DIR)/%/config.json
+	@echo "Generating JBrowse configuration for $*"; \
+	cp $(lastword $^) $@ && \
+	$(SHELL) scripts/generate_jbrowse_config $@ $<
 
+$(CONFIG_DIR)/%/config.json:
+	@echo '{}' > $@
 
 $(FASTA_INDICES): %.fai: %
 	@$(SHELL) scripts/index_fasta.sh $<
