@@ -4,7 +4,7 @@ title: "*Linum tenue* Desf."
 subtitle: "A species of flax"
 summary: "Genome assembly, genome annotation and XXXXX data tracks."
 
-last_updated: "23/08/2024"
+last_updated: "26/08/2024"
 contact_person: "First Name Surname (firstname.surname@scilifelab.se)"
 
 cover_image: "/img/species/Ltenue_thrum_pin_B_Laenen_A_Desamore_4-3ratio_crop.webp"
