@@ -75,7 +75,7 @@ all: build install
 	$(greet)
 
 .PHONY: build
-build: download recompress index-gff index-fasta jbrowse-config
+build: download recompress index jbrowse-config
 
 .PHONY: debug
 debug:
@@ -139,29 +139,30 @@ uninstall:
 	rm -f $(INSTALLED_FILES)
 
 
-.PHONY: index-fasta
-index-fasta: $(FASTA_INDICES)
+.PHONY: index
+index: $(FASTA_INDICES) $(GFF_INDICES) $(BED_INDICES)
 ifneq ($(FASTA_INDICES),)
 	$(call log_info,'Indexed FASTA files')
 	@printf '  - %s\n' $(FASTA_INDICES:.fai='.{fai,gzi}')
 endif
-
-
-.PHONY: index-gff
-index-gff: $(GFF_INDICES)
 ifneq ($(GFF_INDICES),)
 	$(call log_info,'Indexed GFF files')
 	@printf '  - %s\n' $(GFF_INDICES)
 endif
-
-
-.PHONY: index-bed
-index-gff: $(BED_INDICES)
 ifneq ($(BED_INDICES),)
 	$(call log_info,'Indexed BED files')
 	@printf '  - %s\n' $(BED_INDICES)
 endif
 
+define make_index
+	@$(SHELL) scripts/index $<
+endef
+
+$(GFF_INDICES) $(BED_INDICES): %.tbi: %
+	$(make_index)
+
+$(FASTA_INDICES): %.fai: %
+	$(make_index)
 
 $(JBROWSE_CONFIGS): $(DATA_DIR)/%/config.json: $(CONFIG_DIR)/%/config.yml $(CONFIG_DIR)/%/config.json
 	@echo "Generating JBrowse configuration for $*"; \
@@ -171,17 +172,6 @@ $(JBROWSE_CONFIGS): $(DATA_DIR)/%/config.json: $(CONFIG_DIR)/%/config.yml $(CONF
 
 $(CONFIG_DIR)/%/config.json:
 	@echo '{}' > $@
-
-$(FASTA_INDICES): %.fai: %
-	@$(SHELL) scripts/index_fasta.sh $<
-
-
-$(GFF_INDICES): %.tbi: %
-	@$(SHELL) scripts/index_gff.sh $<
-
-
-$(BED_INDICES): %.tbi: %
-	@echo "Indexing BED file $@"; tabix -p bed $<
 
 
 # Order-only prerequisite to avoid re-downloading everything if data/.downloads
