@@ -10,17 +10,22 @@
     <!-- Open link in new tab species browser -->
     {{- partial "open_browser.html" . -}}
 
-
-
     <!-- species pic and distribution map -->
     <div class="row mt-3 d-flex">
 
-        <div class="col-lg-6 col-md-12 scilife-intro-map-image">
+        <div class="col-lg-6 col-md-12">
             <figure>
                 <img src="{{ .Params.cover_image }}" class="card-img-top scilife-intro-map-img" alt="Image of {{ .Title }}">
-                <a href="{{ .Params.img_attrib_link }}" title="Go to the image source" target="_blank">
-                    <figcaption class="scilife-card-image-attrib"> {{ .Params.img_attrib_text }} </figcaption>
-                </a>
+                {{ if .Params.img_attrib_link }}
+                    <a href="{{ .Params.img_attrib_link }}" title="Go to the image source" target="_blank">
+                        <figcaption class="scilife-card-image-attrib"> {{ .Params.img_attrib_text }} </figcaption>
+                    </a>
+                {{ else }}
+                    <p class="scilife-card-image-attrib">
+                        {{ .Params.img_attrib_text }}
+                    </p>
+                {{ end }}
+
             </figure>
         </div>
 
