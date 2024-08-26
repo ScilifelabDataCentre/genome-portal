@@ -89,7 +89,7 @@ debug:
 	$(call log_list, "Files to install :", $(INSTALLED_FILES))
 
 .PHONY: jbrowse-config
-jbrowse-config: $(JBROWSE_CONFIGS);
+jbrowse-config: $(JBROWSE_CONFIGS)
 	$(call log_info,'Generated JBrowse configuration in directories')
 	@printf "  - %s\n" $(JBROWSE_CONFIGS:/config.json=)
 
