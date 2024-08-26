@@ -18,19 +18,8 @@
                 In the Links column, you can find action buttons to download the data file,
                 go to the website of the source repository from where the data was fetched,
                 and (if applicable) the associated scientific article(s) to the data.
+                You can use the toggle on top right of the table to switch between the default and the expanded table view.
             </p>
-        </div>
-    </div>
-
-    <div class="row align-items-center">
-        <div class="col-lg-8">
-            <p>Use the toggle on the right to switch between the default and the expanded table view.</p>
-        </div>
-        <div class="col-lg-4 text-lg-end">
-            <div class="form-check form-switch scilife-toggle">
-                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
-                <label class="form-check-label" for="flexSwitchCheckChecked">Show all columns</label>
-            </div>
         </div>
     </div>
 
@@ -50,6 +39,11 @@
     {{ (resources.Get $tableDataPath | resources.Copy $staticDirFile).Publish }}
 
     <div class="row">
+        <div class="form-check form-switch scilife-toggle">
+            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+            <label class="form-check-label" for="flexSwitchCheckChecked">Show reduced table view</label>
+        </div>
+
         <div id="table-container-long">
             {{ partial "download_table" (dict "tableType" "long" "staticDirPath" $staticDirPath "tableData" $tableData)}}
         </div>
@@ -59,13 +53,6 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col scilife-subsection mt-5">
-            <hr>
-            <h3> TODO: Figure out if the below content should be kept or removed</h3>
-            {{ .Content }}
-        </div>
-    </div>
 </div>
 
 {{ partial "last_updated.html" . }}
@@ -76,11 +63,11 @@
         const shortTable = document.getElementById('table-container-short');
 
         if (this.checked) {
-            longTable.style.display = 'block';
-            shortTable.style.display = 'none';
-        } else {
             longTable.style.display = 'none';
             shortTable.style.display = 'block';
+        } else {
+            longTable.style.display = 'block';
+            shortTable.style.display = 'none';
         }
 
     // Initialize DataTables if not already initialized

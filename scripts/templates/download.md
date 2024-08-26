@@ -5,12 +5,3 @@ layout: "species_download"
 url: "SPECIES_FOLDER/download"
 weight: 3
 ---
-
-### Assembly
-
-[EDIT]
-
-
-### Data Tracks
-
-[EDIT]

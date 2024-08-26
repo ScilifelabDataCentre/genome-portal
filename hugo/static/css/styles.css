@@ -403,7 +403,7 @@ body {
 .scilife-toggle {
   display: flex;
   justify-content: right;
-  align-items: center;
+  align-items: right;
 }
 
 .scilife-toggle .form-check-input:checked {
@@ -417,8 +417,9 @@ body {
 }
 
 .scilife-toggle .form-check-label {
-  font-size: 1.2rem; 
+  font-size: 1.1rem; 
   margin-left: 0.5rem;
+  margin-right: 0.6rem;
 }
 
 /* footer images */

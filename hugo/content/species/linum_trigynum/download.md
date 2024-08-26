@@ -5,11 +5,3 @@ layout: "species_download"
 url: "linum_trigynum/download"
 weight: 3
 ---
-
-### Assembly
-
-[EDIT]
-
-### Data Tracks
-
-[EDIT]
