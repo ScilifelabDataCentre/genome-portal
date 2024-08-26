@@ -39,14 +39,14 @@
           {
             "id": "FGHIJ67890",
             "type": "FeatureTrack",
-            "configuration": "krill_mitochondrial_annotation_truncated",
+            "configuration": "krill_mitochondrial_annotation_truncated_external",
             "minimized": false,
             "displays": [
               {
                 "id": "FGHIJ67890_display",
                 "type": "LinearBasicDisplay",
                 "heightPreConfig": 180,
-                "configuration": "krill_mitochondrial_annotation_truncated-LinearBasicDisplay"
+                "configuration": "krill_mitochondrial_annotation_truncated_external-LinearBasicDisplay"
               }
             ]
           }
@@ -58,8 +58,8 @@
   "tracks": [
   {
     "type": "FeatureTrack",
-    "trackId": "krill_mitochondrial_annotation_truncated",
-    "name": "Functional annotation (test of BED file)",
+    "trackId": "krill_mitochondrial_annotation_truncated_external",
+    "name": "Test of initial config (externaly hosted, non-downloaded BED file)",
     "adapter": {
       "type": "BedAdapter",
       "bedLocation": {
