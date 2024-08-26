@@ -15,8 +15,8 @@
 : "${SWG_NAME:=swedgene-site}"
 : "${SWG_DATA_DIR:=data}"
 : "${SWG_PORT:=8080}"
-: "${SWG_HUGO_IMAGE:=klakegg/hugo}"
-: "${SWG_HUGO_TAG:=latest}"
+: "${SWG_HUGO_IMAGE:=hugomods/hugo}"
+: "${SWG_HUGO_TAG:=std-base-0.128.2}"
 
 if [[ -n "${cid:=$(docker ps -qaf name=${SWG_NAME})}" ]]; then
     cat <<EOF
@@ -28,12 +28,12 @@ EOF
 fi
 
 if [[ "$1" == "--dev" ]]; then
-    docker run -d  \
+    docker run --rm -d  \
 	   -p "${SWG_PORT}":1313 \
 	   -p 1313:1313 \
 	   -v "$(pwd)/hugo":"/src" \
 	   --name "${SWG_NAME}" \
-	   "${SWG_HUGO_IMAGE}:${SWG_HUGO_TAG}" serve
+	   "${SWG_HUGO_IMAGE}:${SWG_HUGO_TAG}" hugo server --bind 0.0.0.0
 else
     docker run -d  \
 	   -p "${SWG_PORT}":8080 \
