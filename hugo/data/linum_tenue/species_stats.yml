@@ -19,7 +19,7 @@ annotation:
   - "Gene #": 52,831
   - "Transcript #": 142,552
   - "Avg exons per transcript": 6.1
-  - "Avg gene length (bp)": 3080
-  - "Avg transcript length (bp)": 3305
+  - "Avg gene length (bp)": 3,080
+  - "Avg transcript length (bp)": 3,305
   - "Avg exon length (bp)": 272
   - "Avg intron length (bp)": 101

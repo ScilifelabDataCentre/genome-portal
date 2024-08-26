@@ -3,7 +3,7 @@ key_info:
   - "Assembly Name": "Linum_tenue_thrum_v1"
   - "Assembly Type": "Haploid"
   - "Assembly Level": "Scaffold"
-  - "Genome Representation": "full"
+  - "Genome Representation": "Full"
   - "Accession": "GCA_946122785.1"
 
 
