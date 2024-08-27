@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# View a data directory in JBrowse
+main() {
+    if [[ "$1" == "--build" ]]; then
+	1>&2 echo "Building browser image jb2:latest"
+	docker build -t jb2 docker/jbrowse.dockerfile
+    else
+	data_dir="$(realpath $1)"
+	name=jb2-"${data_dir##*/}"
+
+	if ! docker run -d --rm --name=${name} \
+	       -v "$(realpath $1)":/app/data \
+	       -p 3000:3000 \
+	       jb2; then
+	    1>&2 echo "Error running docker"
+	fi
+	1>&2 cat <<EOF
+Browsing data directory $1 on port 3000.
+To stop and remove container:
+    docker stop ${name}
+EOF
+    fi
+}
+
+main "$@"
