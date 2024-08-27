@@ -1,0 +1,11 @@
+organism: "Meganyctiphanes norvegica"
+assembly:
+  name: Mnor_HA_v2
+  accession: GCA_964058975.1
+  # The following url points to the original ENA upload of the assembly. It will require an alias file to be able to load the protein coding genes track
+  url: "ftp://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/cax/CAXKWB01.fasta.gz"
+  aliases: "https://raw.githubusercontent.com/ScilifelabDataCentre/swedgene/main/scripts/data_stewardship/alias_files_temp_storage/CAXKWB01.fna.alias"
+tracks:
+  - name: "Protein coding genes (non-redundant)"
+    url: "https://figshare.scilifelab.se/ndownloader/files/40569599"
+    fileName: "annotations.protein_coding_gene_models.non_redundant_added_stop_codons.gff"
