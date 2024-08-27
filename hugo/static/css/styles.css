@@ -9,7 +9,7 @@
   --scilife-lime-050: #D3E4A3;
   --scilife-lime-025: #E9F2D1;
 
-  /* Grape should be used modestly as a 'color pop' or on smaller details */ 
+  /* Grape should be used modestly as a 'color pop' or on smaller details */
   --scilife-grape: #491F53;
   --scilife-grape-075: #77577E;
   --scilife-grape-050: #A48FA9;
@@ -29,7 +29,7 @@
   --scilife-medium-grey: #A6A6A6;
   --scilife-contrast-okay-grey: #727272;
   --scilife-dark-grey: #3F3F3F;
-} 
+}
 
 a {
   color: var(--scilife-teal);
@@ -42,8 +42,8 @@ body {
 
 .form-control:focus {
   border-color: var(--scilife-lime);
-  box-shadow: 0 0 0 0.2rem rgba(167, 201, 71, 0.25); 
-}  
+  box-shadow: 0 0 0 0.2rem rgba(167, 201, 71, 0.25);
+}
 
 .scilife-navbar {
   font-size: 1.5rem;
@@ -92,13 +92,13 @@ body {
 
 .scilife-breadcrumbs {
   font-size: 1.125rem;
-  font-weight: 500; 
-  letter-spacing: 0.045rem; 
+  font-weight: 500;
+  letter-spacing: 0.045rem;
   color: var(--scilife-contrast-okay-grey)
 }
 
 .scilife-breadcrumbs a {
-  color: var(--scilife-contrast-okay-grey); 
+  color: var(--scilife-contrast-okay-grey);
 }
 
 
@@ -108,22 +108,22 @@ body {
 }
 
 .scilife-species-titles h1 {
-  font-size: 3rem; 
-  font-weight: 700; 
+  font-size: 3rem;
+  font-weight: 700;
   letter-spacing: -0.06rem;
 }
 
 .scilife-species-titles h2 {
   color: var(--scilife-contrast-okay-grey);
-  font-size: 2.5rem; 
-  font-weight: 700; 
+  font-size: 2.5rem;
+  font-weight: 700;
   letter-spacing: -0.05rem;
 }
 
 .scilife-species-titles h3 {
   color: var(--scilife-grape);
-  font-size: 2rem; 
-  font-weight: 700; 
+  font-size: 2rem;
+  font-weight: 700;
   letter-spacing: -0.04rem;
 }
 
@@ -135,7 +135,7 @@ body {
   padding: 0.5rem;
 }
 
-.scilife-species-card .card-body { 
+.scilife-species-card .card-body {
   padding: 0rem;
 }
 
@@ -174,7 +174,10 @@ body {
   border-color: var(--scilife-aqua);
 }
 
-.scilife-species-button:hover {
+.scilife-species-button:hover,
+.scilife-species-button:focus,
+.scilife-species-button:active,
+.scilife-species-button:active:focus {
   color: white;
   background-color: var(--scilife-aqua);
   border-color: var(--scilife-aqua);
@@ -189,27 +192,28 @@ body {
 /* For mobile devices */
 @media (max-width: 576px) {
   .scilife-intro-map-img {
-      max-height: 300px;
+    max-height: 300px;
   }
 }
+
 /* For tablets */
 @media (min-width: 577px) and (max-width: 992px) {
   .scilife-intro-map-img {
-      max-height: 350px;
+    max-height: 350px;
   }
 }
 
 /* For laptops */
 @media (min-width: 993px) and (max-width: 1199px) {
   .scilife-intro-map-img {
-      max-height: 330px;
+    max-height: 330px;
   }
 }
 
 /* For larger screen */
-@media (min-width: 1400px) { 
+@media (min-width: 1400px) {
   .scilife-intro-map-img {
-      height: 450px;
+    height: 450px;
   }
 }
 
@@ -248,8 +252,15 @@ body {
   color: white;
   font-size: 1.125rem;
   font-weight: 700;
-  letter-spacing: 0.045rem; 
+  letter-spacing: 0.045rem;
 }
+
+.scilife-subsection .btn:focus {
+  background-color: var(--scilife-teal);
+  color: white;
+  border-color: var(--scilife-teal);
+}
+
 
 /* Overrides default button */
 .scilife-subsection .scilife-ncbi-ena-btn {
@@ -259,15 +270,27 @@ body {
   align-items: center;
 }
 
+.scilife-subsection .scilife-ncbi-ena-btn:focus {
+  background-color: var(--scilife-grape);
+  color: white;
+  border-color: var(--scilife-grape);
+}
+
 /* Overrides default button */
 .scilife-subsection .scilife-external-btn {
   background-color: var(--scilife-lime-025);
   border-color: var(--scilife-medium-grey);
-  border-radius: 0.5rem; 
+  border-radius: 0.5rem;
   color: black;
   font-size: 1.125rem;
   font-weight: 700;
-  letter-spacing: 0.045rem; 
+  letter-spacing: 0.045rem;
+}
+
+.scilife-subsection .scilife-external-btn:focus {
+  background-color: var(--scilife-lime-025);
+  color: black;
+  border-color: var(--scilife-medium-grey);
 }
 
 .scilife-alert {
@@ -280,8 +303,9 @@ body {
   color: var(--scilife-grape);
 }
 
-
-.scilife-sort-dropdown, .scilife-search-box, .scilife-search-icon {
+.scilife-sort-dropdown,
+.scilife-search-box,
+.scilife-search-icon {
   color: var(--scilife-grape);
   border-color: var(--scilife-lime);
   border-width: 1px;
@@ -304,15 +328,15 @@ body {
 }
 
 .scilife-dropdown-item {
-  color: black; 
-  background-color: white; 
-  border-radius: 4px; 
+  color: black;
+  background-color: white;
+  border-radius: 4px;
   font-size: 1.1rem;
   font-weight: 600;
 }
 
 .scilife-dropdown-item:hover {
-  background-color: var(--scilife-light-grey); 
+  background-color: var(--scilife-light-grey);
 }
 
 .scilife-dropdown-item.active {
@@ -352,19 +376,19 @@ body {
 .scilife-icon {
   margin-left: 0.25rem;
   width: 1.3rem;
-  height: 1.3rem; 
+  height: 1.3rem;
 }
 
 .scilife-icon-lg {
   margin-left: 0.25rem;
   width: 1.6rem;
-  height: 1.6rem; 
+  height: 1.6rem;
 }
 
 .scilife-icon-xl {
   margin-left: 0.25rem;
   width: 2rem;
-  height: 2rem; 
+  height: 2rem;
 }
 
 
@@ -382,7 +406,7 @@ body {
 
 .scilife-link-container {
   display: flex;
-  gap: 0.4rem; 
+  gap: 0.4rem;
 }
 
 .scilife-download-link {
@@ -395,9 +419,9 @@ body {
 }
 
 .scilife-download-link img {
-  margin-bottom: 0.2rem; 
-  width: 2.1rem; 
-  height: 2.1rem; 
+  margin-bottom: 0.2rem;
+  width: 2.1rem;
+  height: 2.1rem;
 }
 
 
@@ -408,9 +432,9 @@ body {
 }
 
 .scilife-toggle .form-check-input:checked {
-  background-color: var(--scilife-teal); 
+  background-color: var(--scilife-teal);
   border-color: var(--scilife-teal);
-  box-shadow: 0 0 0 0.2rem rgba(4, 92, 100, 0.5); 
+  box-shadow: 0 0 0 0.2rem rgba(4, 92, 100, 0.5);
 }
 
 .scilife-toggle .form-check-input::before {
@@ -418,43 +442,43 @@ body {
 }
 
 .scilife-toggle .form-check-label {
-  font-size: 1.1rem; 
+  font-size: 1.1rem;
   margin-left: 0.5rem;
   margin-right: 0.6rem;
 }
 
 /* footer images */
 .scilife-footer-img {
-  max-width: 150px; 
+  max-width: 150px;
 }
 
 @media (min-width: 992px) {
   .scilife-footer-img {
-      max-width: 75px;
+    max-width: 75px;
   }
 }
 
 @media (min-width: 1100px) {
   .scilife-footer-img {
-      max-width: 90px; 
+    max-width: 90px;
   }
 }
 
 @media (min-width: 1200px) {
   .scilife-footer-img {
-      max-width: 100px; 
+    max-width: 100px;
   }
 }
 
 @media (min-width: 1300px) {
   .scilife-footer-img {
-      max-width: 115px; 
+    max-width: 115px;
   }
 }
 
 @media (min-width: 1400px) {
   .scilife-footer-img {
-      max-width: 125px; 
+    max-width: 125px;
   }
 }
 
@@ -468,32 +492,56 @@ iframe#matoOpOut {
   border-width: 0.05rem;
   border-style: solid;
   border-radius: 0.3rem;
-  border-color:  var(--scilife-dark-grey);
+  border-color: var(--scilife-dark-grey);
 }
 
 /* Styles for different screen sizes */
-@media (max-width: 360px)  { iframe#matoOpOut { height: 50vh; } }
-@media (min-width: 361px)  { iframe#matoOpOut { height: 25vh; } }
-@media (min-width: 492px)  { iframe#matoOpOut { height: 20vh; } }
-@media (min-width: 768px)  { iframe#matoOpOut { height: 15vh; } }
-@media (min-width: 1024px) { iframe#matoOpOut { height: 14vh; } }
+@media (max-width: 360px) {
+  iframe#matoOpOut {
+    height: 50vh;
+  }
+}
+
+@media (min-width: 361px) {
+  iframe#matoOpOut {
+    height: 25vh;
+  }
+}
+
+@media (min-width: 492px) {
+  iframe#matoOpOut {
+    height: 20vh;
+  }
+}
+
+@media (min-width: 768px) {
+  iframe#matoOpOut {
+    height: 15vh;
+  }
+}
+
+@media (min-width: 1024px) {
+  iframe#matoOpOut {
+    height: 14vh;
+  }
+}
 
 /* Styles for markdown formatting of inline code and code blocks */
 code {
   color: black;
   background-color: var(--scilife-light-grey);
-  border-radius: 5px; 
+  border-radius: 5px;
   padding: 2px;
 }
 
 pre {
   color: black;
-  background-color: var(--scilife-light-grey); 
+  background-color: var(--scilife-light-grey);
   -moz-tab-size: 4;
   -o-tab-size: 4;
   tab-size: 4;
   border: 1px solid var(--scilife-medium-grey);
-  border-radius: 10px; 
+  border-radius: 10px;
   line-height: 1.5;
   padding: 5px;
 }
