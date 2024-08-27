@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# Index genomic file
+#
+# samtools(1) or tabix(1) or used to performed the indexing based on
+# the file type.
+#
+# Arguments:
+#   FILE: file to index, compressed with bgzip(1) and with the .bgz extension
+# Returns:
+#   0 if indexing was successful, 1 otherwise
+
+main() {
+    local -a cmd
+    echo "Indexing $1" >&2
+    case "${1##*/}" in
+	*.gff.bgz)
+	    cmd=(tabix -p gff);;
+	*.bed.bgz)
+	    cmd=(tabix -p bed);;
+	*.fna.bgz)
+	    cmd=(samtools faidx);;
+	*)
+	    echo "Unable to index $1 : unrecognized file type"
+	    return 1
+    esac
+    if ! "${cmd[@]}" "$1"; then
+	echo "Error indexing file $1"
+	return 1
+    fi
+}
+
+main "$@"

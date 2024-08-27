@@ -7,17 +7,27 @@
 # Output:
 #   Writes filtered stream to stdout
 
-readonly gff_pattern='\.gff(\.|$)'
+main () {
+    local -r gff_pattern='\.gff(\.|$)'
+    local -r bed_pattern='\.bed(\.|$)'
 
-if [[ "$1" =~ ${gff_pattern} ]]; then
-    echo "Sorting GFF file $1" >&2
-    if ! grep -v "^#" | sort -t$'\t' -k1,1 -k4,4n; then
-	echo "Error filtering contents of GFF file: $1" >&2
+    if [[ "$1" =~ ${gff_pattern} ]]; then
+	echo "Sorting GFF file $1" >&2
+	if ! grep -v "^#" | sort -t$'\t' -k1,1 -k4,4n; then
+	    echo "Error filtering contents of GFF file: $1" >&2
+	fi
+    elif [[ "$1" =~ ${bed_pattern} ]]; then
+	echo "Sorting BED file $1" >&2
+	if ! grep -v "^#" | sort -k1,1 -k2,2n; then
+	    echo "Error filtering contents of BED file: $1" >&2
+	fi
+    else
+	# Default: just forward the stream unmolested
+	cat
     fi
-else
-    # Default: just forward the stream unmolested
-    cat
-fi
+}
+
+main "$@"
 
 
 
