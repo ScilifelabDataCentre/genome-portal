@@ -23,9 +23,64 @@
                     <tbody class="table-responsive">
                         {{ range after 1 . }}
                             <tr>
-                            {{ range . }}
-                                <td>{{ . | markdownify }}</td>
-                            {{ end }}
+                                {{ $term := index . 0 }}
+                                {{ $accessionCode := index . 1 }}
+                                {{ $definition := index . 2 }}
+
+                                <td>{{ $term | markdownify }}</td>
+
+                                <!-- accession codes altered to contain link to defintion. -->
+                                {{ if strings.HasPrefix $accessionCode "SO:" }}
+                                    <td>
+                                        <a href="http://www.sequenceontology.org/browser/current_release/term/{{$accessionCode}}" target="_blank">
+                                            {{ $accessionCode }}
+                                        </a>
+                                    </td>
+                                {{ else if or (strings.HasPrefix $accessionCode "FBcv:") (strings.HasPrefix $accessionCode "FBsv:") }}
+                                    <td>
+                                        <a href="https://flybase.org/cgi-bin/cvreport.pl?rel=is_a&id={{$accessionCode}}" target="_blank">
+                                            {{ $accessionCode }}
+                                        </a>
+                                    </td>
+                                {{ else if strings.HasPrefix $accessionCode "OBI" }}
+                                    <td>
+                                        <a href="https://ontobee.org/ontology/OBI?iri=http://purl.obolibrary.org/obo/{{$accessionCode}}" target="_blank">
+                                            {{ $accessionCode }}
+                                        </a>
+                                    </td>
+
+                                {{ else if strings.HasPrefix $accessionCode "GENO" }}
+                                    <td>
+                                        <a href="https://ontobee.org/ontology/GENO?iri=http://purl.obolibrary.org/obo/{{$accessionCode}}" target="_blank">
+                                            {{ $accessionCode }}
+                                        </a>
+                                    </td>
+
+                                {{ else if strings.HasPrefix $accessionCode "GENEPIO" }}
+                                    <td>
+                                        <a href="https://ontobee.org/ontology/GENEPIO?iri=http://purl.obolibrary.org/obo/{{$accessionCode}}" target="_blank">
+                                            {{ $accessionCode }}
+                                        </a>
+                                    </td>
+                                {{ else if strings.HasPrefix $accessionCode "GO:" }}
+                                    <td>
+                                        <a href="https://amigo.geneontology.org/amigo/term/{{$accessionCode}}" target="_blank">
+                                            {{ $accessionCode }}
+                                        </a>
+                                    </td>
+
+                                {{ else if or (strings.HasPrefix $accessionCode "operation_") (strings.HasPrefix $accessionCode "data_") }}
+                                    <td>
+                                        <a href="https://bioportal.bioontology.org/ontologies/EDAM?p=classes&conceptid={{$accessionCode}}" target="_blank">
+                                            (EDAM) {{ $accessionCode }}
+                                        </a>
+                                    </td>
+
+                                {{ else }}
+                                    <td>{{ $accessionCode | markdownify }}</td>
+                                {{ end }}
+
+                                <td>{{ $definition | markdownify }}</td>
                             </tr>
                         {{ end }}
                     </tbody>
