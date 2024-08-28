@@ -2,9 +2,9 @@
 # Required params below
 title: "*Meganyctiphanes norvegica*"
 subtitle: "Northern krill"
-summary: "Genome assembly, genome annotation and 10 data tracks."
+summary: "Genome assembly, genome annotation and XXXXXX data tracks."
 
-last_updated: "15/05/2024"
+last_updated: "27/08/2024"
 contact_person: "First Name Surname (firstname.surname@scilifelab.se)"
 
 cover_image: "/img/species/northern_krill.webp"
@@ -32,11 +32,13 @@ initialZoom: 1
 
 ### Description
 
-Write content here in markdown for the introduction tab of the species page.
+[EDIT Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.]
 
 #### Genome reference
 
-[EDIT]
+If you use the data presented in the genome portal from this species in your research, please cite the original publication:
+
+- <p> Unneberg, P., Larsson, M., Olsson, A., Wallerman, O., Petri, A., Bunikis, I., Vinnere Pettersson, O., Papetti, C., Gislason, A., Glenner, H., Cartes, J. E., Blanco-Bercial, L., Eriksen, E., Meyer, B., & Wallberg, A. (2024). Ecological genomics in the Northern krill uncovers loci for local adaptation across ocean basins. Nature Communications, 15(1), 6297. <a href="https://doi.org/10.1038/s41467-024-50239-7"> https://doi.org/10.1038/s41467-024-50239-7</a></p>
 
 #### References
 

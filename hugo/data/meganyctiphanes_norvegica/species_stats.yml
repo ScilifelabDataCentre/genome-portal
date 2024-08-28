@@ -1,19 +1,19 @@
 ---
 assembly:
-  - "Assembly length (Mbp)": [EDIT]
-  - "GC %": [EDIT]
-  - "Contig #": [EDIT]
-  - "Contig N50 (Mbp)": [EDIT]
-  - "Contig L50": [EDIT]
-  - "Contig N90 (Mbp)": [EDIT]
-  - "Contig L90": [EDIT]
-  - "Scaffold #": [EDIT]
-  - "Scaffold N50 (Mbp)": [EDIT]
-  - "Scaffold L50": [EDIT]
-  - "Scaffold N90 (Mbp)": [EDIT]
-  - "Scaffold L90": [EDIT]
-  - "Scaffolds >= 10 kb": [EDIT]
-  - "BUSCO % [EDIT]": "[EDIT]"
+  - "Assembly length (Mbp)": 19.73
+  - "GC %": 29.92
+  - "Contig #": 422,377
+  - "Contig N50 (Mbp)": 70,524
+  - "Contig L50": 82,325
+  - "Contig N90 (Mbp)": 21,391
+  - "Contig L90": 272,177
+  - "Scaffold #": 216,567
+  - "Scaffold N50 (Mbp)": 220,856
+  - "Scaffold L50": 24,545
+  - "Scaffold N90 (Mbp)": 38,152
+  - "Scaffold L90": 111,071
+  - "Scaffolds >= 10 kb": 192,940
+  - "BUSCO % (arthropoda_odb10)": "C:99.7 [S:72, D:3.7], F:14, M:10, n:1013"
 
 annotation:
   - "Gene #": [EDIT]
