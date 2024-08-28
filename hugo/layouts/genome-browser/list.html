@@ -1,20 +1,39 @@
 {{ define "main" }}
+
 <div class="container-fluid mt-3">
     <div class="row">
         <div class="col" id="root"></div>
     </div>
+
+    <!-- Hidden div for no config file message -->
+    <div id="no-config" style="display: none;" class="row scilife-subsection">
+        <div class="alert text-center" role="alert" style="--bs-alert-bg: #E9F2D1; --bs-alert-color: black; font-size: 1.5rem;">
+            <i class="bi bi-exclamation-triangle-fill" aria-hidden="true"></i>
+            No JBrowse2 configuration file detected. A configuration file is needed to use the genome browser.
+            <br>
+            <a href="/" class="btn mt-2">Return to the Homepage</a>
+        </div>
+    </div>
 </div>
 
-<!-- JBrowse source code -->
-
 {{ if hugo.IsDevelopment }}
-<script>
-  window.__jbrowseCacheBuster = true
-</script>
+    <script>
+        window.__jbrowseCacheBuster = true
+    </script>
 {{ end }}
 
-<script
-    defer="defer" src="/browser/static/js/main.85262b6a.js">
+<!-- Primitive check if using a config file -->
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+        if (window.location.search.search(/config=.+/) > -1) {
+            const script = document.createElement('script');
+            script.defer = true;
+            script.src = '/browser/static/js/main.85262b6a.js';
+            document.head.appendChild(script);
+        } else {
+            document.getElementById('no-config').style.display = 'block';
+        }
+    });
 </script>
 
 {{ end }}
