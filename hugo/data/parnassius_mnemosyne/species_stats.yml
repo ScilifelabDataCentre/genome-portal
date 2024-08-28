@@ -16,10 +16,10 @@ assembly:
   - "BUSCO % (lepidoptera_odb10)": "C:99 [S:97.8, D:1.2], F:0.2, M:0.8, n:5286"
 
 annotation:
-  - "Gene #": 22852
-  - "Transcript #": 27376
+  - "Gene #": 22,852
+  - "Transcript #": 27,376
   - "Average exons per transcript": 4.7
-  - "Avg. gene length (bp)": 16898
-  - "Avg. transcript length (bp)": 16026
+  - "Avg. gene length (bp)": 16,898
+  - "Avg. transcript length (bp)": 16,026
   - "Avg. exon length (bp)": 343
-  - "Avg. intron length (bp)": 3916
+  - "Avg. intron length (bp)": 3,916

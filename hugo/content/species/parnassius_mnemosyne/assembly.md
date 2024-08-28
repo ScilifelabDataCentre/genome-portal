@@ -1,9 +1,9 @@
 ---
 key_info:
   - "Assembly Name": "Parnassius_mnemosyne_n_2023_11"
-  - "Assembly Type": "haploid"
-  - "Assembly Level": "scaffold"
-  - "Genome Representation": "full"
+  - "Assembly Type": "Haploid"
+  - "Assembly Level": "Scaffold"
+  - "Genome Representation": "Full"
   - "Accession": "GCA_963668995.1"
 
 
