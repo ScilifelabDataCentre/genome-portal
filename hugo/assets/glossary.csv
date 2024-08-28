@@ -1,0 +1,4 @@
+Term (or synonym)|Ontology accession number|Definition
+assembly|[SO:0001248](http://www.sequenceontology.org/browser/current_release/term/SO:0001248)|A region of the genome of known length that is composed by ordering and aligning two or more different regions
+assembly level - chromosome|[FBcv:0003235](https://flybase.org/cgi-bin/cvreport.pl?rel=is_a&id=FBcv:0003235)|There is sequence for one or more chromosomes. This could be a completely sequenced chromosome without gaps or a chromosome containing scaffolds or contigs with gaps between them. There may also be unplaced or unlocalized scaffolds.
+assembly level - scaffold|[FBcv:0003236](https://flybase.org/cgi-bin/cvreport.pl?rel=is_a&id=FBcv:0003236)|Some sequence contigs have been connected across gaps to create scaffolds, but no scaffolds have been placed on chromosomes.
