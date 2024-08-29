@@ -6,7 +6,7 @@
 </div>
 
 <!-- sort species and search box -->
-<div class="row mb-4 justify-content-center">
+<div id="species-section" class="row mb-4 justify-content-center">
     <div class="col-12 col-md-4 col-lg-3 col-xl-2 mb-2">
         <div class="dropdown">
             <button class="btn btn-lg scilife-sort-dropdown dropdown-toggle"
@@ -36,9 +36,8 @@
     <div class="col-12 col-md-8 col-lg-9 col-xl-10">
         <!-- Note: text color seemed to only work if set here, it's scilifelab grape -->
         <div class="input-group">
-            <input type="text" id="Search" class="form-control scilife-search-box"
-                placeholder="Start typing to filter the species below..."
-                style="color:#491F53;" aria-label="Search">
+            <input type="text" id="Search" class="form-control scilife-search-box" aria-label="Search"
+                placeholder="Start typing to filter the species below...">
             <span class="input-group-text scilife-search-icon" title="Start typing to search">
                 <img src="/img/icons/search_grape.svg" alt="Search Icon" class="scilife-icon-lg">
             </span>

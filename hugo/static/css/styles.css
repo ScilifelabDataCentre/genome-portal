@@ -39,14 +39,22 @@ body {
   font-family: "Lato", Times, Arial;
 }
 
-.header {
+.scilife-banner{
   color: white;
   position: relative;
   overflow: hidden;
   padding: 1.2rem 0rem;
+  margin-bottom: 1rem;
 }
 
-.header img {
+.scilife-banner h1{
+  color: #FFF;
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: -0.06rem;
+}
+
+.scilife-banner img {
   width: 100%;
   height: auto;
   position: absolute;
@@ -57,12 +65,67 @@ body {
   opacity: 0.9;
 }
 
-.header h1 {
-  color: #FFF;
-  font-size: 3rem;
-  font-weight: 700;
-  letter-spacing: -0.06rem;
+
+.scilife-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 1.2rem 0rem;
+  margin-bottom: 1rem;
+  background: url('/img/logos/hero_bg.webp') no-repeat center center; 
+  background-size: cover; 
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh; 
+  max-width: 1444px;
 }
+
+.scilife-hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2); 
+  z-index: 0; 
+}
+
+.scilife-hero-content {
+  position: relative;
+  z-index: 1; 
+  margin: 2rem;
+  margin-right: 30%;
+  text-align: left; 
+}
+
+.scilife-hero-title {
+  font-size: 3rem;
+  font-weight: 600;
+}
+
+.scilife-hero-subtitle {
+  font-size: 2rem;
+  font-weight: 400;
+  margin-top: 1rem;
+}
+
+.scilife-hero-text {
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-top: 1rem;
+}
+
+.scilife-hero-button {
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  color: white;
+  background-color: var(--scilife-aqua);
+  border-color: var(--scilife-aqua);
+}
+
+
 
 
 
@@ -73,7 +136,7 @@ body {
 
 .scilife-navbar {
   font-size: 1.5rem;
-  color: var(--scilife-aqua);
+  color: var(--scilife-aqua-075);
   font-weight: 700;
   letter-spacing: 0.045rem;
 }
@@ -98,9 +161,6 @@ body {
   margin-bottom: 0.5rem;
 }
 
-
-
-
 .scilife-breadcrumbs {
   font-size: 1.125rem;
   font-weight: 500;
@@ -111,7 +171,6 @@ body {
 .scilife-breadcrumbs a {
   color: var(--scilife-contrast-okay-grey);
 }
-
 
 .scilife-speices-nav {
   font-size: 1.25rem;
