@@ -2,9 +2,9 @@
     <div class="container">
 
         <a class="navbar-brand" href="/">
-            <img src="/img/logos/evo_biodiv_logo.png"
+            <img src="/img/logos/navbar_logo.webp"
                 alt="The DDLS Evolution and Biodiveristy node's logo"
-                style="display: flex; height: 2.5rem; justify-content: center; align-items: center;">
+                style="display: flex; height: 3.5rem; justify-content: center; align-items: center;">
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -13,39 +13,11 @@
         </button>
 
         <div class="collapse navbar-collapse scilife-navbar" id="navbarSupportedContent">
-            <ul class="navbar-nav mb-2 mb-lg-0">
-
-                <li class="nav-item">
-                    <a href="https://www.scilifelab.se">
-                        <img src="/img/logos/scilifelab-logo.svg"
-                            alt="SciLifeLab logo"
-                            style="display: flex; height: 2.5rem; justify-content: center; align-items: center;">
-                    </a>
-                </li>
-            </ul>
-
             <ul class="navbar-nav ms-auto">
-
                 {{ range .Site.Menus.main }}
-                    {{ if .HasChildren }}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            {{ .Name }}
-                        </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{{ .URL }}"> All {{ .Title }} </a></li>
-                        {{ range .Children }}
-                            <li><a class="dropdown-item" href="{{ .URL }}"> {{ .Name }} </a></li>
-                        {{ end }}
-                    </ul>
-                    </li>
-
-                    {{ else }}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ .URL }}">{{ .Name }}</a>
                     </li>
-
-                    {{ end }}
                 {{ end }}
             </ul>
         </div>

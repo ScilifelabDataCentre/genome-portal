@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
-/* @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap'); */
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 /* Brand colors */
 :root {
@@ -36,7 +35,7 @@ a {
 }
 
 body {
-  font-family: "Lato", Times, Arial;
+  font-family: "Roboto", Arial, "Lato";
 }
 
 .scilife-banner{
@@ -126,9 +125,6 @@ body {
 }
 
 
-
-
-
 .form-control:focus {
   border-color: var(--scilife-lime);
   box-shadow: 0 0 0 0.2rem rgba(167, 201, 71, 0.25);
@@ -136,13 +132,20 @@ body {
 
 .scilife-navbar {
   font-size: 1.5rem;
-  color: var(--scilife-aqua-075);
   font-weight: 700;
   letter-spacing: 0.045rem;
 }
 
+.navbar-nav .nav-item {
+  margin-right: 0.4rem; 
+}
+
+.navbar-nav .nav-item:last-child {
+  margin-right: 0;
+}
+
 .scilife-navbar li a {
-  color: var(--scilife-teal);
+  color: var(--scilife-aqua);;
 }
 
 .scilife-footer-text a {
