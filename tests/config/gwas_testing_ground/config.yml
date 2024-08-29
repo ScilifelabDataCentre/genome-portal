@@ -1,0 +1,6 @@
+organism: "Linum tenue"
+assembly:
+  name: Lten_truncated
+  accession: XXX12345
+  url: "http://fixtures/gwas_testing_ground/Lten_LG10_truncated.fasta.gz"
+  displayName: "Lten_truncated"
