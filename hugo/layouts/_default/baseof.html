@@ -3,7 +3,12 @@
     {{- partial "head.html" . -}}
     <body class="d-flex flex-column min-vh-100">
         {{- partial "navbar.html" . -}}
-        {{- partial "banner.html" . -}}
+
+        {{ if eq .Kind "home" }}
+            {{- partial "hero.html" . -}}
+        {{ else }}
+            {{- partial "banner.html" . -}}
+        {{ end }}
 
         {{ $isGenomePage := eq .RelPermalink "/genome-browser/" }}
         {{ if and (not $isGenomePage) (not .IsHome) }}

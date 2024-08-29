@@ -39,6 +39,32 @@ body {
   font-family: "Lato", Times, Arial;
 }
 
+.header {
+  color: white;
+  position: relative;
+  overflow: hidden;
+  padding: 1.2rem 0rem;
+}
+
+.header img {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  z-index: -1;
+  top: 10%;
+  transform: translateY(-10%);
+  left: 0;
+  opacity: 0.9;
+}
+
+.header h1 {
+  color: #FFF;
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: -0.06rem;
+}
+
+
 
 .form-control:focus {
   border-color: var(--scilife-lime);
@@ -73,22 +99,7 @@ body {
 }
 
 
-.scilife-banner {
-  background-color: var(--scilife-grape);
-  font-size: 1.25rem;
-  display: flex;
-  padding: 1.5rem 0rem;
-  justify-content: center;
-  align-items: center;
-}
 
-.scilife-banner h1 {
-  color: #FFF;
-  text-align: center;
-  font-size: 3rem;
-  font-weight: 700;
-  letter-spacing: -0.06rem;
-}
 
 .scilife-breadcrumbs {
   font-size: 1.125rem;
@@ -130,6 +141,7 @@ body {
 
 .scilife-species-card {
   border-color: var(--scilife-light-grey);
+  border-width: 0.15rem;
   display: flex;
   flex-wrap: wrap;
   padding: 0.5rem;
@@ -345,7 +357,7 @@ body {
 }
 
 .scilife-search-box::placeholder {
-  color: var(--scilife-grape);
+  color: var(--scilife-dark-grey);
 }
 
 .scilife-search-icon {
