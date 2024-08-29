@@ -1,5 +1,5 @@
 ---
-title: Add your own genome project
+title: Contribute
 ---
 
 Are you a researcher affiliated with a Swedish research institution and have a genome with annotation tracks you would like to see displayed in the Genome Portal? Great! Please send us a mail at [dsn-eb@scilifelab.se](mailto:dsn-eb@scilifelab.se) or through the <a href="/contact">Contact page</a>. We will be happy to hear about your data and discuss how we can accommodate it.
@@ -28,6 +28,6 @@ Please note that the requirements might be subject to change in the future
 
 The Genome Portal is able to display many data types that are commonly used in genomics and transcriptomics studies. In the two sub-pages below we have collected recommendations about file formats and how to upload data files to public repositories. Following these will help in the process of assuring that the data is compatible for display in the Genome Portal.
 
-* <a href="/add_genome/recommendations_for_file_formats">Recommendations for file formats</a>
+* <a href="/contribute/recommendations_for_file_formats">Recommendations for file formats</a>
 
-* <a href="/add_genome/recommendations_for_making_data_public">Recommendations of how to make data files publicly available</a>
+* <a href="/contribute/recommendations_for_making_data_public">Recommendations of how to make data files publicly available</a>

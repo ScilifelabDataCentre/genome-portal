@@ -10,7 +10,7 @@ The Genome Portal uses the FAIR principles as a guidance for sharing of research
 {{< info_block >}}
 For more information on the FAIR principles, we recommend <a href="https://data-guidelines.scilifelab.se/topics/fair-principles/">this summary</a> in the SciLifeLab Research Data Management guidelines.{{< /info_block >}}
 
-Below we list three recommendations of how to share research data in a manner that follows the FAIR principles and facilitates the integration with the Genome Portal. For information relating to the data files themselves, please also see the <a href="/add_genome/recommendations_for_file_formats"> recommendations for file formats</a> for displaying data on the Genome Portal.
+Below we list three recommendations of how to share research data in a manner that follows the FAIR principles and facilitates the integration with the Genome Portal. For information relating to the data files themselves, please also see the <a href="/contribute/recommendations_for_file_formats"> recommendations for file formats</a> for displaying data on the Genome Portal.
 
 ### Recommendations
 

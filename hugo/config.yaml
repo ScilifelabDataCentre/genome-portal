@@ -20,8 +20,8 @@ menus:
   - name: Home
     pageRef: /
     weight: 1
-  - name: Add a genome project
-    pageRef: /add_genome
+  - name: Contribute
+    pageRef: /contribute
     weight: 2
   - name: About
     pageRef: /about
