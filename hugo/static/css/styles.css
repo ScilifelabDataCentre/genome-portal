@@ -175,9 +175,19 @@ body {
   color: var(--scilife-contrast-okay-grey);
 }
 
-.scilife-speices-nav {
+
+.scilife-species-nav {
   font-size: 1.25rem;
   color: black;
+}
+
+@media (min-width: 770px) {
+  .scilife-species-nav .nav-link {
+    border: 3px solid transparent; 
+  }
+  .scilife-species-nav .nav-link.active {
+    border-color: #dee2e6 #dee2e6 #fff; 
+  }
 }
 
 .scilife-species-titles h1 {
