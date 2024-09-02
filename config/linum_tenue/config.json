@@ -33,6 +33,36 @@
               "reversed": false,
               "assemblyName": "Linum_tenue_thrum_v1"
             }
+          ],
+          "tracks": [
+            {
+              "id": "lten_default_protein_coding_genes",
+              "type": "FeatureTrack",
+              "configuration": "ltenue_v1_genes.gff",
+              "minimized": false,
+              "displays": [
+                {
+                  "id": "lten_default_protein_coding_genes_display",
+                  "type": "LinearBasicDisplay",
+                  "heightPreConfig": 180,
+                  "configuration": "ltenue_v1_genes.gff-LinearBasicDisplay"
+                }
+              ]
+            },
+            {
+              "id": "lten_default_repeats",
+              "type": "FeatureTrack",
+              "configuration": "L_tenue_v1_rep.bed",
+              "minimized": false,
+              "displays": [
+                {
+                  "id": "lten_default_repeats_display",
+                  "type": "LinearBasicDisplay",
+                  "heightPreConfig": 350,
+                  "configuration": "L_tenue_v1_rep.bed-LinearBasicDisplay"
+                }
+              ]
+            }
           ]
         }
       ]
