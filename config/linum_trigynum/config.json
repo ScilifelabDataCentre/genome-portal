@@ -1,7 +1,40 @@
 {
-  "defaultSession": [
-    {
-      "name": "Default session"
-    }
-  ]
+  "defaultSession": {
+    "id": "ltri_default_session",
+    "name": "Linum trigynum",
+    "widgets": {
+      "hierarchicalTrackSelector": {
+        "id": "hierarchicalTrackSelector",
+        "type": "HierarchicalTrackSelectorWidget",
+        "view": "ltri_default_session_view",
+        "faceted": {
+          "showSparse": false,
+          "showFilters": true,
+          "showOptions": false,
+          "panelWidth": 400
+        }
+      }
+    },
+    "activeWidgets": {
+      "hierarchicalTrackSelector": "hierarchicalTrackSelector"
+    },
+    "views": [
+      {
+        "id": "ltri_default_session_view",
+        "minimized": false,
+        "type": "LinearGenomeView",
+        "offsetPx": 0,
+        "bpPerPx": 50,
+        "displayedRegions": [
+          {
+            "refName": "OZ034813.1",
+            "start": 0,
+            "end": 47029054,
+            "reversed": false,
+            "assemblyName": "Ltrigynum_genome"
+          }
+        ]
+      }
+    ]
+  }
 }

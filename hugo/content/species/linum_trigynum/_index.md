@@ -2,9 +2,9 @@
 # Required params below
 title: "*Linum trigynum* L."
 subtitle: "French Flax"
-summary: "Genome assembly, genome annotation and XXXXX data tracks."
+summary: "Genome assembly, genome annotation and 2 data tracks."
 
-last_updated: "26/08/2024"
+last_updated: "02/09/2024"
 contact_person: "[EDIT First Name Surname (firstname.surname@scilifelab.se)] "
 
 cover_image: "/img/species/Ltrigynum_field_B_Laenen_A_Desamore_4-3ratio_crop.webp"
