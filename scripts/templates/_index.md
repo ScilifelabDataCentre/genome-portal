@@ -15,6 +15,7 @@ img_attrib_link: "[EDIT] - if there is no hyperlink available for this file, the
 # The params below were auto-generated, you should not need to edit them...
 # unless you were warned by the add-new-species.py script.
 layout: "species_intro"
+banner_title: "Species overview"
 url: "SPECIES_FOLDER"
 weight: 1
 science_name: "SPECIES_NAME"
