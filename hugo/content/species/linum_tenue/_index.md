@@ -2,9 +2,9 @@
 # Required params below
 title: "*Linum tenue* Desf."
 subtitle: "A species of flax"
-summary: "Genome assembly, genome annotation and XXXXX data tracks."
+summary: "Genome assembly, genome annotation and 2 data tracks."
 
-last_updated: "26/08/2024"
+last_updated: "02/09/2024"
 contact_person: "First Name Surname (firstname.surname@scilifelab.se)"
 
 cover_image: "/img/species/Ltenue_thrum_pin_B_Laenen_A_Desamore_4-3ratio_crop.webp"

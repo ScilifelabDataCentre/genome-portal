@@ -1,1 +1,40 @@
-{}
+{
+    "defaultSession": {
+      "id": "lten_default_session",
+      "name": "Linum tenue",
+      "widgets": {
+        "hierarchicalTrackSelector": {
+          "id": "hierarchicalTrackSelector",
+          "type": "HierarchicalTrackSelectorWidget",
+          "view": "lten_default_session_view",
+          "faceted": {
+            "showSparse": false,
+            "showFilters": true,
+            "showOptions": false,
+            "panelWidth": 400
+          }
+        }
+      },
+      "activeWidgets": {
+        "hierarchicalTrackSelector": "hierarchicalTrackSelector"
+      },
+      "views": [
+        {
+          "id": "lten_default_session_view",
+          "minimized": false,
+          "type": "LinearGenomeView",
+          "offsetPx": 0,
+          "bpPerPx": 50,
+          "displayedRegions": [
+            {
+              "refName": "ENA|CAMGYJ010000002|CAMGYJ010000002.1",
+              "start": 0,
+              "end": 72476498,
+              "reversed": false,
+              "assemblyName": "Linum_tenue_thrum_v1"
+            }
+          ]
+        }
+      ]
+    }
+}
