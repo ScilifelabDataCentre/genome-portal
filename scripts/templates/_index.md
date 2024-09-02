@@ -2,7 +2,6 @@
 # Required params below
 title: "[EDIT]"
 subtitle: "[EDIT]"
-summary: "[EDIT]"
 
 last_updated: "[EDIT - USE FORMAT LIKE THIS: DD/MM/YYYY]"
 

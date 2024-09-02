@@ -186,14 +186,6 @@ body {
   }
 }
 
-
-
-
-
-
-
-
-
 .scilife-search-box:focus {
   box-shadow: 0 0 0 0.2rem rgba(4, 92, 100, 0.25);
 }
@@ -292,37 +284,41 @@ body {
   border-color: var(--scilife-light-grey);
   border-width: 0.1rem;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column; 
   padding: 0.5rem;
+  height: 100%; 
+}
+
+.scilife-species-card .card-image {
+  flex: 0 0 auto; 
 }
 
 .scilife-species-card .card-body {
+  flex: 1 1 auto; 
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; 
   padding: 0rem;
 }
 
 .scilife-species-card h2 {
   color: #222;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.0625rem;
+  margin-top: auto; 
+}
+
+.scilife-species-card h3 {
+  color: var(--scilife-dark-grey);
   font-size: 1.125rem;
   font-weight: 700;
   letter-spacing: 0.0625rem;
 }
 
-.scilife-species-card h3 {
-  color: var(--scilife-dark-grey);
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: 0.0625rem;
-}
-
-.scilife-species-card-text {
-  font-size: 0.875rem;
-  font-weight: 400;
-  letter-spacing: 0.0625rem;
-}
-
 .scilife-card-image-attrib {
   font-style: italic;
-  font-size: 0.8rem;
+  font-size: 0.875rem;
   color: var(--scilife-teal);
 }
 
