@@ -97,6 +97,7 @@ body {
   margin: 2rem;
   margin-right: 30%;
   text-align: left; 
+  align-items: center;
 }
 
 .scilife-hero-title {
@@ -116,23 +117,23 @@ body {
   margin-top: 1rem;
 }
 
-.scilife-hero-button {
-  font-size: 1.5rem;
-  margin-top: 1rem;
-  color: white;
-  background-color: var(--scilife-aqua);
-  border-color: var(--scilife-aqua);
+
+.scilife-search-box:focus {
+  box-shadow: 0 0 0 0.2rem rgba(4, 92, 100, 0.25);
 }
 
+.scilife-contact-form:focus {
+  box-shadow: 0 0 0 0.2rem rgba(4, 92, 100, 0.25);
+}
 
-.form-control:focus {
-  border-color: var(--scilife-lime);
-  box-shadow: 0 0 0 0.2rem rgba(167, 201, 71, 0.25);
+#contactForm .form-check-input:checked {
+  background-color: var(--scilife-teal);
+  border-color: var(--scilife-teal);
 }
 
 .scilife-navbar {
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: 0.045rem;
 }
 
@@ -213,7 +214,7 @@ body {
 
 .scilife-species-card {
   border-color: var(--scilife-light-grey);
-  border-width: 0.15rem;
+  border-width: 0.1rem;
   display: flex;
   flex-wrap: wrap;
   padding: 0.5rem;
@@ -390,33 +391,37 @@ body {
 .scilife-sort-dropdown,
 .scilife-search-box,
 .scilife-search-icon {
-  color: var(--scilife-grape);
-  border-color: var(--scilife-lime);
-  border-width: 1px;
+  color: var(--scilife-dark-grey);
+  border-color: var(--scilife-dark-grey);
+  border-width: 0.5px;
   padding: 6px 6px;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: 500;
   letter-spacing: 0.045rem;
+  border-radius: 0; 
+}
+
+.scilife-sort-dropdown {
+background-color: var(--scilife-light-grey);
 }
 
 .scilife-sort-dropdown:hover {
-  color: var(--scilife-grape);
-  border-color: var(--scilife-lime);
-  background-color: var(--scilife-lime-025);
+  border-color: var(--scilife-teal);
+  background-color: var(--scilife-teal-025);
 }
 
 .scilife-sort-dropdown:focus {
-  color: var(--scilife-grape);
-  border-color: var(--scilife-lime);
-  background-color: var(--scilife-lime-025);
+  color: black;
+  border-color: var(--scilife-teal);
+  background-color: var(--scilife-teal-025);
 }
 
 .scilife-dropdown-item {
   color: black;
   background-color: white;
   border-radius: 4px;
-  font-size: 1.1rem;
-  font-weight: 600;
+  font-size: 1.2rem;
+  font-weight: 500;
 }
 
 .scilife-dropdown-item:hover {
@@ -424,16 +429,24 @@ body {
 }
 
 .scilife-dropdown-item.active {
-  color: var(--scilife-grape);
-  background-color: var(--scilife-lime-025);
+  color: var(--scilife-teal);
+  background-color: var(--scilife-teal-025);
 }
 
 .scilife-search-box::placeholder {
   color: var(--scilife-dark-grey);
 }
 
+.scilife-search-box:focus {
+  color: var(--scilife-dark-grey) !important; 
+  border-color: var(--scilife-dark-grey) !important;
+  border-width: 2px;
+  outline: none;
+}
+
+
 .scilife-search-icon {
-  background-color: var(--scilife-lime-025);
+  background-color: var(--scilife-teal-025);
   display: flex;
   align-items: center;
   justify-content: center;
