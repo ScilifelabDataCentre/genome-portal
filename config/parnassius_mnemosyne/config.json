@@ -1,1 +1,41 @@
-{}
+{
+    "defaultSession": {
+      "id": "pmne_default_session",
+      "name": "Parnassius mnemosyne",
+      "widgets": {
+        "hierarchicalTrackSelector": {
+          "id": "hierarchicalTrackSelector",
+          "type": "HierarchicalTrackSelectorWidget",
+          "view": "pmne_default_session_view",
+          "faceted": {
+            "showSparse": false,
+            "showFilters": true,
+            "showOptions": false,
+            "panelWidth": 400
+          }
+        }
+      },
+      "activeWidgets": {
+        "hierarchicalTrackSelector": "hierarchicalTrackSelector"
+      },
+      "views": [
+        {
+          "id": "pmne_default_session_view",
+          "minimized": false,
+          "type": "LinearGenomeView",
+          "offsetPx": 0,
+          "bpPerPx": 1600,
+          "displayedRegions": [
+            {
+              "refName": "ENA|CAVLGL010000001|CAVLGL010000001.1",
+              "start": 0,
+              "end": 73713281,
+              "reversed": false,
+              "assemblyName": "Parnassius_mnemosyne_n_2023_11"
+            }
+          ]
+        }
+      ]
+    }
+  }
+  
