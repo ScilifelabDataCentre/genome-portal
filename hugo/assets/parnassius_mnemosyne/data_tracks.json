@@ -9,9 +9,8 @@
     ],
     "accession": "GCA_900323705.1",
     "fileName": "CAVLGL01.fasta.gz",
-    "submitterName": "Jacob Höglund",
     "principalInvestigator": "Jacob Höglund",
-    "submitterAffiliation": "Uppsala University",
+    "principalInvestigatorAffiliation": "Uppsala University",
     "firstDateOnPortal": "April 8 2024"
   },
   {
@@ -20,9 +19,8 @@
     "links": [],
     "accession": "OZ075093.1",
     "fileName": "OZ075093.1.fasta.gz",
-    "submitterName": "Jacob Höglund",
     "principalInvestigator": "Jacob Höglund",
-    "submitterAffiliation": "Uppsala University",
+    "principalInvestigatorAffiliation": "Uppsala University",
     "firstDateOnPortal": "April 8 2024"
   },
   {
@@ -34,9 +32,8 @@
     ],
     "accession": "",
     "fileName": "pmne_functional_edit1.gff.gz",
-    "submitterName": "Freddy Mercury",
     "principalInvestigator": "Jacob Höglund",
-    "submitterAffiliation": "Uppsala University",
+    "principalInvestigatorAffiliation": "Uppsala University",
     "firstDateOnPortal": "April 8 2024"
   },
   {
@@ -48,9 +45,8 @@
     ],
     "accession": "",
     "fileName": "pmne_Illumina_RNAseq_StringTie_sorted-transcripts_match.gff.gz",
-    "submitterName": "Andrea Echeverry",
     "principalInvestigator": "Ebba Jacobson",
-    "submitterAffiliation": "SLU",
+    "principalInvestigatorAffiliation": "SLU",
     "firstDateOnPortal": "May 8 2024"
   },
   {
@@ -61,9 +57,8 @@
     ],
     "accession": "",
     "fileName": "pmne_ncRNAs.gff.gz",
-    "submitterName": "Ruben Albarran",
     "principalInvestigator": "Ebba Jacobson",
-    "submitterAffiliation": "SLU",
+    "principalInvestigatorAffiliation": "SLU",
     "firstDateOnPortal": "May 9 2024"
   },
   {
@@ -72,9 +67,8 @@
     "links": [],
     "accession": "",
     "fileName": "pmne_tRNAs_and_pseudogenes.gff.gz",
-    "submitterName": "Tom Yorke",
     "principalInvestigator": "Ebba Jacobson",
-    "submitterAffiliation": "SLU",
+    "principalInvestigatorAffiliation": "SLU",
     "firstDateOnPortal": "June 7 2024"
   },
   {
@@ -83,9 +77,8 @@
     "links": [],
     "accession": "",
     "fileName": "pmne_mtdna.gff.gz",
-    "submitterName": "Joe Arroyo",
     "principalInvestigator": "Ebba Jacobson",
-    "submitterAffiliation": "SLU",
+    "principalInvestigatorAffiliation": "SLU",
     "firstDateOnPortal": "June 17 2024"
   }
 ]

@@ -12,10 +12,9 @@
                 {{ if eq $tableType "long"}}
                     <th>Accession</th>
                     <th>File name</th>
-                    <th>Submitter name</th>
                 {{ end }}
                 <th>Principal investigator</th>
-                <th>Submitter affiliation</th>
+                <th>Principal investigator affiliation</th>
                 {{ if eq $tableType "long"}}
                     <th>First date on portal</th>
                 {{ end }}
@@ -59,13 +58,10 @@
                     {{ if eq $tableType "long"}}
                         <td>{{ .accession }}</td>
                         <td>{{ .fileName }}</td>
-                        <td>{{ .submitterName }}</td>
                     {{ end }}
 
-                    <td>
-                        {{ .principalInvestigator }}
-                    </td>
-                    <td>{{ .submitterAffiliation }}</td>
+                    <td>{{ .principalInvestigator }}</td>
+                    <td>{{ .principalInvestigatorAffiliation }}</td>
 
                     {{ if eq $tableType "long"}}
                         <td>{{ .firstDateOnPortal }}</td>
