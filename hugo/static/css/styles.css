@@ -112,10 +112,86 @@ body {
 }
 
 .scilife-hero-text {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: 400;
   margin-top: 1rem;
 }
+
+
+@media (max-width: 575.98px) {
+  .scilife-hero {
+    min-height: 80vh; 
+    background-position: 80% center
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .scilife-hero {
+    min-height: 80vh; 
+    background-position: 80% center
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .scilife-hero {
+    min-height: 70vh; 
+    background-position: 75% center
+  }
+  .scilife-hero-content {
+    position: relative;
+    z-index: 1; 
+    margin: 3rem;
+    margin-right: 40%;
+    text-align: left; 
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .scilife-hero {
+    min-height: 60vh; 
+    background-position: 70% center
+  }
+  .scilife-hero-content {
+    position: relative;
+    z-index: 1; 
+    margin: 2rem;
+    margin-right: 40%;
+    text-align: left; 
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1399.98px) {
+  .scilife-hero {
+    min-height: 50vh; 
+  }
+  .scilife-hero-content {
+    position: relative;
+    z-index: 1; 
+    margin: 2rem;
+    margin-right: 25%;
+    text-align: left; 
+  }
+}
+
+@media (min-width: 1400px) {
+  .scilife-hero {
+    min-height: 50vh; 
+  }
+  .scilife-hero-content {
+    position: relative;
+    z-index: 1; 
+    margin: 2rem;
+    margin-right: 30%;
+    text-align: left; 
+  }
+}
+
+
+
+
+
+
+
 
 
 .scilife-search-box:focus {
