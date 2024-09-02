@@ -5,7 +5,6 @@ subtitle: "[EDIT]"
 summary: "[EDIT]"
 
 last_updated: "[EDIT - USE FORMAT LIKE THIS: DD/MM/YYYY]"
-contact_person: "[EDIT First Name Surname (firstname.surname@scilifelab.se)] "
 
 cover_image: "/img/species/[EDIT]"
 img_attrib_text: "[EDIT]"
@@ -49,3 +48,7 @@ Write content here in markdown for the introduction tab of the species page.
 
 #### References
 
+
+#### Changelog
+
+- [TODO - Add date] - Species first published on the Portal
