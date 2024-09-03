@@ -33,6 +33,64 @@
               "reversed": false,
               "assemblyName": "Parnassius_mnemosyne_n_2023_11"
             }
+          ],
+          "tracks": [
+            {
+              "id": "pmne_default_protein_coding_genes",
+              "type": "FeatureTrack",
+              "configuration": "pmne_functional_edit1.gff",
+              "minimized": false,
+              "displays": [
+                {
+                  "id": "pmne_default_protein_coding_genes_display",
+                  "type": "LinearBasicDisplay",
+                  "heightPreConfig": 150,
+                  "configuration": "pmne_functional_edit1.gff-LinearBasicDisplay"
+                }
+              ]
+            },
+            {
+              "id": "pmne_default_transcripts",
+              "type": "FeatureTrack",
+              "configuration": "pmne_Illumina_RNAseq_StringTie_sorted-transcripts_match.gff",
+              "minimized": false,
+              "displays": [
+                {
+                  "id": "pmne_default_transcripts_display",
+                  "type": "LinearBasicDisplay",
+                  "heightPreConfig": 150,
+                  "configuration": "pmne_Illumina_RNAseq_StringTie_sorted-transcripts_match.gff-LinearBasicDisplay"
+                }
+              ]
+            },
+            {
+              "id": "pmne_default_ncrna",
+              "type": "FeatureTrack",
+              "configuration": "pmne_ncRNAs.gff",
+              "minimized": false,
+              "displays": [
+                {
+                  "id": "pmne_default_ncrna_display",
+                  "type": "LinearBasicDisplay",
+                  "heightPreConfig": 100,
+                  "configuration": "pmne_ncRNAs.gff-LinearBasicDisplay"
+                }
+              ]
+            },
+            {
+              "id": "pmne_default_trna",
+              "type": "FeatureTrack",
+              "configuration": "pmne_tRNAs_and_pseudogenes.gff",
+              "minimized": false,
+              "displays": [
+                {
+                  "id": "pmne_default_trna_display",
+                  "type": "LinearBasicDisplay",
+                  "heightPreConfig": 100,
+                  "configuration": "pmne_tRNAs_and_pseudogenes.gff-LinearBasicDisplay"
+                }
+              ]
+            }
           ]
         }
       ]
