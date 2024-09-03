@@ -32,7 +32,9 @@ initialZoom: 1
 
 ### Description
 
-[EDIT Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.]
+The *Meganyctiphanes norvegica* species of krill is a macrozooplankton crustacean found in the Northen Atlantic (Unneberg et al., 2024). It is among the largest of the Euphausiid (krill) species, with total body length reaching up to 40 and 50 mm (Tarling et al., 2010). It can tolerate a broader range of temperature than other krill species (Huenerlage & Buchholz, 2015), and consequently has a large latitudinal distribution ranging from Barents Sea to the Mediterranean Sea (Tarling et al., 2010; Unneberg et al., 2024).
+
+The broad temperature range of *M. norvegica* make it interesting for studies on ecological adaptation to the warming of the oceans. A challenge with genomic analysis of krill species is their huge genome size (19 Gb for *M. norvegica*) (Choquet et al. 2023; Jeffery, 2012; Unneberg et al., 2024). Genetic variation has been found to be widespread but divergent among specimens collected thoughout the geographic distribution, including polygeneic variants indicating adaptation potential to changes in light and temperature (Unneberg et al., 2024).
 
 #### Genome reference
 
@@ -42,4 +44,10 @@ If you use the data presented in the genome portal from this species in your res
 
 #### References
 
-- [EDIT]
+- Choquet, M., Lenner, F., Cocco, A., Toullec, G., Corre, E., Toullec, J.-Y., & Wallberg, A. (2023). Comparative Population Transcriptomics Provide New Insight into the Evolutionary History and Adaptive Potential of World Ocean Krill. Molecular Biology and Evolution, 40(11), msad225. [https://doi.org/10.1093/molbev/msad225](https://doi.org/10.1093/molbev/msad225)
+
+- Huenerlage K & Buchholz F. (2015). Thermal limits of krill species from the high-Arctic Kongsfjord (Spitsbergen). Marine Ecology Progress Series, 535, 89–98. [https://doi.org/10.3354/meps11408](https://doi.org/10.3354/meps11408)
+
+- Jeffery, N. W. (2012). The first genome size estimates for six species of krill (Malacostraca, Euphausiidae): Large genomes at the north and south poles. Polar Biology, 35(6), 959–962. [https://doi.org/10.1007/s00300-011-1137-4](https://doi.org/10.1007/s00300-011-1137-4)
+
+- Tarling, G. A., Ensor, N. S., Fregin, T., Goodall-Copestake, W. P., & Fretwell, P. (2010). Chapter One—An Introduction to the Biology of Northern Krill (Meganyctiphanes norvegica Sars). In G. A. Tarling (Ed.), Advances in Marine Biology (Vol. 57, pp. 1–40). Academic Press. [https://doi.org/10.1016/B978-0-12-381308-4.00001-7](https://doi.org/10.1016/B978-0-12-381308-4.00001-7)
