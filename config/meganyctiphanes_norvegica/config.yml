@@ -1,6 +1,7 @@
 organism: "Meganyctiphanes norvegica"
 assembly:
   name: Mnor_HA_v2
+  displayName: "Meganyctiphanes norvegica genome assembly"
   accession: GCA_964058975.1
   # The following url points to the original ENA upload of the assembly. It will require an alias file to be able to load the protein coding genes track
   url: "ftp://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/cax/CAXKWB01.fasta.gz"
