@@ -2,9 +2,9 @@
 # Required params below
 title: "*Parnassius mnemosyne*"
 subtitle: "Clouded apollo butterfly"
-summary: "Genome assembly, genome annotation and 4 data tracks."
+summary: "Genome assembly, genome annotation and 5 data tracks."
 
-last_updated: "17/07/2024"
+last_updated: "02/09/2024"
 contact_person: "First Name Surname (firstname.surname@scilifelab.se)"
 
 cover_image: "/img/species/clouded_apollo.webp"

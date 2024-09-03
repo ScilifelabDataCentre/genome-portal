@@ -9,7 +9,7 @@ contact_person: "[EDIT First Name Surname (firstname.surname@scilifelab.se)] "
 
 cover_image: "/img/species/[EDIT]"
 img_attrib_text: "[EDIT]"
-img_attrib_link: "[EDIT]"
+img_attrib_link: "[EDIT] - if there is no hyperlink available for this file, then you should delete this line"
 
 
 # The params below were auto-generated, you should not need to edit them...

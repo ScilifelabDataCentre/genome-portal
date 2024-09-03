@@ -1,15 +1,15 @@
 ---
 # Required params below
-title: "*Linum trigynum*"
-subtitle: "A species of flax"
-summary: "[EDIT]"
+title: "*Linum trigynum* L."
+subtitle: "French Flax"
+summary: "Genome assembly, genome annotation and 2 data tracks."
 
-last_updated: "05/07/2024"
+last_updated: "02/09/2024"
 contact_person: "[EDIT First Name Surname (firstname.surname@scilifelab.se)] "
 
-cover_image: "/img/species/linum_trigynum.webp"
-img_attrib_text: "Linum trigynum by Denis Barthel, public domain"
-img_attrib_link: "https://commons.wikimedia.org/wiki/File:Linum_trigynum_Dingli_Cliffs_Malta_03.jpg"
+cover_image: "/img/species/Ltrigynum_field_B_Laenen_A_Desamore_4-3ratio_crop.webp"
+img_attrib_text: "Linum trigynum by Benjamin Laenen and Aurélie Désamoré, used with permission"
+#img_attrib_link: ""
 
 
 # The params below were auto-generated, you should not need to edit them...
@@ -17,7 +17,7 @@ img_attrib_link: "https://commons.wikimedia.org/wiki/File:Linum_trigynum_Dingli_
 layout: "species_intro"
 url: "linum_trigynum"
 weight: 1
-science_name: "linum trigynum"
+science_name: "Linum trigynum"
 lineage_data_path: "linum_trigynum/taxonomy"
 
 gbif_taxon_id: "2873874"
@@ -33,8 +33,12 @@ initialZoom: 1
 
 ### Description
 
-Write content here in markdown for the introduction tab of the species page.
+*Linum trigynum* is an annual herbaceous species which ranges in height from 10 to 50 cm and has actinomorphic yellow flowers with fivefold symmetry. It is self-compatible and homostylous with anthers and stigmas at the same level in the flower (Gutiérrez-Valencia et al. 2024). The native distribution of *L. trigynum* ranges from the Mediterranean Basin into western Asia.
+
+A recent genomic study has shown that *L. trigynum* is a short homostyle that primarily reproduces through self-fertilization in natural populations (Gutiérrez-Valencia et al. 2024). *L. trigynum* has lower genetic diversity and exhibits signatures of relaxed purifying and positive selection across its genome, compared to the related distylous species *L. tenue* (Gutiérrez-Valencia et al. 2024).
 
 #### Genome reference
 
-#### References
+If you use the data presented in the genome portal from this species in your research, please cite the original publication:
+
+- <p> Gutiérrez-Valencia, J., Zervakis, P.-I., Postel, Z., Fracassetti, M., Losvik, A., Mehrabi, S., Bunikis, I., Soler, L., Hughes, P. W., Désamoré, A., Laenen, B., Abdelaziz, M., Pettersson, O. V., Arroyo, J., & Slotte, T. (2024). Genetic Causes and Genomic Consequences of Breakdown of Distyly in <i>Linum trigynum</i>. Molecular Biology and Evolution, 41(5), msae087. <a href="https://doi.org/10.1093/molbev/msae087">https://doi.org/10.1093/molbev/msae087</a> </p>

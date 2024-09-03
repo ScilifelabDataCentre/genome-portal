@@ -60,16 +60,23 @@
                             alt="Image of {{ .Title | markdownify }}">
                     </a>
 
-                    <a href="{{ .Params.img_attrib_link }}" title="Go to the image source" target="_blank">
-                        <figcaption class="scilife-card-image-attrib"> {{ .Params.img_attrib_text }} </figcaption>
-                    </a>
+                    {{ if .Params.img_attrib_link }}
+                        <a href="{{ .Params.img_attrib_link }}" title="Go to the image source" target="_blank">
+                            <figcaption class="scilife-card-image-attrib"> {{ .Params.img_attrib_text }} </figcaption>
+                        </a>
+                    {{ else }}
+                        <p class="scilife-card-image-attrib">
+                            {{ .Params.img_attrib_text }}
+                        </p>
+                    {{ end }}
+
                 </figure>
             </div>
 
             <div class="card-body">
                 <h2 class="card-title" id="science-name">{{ .Title | markdownify }}</h2>
                 <h3 class="card-title" id="common-name">{{ .Params.subtitle | markdownify }}</h3>
-                <p class="card-text">{{ .Summary }}</p>
+                <p class="card-text scilife-species-card-text">{{ .Summary }}</p>
             </div>
 
             <div class="d-flex justify-content-between align-items-center">

@@ -39,7 +39,7 @@ list_urls() {
 # Outputs:
 #   Forward lines whose TARGET need to be downloaded to stdout
 filter_download_targets () {
-    local -ar DOWNLOAD_EXTENSIONS=(fna gff gtf)
+    local -ar DOWNLOAD_EXTENSIONS=(fna gff gtf bed)
     local -a GREP_PATTERNS
     for ext in "${DOWNLOAD_EXTENSIONS[@]}";
     do

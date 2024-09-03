@@ -1,6 +1,7 @@
 organism: "Linum trigynum"
 assembly:
   name: Ltrigynum_genome
+  displayName: "Linum trigynum genome assembly"
   accession: GCA_964030455.1
   # The following url points to the original ENA upload of the assembly. Interestingly, due to the metadata for this ENA submission, 
   # this file only contains the unplaced scaffolds, and not the ten chromosome sequences. Will circumvent this for now by using the NCBI mirror instead.
@@ -10,7 +11,8 @@ assembly:
   aliases: "https://raw.githubusercontent.com/ScilifelabDataCentre/swedgene/main/scripts/data_stewardship/alias_files_temp_storage/GCA_964030455.1_Ltrigynum_genome_genomic.fna.alias"
 tracks:
   - name: "Protein coding genes"
-  # Note: this annotation file is compressed with zip, not gzip. 
-  # Note2; It only contains annotations for the chromosomes, not the unplaced scaffolds.
-    url: "https://figshare.scilifelab.se/ndownloader/files/44990356"
-    fileName: "Ltrigynum_v1_genes.gtf.zip"
+    url: "https://figshare.scilifelab.se/ndownloader/files/48853129"
+    fileName: "Ltrigynum_v1_genes.gff.gz"
+  - name: "Repeats"
+    url: "https://figshare.scilifelab.se/ndownloader/files/48879658"
+    fileName: "L_trigynum_v1_rep.bed.gz"

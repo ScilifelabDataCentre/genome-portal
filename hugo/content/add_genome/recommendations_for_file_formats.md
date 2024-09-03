@@ -52,9 +52,9 @@ In the subsections below we have collected specific recommendations for some com
 
 One of the most common formats for storing annotations for genomic features is GFF (General Feature Format). NCBI for instance uses this for protein-coding genes. JBrowse 2 specifically supports the GFF3 version, and older GFF formats thus need to be converted to GFF3 as described below.
 
-GTF is another format for storing annotations that is very similar to GFF. JBrowse 2 does not natively support GTF files, but can be made to do so by installing the GtfAdapter plugin. The Genome Portal uses GtfAdapter and is thus able to display GTF tracks.
+GTF is another format for storing annotations that is very similar to GFF. Despite not being listed in the [table of supported formats](https://jbrowse.org/jb2/features/#supported-data-formats), JBrowse 2 can be configured to display GTF files. GTFs can thus be used in the Genome Portal, but the loading times in the JBrowse 2 window could be slightly longer for GTF than for GFF due to the current lack of support for indexed GTF files. Therefore, we recommend submitters to use GFF instead of GTF, if possible.
 
-Another solution would be to convert the GTF files to GFF3; this would for instance be useful if a user wants to download the the files for loading them in a local JBrowse 2 desktop client. There are several bioinformatics tools that can convert GTF and older GFF versions to GFF3. We recommend using <a href="https://agat.readthedocs.io">AGAT</a>. This is a command line toolkit designed by the NBIS bioinformatics platform at SciLifeLab. The AGAT script `agat_convert_sp_gxf2gxf.pl` is used to achieve conversions from GFF and GTF to GFF3.
+There are several bioinformatics tools that can convert GTF and older GFF versions to GFF3. We recommend using <a href="https://agat.readthedocs.io">AGAT</a>. This is a command line toolkit designed by the NBIS bioinformatics platform at SciLifeLab. The AGAT script `agat_convert_sp_gxf2gxf.pl` is used to achieve conversions from GFF and GTF to GFF3.
 
 ```
 # Usage example based on the AGAT documentation
@@ -65,7 +65,13 @@ agat_convert_sp_gxf2gxf.pl -g annotation_file1.gtf --output annotation_file1.gff
 
 #### BED
 
-Another very common format for describing genomic features is BED (Browser Extensible Data). BED files have a less complicated version history than GFF/GTF and should, in general, be directly compatible with JBrowse 2. Note that BED documentation sometimes discusses BED followed with a number, such as BED3, BED6, BED12. The numbers indicate the number of the established BED columns that are included in that particular BED file. The first three columns are mandatory, meaning that BED3 is the minimal formatting for a BED file. To our knowledge, JBrowse 2 supports BED versions with different number of columns as long as the number of columns are consistent across the rows within each BED file.
+Another very common format for describing genomic features is BED (Browser Extensible Data). BED files have a less complicated version history than GFF/GTF, but there are variations of BED that use different delimiter format. For compatibility with JBrowse 2, the BED files need to be tab-delimited, and not white-space delimited. If needed, a white-space delimited file can be converted to be tab-delimited using for instance:
+
+```
+awk '{$1=$1}1' OFS='\t' data.ws_delimited.bed > data.tab_delimited.bed
+```
+
+Note that BED documentation sometimes discusses BED followed with a number, such as BED3, BED6, BED12. The numbers indicate the number of the established BED columns that are included in that particular BED file. The first three columns are mandatory, meaning that BED3 is the minimal formatting for a BED file. JBrowse 2 supports BED versions with different number of columns as long as the number of columns are consistent across the rows within each BED file.
 
 JBrowse 2 also supports the bigBED format, which is a binary, indexed format that is recommended for large BED-formatted datasets in order to improve performance. Please see the <a href="https://genome.ucsc.edu/goldenPath/help/bigBed.html">bigBED documentation</a> for how to convert BED to bigBED.
 
