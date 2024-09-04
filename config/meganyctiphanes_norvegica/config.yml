@@ -6,8 +6,7 @@ assembly:
   # The following url points to the original ENA upload of the assembly. It will require an alias file to be able to load the protein coding genes track
   url: "ftp://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/cax/CAXKWB01.fasta.gz"
   # NOTE: this alias file is 15 Mb. Copied it to local hugo/public/data dir for now to enable local testing
-  aliases: "CAXKWB01.fna.alias"
-  # aliases: "https://raw.githubusercontent.com/ScilifelabDataCentre/swedgene/main/scripts/data_stewardship/alias_files_temp_storage/CAXKWB01.fna.alias"
+  aliases: "https://raw.githubusercontent.com/ScilifelabDataCentre/swedgene/main/scripts/data_stewardship/alias_files_temp_storage/CAXKWB01.fna.alias"
 tracks:
   - name: "Protein coding genes (NCBI version)"
     url: "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/964/058/975/GCA_964058975.1_Mnor_HA_v2/GCA_964058975.1_Mnor_HA_v2_genomic.gff.gz"
