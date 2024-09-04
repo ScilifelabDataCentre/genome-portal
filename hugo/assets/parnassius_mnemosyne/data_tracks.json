@@ -9,7 +9,6 @@
     ],
     "accession": "GCA_900323705.1",
     "fileName": "CAVLGL01.fasta.gz",
-    "submitterName": "Jacob Höglund and Niclas Backström",
     "principalInvestigator": "Jacob Höglund and Niclas Backström",
     "principalInvestigatorAffiliation": "Uppsala University",
     "firstDateOnPortal": "15 October 2024"
@@ -23,7 +22,6 @@
     ],
     "accession": "",
     "fileName": "pmne_functional_edit1.gff.gz",
-    "submitterName": "Jacob Höglund and Niclas Backström",
     "principalInvestigator": "Jacob Höglund and Niclas Backström",
     "principalInvestigatorAffiliation": "Uppsala University",
     "firstDateOnPortal": "15 October 2024"
@@ -37,7 +35,6 @@
     ],
     "accession": "",
     "fileName": "pmne_Illumina_RNAseq_StringTie_sorted-transcripts_match.gff.gz",
-    "submitterName": "Jacob Höglund and Niclas Backström",
     "principalInvestigator": "Jacob Höglund and Niclas Backström",
     "principalInvestigatorAffiliation": "Uppsala University",
     "firstDateOnPortal": "15 October 2024"
@@ -51,7 +48,6 @@
     ],
     "accession": "",
     "fileName": "pmne_ncRNAs.gff.gz",
-    "submitterName": "Jacob Höglund and Niclas Backström",
     "principalInvestigator": "Jacob Höglund and Niclas Backström",
     "principalInvestigatorAffiliation": "Uppsala University",
     "firstDateOnPortal": "15 October 2024"
@@ -65,7 +61,6 @@
     ],
     "accession": "",
     "fileName": "pmne_tRNAs_and_pseudogenes.gff.gz",
-    "submitterName": "Jacob Höglund and Niclas Backström",
     "principalInvestigator": "Jacob Höglund and Niclas Backströmn",
     "principalInvestigatorAffiliation": "Uppsala University",
     "firstDateOnPortal": "15 October 2024"
@@ -79,7 +74,6 @@
     ],
     "accession": "OZ075093.1",
     "fileName": "OZ075093.1.fasta.gz",
-    "submitterName": "Jacob Höglund and Niclas Backström",
     "principalInvestigator": "Jacob Höglund and Niclas Backström",
     "principalInvestigatorAffiliation": "Uppsala University",
     "firstDateOnPortal": "15 October 2024"
@@ -93,7 +87,6 @@
     ],
     "accession": "",
     "fileName": "pmne_mtdna.gff.gz",
-    "submitterName": "Jacob Höglund and Niclas Backström",
     "principalInvestigator": "Jacob Höglund and Niclas Backström",
     "principalInvestigatorAffiliation": "Uppsala University",
     "firstDateOnPortal": "15 October 2024"
