@@ -95,9 +95,7 @@ body {
   position: relative;
   z-index: 1; 
   margin: 2rem;
-  margin-right: 30%;
   text-align: left; 
-  align-items: center;
 }
 
 .scilife-hero-title {
@@ -106,17 +104,9 @@ body {
 }
 
 .scilife-hero-subtitle {
-  font-size: 2rem;
+  font-size: 1.4rem;
   font-weight: 400;
-  margin-top: 1rem;
 }
-
-.scilife-hero-text {
-  font-size: 1.3rem;
-  font-weight: 400;
-  margin-top: 1rem;
-}
-
 
 @media (max-width: 575.98px) {
   .scilife-hero {
@@ -137,12 +127,11 @@ body {
     min-height: 70vh; 
     background-position: 75% center
   }
-  .scilife-hero-content {
-    position: relative;
-    z-index: 1; 
-    margin: 3rem;
-    margin-right: 40%;
-    text-align: left; 
+  .scilife-hero-title {
+    margin-right: 30%;
+  }
+  .scilife-hero-subtitle {
+    margin-right: 30%;
   }
 }
 
@@ -151,12 +140,11 @@ body {
     min-height: 60vh; 
     background-position: 70% center
   }
-  .scilife-hero-content {
-    position: relative;
-    z-index: 1; 
-    margin: 2rem;
+  .scilife-hero-title {
     margin-right: 40%;
-    text-align: left; 
+  }
+  .scilife-hero-subtitle {
+    margin-right: 40%;
   }
 }
 
@@ -164,12 +152,11 @@ body {
   .scilife-hero {
     min-height: 50vh; 
   }
-  .scilife-hero-content {
-    position: relative;
-    z-index: 1; 
-    margin: 2rem;
-    margin-right: 25%;
-    text-align: left; 
+  .scilife-hero-title {
+    margin-right: 20%;
+  }
+  .scilife-hero-subtitle {
+    margin-right: 30%;
   }
 }
 
@@ -177,12 +164,11 @@ body {
   .scilife-hero {
     min-height: 50vh; 
   }
-  .scilife-hero-content {
-    position: relative;
-    z-index: 1; 
-    margin: 2rem;
-    margin-right: 30%;
-    text-align: left; 
+  .scilife-hero-title {
+    margin-right: 20%;
+  }
+  .scilife-hero-subtitle {
+    margin-right: 42%;
   }
 }
 
@@ -214,7 +200,7 @@ body {
 }
 
 .scilife-navbar li a {
-  color: var(--scilife-aqua);;
+  color: var(--scilife-contrast-okay-grey);;
 }
 
 .scilife-footer-text a {
@@ -250,6 +236,13 @@ body {
   color: black;
 }
 
+.scilife-species-nav a,
+.scilife-species-nav a:hover, 
+.scilife-species-nav a:active,
+.scilife-species-nav a:focus {
+  color: var(--scilife-teal);
+}
+
 @media (min-width: 770px) {
   .scilife-species-nav .nav-link {
     border: 3px solid transparent; 
@@ -281,7 +274,7 @@ body {
 
 
 .scilife-species-card {
-  border-color: var(--scilife-light-grey);
+  border-color: var(--scilife-medium-grey);
   border-width: 0.1rem;
   display: flex;
   flex-direction: column; 
@@ -392,7 +385,7 @@ body {
 
 .scilife-subsection h4 {
   color: var(--scilife-teal);
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: 700;
   letter-spacing: -0.04rem;
 }
@@ -400,7 +393,7 @@ body {
 .scilife-subsection p {
   font-size: 1.125rem;
   font-weight: 400;
-  line-height: 1.575rem;
+  line-height: 1.7rem;
 }
 
 .scilife-subsection .btn {
@@ -435,7 +428,7 @@ body {
 
 /* Overrides default button */
 .scilife-subsection .scilife-external-btn {
-  background-color: var(--scilife-lime-025);
+  background-color: var(--scilife-aqua-025);
   border-color: var(--scilife-medium-grey);
   border-radius: 0.5rem;
   color: black;
@@ -474,7 +467,17 @@ body {
 }
 
 .scilife-sort-dropdown {
-background-color: var(--scilife-light-grey);
+  background-color: var(--scilife-light-grey);
+  margin-left: 0.5px; 
+  z-index: 1; 
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.scilife-search-box {
+  margin-right: 0.5px; 
+  z-index: 0;
+  padding-left: 10px;
 }
 
 .scilife-sort-dropdown:hover {
@@ -506,8 +509,10 @@ background-color: var(--scilife-light-grey);
 }
 
 .scilife-search-box::placeholder {
-  color: var(--scilife-dark-grey);
+  color: var(--scilife-contrast-okay-grey);
 }
+
+
 
 .scilife-search-box:focus {
   color: var(--scilife-dark-grey) !important; 
@@ -533,7 +538,7 @@ background-color: var(--scilife-light-grey);
   font-size: 0.9rem;
   font-weight: 400;
   color: var(--scilife-contrast-okay-grey);
-  text-align: center;
+  text-align: left;
 }
 
 .scilife-icon-sm {
