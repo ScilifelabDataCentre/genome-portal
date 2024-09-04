@@ -1,7 +1,70 @@
 {
-  "defaultSession": [
-    {
-      "name": "Default session"
-    }
-  ]
+  "defaultSession": {
+    "id": "ltri_default_session",
+    "name": "Linum trigynum",
+    "widgets": {
+      "hierarchicalTrackSelector": {
+        "id": "hierarchicalTrackSelector",
+        "type": "HierarchicalTrackSelectorWidget",
+        "view": "ltri_default_session_view",
+        "faceted": {
+          "showSparse": false,
+          "showFilters": true,
+          "showOptions": false,
+          "panelWidth": 400
+        }
+      }
+    },
+    "activeWidgets": {
+      "hierarchicalTrackSelector": "hierarchicalTrackSelector"
+    },
+    "views": [
+      {
+        "id": "ltri_default_session_view",
+        "minimized": false,
+        "type": "LinearGenomeView",
+        "offsetPx": 0,
+        "bpPerPx": 50,
+        "displayedRegions": [
+          {
+            "refName": "OZ034813.1",
+            "start": 0,
+            "end": 47029054,
+            "reversed": false,
+            "assemblyName": "Ltrigynum_genome"
+          }
+        ],
+        "tracks": [
+          {
+            "id": "ltri_default_protein_coding_genes",
+            "type": "FeatureTrack",
+            "configuration": "Ltrigynum_v1_genes.gff",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "lten_default_protein_coding_genes_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 120,
+                "configuration": "Ltrigynum_v1_genes.gff-LinearBasicDisplay"
+              }
+            ]
+          },
+          {
+            "id": "ltri_default_repeats",
+            "type": "FeatureTrack",
+            "configuration": "L_trigynum_v1_rep.bed",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "lten_default_repeats_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 350,
+                "configuration": "L_trigynum_v1_rep.bed-LinearBasicDisplay"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

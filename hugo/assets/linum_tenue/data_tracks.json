@@ -1,5 +1,45 @@
 [
   {
-    "dataTrackName": "TODO"
+    "dataTrackName": "Genome",
+    "description": "Reference genome sequence",
+    "links": [
+      {"Download": "https://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/cam/CAMGYJ01.fasta.gz"},
+      {"Website": "https://www.ebi.ac.uk/ena/browser/view/GCA_946122785.1"},
+      {"Article": "https://doi.org/10.1016/j.cub.2022.08.042"}
+    ],
+    "accession": "GCA_946122785.1",
+    "fileName": "CAMGYJ01.fasta.gz",
+    "submitterName": "Tanja Slotte",
+    "principalInvestigator": "Tanja Slotte",
+    "submitterAffiliation": "Stockholm University",
+    "firstDateOnPortal": "15 October 2024"
+  },
+  {
+    "dataTrackName": "Protein-coding genes",
+    "description": "Functional annotation of protein-coding genes",
+    "links": [
+      {"Download": "https://figshare.scilifelab.se/ndownloader/files/45076090"},
+      {"Website": "https://doi.org/10.17044/scilifelab.24340378.v1"}
+    ],
+    "accession": "",
+    "fileName": "ltenue_v1_genes.gff.zip",
+    "submitterName": "Tanja Slotte",
+    "principalInvestigator": "Tanja Slotte",
+    "submitterAffiliation": "Stockholm University",
+    "firstDateOnPortal": "15 October 2024"
+  },
+  {
+    "dataTrackName": "Repeats",
+    "description": "Annotation of the repetitive regions",
+    "links": [
+      {"Download": "https://figshare.scilifelab.se/ndownloader/files/48879751"},
+      {"Website": "https://doi.org/10.17044/scilifelab.24343000.v2"}
+    ],
+    "accession": "",
+    "fileName": "L_tenue_v1_rep.bed.gz",
+    "submitterName": "Tanja Slotte",
+    "principalInvestigator": "Tanja Slotte",
+    "submitterAffiliation": "Stockholm University",
+    "firstDateOnPortal": "15 October 2024"
   }
 ]
