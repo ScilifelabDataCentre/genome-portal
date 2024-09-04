@@ -9,9 +9,8 @@
     ],
     "accession": "GCA_964030455.1",
     "fileName": "GCA_964030455.1_Ltrigynum_genome_genomic.fna.gz",
-    "submitterName": "Tanja Slotte",
     "principalInvestigator": "Tanja Slotte",
-    "submitterAffiliation": "Stockholm University",
+    "principalInvestigatorAffiliation": "Stockholm University",
     "firstDateOnPortal": "15 October 2024"
   },
   {
@@ -23,9 +22,8 @@
     ],
     "accession": "",
     "fileName": "Ltrigynum_v1_genes.gff.gz",
-    "submitterName": "Tanja Slotte",
     "principalInvestigator": "Tanja Slotte",
-    "submitterAffiliation": "Stockholm University",
+    "principalInvestigatorAffiliation": "Stockholm University",
     "firstDateOnPortal": "15 October 2024"
   },
   {
@@ -37,9 +35,8 @@
     ],
     "accession": "",
     "fileName": "L_trigynum_v1_rep.bed.gz",
-    "submitterName": "Tanja Slotte",
     "principalInvestigator": "Tanja Slotte",
-    "submitterAffiliation": "Stockholm University",
+    "principalInvestigatorAffiliation": "Stockholm University",
     "firstDateOnPortal": "15 October 2024"
   }
 ]

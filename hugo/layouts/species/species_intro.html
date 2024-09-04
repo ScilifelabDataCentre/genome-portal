@@ -7,9 +7,6 @@
 
 <div class="container mt-3">
 
-    <!-- Open link in new tab species browser -->
-    {{- partial "open_browser.html" . -}}
-
     <!-- species pic and distribution map -->
     <div class="row mt-3 d-flex">
 
@@ -107,14 +104,6 @@
             <h3>External links</h3>
 
             <div class="d-grid gap-2 d-md-flex text-center text-md-left">
-                <a href="TODO" target="_blank">
-                    <button class="scilife-external-btn btn btn-lg">
-                        <img src="/img/icons/plant1.svg" alt="Plant icon" class="scilife-icon">
-                        <br>
-                        Biology and Ecology
-                    </button>
-                </a>
-
                 {{ if .Params.gbif_taxon_id }}
                     <a href="https://species.biodiversitydata.se/species/{{ .Params.gbif_taxon_id }}" target="_blank">
                         <button class="scilife-external-btn btn btn-lg">
@@ -131,9 +120,7 @@
                             Occurrence data in GBIF
                         </button>
                     </a>
-
                 {{ end }}
-
 
                 {{ if .Params.goat_webpage }}
                     <a href="{{ .Params.goat_webpage }}" target="_blank">

@@ -2,10 +2,8 @@
 # Required params below
 title: "*Linum trigynum* L."
 subtitle: "French Flax"
-summary: "Genome assembly, genome annotation and 2 data tracks."
 
 last_updated: "02/09/2024"
-contact_person: "[EDIT First Name Surname (firstname.surname@scilifelab.se)] "
 
 cover_image: "/img/species/Ltrigynum_field_B_Laenen_A_Desamore_4-3ratio_crop.webp"
 img_attrib_text: "Linum trigynum by Benjamin Laenen and Aurélie Désamoré, used with permission"
@@ -15,6 +13,7 @@ img_attrib_text: "Linum trigynum by Benjamin Laenen and Aurélie Désamoré, use
 # The params below were auto-generated, you should not need to edit them...
 # unless you were warned by the add-new-species.py script.
 layout: "species_intro"
+banner_title: "Species overview"
 url: "linum_trigynum"
 weight: 1
 science_name: "Linum trigynum"

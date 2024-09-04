@@ -8,10 +8,8 @@
       {"Article": "https://doi.org/10.1016/j.cub.2022.08.042"}
     ],
     "accession": "GCA_946122785.1",
-    "fileName": "CAMGYJ01.fasta.gz",
-    "submitterName": "Tanja Slotte",
     "principalInvestigator": "Tanja Slotte",
-    "submitterAffiliation": "Stockholm University",
+    "principalInvestigatorAffiliation": "Stockholm University",
     "firstDateOnPortal": "15 October 2024"
   },
   {
@@ -23,9 +21,8 @@
     ],
     "accession": "",
     "fileName": "ltenue_v1_genes.gff.zip",
-    "submitterName": "Tanja Slotte",
     "principalInvestigator": "Tanja Slotte",
-    "submitterAffiliation": "Stockholm University",
+    "principalInvestigatorAffiliation": "Stockholm University",
     "firstDateOnPortal": "15 October 2024"
   },
   {
@@ -37,9 +34,8 @@
     ],
     "accession": "",
     "fileName": "L_tenue_v1_rep.bed.gz",
-    "submitterName": "Tanja Slotte",
     "principalInvestigator": "Tanja Slotte",
-    "submitterAffiliation": "Stockholm University",
+    "principalInvestigatorAffiliation": "Stockholm University",
     "firstDateOnPortal": "15 October 2024"
   }
 ]
