@@ -1,0 +1,57 @@
+{
+    "defaultSession": {
+      "id": "smar_default_session",
+      "name": "Skeletonema marinoi",
+      "widgets": {
+        "hierarchicalTrackSelector": {
+          "id": "hierarchicalTrackSelector",
+          "type": "HierarchicalTrackSelectorWidget",
+          "view": "smar_default_session_view",
+          "faceted": {
+            "showSparse": false,
+            "showFilters": true,
+            "showOptions": false,
+            "panelWidth": 400
+          }
+        }
+      },
+      "activeWidgets": {
+        "hierarchicalTrackSelector": "hierarchicalTrackSelector"
+      },
+      "views": [
+        {
+          "id": "smar_default_session_view",
+          "minimized": false,
+          "type": "LinearGenomeView",
+          "offsetPx": 0,
+          "bpPerPx": 50,
+          "displayedRegions": [
+            {
+              "refName": "ENA|JATAAI010000001|JATAAI010000001.1",
+              "start": 0,
+              "end": 3534548,
+              "reversed": false,
+              "assemblyName": "GU_Smar_1.1.8"
+            }
+          ],
+          "tracks": [
+            {
+              "id": "smar_default_protein_coding_genes",
+              "type": "FeatureTrack",
+              "configuration": "GCA_030871285.1_GU_Smar_1.1.8_genomic.gff",
+              "minimized": false,
+              "displays": [
+                {
+                  "id": "smar_default_protein_coding_genes_display",
+                  "type": "LinearBasicDisplay",
+                  "heightPreConfig": 200,
+                  "configuration": "GCA_030871285.1_GU_Smar_1.1.8_genomic.gff-LinearBasicDisplay"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+  
