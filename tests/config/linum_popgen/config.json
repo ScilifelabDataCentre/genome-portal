@@ -1,0 +1,118 @@
+{
+    "defaultSession": {
+      "id": "lten_default_session",
+      "name": "Linum tenue",
+      "widgets": {
+        "hierarchicalTrackSelector": {
+          "id": "hierarchicalTrackSelector",
+          "type": "HierarchicalTrackSelectorWidget",
+          "view": "lten_default_session_view",
+          "faceted": {
+            "showSparse": false,
+            "showFilters": true,
+            "showOptions": false,
+            "panelWidth": 400
+          }
+        }
+      },
+      "activeWidgets": {
+        "hierarchicalTrackSelector": "hierarchicalTrackSelector"
+      },
+      "views": [
+        {
+          "id": "lten_default_session_view",
+          "minimized": false,
+          "type": "LinearGenomeView",
+          "offsetPx": 0,
+          "bpPerPx": 50,
+          "displayedRegions": [
+            {
+              "refName": "ENA|CAMGYJ010000002|CAMGYJ010000002.1",
+              "start": 0,
+              "end": 72476498,
+              "reversed": false,
+              "assemblyName": "Linum_tenue_thrum_v1"
+            }
+          ],
+          "tracks": [
+            {
+              "id": "lten_default_protein_coding_genes",
+              "type": "FeatureTrack",
+              "configuration": "ltenue_v1_genes.gff",
+              "minimized": false,
+              "displays": [
+                {
+                  "id": "lten_default_protein_coding_genes_display",
+                  "type": "LinearBasicDisplay",
+                  "heightPreConfig": 150,
+                  "configuration": "ltenue_v1_genes.gff-LinearBasicDisplay"
+                }
+              ]
+            },
+            {
+              "id": "lten_default_repeats",
+              "type": "FeatureTrack",
+              "configuration": "L_tenue_v1_rep.bed",
+              "minimized": false,
+              "displays": [
+                {
+                  "id": "lten_default_repeats_display",
+                  "type": "LinearBasicDisplay",
+                  "heightPreConfig": 150,
+                  "configuration": "L_tenue_v1_rep.bed-LinearBasicDisplay"
+                }
+              ]
+            },
+            {
+              "id": "lten_default_TD06",
+              "type": "FeatureTrack",
+              "configuration": "Lten_pop06_TD_init_config",
+              "minimized": false,
+              "displays": [
+                {
+                  "id": "lten_default_lten_default_TD06_display",
+                  "type": "LinearManhattanDisplay",
+                  "heightPreConfig": 150,
+                  "configuration": "Lten_pop06_TD_init_config_display"
+                }
+              ]
+            }
+          ],
+          "trackLabels":	"offset"
+        }
+      ]
+    },
+    "plugins": [
+      {
+        "name": "GWAS",
+        "url": "https://unpkg.com/jbrowse-plugin-gwas/dist/jbrowse-plugin-gwas.umd.production.min.js"
+      }
+    ],
+    "tracks": [
+      {
+        "type": "FeatureTrack",
+        "trackId": "Lten_pop06_TD_init_config",
+        "name": "Tajima's D, population 06",
+        "assemblyNames": ["Linum_tenue_thrum_v1"],
+        "category": ["Population genomics"],
+        "adapter": {
+          "type": "BedTabixAdapter",
+          "scoreColumn": "TajimaD",
+          "bedGzLocation": {
+            "uri": "Lten_pop06_TD.bed.bgz"
+          },
+          "index": {
+            "location": {
+              "uri": "Lten_pop06_TD.bed.bgz.tbi"
+            }
+          }
+        },
+        "displays": [
+          {
+            "displayId": "Lten_pop06_TD_init_config_display",
+            "type": "LinearManhattanDisplay"
+          }
+        ]
+      }
+    ]
+}
