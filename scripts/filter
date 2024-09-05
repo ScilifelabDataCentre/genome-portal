@@ -18,7 +18,7 @@ main () {
 	fi
     elif [[ "$1" =~ ${bed_pattern} ]]; then
 	echo "Sorting BED file $1" >&2
-	if ! grep -v "^#" | sort -k1,1 -k2,2n; then
+	if ! sort -k1,1 -k2,2n; then
 	    echo "Error filtering contents of BED file: $1" >&2
 	fi
     else
