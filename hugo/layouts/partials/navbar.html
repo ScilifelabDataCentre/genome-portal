@@ -2,9 +2,8 @@
     <div class="container">
 
         <a class="navbar-brand" href="/">
-            <img src="/img/logos/logo_evolution_and_biodiversity_portal_onlyText.svg"
-                alt="The DDLS Evolution and Biodiveristy node's logo"
-                style="display: flex; height: 3.5rem; justify-content: center; align-items: center;">
+            <img class="scilife-navbar-logo" src="/img/logos/logo_evolution_and_biodiversity_portal_onlyText.svg"
+                alt="The DDLS Evolution and Biodiveristy node's logo">
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -13,7 +12,7 @@
         </button>
 
         <div class="collapse navbar-collapse scilife-navbar" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto">
+            <ul class="navbar-nav ms-lg-auto">
                 {{ range .Site.Menus.main }}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ .URL }}">{{ .Name }}</a>

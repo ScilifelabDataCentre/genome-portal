@@ -185,11 +185,6 @@ body {
   border-color: var(--scilife-teal);
 }
 
-.scilife-navbar {
-  font-size: 1.5rem;
-  font-weight: 500;
-  letter-spacing: 0.045rem;
-}
 
 .navbar-nav .nav-item {
   margin-right: 0.4rem; 
@@ -199,8 +194,37 @@ body {
   margin-right: 0;
 }
 
+.scilife-navbar {
+  font-weight: 400;
+  letter-spacing: 0.045rem;
+}
+
 .scilife-navbar li a {
   color: var(--scilife-contrast-okay-grey);;
+}
+
+.scilife-navbar-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-width: 992px) {
+  .scilife-navbar-logo {
+      height: 4rem;
+  }
+  .scilife-navbar {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 991px) {
+  .scilife-navbar-logo {
+      height: 3rem;
+  }
+  .scilife-navbar {
+    font-size: 1.3rem;
+  }
 }
 
 .scilife-footer-text a {
