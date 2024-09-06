@@ -110,21 +110,21 @@ body {
 
 @media (max-width: 575.98px) {
   .scilife-hero {
-    min-height: 80vh; 
+    min-height: 40vh; 
     background-position: 80% center
   }
 }
 
 @media (min-width: 576px) and (max-width: 767.98px) {
   .scilife-hero {
-    min-height: 80vh; 
+    min-height: 30vh; 
     background-position: 80% center
   }
 }
 
 @media (min-width: 768px) and (max-width: 991.98px) {
   .scilife-hero {
-    min-height: 70vh; 
+    min-height: 35vh; 
     background-position: 75% center
   }
   .scilife-hero-title {
@@ -137,38 +137,38 @@ body {
 
 @media (min-width: 992px) and (max-width: 1199.98px) {
   .scilife-hero {
-    min-height: 60vh; 
+    min-height: 30vh; 
     background-position: 70% center
   }
   .scilife-hero-title {
-    margin-right: 40%;
-  }
-  .scilife-hero-subtitle {
-    margin-right: 40%;
-  }
-}
-
-@media (min-width: 1200px) and (max-width: 1399.98px) {
-  .scilife-hero {
-    min-height: 50vh; 
-  }
-  .scilife-hero-title {
-    margin-right: 20%;
+    margin-right: 10%;
   }
   .scilife-hero-subtitle {
     margin-right: 30%;
   }
 }
 
-@media (min-width: 1400px) {
+@media (min-width: 1200px) and (max-width: 1399.98px) {
   .scilife-hero {
-    min-height: 50vh; 
+    min-height: 24vh; 
   }
   .scilife-hero-title {
     margin-right: 20%;
   }
   .scilife-hero-subtitle {
-    margin-right: 42%;
+    margin-right: 43%;
+  }
+}
+
+@media (min-width: 1400px) {
+  .scilife-hero {
+    min-height: 27vh; 
+  }
+  .scilife-hero-title {
+    margin-right: 20%;
+  }
+  .scilife-hero-subtitle {
+    margin-right: 47%;
   }
 }
 
