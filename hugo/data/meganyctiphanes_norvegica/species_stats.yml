@@ -16,10 +16,10 @@ assembly:
   - "BUSCO % (arthropoda_odb10)": "C:99.7 [S:72, D:3.7], F:14, M:10, n:1013"
 
 annotation:
-  - "Gene #": [EDIT]
-  - "Transcript #": [EDIT]
-  - "Avg exons per transcript": [EDIT]
-  - "Avg gene length (bp)": [EDIT]
-  - "Avg transcript length (bp)": [EDIT]
-  - "Avg exon length (bp)": [EDIT]
-  - "Avg intron length (bp)": [EDIT]
+  - "Gene #": 42,189
+  - "Transcript #": 42,189
+  - "Avg exons per transcript": 5.7
+  - "Avg gene length (bp)": 50,276
+  - "Avg transcript length (bp)": 50,276
+  - "Avg exon length (bp)": 282
+  - "Avg intron length (bp)": 9,804
