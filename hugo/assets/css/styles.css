@@ -70,13 +70,13 @@ body {
   overflow: hidden;
   padding: 1.2rem 0rem;
   margin-bottom: 1rem;
-  background: url('/img/logos/hero_bg.webp') no-repeat center center; 
-  background-size: cover; 
+  background: url('/img/logos/hero_bg.webp') no-repeat center center;
+  background-size: cover;
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 60vh; 
+  min-height: 60vh;
   max-width: 1444px;
 }
 
@@ -87,15 +87,15 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.2); 
-  z-index: 0; 
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 0;
 }
 
 .scilife-hero-content {
   position: relative;
-  z-index: 1; 
+  z-index: 1;
   margin: 2rem;
-  text-align: left; 
+  text-align: left;
 }
 
 .scilife-hero-title {
@@ -110,21 +110,21 @@ body {
 
 @media (max-width: 575.98px) {
   .scilife-hero {
-    min-height: 40vh; 
+    min-height: 40vh;
     background-position: 80% center
   }
 }
 
 @media (min-width: 576px) and (max-width: 767.98px) {
   .scilife-hero {
-    min-height: 30vh; 
+    min-height: 30vh;
     background-position: 80% center
   }
 }
 
 @media (min-width: 768px) and (max-width: 991.98px) {
   .scilife-hero {
-    min-height: 35vh; 
+    min-height: 35vh;
     background-position: 75% center
   }
   .scilife-hero-title {
@@ -137,7 +137,7 @@ body {
 
 @media (min-width: 992px) and (max-width: 1199.98px) {
   .scilife-hero {
-    min-height: 30vh; 
+    min-height: 30vh;
     background-position: 70% center
   }
   .scilife-hero-title {
@@ -150,7 +150,7 @@ body {
 
 @media (min-width: 1200px) and (max-width: 1399.98px) {
   .scilife-hero {
-    min-height: 24vh; 
+    min-height: 24vh;
   }
   .scilife-hero-title {
     margin-right: 20%;
@@ -162,7 +162,7 @@ body {
 
 @media (min-width: 1400px) {
   .scilife-hero {
-    min-height: 27vh; 
+    min-height: 27vh;
   }
   .scilife-hero-title {
     margin-right: 20%;
@@ -187,7 +187,7 @@ body {
 
 
 .navbar-nav .nav-item {
-  margin-right: 0.4rem; 
+  margin-right: 0.4rem;
 }
 
 .navbar-nav .nav-item:last-child {
@@ -261,7 +261,7 @@ body {
 }
 
 .scilife-species-nav a,
-.scilife-species-nav a:hover, 
+.scilife-species-nav a:hover,
 .scilife-species-nav a:active,
 .scilife-species-nav a:focus {
   color: var(--scilife-teal);
@@ -269,10 +269,10 @@ body {
 
 @media (min-width: 770px) {
   .scilife-species-nav .nav-link {
-    border: 3px solid transparent; 
+    border: 3px solid transparent;
   }
   .scilife-species-nav .nav-link.active {
-    border-color: #dee2e6 #dee2e6 #fff; 
+    border-color: #dee2e6 #dee2e6 #fff;
   }
 }
 
@@ -301,20 +301,20 @@ body {
   border-color: var(--scilife-medium-grey);
   border-width: 0.1rem;
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   padding: 0.5rem;
-  height: 100%; 
+  height: 100%;
 }
 
 .scilife-species-card .card-image {
-  flex: 0 0 auto; 
+  flex: 0 0 auto;
 }
 
 .scilife-species-card .card-body {
-  flex: 1 1 auto; 
+  flex: 1 1 auto;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; 
+  justify-content: flex-start;
   padding: 0rem;
 }
 
@@ -323,7 +323,7 @@ body {
   font-size: 1.25rem;
   font-weight: 700;
   letter-spacing: 0.0625rem;
-  margin-top: auto; 
+  margin-top: auto;
 }
 
 .scilife-species-card h3 {
@@ -487,19 +487,19 @@ body {
   font-size: 1.2rem;
   font-weight: 500;
   letter-spacing: 0.045rem;
-  border-radius: 0; 
+  border-radius: 0;
 }
 
 .scilife-sort-dropdown {
   background-color: var(--scilife-light-grey);
-  margin-left: 0.5px; 
-  z-index: 1; 
+  margin-left: 0.5px;
+  z-index: 1;
   padding-left: 10px;
   padding-right: 10px;
 }
 
 .scilife-search-box {
-  margin-right: 0.5px; 
+  margin-right: 0.5px;
   z-index: 0;
   padding-left: 10px;
 }
@@ -539,7 +539,7 @@ body {
 
 
 .scilife-search-box:focus {
-  color: var(--scilife-dark-grey) !important; 
+  color: var(--scilife-dark-grey) !important;
   border-color: var(--scilife-dark-grey) !important;
   border-width: 2px;
   outline: none;
