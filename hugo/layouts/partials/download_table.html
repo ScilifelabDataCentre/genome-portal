@@ -1,6 +1,7 @@
 {{ $tableType := .tableType }}
 {{ $tableData := .tableData }}
 {{ $staticDirPath := .staticDirPath }}
+{{ $aliasFileURL := .aliasFileURL }}
 
 <div class="table-responsive">
     <table id="downloadTable{{ $tableType | title}}" class="table table-hover table-bordered">
@@ -76,32 +77,27 @@
 <div class="row g-1">
     <div class="col-12">
       <caption class="scilife-download-table-caption">
-        <a href="{{ $staticDirPath }}.csv" target="_blank">
-          <img src="/img/icons/download.svg" alt="Download Icon" class="scilife-icon">
-          Download the table contents as a CSV file.
-        </a>
-      </caption>
-    </div>
-    <div class="col-12">
-      <caption class="scilife-download-table-caption">
-        <a href="{{ $staticDirPath }}.json" target="_blank">
+        <a href="{{ $staticDirPath }}.json" download>
           <img src="/img/icons/download.svg" alt="Download Icon" class="scilife-icon">
           Download the table contents as a JSON file.
         </a>
       </caption>
     </div>
-    <div class="col-12">
-      <caption class="scilife-download-table-caption">
-        <a href="#TODO" target="_blank">
-          <img src="/img/icons/download.svg" alt="Download Icon" class="scilife-icon">
-          Download the refNameAlias text file used in JBrowse to set the aliases for reference sequence names (e.g., to define that "chr1" is an alias for "1").
-        </a>
-      </caption>
-    </div>
+
+    {{ if ne $aliasFileURL "" }}
+      <div class="col-12">
+        <caption class="scilife-download-table-caption">
+          <a href="{{ $aliasFileURL }}" target="_blank">
+            <img src="/img/icons/file.svg" alt="File icon" class="scilife-icon">
+            Open (in a new tab) the refNameAlias text file used in JBrowse to set the aliases for reference sequence names (e.g., to define that "chr1" is an alias for "1").
+          </a>
+        </caption>
+      </div>
+    {{ end }}
     <div class="col-12">
       <caption class="scilife-download-table-caption">
         <a href="/glossary" target="_blank">
-          <img src="/img/icons/book_open.svg" alt="Download Icon" class="scilife-icon">
+          <img src="/img/icons/book_open.svg" alt="Open book icon" class="scilife-icon">
           Open the Glossary (in a new tab).
         </a>
       </caption>
