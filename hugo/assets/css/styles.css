@@ -60,7 +60,8 @@ body {
   top: 10%;
   transform: translateY(-10%);
   left: 0;
-  opacity: 0.9;
+  opacity: 1;
+  filter: brightness(90%);
 }
 
 
