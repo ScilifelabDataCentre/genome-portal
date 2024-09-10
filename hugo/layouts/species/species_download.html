@@ -35,6 +35,13 @@
 
     {{ (resources.Get $tableDataPath | resources.Copy $staticDirFile).Publish }}
 
+
+    {{ $aliasFileURL := "" }}
+    {{ if .Params.alias_file_url }}
+        {{ $aliasFileURL = .Params.alias_file_url }}
+    {{ end }}
+
+
     <div class="row">
         <div class="form-check form-switch scilife-toggle">
             <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
@@ -42,11 +49,11 @@
         </div>
 
         <div id="table-container-long">
-            {{ partial "download_table" (dict "tableType" "long" "staticDirPath" $staticDirPath "tableData" $tableData)}}
+            {{ partial "download_table" (dict "tableType" "long" "staticDirPath" $staticDirPath "tableData" $tableData "aliasFileURL" $aliasFileURL )}}
         </div>
 
         <div id="table-container-short">
-            {{ partial "download_table" (dict "tableType" "short" "staticDirPath" $staticDirPath "tableData" $tableData)}}
+            {{ partial "download_table" (dict "tableType" "short" "staticDirPath" $staticDirPath "tableData" $tableData "aliasFileURL" $aliasFileURL )}}
         </div>
     </div>
 
