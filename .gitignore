@@ -17,6 +17,7 @@ hugo/.hugo_build.lock
 #data stewardship
 scripts/data_stewardship/temp/**
 scripts/data_stewardship/logs/**
+scripts/data_stewardship/*.agat.log
 
 # OSX
 *.DS_Store
