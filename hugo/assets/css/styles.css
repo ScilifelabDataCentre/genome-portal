@@ -296,14 +296,13 @@ body {
   letter-spacing: -0.04rem;
 }
 
-
 .scilife-species-card {
-  border-color: var(--scilife-medium-grey);
-  border-width: 0.1rem;
   display: flex;
   flex-direction: column;
-  padding: 0.5rem;
   height: 100%;
+  padding: 0.5rem;
+  border: 0.1rem solid var(--scilife-medium-grey);
+  box-shadow: 0 0 0.2rem 0.2rem rgba(0, 0, 0, 0.08);
 }
 
 .scilife-species-card .card-image {
