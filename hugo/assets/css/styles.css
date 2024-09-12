@@ -363,34 +363,43 @@ body {
   height: 400px;
 }
 
-/* For mobile devices */
 @media (max-width: 576px) {
   .scilife-intro-map-img {
     max-height: 300px;
   }
 }
 
-/* For tablets */
 @media (min-width: 577px) and (max-width: 992px) {
   .scilife-intro-map-img {
     max-height: 350px;
   }
 }
 
-/* For laptops */
 @media (min-width: 993px) and (max-width: 1199px) {
   .scilife-intro-map-img {
     max-height: 330px;
   }
 }
 
-/* For larger screen */
 @media (min-width: 1400px) {
   .scilife-intro-map-img {
     height: 450px;
   }
 }
 
+.map-error-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 2rem;
+  color: red;
+  z-index: 1000;
+}
 
 .scilife-subsection h2 {
   color: var(--scilife-teal);
