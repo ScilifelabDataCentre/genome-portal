@@ -15,6 +15,7 @@
   --scilife-teal-075: #43858B;
   --scilife-teal-050: #82AEB2;
   --scilife-teal-025: #C0D6D8;
+  --scilife-teal-light: #E6F2F3;
 
   --scilife-aqua: #4C979F;
   --scilife-aqua-075: #79B1B7;
@@ -642,6 +643,60 @@ body {
   font-size: 1.1rem;
   margin-left: 0.5rem;
   margin-right: 0.6rem;
+}
+
+
+/* contribute page */
+.scilife-numbered-circle {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  font-weight: bold;
+  margin: 0 auto;
+  color: var(--scilife-teal);
+  background-color: var(--scilife-teal-light);
+  border: 2px solid var(--scilife-teal);
+}
+
+.scilife-contrib-border {
+  display: inline-block;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  border: 0.15rem solid var(--scilife-medium-grey);
+}
+
+.scilife-contrib-mainheader {
+  background-color: var(--scilife-teal);
+  color: white;
+  font-size: 2rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+.scilife-contrib-subheader {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: black;
+}
+
+.scilife-contrib-subtext {
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
+.scilife-contrib-enjoy-subtext {
+  margin-left: 6.2rem;
+  color: var(--scilife-grape);
+  font-size: 2rem;
+  font-weight: 700;
+  font-style: italic;
 }
 
 /* footer images */
