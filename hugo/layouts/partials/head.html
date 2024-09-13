@@ -2,7 +2,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Site meta -->
-    <title>{{ .Title }} | {{ .Site.Title }}</title>
+    <title>
+        {{ with .Params.banner_title }}
+            {{ . }}
+        {{ else }}
+            {{ .Title }}
+        {{ end }}
+        | {{ .Site.Title }}
+    </title>
     <meta name="description" content='{{ if .IsHome }}{{ .Param "description" }}{{ else }}{{ .Description }}{{ end }}'>
     <meta http-equiv="content-language" content="en">
     <meta name="theme-color" content="#a7c947">

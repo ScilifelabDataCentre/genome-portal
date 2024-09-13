@@ -212,7 +212,7 @@ body {
 
 @media (min-width: 992px) {
   .scilife-navbar-logo {
-      height: 4rem;
+      height: 2.2rem;
   }
   .scilife-navbar {
     font-size: 1.4rem;
@@ -221,7 +221,7 @@ body {
 
 @media (max-width: 991px) {
   .scilife-navbar-logo {
-      height: 3rem;
+      height: 1.8rem;
   }
   .scilife-navbar {
     font-size: 1.3rem;
@@ -418,7 +418,7 @@ body {
 
 .scilife-subsection h4 {
   color: var(--scilife-teal);
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: -0.04rem;
 }
@@ -685,7 +685,8 @@ body {
   padding: 1rem;
   border-radius: 0.5rem;
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 0.4rem;
+  margin-top: 0.4rem;
   display: inline-block;
 }
 
