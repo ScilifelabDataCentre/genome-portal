@@ -11,7 +11,7 @@
                 <th>Description</th>
                 <th>Links</th>
                 {{ if eq $tableType "long"}}
-                    <th>Accession</th>
+                    <th>Accession/DOI</th>
                     <th>File name</th>
                 {{ end }}
                 <th>Principal investigator</th>
@@ -57,9 +57,21 @@
                     </td>
 
                     {{ if eq $tableType "long"}}
-                        <td>{{ .accession }}</td>
-                        <td>{{ .fileName }}</td>
-                    {{ end }}
+                    <td>
+                        {{ $accessionUrl := "" }}
+                        {{ range .links}}
+                            {{ if .Website }}
+                                {{ $accessionUrl = .Website }}
+                            {{ end }}
+                        {{ end }}
+                        {{ if $accessionUrl }}
+                            <a href="{{ $accessionUrl }}" >{{ .accessionOrDOI }}</a>
+                        {{ else }}
+                            {{ .accessionOrDOI }}
+                        {{ end }}
+                    </td>
+                    <td>{{ .fileName }}</td>
+                {{ end }}
 
                     <td>{{ .principalInvestigator }}</td>
                     <td>{{ .principalInvestigatorAffiliation }}</td>

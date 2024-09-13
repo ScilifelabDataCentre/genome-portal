@@ -7,7 +7,7 @@
       {"Website": "https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_964030455.1/"},
       {"Article": "https://doi.org/10.1093/molbev/msae087"}
     ],
-    "accession": "GCA_964030455.1",
+    "accessionOrDOI": "GCA_964030455.1",
     "fileName": "GCA_964030455.1_Ltrigynum_genome_genomic.fna.gz",
     "principalInvestigator": "Tanja Slotte",
     "principalInvestigatorAffiliation": "Stockholm University",
@@ -18,9 +18,10 @@
     "description": "Functional annotation of protein-coding genes",
     "links": [
       {"Download": "https://figshare.scilifelab.se/ndownloader/files/48853129"},
-      {"Website": "https://doi.org/10.17044/scilifelab.24324382.v2"}
+      {"Website": "https://doi.org/10.17044/scilifelab.24324382.v2"},
+      {"Article": "https://doi.org/10.1093/molbev/msae087"}
     ],
-    "accession": "",
+    "accessionOrDOI": "10.17044/scilifelab.24324382.v2",
     "fileName": "Ltrigynum_v1_genes.gff.gz",
     "principalInvestigator": "Tanja Slotte",
     "principalInvestigatorAffiliation": "Stockholm University",
@@ -31,9 +32,10 @@
     "description": "Annotation of the repetitive regions",
     "links": [
       {"Download": "https://figshare.scilifelab.se/ndownloader/files/48879658"},
-      {"Website": "https://doi.org/10.17044/scilifelab.24324310.v2"}
+      {"Website": "https://doi.org/10.17044/scilifelab.24324310.v2"},
+      {"Article": "https://doi.org/10.1093/molbev/msae087"}
     ],
-    "accession": "",
+    "accessionOrDOI": "10.17044/scilifelab.24324382.v2",
     "fileName": "L_trigynum_v1_rep.bed.gz",
     "principalInvestigator": "Tanja Slotte",
     "principalInvestigatorAffiliation": "Stockholm University",
