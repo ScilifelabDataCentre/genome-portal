@@ -166,26 +166,29 @@ populate_yaml_template() {
         export "${var}"="$mbp_value"
     done
 
-    # Function to format numbers with commas
-    format_number() {
-        echo "$1" | awk '{printf "%\047d\n", $1}'
-    }
 
-    # Make an array of variable names. Loop through the array and format the variables.
-    # Only format numbers that do no have decimals
-    variables=(total_length gc_content total_contigs contig_N50 contig_L50 contig_N90 contig_L90 \
-                total_scaffolds scaffold_N50 scaffold_L50 scaffold_N90 scaffold_L90 scaffold_above10k \
-                total_genes total_transcripts avg_exons_per_transcript avg_gene_length avg_transcript_length \
-                avg_exon_length avg_intron_length)
-    for var in "${variables[@]}"; do
-        value=${!var}
-        if [[ $value != *.* ]]; then
-            formatted_value=$(format_number "$value")
-            export "$var"="$formatted_value"
-        else
-            export "$var"="$value"
-        fi
-    done
+    #Commented out the below code since, since we decided not to use thousands separators in the yaml file.
+    #
+    # # Function to format numbers with commas
+    # format_number() {
+    #     echo "$1" | awk '{printf "%\047d\n", $1}'
+    # }
+
+    # # Make an array of variable names. Loop through the array and format the variables.
+    # # Only format numbers that do no have decimals
+    # variables=(total_length gc_content total_contigs contig_N50 contig_L50 contig_N90 contig_L90 \
+    #             total_scaffolds scaffold_N50 scaffold_L50 scaffold_N90 scaffold_L90 scaffold_above10k \
+    #             total_genes total_transcripts avg_exons_per_transcript avg_gene_length avg_transcript_length \
+    #             avg_exon_length avg_intron_length)
+    # for var in "${variables[@]}"; do
+    #     value=${!var}
+    #     if [[ $value != *.* ]]; then
+    #         formatted_value=$(format_number "$value")
+    #         export "$var"="$formatted_value"
+    #     else
+    #         export "$var"="$value"
+    #     fi
+    # done
 
     # The below line is technically not needed since the loops already export variables for use with yq.
     # But having the line complies with style suggestions from ShellCheck, and thus it is kept.
