@@ -188,7 +188,7 @@ body {
 
 
 .navbar-nav .nav-item {
-  margin-right: 0.4rem;
+  margin-right: 0.3rem;
 }
 
 .navbar-nav .nav-item:last-child {
@@ -210,21 +210,42 @@ body {
   align-items: center;
 }
 
-@media (min-width: 992px) {
+
+@media (max-width: 767px) {
   .scilife-navbar-logo {
-      height: 2.2rem;
+      height: 1.5rem;
   }
   .scilife-navbar {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
   }
 }
 
-@media (max-width: 991px) {
+@media (min-width: 768px) and (max-width: 991px) {
   .scilife-navbar-logo {
-      height: 1.8rem;
+      height: 2rem;
   }
   .scilife-navbar {
     font-size: 1.3rem;
+  }
+}
+
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .scilife-navbar-logo {
+      height: 1.5rem;
+  }
+  .scilife-navbar {
+    font-size: 1.3rem;
+  }
+}
+
+
+@media (min-width: 1200px) {
+  .scilife-navbar-logo {
+      height: 2rem;
+  }
+  .scilife-navbar {
+    font-size: 1.5rem;
   }
 }
 
