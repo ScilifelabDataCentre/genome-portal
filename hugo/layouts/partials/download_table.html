@@ -1,6 +1,7 @@
 {{ $tableType := .tableType }}
 {{ $tableData := .tableData }}
 {{ $staticDirPath := .staticDirPath }}
+{{ $aliasFileURL := .aliasFileURL }}
 
 <div class="table-responsive">
     <table id="downloadTable{{ $tableType | title}}" class="table table-hover table-bordered">
@@ -10,12 +11,11 @@
                 <th>Description</th>
                 <th>Links</th>
                 {{ if eq $tableType "long"}}
-                    <th>Accession</th>
+                    <th>Accession/DOI</th>
                     <th>File name</th>
-                    <th>Submitter name</th>
                 {{ end }}
                 <th>Principal investigator</th>
-                <th>Submitter affiliation</th>
+                <th>Principal investigator affiliation</th>
                 {{ if eq $tableType "long"}}
                     <th>First date on portal</th>
                 {{ end }}
@@ -57,21 +57,24 @@
                     </td>
 
                     {{ if eq $tableType "long"}}
-                        <td>{{ .accession }}</td>
-                        <td>{{ .fileName }}</td>
-                        <td>{{ .submitterName }}</td>
-                    {{ end }}
-
                     <td>
-                        {{ .principalInvestigator }}
-                        {{ with .principalInvestigatorEmail }}
-                        <a href="mailto:{{ . }}" aria-label="Email {{ . }}">
-                            <i class="bi bi-envelope" aria-hidden="true"></i>
-                            <span class="visually-hidden">Email {{ . }}</span>
-                        </a>
+                        {{ $accessionUrl := "" }}
+                        {{ range .links}}
+                            {{ if .Website }}
+                                {{ $accessionUrl = .Website }}
+                            {{ end }}
+                        {{ end }}
+                        {{ if $accessionUrl }}
+                            <a href="{{ $accessionUrl }}" >{{ .accessionOrDOI }}</a>
+                        {{ else }}
+                            {{ .accessionOrDOI }}
                         {{ end }}
                     </td>
-                    <td>{{ .submitterAffiliation }}</td>
+                    <td>{{ .fileName }}</td>
+                {{ end }}
+
+                    <td>{{ .principalInvestigator }}</td>
+                    <td>{{ .principalInvestigatorAffiliation }}</td>
 
                     {{ if eq $tableType "long"}}
                         <td>{{ .firstDateOnPortal }}</td>
@@ -83,30 +86,36 @@
     </table>
 </div>
 
+<div class="row g-1">
+    <div class="col-12">
+      <caption class="scilife-download-table-caption">
+        <a href="{{ $staticDirPath }}.json" download>
+          <img src="/img/icons/download.svg" alt="Download Icon" class="scilife-icon">
+          Download the table contents as a JSON file.
+        </a>
+      </caption>
+    </div>
 
+    {{ if ne $aliasFileURL "" }}
+      <div class="col-12">
+        <caption class="scilife-download-table-caption">
+          <a href="{{ $aliasFileURL }}" target="_blank">
+            <img src="/img/icons/file.svg" alt="File icon" class="scilife-icon">
+            Open (in a new tab) the refNameAlias text file used in JBrowse to set the aliases for reference sequence names (e.g., to define that "chr1" is an alias for "1").
+          </a>
+        </caption>
+      </div>
+    {{ end }}
+    <div class="col-12">
+      <caption class="scilife-download-table-caption">
+        <a href="/glossary" target="_blank">
+          <img src="/img/icons/book_open.svg" alt="Open book icon" class="scilife-icon">
+          Open the Glossary (in a new tab).
+        </a>
+      </caption>
+    </div>
+  </div>
 
-
-
-<caption class="scilife-download-table-caption"> <a href="{{ $staticDirPath }}.csv" target="_blank" >
-    <img src="/img/icons/download.svg" alt="Download Icon" class="scilife-icon">
-    Download the table contents as a CSV file.
-</a></caption><br>
-
-<caption class="scilife-download-table-caption"> <a href="{{ $staticDirPath }}.json" target="_blank" >
-    <img src="/img/icons/download.svg" alt="Download Icon" class="scilife-icon">
-    Download the table contents as a JSON file.
-</a></caption><br>
-
-
-<caption class="scilife-download-table-caption"> <a href="#TODO" target="_blank" >
-    <img src="/img/icons/download.svg" alt="Download Icon" class="scilife-icon">
-    Download the refNameAlias text file used in JBrowse to set the aliases for reference sequence names (e.g., to define that "chr1" is an alias for "1").
-</a></caption><br>
-
-<caption class="scilife-download-table-caption"> <a href="#TODO" target="_blank" >
-    <img src="/img/icons/book_open.svg" alt="Download Icon" class="scilife-icon">
-    Open the Glossary (in a new tab).
-</a></caption><br>
 
 
 <link href="/Datatables/datatables.min.css" rel="stylesheet">

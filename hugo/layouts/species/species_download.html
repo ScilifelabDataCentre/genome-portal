@@ -7,18 +7,15 @@
 
 <div class="container mt-3">
 
-    <!-- Open link in new tab species browser -->
-    {{- partial "open_browser.html" . -}}
-
     <div class="row">
         <div class="col-md scilife-subsection">
             <h3>Data availability</h3>
             <p>
-                The table below lists the data files currently displayed on the genome portal.
+                The table below lists the data files currently displayed on the Genome Portal.
                 In the Links column, you can find action buttons to download the data file,
                 go to the website of the source repository from where the data was fetched,
                 and (if applicable) the associated scientific article(s) to the data.
-                You can use the toggle on top right of the table to switch between the default and the expanded table view.
+                You can use the toggle on the top right of the table to switch between the default and the expanded table view.
             </p>
         </div>
     </div>
@@ -38,6 +35,13 @@
 
     {{ (resources.Get $tableDataPath | resources.Copy $staticDirFile).Publish }}
 
+
+    {{ $aliasFileURL := "" }}
+    {{ if .Params.alias_file_url }}
+        {{ $aliasFileURL = .Params.alias_file_url }}
+    {{ end }}
+
+
     <div class="row">
         <div class="form-check form-switch scilife-toggle">
             <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
@@ -45,11 +49,11 @@
         </div>
 
         <div id="table-container-long">
-            {{ partial "download_table" (dict "tableType" "long" "staticDirPath" $staticDirPath "tableData" $tableData)}}
+            {{ partial "download_table" (dict "tableType" "long" "staticDirPath" $staticDirPath "tableData" $tableData "aliasFileURL" $aliasFileURL )}}
         </div>
 
         <div id="table-container-short">
-            {{ partial "download_table" (dict "tableType" "short" "staticDirPath" $staticDirPath "tableData" $tableData)}}
+            {{ partial "download_table" (dict "tableType" "short" "staticDirPath" $staticDirPath "tableData" $tableData "aliasFileURL" $aliasFileURL )}}
         </div>
     </div>
 

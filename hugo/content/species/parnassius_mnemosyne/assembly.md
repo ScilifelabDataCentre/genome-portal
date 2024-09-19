@@ -1,9 +1,9 @@
 ---
 key_info:
   - "Assembly Name": "Parnassius_mnemosyne_n_2023_11"
-  - "Assembly Type": "haploid"
-  - "Assembly Level": "scaffold"
-  - "Genome Representation": "full"
+  - "Assembly Type": "Haploid"
+  - "Assembly Level": "Scaffold"
+  - "Genome Representation": "Full"
   - "Accession": "GCA_963668995.1"
 
 
@@ -28,7 +28,7 @@ BUSCO notation: C: Complete; S: Single-copy; D: Duplicated; F: Fragmented; M: Mi
 
 The data for *Parnassius mnemosyne* displayed in the genome portal comes from:
 
-- Höglund, J., Dias, G., Olsen, R. A., Soares, A., Bunikis, I., Talla, V., & Backström, N. (2024). A Chromosome-Level Genome Assembly and Annotation for the Clouded Apollo Butterfly (*Parnassius mnemosyne*): A Species of Global Conservation Concern. Genome Biology and Evolution, 16(2), evae031. <https://doi.org/10.1093/gbe/evae031>
+- <p> Höglund, J., Dias, G., Olsen, R. A., Soares, A., Bunikis, I., Talla, V., & Backström, N. (2024). A Chromosome-Level Genome Assembly and Annotation for the Clouded Apollo Butterfly (<i>Parnassius mnemosyne</i>): A Species of Global Conservation Concern. Genome Biology and Evolution, 16(2), evae031. <a href="https://doi.org/10.1093/gbe/evae031">https://doi.org/10.1093/gbe/evae031</a></p>
 
 ### Methods
 

@@ -1,94 +1,100 @@
 [
   {
-    "dataTrackName": "genome",
+    "dataTrackName": "Genome",
     "description": "Reference genome sequence",
     "links": [
-      {"Download": "https://www.microsoft.com/TODO"},
-      {"Website": "https://www.microsoft.com/TODO"},
-      {"Article": "https://www.microsoft.com/TODO"}
+      {"Download": "https://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/cav/CAVLGL01.fasta.gz"},
+      {"Website": "https://www.ebi.ac.uk/ena/browser/view/GCA_963668995.1"},
+      {"Article": "https://doi.org/10.1093/gbe/evae031"}
     ],
-    "accession": "GCA_900323705.1",
+    "accessionOrDOI": "GCA_900323705.1",
     "fileName": "CAVLGL01.fasta.gz",
-    "submitterName": "Jacob Höglund",
-    "principalInvestigator": "Jacob Höglund",
-    "principalInvestigatorEmail": "TODO@gmail.com",
-    "submitterAffiliation": "Uppsala University",
-    "firstDateOnPortal": "April 8 2024"
+    "principalInvestigator": "Jacob Höglund and Niclas Backström",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "15 October 2024"
   },
   {
-    "dataTrackName": "mt genome",
-    "description": "Reference mitochondrial genome sequence",
-    "links": [],
-    "accession": "OZ075093.1",
-    "fileName": "OZ075093.1.fasta.gz",
-    "submitterName": "Jacob Höglund",
-    "principalInvestigator": "Jacob Höglund",
-    "principalInvestigatorEmail": "TODO@gmail.com",
-    "submitterAffiliation": "Uppsala University",
-    "firstDateOnPortal": "April 8 2024"
-  },
-  {
-    "dataTrackName": "nc genes",
-    "description": "Genome annotation (protein coding genes)",
+    "dataTrackName": "Protein-coding genes",
+    "description": "Functional annotation of protein-coding genes in the primary genome assembly",
     "links": [
-      {"Download": "https://www.microsoft.com/TODO"},
-      {"Website": "https://www.microsoft.com/TODO"}
+      {"Download": "https://figshare.scilifelab.se/ndownloader/files/47209624"},
+      {"Website": "https://doi.org/10.17044/scilifelab.25908748.v2"},
+      {"Article": "https://doi.org/10.1093/gbe/evae031"}
     ],
-    "accession": "",
+    "accessionOrDOI": "10.17044/scilifelab.25908748.v2",
     "fileName": "pmne_functional_edit1.gff.gz",
-    "submitterName": "Freddy Mercury",
-    "principalInvestigator": "Jacob Höglund",
-    "principalInvestigatorEmail": "TODO@gmail.com",
-    "submitterAffiliation": "Uppsala University",
-    "firstDateOnPortal": "April 8 2024"
+    "principalInvestigator": "Jacob Höglund and Niclas Backström",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "15 October 2024"
   },
   {
-    "dataTrackName": "transcripts",
+    "dataTrackName": "Transcripts",
     "description": "Illumina RNAseq transcript assembly (thorax muscle tissue)",
     "links": [
-      {"Website": "https://www.microsoft.com/TODO"},
-      {"Article": "https://www.microsoft.com/TODO"}
+      {"Download": "https://figshare.scilifelab.se/ndownloader/files/47209648"},
+      {"Website": "https://doi.org/10.17044/scilifelab.25908748.v2"},
+      {"Article": "https://doi.org/10.1093/gbe/evae031"}
     ],
-    "accession": "",
+    "accessionOrDOI": "10.17044/scilifelab.25908748.v2",
     "fileName": "pmne_Illumina_RNAseq_StringTie_sorted-transcripts_match.gff.gz",
-    "submitterName": "Andrea Echeverry",
-    "principalInvestigator": "Ebba Jacobson",
-    "submitterAffiliation": "SLU",
-    "firstDateOnPortal": "May 8 2024"
+    "principalInvestigator": "Jacob Höglund and Niclas Backström",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "15 October 2024"
   },
   {
     "dataTrackName": "ncRNA genes",
     "description": "Non-coding RNA (ncRNA) genes",
     "links": [
-      {"Download": "https://www.microsoft.com/TODO"}
+      {"Download": "https://figshare.scilifelab.se/ndownloader/files/47209660"},
+      {"Website": "https://doi.org/10.17044/scilifelab.25908748.v2"},
+      {"Article": "https://doi.org/10.1093/gbe/evae031"}
     ],
-    "accession": "",
+    "accessionOrDOI": "10.17044/scilifelab.25908748.v2",
     "fileName": "pmne_ncRNAs.gff.gz",
-    "submitterName": "Ruben Albarran",
-    "principalInvestigator": "Ebba Jacobson",
-    "submitterAffiliation": "SLU",
-    "firstDateOnPortal": "May 9 2024"
+    "principalInvestigator": "Jacob Höglund and Niclas Backström",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "15 October 2024"
   },
   {
     "dataTrackName": "tRNA genes",
     "description": "tRNA genes and putative pseudogenes",
-    "links": [],
-    "accession": "",
+    "links": [
+      {"Download": "https://figshare.scilifelab.se/ndownloader/files/47209663"},
+      {"Website": "https://doi.org/10.17044/scilifelab.25908748.v2"},
+      {"Article": "https://doi.org/10.1093/gbe/evae031"}
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.25908748.v2",
     "fileName": "pmne_tRNAs_and_pseudogenes.gff.gz",
-    "submitterName": "Tom Yorke",
-    "principalInvestigator": "Ebba Jacobson",
-    "submitterAffiliation": "SLU",
-    "firstDateOnPortal": "June 7 2024"
+    "principalInvestigator": "Jacob Höglund and Niclas Backströmn",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "15 October 2024"
   },
   {
-    "dataTrackName": "mt genes",
+    "dataTrackName": "Mitochondrial genome",
+    "description": "Mitochondrial genome sequence",
+    "links": [
+      {"Download": "https://www.ebi.ac.uk/ena/browser/api/fasta/OZ075093.1?download=true&gzip=true"},
+      {"Website": "https://www.ebi.ac.uk/ena/browser/view/OZ075093.1"},
+      {"Article": "https://doi.org/10.1093/gbe/evae031"}
+    ],
+    "accessionOrDOI": "OZ075093.1",
+    "fileName": "OZ075093.1.fasta.gz",
+    "principalInvestigator": "Jacob Höglund and Niclas Backström",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "15 October 2024"
+  },
+  {
+    "dataTrackName": "Mitochondrial genes",
     "description": "Annotation of protein coding genes in the mitochondrion",
-    "links": [],
-    "accession": "",
+    "links": [
+      {"Download": "https://figshare.scilifelab.se/ndownloader/files/47209654"},
+      {"Website": "https://doi.org/10.17044/scilifelab.25908748.v2"},
+      {"Article": "https://doi.org/10.1093/gbe/evae031"}
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.25908748.v2",
     "fileName": "pmne_mtdna.gff.gz",
-    "submitterName": "Joe Arroyo",
-    "principalInvestigator": "Ebba Jacobson",
-    "submitterAffiliation": "SLU",
-    "firstDateOnPortal": "June 17 2024"
+    "principalInvestigator": "Jacob Höglund and Niclas Backström",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "15 October 2024"
   }
 ]

@@ -7,11 +7,11 @@ assembly:
   aliases: "https://raw.githubusercontent.com/ScilifelabDataCentre/swedgene/main/scripts/data_stewardship/alias_files_temp_storage/CAVLGL01.fna.alias"
 
 tracks:
-  - name: "Protein coding genes (NCBI version)"
-    #trackDescription: "Annotation of protein coding genes, processed by NCBI"
-    url: "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/963/668/995/GCA_963668995.1_Parnassius_mnemosyne_n_2023_11/GCA_963668995.1_Parnassius_mnemosyne_n_2023_11_genomic.gff.gz"
-    #defaultSession: no
-  - name: "Protein coding genes (Original version)"
+  # - name: "Protein coding genes (NCBI version)"
+  #   #trackDescription: "Annotation of protein coding genes, processed by NCBI"
+  #   url: "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/963/668/995/GCA_963668995.1_Parnassius_mnemosyne_n_2023_11/GCA_963668995.1_Parnassius_mnemosyne_n_2023_11_genomic.gff.gz"
+  #   #defaultSession: no
+  - name: "Protein coding genes"
     #trackDescription: "Annotation of protein coding genes, original version that was submitted to ENA"
     url: "https://figshare.scilifelab.se/ndownloader/files/47209624"
     fileName: "pmne_functional_edit1.gff.gz"

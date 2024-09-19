@@ -1,24 +1,24 @@
 ---
 assembly:
   - "Assembly length (Mbp)": 1494.39
-  - "GC %": 38.0
+  - "GC %": 38.04
   - "Contig #": 285
   - "Contig N50 (Mbp)": 23.93
   - "Contig L50": 22
   - "Contig N90 (Mbp)": 4.73
   - "Contig L90": 82
   - "Scaffold #": 169
-  - "Scaffolds >= 10 kb": 168
   - "Scaffold N50 (Mbp)": 49.64
   - "Scaffold L50": 13
   - "Scaffold N90 (Mbp)": 34.77
   - "Scaffold L90": 27
+  - "Scaffolds >= 10 kb": 168
   - "BUSCO % (lepidoptera_odb10)": "C:99 [S:97.8, D:1.2], F:0.2, M:0.8, n:5286"
 
 annotation:
   - "Gene #": 22852
   - "Transcript #": 27376
-  - "Average exons per transcript": 4.7
+  - "Average exons per transcript": 4.70
   - "Avg. gene length (bp)": 16898
   - "Avg. transcript length (bp)": 16026
   - "Avg. exon length (bp)": 343

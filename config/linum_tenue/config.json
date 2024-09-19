@@ -1,1 +1,71 @@
-{}
+{
+    "defaultSession": {
+      "id": "lten_default_session",
+      "name": "Linum tenue",
+      "widgets": {
+        "hierarchicalTrackSelector": {
+          "id": "hierarchicalTrackSelector",
+          "type": "HierarchicalTrackSelectorWidget",
+          "view": "lten_default_session_view",
+          "faceted": {
+            "showSparse": false,
+            "showFilters": true,
+            "showOptions": false,
+            "panelWidth": 400
+          }
+        }
+      },
+      "activeWidgets": {
+        "hierarchicalTrackSelector": "hierarchicalTrackSelector"
+      },
+      "views": [
+        {
+          "id": "lten_default_session_view",
+          "minimized": false,
+          "type": "LinearGenomeView",
+          "trackLabels": "offset",
+          "offsetPx": 0,
+          "bpPerPx": 50,
+          "displayedRegions": [
+            {
+              "refName": "ENA|CAMGYJ010000002|CAMGYJ010000002.1",
+              "start": 0,
+              "end": 72476498,
+              "reversed": false,
+              "assemblyName": "Linum_tenue_thrum_v1"
+            }
+          ],
+          "tracks": [
+            {
+              "id": "lten_default_protein_coding_genes",
+              "type": "FeatureTrack",
+              "configuration": "ltenue_v1_genes.gff",
+              "minimized": false,
+              "displays": [
+                {
+                  "id": "lten_default_protein_coding_genes_display",
+                  "type": "LinearBasicDisplay",
+                  "heightPreConfig": 180,
+                  "configuration": "ltenue_v1_genes.gff-LinearBasicDisplay"
+                }
+              ]
+            },
+            {
+              "id": "lten_default_repeats",
+              "type": "FeatureTrack",
+              "configuration": "L_tenue_v1_rep.bed",
+              "minimized": false,
+              "displays": [
+                {
+                  "id": "lten_default_repeats_display",
+                  "type": "LinearBasicDisplay",
+                  "heightPreConfig": 350,
+                  "configuration": "L_tenue_v1_rep.bed-LinearBasicDisplay"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+}

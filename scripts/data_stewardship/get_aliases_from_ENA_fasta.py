@@ -35,13 +35,11 @@ import os
 import re
 
 
-def parse_the_arguments():
+def parse_arguments():
     """
     Run argparse to set up and capture the arguments of the script.
     """
-
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-
     parser.add_argument(
         "--fasta",
         required=True,
@@ -51,7 +49,6 @@ def parse_the_arguments():
         Input; the path to the ENA formatted genome assembly fasta file. The script does not support compressed files (e.g.: .fa.gz)
         """,
     )
-
     parser.add_argument(
         "--out",
         required=False,
@@ -62,40 +59,32 @@ def parse_the_arguments():
         in the current directory and will be given the file name of the fasta file appended with the suffix: .alias
         """,
     )
-
     return parser.parse_args()
 
 
-def make_alias_dictionary(fasta: str) -> dict[str, dict[str, str]]:
+def open_fasta_file(fasta_path: str):
     """
-    Load the fasta file given by the input argument. First check if it is gzipped or not.
-    Then call on the subfunction process_fasta_headers. The subfunction tests if it looks like
-    an ENA formatted fasta; if not: exit. If it is ENA formatted: it splits and extracts the substrings
-    that contain the GenBank header, and, if present, the contig header. It returns a nested dictionary
-    with the ENA header as outer key, NCBI header as inner key, and contig name as inner value. This
-    dictionary is then passed back to make_alias_dictionary and returned.
+    Subfunction for make_alias_file that opens the fasta file given by the --fasta input argument, after checking if it is gzipped or not.
+    It passes the opened file onto the next subfunction, in which the alias dictionary is generated.
     """
-
-    alias_dict = {}
-
     try:
-        with gzip.open(fasta, "rt") as file:
-            alias_dict = process_fasta_headers(file, alias_dict)
-            print(f"The file {fasta} is gzipped. Creating refNameAlias file...")
+        with gzip.open(fasta_path, "rt") as file:
+            alias_dict = process_fasta_headers(file)
+            print(f"The file {fasta_path} is gzipped. Creating refNameAlias file...")
     except gzip.BadGzipFile:
-        with open(fasta, "r") as file:
-            alias_dict = process_fasta_headers(file, alias_dict)
-            print(f"The file {fasta} is not gzipped. Creating refNameAlias file...")
-
+        with open(fasta_path, "r") as file:
+            alias_dict = process_fasta_headers(file)
+            print(f"The file {fasta_path} is not gzipped. Creating refNameAlias file...")
     return alias_dict
 
 
-def process_fasta_headers(file: str, alias_dict: dict) -> dict[str, dict[str, str]]:
+def process_fasta_headers(file: str) -> dict[str, dict[str, str]]:
     """
-    Subfunction for make_alias_dictionary. Processes the fasta headers and extracts the ENA
+    Subfunction for open_fasta_file. Processes the fasta headers and extracts the ENA
     and NCBI headers, and, if present, the contig header. It raises an error if the fasta headers
-    are not formatted in the ENA style. Returns a nested dictionary back to make_alias_dictionary.
+    are not formatted in the ENA style. Returns a nested dictionary back to open_fasta_file.
     """
+    alias_dict = {}
     for line in file:
         if line.startswith(">"):
             # Find fasta headers in the multi-fasta
@@ -108,28 +97,42 @@ def process_fasta_headers(file: str, alias_dict: dict) -> dict[str, dict[str, st
                     contig_name_fasta_header = ""
                 alias_dict[ENA_fasta_header] = {NCBI_fasta_header: contig_name_fasta_header}
             else:
-                raise ValueError
+                raise ValueError("The fasta headers are not formatted in the ENA style.")
     return alias_dict
 
 
-if __name__ == "__main__":
-    args = parse_the_arguments()
+def make_alias_file(fasta_path: str, alias_output_path: str) -> dict[str, dict[str, str]]:
+    """
+    Subfunction for main. Calls process_fasta_headers to generate the alias dictionary, and writes the dictionary to a file.
+    If the --out argument was specified, the file will be saved to the specified path. If not, it will be saved to the
+    alias_files_temp_storage subdirectory and be named after the inputted fasta file and suffixed with .alias.
+    """
+    alias_dict = open_fasta_file(fasta_path)
+    with open(alias_output_path, "w") as file:
+        file.write("#ENA_header\tNCBI_header\toriginal_header\n")
+        for outer_key, outer_value in alias_dict.items():
+            for inner_key, inner_value in outer_value.items():
+                aliases = "".join(f"{outer_key}\t{inner_key}\t{inner_value}\n")
+                file.write(aliases)
+    print("Wrote alias file to:", alias_output_path)
 
-    fasta = args.fasta
 
-    if args.out is not None:
-        alias_output = args.out
-    else:
-        fasta_filename = os.path.basename(fasta)
-        # Strip extensions like .gz and .bgz. The conditional checks for extensions that should be stripped.
-        # os.path.splitext strips the last extension only, but will remove any extension. So *.fna.gz will be stripped to .fna)
+def main():
+    """
+    Main function that calls the subfunctions to generate the alias file.
+    """
+    args = parse_arguments()
+    fasta_path = args.fasta
+    alias_output_path = args.out
+
+    if not alias_output_path:
+        fasta_filename = os.path.basename(fasta_path)
         while any(fasta_filename.endswith(ext) for ext in [".gz", ".bgz"]):
             fasta_filename, _ = os.path.splitext(fasta_filename)
-        alias_output = "alias_files_temp_storage/" + fasta_filename + ".alias"
+        alias_output_path = "alias_files_temp_storage/" + fasta_filename + ".alias"
 
-    # Read the ENA formated fasta file and generate dictionary with the aliases:
     try:
-        alias_dict = make_alias_dictionary(fasta)
+        make_alias_file(fasta_path, alias_output_path)
     except ValueError as e:
         print("""
               ERROR: This does not seem to be an ENA formatted fasta file.
@@ -137,11 +140,6 @@ if __name__ == "__main__":
               """)
         raise e
 
-    # Write the alias dictionary to a tab-separated file:
-    with open(alias_output, "w") as file:
-        for outer_key, outer_value in alias_dict.items():
-            for inner_key, inner_value in outer_value.items():
-                aliases = "".join(f"{outer_key}\t{inner_key}\t{inner_value}\n")
-                file.write(aliases)
 
-    print("Wrote alias file to:", alias_output)
+if __name__ == "__main__":
+    main()
