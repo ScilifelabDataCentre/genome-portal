@@ -122,6 +122,31 @@ run_agat_func_stats() {
     fi
 }
 
+extract_quast_data() {
+    # Subfunction that handles the extraction of data from quast reports with two or three columns
+    local query="$1"
+    local file="$2"
+    local is_scaffold="$3"
+    local columns
+    columns=$(awk -F'\t' '{print NF; exit}' "$file")
+
+    if [[ "$columns" -eq 2 ]]; then
+        grep "$query" "$file" | awk -F'\t' '{print $(NF)}'
+    elif [[ "$columns" -eq 3 ]]; then
+        if [[ "$is_scaffold" == "true" ]]; then
+            grep "$query" "$file" | awk -F'\t' '{print $(NF-1)}'
+        else
+            grep "$query" "$file" | awk -F'\t' '{print $(NF)}'
+        fi
+    fi
+}
+
+convert_bp_to_mbp() {
+    # Subfunction that convert base pairs to mega base pairs
+    local value="$1"
+    echo "$value" | awk '{printf "%.2f", $1 / 1000000}'
+}
+
 populate_yaml_template() {
     echo -e "\n- Populating YAML template..."
     git_root=$(git rev-parse --show-toplevel)
@@ -129,33 +154,40 @@ populate_yaml_template() {
     output_path="temp/species_stats_$(basename "$fasta" .fna).yml"
 
     # Extract relevant information from the quast report
-    total_length=$(grep "Total length (>= 0 bp)" "$quast_output_dir/report.txt" | awk '{print $(NF-1)}')
-    gc_content=$(grep "GC (%)" "$quast_output_dir/report.txt" | awk '{print $(NF-1)}')
-    total_contigs=$(grep "contigs (>= 0 bp)" "$quast_output_dir/report.txt"| awk '{print $(NF)}')
-    contig_N50=$(grep "N50" "$quast_output_dir/report.txt"| awk '{print $(NF)}')
-    contig_L50=$(grep "L50" "$quast_output_dir/report.txt"| awk '{print $(NF)}')
-    contig_N90=$(grep "N90" "$quast_output_dir/report.txt"| awk '{print $(NF)}')
-    contig_L90=$(grep "L90" "$quast_output_dir/report.txt"| awk '{print $(NF)}')
-    total_scaffolds=$(grep "contigs (>= 0 bp)" "$quast_output_dir/report.txt"| awk '{print $(NF-1)}')
-    scaffold_N50=$(grep "N50" "$quast_output_dir/report.txt"| awk '{print $(NF-1)}')
-    scaffold_L50=$(grep "L50" "$quast_output_dir/report.txt"| awk '{print $(NF-1)}')
-    scaffold_N90=$(grep "N90" "$quast_output_dir/report.txt"| awk '{print $(NF-1)}')
-    scaffold_L90=$(grep "L90" "$quast_output_dir/report.txt"| awk '{print $(NF-1)}')
-    scaffold_above10k=$(grep "contigs (>= 10000 bp)" "$quast_output_dir/report.txt"| awk '{print $(NF-1)}')
+    total_length=$(extract_quast_data "Total length (>= 0 bp)" "$quast_output_dir/report.tsv" "false")
+    gc_content=$(extract_quast_data "GC (%)" "$quast_output_dir/report.tsv" "false")
+    total_contigs=$(extract_quast_data "contigs (>= 0 bp)" "$quast_output_dir/report.tsv" "false")
+    contig_N50=$(extract_quast_data "N50" "$quast_output_dir/report.tsv" "false")
+    contig_L50=$(extract_quast_data "L50" "$quast_output_dir/report.tsv" "false")
+    contig_N90=$(extract_quast_data "N90" "$quast_output_dir/report.tsv" "false")
+    contig_L90=$(extract_quast_data "L90" "$quast_output_dir/report.tsv" "false")
+    total_scaffolds=$(extract_quast_data "contigs (>= 0 bp)" "$quast_output_dir/report.tsv" "true")
+    scaffold_N50=$(extract_quast_data "N50" "$quast_output_dir/report.tsv" "true")
+    scaffold_L50=$(extract_quast_data "L50" "$quast_output_dir/report.tsv" "true")
+    scaffold_N90=$(extract_quast_data "N90" "$quast_output_dir/report.tsv" "true")
+    scaffold_L90=$(extract_quast_data "L90" "$quast_output_dir/report.tsv" "true")
+    scaffold_above10k=$(extract_quast_data "contigs (>= 10000 bp)" "$quast_output_dir/report.tsv" "true")
 
-    # Extract relevant information from the AGAT report
+    # Extract relevant information from the AGAT report. Allow for alternative phrasings in the AGAT report.
     total_genes=$(grep "Number of gene " "$agat_output_dir/stat_features.txt" | awk '{print $(NF)}')
     total_transcripts=$(grep "Number of mrna " "$agat_output_dir/stat_features.txt" | awk '{print $(NF)}')
+    if [ -z "$total_transcripts" ]; then
+        total_transcripts=$(grep "Number of transcript" "$agat_output_dir/stat_features.txt" | awk '{print $(NF)}')
+    fi
     avg_exons_per_transcript=$(grep "mean exons per mrna" "$agat_output_dir/stat_features.txt" | awk '{print $(NF)}')
+    if [ -z "$avg_exons_per_transcript" ]; then
+        avg_exons_per_transcript=$(grep "mean exons per transcript" "$agat_output_dir/stat_features.txt" | awk '{print $(NF)}')
+    fi
     avg_gene_length=$(grep "mean gene length (bp)" "$agat_output_dir/stat_features.txt" | awk '{print $(NF)}')
     avg_transcript_length=$(grep "mean mrna length (bp)" "$agat_output_dir/stat_features.txt" | awk '{print $(NF)}')
+    if [ -z "$avg_transcript_length" ]; then
+        avg_transcript_length=$(grep "mean transcript length (bp)" "$agat_output_dir/stat_features.txt" | awk '{print $(NF)}')
+    fi
     avg_exon_length=$(grep "mean exon length (bp)" "$agat_output_dir/stat_features.txt" | awk '{print $(NF)}')
     avg_intron_length=$(grep "mean intron length (bp)" "$agat_output_dir/stat_features.txt" | awk '{print $(NF)}')
-
-    # Function to convert base pairs to mega base pairs
-    convert_bp_to_mbp() {
-       echo "$1" | awk "BEGIN {printf \"%.2f\", $1 / 1000000}"
-    }
+    if [ -z "$avg_intron_length" ]; then
+        avg_intron_length=$(grep "mean intron in cds length (bp)" "$agat_output_dir/stat_features.txt" | awk '{print $(NF)}')
+    fi
 
     # Make an array of variable names. Loop through the array and format the variables.
     # Use indirect expansion to get values. Export variables to make them available for yq.
