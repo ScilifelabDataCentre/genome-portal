@@ -749,19 +749,13 @@ body {
 
 @media (min-width: 1200px) {
   .scilife-footer-img {
-    max-width: 100px;
-  }
-}
-
-@media (min-width: 1300px) {
-  .scilife-footer-img {
-    max-width: 115px;
+    max-width: 140px;
   }
 }
 
 @media (min-width: 1400px) {
   .scilife-footer-img {
-    max-width: 125px;
+    max-width: 150px;
   }
 }
 
