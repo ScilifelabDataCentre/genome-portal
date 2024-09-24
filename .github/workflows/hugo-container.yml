@@ -2,7 +2,9 @@ name: Build and push Hugo site image to GitHub Container Registry
 on:
   push:
     tags:
-      - 'v*.*.*' # i.e. has to have a release tag to run 
+      - 'v*.*.*' # i.e. has to have a release tag to run
+    branches:
+      - nginx-config # temporary, for testing.  
       
   # if run as workflow_dispatch, these tags can be used in build+push step
   workflow_dispatch:
