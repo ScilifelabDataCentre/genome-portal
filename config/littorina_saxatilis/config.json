@@ -1,0 +1,57 @@
+{
+    "defaultSession": {
+      "id": "lsax_default_session",
+      "name": "Littorina saxatilis",
+      "widgets": {
+        "hierarchicalTrackSelector": {
+          "id": "hierarchicalTrackSelector",
+          "type": "HierarchicalTrackSelectorWidget",
+          "view": "lsax_default_session_view",
+          "faceted": {
+            "showSparse": false,
+            "showFilters": true,
+            "showOptions": false,
+            "panelWidth": 400
+          }
+        }
+      },
+      "activeWidgets": {
+        "hierarchicalTrackSelector": "hierarchicalTrackSelector"
+      },
+      "views": [
+        {
+          "id": "lsax_default_session_view",
+          "minimized": false,
+          "type": "LinearGenomeView",
+          "offsetPx": 0,
+          "bpPerPx": 1000,
+          "displayedRegions": [
+            {
+              "refName": "CM074559.1",
+              "start": 0,
+              "end": 4000000,
+              "reversed": false,
+              "assemblyName": "US_GU_Lsax_2.0"
+            }
+          ],
+          "tracks": [
+            {
+              "id": "lsax_default_protein_coding_genes",
+              "type": "FeatureTrack",
+              "configuration": "GCA_037325665.1_US_GU_Lsax_2.0_genomic.gff",
+              "minimized": false,
+              "displays": [
+                {
+                  "id": "lsax_default_protein_coding_genes_display",
+                  "type": "LinearBasicDisplay",
+                  "heightPreConfig": 250,
+                  "configuration": "GCA_037325665.1_US_GU_Lsax_2.0_genomic.gff-LinearBasicDisplay"
+                }
+              ]
+            }
+          ],
+          "trackLabels": "offset"
+        }
+      ]
+    }
+}
