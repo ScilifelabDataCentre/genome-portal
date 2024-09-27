@@ -63,3 +63,7 @@ If you use the data presented in the genome portal from this species in your res
 - Talla, V., Mrazek, V., Höglund, J., & Backström, N. (2023). Whole genome re-sequencing uncovers significant population structure and low genetic diversity in the endangered clouded apollo (*Parnasssius mnemosyne*) in Sweden. Conservation Genetics, 24(3), 305–314. <https://doi.org/10.1007/s10592-023-01502-9>
 
 - Westin, A., Lennartsson, T., & Björklund, J.-O. (2018). The historical ecology approach in species conservation – Identifying suitable habitat management for the endangered clouded Apollo butterfly (*Parnassius mnemosyne* L.) in Sweden. AIMS Environmental Science, 5(4), 244–272. <https://doi.org/10.3934/environsci.2018.4.244>
+
+#### Changelog
+
+- 15/10/2024 - Species first published on the Portal

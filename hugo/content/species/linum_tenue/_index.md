@@ -51,3 +51,7 @@ If you use the data presented in the genome portal from this species in your res
 - Gutiérrez-Valencia, J., Zervakis, P.-I., Postel, Z., Fracassetti, M., Losvik, A., Mehrabi, S., Bunikis, I., Soler, L., Hughes, P. W., Désamoré, A., Laenen, B., Abdelaziz, M., Pettersson, O. V., Arroyo, J., & Slotte, T. (2024). Genetic Causes and Genomic Consequences of Breakdown of Distyly in *Linum trigynum*. Molecular Biology and Evolution, 41(5), msae087. <https://doi.org/10.1093/molbev/msae087>
 
 - Murray, B. G. (1986). Floral Biology and Self-Incompatibility in *Linum*. Botanical Gazette, 147(3), 327–333. <https://doi.org/10.1086/337599>
+
+#### Changelog
+
+- 15/10/2024 - Species first published on the Portal

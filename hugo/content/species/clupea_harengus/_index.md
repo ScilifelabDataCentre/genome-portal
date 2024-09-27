@@ -49,3 +49,7 @@ Write some content here in markdown for the introduction tab of the species page
 #### References
 
 - [EDIT]
+
+#### Changelog
+
+- DD/MM/YYYY - Species first published on the Portal
