@@ -18,25 +18,21 @@ stats_data_path: "SPECIES_FOLDER/species_stats"
 lineage_data_path: "SPECIES_FOLDER/taxonomy"
 ---
 
-### Methods
-
-[EDIT - add a short text about the methods here]
-
 |||||| Content divider - do not remove ||||||
 
-### Contributor(s)
+Notes: Assembly statistics were calculated for the primary genome assembly [EDIT:accession_number]. Busco statistics were taken from [EDIT:publicaion_reference]. Annotation statistics were calculated using [EDIT:filename].
 
-- [EDIT, Add information about provider and the research group that published the genome and data tracks]
+BUSCO notation: C: Complete; S: Single-copy; D: Duplicated; F: Fragmented; M: Missing; n: Total BUSCO genes included in the dataset (here: [EDIT:busco_dataset]). See also [the official BUSCO manual](https://busco.ezlab.org/busco_userguide.html#interpreting-the-results).
 
 ### Publication(s)
 
-- [EDIT]
+The data for *[EDIT:species_name]* displayed in the genome portal comes from:
+
+- <p> [EDIT] <a href="[EDIT:DOI_URL]"> [EDIT:DOI_number]]</a></p>
 
 ### Funding
 
-- [EDIT]
-
-### Acknowledgements
+*The study in which the genome data was generated ([EDIT:publicaion_reference]) acknowledge funding by:*
 
 - [EDIT]
-
+- [EDIT]
