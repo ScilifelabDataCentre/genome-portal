@@ -116,8 +116,10 @@
 
                 helpControl.addTo(map);
 
-                $('#helpButton').click(function() {
-                    $('.toast').toast('show');
+                document.getElementById('helpButton').addEventListener('click', function() {
+                    document.querySelectorAll('.toast').forEach(function(toast) {
+                        toast.classList.add('show');
+                    });
                 });
             }
         }
