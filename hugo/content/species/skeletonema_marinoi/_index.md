@@ -46,3 +46,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 #### Genome reference
 
 #### References
+
+#### Changelog
+
+- DD/MM/YYYY - Species first published on the Portal
