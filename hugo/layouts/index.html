@@ -105,14 +105,14 @@
     const speciesCards = Array.from(document.querySelectorAll('.scilife-species-card'));
 
     function sortAlphabetically(a, b) {
-        const titleA = $(a).find('#science-name').text();
-        const titleB = $(b).find('#science-name').text();
+        const titleA = a.querySelector('#science-name').textContent;
+        const titleB = b.querySelector('#science-name').textContent;
         return titleA.localeCompare(titleB);
     }
 
     function sortRevAlphabetically(a, b) {
-        const titleA = $(a).find('#science-name').text();
-        const titleB = $(b).find('#science-name').text();
+        const titleA = a.querySelector('#science-name').textContent;
+        const titleB = b.querySelector('#science-name').textContent;
         return titleB.localeCompare(titleA);
     }
 
@@ -124,8 +124,8 @@
     }
 
     function sortUpdated(a, b) {
-        const dateStrA = $(a).find('.hidden-date').text();
-        const dateStrB = $(b).find('.hidden-date').text();
+        const dateStrA = a.querySelector('.hidden-date').textContent;
+        const dateStrB = b.querySelector('.hidden-date').textContent;
 
         const dateA = stringToDate(dateStrA);
         const dateB = stringToDate(dateStrB);
