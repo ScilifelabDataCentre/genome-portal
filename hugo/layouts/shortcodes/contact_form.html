@@ -16,10 +16,10 @@
         </div>
     </div>
 
-    <div class="mb-3">
-        <label class="form-label">
+    <fieldset class="mb-3">
+        <legend class="form-label">
             Please select the reason that best describes why you're getting in contact with us.*
-        </label>
+        </legend>
 
         <div class="form-check">
             <input class="form-check-input" type="radio" name="contactReason" id="flexRadioDefault1"
@@ -57,7 +57,7 @@
             </label>
         </div>
 
-    </div>
+    </fieldset>
 
     <div class="mb-3">
         <label for="textareaInput" class="form-label" style="display: block;">
@@ -72,14 +72,17 @@
     </div>
 
     <div class="mb-3">
-        <div class="g-recaptcha" id="recaptcha-widget" data-sitekey="6LfLRQMqAAAAACSectjtigWkNvif1G2J8EFlj1nV"></div>
+        <div class="g-recaptcha" id="recaptcha-widget" aria-label="reCAPTCHA verification widget"
+            data-sitekey="6LfLRQMqAAAAACSectjtigWkNvif1G2J8EFlj1nV">
+        </div>
     </div>
 
-    <div id="reCAPTCHAAlert" class="alert alert-danger mb-3" role="alert" style="display: none;">
+    <div id="reCAPTCHAAlert" class="alert alert-danger mb-3" role="alert" style="display: none;"
+        aria-label="reCAPTCHA verification alert">
         Please verify you're not a robot in order to submit the form.
     </div>
 
-    <button type="submit" class="btn btn-primary mb-3">Submit</button>
+    <button type="submit" class="btn btn-primary mb-3" aria-label="Submit the form">Submit</button>
 
 </form>
 
