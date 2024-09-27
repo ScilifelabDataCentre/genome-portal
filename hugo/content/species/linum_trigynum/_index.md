@@ -41,7 +41,3 @@ A recent genomic study has shown that *L. trigynum* is a short homostyle that pr
 If you use the data presented in the genome portal from this species in your research, please cite the original publication:
 
 - <p> Gutiérrez-Valencia, J., Zervakis, P.-I., Postel, Z., Fracassetti, M., Losvik, A., Mehrabi, S., Bunikis, I., Soler, L., Hughes, P. W., Désamoré, A., Laenen, B., Abdelaziz, M., Pettersson, O. V., Arroyo, J., & Slotte, T. (2024). Genetic Causes and Genomic Consequences of Breakdown of Distyly in <i>Linum trigynum</i>. Molecular Biology and Evolution, 41(5), msae087. <a href="https://doi.org/10.1093/molbev/msae087">https://doi.org/10.1093/molbev/msae087</a> </p>
-
-#### Changelog
-
-- DD/MM/YYYY - Species first published on the Portal
