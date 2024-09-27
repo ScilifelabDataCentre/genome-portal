@@ -83,8 +83,9 @@ init_variables_and_parse_arguments() {
     fi
 
     # Create output paths
-    quast_output_dir="./logs/quast/$(basename "$fasta" .fna)"
-    agat_output_dir="./logs/agat/$(basename "${gff%%.gff*}")"
+    git_root=$(git rev-parse --show-toplevel)
+    quast_output_dir="${git_root}/scripts/data_stewardship/logs/quast/$(basename "$fasta" .fna)"
+    agat_output_dir="${git_root}/scripts/data_stewardship/logs/agat/$(basename "${gff%%.gff*}")"
 }
 
 run_quast() {
@@ -97,7 +98,7 @@ run_agat_func_stats() {
     # AGAT requires the GFF file to be uncompressed. Check if the file is compressed and decompress it if necessary.
     if [[ "$gff" == *.gz || "$gff" == *.bgz ]]; then
         echo -e "\n- The GFF file seem to be compressed. Decompressing..."
-        temp_gff="$(mktemp "temp/$(basename "${gff%.gz}" .bgz)..XXXXXXX")"
+        temp_gff="$(mktemp "${git_root}/scripts/data_stewardship/temp/$(basename "${gff%.gz}" .bgz)..XXXXXXX")"
         gunzip -c "$gff" > "$temp_gff"
         gff="$temp_gff"
     fi
@@ -149,9 +150,8 @@ convert_bp_to_mbp() {
 
 populate_yaml_template() {
     echo -e "\n- Populating YAML template..."
-    git_root=$(git rev-parse --show-toplevel)
     template_path="$git_root/scripts/templates/species_stats.yml"
-    output_path="temp/species_stats_$(basename "$fasta" .fna).yml"
+    output_path="${git_root}/scripts/data_stewardship/temp/species_stats_$(basename "$fasta" .fna).yml"
 
     # Extract relevant information from the quast report
     total_length=$(extract_quast_data "Total length (>= 0 bp)" "$quast_output_dir/report.tsv" "false")

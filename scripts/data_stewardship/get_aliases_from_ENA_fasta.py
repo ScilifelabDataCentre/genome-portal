@@ -33,6 +33,7 @@ import argparse
 import gzip
 import os
 import re
+import subprocess
 
 
 def parse_arguments():
@@ -117,6 +118,16 @@ def make_alias_file(fasta_path: str, alias_output_path: str) -> dict[str, dict[s
     print("Wrote alias file to:", alias_output_path)
 
 
+def get_git_root():
+    try:
+        git_root = subprocess.check_output(["git", "rev-parse", "--show-toplevel"]).strip().decode("utf-8")
+        return git_root
+    except subprocess.CalledProcessError:
+        raise RuntimeError(
+            "It seems like you are not currently not in a git repository. Please run this script from within the Genome Portal git repository."
+        ) from None
+
+
 def main():
     """
     Main function that calls the subfunctions to generate the alias file.
@@ -129,7 +140,10 @@ def main():
         fasta_filename = os.path.basename(fasta_path)
         while any(fasta_filename.endswith(ext) for ext in [".gz", ".bgz"]):
             fasta_filename, _ = os.path.splitext(fasta_filename)
-        alias_output_path = "alias_files_temp_storage/" + fasta_filename + ".alias"
+        git_root = get_git_root()
+        alias_output_path = os.path.join(
+            git_root, "scripts/data_stewardship/alias_files_temp_storage/", fasta_filename + ".alias"
+        )
 
     try:
         make_alias_file(fasta_path, alias_output_path)
