@@ -53,24 +53,5 @@
           "trackLabels": "offset"
         }
       ]
-    },
-    "tracks": [
-      {
-        "type": "FeatureTrack",
-        "trackId": "[TRACK_ID]_init_config",
-        "name": "[TRACK_NAME])",
-        "assemblyNames": ["[ASSEMBLY_NAME]"],
-        "adapter": {
-          "type": "[ADAPTER_TYPE]",
-          "bedGzLocation": {
-            "uri": "[TRACK_FILE_NAME]"
-          },
-          "index": {
-            "location": {
-              "uri": "[TRACK_INDEX_FILE_NAME]"
-            }
-          }
-        }
-      }
-    ]
+    }
 }
