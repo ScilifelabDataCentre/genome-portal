@@ -26,9 +26,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
-
-    {{ if or (eq .Title "Glossary") (eq .Title "Download") }}
+    {{ if or (eq .Title "Glossary") (eq .Title "Download") (eq .Title "Genome assembly") }}
         <link rel="preconnect" href="https://code.jquery.com">
+        <link rel="preconnect" href="https://cdn.datatables.net">
     {{ end }}
 
     <!-- Google Font for Roboto-->
@@ -56,13 +56,17 @@
         crossorigin="anonymous">
     </script>
 
-    <!-- JQuery sometimes needed with datatables library -->
-    {{ if or (eq .Title "Glossary") (eq .Title "Download") }}
+    <!-- Datatables (sometimes needs Jquery as dependancy) -->
+    {{ if or (eq .Title "Glossary") (eq .Title "Download") (eq .Title "Genome assembly") }}
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"
             integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous">
         </script>
+        <link href="/Datatables/datatables.min.css" rel="stylesheet">
+        <script src="/Datatables/datatables.min.js"></script>
     {{ end }}
 
+
+    <!-- Matomo tracking info -->
     {{ if eq .Type "contact" }}
         <script type="text/javascript">
             var onloadCallback = function () {
