@@ -1,12 +1,32 @@
 #!/bin/bash
 #
 # Apply file-type-specific filters to stdin
-#
+
+
+# Sort BED file
+# Output:
+#   Sorted BED stream with headers preserved.
+sort_bed() {
+    local -r tmp=$(mktemp)
+    cat > "${tmp}"
+    headers=(-e '^browser' -e '^track' -e '^#')
+    grep -E "${headers[@]}" "${tmp}"
+    grep -E -v "${headers[@]}" "${tmp}" | sort -k1,1 -k2,2n
+    rm -f "${tmp}"
+}
+
+# Replace spaces by tabs
+# Output:
+#  Input stream with every whitespace sequence replaced by a
+#  single tab character.
+tabify() {
+    :
+}
+
 # Arguments:
 #   The name of the file being streamed
 # Output:
 #   Writes filtered stream to stdout
-
 main () {
     local -r gff_pattern='\.gff(\.|$)'
     local -r bed_pattern='\.bed(\.|$)'
@@ -18,7 +38,7 @@ main () {
 	fi
     elif [[ "$1" =~ ${bed_pattern} ]]; then
 	echo "Sorting BED file $1" >&2
-	if ! grep -v "^#" | sort -k1,1 -k2,2n; then
+	if ! sort_bed; then
 	    echo "Error filtering contents of BED file: $1" >&2
 	fi
     else
@@ -27,7 +47,10 @@ main () {
     fi
 }
 
-main "$@"
+if [[ ${BASH_SOURCE[0]} == "$0" ]];
+then
+    main "$@"
+fi
 
 
 
