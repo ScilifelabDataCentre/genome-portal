@@ -20,7 +20,7 @@ sort_bed() {
 #  Input stream with every whitespace sequence replaced by a
 #  single tab character.
 tabify() {
-    :
+    sed -E 's/ +/\t/g'
 }
 
 # Arguments:
@@ -38,7 +38,7 @@ main () {
 	fi
     elif [[ "$1" =~ ${bed_pattern} ]]; then
 	echo "Sorting BED file $1" >&2
-	if ! sort_bed; then
+	if ! tabify | sort_bed; then
 	    echo "Error filtering contents of BED file: $1" >&2
 	fi
     else

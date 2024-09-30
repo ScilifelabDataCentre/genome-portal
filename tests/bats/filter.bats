@@ -21,8 +21,17 @@ EOF
     [ "${res}" = "${expected}" ]
 }
 
+@test "tabify" {
+    . "${SRC}"
+    res=$(tabify <<EOF
+A 3    4
+EOF
+       )
+    expected=$(printf '%s\t%s\t%s' A 3 4)
+    [ "${res}" = "${expected}" ]
+}
 
-@test "Sort BED file" {
+@test "Sort and tabify BED file" {
     . "${SRC}"
     res=$(main test.bed <<EOF
 # Header
@@ -32,14 +41,6 @@ A 3
 A 2
 EOF
        )
-    expected=$(cat <<EOF
-# Header
-track foo
-browser bar
-A 2
-A 3
-EOF
-       )
+    expected=$(printf '%s\t%s\n' '#' Header track foo browser bar A 2 A 3)
     [ "${res}" = "${expected}" ]
 }
-
