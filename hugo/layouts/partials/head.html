@@ -10,7 +10,10 @@
         {{ end }}
         | {{ .Site.Title }}
     </title>
-    <meta name="description" content='{{ if .IsHome }}{{ .Param "description" }}{{ else }}{{ .Description }}{{ end }}'>
+
+    {{ $description := partial "create_description.html" . }}
+    <meta name="description" content="{{ $description }}">
+
     <meta http-equiv="content-language" content="en">
     <meta name="theme-color" content="#a7c947">
 

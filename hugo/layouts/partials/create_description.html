@@ -1,0 +1,59 @@
+<!-- creates the site meta description for each page, good for search engine optimization -->
+
+{{ $description := "" }}
+
+{{ if .IsHome }}
+    {{ $description = "A platform facilitating access and discovery of genome data of non-model eukaryotic species studied in Sweden, hosted by SciLifeLab" }}
+
+<!-- Individ pages -->
+{{ else if eq .Title "Contact" }}
+    {{ $description = "Contact us for more information and support." }}
+
+{{ else if eq .Title "About" }}
+    {{ $description = "Learn more about the Swedish Reference Genome Portal and its mission." }}
+
+{{ else if eq .Title "Information på svenska" }}
+    {{ $description = "Lär dig mer om den Swedish Reference Genome Portal och sin uppdrag." }}
+
+{{ else if eq .Title "Privacy Policy" }}
+    {{ $description = "The privacy policy applicable to the Swedish Reference Genome Portal." }}
+
+{{ else if eq .Title "Glossary" }}
+    {{ $description = "A comprehensive glossary of terms used in the Swedish Reference Genome Portal." }}
+
+{{ else if eq .Title "Contribute" }}
+    {{ $description = "Learn how you, as a researcher affiliated with a Swedish institution, can have data displayed on the Swedish Reference Genome Portal." }}
+
+{{ else if eq .Title "Recommendations for file formats" }}
+    {{ $description =  "Recommendations for the file formats that can be used for displaying data on the Swedish Reference Genome Portal." }}
+
+{{ else if eq .Title "Recommendations of how to make data files publicly available" }}
+    {{ $description =  "We list three recommendations on how to share research data in a manner that follows the FAIR principles and facilitates integration with the Genome Portal." }}
+
+{{ else if eq .Title "Genome Browser" }}
+    {{ $description =  "Browse the genome and its annotations using JBrowse 2." }}
+
+<!-- species section -->
+{{ else if eq .Params.layout "species_intro" }}
+    {{ $title := .Params.title | markdownify | plainify }}
+    {{ $subtitle := .Params.subtitle | markdownify | plainify }}
+    {{ $description =  printf "The Swedish Reference Genome Portals landing page for the species %s, commonly known as: %s."  $title $subtitle }}
+
+{{ else if or (eq .Params.layout "species_assembly") (eq .Params.layout "species_download") }}
+    {{ $parent := .Parent }}
+    {{ $title := $parent.Params.title | markdownify | plainify }}
+
+    {{ if eq .Params.layout "species_assembly" }}
+        {{ $description = printf "Genome assembly statistics obtained from sequencing the %s genome." $title }}
+
+    {{ else if eq .Params.layout "species_download" }}
+        {{ $description = printf "A table of available genomic annotations/data tracks for the species %s with download links provided." $title }}
+
+    {{ end }}
+
+<!-- Just in case anything missed, should not be anything... -->
+{{ else }}
+    {{ $description = "A platform facilitating access and discovery of genome data of non-model eukaryotic species studied in Sweden, hosted by SciLifeLab." }}
+
+{{ end }}
+{{ return $description }}
