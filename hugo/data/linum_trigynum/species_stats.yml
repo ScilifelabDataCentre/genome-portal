@@ -16,10 +16,10 @@ assembly:
   - "BUSCO % (eukaryota_odb10)": "C:95.6 [S:66.2, D:29.4], F:1.2, M:3.2, n:255"
 
 annotation:
-  - "Gene #": 54,671
-  - "Transcript #": 80,475
-  - "Avg exons per transcript": 3.9
-  - "Avg gene length (bp)": 3,176
-  - "Avg transcript length (bp)": 2,705
+  - "Gene #": 54671
+  - "Transcript #": 80475
+  - "Avg exons per transcript": 3.90
+  - "Avg gene length (bp)": 3176
+  - "Avg transcript length (bp)": 2705
   - "Avg exon length (bp)": 510
   - "Avg intron length (bp)": 233

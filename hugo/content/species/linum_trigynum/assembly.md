@@ -30,26 +30,13 @@ The data for *Linum trigynum* displayed in the genome portal comes from:
 
 - <p> Gutiérrez-Valencia, J., Zervakis, P.-I., Postel, Z., Fracassetti, M., Losvik, A., Mehrabi, S., Bunikis, I., Soler, L., Hughes, P. W., Désamoré, A., Laenen, B., Abdelaziz, M., Pettersson, O. V., Arroyo, J., & Slotte, T. (2024). Genetic Causes and Genomic Consequences of Breakdown of Distyly in <i>Linum trigynum</i>. Molecular Biology and Evolution, 41(5), msae087. <a href="https://doi.org/10.1093/molbev/msae087">https://doi.org/10.1093/molbev/msae087</a> </p>
 
-### Methods
-
-*Below is a brief summary of the methodology used to produce the genome data, based on [ADD INFORMATION ON PUBLICATION HERE].*
-
-#### Samples
-
-- [EDIT]
-
-#### Genome assembly
-
-- [EDIT]
-
-#### Genome annotation
-
-- [EDIT]
-
 ### Funding
 
-- [EDIT]
+*The study in which the genome data was generated (Gutiérrez-Valencia et al. 2024) acknowledge funding by:*
 
-### Acknowledgements
-
-- [EDIT]
+- The European Research Council (ERC) under the European Union’s Horizon 2020 research and innovation programme (grant agreement number [757451](https://cordis.europa.eu/project/id/757451))
+- The Swedish Research Council (grant numbers [2019-04452](https://www.vr.se/english/swecris.html#/project/2019-04452_VR) and [2023-04532](https://www.vr.se/english/swecris.html#/project/2023-04532_VR))
+- The Erik Philip-Sörensen foundation
+- The Bergströms foundation
+- The Nilsson-Ehle foundation
+- The Carl Trygger foundation

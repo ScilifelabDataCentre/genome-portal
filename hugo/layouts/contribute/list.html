@@ -1,0 +1,83 @@
+{{ define "main" }}
+
+<div class="container mt-3">
+    <div class="scilife-contrib-border">
+
+        <div class="row justify-content-center mx-3">
+            <div class="col-auto">
+                <div class="scilife-contrib-mainheader">
+                    <h2>How to add your data to the portal</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-start mx-2 mt-2">
+            <div class="d-flex align-items-center flex-wrap">
+                <div class="col-auto align-self-start">
+                    <span class="scilife-numbered-circle">1</span>
+                </div>
+                <div class="col ms-3">
+                    <div>
+                        <h3 class="scilife-contrib-subheader">Express your interest</h3>
+                        <p class="scilife-contrib-subtext">
+                            Send us an email to <a href="mailto:dsn-eb@scilifelab.se">dsn-eb@scilifelab.se</a> or  <a href="/contact">fill out our contact form</a> to get in touch.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-start mx-2 mt-2">
+            <div class="d-flex align-items-center flex-wrap">
+                <div class="col-auto align-self-start">
+                    <span class="scilife-numbered-circle">2</span>
+                </div>
+                <div class="col ms-3">
+                    <div>
+                        <h3 class="scilife-contrib-subheader">Tell us more about your data</h3>
+                        <p class="scilife-contrib-subtext">
+                            Help us find the data and its associated metadata by filling out a brief form.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-start mx-2 mt-2">
+            <div class="d-flex align-items-center flex-wrap">
+                <div class="col-auto align-self-start">
+                    <span class="scilife-numbered-circle">3</span>
+                </div>
+                <div class="col ms-3">
+                    <div>
+                        <h3 class="scilife-contrib-subheader">Let us setup your data in the portal</h3>
+                        <p class="scilife-contrib-subtext">
+                            Our developers and data stewards will upload the data to the portal for you.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div>
+                <span class="scilife-contrib-enjoy-subtext">Enjoy!</span>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col scilife-subsection mt-3">
+            {{ .Content }}
+        </div>
+    </div>
+
+    {{ partial "last_updated.html" . }}
+</div>
+
+{{ end }}

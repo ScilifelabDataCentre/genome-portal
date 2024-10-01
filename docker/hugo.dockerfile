@@ -18,8 +18,7 @@ RUN mkdir /target && \
 # Stage 2: Serve the generated html using nginx
 FROM nginxinc/nginx-unprivileged:stable-alpine
 
-RUN sed -i '3 a\    absolute_redirect off;' /etc/nginx/conf.d/default.conf && \
-    sed -i 's/#error_page  404/error_page  404/' /etc/nginx/conf.d/default.conf
+COPY docker/nginx-custom.conf /etc/nginx/conf.d/default.conf 
 
 COPY --from=build /target /usr/share/nginx/html
 EXPOSE 8080

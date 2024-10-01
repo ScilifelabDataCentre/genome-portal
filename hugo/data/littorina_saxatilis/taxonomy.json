@@ -1,0 +1,58 @@
+{
+    "Species": {
+        "science_name": "Littorina saxatilis",
+        "tax_id": "31220",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:31220",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=31220",
+        "display_order": 1
+    },
+    "Genus": {
+        "science_name": "Littorina",
+        "tax_id": "31213",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:31213",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=31213",
+        "display_order": 2
+    },
+    "Family": {
+        "science_name": "Littorinidae",
+        "tax_id": "31212",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:31212",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=31212",
+        "display_order": 3
+    },
+    "Order": {
+        "science_name": "Littorinimorpha",
+        "tax_id": "216294",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:216294",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=216294",
+        "display_order": 4
+    },
+    "Class": {
+        "science_name": "Gastropoda",
+        "tax_id": "6448",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:6448",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=6448",
+        "display_order": 5
+    },
+    "Phylum": {
+        "science_name": "Mollusca",
+        "tax_id": "6447",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:6447",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=6447",
+        "display_order": 6
+    },
+    "Kingdom": {
+        "science_name": "Metazoa",
+        "tax_id": "33208",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:33208",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=33208",
+        "display_order": 7
+    },
+    "Superkingdom": {
+        "science_name": "Eukaryota",
+        "tax_id": "2759",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:2759",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=2759",
+        "display_order": 8
+    }
+}

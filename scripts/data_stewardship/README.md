@@ -12,6 +12,14 @@ Some of the scripts will produce log files. These will be saved to the logs/ dir
 
 This script performs pairwise comparison of two versions of the same genome assembly to identify if there are any differences between the nucleotide sequences (the fasta headers are not considered). This can for instance be used to spot if an alternative version of an assembly contains scaffolds not found in the version on ENA or NCBI (such as mitochondrial scaffolds). Use-case example: compare that ENA (CAVLGL01.fasta.gz) and NCBI (GCA_963668995.1_Parnassius_mnemosyne_n_2023_11_genomic.fna.gz) versions of the Clouded Apollo assembly and check if they are identical.
 
+- **configure_default_session.py**
+
+This script reads a config.yml from a species folder (./config/[SPECIES_NAME]/config.yml) and uses its values to generate a JBrowse 2 defaultSession configuration. The output file is intended to be copied back to the species folder as config.json when the user is satsified with the results. The settings in ./config/[SPECIES_NAME]/config.json will be used by the makefile when creating the final cconfig.json that will be used to display the genome browser for the species in the Genome Portal. The script requires the pyyaml library, which can for instance be installed with pip.
+
+- **generate_assembly_and_annotation_statistics.sh**
+
+This script runs Quast and AGAT analyses to collect statistics from a genome assembly FASTA and an annotation GFF from a species, and extracts the relevant statistics that are needed for the tables in the species' Assembly tab in the Genome Portal. The script is intended to be run with assembly and annotation files from the same species, but this is up to the user to control as it is not explicitly enforced by the code itself.
+
 - **get_aliases_from_ENA_fasta.py**
 
 This script generates a refNameAlias file from genome assemblies downloaded from ENA. It can basically be seen as a soft-link that handles synonymous names for a given fasta header. This allows for higher flexibility for displaying versions of the data tracks that use a different formatting for how they call on the headers in the assembly fasta. For instance, correlation of GFFs to its assembly is made is made based on the element in the seqid column in the GFF. Using alias files avoids having to correctly rename potentially tens-of-thousands of lines in a data track file. As of now, the alias files are stored in the alias_file_temp_storage/ directory.

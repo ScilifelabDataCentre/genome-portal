@@ -1,16 +1,10 @@
 {{ $lastUpdated := .Params.last_updated }}
-{{ $contactPerson := .Params.contact_person }}
 {{ if not (or .IsHome .IsSection) }}
     {{ $lastUpdated = .Parent.Params.last_updated }}
-    {{ $contactPerson = .Parent.Params.contact_person }}
 {{ end }}
 
 <div>
     <p class="last-updated_text">
         Page last updated: {{ $lastUpdated }}
-        {{ if $contactPerson }}
-            <br>
-            Contact Responsible: {{ $contactPerson }}
-        {{ end }}
     </p>
 </div>

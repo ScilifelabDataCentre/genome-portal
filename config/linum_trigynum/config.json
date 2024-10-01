@@ -23,6 +23,7 @@
         "id": "ltri_default_session_view",
         "minimized": false,
         "type": "LinearGenomeView",
+        "trackLabels": "offset",
         "offsetPx": 0,
         "bpPerPx": 50,
         "displayedRegions": [

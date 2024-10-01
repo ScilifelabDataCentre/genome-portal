@@ -30,26 +30,13 @@ The data for *Linum tenue* displayed in the genome portal comes from:
 
 - <p> Gutiérrez-Valencia, J., Fracassetti, M., Berdan, E. L., Bunikis, I., Soler, L., Dainat, J., Kutschera, V. E., Losvik, A., Désamoré, A., Hughes, P. W., Foroozani, A., Laenen, B., Pesquet, E., Abdelaziz, M., Pettersson, O. V., Nystedt, B., Brennan, A. C., Arroyo, J., & Slotte, T. (2022). Genomic analyses of the <i>Linum </i>distyly supergene reveal convergent evolution at the molecular level. Current Biology, 32(20), 4360-4371.e6. <a href="https://doi.org/10.1016/j.cub.2022.08.042"> https://doi.org/10.1016/j.cub.2022.08.042</a></p>
 
-### Methods
-
-*Below is a brief summary of the methodology used to produce the genome data, based on [ADD INFORMATION ON PUBLICATION HERE].*
-
-#### Samples
-
-- [EDIT]
-
-#### Genome assembly
-
-- [EDIT]
-
-#### Genome annotation
-
-- [EDIT]
-
 ### Funding
 
-- [EDIT]
+*The study in which the genome data was generated (Gutiérrez-Valencia et al. 2022) acknowledge funding by:*
 
-### Acknowledgements
-
-- [EDIT]
+- The European Research Council (ERC) under the European Union’s Horizon 2020 research and innovation programme (grant agreement no. [757451](https://cordis.europa.eu/project/id/757451))
+- The Swedish Research Council (grant no. [2019-04452](https://www.vr.se/english/swecris.html#/project/2019-04452_VR))
+- The Erik Philip-Sörensen foundation
+- The Bergströms foundation
+- The Carl Trygger foundation
+- The Knut and Alice Wallenberg Foundation as part of the National Bioinformatics Infrastructure Sweden at SciLifeLab.

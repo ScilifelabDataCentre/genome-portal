@@ -2,10 +2,8 @@
 # Required params below
 title: "*Clupea harengus*"
 subtitle: "Atlantic herring"
-summary: "Genome sequencing work on the Atlantic herring, with scientific name Clupea harengus."
 
 last_updated: "15/05/2024"
-contact_person: "First Name Surname (firstname.surname@scilifelab.se)"
 
 cover_image: "/img/species/clupea_harengus.webp"
 img_attrib_text: "Clupea harengus by Gervais et Boulart, public domain"
@@ -15,6 +13,7 @@ img_attrib_link: "https://en.wikipedia.org/wiki/File:Clupea_harengus_Gervais.jpg
 # The params below were auto-generated, you should not need to edit them...
 # unless you were warned by the add-new-species.py script.
 layout: "species_intro"
+banner_title: "Species overview"
 url: "clupea_harengus"
 weight: 1
 science_name: "Clupea harengus"
@@ -50,3 +49,7 @@ Write some content here in markdown for the introduction tab of the species page
 #### References
 
 - [EDIT]
+
+#### Changelog
+
+- DD/MM/YYYY - Species first published on the Portal

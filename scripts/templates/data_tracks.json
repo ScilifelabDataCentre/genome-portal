@@ -7,12 +7,10 @@
         {"Website": "[EDIT]"},
         {"Article": "[EDIT]"}
       ],
-      "accession": "[EDIT]",
+      "accessionOrDOI": "[EDIT]",
       "fileName": "[EDIT]",
-      "submitterName": "[EDIT]",
       "principalInvestigator": "[EDIT]",
-      "principalInvestigatorEmail": "[EDIT]",
-      "submitterAffiliation": "[EDIT]",
+      "principalInvestigatorAffiliation": "[EDIT]",
       "firstDateOnPortal": "[EDIT]"
     }
 ]

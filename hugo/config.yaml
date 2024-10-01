@@ -1,10 +1,7 @@
-baseURL: "https://swedgene.se/"
+baseURL: "https://genomes.scilifelab.se/"
 languageCode: "en-us"
-title: "Swedish national genome portal, hosted by SciLifeLab"
+title: "Swedish Reference Genome Portal, hosted by SciLifeLab"
 buildFuture: true
-params:
-  title: "Swedish national genome portal, hosted by SciLifeLab"
-  description: "Swedish national genome portal, hosted by SciLifeLab"
 
 markup:
   goldmark:
@@ -20,12 +17,15 @@ menus:
   - name: Home
     pageRef: /
     weight: 1
-  - name: Add a genome project
-    pageRef: /add_genome
+  - name: Contribute
+    pageRef: /contribute
     weight: 2
   - name: About
     pageRef: /about
     weight: 3
+  - name: Glossary
+    pageRef: /glossary
+    weight: 4
   - name: Contact
     pageRef: /contact
-    weight: 4
+    weight: 5
