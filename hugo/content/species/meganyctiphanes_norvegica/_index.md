@@ -4,8 +4,7 @@ title: "*Meganyctiphanes norvegica*"
 subtitle: "Northern krill"
 summary: "Genome assembly, genome annotation and XXXXXX data tracks."
 
-last_updated: "27/08/2024"
-contact_person: "First Name Surname (firstname.surname@scilifelab.se)"
+last_updated: "01/10/2024"
 
 cover_image: "/img/species/northern_krill.webp"
 img_attrib_text: "Northern Krill by Uwe Kils, CC BY-SA 3.0"
@@ -54,4 +53,4 @@ If you use the data presented in the genome portal from this species in your res
 
 #### Changelog
 
-- DD/MM/YYYY - Species first published on the Portal
+- 15/10/2024 - Species first published on the Portal

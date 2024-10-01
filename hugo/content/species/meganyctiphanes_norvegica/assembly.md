@@ -55,9 +55,3 @@ Gene models were produced using Illumina RNA-seq data, Trinity assembled transcr
 - U.S. National Science Foundation, Division Of Ocean Sciences (NSF OCE) grants [1316040](https://www.nsf.gov/awardsearch/showAward?AWD_ID=1316040) and [1948162](https://www.nsf.gov/awardsearch/showAward?AWD_ID=1948162)
 
 - Knut and Alice Wallenberg Foundation as part of the National Bioinformatics Infrastructure Sweden at SciLifeLab, grant ID KAW 2017.0003.
-
-### Acknowledgements
-
-*The study in which the genome data was generated (Unneberg et al. 2024) acknolowledges the following support:*
-
-- Computations were performed in project SNIC 2022/5-472 provided by the National Academic Infrastructure for Supercomputing in Sweden (NAISS) and the Swedish National Infrastructure for Computing (SNIC) at UPPMAX and the PDC Center for High Performance Computing partially funded by the Swedish Research Council through grant agreements no. 2022-06725 and no. 2018-05973.
