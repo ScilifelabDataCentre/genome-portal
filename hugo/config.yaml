@@ -1,10 +1,7 @@
-baseURL: "https://swedgene.se/"
+baseURL: "https://genomes.scilifelab.se/"
 languageCode: "en-us"
-title: "Swedish national genome portal, hosted by SciLifeLab"
+title: "Swedish Reference Genome Portal, hosted by SciLifeLab"
 buildFuture: true
-params:
-  title: "Swedish national genome portal, hosted by SciLifeLab"
-  description: "Swedish national genome portal, hosted by SciLifeLab"
 
 markup:
   goldmark:
