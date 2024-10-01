@@ -1,1 +1,26 @@
-{}
+{
+    "tracks": [
+	    {
+		"type": "FeatureTrack",
+		"trackId": "configured_by_hand.gff",
+		"name": "Protein coding genes configured by hand",
+		"adapter": {
+		    "type": "Gff3TabixAdapter",
+		    "gffGzLocation": {
+			"uri": "configured_by_hand.gff.bgz",
+			"locationType": "UriLocation"
+		    },
+		    "index": {
+			"location": {
+			    "uri": "configured_by_hand.gff.bgz.tbi",
+			    "locationType": "UriLocation"
+			},
+			"indexType": "TBI"
+		    }
+		},
+		"assemblyNames": [
+		    "Tiny_herb_v1"
+		]
+	    }
+    ]
+}
