@@ -37,20 +37,6 @@
           ],
           "tracks": [
             {
-              "id": "mnor_default_protein_coding_genes",
-              "type": "FeatureTrack",
-              "configuration": "GCA_964058975.1_Mnor_HA_v2_genomic.gff",
-              "minimized": false,
-              "displays": [
-                {
-                  "id": "mnor_default_protein_coding_genes_display",
-                  "type": "LinearBasicDisplay",
-                  "heightPreConfig": 300,
-                  "configuration": "GCA_964058975.1_Mnor_HA_v2_genomic.gff-LinearBasicDisplay"
-                }
-              ]
-            },
-            {
               "id": "mnor_default_protein_coding_genes_non_redundant",
               "type": "FeatureTrack",
               "configuration": "annotations.protein_coding_gene_models.non_redundant_added_stop_codons.gff",

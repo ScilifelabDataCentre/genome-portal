@@ -8,8 +8,6 @@ assembly:
   # NOTE: this alias file is 15 Mb. Copied it to local hugo/public/data dir for now to enable local testing
   aliases: "https://raw.githubusercontent.com/ScilifelabDataCentre/swedgene/main/scripts/data_stewardship/alias_files_temp_storage/CAXKWB01.fna.alias"
 tracks:
-  - name: "Protein coding genes (NCBI version)"
-    url: "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/964/058/975/GCA_964058975.1_Mnor_HA_v2/GCA_964058975.1_Mnor_HA_v2_genomic.gff.gz"
   - name: "Protein coding genes (non-redundant with added stop codons)"
     url: "https://figshare.scilifelab.se/ndownloader/files/40569599"
     fileName: "annotations.protein_coding_gene_models.non_redundant_added_stop_codons.gff"

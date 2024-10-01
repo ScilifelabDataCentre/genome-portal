@@ -7,26 +7,11 @@
       {"Website": "https://www.ebi.ac.uk/ena/browser/view/GCA_964058975.1"},
       {"Article": "https://doi.org/10.1038/s41467-024-50239-7"}
     ],
-    "accession": "GCA_964030455.1",
+    "accessionOrDOI": "GCA_964030455.1",
     "fileName": "CAXKWB01.fasta.gz",
     "submitterName": "Andreas Wallberg",
     "principalInvestigator": "Andreas Wallberg",
-    "submitterAffiliation": "Uppsala University",
-    "firstDateOnPortal": "15 October 2024"
-  },
-  {
-    "dataTrackName": "Protein-coding genes",
-    "description": "Functional annotation of protein-coding genes",
-    "links": [
-      {"Download": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/964/058/975/GCA_964058975.1_Mnor_HA_v2/GCA_964058975.1_Mnor_HA_v2_genomic.gff.gz"},
-      {"Website": "https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_964058975.1/"},
-      {"Article": "https://doi.org/10.1038/s41467-024-50239-7"}
-    ],
-    "accession": "",
-    "fileName": "GCA_964058975.1_Mnor_HA_v2_genomic.gff.gz",
-    "submitterName": "Andreas Wallberg",
-    "principalInvestigator": "Andreas Wallberg",
-    "submitterAffiliation": "Uppsala University",
+    "principalInvestigatorAffiliation": "Uppsala University",
     "firstDateOnPortal": "15 October 2024"
   },
   {
@@ -37,11 +22,11 @@
       {"Website": "https://doi.org/10.17044/scilifelab.22786925.v1"},
       {"Article": "https://doi.org/10.1038/s41467-024-50239-7"}
     ],
-    "accession": "",
+    "accessionOrDOI": "10.17044/scilifelab.22786925.v1",
     "fileName": "annotations.protein_coding_gene_models.non_redundant_added_stop_codons.gff",
     "submitterName": "Andreas Wallberg",
     "principalInvestigator": "Andreas Wallberg",
-    "submitterAffiliation": "Uppsala University",
+    "principalInvestigatorAffiliation": "Uppsala University",
     "firstDateOnPortal": "15 October 2024"
   }
 ]
