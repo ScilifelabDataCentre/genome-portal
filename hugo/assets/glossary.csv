@@ -1,29 +1,29 @@
-Term (or synonym)|Ontology accession number|Definition
-annotation track|data_3002|Annotation of one particular positional feature on a biomolecular (typically genome) sequence, suitable for import and display in a genome browser.
-assembly|SO:0001248|A region of the genome of known length that is composed by ordering and aligning two or more different regions
-assembly level - chromosome|FBcv:0003235|There is sequence for one or more chromosomes. This could be a completely sequenced chromosome without gaps or a chromosome containing scaffolds or contigs with gaps between them. There may also be unplaced or unlocalized scaffolds.
-assembly level - scaffold|FBcv:0003236|Some sequence contigs have been connected across gaps to create scaffolds, but no scaffolds have been placed on chromosomes.
-contig|SO:0000149|A contiguous sequence derived from sequence assembly. Has no gaps, but may contain N's from unavailable bases.
-contig N50|OBI_0001941|N50 statistic computed for the contigs produced by the assembly process. A contig N50 is calculated by first ordering every contig by length from longest to shortest. Next, starting from the longest contig, the lengths of each contig are summed, until this running sum equals one-half of the total length of all contigs in the assembly. The contig N50 of the assembly is the length of the shortest contig in this list.
-contig N50|GENEPIO_0001633|Contig L50 is the number of contigs equal to or longer than contig N50. The length of the assembly itself is used in the calculation.
-genome assembly|FBcv:0003086|The result of reconstruction of the genome achieved by aligning and merging smaller fragments.
-genome representation - full|FBcv:0003237|The assembly represents the whole genome, though there may still be gaps.
-genome representation - partial|FBcv:0003238|The assembly represents only part of the organism's genome, because only a single chromosome was targeted, coverage is <1, or total length is less than half the average for other assemblies of the same species.
-isoform|SO:0001149|Description of sequence variants produced by alternative splicing, alternative promoter usage, alternative initiation and ribosomal frameshifting.
-mitochondrion|GO:0005739|A semiautonomous, self replicating organelle that occurs in varying numbers, shapes, and sizes in the cytoplasm of virtually all eukaryotic cells. It is notably the site of tissue respiration.
-mitochondrial chromosome|GO:0000262|A chromosome found in the mitochondrion of a eukaryotic cell.
-ncRNA|SO:0000655|An RNA transcript that does not encode for a protein rather the RNA molecule is the gene product.
-ncRNA_gene|SO:0001263|A gene that encodes a non-coding RNA.
-protein_coding|SO:0000010|A gene which, when transcribed, can be translated into a protein.
-pseudogene|SO:0000336|A sequence that closely resembles a known functional gene, at another locus within a genome, that is non-functional as a consequence of (usually several) mutations that prevent either its transcription or translation (or both). In general, pseudogenes result from either reverse transcription of a transcript of their "normal" paralog (SO:0000043) (in which case the pseudogene typically lacks introns and includes a poly(A) tail) or from recombination (SO:0000044) (in which case the pseudogene is typically a tandem duplication of its "normal" paralog).
-reference_genome|SO:0001505|A collection of sequences (often chromosomes) taken as the standard for a given organism and genome assembly.
-reference genome assembly|FBcv:0003087|The result of extensive sequence alignment and merging to produce a genome assembly that serves as the current reference for a particular organism.
-reference genome sequence|FBsv:0001013|A whole genome sequence used as the standard sequence for a species.
-reference sequence|GENO_0000017|A sequence that serves as a standard against which other sequences at the same location are compared.
-RNA-Seq|FBcv:0003068|A quantitative method for mapping transcribed regions, in which complementary DNA fragments are subjected to high-throughput sequencing.
-scaffold|SO:0000148|One or more contigs that have been ordered and oriented using end-read information. Contains gaps that are filled with N's.
-scaffold N50|OBI_0001945|N50 statistic computed for the scaffold produced by the assembly process. The method for computing the value is similar to that of contig N50 but uses scaffold information instead of contig information
-tRNA|SO:0000253|Transfer RNA (tRNA) molecules are approximately 80 nucleotides in length. Their secondary structure includes four short double-helical elements and three loops (D, anti-codon, and T loops). Further hydrogen bonds mediate the characteristic L-shaped molecular structure. Transfer RNAs have two regions of fundamental functional importance: the anti-codon, which is responsible for specific mRNA codon recognition, and the 3' end, to which the tRNA's corresponding amino acid is attached (by aminoacyl-tRNA synthetases). Transfer RNAs cope with the degeneracy of the genetic code in two manners: having more than one tRNA (with a specific anti-codon) for a particular amino acid; and 'wobble' base-pairing, i.e. permitting non-standard base-pairing at the 3rd anti-codon position.
-tRNA_gene|SO:0001272|A noncoding RNA that binds to a specific amino acid to allow that amino acid to be used by the ribosome during translation of RNA.
-transcript|SO:0000673|An RNA synthesized on a DNA or RNA template by an RNA polymerase.
-Transcriptome assembly|operation_3258|Infer a transcriptome sequence by analysis of short sequence reads.
+Term (or synonym)|Ontology accession number|Definition|Ontology version
+annotation track|data_3002|Annotation of one particular positional feature on a biomolecular (typically genome) sequence, suitable for import and display in a genome browser.|EDAM 1.25
+assembly|SO:0001248|A region of the genome of known length that is composed by ordering and aligning two or more different regions|SO v2024-06-05
+assembly level - chromosome|FBcv:0003235|There is sequence for one or more chromosomes. This could be a completely sequenced chromosome without gaps or a chromosome containing scaffolds or contigs with gaps between them. There may also be unplaced or unlocalized scaffolds.|FB2024_04
+assembly level - scaffold|FBcv:0003236|Some sequence contigs have been connected across gaps to create scaffolds, but no scaffolds have been placed on chromosomes.|FB2024_04
+contig|SO:0000149|A contiguous sequence derived from sequence assembly. Has no gaps, but may contain N's from unavailable bases.|SO v2024-06-05
+contig N50|OBI_0001941|N50 statistic computed for the contigs produced by the assembly process. A contig N50 is calculated by first ordering every contig by length from longest to shortest. Next, starting from the longest contig, the lengths of each contig are summed, until this running sum equals one-half of the total length of all contigs in the assembly. The contig N50 of the assembly is the length of the shortest contig in this list.|OBI v2024-06-10
+contig N50|GENEPIO_0001633|Contig L50 is the number of contigs equal to or longer than contig N50. The length of the assembly itself is used in the calculation.|GenEpiO v0.8
+genome assembly|FBcv:0003086|The result of reconstruction of the genome achieved by aligning and merging smaller fragments.|FB2024_04
+genome representation - full|FBcv:0003237|The assembly represents the whole genome, though there may still be gaps.|FB2024_04
+genome representation - partial|FBcv:0003238|The assembly represents only part of the organism's genome, because only a single chromosome was targeted, coverage is <1, or total length is less than half the average for other assemblies of the same species.|FB2024_04
+isoform|SO:0001149|Description of sequence variants produced by alternative splicing, alternative promoter usage, alternative initiation and ribosomal frameshifting.|SO v2024-06-05
+mitochondrion|GO:0005739|A semiautonomous, self replicating organelle that occurs in varying numbers, shapes, and sizes in the cytoplasm of virtually all eukaryotic cells. It is notably the site of tissue respiration.|GO 2024-09-08
+mitochondrial chromosome|GO:0000262|A chromosome found in the mitochondrion of a eukaryotic cell.|GO 2024-09-08
+ncRNA|SO:0000655|An RNA transcript that does not encode for a protein rather the RNA molecule is the gene product.|SO v2024-06-05
+ncRNA_gene|SO:0001263|A gene that encodes a non-coding RNA.|SO v2024-06-05
+protein_coding|SO:0000010|A gene which, when transcribed, can be translated into a protein.|SO v2024-06-05
+pseudogene|SO:0000336|A sequence that closely resembles a known functional gene, at another locus within a genome, that is non-functional as a consequence of (usually several) mutations that prevent either its transcription or translation (or both). In general, pseudogenes result from either reverse transcription of a transcript of their "normal" paralog (SO:0000043) (in which case the pseudogene typically lacks introns and includes a poly(A) tail) or from recombination (SO:0000044) (in which case the pseudogene is typically a tandem duplication of its "normal" paralog).|SO v2024-06-05
+reference_genome|SO:0001505|A collection of sequences (often chromosomes) taken as the standard for a given organism and genome assembly.|SO v2024-06-05
+reference genome assembly|FBcv:0003087|The result of extensive sequence alignment and merging to produce a genome assembly that serves as the current reference for a particular organism.|FB2024_04
+reference genome sequence|FBsv:0001013|A whole genome sequence used as the standard sequence for a species.|FB2024_04
+reference sequence|GENO_0000017|A sequence that serves as a standard against which other sequences at the same location are compared.|GENO v2023-10-08
+RNA-Seq|FBcv:0003068|A quantitative method for mapping transcribed regions, in which complementary DNA fragments are subjected to high-throughput sequencing.|FB2024_04
+scaffold|SO:0000148|One or more contigs that have been ordered and oriented using end-read information. Contains gaps that are filled with N's.|SO v2024-06-05
+scaffold N50|OBI_0001945|N50 statistic computed for the scaffold produced by the assembly process. The method for computing the value is similar to that of contig N50 but uses scaffold information instead of contig information.|OBI v2024-06-10
+tRNA|SO:0000253|Transfer RNA (tRNA) molecules are approximately 80 nucleotides in length. Their secondary structure includes four short double-helical elements and three loops (D, anti-codon, and T loops). Further hydrogen bonds mediate the characteristic L-shaped molecular structure. Transfer RNAs have two regions of fundamental functional importance: the anti-codon, which is responsible for specific mRNA codon recognition, and the 3' end, to which the tRNA's corresponding amino acid is attached (by aminoacyl-tRNA synthetases). Transfer RNAs cope with the degeneracy of the genetic code in two manners: having more than one tRNA (with a specific anti-codon) for a particular amino acid; and 'wobble' base-pairing, i.e. permitting non-standard base-pairing at the 3rd anti-codon position.|SO v2024-06-05
+tRNA_gene|SO:0001272|A noncoding RNA that binds to a specific amino acid to allow that amino acid to be used by the ribosome during translation of RNA.|SO v2024-06-05
+transcript|SO:0000673|An RNA synthesized on a DNA or RNA template by an RNA polymerase.|SO v2024-06-05
+Transcriptome assembly|operation_3258|Infer a transcriptome sequence by analysis of short sequence reads.|EDAM 1.25
