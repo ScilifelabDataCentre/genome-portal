@@ -4,11 +4,11 @@ on:
   push:
     branches:
       - main
-      - develop
+      - prod
   pull_request:
     branches:
       - main
-      - develop
+      - prod
 
 jobs:
   pre_commit:

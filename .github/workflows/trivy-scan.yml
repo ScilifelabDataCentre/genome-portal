@@ -3,11 +3,11 @@ on:
   push:
     branches:
       - main
-      - develop
+      - prod
   pull_request:
     branches:
       - main
-      - develop
+      - prod
   schedule:
     - cron: '15 5 * * 3' # runs at 5:15 AM every Wednesday
     

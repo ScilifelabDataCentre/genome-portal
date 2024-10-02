@@ -3,14 +3,14 @@ on:
   push:
     branches:
       - main
-      - develop
+      - prod
     paths:
       - 'hugo/**'
   
   pull_request:
     branches:
       - main
-      - develop
+      - prod
     paths:
       - 'hugo/**'
 
