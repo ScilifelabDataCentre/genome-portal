@@ -2,7 +2,6 @@
 # Required params below
 title: "*Meganyctiphanes norvegica*"
 subtitle: "Northern krill"
-summary: "Genome assembly, genome annotation and XXXXXX data tracks."
 
 last_updated: "01/10/2024"
 
@@ -31,9 +30,9 @@ initialZoom: 1
 
 ### Description
 
-The *Meganyctiphanes norvegica* species of krill is a macrozooplankton crustacean found in the Northen Atlantic (Unneberg et al., 2024). It is among the largest of the Euphausiid (krill) species, with total body length reaching up to 40 and 50 mm (Tarling et al., 2010). It can tolerate a broader range of temperature than other krill species (Huenerlage & Buchholz, 2015), and consequently has a large latitudinal distribution ranging from Barents Sea to the Mediterranean Sea (Tarling et al., 2010; Unneberg et al., 2024).
+The *Meganyctiphanes norvegica* species of krill is a macrozooplankton crustacean found in the Northen Atlantic (Unneberg et al., 2024). It is among the largest of the Euphausiid (krill) species, with total body length reaching up to 40 and 50 mm (Tarling et al., 2010). It can tolerate a broader range of temperatures than other krill species (Huenerlage & Buchholz, 2015), and consequently has a large latitudinal distribution ranging from Barents Sea to the Mediterranean Sea (Tarling et al., 2010; Unneberg et al., 2024).
 
-The broad temperature range of *M. norvegica* make it interesting for studies on ecological adaptation to the warming of the oceans. A challenge with genomic analysis of krill species is their huge genome size (19 Gb for *M. norvegica*) (Choquet et al. 2023; Jeffery, 2012; Unneberg et al., 2024). Genetic variation has been found to be widespread but divergent among specimens collected thoughout the geographic distribution, including polygeneic variants indicating adaptation potential to changes in light and temperature (Unneberg et al., 2024).
+The tolerance of *M. norvegica* to a broader range of temperatures make it interesting for studies on ecological adaptation to the warming of the oceans. A challenge with genomic analysis of krill species is their huge genome size (19 Gb for *M. norvegica*) (Choquet et al. 2023; Jeffery, 2012; Unneberg et al., 2024). Genetic variation has been found to be widespread but divergent among specimens collected thoughout their geographic distribution, including polygeneic variants indicating adaptation potential to changes in light and temperature (Unneberg et al., 2024).
 
 #### Genome reference
 
@@ -53,4 +52,4 @@ If you use the data presented in the genome portal from this species in your res
 
 #### Changelog
 
-- 15/10/2024 - Species first published on the Portal
+<p> - 15/10/2024 - Species first published on the Portal </p>
