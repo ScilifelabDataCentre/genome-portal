@@ -20,7 +20,7 @@ sort_bed() {
 #  Input stream with every whitespace sequence replaced by a
 #  single tab character.
 tabify() {
-    sed -E 's/ +/\t/g'
+    sed -E 's/\s+/\t/g'
 }
 
 # Arguments:
