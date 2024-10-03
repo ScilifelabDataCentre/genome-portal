@@ -9,3 +9,5 @@ tracks:
     url: "http://fixtures/tiny_herb/genes.gff.gz"
   - name: "Test track that requires alias in order to display"
     url: "http://fixtures/tiny_herb/data_track_that_requires_alias.gff.gz"
+  - name: "Space-delimited BED file"
+    url: "http://fixtures/tiny_herb/tiny_herb_LG1_repeats_ws_delimited_truncated.bed"
