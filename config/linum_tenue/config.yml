@@ -14,3 +14,71 @@ tracks:
   - name: "Repeats"
     url: "https://figshare.scilifelab.se/ndownloader/files/48879751"
     fileName: "L_tenue_v1_rep.bed.gz"
+  - name: "Lten_pop06_TD"
+    url: "https://figshare.scilifelab.se/ndownloader/files/49006876"
+    fileName: "Lten_pop06_TD.bed.zip"
+    addTrack: false
+  - name: "Lten_pop08_TD"
+    url: "https://figshare.scilifelab.se/ndownloader/files/49006879"
+    fileName: "Lten_pop08_TD.bed.zip"
+    addTrack: false
+  - name: "Lten_pop17_TD"
+    url: "https://figshare.scilifelab.se/ndownloader/files/49006882"
+    fileName: "Lten_pop17_TD.bed.zip"
+    addTrack: false
+  - name: "Lten_pop21_TD"
+    url: "https://figshare.scilifelab.se/ndownloader/files/49006888"
+    fileName: "Lten_pop21_TD.bed.zip"
+    addTrack: false
+  - name: "Lten_pop23_TD"
+    url: "https://figshare.scilifelab.se/ndownloader/files/49006891"
+    fileName: "Lten_pop23_TD.bed.zip"
+    addTrack: false
+  - name: "Lten_pop26_TD"
+    url: "https://figshare.scilifelab.se/ndownloader/files/49007380"
+    fileName: "Lten_pop26_TD.bed.zip"
+    addTrack: false
+  - name: "Lten_pop32_TD"
+    url: "https://figshare.scilifelab.se/ndownloader/files/49006918"
+    fileName: "Lten_pop32_TD.bed.zip"
+    addTrack: false
+  - name: "Lten_pop34_TD"
+    url: "https://figshare.scilifelab.se/ndownloader/files/49006924"
+    fileName: "Lten_pop34_TD.bed.zip"
+    addTrack: false
+  - name: "Lten_pop06_PI"
+    url: "https://figshare.scilifelab.se/ndownloader/files/49006264"
+    fileName: "Lten_pop06_Pi.bed.zip"
+    addTrack: false
+  - name: "Lten_pop08_PI"
+    url: "https://figshare.scilifelab.se/ndownloader/files/49006267"
+    fileName: "Lten_pop08_Pi.bed.zip"
+    addTrack: false
+  - name: "Lten_pop17_PI"
+    url: "https://figshare.scilifelab.se/ndownloader/files/49006270"
+    fileName: "Lten_pop17_Pi.bed.zip"
+    addTrack: false
+  - name: "Lten_pop21_PI"
+    url: "https://figshare.scilifelab.se/ndownloader/files/49006273"
+    fileName: "Lten_pop21_Pi.bed.zip"
+    addTrack: false
+  - name: "Lten_pop23_PI"
+    url: "https://figshare.scilifelab.se/ndownloader/files/49006282"
+    fileName: "Lten_pop23_Pi.bed.zip"
+    addTrack: false
+  - name: "Lten_pop26_PI"
+    url: "https://figshare.scilifelab.se/ndownloader/files/49006285"
+    fileName: "Lten_pop26_Pi.bed.zip"
+    addTrack: false
+  - name: "Lten_pop32_PI"
+    url: "https://figshare.scilifelab.se/ndownloader/files/49006297"
+    fileName: "Lten_pop32_Pi.bed.zip"
+    addTrack: false
+  - name: "Lten_pop34_PI"
+    url: "https://figshare.scilifelab.se/ndownloader/files/49006300"
+    fileName: "Lten_pop34_Pi.bed.zip"
+    addTrack: false
+
+
+
+  
