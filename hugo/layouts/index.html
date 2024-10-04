@@ -104,9 +104,19 @@
 <script>
     const speciesCards = Array.from(document.querySelectorAll('.scilife-species-card'));
 
+    // helper function to handle missing elements by returning empty string
+    function getElementText(root, selector) {
+        const element = root.querySelector(selector);
+        if (!element) {
+            console.debug(`Element not found for selector: ${selector}`);
+            return '';
+        }
+        return element.textContent;
+    }
+
     function sortAlphabetically(a, b) {
-        const titleA = a.querySelector('#science-name').textContent;
-        const titleB = b.querySelector('#science-name').textContent;
+        const titleA = getElementText(a, '#science-name');
+        const titleB = getElementText(b, '#science-name');
         return titleA.localeCompare(titleB);
     }
 
@@ -120,8 +130,8 @@
     }
 
     function sortUpdated(a, b) {
-        const dateStrA = a.querySelector('.hidden-date').textContent;
-        const dateStrB = b.querySelector('.hidden-date').textContent;
+        const dateStrA = getElementText(a, '.hidden-date');
+        const dateStrB = getElementText(b, '.hidden-date');
 
         const dateA = stringToDate(dateStrA);
         const dateB = stringToDate(dateStrB);
@@ -141,9 +151,9 @@
             cardsToAppend = speciesCards.slice();
         } else {
             cardsToAppend = speciesCards.filter(function (card) {
-                const title = card.querySelector('#science-name').textContent.toLowerCase();
-                const subtitle = card.querySelector('#common-name').textContent.toLowerCase();
-                const cardText = card.querySelector('.card-text').textContent.toLowerCase();
+                const title = getElementText(card, '#science-name').toLowerCase();
+                const subtitle = getElementText(card, '#common-name').toLowerCase();
+                const cardText = getElementText(card, '.card-text').toLowerCase();
                 return title.includes(searchText) || subtitle.includes(searchText) || cardText.includes(searchText);
             });
         }
