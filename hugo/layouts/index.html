@@ -110,11 +110,7 @@
         return titleA.localeCompare(titleB);
     }
 
-    function sortRevAlphabetically(a, b) {
-        const titleA = a.querySelector('#science-name').textContent;
-        const titleB = b.querySelector('#science-name').textContent;
-        return titleB.localeCompare(titleA);
-    }
+    const sortRevAlphabetically = (a, b) => -sortAlphabetically(a, b);
 
     // All dates have DD/MM/YYYY format but
     // JS Dates object need standard define in stringToDate function
