@@ -66,14 +66,14 @@
             {
               "id": "lten_default_TD06",
               "type": "FeatureTrack",
-              "configuration": "Lten_pop06_TD_init_config",
+              "configuration": "Lten_pop06_TD",
               "minimized": false,
               "displays": [
                 {
                   "id": "lten_default_lten_default_TD06_display",
                   "type": "LinearManhattanDisplay",
                   "heightPreConfig": 150,
-                  "configuration": "Lten_pop06_TD_init_config_display"
+                  "configuration": "Lten_pop06_TD_display"
                 }
               ]
             }
@@ -91,7 +91,7 @@
     "tracks": [
       {
         "type": "FeatureTrack",
-        "trackId": "Lten_pop06_TD_init_config",
+        "trackId": "Lten_pop06_TD",
         "name": "Tajima's D, population 06",
         "assemblyNames": ["Linum_tenue_thrum_v1"],
         "category": ["Population genomics"],
@@ -109,7 +109,7 @@
         },
         "displays": [
           {
-            "displayId": "Lten_pop06_TD_init_config_display",
+            "displayId": "Lten_pop06_TD_display",
             "type": "LinearManhattanDisplay"
           }
         ]

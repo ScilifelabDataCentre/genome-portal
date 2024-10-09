@@ -14,6 +14,7 @@ tracks:
   - name: "Repeats"
     url: "https://figshare.scilifelab.se/ndownloader/files/48879751"
     fileName: "L_tenue_v1_rep.bed.gz"
-  - name: "Placeholder_Lten_pop06_TD"
+  - name: "Lten_pop06_TD"
     url: "https://figshare.scilifelab.se/ndownloader/files/49006876"
     fileName: "Lten_pop06_TD.bed.zip"
+    addTrack: false
