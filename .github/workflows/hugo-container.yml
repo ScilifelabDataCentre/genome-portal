@@ -2,8 +2,8 @@ name: Build and push Hugo site image to GitHub Container Registry
 on:
   push:
     branches:
-      - prod # aka prod/stable
-      - main # aka dev
+      - prod # Branch to be deployed in production, through builds tagged prod
+      - main # Branch to be deployed in development, through builds tagged dev
       
   # workflow_dispatch can be used on feature branch to test the site on dev instance
   workflow_dispatch:

@@ -2,12 +2,12 @@ name: Trivy - Security scan
 on:
   push:
     branches:
-      - main
-      - prod
+      - prod # Branch to be deployed in production, through builds tagged prod
+      - main # Branch to be deployed in development, through builds tagged dev 
   pull_request:
     branches:
-      - main
-      - prod
+      - prod # Branch to be deployed in production, through builds tagged prod
+      - main # Branch to be deployed in development, through builds tagged dev 
   schedule:
     - cron: '15 5 * * 3' # runs at 5:15 AM every Wednesday
     
