@@ -15,7 +15,7 @@ on:
 
 jobs:
   push-to-container-registry:
-    if: github.repository == 'ScilifelabDataCentre/swedgene'  
+    if: github.repository == 'ScilifelabDataCentre/genome-portal'  
     name: Build and push Hugo site Docker image to GitHub Container Registry
 
     runs-on: ubuntu-latest
