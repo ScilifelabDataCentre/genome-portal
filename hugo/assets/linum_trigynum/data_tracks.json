@@ -40,5 +40,229 @@
     "principalInvestigator": "Tanja Slotte",
     "principalInvestigatorAffiliation": "Stockholm University",
     "firstDateOnPortal": "15 October 2024"
+  },
+  {
+    "dataTrackName": "Tajima's D, population 01",
+    "description": "Whole genome Tajima's D estimates for individuals of population 01 of L. trigynum per 100 kb windows.",
+    "links": [
+      {"Download": "https://figshare.scilifelab.se/ndownloader/files/49006102"},
+      {"Website": "https://doi.org/10.17044/scilifelab.26937202.v1"},
+      {"Article": "https://doi.org/10.1016/j.cub.2022.08.042"}
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.26937202.v1",
+    "fileName": "Ltri_pop01_TD.bed.zip",
+    "principalInvestigator": "Tanja Slotte",
+    "principalInvestigatorAffiliation": "Stockholm University",
+    "firstDateOnPortal": "15 October 2024"
+  },
+  {
+    "dataTrackName": "Tajima's D, population 03",
+    "description": "Whole genome Tajima's D estimates for individuals of population 03 of L. trigynum per 100 kb windows.",
+    "links": [
+      {"Download": "https://figshare.scilifelab.se/ndownloader/files/49006105"},
+      {"Website": "https://doi.org/10.17044/scilifelab.26937202.v1"},
+      {"Article": "https://doi.org/10.1016/j.cub.2022.08.042"}
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.26937202.v1",
+    "fileName": "Ltri_pop03_TD.bed.zip",
+    "principalInvestigator": "Tanja Slotte",
+    "principalInvestigatorAffiliation": "Stockholm University",
+    "firstDateOnPortal": "15 October 2024"
+  },
+  {
+    "dataTrackName": "Tajima's D, population 04",
+    "description": "Whole genome Tajima's D estimates for individuals of population 04 of L. trigynum per 100 kb windows.",
+    "links": [
+      {"Download": "https://figshare.scilifelab.se/ndownloader/files/49006108"},
+      {"Website": "https://doi.org/10.17044/scilifelab.26937202.v1"},
+      {"Article": "https://doi.org/10.1016/j.cub.2022.08.042"}
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.26937202.v1",
+    "fileName": "Ltri_pop04_TD.bed.zip",
+    "principalInvestigator": "Tanja Slotte",
+    "principalInvestigatorAffiliation": "Stockholm University",
+    "firstDateOnPortal": "15 October 2024"
+  },
+  {
+    "dataTrackName": "Tajima's D, population 06",
+    "description": "Whole genome Tajima's D estimates for individuals of population 06 of L. trigynum per 100 kb windows.",
+    "links": [
+      {"Download": "https://figshare.scilifelab.se/ndownloader/files/49006111"},
+      {"Website": "https://doi.org/10.17044/scilifelab.26937202.v1"},
+      {"Article": "https://doi.org/10.1016/j.cub.2022.08.042"}
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.26937202.v1",
+    "fileName": "Ltri_pop06_TD.bed.zip",
+    "principalInvestigator": "Tanja Slotte",
+    "principalInvestigatorAffiliation": "Stockholm University",
+    "firstDateOnPortal": "15 October 2024"
+  },
+  {
+    "dataTrackName": "Tajima's D, population 07",
+    "description": "Whole genome Tajima's D estimates for individuals of population 07 of L. trigynum per 100 kb windows.",
+    "links": [
+      {"Download": "https://figshare.scilifelab.se/ndownloader/files/49006117"},
+      {"Website": "https://doi.org/10.17044/scilifelab.26937202.v1"},
+      {"Article": "https://doi.org/10.1016/j.cub.2022.08.042"}
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.26937202.v1",
+    "fileName": "Ltri_pop07_TD.bed.zip",
+    "principalInvestigator": "Tanja Slotte",
+    "principalInvestigatorAffiliation": "Stockholm University",
+    "firstDateOnPortal": "15 October 2024"
+  },
+  {
+    "dataTrackName": "Tajima's D, population 08",
+    "description": "Whole genome Tajima's D estimates for individuals of population 08 of L. trigynum per 100 kb windows.",
+    "links": [
+      {"Download": "https://figshare.scilifelab.se/ndownloader/files/49006120"},
+      {"Website": "https://doi.org/10.17044/scilifelab.26937202.v1"},
+      {"Article": "https://doi.org/10.1016/j.cub.2022.08.042"}
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.26937202.v1",
+    "fileName": "Ltri_pop08_TD.bed.zip",
+    "principalInvestigator": "Tanja Slotte",
+    "principalInvestigatorAffiliation": "Stockholm University",
+    "firstDateOnPortal": "15 October 2024"
+  },
+  {
+    "dataTrackName": "Tajima's D, population 10",
+    "description": "Whole genome Tajima's D estimates for individuals of population 10 of L. trigynum per 100 kb windows.",
+    "links": [
+      {"Download": "https://figshare.scilifelab.se/ndownloader/files/49006123"},
+      {"Website": "https://doi.org/10.17044/scilifelab.26937202.v1"},
+      {"Article": "https://doi.org/10.1016/j.cub.2022.08.042"}
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.26937202.v1",
+    "fileName": "Ltri_pop10_TD.bed.zip",
+    "principalInvestigator": "Tanja Slotte",
+    "principalInvestigatorAffiliation": "Stockholm University",
+    "firstDateOnPortal": "15 October 2024"
+  },
+  {
+    "dataTrackName": "Tajima's D, population 11",
+    "description": "Whole genome Tajima's D estimates for individuals of population 11 of L. trigynum per 100 kb windows.",
+    "links": [
+      {"Download": "https://figshare.scilifelab.se/ndownloader/files/49006126"},
+      {"Website": "https://doi.org/10.17044/scilifelab.26937202.v1"},
+      {"Article": "https://doi.org/10.1016/j.cub.2022.08.042"}
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.26937202.v1",
+    "fileName": "Ltri_pop11_TD.bed.zip",
+    "principalInvestigator": "Tanja Slotte",
+    "principalInvestigatorAffiliation": "Stockholm University",
+    "firstDateOnPortal": "15 October 2024"
+  },
+  {
+    "dataTrackName": "Nucleotide diversity (π), population 01",
+    "description": "Whole genome nucleotide diversity (π) estimates for individuals of population 01 of L. trigynum per 100 kb windows.",
+    "links": [
+      {"Download": "https://figshare.scilifelab.se/ndownloader/files/49005187"},
+      {"Website": "https://doi.org/10.17044/scilifelab.26936965.v1"},
+      {"Article": "https://doi.org/10.1016/j.cub.2022.08.042"}
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.26936965.v1",
+    "fileName": "Ltri_pop01_Pi.bed.zip",
+    "principalInvestigator": "Tanja Slotte",
+    "principalInvestigatorAffiliation": "Stockholm University",
+    "firstDateOnPortal": "15 October 2024"
+  },
+  {
+    "dataTrackName": "Nucleotide diversity (π), population 03",
+    "description": "Whole genome nucleotide diversity (π) estimates for individuals of population 03 of L. trigynum per 100 kb windows.",
+    "links": [
+      {"Download": "https://figshare.scilifelab.se/ndownloader/files/49005193"},
+      {"Website": "https://doi.org/10.17044/scilifelab.26936965.v1"},
+      {"Article": "https://doi.org/10.1016/j.cub.2022.08.042"}
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.26936965.v1",
+    "fileName": "Ltri_pop03_Pi.bed.zip",
+    "principalInvestigator": "Tanja Slotte",
+    "principalInvestigatorAffiliation": "Stockholm University",
+    "firstDateOnPortal": "15 October 2024"
+  },
+  {
+    "dataTrackName": "Nucleotide diversity (π), population 04",
+    "description": "Whole genome nucleotide diversity (π) estimates for individuals of population 04 of L. trigynum per 100 kb windows.",
+    "links": [
+      {"Download": "https://figshare.scilifelab.se/ndownloader/files/49005196"},
+      {"Website": "https://doi.org/10.17044/scilifelab.26936965.v1"},
+      {"Article": "https://doi.org/10.1016/j.cub.2022.08.042"}
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.26936965.v1",
+    "fileName": "Ltri_pop04_Pi.bed.zip",
+    "principalInvestigator": "Tanja Slotte",
+    "principalInvestigatorAffiliation": "Stockholm University",
+    "firstDateOnPortal": "15 October 2024"
+  },
+  {
+    "dataTrackName": "Nucleotide diversity (π), population 06",
+    "description": "Whole genome nucleotide diversity (π) estimates for individuals of population 06 of L. trigynum per 100 kb windows.",
+    "links": [
+      {"Download": "https://figshare.scilifelab.se/ndownloader/files/49005199"},
+      {"Website": "https://doi.org/10.17044/scilifelab.26936965.v1"},
+      {"Article": "https://doi.org/10.1016/j.cub.2022.08.042"}
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.26936965.v1",
+    "fileName": "Ltri_pop06_Pi.bed.zip",
+    "principalInvestigator": "Tanja Slotte",
+    "principalInvestigatorAffiliation": "Stockholm University",
+    "firstDateOnPortal": "15 October 2024"
+  },
+  {
+    "dataTrackName": "Nucleotide diversity (π), population 07",
+    "description": "Whole genome nucleotide diversity (π) estimates for individuals of population 07 of L. trigynum per 100 kb windows.",
+    "links": [
+      {"Download": "https://figshare.scilifelab.se/ndownloader/files/49005202"},
+      {"Website": "https://doi.org/10.17044/scilifelab.26936965.v1"},
+      {"Article": "https://doi.org/10.1016/j.cub.2022.08.042"}
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.26936965.v1",
+    "fileName": "Ltri_pop07_Pi.bed.zip",
+    "principalInvestigator": "Tanja Slotte",
+    "principalInvestigatorAffiliation": "Stockholm University",
+    "firstDateOnPortal": "15 October 2024"
+  },
+  {
+    "dataTrackName": "Nucleotide diversity (π), population 08",
+    "description": "Whole genome nucleotide diversity (π) estimates for individuals of population 08 of L. trigynum per 100 kb windows.",
+    "links": [
+      {"Download": "https://figshare.scilifelab.se/ndownloader/files/49005208"},
+      {"Website": "https://doi.org/10.17044/scilifelab.26936965.v1"},
+      {"Article": "https://doi.org/10.1016/j.cub.2022.08.042"}
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.26936965.v1",
+    "fileName": "Ltri_pop08_Pi.bed.zip",
+    "principalInvestigator": "Tanja Slotte",
+    "principalInvestigatorAffiliation": "Stockholm University",
+    "firstDateOnPortal": "15 October 2024"
+  },
+  {
+    "dataTrackName": "Nucleotide diversity (π), population 10",
+    "description": "Whole genome nucleotide diversity (π) estimates for individuals of population 10 of L. trigynum per 100 kb windows.",
+    "links": [
+      {"Download": "https://figshare.scilifelab.se/ndownloader/files/49005211"},
+      {"Website": "https://doi.org/10.17044/scilifelab.26936965.v1"},
+      {"Article": "https://doi.org/10.1016/j.cub.2022.08.042"}
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.26936965.v1",
+    "fileName": "Ltri_pop10_Pi.bed.zip",
+    "principalInvestigator": "Tanja Slotte",
+    "principalInvestigatorAffiliation": "Stockholm University",
+    "firstDateOnPortal": "15 October 2024"
+  },
+  {
+    "dataTrackName": "Nucleotide diversity (π), population 11",
+    "description": "Whole genome nucleotide diversity (π) estimates for individuals of population 11 of L. trigynum per 100 kb windows.",
+    "links": [
+      {"Download": "https://figshare.scilifelab.se/ndownloader/files/49005214"},
+      {"Website": "https://doi.org/10.17044/scilifelab.26936965.v1"},
+      {"Article": "https://doi.org/10.1016/j.cub.2022.08.042"}
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.26936965.v1",
+    "fileName": "Ltri_pop11_Pi.bed.zip",
+    "principalInvestigator": "Tanja Slotte",
+    "principalInvestigatorAffiliation": "Stockholm University",
+    "firstDateOnPortal": "15 October 2024"
   }
 ]
