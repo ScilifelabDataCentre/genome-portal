@@ -6,7 +6,7 @@
 
 <a id="org88ad8e6"></a>
 
-Swedgene
+genome-portal - The repository for the Swedish Reference Genome Portal
 ========
 
 # Data organization
@@ -69,7 +69,7 @@ To build JBrowse assests for a particular species:
 This repository comes with 2 Dockerfiles:
 
 ### 1. `docker/hugo.dockerfile` : Builds a docker image containing the hugo website ready to be run. 
-You can obtain the latest version of this image from the [packages section of this repository](https://github.com/orgs/ScilifelabDataCentre/packages?repo_name=swedgene). 
+You can obtain the latest version of this image from the [packages section of this repository](https://github.com/orgs/ScilifelabDataCentre/packages?repo_name=genome-portal). 
 
 To build an run the Hugo site yourself/locally you can do the following from the root directory of the repository. 
 
@@ -91,7 +91,7 @@ The site will be then visible to you at the address: http://localhost:8080/ on y
 
 ### 2. `docker/data.dockerfile` : Builds a Docker image that can be used to download and process the data assets needed for the JBrowse section of the website. 
 
-As above, you can obtain the latest version of this image from the [packages section of this repository](https://github.com/orgs/ScilifelabDataCentre/packages?repo_name=swedgene). 
+As above, you can obtain the latest version of this image from the [packages section of this repository](https://github.com/orgs/ScilifelabDataCentre/packages?repo_name=genome-portal). 
 
 Then to use the image to build all the data files you can use the provided script: 
 

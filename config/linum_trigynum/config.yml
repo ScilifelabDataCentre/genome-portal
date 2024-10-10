@@ -8,7 +8,7 @@ assembly:
   #url: "https://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/cax/CAXIPQ01.fasta.gz"
   url: "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/964/030/455/GCA_964030455.1_Ltrigynum_genome/GCA_964030455.1_Ltrigynum_genome_genomic.fna.gz"
   # Temp storage for alias file. At a later stage it would be more FAIR to store it in a another repo (such as SLL Figshare) where it can get a PID.
-  aliases: "https://raw.githubusercontent.com/ScilifelabDataCentre/swedgene/main/scripts/data_stewardship/alias_files_temp_storage/GCA_964030455.1_Ltrigynum_genome_genomic.fna.alias"
+  aliases: "https://raw.githubusercontent.com/ScilifelabDataCentre/genome-portal/main/scripts/data_stewardship/alias_files_temp_storage/GCA_964030455.1_Ltrigynum_genome_genomic.fna.alias"
 tracks:
   - name: "Protein coding genes"
     url: "https://figshare.scilifelab.se/ndownloader/files/48853129"

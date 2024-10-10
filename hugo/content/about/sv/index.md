@@ -23,4 +23,4 @@ Alla är välkomna att använda denna webbplats, men för att kunna skicka in et
 
 Denna webbsida är byggd med hjälp av [Hugo](https://gohugo.io/) som är ett verktyg för att skapa statiska webbsidor. Genombrowsern [JBrowse2](https://jbrowse.org/jb2/)  används för att visualisera genomik-datan och är inbäddad i den statiska webbsidan. All data i genomportalen är öppet tillgänglig via offentliga repositorier. Portalen hämtar en kopia av all data för att visa upp i genombrowsern.
 
-Genomportalen använder sig av öppen källkod under en *MIT open source*-licens. Källkoden  finns att tillgå på [GitHub](https://github.com/ScilifelabDataCentre/swedgene/). Portalen är driftsatt på ett [Kubernetes](https://kubernetes.io/)-kluster som finns vid  [Kungliga Tekniska Högskolan (KTH)](https://www.kth.se/) i Stockholm.
+Genomportalen använder sig av öppen källkod under en *MIT open source*-licens. Källkoden  finns att tillgå på [GitHub](https://github.com/ScilifelabDataCentre/genome-portal/). Portalen är driftsatt på ett [Kubernetes](https://kubernetes.io/)-kluster som finns vid  [Kungliga Tekniska Högskolan (KTH)](https://www.kth.se/) i Stockholm.
