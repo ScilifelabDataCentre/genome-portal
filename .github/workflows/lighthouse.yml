@@ -2,15 +2,15 @@ name: Build hugo site and test site with Lighthouse CI
 on:
   push:
     branches:
-      - main
-      - develop
+      - prod # Branch to be deployed in production, through builds tagged prod
+      - main # Branch to be deployed in development, through builds tagged dev 
     paths:
       - 'hugo/**'
   
   pull_request:
     branches:
-      - main
-      - develop
+      - prod # Branch to be deployed in production, through builds tagged prod
+      - main # Branch to be deployed in development, through builds tagged dev 
     paths:
       - 'hugo/**'
 
