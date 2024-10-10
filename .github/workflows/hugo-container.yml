@@ -4,7 +4,9 @@ on:
     branches:
       - prod # Branch to be deployed in production, through builds tagged prod
       - main # Branch to be deployed in development, through builds tagged dev
-      
+    paths-ignore:
+      - 'README.md' # changes to only readme will not trigger rebuild
+  
   # workflow_dispatch can be used on feature branch to test the site on dev instance
   workflow_dispatch:
     inputs:
