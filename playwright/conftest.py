@@ -12,3 +12,9 @@ def base_url():
 def home_page(page: Page, base_url: str) -> Page:
     page.goto(base_url)
     return page
+
+
+@pytest.fixture
+def about_page(page: Page, base_url: str) -> Page:
+    page.goto(base_url + "/about/")
+    return page
