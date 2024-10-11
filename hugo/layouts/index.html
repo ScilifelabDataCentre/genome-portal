@@ -108,7 +108,7 @@
     function getElementText(root, selector) {
         const element = root.querySelector(selector);
         if (!element) {
-            console.debug(`Element not found for selector: ${selector}`);
+            console.warn(`Element not found for selector: ${selector} in root: ${root}`);
             return '';
         }
         return element.textContent;
