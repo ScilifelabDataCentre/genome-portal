@@ -74,12 +74,12 @@
             shortTable.style.display = 'none';
         }
 
-    // Initialize DataTables if not already initialized
-    if (!$.fn.DataTable.isDataTable('#downloadTableLong')) {
-            $('#downloadTableLong').DataTable();
+        // Initialize DataTables if not already initialized
+        if (!document.querySelector('#downloadTableLong').classList.contains('dataTable')) {
+            new DataTable('#downloadTableLong');
         }
-        if (!$.fn.DataTable.isDataTable('#downloadTableShort')) {
-            $('#downloadTableShort').DataTable();
+        if (!document.querySelector('#downloadTableShort').classList.contains('dataTable')) {
+            new DataTable('#downloadTableShort');
         }
     });
 
