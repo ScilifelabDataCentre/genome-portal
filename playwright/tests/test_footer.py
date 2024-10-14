@@ -1,5 +1,6 @@
 import re
-from datetime import datetime
+
+from utils import validate_date_format
 
 from playwright.sync_api import Page, expect
 
@@ -59,10 +60,6 @@ def test_site_last_updated(home_page: Page):
     last_updated_text = home_page.get_by_text(re.compile("Website last updated:"))
     expect(last_updated_text).to_be_visible()
 
-    date_shown = last_updated_text.inner_text().split(":")[1].strip()
-    print(f"{date_shown=}")
+    date = last_updated_text.inner_text().split(":")[1].strip()
     # Check that the date is in the correct format
-    try:
-        datetime.strptime(date_shown, "%d %B %Y")
-    except ValueError as exc:
-        raise AssertionError("Date format is incorrect") from exc
+    validate_date_format(date=date, date_format="%d %B %Y")
