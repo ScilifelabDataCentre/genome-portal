@@ -3,24 +3,29 @@ title: The Swedish Reference Genome Portal
 message: "If you use or reuse this software, please cite it using the following metadata."
 type: software
 authors:
-  - family-names: Author1_last_name
-    given-names: Author1_given_name
-    orcid: "https://orcid.org/0000-0000-0000-0000"
-  - family-names: Author2_last_name
-    given-names: Author2_given_name
-    orcid: "https://orcid.org/0000-0000-0000-0000"
-  - family-names: Author3_last_name
-    given-names: Author3_given_name
-    orcid: "https://orcid.org/0000-0000-0000-0000"
-  - family-names: Author4_last_name
-    given-names: Author4_given_name
-    orcid: "https://orcid.org/0000-0000-0000-0000"
-  - family-names: Author5_last_name
-    given-names: Author5_given_name
-    orcid: "https://orcid.org/0000-0000-0000-0000"
-  - family-names: Author6_last_name
-    given-names: Author7_given_name
-    orcid: "https://orcid.org/0000-0000-0000-0000"
+  - family-names: Lantz
+    given-names: Henrik
+  - family-names: Brink
+    given-names: Daniel P.
+    orcid: "https://orcid.org/0000-0003-4041-0250"
+  - family-names: Crean
+    given-names: Rory
+  - family-names: Ågren
+    given-names: Quentin
+  - family-names: Fuentes-Pardo
+    given-names: Angela P. 
+    orcid: "https://orcid.org/0000-0002-5734-9030"
+  - family-names: Kochari
+    given-names: Arnold
+    orcid: "https://orcid.org/0000-0003-1373-5121"
+  - family-names: Kutima
+    given-names: Hanna
+    orcid: "https://orcid.org/0000-0001-7724-2567"
+  - family-names: Rung
+    given-names: Johan
+    orcid: "https://orcid.org/0000-0001-5875-8429"
+  - family-names: Persson
+    given-names: Bengt
 repository-code: "https://github.com/ScilifelabDataCentre/genome-portal"
 url: "https://genomes.scilifelab.se"
 abstract: "The Swedish Reference Genome Portal is a platform facilitating access and discovery of genome data of non-model eukaryotic species studied in Sweden."
@@ -70,7 +75,7 @@ references:
     doi: 10.1186/s13059-023-02914-z
     issue: 1
     journal: Genome Biology
-    scope: "Cite this paper if you want to reference the JBrowse 2 genome browser, which is used in the Swedish Reference Genome Portal."
+    scope: "Please cite this paper for referencing JBrowse 2, the genome browser software utilized on the Swedish Reference Genome Portal."
     title: "JBrowse 2: a modular genome browser with views of synteny and structural variation"
     type: article
     volume: 24
