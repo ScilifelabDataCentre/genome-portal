@@ -4,12 +4,6 @@ from playwright.sync_api import Locator, Page, expect
 
 
 @pytest.fixture
-def glossary_page(page: Page, base_url: str) -> Page:
-    page.goto(f"{base_url}/glossary")
-    return page
-
-
-@pytest.fixture
 def search_input(glossary_page: Page) -> Locator:
     return glossary_page.get_by_label("Search:")
 
