@@ -24,7 +24,7 @@
           "minimized": false,
           "type": "LinearGenomeView",
           "offsetPx": 0,
-          "bpPerPx": 50,
+          "bpPerPx": 200,
           "displayedRegions": [
             {
               "refName": "ENA|CAMGYJ010000002|CAMGYJ010000002.1",

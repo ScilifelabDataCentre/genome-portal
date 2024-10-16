@@ -4,3 +4,8 @@ assembly:
   accession: XXX12345
   url: "http://fixtures/gwas_testing_ground/Lten_LG10_truncated.fasta.gz"
   displayName: "Lten_truncated"
+tracks:
+  - name: "GWAS randomized dummy data"
+    url: "http://fixtures/gwas_testing_ground/gwas_randomized_dummy_data.txt"
+    fileName: "gwas_randomized_dummy_data.bed"
+    addTrack: false
