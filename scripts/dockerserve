@@ -12,7 +12,7 @@
 
 : "${SWG_IMAGE:=ghcr.io/scilifelabdatacentre/swg-hugo-site}"
 : "${SWG_TAG:=main}"
-: "${SWG_NAME:=swedgene-site}"
+: "${SWG_NAME:=genome-portal}"
 : "${SWG_DATA_DIR:=data}"
 : "${SWG_PORT:=8080}"
 : "${SWG_HUGO_IMAGE:=hugomods/hugo}"
