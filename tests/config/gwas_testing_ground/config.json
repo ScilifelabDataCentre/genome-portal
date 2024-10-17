@@ -1,0 +1,35 @@
+{
+  "plugins": [
+    {
+      "name": "GWAS",
+      "url": "https://unpkg.com/jbrowse-plugin-gwas/dist/jbrowse-plugin-gwas.umd.production.min.js"
+    }
+  ],
+  "tracks": [
+      {
+        "type": "FeatureTrack",
+        "trackId": "gwas_track",
+        "name": "GWAS",
+        "category": ["Annotation"],
+        "assemblyNames": ["Lten_truncated"],
+        "adapter": {
+          "type": "BedTabixAdapter",
+          "scoreColumn": "TajimaD",
+          "bedGzLocation": {
+            "uri": "gwas_randomized_dummy_data.bed.bgz"
+          },
+          "index": {
+            "location": {
+              "uri": "gwas_randomized_dummy_data.bed.bgz.tbi"
+            }
+          }
+        },
+        "displays": [
+          {
+            "displayId": "gwas_display",
+            "type": "LinearManhattanDisplay"
+          }
+        ]
+      }
+    ]
+  }
