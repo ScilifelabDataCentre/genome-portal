@@ -11,7 +11,7 @@ def validate_date_format(date: str, date_format: str):
     Validate the format of a date on the website is as expected.
     Returns nothing if fine, will raise Error otherwise, causing test fail.
     """
-    ALLOWED_DATE_FORMATS = ["%d %B %Y"]
+    ALLOWED_DATE_FORMATS = ["%d %B %Y", "%d/%m/%Y"]
 
     if date_format not in ALLOWED_DATE_FORMATS:
         raise ValueError(f"Date format: {date_format} is not supported")
