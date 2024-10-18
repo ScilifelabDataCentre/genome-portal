@@ -166,13 +166,4 @@ scripts/dockerserve --dev
 ```
 
 The website will be then visible to you at the address: http://localhost:1313/ on your web browser.
-# Run the dockermake script to build the assets and install them
-locally.
-./scripts/dockermake.sh SPECIES=clupea_harengus
-```
-All data file will end up in a `.gitignore` directory named `data`,
-and a subset copied to `hugo/static/data`.
 
-**3. Run the Hugo site locally**
-
-```bash
