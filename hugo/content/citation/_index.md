@@ -71,13 +71,12 @@ the _Description_ page of each species. In general, many datasets in the Swedish
 we reccomend that you cite the original publication. For datasets that do not have an associated publication, please go to the _Download_ page for the species, click the *Show reduced table view*
 button and see if there is an accession number or a DOI that can be used to refer to the dataset.
 
-### 4. Citing the underlying code
+### 4. Citing the source code
 
 #### Citing the Genome Portal code
 
-The Genome Portal is operated by the <a target="_blank" href="https://scilifelab.se/data">SciLifeLab Data Centre</a> and partners. All of the source code used on the website is available on GitHub.
-The code used to produce the website is available in our <a target="_blank" href="https://github.com/ScilifelabDataCentre/genome-portal/">genome-portal repository</a>.
-All of the code that we have produced is available for reuse under an MIT licence. If you have reused the code or otherwise want to cite the code, please use the following:
+The Genome Portal is operated by the <a target="_blank" href="https://scilifelab.se/data">SciLifeLab Data Centre</a> and partners. All of the source code used to generate the website is available on [GitHub](https://github.com/ScilifelabDataCentre/genome-portal/).
+The code is published under the MIT license. If you have reused the code or otherwise want to cite the code, please use the following:
 
 **APA format:**\
 SciLifeLab Data Centre (year) genome-portal. version: [version number](Software). Zenodo. XXXXXXX<XXXXXXX>.
