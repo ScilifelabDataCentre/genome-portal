@@ -4,9 +4,9 @@ Swedish Reference Genome Portal
 The Swedish Reference Genome Portal (https://genomes.scilifelab.se/) :
 
 - Showcases genome research performed in Sweden on non-model eukaryotic species.
-- Encourages sharing genomic annotations, even the seldom-published kind.
-- Ensure all data shown on the Genome Portal is aligned with the FAIR principles and available in public repositories.
-- Make it easier to access, visualise, and interpret genome data by lowering the barriers to entry.
+- Lowers the barrier of entry to access, visualise, and interpret genome data. 
+- Encourages sharing of genomic annotations, even the seldom-published kind.
+- Strives to present FAIR data, available in public repositories.
 
 
 ## Table of Contents
