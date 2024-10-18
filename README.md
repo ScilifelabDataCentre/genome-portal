@@ -1,4 +1,4 @@
-genome-portal - The repository for the Swedish Reference Genome Portal
+Swedish Reference Genome Portal
 ========
 
 The Swedish Reference Genome Portal (https://genomes.scilifelab.se/) :
