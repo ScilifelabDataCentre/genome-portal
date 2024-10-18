@@ -6,15 +6,7 @@ In line with the principles of _FAIR_ and _Open Science_, we encourage the reuse
 On this page, you will find information about how to cite the portal when reusing and referencing the content. Please note that the information on the portal is
 updated continuously, therefore it is important to refer to specific versions (or to provide access dates) within citations.
 
-Below are instructions for how to cite different aspects of the Genome Portal. These include:
-
-- Citing the the Swedish Reference Genome Portal website
-
-- Citing a specific species entry in the Genome Portal
-
-- Citing the data in the Genome Portal
-
-- Citing the underlying code of the Genome Portal, including its dependency on JBrowse 2
+Below are instructions for how to cite different aspects of the Genome Portal:
 
 ### 1. Citing the Swedish Reference Genome Portal website
 
@@ -39,7 +31,7 @@ You will find the version number of the portal at XXXXXthe bottom of the footer 
 ### 2. Citing a specific species entry
 
 If you would like to refer to a specific species entry from the Genome Portal, you can do so by taking the Genome Portal citation (Section 1) and adding the species name and the
-DOI pointing to its associated metadata in SciLifeLab Data Repository:
+DOI pointing to its associated species record in the [SciLifeLab Data Repository](https://figshare.scilifelab.se/):
 
 **In-text citation (APA format)**:\
 The [_Species name_] entry in the Swedish Reference Genome Portal (SciLifeLab Data Centre; _version number_; RRID: XXXXXXXXX; [Species DOI]).
@@ -51,15 +43,12 @@ where `[species_name]` should be replaced with the binomal name of your species 
 
 #### Data availability statement for submitting researchers
 
-Researchers who have submitted their data to the Genome Portal may want to include the following text for the Data Availability statement in their research manuscript.
+Researchers who have submitted their data to the Genome Portal may want to include the following text for the Data Availability statement in their research manuscript(s).
 
 "Visualisations of the genome assemby and annotation tracks from this publication can be found in the Swedish Reference Genome Portal at <https://genomes.scilifelab.se/[species_name>].
 The accompanying metadata for this entry in the portal can be found at [DOI]."
 
 where `[species_name]` and `[DOI]` should be replaced as described above.
-
-The Genome Portal staff can help you reserve an entry on the portal and a DOI for the metadata already during the manuscript submission stage. When the manuscript is accepted for publication and the data has been
-made public, we will activate the entry on the Swedish Reference Genome Portal. If you have any questions about this, please contact us through the <a href="/contact">Contact page</a>.
 
 ### 3. Citing the data in the portal
 
