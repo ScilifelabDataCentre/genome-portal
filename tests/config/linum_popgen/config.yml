@@ -1,0 +1,20 @@
+organism: "Linum tenue"
+assembly:
+  name: Linum_tenue_thrum_v1
+  displayName: "Linum tenue genome assembly"
+  accession: GCA_946122785.1
+  # The following url points to the original ENA upload of the assembly. It will require an alias file to be able to load the protein coding genes track
+  url: "https://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/cam/CAMGYJ01.fasta.gz"
+  aliases: "https://raw.githubusercontent.com/ScilifelabDataCentre/swedgene/main/scripts/data_stewardship/alias_files_temp_storage/CAMGYJ01.fna.alias"
+tracks:
+  - name: "Protein coding genes"
+  # Note: this annotation file is compressed with zip, not gzip
+    url: "https://figshare.scilifelab.se/ndownloader/files/45076090"
+    fileName: "ltenue_v1_genes.gff.zip"
+  - name: "Repeats"
+    url: "https://figshare.scilifelab.se/ndownloader/files/48879751"
+    fileName: "L_tenue_v1_rep.bed.gz"
+  - name: "Lten_pop06_TD"
+    url: "https://figshare.scilifelab.se/ndownloader/files/49006876"
+    fileName: "Lten_pop06_TD.bed.zip"
+    addTrack: false
