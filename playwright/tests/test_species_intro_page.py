@@ -7,10 +7,23 @@ This way each test can be run on every species including those newly added.
 
 import re
 
+import pytest
 from utils import validate_date_format
 
 from playwright.sync_api import Page, expect
 from playwright.sync_api import TimeoutError as PlaywrightTimeoutError
+
+REQUIRED_HEADERS = ["Taxonomy", "External links", "Description", "Genome reference", "References", "Changelog"]
+
+
+@pytest.mark.parametrize("heading_text", REQUIRED_HEADERS)
+def test_required_headers_visible(all_intro_pages: list[Page], heading_text: str):
+    """
+    Test the required headers for the intro page are present.
+    """
+    for intro_page in all_intro_pages:
+        locator = intro_page.get_by_role("heading", name=heading_text)
+        expect(locator, f"The heading: {heading_text} is not visible on page: {intro_page.url}").to_be_visible()
 
 
 def test_for_changelog(all_intro_pages: list[Page]):
