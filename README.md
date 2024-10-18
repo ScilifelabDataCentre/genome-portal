@@ -39,9 +39,6 @@ The Genome Portal is currently hosted by the [KTH Royal
 Institute of Technology](https://www.kth.se/) in Stockholm.
 
 
-TODO - perhaps we can add a gif/screenshot of the website in action?
-
-
 ## Contact us
 
 We welcome all questions and suggestions (including feature requests or bug reports).
