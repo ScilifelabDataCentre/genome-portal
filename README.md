@@ -53,9 +53,9 @@ We welcome all questions and suggestions (including feature requests or bug repo
 
 ## Contributing
 
-Two types of contributions are espacially welcome:
+Two types of contributions are especially welcome:
 
-- **Data**: Consult our
+- **Datasets**: Consult our
  [requirements](https://genomes.scilifelab.se/contribute) for
 including a dataset to the portal, and contact us if you have any
 questions.
@@ -92,22 +92,21 @@ source code.
 
 - The `config/` directory contains information about data sources
   (tracks and assemblies) displayed in the genome browser.
-  - Each species gets its own subdirectory (for example `config/clupea_harengus`).
-  - Species directories include:
-	- `config.yml` : file specifying the assembly and tracks to be displayed in JBrowse.
-	- `config.json` : a starting point from which to generate a complete JBrowse2
+  - Each species subdirectory inclues:
+	- `config.yml` : specifies the assembly and tracks to be displayed in JBrowse2.
+	- `config.json` : starting point from which to generate a complete JBrowse2
       configuration, based on `config.yaml`. A common use is to define
-      a default browsing session.
+      default browsing sessions.
 
 - Different `make` recipes prepare the material described in `config/`
-  for use by JBrowse. The main operations are downloading data files,
+  for use by JBrowse2. The main operations are downloading data files,
   compressing using `bgzip` and indexing with `samtools`.
 
 - The website content resides in the `hugo` directory.
   - Most importantly, each species gets:
     1. A content subdirectory in `hugo/content/species/` (e.g. `hugo/content/species/clupea_harengus`)
 	2. A data directory in `hugo/data/` (taxonomic information and statistics)
-	3. An assets directory in `hugo/assets` (data recensions)
+	3. An assets directory in `hugo/assets` (data inventory)
 
 - The `scripts` folder contains executables to help:
     1. build and serve the website using Docker
