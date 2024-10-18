@@ -213,7 +213,7 @@ body {
 
 @media (max-width: 767px) {
   .scilife-navbar-logo {
-      height: 1.5rem;
+      height:  1.5rem;
   }
   .scilife-navbar {
     font-size: 1.2rem;
@@ -222,7 +222,7 @@ body {
 
 @media (min-width: 768px) and (max-width: 991px) {
   .scilife-navbar-logo {
-      height: 2rem;
+      height: 1.7rem;
   }
   .scilife-navbar {
     font-size: 1.3rem;
@@ -232,17 +232,25 @@ body {
 
 @media (min-width: 992px) and (max-width: 1199px) {
   .scilife-navbar-logo {
-      height: 1.5rem;
+      height:  1.8rem;
   }
   .scilife-navbar {
     font-size: 1.3rem;
   }
 }
 
-
-@media (min-width: 1200px) {
+@media (min-width: 1200px) and (max-width: 1399px)  {
   .scilife-navbar-logo {
       height: 2rem;
+  }
+  .scilife-navbar {
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 1400px) {
+  .scilife-navbar-logo {
+      height: 2.5rem;
   }
   .scilife-navbar {
     font-size: 1.5rem;
