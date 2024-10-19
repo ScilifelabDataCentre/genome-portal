@@ -11,5 +11,5 @@ representation:
   label: "Assembly Representation"
   value: ""
 accession:
-  label: "Assembly Accession"
-  value: ""
+  label: "Accession"
+  value: "GCA_XXX"

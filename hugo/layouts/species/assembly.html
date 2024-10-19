@@ -1,175 +1,150 @@
 {{ define "main" }}
 
-{{ partial "species_title.html" . }}
+    {{ partial "species_title.html" . }}
 
-{{ partial "species_nav.html" . }}
+    {{ partial "species_nav.html" . }}
 
-<!-- YAML file with assembly and annotation data per species -->
-{{ $stats_file := (split .Params.stats_data_path "/") }}
-{{ $stats_contents := index .Site.Data $stats_file }}
+    <div class="container mt-3">
+	{{ with .Resources.Get "assembly.yaml" }}
+	    {{ $metadata := transform.Unmarshal . }}
+	    <div class="row align-items-center">
+		<div class="col-md scilife-subsection">
+		    <h3>Description</h3>
+		    <ul style="font-size: 1.125rem;">
+			{{ range slice "name" "type" "level" "representation" "accession" }}
+			    {{ $entry := index $metadata . }}
+			    <li><strong>{{ $entry.label }}: </strong> {{ $entry.value }}</li>
+			{{ end }}
+		    </ul>
+		</div>
+		<div class="col-md scilife-subsection text-md-center">
+		    <div class="mb-3">
+			<a href="https://www.ebi.ac.uk/ena/browser/view/{{ $metadata.accession.value }}" target="_blank">
+			    <button class="btn btn-lg scilife-ncbi-ena-btn">
+				Open assembly record in the ENA
+				<img src="/img/icons/open_new_tab_white.svg" alt="Open in new tab Icon" class="scilife-icon-lg">
+			    </button>
+			</a>
+		    </div>
+		    <div>
+			<a href="https://www.ncbi.nlm.nih.gov/datasets/genome/{{ $metadata.accession.value }}" target="_blank">
+			    <button class="btn btn-lg scilife-ncbi-ena-btn">
+				Open assembly record in the NCBI
+				<img src="/img/icons/open_new_tab_white.svg" alt="Open in new tab Icon" class="scilife-icon-lg">
+			    </button>
+			</a>
+		    </div>
+		</div>
+	    </div>
+	{{ else }}
+	    No metadata was provided for this assembly.
+	{{ end }}
 
-<!-- Get links to ENA and NCBI for the species -->
-{{ $.Scratch.Add "accession" "" }}
-{{ range .Params.key_info }}
-    {{ if isset . "Accession" }}
-        {{ $.Scratch.Set "accession" .Accession }}
-    {{ end }}
-{{ end }}
-{{ $accession := $.Scratch.Get "accession" }}
+	<div class="row">
+	    <div class="col scilife-subsection">
+		{{ .Content }}
+	    </div>
+	</div>
 
-{{ $ena_link := print "https://www.ebi.ac.uk/ena/browser/view/" $accession }}
-{{ $ncbi_link := print "https://www.ncbi.nlm.nih.gov/datasets/genome/" $accession }}
+	<div class="row row-cols-1 row-cols-lg-2">
+	    {{ with .Resources.Get "stats.yaml" }}
+		{{ $stats := transform.Unmarshal . }}
 
+		<!-- assembly data table -->
+		<div class="col scilife-subsection">
+		    <h3>Assembly Statistics</h3>
+		    <div class="table-responsive">
+			<table id="assemblyTable" class="table table-hover table-bordered">
 
-<!-- break down content into 2 parts based on divider ... -->
-{{ $content := .Content }}
-{{ $contrib := .Resources.Get "contrib.md" }}
+			    <thead class="table-light">
+				<tr>
+				    <th scope="col">Statistic</th>
+				    <th scope="col">Value</th>
+				</tr>
+			    </thead>
 
+			    <tbody class="table-responsive">
+				{{ range $idx, $statistic := $stats.assembly }}
+				    {{ range $stat_name, $value := $statistic }}
+					<tr>
+					    <td> {{ $stat_name }} </td>
+					    <td> {{ $value }} </td>
+					</tr>
+				    {{ end }}
+				{{ end }}
+			    </tbody>
 
-<div class="container mt-3">
+			</table>
+		    </div>
+		</div>
 
-    <div class="row align-items-center">
-        <div class="col-md scilife-subsection">
-            <h3>Description</h3>
-            <ul style="font-size: 1.125rem;">
-	      {{ with .Resources.Get "assembly.yaml" }}
-	        {{ $metadata := transform.Unmarshal . }}
-	        {{ range slice "name" "type" "level" "representation" "accession" }}
-	          {{ $entry := index $metadata . }}
-	            <li><strong>{{ $entry.label }}: </strong> {{ $entry.value }}</li>
-	        {{ end }}
-	      {{ end }}
-            </ul>
-        </div>
-        <div class="col-md scilife-subsection text-md-center">
-            <div class="mb-3">
-                <a href="{{ $ena_link }}" target="_blank">
-                    <button class="btn btn-lg scilife-ncbi-ena-btn">
-                        Open assembly record in the ENA
-                        <img src="/img/icons/open_new_tab_white.svg" alt="Open in new tab Icon" class="scilife-icon-lg">
-                    </button>
-                </a>
-            </div>
-            <div>
-                <a href="{{ $ncbi_link }}" target="_blank">
-                    <button class="btn btn-lg scilife-ncbi-ena-btn">
-                        Open assembly record in the NCBI
-                        <img src="/img/icons/open_new_tab_white.svg" alt="Open in new tab Icon" class="scilife-icon-lg">
-                    </button>
-                </a>
-            </div>
-        </div>
+		<!-- annotation data table -->
+		<div class="col scilife-subsection">
+		    <h3> Annotation Statistics</h3>
+
+		    <div class="table-responsive">
+			<table id="annotationTable" class="table table-hover table-bordered">
+
+			    <thead class="table-light">
+				<tr>
+				    <th scope="col">Statistic</th>
+				    <th scope="col">Value</th>
+				</tr>
+			    </thead>
+
+			    <tbody class="table-responsive">
+				{{ range $idx, $statistic := $stats.annotation }}
+				    {{ range $stat_name, $value := $statistic }}
+					<tr>
+					    <td> {{ $stat_name }} </td>
+					    <td> {{ $value }} </td>
+					</tr>
+				    {{ end }}
+				{{ end }}
+			    </tbody>
+
+			</table>
+		    </div>
+		</div>
+	    {{ else }}
+		<p>No assembly and annotation statistics have been provided for this species</p>
+	    {{ end }}
+	</div>
 
     </div>
 
 
     <div class="row">
-        <div class="col scilife-subsection">
-            {{ $content | safeHTML }}
-        </div>
+	<div class="col scilife-subsection">
+            {{ with .Resources.Get "contrib.md" }}
+		{{ .Content }}
+	    {{ end }}
+	</div>
     </div>
 
-    <div class="row row-cols-1 row-cols-lg-2">
-
-        <!-- assembly data table -->
-        <div class="col scilife-subsection">
-            <h3>Assembly Statistics</h3>
-
-        {{ if .Params.stats_data_path }}
-            <div class="table-responsive">
-                <table id="assemblyTable" class="table table-hover table-bordered">
-
-                <thead class="table-light">
-                    <tr>
-                    <th scope="col">Statistic</th>
-                    <th scope="col">Value</th>
-                    </tr>
-                </thead>
-
-                <tbody class="table-responsive">
-                    {{ range $idx, $statistic := $stats_contents.assembly }}
-                        {{ range $stat_name, $value := $statistic }}
-                        <tr>
-                            <td> {{ $stat_name }} </td>
-                            <td> {{ $value }} </td>
-                        </tr>
-                        {{ end }}
-                    {{ end }}
-                </tbody>
-
-                </table>
-            </div>
-        {{ else }}
-            <p> No assembly data has been provided for this species </p>
-        {{ end }}
-        </div>
-
-        <!-- annotation data table -->
-        <div class="col scilife-subsection">
-            <h3> Annotation Statistics</h3>
-
-        {{ if .Params.stats_data_path }}
-            <div class="table-responsive">
-                <table id="annotationTable" class="table table-hover table-bordered">
-
-                <thead class="table-light">
-                    <tr>
-                    <th scope="col">Statistic</th>
-                    <th scope="col">Value</th>
-                    </tr>
-                </thead>
-
-                <tbody class="table-responsive">
-                    {{ range $idx, $statistic := $stats_contents.annotation }}
-                        {{ range $stat_name, $value := $statistic }}
-                        <tr>
-                            <td> {{ $stat_name }} </td>
-                            <td> {{ $value }} </td>
-                        </tr>
-                        {{ end }}
-                    {{ end }}
-                </tbody>
-
-                </table>
-            </div>
-        {{ else }}
-            <p> No annotation data has been provided for this species </p>
-        {{ end }}
-        </div>
-
-    </div>
-</div>
-
-
-<div class="row">
-    <div class="col scilife-subsection">
-        {{ $contrib | safeHTML }}
-    </div>
-</div>
-
-{{ partial "last_updated.html" . }}
+    {{ partial "last_updated.html" . }}
 
 
 {{ end }}
 
 {{ define "scripts" }}
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        new DataTable('#assemblyTable', {
-            info: false,
-            ordering: false,
-            paging: false,
-            searching: false
-        });
+    <script>
+     document.addEventListener('DOMContentLoaded', function() {
+         new DataTable('#assemblyTable', {
+             info: false,
+             ordering: false,
+             paging: false,
+             searching: false
+         });
 
-        new DataTable('#annotationTable', {
-            info: false,
-            ordering: false,
-            paging: false,
-            searching: false
-        });
-    });
-</script>
+         new DataTable('#annotationTable', {
+             info: false,
+             ordering: false,
+             paging: false,
+             searching: false
+         });
+     });
+    </script>
 
 {{ end }}
