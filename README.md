@@ -11,15 +11,14 @@ The Swedish Reference Genome Portal (https://genomes.scilifelab.se/) :
 
 ## Table of Contents
 
-1. [Overview](#implementation-overview)
+1. [Overview](#overview)
 2. [Contact us](#contact-us)
 3. [Contributing](#contributing)
 4. [Cite this portal](#cite-this-portal)
 5. [Funding](#funding)
-6. [Documentation](#development-information)
+6. [Technical overview](#technical-overview)
 	- [Repository Layout](#repository-layout)
-	- [Local development setup](#local-development-setup)
-	- [Up and running!](#org6eb5bf4)
+	- [Local development](#local-development)
 
 
 ## Overview
@@ -82,13 +81,12 @@ and also by the [Swedish Foundation for Strategic Research
 (SSF)](https://strategiska.se/en/).
 
 
-## Documentation
+## Technical overview
 
 This section contains high-level technical documentation about the
 source code.
 
 ### Repository layout
-
 
 - The `config/` directory contains information about data sources
   (tracks and assemblies) displayed in the genome browser.
@@ -120,16 +118,6 @@ source code.
 	1. `docker/data.dockerfile` used for data preparation (everything that ``make` needs)
 	2. `docker/hugo.dockerfile` used to build and serve the website.
 
-
-### Branches
-
-This repository contains two permenant branches:
-- `main`: deployable at any time, and merge target for feature branches.
-- `prod`: receives merges from `main` and version tags at release time.
-
-Work should be performed on feature branches forked from `main`, and
-merged back through pull requests.
-
 ### Local development
 
 The steps described below requires
@@ -148,8 +136,7 @@ cd genome-portal
 # Build local image from `docker/data.dockerfile`
 ./scripts/dockerbuild.sh data
 
-# Run the dockermake script to build the assets and install them
-locally.
+# Run the dockermake script to build the assets and install them locally.
 ./scripts/dockermake.sh
 ```
 You may need to be patient, some of them are tens of Gigabytes. Should
