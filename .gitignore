@@ -36,3 +36,6 @@ __pycache__/
 # make
 .downloads
 targets.mk
+
+# Emacs
+.dirs-local.el
