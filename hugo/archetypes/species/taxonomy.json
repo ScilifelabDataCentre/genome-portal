@@ -1,0 +1,58 @@
+{
+    "Species": {
+        "science_name": "Clupea harengus",
+        "tax_id": "7950",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:7950",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=7950",
+        "display_order": 1
+    },
+    "Genus": {
+        "science_name": "Clupea",
+        "tax_id": "7949",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:7949",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=7949",
+        "display_order": 2
+    },
+    "Family": {
+        "science_name": "Clupeidae",
+        "tax_id": "55118",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:55118",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=55118",
+        "display_order": 3
+    },
+    "Order": {
+        "science_name": "Clupeiformes",
+        "tax_id": "32446",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:32446",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=32446",
+        "display_order": 4
+    },
+    "Class": {
+        "science_name": "Actinopteri",
+        "tax_id": "186623",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:186623",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=186623",
+        "display_order": 5
+    },
+    "Phylum": {
+        "science_name": "Chordata",
+        "tax_id": "7711",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:7711",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=7711",
+        "display_order": 6
+    },
+    "Kingdom": {
+        "science_name": "Metazoa",
+        "tax_id": "33208",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:33208",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=33208",
+        "display_order": 7
+    },
+    "Superkingdom": {
+        "science_name": "Eukaryota",
+        "tax_id": "2759",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:2759",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=2759",
+        "display_order": 8
+    }
+}

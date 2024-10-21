@@ -1,12 +1,10 @@
 ---
 # Required params below
-title: "*Foo barus*"
-subtitle: "Pacifc  herring"
+title: "*Clupea harengus*"
+subtitle: "Atlantic herring"
 
 last_updated: "15/05/2024"
 
-# TODO Place image in bundle and use metadata for uniform naming
-# TODO Extract non-standard fields under params key
 cover_image: "/img/species/clupea_harengus.webp"
 img_attrib_text: "Clupea harengus by Gervais et Boulart, public domain"
 img_attrib_link: "https://en.wikipedia.org/wiki/File:Clupea_harengus_Gervais.jpg"
@@ -16,6 +14,7 @@ img_attrib_link: "https://en.wikipedia.org/wiki/File:Clupea_harengus_Gervais.jpg
 # unless you were warned by the add-new-species.py script.
 layout: "species_intro"
 banner_title: "Species overview"
+url: "clupea_harengus"
 weight: 1
 science_name: "Clupea harengus"
 lineage_data_path: "clupea_harengus/taxonomy"
