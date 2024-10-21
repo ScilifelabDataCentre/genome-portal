@@ -1,3 +1,19 @@
+{{ define "early-connections" }}
+
+<link rel="preconnect" href="https://www.google.com">
+<link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+
+{{ end }}
+
+
+{{ define "script_includes" }}
+
+<!-- Load the Google reCAPTCHA API asynchronously and defer its execution until the page has finished parsing -->
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
+
+{{ end }}
+
+
 {{ define "main" }}
 
 <div class="container mt-3">
@@ -7,5 +23,14 @@
         </div>
     </div>
 </div>
+
+
+<script type="text/javascript">
+    var onloadCallback = function () {
+        grecaptcha.render(id = "recaptcha-widget", {
+            'sitekey': '6LfLRQMqAAAAACSectjtigWkNvif1G2J8EFlj1nV'
+        });
+    };
+</script>
 
 {{ end }}
