@@ -1,7 +1,8 @@
 """
-Some checks for the contact page, focussed on the contact form.
+Tests for the contact page, mostly focussed on the contact form.
 
-Currently do not test a successful form submission, as this would require a valid recaptcha token.
+Currently does not test for a successful form submission, as this would require a valid recaptcha token.
+Instead checks that error messages are displayed when the form is submitted without all required fields filled in or without recaptcha.
 """
 
 import re
@@ -29,12 +30,12 @@ def form_alert(contact_page: Page) -> Locator:
     return contact_page.get_by_text("Please fill out all the")
 
 
-def test_has_title(contact_page: Page):
+def test_has_title(contact_page: Page) -> None:
     """Test that the contact page has the correct title."""
     expect(contact_page).to_have_title(re.compile("Contact"))
 
 
-def test_error_messages_hidden(contact_page: Page, form_alert: Locator, recaptcha_alert: Locator):
+def test_error_messages_hidden(contact_page: Page, form_alert: Locator, recaptcha_alert: Locator) -> None:
     """
     Test that the error messages are hidden by default.
     """
@@ -42,7 +43,7 @@ def test_error_messages_hidden(contact_page: Page, form_alert: Locator, recaptch
     expect(recaptcha_alert).to_be_hidden()
 
 
-def test_no_recapatcha(contact_page: Page, form_alert: Locator, recaptcha_alert: Locator):
+def test_no_recapatcha(contact_page: Page, form_alert: Locator, recaptcha_alert: Locator) -> None:
     """
     Validate that filling in whole form but not doing recaptcha raises the recaptcha alert message.
     """
@@ -58,7 +59,7 @@ def test_no_recapatcha(contact_page: Page, form_alert: Locator, recaptcha_alert:
     expect(form_alert).to_be_hidden()
 
 
-def test_not_fill_in_description(contact_page: Page, form_alert: Locator, recaptcha_alert: Locator):
+def test_not_fill_in_description(contact_page: Page, form_alert: Locator, recaptcha_alert: Locator) -> None:
     """
     Validate that not filling in the description and recaptcha raises both alert messages.
     """
@@ -73,7 +74,7 @@ def test_not_fill_in_description(contact_page: Page, form_alert: Locator, recapt
     expect(form_alert).to_be_visible()
 
 
-def test_bad_format_email_raises_warning(contact_page: Page, form_alert: Locator, recaptcha_alert: Locator):
+def test_bad_format_email_raises_warning(contact_page: Page, form_alert: Locator, recaptcha_alert: Locator) -> None:
     """
     Validate that filling in a bad email format raises an alert message.
     """
@@ -92,3 +93,10 @@ def test_bad_format_email_raises_warning(contact_page: Page, form_alert: Locator
     contact_page.locator("#emailInput").fill("realemail@gmail.com")
     contact_page.get_by_label("Submit the form").click()
     expect(form_alert).to_be_hidden()
+
+
+def test_recaptcha_present(contact_page: Page) -> None:
+    """
+    Validate that the recaptcha widget is present on the page.
+    """
+    expect(contact_page.get_by_label("reCAPTCHA verification widget")).to_be_visible()

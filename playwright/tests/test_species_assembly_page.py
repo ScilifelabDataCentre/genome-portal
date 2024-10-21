@@ -5,18 +5,15 @@ The conftest.py has a fixture (all_assembly_pages) that returns a list of all th
 This way each test can be run on every species including those newly added.
 """
 
-import pytest  # noqa
+import pytest
 
-from utils import validate_date_format  # noqa
-
-from playwright.sync_api import Page, expect, Locator  # noqa
-from playwright.sync_api import TimeoutError as PlaywrightTimeoutError  # noqa
+from playwright.sync_api import Page, expect
 
 REQUIRED_HEADERS = ["Description", "Annotation Statistics", "Assembly Statistics"]
 
 
 @pytest.mark.parametrize("heading_text", REQUIRED_HEADERS)
-def test_required_headers_visible(all_assembly_pages: list[Page], heading_text: str):
+def test_required_headers_visible(all_assembly_pages: list[Page], heading_text: str) -> None:
     """
     Test the required headers for the assembly page are present.
     """

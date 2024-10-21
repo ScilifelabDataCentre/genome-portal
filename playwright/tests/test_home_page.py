@@ -1,5 +1,5 @@
 """
-Tests for the home page and navbar.
+Tests for the home page and the navbar.
 """
 
 import re
@@ -23,26 +23,26 @@ def get_species_cards(page: Page) -> Locator:
 
 
 def get_species_card_order(page: Page) -> list[str]:
-    """Helper function to return the order of the species cards."""
+    """Helper function to return the the species cards titles (science names) in order."""
     species_cards = get_species_cards(page)
     return species_cards.locator("#science-name").all_inner_texts()
 
 
-def test_has_title(home_page: Page):
+def test_has_title(home_page: Page) -> None:
     """Test that the home page has the correct title."""
     expect(home_page).to_have_title(re.compile("Swedish Reference Genome Portal"))
 
 
-def test_navbar_links(home_page: Page):
+def test_navbar_links(home_page: Page) -> None:
     """Test navbar links redirect to the correct page."""
-    links = {"Home": "Home", "About": "About", "Glossary": "Glossary", "Contact": "Contact"}
+    NAVBAR_LINKS = {"Home": "Home", "About": "About", "Glossary": "Glossary", "Contact": "Contact"}
 
-    for name, title in links.items():
+    for name, title in NAVBAR_LINKS.items():
         home_page.locator("#navbarSupportedContent").get_by_role("link", name=name).click()
         expect(home_page).to_have_title(re.compile(title))
 
 
-def test_no_results_alert_responsive(home_page: Page):
+def test_no_results_alert_responsive(home_page: Page) -> None:
     """
     Test updating text in search bar shows/hides the no results alert.
     """
@@ -62,7 +62,7 @@ def test_no_results_alert_responsive(home_page: Page):
     expect(no_results_alert).not_to_be_visible()
 
 
-def test_search_cards_responsive(home_page: Page):
+def test_search_cards_responsive(home_page: Page) -> None:
     """
     Test the species cards are responsive to the search.
     As in the appear and disappear based on the search term used.
@@ -85,7 +85,7 @@ def test_search_cards_responsive(home_page: Page):
     assert species_cards.count() == total_numb_cards
 
 
-def test_search_dropdown_ordering(home_page: Page):
+def test_search_dropdown_ordering(home_page: Page) -> None:
     """
     Test clicking the different search ordering dropdown options alters the card ordering.
     Default ordering is last updated.
@@ -112,11 +112,11 @@ def test_search_dropdown_ordering(home_page: Page):
     assert new_cards_order == initial_cards_order
 
 
-def test_search_and_dropdown_work_together(home_page: Page):
+def test_search_and_dropdown_work_together(home_page: Page) -> None:
     """
-    Test after searching for something, changing the ordering via the dropdown still works.
+    Test after searching for something, changing the ordering of the search via the dropdown still works.
 
-    Uses above test as identical to above but with the search bar filled.
+    Uses the "test_search_dropdown_ordering" function as identical to above but now with the search bar filled.
     """
     search_bar = get_search_bar(home_page)
 

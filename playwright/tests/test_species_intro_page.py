@@ -17,7 +17,7 @@ REQUIRED_HEADERS = ["Taxonomy", "External links", "Description", "Genome referen
 
 
 @pytest.mark.parametrize("heading_text", REQUIRED_HEADERS)
-def test_required_headers_visible(all_intro_pages: list[Page], heading_text: str):
+def test_required_headers_visible(all_intro_pages: list[Page], heading_text: str) -> None:
     """
     Test the required headers for the intro page are present.
     """
@@ -26,7 +26,7 @@ def test_required_headers_visible(all_intro_pages: list[Page], heading_text: str
         expect(locator, f"The heading: {heading_text} is not visible on page: {intro_page.url}").to_be_visible()
 
 
-def test_for_changelog(all_intro_pages: list[Page]):
+def test_for_changelog(all_intro_pages: list[Page]) -> None:
     """
     Check if all species pages have a changelog.
     """
@@ -35,7 +35,7 @@ def test_for_changelog(all_intro_pages: list[Page]):
         expect(changelog, f"Changelog not found on page: {intro_page.url}").to_be_visible(timeout=1_000)
 
 
-def test_banner_title_correct(all_intro_pages: list[Page]):
+def test_banner_title_correct(all_intro_pages: list[Page]) -> None:
     """
     Check all species pages have the correct banner title.
     """
@@ -44,7 +44,7 @@ def test_banner_title_correct(all_intro_pages: list[Page]):
         expect(banner_title, f"Species banner not found/correct on page: {intro_page.url}").to_be_visible(timeout=1_000)
 
 
-def test_browse_genome_button(all_intro_pages: list[Page]):
+def test_browse_genome_button(all_intro_pages: list[Page]) -> None:
     """
     Test clicking the browse the genome button resolves to the genome browser page.
     """
@@ -56,7 +56,7 @@ def test_browse_genome_button(all_intro_pages: list[Page]):
         expect(heading, f"Navigation to genome browser for page {intro_page.url} went wrong").to_be_visible()
 
 
-def test_has_last_updated(all_intro_pages: list[Page]):
+def test_has_last_updated(all_intro_pages: list[Page]) -> None:
     """Test that all intro page have a last updated text and that it is correctly formatted."""
     for intro_page in all_intro_pages:
         # Check if the last updated date is visible on the page.
@@ -75,7 +75,7 @@ def test_has_last_updated(all_intro_pages: list[Page]):
         assert valid_date, f"Date format incorrect on page: {intro_page.url}"
 
 
-def test_sbdi_gbif_links(all_intro_pages: list[Page]):
+def test_sbdi_gbif_links(all_intro_pages: list[Page]) -> None:
     """
     Test the SBDI and GBIF links found in the external links are correct.
     These have a placeholder in the template, so this test should catch if they haven't been filled in.
@@ -92,7 +92,7 @@ def test_sbdi_gbif_links(all_intro_pages: list[Page]):
         )
 
 
-def test_vulnerability_links(all_intro_pages: list[Page]):
+def test_vulnerability_links(all_intro_pages: list[Page]) -> None:
     """
     Vulnerability links are optional, so these should have been deleted from a species page if not present.
 

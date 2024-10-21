@@ -1,3 +1,7 @@
+"""
+Tests focussed on validating the search functionality on the glossary page.
+"""
+
 import pytest
 
 from playwright.sync_api import Locator, Page, expect

@@ -1,7 +1,7 @@
 """
 Essentially holds the fixtures for each page on the website.
 
-Note that of use of context.new_page() is required when you combine multiple page objects in a single test.
+Note that the use of context.new_page() is required when you combine multiple page objects in a single test.
 For example when generating the all_pages() fixture, we need to create a new page object for each page.
 Otherwise it would return a list of the same page object (i.e., the last page included) over and over again.
 With context.new_page(), we get a list of all the unique pages that we want to test.
@@ -14,7 +14,7 @@ from tests.utils import get_list_of_species
 
 
 @pytest.fixture(scope="session")
-def base_url():
+def base_url() -> str:
     return "http://localhost:1313"
 
 

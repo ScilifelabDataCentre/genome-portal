@@ -6,7 +6,7 @@ from datetime import datetime
 from pathlib import Path
 
 
-def validate_date_format(date: str, date_format: str):
+def validate_date_format(date: str, date_format: str) -> None:
     """
     Validate the format of a date on the website is as expected.
     Returns nothing if fine, will raise Error otherwise, causing test fail.
