@@ -63,7 +63,7 @@
     "adapter": {
       "type": "BedAdapter",
       "bedLocation": {
-        "uri": "https://raw.githubusercontent.com/ScilifelabDataCentre/swedgene/main/tests/fixtures/mito_krill/krill_mitochondrial_annotation_truncated.bed",
+        "uri": "https://raw.githubusercontent.com/ScilifelabDataCentre/genome-portal/main/tests/fixtures/mito_krill/krill_mitochondrial_annotation_truncated.bed",
         "locationType": "UriLocation"
       }
     },

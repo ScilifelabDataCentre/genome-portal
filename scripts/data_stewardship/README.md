@@ -1,6 +1,6 @@
 # Data Stewardship scripts
 
-This subdirectory stores scripts and workflows for the process of adding new datasets to the Genome Portal. The scripts are not intended for the deployment of the portal itself. Therefore, many of the scripts will rely heavily on external dependencies in the form of established bioinformatics tools.
+This subdirectory stores scripts and workflows for the process of adding new datasets to the Swedish Reference Genome Portal (henceforth referred to as the Genome Portal). The scripts are not intended for the deployment of the portal itself. Therefore, many of the scripts will rely heavily on external dependencies in the form of established bioinformatics tools.
 
 Each script has its own documentation, and the easiest way to access that is to open the file in an editor. It contains a description of the purpose of the scrip, information on how to use it, and a list of the dependencies.
 
