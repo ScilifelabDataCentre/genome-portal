@@ -13,11 +13,6 @@ from playwright.sync_api import BrowserContext, Page
 from tests.utils import get_list_of_species
 
 
-@pytest.fixture(scope="session")
-def base_url() -> str:
-    return "http://localhost:1313"
-
-
 def generate_single_page(context: BrowserContext, url: str) -> Page:
     """
     Generate a single page object.
