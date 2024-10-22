@@ -1,16 +1,17 @@
 {{ define "main" }}
 
 <!-- markdown file content here -->
-<div class="row scilife-subsection">
-    {{ .Content }}
+<div class="row scilife-subsection mt-2">
+    <h2>Explore species</h2>
+    <p> Scroll down to see the available species or use the search box below to filter which species to show.</p>
 </div>
 
-<!-- sort species and search box -->
-<div class="row mb-4 justify-content-center">
-    <div class="col-12 col-md-4 col-lg-3 col-xl-2 mb-2">
-        <div class="dropdown">
-            <button class="btn btn-lg scilife-sort-dropdown dropdown-toggle"
-                type="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+<div class="row g-3 align-items-center mb-3">
+    <div class="col-12 col-lg-12 mb-2 d-md-flex align-items-center">
+        <div class="dropdown mb-2 mb-md-0">
+            <button class="btn btn-lg dropdown-toggle scilife-sort-dropdown" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
                 <i class="bi bi-clock"></i> Last updated
             </button>
             <ul class="dropdown-menu">
@@ -31,20 +32,18 @@
                 </li>
             </ul>
         </div>
-    </div>
-
-    <div class="col-12 col-md-8 col-lg-9 col-xl-10">
-        <!-- Note: text color seemed to only work if set here, it's scilifelab grape -->
-        <div class="input-group">
-            <input type="text" id="Search" class="form-control scilife-search-box"
-                placeholder="Start typing to filter the species below..."
-                style="color:#491F53;" aria-label="Search">
-            <span class="input-group-text scilife-search-icon" title="Start typing to search">
-                <img src="/img/icons/search_grape.svg" alt="Search Icon" class="scilife-icon-lg">
-            </span>
+        <div class="flex-grow-1">
+            <div class="input-group">
+                <input type="text" id="Search" class="form-control scilife-search-box"
+                    placeholder="Start typing to filter the species below..." aria-label="Search">
+                <span class="input-group-text scilife-search-icon" title="Start typing to search">
+                    <img src="/img/icons/search_grey.svg" alt="Search Icon" class="scilife-icon-lg">
+                </span>
+            </div>
         </div>
     </div>
 </div>
+
 
 
 <!-- Species cards -->
@@ -61,13 +60,13 @@
                     </a>
 
                     {{ if .Params.img_attrib_link }}
-                        <a href="{{ .Params.img_attrib_link }}" title="Go to the image source" target="_blank">
-                            <figcaption class="scilife-card-image-attrib"> {{ .Params.img_attrib_text }} </figcaption>
-                        </a>
+                    <a href="{{ .Params.img_attrib_link }}" title="Go to the image source" target="_blank">
+                        <figcaption class="scilife-card-image-attrib"> {{ .Params.img_attrib_text }} </figcaption>
+                    </a>
                     {{ else }}
-                        <p class="scilife-card-image-attrib">
-                            {{ .Params.img_attrib_text }}
-                        </p>
+                    <p class="scilife-card-image-attrib">
+                        {{ .Params.img_attrib_text }}
+                    </p>
                     {{ end }}
 
                 </figure>
@@ -76,7 +75,6 @@
             <div class="card-body">
                 <h2 class="card-title" id="science-name">{{ .Title | markdownify }}</h2>
                 <h3 class="card-title" id="common-name">{{ .Params.subtitle | markdownify }}</h3>
-                <p class="card-text scilife-species-card-text">{{ .Summary }}</p>
             </div>
 
             <div class="d-flex justify-content-between align-items-center">
@@ -85,7 +83,7 @@
                 <div class="hidden-date" style="display: none;">{{ .Params.last_updated }}</div>
 
                 <a href="{{ .RelPermalink }}" class="btn btn-primary scilife-species-button"
-                    title="Click here to view the {{ .Title | markdownify }}">
+                    title="Go to the {{ .Title | markdownify }} page">
                     <i class="bi bi-arrow-right" style="font-size: 1.25em;"></i>
                 </a>
             </div>
@@ -97,7 +95,7 @@
 </div>
 
 <!-- shows if no search results -->
-<div id="no-filtered-card" class="alert alert-primary" style="display: none;" role="alert">
+<div id="no-filtered-card" class="alert alert-primary mt-3" style="display: none;" role="alert">
     No results found with your search term
 </div>
 
@@ -106,17 +104,23 @@
 <script>
     const speciesCards = Array.from(document.querySelectorAll('.scilife-species-card'));
 
+    // helper function to handle missing elements by returning empty string
+    function getElementText(root, selector) {
+        const element = root.querySelector(selector);
+        if (!element) {
+            console.warn(`Element not found for selector: ${selector} in root: ${root}`);
+            return '';
+        }
+        return element.textContent;
+    }
+
     function sortAlphabetically(a, b) {
-        const titleA = $(a).find('#science-name').text();
-        const titleB = $(b).find('#science-name').text();
+        const titleA = getElementText(a, '#science-name');
+        const titleB = getElementText(b, '#science-name');
         return titleA.localeCompare(titleB);
     }
 
-    function sortRevAlphabetically(a, b) {
-        const titleA = $(a).find('#science-name').text();
-        const titleB = $(b).find('#science-name').text();
-        return titleB.localeCompare(titleA);
-    }
+    const sortRevAlphabetically = (a, b) => -sortAlphabetically(a, b);
 
     // All dates have DD/MM/YYYY format but
     // JS Dates object need standard define in stringToDate function
@@ -126,8 +130,8 @@
     }
 
     function sortUpdated(a, b) {
-        const dateStrA = $(a).find('.hidden-date').text();
-        const dateStrB = $(b).find('.hidden-date').text();
+        const dateStrA = getElementText(a, '.hidden-date');
+        const dateStrB = getElementText(b, '.hidden-date');
 
         const dateA = stringToDate(dateStrA);
         const dateB = stringToDate(dateStrB);
@@ -147,9 +151,9 @@
             cardsToAppend = speciesCards.slice();
         } else {
             cardsToAppend = speciesCards.filter(function (card) {
-                const title = card.querySelector('#science-name').textContent.toLowerCase();
-                const subtitle = card.querySelector('#common-name').textContent.toLowerCase();
-                const cardText = card.querySelector('.card-text').textContent.toLowerCase();
+                const title = getElementText(card, '#science-name').toLowerCase();
+                const subtitle = getElementText(card, '#common-name').toLowerCase();
+                const cardText = getElementText(card, '.card-text').toLowerCase();
                 return title.includes(searchText) || subtitle.includes(searchText) || cardText.includes(searchText);
             });
         }
@@ -160,7 +164,7 @@
             document.querySelector("#no-filtered-card").style.display = 'none';
 
             if (RevAlphabetSet) {
-            cardsToAppend.sort(sortRevAlphabetically);
+                cardsToAppend.sort(sortRevAlphabetically);
             }
             else if (UpdatedSet) {
                 cardsToAppend.sort(sortUpdated);
@@ -178,7 +182,7 @@
     // Event listeners for sorting buttons and then search box
     const sortingButtons = ["Alphabet", "RevAlphabet", "Updated"];
     sortingButtons.forEach(buttonId => {
-        document.getElementById(buttonId).addEventListener("click", function() {
+        document.getElementById(buttonId).addEventListener("click", function () {
             sortingButtons.forEach(id => document.getElementById(id).classList.remove("active"));
             this.classList.add("active");
 

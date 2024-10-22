@@ -5,10 +5,10 @@
         <!-- Site links -->
         <div class="row">
             <div class="col-lg-3">
-                <h2 class="scilife-footer-titles">Site Navigation</h2>
+                <h2 class="scilife-footer-titles">Site navigation</h2>
                 <ul class="list-unstyled scilife-footer-text">
                     <li><a href="/">Home</a></li>
-                    <li><a href="/add_genome">Add a genome project</a></li>
+                    <li><a href="/contribute">Contribute</a></li>
                     <li><a href="/about">About the portal</a></li>
                     <li><a href="/about/sv">Information på svenska</a></li>
                     <li><a href="/glossary">Glossary</a></li>
@@ -18,18 +18,20 @@
             </div>
 
             <!-- Explaination about the site and more -->
-            <div class="col-lg-5">
+            <div class="col-lg-5 col-xl-4">
                 <h2 class="scilife-footer-titles">About the portal</h2>
                 <ul class="list-unstyled">
                     <li>
-                        <p> This site is developed and operated by the SciLifeLab Data Centre and is
-                            free to use for all.
+                        <p>
+                            This service is provided by the Data Science Node in Evolution
+                            and Biodiversity (DSN-EB), part of SciLifeLab and Wallenberg
+                            National Program for Data-Driven Life Science (DDLS).
 
                             If you have a genome project you would like to add to this site, please visit the
-                            <a href="/add_genome">Add a genome project</a> page for further instructions.
+                            <a href="/contribute">Contribute</a> page for further instructions.
 
                             The source code for this website is
-                            <a href="https://github.com/ScilifelabDataCentre/swedgene/" target="_blank">
+                            <a href="https://github.com/ScilifelabDataCentre/genome-portal/" target="_blank">
                                 available on GitHub
                             </a>.
                         </p>
@@ -41,16 +43,22 @@
             </div>
 
 
-            <div class="col-lg-4">
+            <div class="col-lg-4 col-xl-5">
                 <!-- Funders etc... part -->
                 <h2 class="scilife-footer-titles mb-2">Supported by</h2>
 
-                <img class="scilife-footer-img" src="/img/logos/kaw_logo.png"
-                alt="Logo for the Knut and Alice Wallenberg Foundation">
-                <img class="scilife-footer-img" src="/img/logos/sfsr_logo.png"
-                alt="Logo for the Swedish Foundation for Strategic Research">
-                <img class="scilife-footer-img" src="/img/logos/scilifelab-logo.svg"
-                alt="SciLifeLab's Logo">
+                <a href="https://kaw.wallenberg.org/en" target="_blank" style="text-decoration: none;">
+                    <img fetchpriority="low" class="scilife-footer-img" src="/img/logos/kaw.webp"
+                        alt="Logo for the Knut and Alice Wallenberg Foundation">
+                </a>
+                <a href="https://strategiska.se/en/" target="_blank" style="text-decoration: none;">
+                    <img fetchpriority="low" class="scilife-footer-img" src="/img/logos/sfsr_logo.webp"
+                        alt="Logo for the Swedish Foundation for Strategic Research">
+                </a>
+                <a href="https://www.scilifelab.se/" target="_blank" style="text-decoration: none;">
+                    <img fetchpriority="low" class="scilife-footer-img" src="/img/logos/scilifelab-logo.svg"
+                        alt="SciLifeLab's Logo">
+                </a>
 
                 <!--bootstrap icons with links to different services -->
                 <h2 class="scilife-footer-titles mt-2 mb-1">Stay Updated</h2>
@@ -72,12 +80,12 @@
         </div>
 
         <p class="mt-2 mb-0 text-start text-lg-center"><i> Website last updated: {{ now.Format "02 January 2006"}} </i></p>
-        <br>
+        <div style="margin: 10px 0 10px 0;"></div>
     </div>
 </footer>
 
 <!-- Matomo tracking info -->
-<!-- <script>
+<script>
     var _paq = window._paq = window._paq || [];
     /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
     _paq.push(["disableCookies"]);
@@ -86,8 +94,8 @@
     (function () {
         var u = "//matomo.dc.scilifelab.se/";
         _paq.push(['setTrackerUrl', u + 'matomo.php']);
-        _paq.push(['setSiteId', 'TODO']); /* TODO Make sure site ID is added once running on Matomo */
+        _paq.push(['setSiteId', '11']);
         var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
         g.async = true; g.src = u + 'matomo.js'; s.parentNode.insertBefore(g, s);
     })();
-</script> -->
+</script>

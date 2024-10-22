@@ -64,6 +64,20 @@ add_assemblies() {
     done < <(yq '.assembly | [.url, .name, .displayName // "", .aliases // "", .fileName // ""] | join(";")' "$1")
 }
 
+
+# List tracks from a configuration file
+# Arguments
+#   Configuration file name
+# Outputs:
+#   One line per track, with semicolon-separated fields
+list_tracks () {
+    yq '.tracks |
+    filter(.addTrack != false) |
+    .[] |
+    [.url, .name, .fileName // ""] |
+    join(";")' "$1"
+}
+
 add_tracks () {
     local -a file_args
     # jbrowse add-track expects target to exist, unlike add-assembly
@@ -73,7 +87,7 @@ add_tracks () {
 	file_args=()
 	ensure_local "$url" "$filename" file_args
 	jbrowse add-track "${JBROWSE_ARGS[@]}" --name="$name"  "${file_args[@]}"
-    done < <(yq '.tracks[] | [.url, .name, .fileName // ""] | join(";")' "$1")
+    done < <(list_tracks "$1")
 }
 
 add_hubs () {

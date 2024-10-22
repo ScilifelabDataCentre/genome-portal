@@ -16,10 +16,10 @@ assembly:
   - "BUSCO % (eudicots_odb10)": "C:94.2 [S:62.9, D:31.3], F:0.9, M:4.9, n:2326"
 
 annotation:
-  - "Gene #": 52,831
-  - "Transcript #": 142,552
-  - "Avg exons per transcript": 6.1
-  - "Avg gene length (bp)": 3,080
-  - "Avg transcript length (bp)": 3,305
+  - "Gene #": 52831
+  - "Transcript #": 142552
+  - "Avg exons per transcript": 6.10
+  - "Avg gene length (bp)": 3080
+  - "Avg transcript length (bp)": 3305
   - "Avg exon length (bp)": 272
   - "Avg intron length (bp)": 101

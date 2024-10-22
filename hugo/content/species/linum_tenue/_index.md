@@ -2,10 +2,8 @@
 # Required params below
 title: "*Linum tenue* Desf."
 subtitle: "A species of flax"
-summary: "Genome assembly, genome annotation and 2 data tracks."
 
 last_updated: "02/09/2024"
-contact_person: "First Name Surname (firstname.surname@scilifelab.se)"
 
 cover_image: "/img/species/Ltenue_thrum_pin_B_Laenen_A_Desamore_4-3ratio_crop.webp"
 img_attrib_text: "Linum tenue by Benjamin Laenen and Aurélie Désamoré, used with permission. Flower morphs: thrum (left) and pin (right)."
@@ -15,6 +13,7 @@ img_attrib_link: ""
 # The params below were auto-generated, you should not need to edit them...
 # unless you were warned by the add-new-species.py script.
 layout: "species_intro"
+banner_title: "Species overview"
 url: "linum_tenue"
 weight: 1
 science_name: "Linum tenue"
@@ -52,3 +51,7 @@ If you use the data presented in the genome portal from this species in your res
 - Gutiérrez-Valencia, J., Zervakis, P.-I., Postel, Z., Fracassetti, M., Losvik, A., Mehrabi, S., Bunikis, I., Soler, L., Hughes, P. W., Désamoré, A., Laenen, B., Abdelaziz, M., Pettersson, O. V., Arroyo, J., & Slotte, T. (2024). Genetic Causes and Genomic Consequences of Breakdown of Distyly in *Linum trigynum*. Molecular Biology and Evolution, 41(5), msae087. <https://doi.org/10.1093/molbev/msae087>
 
 - Murray, B. G. (1986). Floral Biology and Self-Incompatibility in *Linum*. Botanical Gazette, 147(3), 327–333. <https://doi.org/10.1086/337599>
+
+#### Changelog
+
+- 15/10/2024 - Species first published on the Portal

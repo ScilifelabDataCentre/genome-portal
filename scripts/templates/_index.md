@@ -2,10 +2,8 @@
 # Required params below
 title: "[EDIT]"
 subtitle: "[EDIT]"
-summary: "[EDIT]"
 
 last_updated: "[EDIT - USE FORMAT LIKE THIS: DD/MM/YYYY]"
-contact_person: "[EDIT First Name Surname (firstname.surname@scilifelab.se)] "
 
 cover_image: "/img/species/[EDIT]"
 img_attrib_text: "[EDIT]"
@@ -15,6 +13,7 @@ img_attrib_link: "[EDIT] - if there is no hyperlink available for this file, the
 # The params below were auto-generated, you should not need to edit them...
 # unless you were warned by the add-new-species.py script.
 layout: "species_intro"
+banner_title: "Species overview"
 url: "SPECIES_FOLDER"
 weight: 1
 science_name: "SPECIES_NAME"
@@ -48,3 +47,7 @@ Write content here in markdown for the introduction tab of the species page.
 
 #### References
 
+
+#### Changelog
+
+- [TODO - Add date] - Species first published on the Portal

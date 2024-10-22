@@ -7,11 +7,10 @@
       {"Website": "https://www.ebi.ac.uk/ena/browser/view/GCA_963668995.1"},
       {"Article": "https://doi.org/10.1093/gbe/evae031"}
     ],
-    "accession": "GCA_900323705.1",
+    "accessionOrDOI": "GCA_900323705.1",
     "fileName": "CAVLGL01.fasta.gz",
-    "submitterName": "Jacob Höglund and Niclas Backström",
     "principalInvestigator": "Jacob Höglund and Niclas Backström",
-    "submitterAffiliation": "Uppsala University",
+    "principalInvestigatorAffiliation": "Uppsala University",
     "firstDateOnPortal": "15 October 2024"
   },
   {
@@ -19,13 +18,13 @@
     "description": "Functional annotation of protein-coding genes in the primary genome assembly",
     "links": [
       {"Download": "https://figshare.scilifelab.se/ndownloader/files/47209624"},
-      {"Website": "https://doi.org/10.17044/scilifelab.25908748.v2"}
+      {"Website": "https://doi.org/10.17044/scilifelab.25908748.v2"},
+      {"Article": "https://doi.org/10.1093/gbe/evae031"}
     ],
-    "accession": "",
+    "accessionOrDOI": "10.17044/scilifelab.25908748.v2",
     "fileName": "pmne_functional_edit1.gff.gz",
-    "submitterName": "Jacob Höglund and Niclas Backström",
     "principalInvestigator": "Jacob Höglund and Niclas Backström",
-    "submitterAffiliation": "Uppsala University",
+    "principalInvestigatorAffiliation": "Uppsala University",
     "firstDateOnPortal": "15 October 2024"
   },
   {
@@ -33,13 +32,13 @@
     "description": "Illumina RNAseq transcript assembly (thorax muscle tissue)",
     "links": [
       {"Download": "https://figshare.scilifelab.se/ndownloader/files/47209648"},
-      {"Website": "https://doi.org/10.17044/scilifelab.25908748.v2"}
+      {"Website": "https://doi.org/10.17044/scilifelab.25908748.v2"},
+      {"Article": "https://doi.org/10.1093/gbe/evae031"}
     ],
-    "accession": "",
+    "accessionOrDOI": "10.17044/scilifelab.25908748.v2",
     "fileName": "pmne_Illumina_RNAseq_StringTie_sorted-transcripts_match.gff.gz",
-    "submitterName": "Jacob Höglund and Niclas Backström",
     "principalInvestigator": "Jacob Höglund and Niclas Backström",
-    "submitterAffiliation": "Uppsala University",
+    "principalInvestigatorAffiliation": "Uppsala University",
     "firstDateOnPortal": "15 October 2024"
   },
   {
@@ -47,13 +46,13 @@
     "description": "Non-coding RNA (ncRNA) genes",
     "links": [
       {"Download": "https://figshare.scilifelab.se/ndownloader/files/47209660"},
-      {"Website": "https://doi.org/10.17044/scilifelab.25908748.v2"}
+      {"Website": "https://doi.org/10.17044/scilifelab.25908748.v2"},
+      {"Article": "https://doi.org/10.1093/gbe/evae031"}
     ],
-    "accession": "",
+    "accessionOrDOI": "10.17044/scilifelab.25908748.v2",
     "fileName": "pmne_ncRNAs.gff.gz",
-    "submitterName": "Jacob Höglund and Niclas Backström",
     "principalInvestigator": "Jacob Höglund and Niclas Backström",
-    "submitterAffiliation": "Uppsala University",
+    "principalInvestigatorAffiliation": "Uppsala University",
     "firstDateOnPortal": "15 October 2024"
   },
   {
@@ -61,13 +60,13 @@
     "description": "tRNA genes and putative pseudogenes",
     "links": [
       {"Download": "https://figshare.scilifelab.se/ndownloader/files/47209663"},
-      {"Website": "https://doi.org/10.17044/scilifelab.25908748.v2"}
+      {"Website": "https://doi.org/10.17044/scilifelab.25908748.v2"},
+      {"Article": "https://doi.org/10.1093/gbe/evae031"}
     ],
-    "accession": "",
+    "accessionOrDOI": "10.17044/scilifelab.25908748.v2",
     "fileName": "pmne_tRNAs_and_pseudogenes.gff.gz",
-    "submitterName": "Jacob Höglund and Niclas Backström",
     "principalInvestigator": "Jacob Höglund and Niclas Backströmn",
-    "submitterAffiliation": "Uppsala University",
+    "principalInvestigatorAffiliation": "Uppsala University",
     "firstDateOnPortal": "15 October 2024"
   },
   {
@@ -75,13 +74,13 @@
     "description": "Mitochondrial genome sequence",
     "links": [
       {"Download": "https://www.ebi.ac.uk/ena/browser/api/fasta/OZ075093.1?download=true&gzip=true"},
-      {"Website": "https://www.ebi.ac.uk/ena/browser/view/OZ075093.1"}
+      {"Website": "https://www.ebi.ac.uk/ena/browser/view/OZ075093.1"},
+      {"Article": "https://doi.org/10.1093/gbe/evae031"}
     ],
-    "accession": "OZ075093.1",
+    "accessionOrDOI": "OZ075093.1",
     "fileName": "OZ075093.1.fasta.gz",
-    "submitterName": "Jacob Höglund and Niclas Backström",
     "principalInvestigator": "Jacob Höglund and Niclas Backström",
-    "submitterAffiliation": "Uppsala University",
+    "principalInvestigatorAffiliation": "Uppsala University",
     "firstDateOnPortal": "15 October 2024"
   },
   {
@@ -89,13 +88,13 @@
     "description": "Annotation of protein coding genes in the mitochondrion",
     "links": [
       {"Download": "https://figshare.scilifelab.se/ndownloader/files/47209654"},
-      {"Website": "https://doi.org/10.17044/scilifelab.25908748.v2"}
+      {"Website": "https://doi.org/10.17044/scilifelab.25908748.v2"},
+      {"Article": "https://doi.org/10.1093/gbe/evae031"}
     ],
-    "accession": "",
+    "accessionOrDOI": "10.17044/scilifelab.25908748.v2",
     "fileName": "pmne_mtdna.gff.gz",
-    "submitterName": "Jacob Höglund and Niclas Backström",
     "principalInvestigator": "Jacob Höglund and Niclas Backström",
-    "submitterAffiliation": "Uppsala University",
+    "principalInvestigatorAffiliation": "Uppsala University",
     "firstDateOnPortal": "15 October 2024"
   }
 ]

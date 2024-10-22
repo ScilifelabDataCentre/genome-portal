@@ -2,10 +2,8 @@
 # Required params below
 title: "*Parnassius mnemosyne*"
 subtitle: "Clouded apollo butterfly"
-summary: "Genome assembly, genome annotation and 5 data tracks."
 
 last_updated: "02/09/2024"
-contact_person: "First Name Surname (firstname.surname@scilifelab.se)"
 
 cover_image: "/img/species/clouded_apollo.webp"
 img_attrib_text: "Clouded apollo by Charles J. Sharp, CC BY-SA 4.0"
@@ -15,6 +13,7 @@ img_attrib_link: "https://en.wikipedia.org/wiki/File:Clouded_apollo_(Parnassius_
 # The params below were auto-generated, you should not need to edit them...
 # unless you were warned by the add-new-species.py script.
 layout: "species_intro"
+banner_title: "Species overview"
 url: "parnassius_mnemosyne"
 weight: 1
 science_name: "Parnassius mnemosyne"
@@ -49,7 +48,7 @@ The genome assembly hosted in the portal was generated in a study by Höglund et
 
 If you use the data presented in the genome portal from this species in your research, please cite the original publication(s):
 
-- <p> Höglund, J., Dias, G., Olsen, R. A., Soares, A., Bunikis, I., Talla, V., & Backström, N. (2024). A Chromosome-Level Genome Assembly and Annotation for the Clouded Apollo Butterfly (*Parnassius mnemosyne*): A Species of Global Conservation Concern. Genome Biology and Evolution, 16(2), evae031. <a href="https://doi.org/10.1093/gbe/evae031"> https://doi.org/10.1093/gbe/evae031</a> </p>
+- <p> Höglund, J., Dias, G., Olsen, R. A., Soares, A., Bunikis, I., Talla, V., & Backström, N. (2024). A Chromosome-Level Genome Assembly and Annotation for the Clouded Apollo Butterfly (<i>Parnassius mnemosyne</i>): A Species of Global Conservation Concern. Genome Biology and Evolution, 16(2), evae031. <a href="https://doi.org/10.1093/gbe/evae031"> https://doi.org/10.1093/gbe/evae031</a> </p>
 
 #### References
 
@@ -64,3 +63,7 @@ If you use the data presented in the genome portal from this species in your res
 - Talla, V., Mrazek, V., Höglund, J., & Backström, N. (2023). Whole genome re-sequencing uncovers significant population structure and low genetic diversity in the endangered clouded apollo (*Parnasssius mnemosyne*) in Sweden. Conservation Genetics, 24(3), 305–314. <https://doi.org/10.1007/s10592-023-01502-9>
 
 - Westin, A., Lennartsson, T., & Björklund, J.-O. (2018). The historical ecology approach in species conservation – Identifying suitable habitat management for the endangered clouded Apollo butterfly (*Parnassius mnemosyne* L.) in Sweden. AIMS Environmental Science, 5(4), 244–272. <https://doi.org/10.3934/environsci.2018.4.244>
+
+#### Changelog
+
+- 15/10/2024 - Species first published on the Portal
