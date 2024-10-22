@@ -66,8 +66,6 @@ questions.
 
 ## Cite this portal
 
-<a href="TODO"><img src="https://zenodo.org/badge/256458920.svg" alt="zenodo DOI"></a>
-
 See 'Cite this repository' in the "About" section at the top right of
 this page.
 
