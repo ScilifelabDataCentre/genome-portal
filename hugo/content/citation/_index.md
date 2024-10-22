@@ -1,5 +1,6 @@
 ---
 title: How to cite the Genome Portal and the data
+toc: true
 ---
 
 In line with the principles of _FAIR_ and _Open Science_, we encourage the reuse and recognition of material made available on the Swedish Reference Genome Portal.
