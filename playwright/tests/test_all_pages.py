@@ -9,14 +9,16 @@ from playwright.sync_api import Page, expect
 
 def test_for_placeholder_text(all_pages: list[Page]) -> None:
     """
-    Check for any placeholder words like EDIT or TODO in all pages.
+    Check for any placeholder words like EDIT in all pages.
     """
-    PLACEHOLDERS = ["EDIT", "TODO", "XXXXXX"]
+    PLACEHOLDERS = ["EDIT", "TODO", "XXXXXX", "DD/MM/YYYY"]
 
     for page in all_pages:
         for placeholder in PLACEHOLDERS:
             locator = page.get_by_text(placeholder)
-            expect(locator, f"Found the placeholder word '{placeholder}' on this page: {page.url}").to_have_count(0)
+            expect(
+                locator, f"Found what looks like a placeholder: '{placeholder}' on this page: {page.url}"
+            ).to_have_count(0)
 
 
 def test_for_meta_description_tag(all_pages: list[Page]) -> None:
