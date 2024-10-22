@@ -15,10 +15,19 @@ COPY ./hugo/ /src
 RUN mkdir /target && \
     hugo -d /target
 
+FROM alpine:latest AS jbrowse
+ARG JBROWSE_VERSION=v2.15.4
+WORKDIR /tmp
+RUN apk add --no-cache curl findutils jq
+COPY ./scripts/download_jbrowse .
+RUN ash ./download_jbrowse ${JBROWSE_VERSION} /tmp && mv /tmp/jbrowse-${JBROWSE_VERSION} /tmp/jbrowse
+
 # Stage 2: Serve the generated html using nginx
 FROM nginxinc/nginx-unprivileged:stable-alpine
 
 COPY docker/nginx-custom.conf /etc/nginx/conf.d/default.conf 
 
 COPY --from=build /target /usr/share/nginx/html
+COPY --from=jbrowse /tmp/jbrowse /usr/share/nginx/html/browser
+
 EXPOSE 8080
