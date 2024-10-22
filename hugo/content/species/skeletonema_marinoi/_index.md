@@ -12,6 +12,7 @@ img_attrib_link: ""
 # The params below were auto-generated, you should not need to edit them...
 # unless you were warned by the add-new-species.py script.
 layout: "species_intro"
+banner_title: "Species overview"
 url: "skeletonema_marinoi"
 weight: 1
 science_name: "Skeletonema marinoi"
