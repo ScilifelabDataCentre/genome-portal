@@ -3,7 +3,7 @@
 title: "*Skeletonema marinoi* R05AC"
 subtitle: "A diatom species"
 
-last_updated: "21/10/2024"
+last_updated: "22/10/2024"
 
 cover_image: "/img/species/skeletonema_marinoi.webp"
 img_attrib_text: "Skeletonema marinoi by Anna Pielach at CCI (Centre for Cellular Imaging), University of Gothenburg. Used with permission."
@@ -20,15 +20,6 @@ lineage_data_path: "skeletonema_marinoi/taxonomy"
 gbif_taxon_id: "4376733"
 goat_webpage: "https://goat.genomehubs.org/record?recordId=267567&result=taxon&taxonomy=ncbi#skeletonema%20marinoi"
 
-
-# Optional params below,
-# remove them if you don't want them or they are not relevant.
-# iucn_category: "[EDIT]"
-# iucn_link: "[EDIT]"
-
-# swe_red_list: "[EDIT]"
-# swe_red_list_link: "[EDIT]"
-
 # These 3 params define the initial view for the map
 # latitude and longitude are for the map center.
 latitude: 20
@@ -38,7 +29,7 @@ initialZoom: 1
 
 ### Description
 
-The chain-forming marine centric diatom *Skeletonema marinoi* Sarno & Zingone was described in 2005, as one of four new species identified in the *Skeletonema costatum* complex (Sarno et al., 2005). In the Baltic Sea, *S. marinoi* is the dominant species from this genus (Sjöqvist et al., 2015) and several studies have focused on its ecology and evolution (e.g. Godhe and Härnström, 2010; Härnström et al., 2011; Sefbom et al., 2018). The genomes of ten bacteria from the *S. marinoi* microbiome have also been sequenced, to inform on the interactions within the diatom-bacteria holobiont (Johansson et al., 2019a). Several molecular techniques have been developed for this species, including a method for genetic transformation, involving mutagenesis (Johansson et al., 2019b) and Secondary ion mass spectrometry (Stenow et. al 2024) making it a useful tool for studies of evolution, functional genomics and ecology. The sequenced strain R05AC is available from the algal bank at University of Gothenburg ([GUMACC](https://www.gu.se/en/marina-vetenskaper/about-us/algal-bank-gumacc)).
+The chain-forming marine centric diatom *Skeletonema marinoi* Sarno & Zingone was described in 2005, as one of four new species identified in the *Skeletonema costatum* complex (Sarno et al., 2005). In the Baltic Sea, *S. marinoi* is the dominant species from this genus (Sjöqvist et al., 2015) and several studies have focused on its ecology and evolution (e.g. Godhe & Härnström, 2010; Härnström et al., 2011; Sefbom et al., 2018). The genomes of ten bacteria from the *S. marinoi* microbiome have also been sequenced, to inform on the interactions within the diatom-bacteria holobiont (Johansson et al., 2019a). Several molecular techniques have been developed for this species, including a method for genetic transformation, involving mutagenesis (Johansson et al., 2019b) and Secondary ion mass spectrometry (Stenow et. al 2024) making it a useful tool for studies of evolution, functional genomics and ecology. The sequenced strain R05AC is available from the algal bank at University of Gothenburg ([GUMACC](https://www.gu.se/en/marina-vetenskaper/about-us/algal-bank-gumacc)).
 
 #### Genome reference
 
@@ -64,4 +55,4 @@ There is currently no publication accociated with the genome of *S. marinoi* R05
 
 #### Changelog
 
-- 15/10/2024 - Species first published on the Portal
+- 22/10/2024 - Species first published on the Portal
