@@ -3,7 +3,7 @@
 title: "*Meganyctiphanes norvegica*"
 subtitle: "Northern krill"
 
-last_updated: "01/10/2024"
+last_updated: "22/10/2024"
 
 cover_image: "/img/species/northern_krill.webp"
 img_attrib_text: "Northern Krill by Uwe Kils, CC BY-SA 3.0"

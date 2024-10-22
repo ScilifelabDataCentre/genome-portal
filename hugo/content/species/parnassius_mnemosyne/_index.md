@@ -3,7 +3,7 @@
 title: "*Parnassius mnemosyne*"
 subtitle: "Clouded apollo butterfly"
 
-last_updated: "02/09/2024"
+last_updated: "22/10/2024"
 
 cover_image: "/img/species/clouded_apollo.webp"
 img_attrib_text: "Clouded apollo by Charles J. Sharp, CC BY-SA 4.0"
