@@ -26,14 +26,4 @@ BUSCO notation: C: Complete; S: Single-copy; D: Duplicated; F: Fragmented; M: Mi
 
 ### Publication(s)
 
-### Methods
-
-#### Samples
-
-#### Genome assembly
-
-#### Genome annotation
-
-### Funding
-
-### Acknowledgements
+There is currently no publication accociated with the genome of *S. marinoi* R05AC. In the meantime, please cite the genome assembly submission: GCA_030871285.1. A list of the submitting authors can be found at the [JATAAI000000000.1 record at NCBI](https://www.ncbi.nlm.nih.gov/nuccore/JATAAI000000000).

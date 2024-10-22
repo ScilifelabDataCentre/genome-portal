@@ -13,13 +13,13 @@ assembly:
   - "Scaffold N90 (Mbp)": 0.32
   - "Scaffold L90": 48
   - "Scaffolds >= 10 kb": 80
-  - "BUSCO % [EDIT]": "[EDIT]"
+  - "BUSCO % (stramenopiles_odb10)": "C:97.0 [S:93.0, D:4.0], F:0.0, M:3.0, n:100"
 
 annotation:
-  - "Gene #": 17,265
-  - "Transcript #": 17,265
+  - "Gene #": 17265
+  - "Transcript #": 17265
   - "Avg exons per transcript": 1.9
-  - "Avg gene length (bp)": 1,851
-  - "Avg transcript length (bp)": 1,851
+  - "Avg gene length (bp)": 1851
+  - "Avg transcript length (bp)": 1851
   - "Avg exon length (bp)": 861
   - "Avg intron length (bp)": 204
