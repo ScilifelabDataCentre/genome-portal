@@ -1,0 +1,56 @@
+#!/bin/bash
+set -o pipefail
+
+# Download JBrowse web static bundle
+#
+# Fetch the specified release archive from Github, and extract subset
+# of static files of interest to us, rename the entrypoint to `main.js`.
+#
+# Arguments:
+#   TAG: Version tag of the release to be fetched
+#   DIR: Directory where assets should be unpacked
+main () {
+    JBROWSE_TMP=$(mktemp -d)
+    declare -rg JBROWSE_TMP
+    TAG="${1}"
+    RELEASE_URL=https://api.github.com/repos/GMOD/jbrowse-components/releases/tags/"${TAG}"
+
+    if ! ARCHIVE_URL=$(get_jbrowse_web_url "${RELEASE_URL}"); then
+	log_stderr "Could not find release based on tag: ${TAG}"
+	return 1
+    fi
+
+    if ! curl -fsSLO --output-dir "${JBROWSE_TMP}" "${ARCHIVE_URL}"; then
+	log_stderr "Could not fetch archive at ${ARCHIVE_URL}"
+	return 1
+    else
+	log_stderr "Saved JBrowse web archive in temporary directory ${JBROWSE_TMP}"
+    fi
+
+    mkdir -p "${INSTALL_DIR:=${2%/}/jbrowse-${TAG}}"
+    log_stderr "Unzipping static files to ${INSTALL_DIR}"
+    mkdir -p "${INSTALL_DIR}" && unzip -o -q "${JBROWSE_TMP}/jbrowse-web-${TAG}.zip" 'static/*' -x 'static/*.map' -d "${INSTALL_DIR}"
+    find "${INSTALL_DIR}/static/js" -type f -name 'main.*.js' -execdir mv '{}' 'main.js' ';'
+}
+
+get_jbrowse_web_url () {
+    curl -fsSL "${1}" |\
+	jq -r '.assets[] |
+	select(.name | test("jbrowse-web")) |
+	.browser_download_url'
+}
+
+log_stderr() {
+    >&2 echo "$@"
+}
+
+main "$@"
+
+if [[ -n "${JBROWSE_TMP}" ]]; then
+    log_stderr "Deleting temporary directory ${JBROWSE_TMP}"
+    rm -rf "${JBROWSE_TMP}"
+else
+    log_stderr "Nothing to cleanup"
+fi
+
+
