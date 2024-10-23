@@ -12,6 +12,24 @@ set -o pipefail
 main () {
     JBROWSE_TMP=$(mktemp -d)
     TAG="${1}"
+    DIR="${2:-.}"
+    INSTALL_DIR="${DIR%/}/jbrowse-web"
+
+    if [[ -d "${INSTALL_DIR}" ]]; then
+	log_stderr "${INSTALL_DIR} already exists and would be overwritten"
+	return 1
+    fi
+
+    if command -v jbrowse > /dev/null; then
+	log_stderr "Using JBrowse CLI"
+	from_jbrowse_create
+    else
+	log_stderr "JBrowse CLI not installed, falling back to Github API"
+	from_github_api
+    fi
+}
+
+from_github_api() {
     RELEASE_URL=https://api.github.com/repos/GMOD/jbrowse-components/releases/tags/"${TAG}"
 
     if ! ARCHIVE_URL=$(get_jbrowse_web_url "${RELEASE_URL}"); then
@@ -26,10 +44,17 @@ main () {
 	log_stderr "Saved JBrowse web archive in temporary directory ${JBROWSE_TMP}"
     fi
 
-    mkdir -p "${INSTALL_DIR:=${2%/}/jbrowse-${TAG}}"
     log_stderr "Unzipping static files to ${INSTALL_DIR}"
     mkdir -p "${INSTALL_DIR}" && unzip -o -q "${JBROWSE_TMP}/jbrowse-web-${TAG}.zip" 'static/*' -x 'static/*.map' -d "${INSTALL_DIR}"
     find "${INSTALL_DIR}/static/js" -type f -name 'main.*.js' -execdir mv '{}' 'main.js' ';'
+}
+
+from_jbrowse_create () {
+    jbrowse create --tag="${TAG}" "${JBROWSE_TMP}"
+    # Remove .map files and rename entrypoint
+    find "${JBROWSE_TMP}/static/js" -name '*.js.map' -exec rm '{}' '+' -o \
+	 -name 'main.*.js' -execdir mv '{}' 'main.js' ';'
+    mkdir -p "${INSTALL_DIR}" && mv "${JBROWSE_TMP}/static" "${INSTALL_DIR}"
 }
 
 get_jbrowse_web_url () {
