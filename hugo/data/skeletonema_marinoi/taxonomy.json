@@ -1,0 +1,58 @@
+{
+    "Species": {
+        "science_name": "Skeletonema marinoi",
+        "tax_id": "267567",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:267567",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=267567",
+        "display_order": 1
+    },
+    "Genus": {
+        "science_name": "Skeletonema",
+        "tax_id": "2842",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:2842",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=2842",
+        "display_order": 2
+    },
+    "Family": {
+        "science_name": "Skeletonemataceae",
+        "tax_id": "33848",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:33848",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=33848",
+        "display_order": 3
+    },
+    "Order": {
+        "science_name": "Thalassiosirales",
+        "tax_id": "33847",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:33847",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=33847",
+        "display_order": 4
+    },
+    "Class": {
+        "science_name": "Coscinodiscophyceae",
+        "tax_id": "33836",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:33836",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=33836",
+        "display_order": 5
+    },
+    "Phylum": {
+        "science_name": "Bacillariophyta",
+        "tax_id": "2836",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:2836",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=2836",
+        "display_order": 6
+    },
+    "Clade": {
+        "science_name": "Ochrophyta",
+        "tax_id": "2696291",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:2696291",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgiid=2696291",
+        "display_order": 7
+    },
+    "Superkingdom": {
+        "science_name": "Eukaryota",
+        "tax_id": "2759",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:2759",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=2759",
+        "display_order": 8
+    }
+}
