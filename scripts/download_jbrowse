@@ -12,11 +12,10 @@ set -o pipefail
 main () {
     JBROWSE_TMP=$(mktemp -d)
     TAG="${1}"
-    DIR="${2:-.}"
-    INSTALL_DIR="${DIR%/}/jbrowse-web"
+    INSTALL_DIR="${2:-.}"
 
-    if [[ -d "${INSTALL_DIR}" ]]; then
-	log_stderr "${INSTALL_DIR} already exists and would be overwritten"
+    if [[ -d "${INSTALL_DIR}/static" ]]; then
+	log_stderr "${INSTALL_DIR}/static already exists"
 	return 1
     fi
 
