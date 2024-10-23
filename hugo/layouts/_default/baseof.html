@@ -4,13 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <!-- Site meta -->
-        {{ $title := "" }}
-        {{ with .Params.banner_title }}
-            {{ $title = printf "%s" . }}
-        {{ else }}
-            {{ $title = printf "%s" .Title }}
-        {{ end }}
-        <title>{{ printf "%s | %s" $title .Site.Title }}</title>
+        <title>{{ printf "%s | %s" (or .Params.banner_title .Title) .Site.Title }}</title>
 
         {{ $description := partial "create_description.html" . }}
         <meta name="description" content="{{ $description }}">
