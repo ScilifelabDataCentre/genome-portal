@@ -2,14 +2,11 @@
 title: Privacy Policy
 ---
 
-### TODOs
+SciLifeLab operates the [genomes.scilifelab.se](https://genomes.scilifelab.se/) website, which provides the **Service**.
 
-1. Does this also need to be provided in Swedish?
-2. Someone other than Rory needs to check the content/wording etc...
+This page is used to inform website visitors regarding our personal data processing policy. If you choose to use our **Service**, then your personal data will be processed in accordance with this policy.
 
-### Privacy Policy Overview
-
-This site is operated by SciLifeLab Data Centre and this page is used to inform website visitors regarding our data processing and privacy policy. If you choose to use our **Service**, then your personal data will be processed in accordance with this policy.
+The personal information that we collect is used for providing and improving the **Service**. We will not use or share your information with anyone except as described in this policy. All collected personal information will be processed for research purposes, i.e. using the lawful basis of public interest and in accordance with Regulation (EU) 2016/679 of the European Parliament and of the Council of 27 April 2016, the General Data Protection Regulation.
 
 ### Log Data
 
@@ -19,8 +16,11 @@ We want to inform you that whenever you visit our **Service**, we collect the in
 
 <iframe id="matoOpOut" src="https://matomo.dc.scilifelab.se/index.php?module=CoreAdminHome&action=optOut&language=en&fontSize=16px&fontFamily=Helvetica"></iframe>
 
-The personal information that we collect is used for providing and improving the **Service**.
-We will not use or share your information with anyone except as described in this policy. All collected personal information will be processed for research purposes, i.e. using the lawful basis of public interest and in accordance with Regulation (EU) 2016/679 of the European Parliament and of the Council of 27 April 2016, the General Data Protection Regulation.
+### Contact Form
+
+Our **Service** contains a <a href="/contact" target="_blank">contact form</a> that visitors can use to contact us or send us suggestions. The website visitors may choose to provide their personal information such as their name and e-mail address through this form.
+
+The following parties will have access to processing the personal data provided through the form; SciLifeLab Data Centre, Uppsala University, KTH Royal Institute of Technology and Swedish Museum of Natural History. Your personal data will be deleted when no longer needed, or when stipulated by the archival rules for the university as a government authority. If you want to update or remove your personal data, please contact the controller SciLifeLab Data Centre at Uppsala University using [dsn-eb@scilifelab.se](mailto:dsn-eb@scilifelab.se).
 
 ### Links to Other Sites
 
