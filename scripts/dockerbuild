@@ -5,6 +5,9 @@
 # By default, the host user ID and group ID are forwarded through
 # build arguments. To disable this behavior and use the dockerfile
 # defaults, set the SWG_DEFAULT_USER environment variable to 1.
+#
+# The hugo image can be built with the SWG_HUGO_ENV_ARG environment variable
+# This can be used to create the version information shown on the footer of each page
 _DEFAULT_TAG=local
 
 docker_build () {
@@ -28,6 +31,10 @@ fi
 if [[ "$1" = hugo ]]; then
     _DEFAULT_IMAGE=ghcr.io/scilifelabdatacentre/swg-hugo-site
     _DEFAULT_DOCKERFILE=docker/hugo.dockerfile
+    declare -a _BUILD_ARGS
+    if [[ -n "${SWG_HUGO_ENV_ARG}" ]]; then
+    _BUILD_ARGS+=("--build-arg" "HUGO_ENV_ARG=${SWG_HUGO_ENV_ARG}")
+    fi
     docker_build  && exit 0
 fi
 
