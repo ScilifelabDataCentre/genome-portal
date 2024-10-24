@@ -1,0 +1,97 @@
+#!/bin/bash
+set -o pipefail
+set -ue
+
+# Download JBrowse web static bundle
+#
+# Fetch the specified release archive from Github, and extract subset
+# of static files of interest to us, rename the entrypoint to `main.js`.
+#
+# Arguments:
+#   TAG: Version tag of the release to be fetched
+#   DIR: Directory where assets should be unpacked
+main () {
+    TAG="${1}"
+    JBROWSE_INSTALL_DIR="${2}"
+    JRBOWSE_TMP_DIR=$(mktemp -dt "jbrowse-${TAG}-XXX")
+
+    if [[ -d "${JBROWSE_INSTALL_DIR}/static" ]]; then
+	log_stderr "${JBROWSE_INSTALL_DIR}/static already exists. Not attempting anything."
+	return 1
+    fi
+
+    if command -v jbrowse > /dev/null; then
+	log_stderr "Using JBrowse CLI to fetch archive"
+	from_jbrowse_create
+    else
+	log_stderr "JBrowse CLI not installed, falling back on Github API to fetch archive"
+	from_github_api
+    fi
+}
+
+from_github_api() {
+    RELEASE_URL=https://api.github.com/repos/GMOD/jbrowse-components/releases/tags/"${TAG}"
+
+    if ! ARCHIVE_URL=$(get_archive_url "${RELEASE_URL}"); then
+	log_stderr "Could not find release based on tag: ${TAG}"
+	return 1
+    fi
+
+    if ! curl -fsSLO --output-dir "${JRBOWSE_TMP_DIR}" "${ARCHIVE_URL}"; then
+	log_stderr "Could not fetch archive at ${ARCHIVE_URL}"
+	return 1
+    else
+	log_stderr "Saved JBrowse web archive in temporary directory ${JRBOWSE_TMP_DIR}"
+    fi
+
+    log_stderr "Unzipping static files to ${JBROWSE_INSTALL_DIR}"
+    mkdir -p "${JBROWSE_INSTALL_DIR}" && unzip -o -q "${JRBOWSE_TMP_DIR}/jbrowse-web-${TAG}.zip" 'static/*' -x 'static/*.map' -d "${JBROWSE_INSTALL_DIR}"
+    find "${JBROWSE_INSTALL_DIR}/static/js" -type f -name 'main.*.js' -execdir mv '{}' 'main.js' ';'
+}
+
+from_jbrowse_create () {
+    jbrowse create --tag="${TAG}" "${JRBOWSE_TMP_DIR}"
+    # Remove .map files and rename entrypoint
+    find "${JRBOWSE_TMP_DIR}/static/js" -name '*.js.map' -exec rm '{}' '+' -o \
+	 -name 'main.*.js' -execdir mv '{}' 'main.js' ';'
+    mkdir -p "${JBROWSE_INSTALL_DIR}" && mv "${JRBOWSE_TMP_DIR}/static" "${JBROWSE_INSTALL_DIR}"
+}
+
+get_archive_url () {
+    curl -fsSL "${1}" |\
+	jq -r '.assets[] |
+	select(.name | test("jbrowse-web")) |
+	.browser_download_url'
+}
+
+log_stderr() {
+    >&2 echo "$@"
+}
+
+cleanup() {
+    result="$?"
+    # Provide feedback depending on exit status
+    if [[ "${result}" != 0 ]]; then
+	if [[ -z "${TAG:-}" || -z "${JBROWSE_INSTALL_DIR=:-}" ]]; then
+	    log_stderr "Usage: download_jbrowse TAG INSTALL_DIR"
+	else
+	    log_stderr "Failed to install JBrowse ${TAG:-} in ${JBROWSE_INSTALL_DIR}"
+	fi
+    else
+	log_stderr "Successfully install JBrowse ${TAG:-} in ${JBROWSE_INSTALL_DIR:-}"
+    fi
+
+    # In any case, remove temporary directory
+    if [[ -d "${JRBOWSE_TMP_DIR:-}" ]]; then
+	log_stderr "Deleting temporary directory ${JRBOWSE_TMP_DIR}"
+	rm -rf "${JRBOWSE_TMP_DIR}"
+    else
+	log_stderr "Nothing to cleanup"
+    fi
+
+}
+
+trap cleanup EXIT
+
+main "$@"
+

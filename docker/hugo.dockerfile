@@ -1,3 +1,5 @@
+ARG NODE_VERSION=22.2.0
+
 # Stage 1: Download HUGO + build static site. 
 FROM alpine:latest AS build
 RUN apk add --no-cache wget
@@ -15,10 +17,19 @@ COPY ./hugo/ /src
 RUN mkdir /target && \
     hugo -d /target
 
+FROM node:${NODE_VERSION}-slim AS jbrowse
+ARG JBROWSE_VERSION=2.15.4
+WORKDIR /tmp
+RUN npm install -g @jbrowse/cli
+COPY ./scripts/download_jbrowse .
+RUN bash ./download_jbrowse v${JBROWSE_VERSION} /tmp/browser
+
 # Stage 2: Serve the generated html using nginx
 FROM nginxinc/nginx-unprivileged:stable-alpine
 
 COPY docker/nginx-custom.conf /etc/nginx/conf.d/default.conf 
 
 COPY --from=build /target /usr/share/nginx/html
+COPY --from=jbrowse /tmp/browser /usr/share/nginx/html/browser
+
 EXPOSE 8080

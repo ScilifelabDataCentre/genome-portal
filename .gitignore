@@ -39,3 +39,6 @@ targets.mk
 
 # Emacs
 .dirs-local.el
+
+# JBrowse bundle
+hugo/static/browser

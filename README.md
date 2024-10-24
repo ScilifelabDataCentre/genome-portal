@@ -113,7 +113,7 @@ source code.
   data preparation scripts.
 
 - The `docker` folder contains two Dockerfiles:
-	1. `docker/data.dockerfile` used for data preparation (everything that ``make` needs)
+	1. `docker/data.dockerfile` used for data preparation (everything that `make` needs)
 	2. `docker/hugo.dockerfile` used to build and serve the website.
 
 ### Local development
@@ -121,34 +121,63 @@ source code.
 The steps described below requires
 [`docker`](https://www.docker.com/) to be installed.
 
-**1. Clone the repository:**
+**1. Clone the repository**
 
 ```
 git clone git@github.com:ScilifelabDataCentre/genome-portal.git
 cd genome-portal
 ```
 
-**2. Build and install the data needed by JBrowse:**
+**2. Build and install the genomic data**
 
 ```bash
 # Build local image from `docker/data.dockerfile`
-./scripts/dockerbuild.sh data
+./scripts/dockerbuild data
 
 # Run the dockermake script to build the assets and install them locally.
-./scripts/dockermake.sh
+./scripts/dockermake
 ```
-You may need to be patient, some of them are tens of Gigabytes. Should
-only the herring be of interest, for example, you can restrict the
+
+You may need to be patient, some files are tens of Gigabytes. Should
+only a subset of species be of interest, you can restrict the
 scope of the build:
 
 ```bash
-# Build local image from `docker/data.dockerfile`
-./scripts/dockerbuild.sh data
+./scripts/dockermake SPECIES=clupea_harengus,linum_tenue
+```
 
-# build the hugo image
-./scripts/dockerbuild.sh hugo
+**3. Run the web application container**
+
+Then to run the website locally, you have several options
+
+#### Using the latest development image
+
+```bash
+docker pull ghcr.io/scilifelabdatacentre/swg-hugo-site:dev
+./scripts/dockerserve
+```
+
+#### Using a local build
+
+```bash
+./scripts/dockerbuild hugo
+SWG_TAG=local ./scripts/dockerserve
+```
+
+#### Using the Hugo developemt server
+
+This last method is adequate when you want to see changes to the
+source immediately reflected in the web browser. 
+
+It requires the additional step of installing the JBrowse static
+bundle in `hugo/static/browser`
+
+```bash
+./scripts/download_jbrowse v2.15.4 hugo/static/browser
 scripts/dockerserve --dev
 ```
 
-The website will be then visible to you at the address: http://localhost:1313/ on your web browser.
+---
+
+Either of these methods will serve you the website at http://localhost:8080/
 
