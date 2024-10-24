@@ -1,0 +1,62 @@
+{{ $githubURL := "https://github.com/ScilifelabDataCentre/genome-portal" }}
+
+<!-- Split between portal version info and JBrowse version info -->
+{{ $envInfo := split hugo.Environment "|" }}
+{{ $portalInfo := index $envInfo 0 }}
+{{ $jBrowseVersion := index $envInfo 1 }}
+
+{{ $portalHref := "" }}
+{{ $hrefText := "" }}
+
+<!-- GH action triggered build -->
+{{ if strings.Contains $portalInfo "," }}
+    {{ $portalEnvInfo := split $portalInfo "," }}
+    {{ $deploymentType := index $portalEnvInfo 0 }}
+
+    <!-- GH action triggered by release -->
+    {{ if eq $deploymentType "release" }}
+        {{ $versionNumb := index $portalEnvInfo 1 }}
+        {{ $portalHref = printf "%s/tree/%s" $githubURL $versionNumb }}
+        {{ $hrefText = $versionNumb }}
+
+    {{ else }}
+        {{ $gitShaFull := index $portalEnvInfo 1 }}
+        {{ $gitShaShort := substr $gitShaFull 0 7 }}
+        {{ $portalHref = printf "%s/commit/%s" $githubURL $gitShaFull }}
+
+        <!-- GH action build on a push to main aka dev -->
+        {{ if eq $deploymentType "development" }}
+            {{ $hrefText = printf "Built from commit: %s" $gitShaShort }}
+        <!-- GH action build on a feature branch -->
+        {{ else }}
+            {{ $featureBranch := $deploymentType }}
+            {{ $hrefText = printf "Built from commit: %s on branch: %s" $gitShaShort $featureBranch }}
+        {{ end }}
+    {{ end }}
+
+<!-- local build -->
+{{ else }}
+    {{ $portalHref = $githubURL }}
+    {{ $hrefText = "Local dev build" }}
+
+{{ end }}
+
+<!-- Portal version info -->
+<p class="mt-2 mb-0 text-start text-lg-center">
+    <i> Website last updated: {{ now.Format "02 January 2006"}} </i>
+    (<a href="{{ $portalHref }}" target="_blank" rel="noopener noreferrer">{{ $hrefText }}</a>)
+</p>
+
+
+<!-- Happens if site built using Hugo not docker -->
+{{ if eq $jBrowseVersion "" }}
+    {{ $jBrowseVersion = "vX.X.X" }}
+{{ end }}
+
+
+{{ $jBrowseHref := printf "https://github.com/GMOD/jbrowse-components/releases/tag/v%s" $jBrowseVersion }}
+<p class="mt-2 mb-0 text-start text-lg-center">
+    <i> JBrowse Version Used:
+        (<a href="{{ $jBrowseHref }}" target="_blank" rel="noopener noreferrer">{{ $jBrowseVersion }}</a>)
+    </i>
+</p>
