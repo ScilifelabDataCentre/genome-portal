@@ -25,6 +25,8 @@ Please note that the requirements might be subject to change in the future
 
 4. The **data is available in public repositories**. Example repositories include the European Nucleotide Archive - ENA, National Center of Biotechnology Information - NCBI, SciLifeLab Data Repository, Zenodo, among others.
 
+The Genome Portal staff can help you reserve an entry on the portal already during the manuscript writing stage and provide a reference to the entry that can be used in the Data Availability statement of the manuscript. If you desire, we will wait to activate the entry until the manuscript is accepted for publication and the data has been made public.
+
 ## Recommendations
 
 The Genome Portal is able to display diverse data types that are commonly used in genomics studies. Below, you can find recommendations about which data file formats to use, and how to upload data files to public repositories. Following these recommendations will help in the process of assuring that the data is compatible for display on the Genome Portal.
