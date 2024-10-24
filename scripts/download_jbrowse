@@ -1,5 +1,6 @@
 #!/bin/bash
 set -o pipefail
+set -ue
 
 # Download JBrowse web static bundle
 #
@@ -10,9 +11,9 @@ set -o pipefail
 #   TAG: Version tag of the release to be fetched
 #   DIR: Directory where assets should be unpacked
 main () {
-    JBROWSE_TMP=$(mktemp -d)
-    TAG="${1}"
+    TAG="${1:-v2.15.4}"
     INSTALL_DIR="${2:-.}"
+    JBROWSE_TMP=$(mktemp -dt "jbrowse-${TAG}-XXX")
 
     if [[ -d "${INSTALL_DIR}/static" ]]; then
 	log_stderr "${INSTALL_DIR}/static already exists"
@@ -67,13 +68,17 @@ log_stderr() {
     >&2 echo "$@"
 }
 
-main "$@"
+cleanup() {
+    if [[ -d "${JBROWSE_TMP:-}" ]]; then
+	log_stderr "Deleting temporary directory ${JBROWSE_TMP}"
+	rm -rf "${JBROWSE_TMP}"
+    else
+	log_stderr "Nothing to cleanup"
+    fi
+}
 
-if [[ -n "${JBROWSE_TMP}" ]]; then
-    log_stderr "Deleting temporary directory ${JBROWSE_TMP}"
-    rm -rf "${JBROWSE_TMP}"
-else
-    log_stderr "Nothing to cleanup"
-fi
+trap cleanup EXIT
+
+main "$@"
 
 
