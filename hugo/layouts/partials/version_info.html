@@ -1,3 +1,16 @@
+<!--
+This partial generates version information for both the genome-portal and JBrowse which is displayed in the footer of each page.
+
+Logic:
+1. If "hugo.Environment" contains a comma, it indicates a GitHub Actions triggered build:
+   - If the deployment type is "release", set the portalHref and hrefText to the release version.
+   - If the deployment type is "development", set the portalHref and hrefText to the commit SHA.
+   - For other deployment types (e.g. from a feature branches), set the portalHref and hrefText to the commit SHA and branch name.
+
+2. If "hugo.Environment" does not contain a comma, it indicates a local build:
+   - Set the portalHref to the GitHub repository URL and hrefText to "Local dev build".
+-->
+
 {{ $githubURL := "https://github.com/ScilifelabDataCentre/genome-portal" }}
 
 <!-- Split between portal version info and JBrowse version info -->
@@ -16,7 +29,7 @@
     <!-- GH action triggered by release -->
     {{ if eq $deploymentType "release" }}
         {{ $versionNumb := index $portalEnvInfo 1 }}
-        {{ $portalHref = printf "%s/tree/%s" $githubURL $versionNumb }}
+        {{ $portalHref = printf "%s/releases/tag/%s" $githubURL $versionNumb }}
         {{ $hrefText = $versionNumb }}
 
     {{ else }}
@@ -27,22 +40,23 @@
         <!-- GH action build on a push to main aka dev -->
         {{ if eq $deploymentType "development" }}
             {{ $hrefText = printf "Built from commit: %s" $gitShaShort }}
+
         <!-- GH action build on a feature branch -->
         {{ else }}
             {{ $featureBranch := $deploymentType }}
             {{ $hrefText = printf "Built from commit: %s on branch: %s" $gitShaShort $featureBranch }}
         {{ end }}
+
     {{ end }}
 
 <!-- local build -->
 {{ else }}
     {{ $portalHref = $githubURL }}
     {{ $hrefText = "Local dev build" }}
-
 {{ end }}
 
 <!-- Portal version info -->
-<p class="mt-2 mb-0 text-start text-lg-center">
+<p class="mt-3 mt-xl-0 mb-0 text-start text-lg-center">
     <i> Website last updated: {{ now.Format "02 January 2006"}} </i>
     (<a href="{{ $portalHref }}" target="_blank" rel="noopener noreferrer">{{ $hrefText }}</a>)
 </p>
@@ -50,13 +64,13 @@
 
 <!-- Happens if site built using Hugo not docker -->
 {{ if eq $jBrowseVersion "" }}
-    {{ $jBrowseVersion = "vX.X.X" }}
+    {{ $jBrowseVersion = "X.X.X" }}
 {{ end }}
 
 
 {{ $jBrowseHref := printf "https://github.com/GMOD/jbrowse-components/releases/tag/v%s" $jBrowseVersion }}
-<p class="mt-2 mb-0 text-start text-lg-center">
-    <i> JBrowse Version Used:
-        (<a href="{{ $jBrowseHref }}" target="_blank" rel="noopener noreferrer">{{ $jBrowseVersion }}</a>)
+<p class="mt-0 mb-3 text-start text-lg-center">
+    <i> JBrowse version used:
+        (<a href="{{ $jBrowseHref }}" target="_blank" rel="noopener noreferrer">v{{ $jBrowseVersion }}</a>)
     </i>
 </p>
