@@ -340,13 +340,13 @@
         "category": ["Tajima's D"],
         "adapter": {
           "type": "BedTabixAdapter",
-          "scoreColumn": "TajimaD",
+          "scoreColumn": "PI",
           "bedGzLocation": {
-            "uri": "Lten_pop08_TD.bed.bgz"
+            "uri": "Lten_pop08_Pi.bed.bgz"
           },
           "index": {
             "location": {
-              "uri": "Lten_pop08_TD.bed.bgz.tbi"
+              "uri": "Lten_pop08_Pi.bed.bgz.tbi"
             }
           }
         },
@@ -365,13 +365,13 @@
         "category": ["Tajima's D"],
         "adapter": {
           "type": "BedTabixAdapter",
-          "scoreColumn": "TajimaD",
+          "scoreColumn": "PI",
           "bedGzLocation": {
-            "uri": "Lten_pop17_TD.bed.bgz"
+            "uri": "Lten_pop17_Pi.bed.bgz"
           },
           "index": {
             "location": {
-              "uri": "Lten_pop17_TD.bed.bgz.tbi"
+              "uri": "Lten_pop17_Pi.bed.bgz.tbi"
             }
           }
         },
@@ -390,13 +390,13 @@
         "category": ["Tajima's D"],
         "adapter": {
           "type": "BedTabixAdapter",
-          "scoreColumn": "TajimaD",
+          "scoreColumn": "PI",
           "bedGzLocation": {
-            "uri": "Lten_pop21_TD.bed.bgz"
+            "uri": "Lten_pop21_Pi.bed.bgz"
           },
           "index": {
             "location": {
-              "uri": "Lten_pop21_TD.bed.bgz.tbi"
+              "uri": "Lten_pop21_Pi.bed.bgz.tbi"
             }
           }
         },
@@ -415,13 +415,13 @@
         "category": ["Tajima's D"],
         "adapter": {
           "type": "BedTabixAdapter",
-          "scoreColumn": "TajimaD",
+          "scoreColumn": "PI",
           "bedGzLocation": {
-            "uri": "Lten_pop23_TD.bed.bgz"
+            "uri": "Lten_pop23_Pi.bed.bgz"
           },
           "index": {
             "location": {
-              "uri": "Lten_pop23_TD.bed.bgz.tbi"
+              "uri": "Lten_pop23_Pi.bed.bgz.tbi"
             }
           }
         },
@@ -440,13 +440,13 @@
         "category": ["Tajima's D"],
         "adapter": {
           "type": "BedTabixAdapter",
-          "scoreColumn": "TajimaD",
+          "scoreColumn": "PI",
           "bedGzLocation": {
-            "uri": "Lten_pop26_TD.bed.bgz"
+            "uri": "Lten_pop26_Pi.bed.bgz"
           },
           "index": {
             "location": {
-              "uri": "Lten_pop26_TD.bed.bgz.tbi"
+              "uri": "Lten_pop26_Pi.bed.bgz.tbi"
             }
           }
         },
@@ -465,13 +465,13 @@
         "category": ["Tajima's D"],
         "adapter": {
           "type": "BedTabixAdapter",
-          "scoreColumn": "TajimaD",
+          "scoreColumn": "PI",
           "bedGzLocation": {
-            "uri": "Lten_pop32_TD.bed.bgz"
+            "uri": "Lten_pop32_Pi.bed.bgz"
           },
           "index": {
             "location": {
-              "uri": "Lten_pop32_TD.bed.bgz.tbi"
+              "uri": "Lten_pop32_Pi.bed.bgz.tbi"
             }
           }
         },
@@ -490,13 +490,13 @@
         "category": ["Tajima's D"],
         "adapter": {
           "type": "BedTabixAdapter",
-          "scoreColumn": "TajimaD",
+          "scoreColumn": "PI",
           "bedGzLocation": {
-            "uri": "Lten_pop34_TD.bed.bgz"
+            "uri": "Lten_pop34_Pi.bed.bgz"
           },
           "index": {
             "location": {
-              "uri": "Lten_pop34_TD.bed.bgz.tbi"
+              "uri": "Lten_pop34_Pi.bed.bgz.tbi"
             }
           }
         },
@@ -540,13 +540,13 @@
         "category": ["Nucleotide diversity (Pi)"],
         "adapter": {
           "type": "BedTabixAdapter",
-          "scoreColumn": "PI",
+          "scoreColumn": "TajimaD",
           "bedGzLocation": {
-            "uri": "Lten_pop08_Pi.bed.bgz"
+            "uri": "Lten_pop08_TD.bed.bgz"
           },
           "index": {
             "location": {
-              "uri": "Lten_pop08_Pi.bed.bgz.tbi"
+              "uri": "Lten_pop08_TD.bed.bgz.tbi"
             }
           }
         },
@@ -565,13 +565,13 @@
         "category": ["Nucleotide diversity (Pi)"],
         "adapter": {
           "type": "BedTabixAdapter",
-          "scoreColumn": "PI",
+          "scoreColumn": "TajimaD",
           "bedGzLocation": {
-            "uri": "Lten_pop17_Pi.bed.bgz"
+            "uri": "Lten_pop17_TD.bed.bgz"
           },
           "index": {
             "location": {
-              "uri": "Lten_pop17_Pi.bed.bgz.tbi"
+              "uri": "Lten_pop17_TD.bed.bgz.tbi"
             }
           }
         },
@@ -590,13 +590,13 @@
         "category": ["Nucleotide diversity (Pi)"],
         "adapter": {
           "type": "BedTabixAdapter",
-          "scoreColumn": "PI",
+          "scoreColumn": "TajimaD",
           "bedGzLocation": {
-            "uri": "Lten_pop21_Pi.bed.bgz"
+            "uri": "Lten_pop21_TD.bed.bgz"
           },
           "index": {
             "location": {
-              "uri": "Lten_pop21_Pi.bed.bgz.tbi"
+              "uri": "Lten_pop21_TD.bed.bgz.tbi"
             }
           }
         },
@@ -615,13 +615,13 @@
         "category": ["Nucleotide diversity (Pi)"],
         "adapter": {
           "type": "BedTabixAdapter",
-          "scoreColumn": "PI",
+          "scoreColumn": "TajimaD",
           "bedGzLocation": {
-            "uri": "Lten_pop23_Pi.bed.bgz"
+            "uri": "Lten_pop23_TD.bed.bgz"
           },
           "index": {
             "location": {
-              "uri": "Lten_pop23_Pi.bed.bgz.tbi"
+              "uri": "Lten_pop23_TD.bed.bgz.tbi"
             }
           }
         },
@@ -640,13 +640,13 @@
         "category": ["Nucleotide diversity (Pi)"],
         "adapter": {
           "type": "BedTabixAdapter",
-          "scoreColumn": "PI",
+          "scoreColumn": "TajimaD",
           "bedGzLocation": {
-            "uri": "Lten_pop26_Pi.bed.bgz"
+            "uri": "Lten_pop26_TD.bed.bgz"
           },
           "index": {
             "location": {
-              "uri": "Lten_pop26_Pi.bed.bgz.tbi"
+              "uri": "Lten_pop26_TD.bed.bgz.tbi"
             }
           }
         },
@@ -665,13 +665,13 @@
         "category": ["Nucleotide diversity (Pi)"],
         "adapter": {
           "type": "BedTabixAdapter",
-          "scoreColumn": "PI",
+          "scoreColumn": "TajimaD",
           "bedGzLocation": {
-            "uri": "Lten_pop32_Pi.bed.bgz"
+            "uri": "Lten_pop32_TD.bed.bgz"
           },
           "index": {
             "location": {
-              "uri": "Lten_pop32_Pi.bed.bgz.tbi"
+              "uri": "Lten_pop32_TD.bed.bgz.tbi"
             }
           }
         },
@@ -690,13 +690,13 @@
         "category": ["Nucleotide diversity (Pi)"],
         "adapter": {
           "type": "BedTabixAdapter",
-          "scoreColumn": "PI",
+          "scoreColumn": "TajimaD",
           "bedGzLocation": {
-            "uri": "Lten_pop34_Pi.bed.bgz"
+            "uri": "Lten_pop34_TD.bed.bgz"
           },
           "index": {
             "location": {
-              "uri": "Lten_pop34_Pi.bed.bgz.tbi"
+              "uri": "Lten_pop34_TD.bed.bgz.tbi"
             }
           }
         },
