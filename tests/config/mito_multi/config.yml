@@ -1,0 +1,24 @@
+organism: "Parnassius mnemosyne"
+assembly:
+  name: Parnassius_mnemosyne_n_2023_11
+  accession: GCA_963668995.1
+  displayName: "Pmne genome assembly truncated"
+  url: "http://fixtures/mito_clouded_apollo/CAVLGL01_truncated.fasta"
+  aliases: "https://raw.githubusercontent.com/ScilifelabDataCentre/genome-portal/main/scripts/data_stewardship/alias_files_temp_storage/CAVLGL01.fna.alias"
+tracks:
+  - name: "Protein coding genes"
+    url: "https://figshare.scilifelab.se/ndownloader/files/47209624"
+    fileName: "pmne_functional_edit1.gff.gz"
+---
+assembly:
+  name: "Mito_assembly"
+  displayName: "Pmne mito assembly"
+  url: "http://fixtures/mito_clouded_apollo/OZ075093.1.fasta.gz"
+  aliases: "OZ075093.1.fna.alias.nozip"
+tracks:
+  - name: "Mitochondrial genes"
+    url: "https://figshare.scilifelab.se/ndownloader/files/47209654"
+    fileName: "pmne_mtdna.gff.gz"
+  - name: "alias"
+    url: "http://fixtures/mito_clouded_apollo/OZ075093.1.fna.alias"
+    addTrack: false

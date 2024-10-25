@@ -1,0 +1,90 @@
+{
+      "defaultSession": {
+        "id": "pmne_default_session",
+        "name": "Parnassius mnemosyne",
+        "widgets": {
+          "hierarchicalTrackSelector": {
+            "id": "hierarchicalTrackSelector",
+            "type": "HierarchicalTrackSelectorWidget",
+            "view": "pmne_default_session_view",
+            "faceted": {
+              "showSparse": false,
+              "showFilters": true,
+              "showOptions": false,
+              "panelWidth": 400
+            }
+          }
+        },
+        "activeWidgets": {
+          "hierarchicalTrackSelector": "hierarchicalTrackSelector"
+        },
+        "views": [
+          {
+            "id": "pmne_default_session_view",
+            "minimized": false,
+            "type": "LinearGenomeView",
+            "trackLabels": "offset",
+            "offsetPx": 0,
+            "bpPerPx": 10,
+            "displayedRegions": [
+              {
+                "refName": "ENA|CAVLGL010000001|CAVLGL010000001.1",
+                "start": 0,
+                "end": 10000,
+                "reversed": false,
+                "assemblyName": "Parnassius_mnemosyne_n_2023_11"
+              }
+            ],
+            "tracks": [
+              {
+                "id": "pmne_default_protein_coding_genes",
+                "type": "FeatureTrack",
+                "configuration": "pmne_functional_edit1.gff",
+                "minimized": false,
+                "displays": [
+                  {
+                    "id": "pmne_default_protein_coding_genes_display",
+                    "type": "LinearBasicDisplay",
+                    "heightPreConfig": 150,
+                    "configuration": "pmne_functional_edit1.gff-LinearBasicDisplay"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "mito_default_session_view",
+            "minimized": false,
+            "type": "LinearGenomeView",
+            "trackLabels": "offset",
+            "offsetPx": 0,
+            "bpPerPx": 10,
+            "displayedRegions": [
+              {
+                "refName": "ENA|OZ075093|OZ075093.1",
+                "start": 0,
+                "end": 15425,
+                "reversed": false,
+                "assemblyName": "Mito_assembly"
+              }
+            ],
+            "tracks": [
+              {
+                "id": "pmne_mito_genes",
+                "type": "FeatureTrack",
+                "configuration": "pmne_mtdna.gff",
+                "minimized": false,
+                "displays": [
+                  {
+                    "id": "pmne_mito_genes_display",
+                    "type": "LinearBasicDisplay",
+                    "heightPreConfig": 150,
+                    "configuration": "pmne_mtdna.gff-LinearBasicDisplay"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
