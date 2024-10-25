@@ -18,7 +18,9 @@
 **1. Install playwright and it's requirements:**
 
 ```bash
-pip install -r requirements.txt
+python -m venv --prompt=genome-portal .venv
+source ./venv/bin/activate
+python -m pip install -r requirements.txt
 ```
 
 **2. Start running a local version of the server:**
