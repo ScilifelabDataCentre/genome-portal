@@ -15,7 +15,7 @@
 
 ### To run the tests locally 
 
-**1. Install playwright and it's requirements:**
+**1. Install the Playwright test plugin and it's requirements:**
 
 ```bash
 python -m venv --prompt=genome-portal .venv
@@ -23,22 +23,27 @@ source ./venv/bin/activate
 python -m pip install -r requirements.txt
 ```
 
-**2. Start running a local version of the server:**
-
+**2. Install playwright**
 ```bash
-cd hugo
-hugo server
+playwright install
 ```
 
-**3. Run the tests**
+**3. Start running a local version of the server:**
+
+```bash
+./scripts/dockerbuild hugo
+SWG_TAG=local ./scripts/dockerserve
+```
+
+**4. Run the tests**
 
 Run playwright:
 ```bash
-pytest playwright/tests/ --base-url http://localhost:1313 
+pytest playwright/tests/ --base-url http://localhost:8080 
 ```
 
 Note: if you want to run the tests in parralel using playwright you can add the flag `--numprocesses auto`
 
 ```bash
-pytest playwright/tests/ --base-url http://localhost:1313 --numprocesses auto
+pytest playwright/tests/ --base-url http://localhost:8080 --numprocesses auto
 ```
