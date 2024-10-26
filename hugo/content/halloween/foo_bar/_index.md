@@ -11,10 +11,6 @@ resources:
       attribution: demonic domain, CC BY-SATAN
       link: https://commons.wikimedia.org/wiki/File:Pumpkin2007.jpg
 
-cover_image: "/img/species/clupea_harengus.webp"
-img_attrib_text: "Clupea harengus by Gervais et Boulart, public domain"
-img_attrib_link: "https://en.wikipedia.org/wiki/File:Clupea_harengus_Gervais.jpg"
-
 layout: "species_intro"
 banner_title: "Halloween species overview"
 weight: 1
