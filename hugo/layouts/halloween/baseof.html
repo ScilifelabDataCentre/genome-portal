@@ -93,5 +93,8 @@
             <div style="margin: 10px 0 10px 0;"></div>
             {{- partial "footer.html" . -}}
         {{ end }}
+	{{ if hugo.IsDevelopment }}
+	    <pre> {{ debug.Dump . }} </pre>
+	{{ end }}
     </body>
 </html>
