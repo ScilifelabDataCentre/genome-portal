@@ -58,6 +58,15 @@
         <div class="col-lg-4 col-md-12 scilife-subsection">
             <h3>Taxonomy</h3>
 
+	    {{ with .Resources.Get "taxonomy.xml" | transform.Unmarshal  }}
+		{{ with partial "halloween/GetTaxonomyRanks.html" .taxon.lineage.taxon }}
+		    <pre> {{ debug.Dump . }} </pre>
+		{{ end  }}
+	    {{ else }}
+		{{ errorf "Unable to get taxonomy file" }}
+	    {{ end }}
+
+
             {{ $lineage_file := (split .Params.lineage_data_path "/") }}
             {{ $unsorted_dict := index .Site.Data $lineage_file }}
 

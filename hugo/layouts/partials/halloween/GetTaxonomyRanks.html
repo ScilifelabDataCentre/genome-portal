@@ -1,0 +1,11 @@
+{{ $byrank := dict }}
+{{ range . }}
+    {{ $rank := index . "-rank" }}
+    {{ $scientificName := index . "-scientificName" }}
+    {{ $taxId := index . "-taxId" }}
+    {{ with $rank }}
+	{{ $data := dict "scientificName" $scientificName "taxId" $taxId }}
+	{{ $byrank = merge $byrank (dict $rank $data) }}
+    {{ end }}
+{{ end }}
+{{ return $byrank }}
