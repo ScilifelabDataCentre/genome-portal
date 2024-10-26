@@ -1,0 +1,107 @@
+{{ define "early_connections" }}
+
+<link rel="preconnect" href="https://code.jquery.com">
+
+{{ end }}
+
+
+{{ define "script_includes" }}
+
+{{ partial "add_datatables_jquery.html" . }}
+
+{{ end }}
+
+
+
+{{ define "main" }}
+
+{{ partial "species_title.html" . }}
+
+{{ partial "species_nav.html" . }}
+
+<div class="container mt-3">
+
+    <div class="row">
+        <div class="col-md scilife-subsection">
+            <h3>Data availability</h3>
+            <p>
+                The table below lists the data files currently displayed on the Genome Portal.
+                In the Links column, you can find action buttons to download the data file,
+                go to the website of the source repository from where the data was fetched,
+                and (if applicable) the associated scientific article(s) to the data.
+                You can use the toggle on the top right of the table to switch between the default and the expanded table view.
+            </p>
+        </div>
+    </div>
+
+    <!-- This logic uses 1 JSON per species located in the assets folder to:
+            - Generate the table at build time (in the partials)
+            - Publish a copy into the static/public dir so it can be downloaded.
+        This means we don't need to store a copy of the data_tracks.json file inside the static dir. -->
+    {{ $speciesName := index (split .RelPermalink "/") 1 }}
+
+    {{ $tableDataPath := printf "%s/data_tracks.json" $speciesName }}
+    {{ $tableDataResource := resources.Get $tableDataPath }}
+    {{ $tableData := $tableDataResource | transform.Unmarshal }}
+
+    {{ $staticDirPath := printf "/%s/data_tracks" $speciesName }}
+    {{ $staticDirFile := printf "%s/data_tracks.json" $speciesName }}
+
+    {{ (resources.Get $tableDataPath | resources.Copy $staticDirFile).Publish }}
+
+
+    {{ $aliasFileURL := "" }}
+    {{ if .Params.alias_file_url }}
+        {{ $aliasFileURL = .Params.alias_file_url }}
+    {{ end }}
+
+
+    <div class="row">
+        <div class="form-check form-switch scilife-toggle">
+            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+            <label class="form-check-label" for="flexSwitchCheckChecked">Show reduced table view</label>
+        </div>
+
+        <div id="table-container-long">
+            {{ partial "download_table" (dict "tableType" "long" "staticDirPath" $staticDirPath "tableData" $tableData "aliasFileURL" $aliasFileURL )}}
+        </div>
+
+        <div id="table-container-short">
+            {{ partial "download_table" (dict "tableType" "short" "staticDirPath" $staticDirPath "tableData" $tableData "aliasFileURL" $aliasFileURL )}}
+        </div>
+    </div>
+
+</div>
+
+{{ partial "last_updated.html" . }}
+
+<script>
+    document.getElementById('flexSwitchCheckChecked').addEventListener('change', function() {
+        const longTable = document.getElementById('table-container-long');
+        const shortTable = document.getElementById('table-container-short');
+
+        if (this.checked) {
+            longTable.style.display = 'none';
+            shortTable.style.display = 'block';
+        } else {
+            longTable.style.display = 'block';
+            shortTable.style.display = 'none';
+        }
+
+        // Initialize DataTables if not already initialized
+        if (!document.querySelector('#downloadTableLong').classList.contains('dataTable')) {
+            new DataTable('#downloadTableLong');
+        }
+        if (!document.querySelector('#downloadTableShort').classList.contains('dataTable')) {
+            new DataTable('#downloadTableShort');
+        }
+    });
+
+    // Initial state setup
+    document.addEventListener('DOMContentLoaded', function() {
+        const checkbox = document.getElementById('flexSwitchCheckChecked');
+        checkbox.dispatchEvent(new Event('change'));
+    });
+</script>
+
+{{ end }}
