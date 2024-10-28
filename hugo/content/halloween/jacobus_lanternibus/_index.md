@@ -8,14 +8,12 @@ resources:
     name: cover_image
     src: pumpkin.jpg
     params:
-      attribution: demonic domain, CC BY-SATAN
+      attribution: demonic domain, CC BY-SA-TA-N
       link: https://commons.wikimedia.org/wiki/File:Pumpkin2007.jpg
 
 layout: "species_intro"
 banner_title: "Halloween species overview"
 weight: 1
-science_name: "Clupea harengus"
-lineage_data_path: "clupea_harengus/taxonomy"
 
 gbif_taxon_id: "8351946"
 goat_webpage: "https://goat.genomehubs.org/record?recordId=213953&result=taxon&taxonomy=ncbi#Parnassius%20mnemosyne"
