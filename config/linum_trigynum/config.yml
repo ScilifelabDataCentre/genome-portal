@@ -17,10 +17,6 @@ tracks:
     url: "https://figshare.scilifelab.se/ndownloader/files/48879658"
     fileName: "L_trigynum_v1_rep.bed.gz"
   - name: "Ltri_pop01_TD"
-    url: ""
-    fileName: "Ltri_pop01_TD.bed.zip"
-    addTrack: false
-  - name: "Ltri_pop01_TD"
     url: "https://figshare.scilifelab.se/ndownloader/files/49006102"
     fileName: "Ltri_pop01_TD.bed.zip"
     addTrack: false
