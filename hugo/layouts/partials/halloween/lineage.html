@@ -12,8 +12,10 @@
 "species"
 }}
 
+{{/* Ranks that need special labels */}}
 {{ $labels := dict "superkingdom" "Domain"}}
 
+{{/* Ranks that need special name formatting */}}
 {{ $fmt := dict "genus" "<i>%s</i>" "species" "<i>%s</i>" }}
 
 {{ range $order }}
@@ -21,8 +23,10 @@
     {{ with index $ $rank }}
 	<div class="row pb-1">
             <div class="col-12">
+		{{/* Uppercased rank or custom label */}}
                 <b>{{ or (index $labels $rank) $rank | strings.FirstUpper }}:</b>
 		<a href="{{ $ena_url }}{{ .taxId }}" target="_blank">
+		    {{/* Scientific name with optional formatting */}}
 		    {{ printf (or (index $fmt $rank) "%s") .scientificName | safe.HTML }}
 		</a>
             </div>
@@ -36,7 +40,7 @@
 <div class="row pb-1 mb-3">
     <div class="col-12">
         <b>NCBI Taxonomy ID:</b>
-        <a href="{{ $ncbi_url}}{{ .species.taxId }}" target="_blank">
+        <a href="{{ $ncbi_url }}{{ .species.taxId }}" target="_blank">
 	    {{ .species.taxId }}
         </a>
     </div>

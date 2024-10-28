@@ -1,3 +1,11 @@
+{{/*
+Given a dictionary representation of taxonomy.xml, return lineage entries indexed by rank.
+Example output:
+{
+  "species": { "scientificName": "Jacobus lanternibus", "taxId": 666 },
+  "superkingdom": { "scientificName": "Eukaryota", "taxId": 2759 },
+}
+*/}}
 {{ $species := dict "scientificName" (index .taxon "-scientificName") "taxId" (index .taxon "-taxId") }}
 {{ $byrank := dict "species" $species }}
 {{ range .taxon.lineage.taxon }}
