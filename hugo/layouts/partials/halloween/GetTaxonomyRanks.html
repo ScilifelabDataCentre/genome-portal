@@ -1,5 +1,6 @@
-{{ $byrank := dict }}
-{{ range . }}
+{{ $species := dict "scientificName" (index .taxon "-scientificName") "taxId" (index .taxon "-taxId") }}
+{{ $byrank := dict "species" $species }}
+{{ range .taxon.lineage.taxon }}
     {{ $rank := index . "-rank" }}
     {{ $scientificName := index . "-scientificName" }}
     {{ $taxId := index . "-taxId" }}

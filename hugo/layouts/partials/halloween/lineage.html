@@ -1,0 +1,43 @@
+{{ $ena_url := "https://www.ebi.ac.uk/ena/browser/view/Taxon:" }}
+{{ $ncbi_url := "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=" }}
+
+{{ $order := slice
+"superkingdom"
+"kingdom"
+"phylum"
+"class"
+"order"
+"family"
+"genus"
+"species"
+}}
+
+{{ $labels := dict "superkingdom" "Domain"}}
+
+{{ $fmt := dict "genus" "<i>%s</i>" "species" "<i>%s</i>" }}
+
+{{ range $order }}
+    {{ $rank := . }}
+    {{ with index $ $rank }}
+	<div class="row pb-1">
+            <div class="col-12">
+                <b>{{ or (index $labels $rank) $rank | strings.FirstUpper }}:</b>
+		<a href="{{ $ena_url }}{{ .taxId }}" target="_blank">
+		    {{ printf (or (index $fmt $rank) "%s") .scientificName | safe.HTML }}
+		</a>
+            </div>
+            <!-- Force next columns to break to new line -->
+            <div class="w-100"></div>
+        </div>
+    {{ else  }}
+	{{ warnf "Missing lineage entry %s for %s" . $.species.scientificName }}
+    {{ end }}
+{{ end }}
+<div class="row pb-1 mb-3">
+    <div class="col-12">
+        <b>NCBI Taxonomy ID:</b>
+        <a href="{{ $ncbi_url}}{{ .species.taxId }}" target="_blank">
+	    {{ .species.taxId }}
+        </a>
+    </div>
+</div>
