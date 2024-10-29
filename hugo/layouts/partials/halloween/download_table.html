@@ -1,0 +1,128 @@
+{{ $tableType := .tableType }}
+{{ $tableData := .tableData }}
+{{ $staticDirPath := .staticDirPath }}
+{{ $aliasFileURL := .aliasFileURL }}
+
+<div class="table-responsive">
+    <table id="downloadTable{{ $tableType | title}}" class="table table-hover table-bordered">
+        <thead class="table-light">
+            <tr style="white-space: nowrap;">
+                <th>Data track name</th>
+                <th>Description</th>
+                <th>Links</th>
+                {{ if eq $tableType "long"}}
+                    <th>Accession/DOI</th>
+                    <th>File name</th>
+                {{ end }}
+                <th>Principal investigator</th>
+                <th>Principal investigator affiliation</th>
+                {{ if eq $tableType "long"}}
+                    <th>First date on portal</th>
+                {{ end }}
+            </tr>
+        </thead>
+        <tbody class="table-responsive">
+            {{ range $tableData }}
+                <tr>
+                    <td>{{ .dataTrackName }}</td>
+                    <td>{{ .description }}</td>
+                    <td>
+                        <div class="scilife-link-container">
+                        {{ range .links }}
+                            {{ range $linkType, $url := . }}
+
+                                {{ if eq  $linkType "Download"}}
+                                    <a href="{{ $url }}" target="_blank" class="scilife-download-link">
+                                        <img src="/img/icons/download_aqua.svg" alt="Download id">
+                                        Download
+                                    </a>
+
+                                {{ else if eq $linkType "Website"}}
+                                    <a href="{{ $url }}" target="_blank" class="scilife-download-link">
+                                        <img src="/img/icons/external_link_aqua.svg" alt="Website icon">
+                                        Website
+                                    </a>
+
+                                {{ else if eq $linkType "Article"}}
+                                    <a href="{{ $url }}" target="_blank" class="scilife-download-link">
+                                        <img src="/img/icons/file_text.svg" alt="Article icon">
+                                        Article
+                                    </a>
+
+                                {{ end }}
+
+                            {{ end }}
+                        {{ end }}
+                        </div>
+                    </td>
+
+                    {{ if eq $tableType "long"}}
+                    <td>
+                        {{ $accessionUrl := "" }}
+                        {{ range .links}}
+                            {{ if .Website }}
+                                {{ $accessionUrl = .Website }}
+                            {{ end }}
+                        {{ end }}
+                        {{ if $accessionUrl }}
+                            <a href="{{ $accessionUrl }}" >{{ .accessionOrDOI }}</a>
+                        {{ else }}
+                            {{ .accessionOrDOI }}
+                        {{ end }}
+                    </td>
+                    <td>{{ .fileName }}</td>
+                {{ end }}
+
+                    <td>{{ .principalInvestigator }}</td>
+                    <td>{{ .principalInvestigatorAffiliation }}</td>
+
+                    {{ if eq $tableType "long"}}
+                        <td>{{ .firstDateOnPortal }}</td>
+                    {{ end }}
+                </tr>
+
+            {{ end }}
+        </tbody>
+    </table>
+</div>
+
+<div class="row g-1">
+    <div class="col-12">
+      <caption class="scilife-download-table-caption">
+        <a href="{{ $staticDirPath }}" download>
+          <img src="/img/icons/download.svg" alt="Download Icon" class="scilife-icon">
+          Download the table contents as a JSON file.
+        </a>
+      </caption>
+    </div>
+
+    {{ if ne $aliasFileURL "" }}
+      <div class="col-12">
+        <caption class="scilife-download-table-caption">
+          <a href="{{ $aliasFileURL }}" target="_blank">
+            <img src="/img/icons/file.svg" alt="File icon" class="scilife-icon">
+            Open (in a new tab) the refNameAlias text file used in JBrowse to set the aliases for reference sequence names (e.g., to define that "chr1" is an alias for "1").
+          </a>
+        </caption>
+      </div>
+    {{ end }}
+    <div class="col-12">
+      <caption class="scilife-download-table-caption">
+        <a href="/glossary" target="_blank">
+          <img src="/img/icons/book_open.svg" alt="Open book icon" class="scilife-icon">
+          Open the Glossary (in a new tab).
+        </a>
+      </caption>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        new DataTable('#downloadTable{{ $tableType | title}}', {
+            info: false,
+            ordering: true,
+            paging: false,
+            searching: false
+        });
+    });
+</script>
