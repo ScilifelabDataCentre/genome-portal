@@ -31,7 +31,7 @@ embedded within the website to visually explore genome datasets.
 
 - Primary data file sources are available in public repositories
 (such as [ENA](https://www.ebi.ac.uk/ena/browser/home)), and prepared
-for display on `JBrowse` by our `Makefile` recipes (essentially
+for display on JBrowse by our `Makefile` recipes (essentially
 compressing and indexing).
 
 - The code for the Genome Portal is available under an MIT (open
