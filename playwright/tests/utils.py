@@ -8,24 +8,38 @@ from pathlib import Path
 
 def get_list_of_species() -> list[str]:
     """
-    Search the Hugo content directory to get all the species shown.
+    Search the Hugo content directory to get all the species on the website.
     This helper function is useful for testing each species page in the same way.
+
+    The function also validates each page is not in draft mode (wont show up on website yet)
     """
     HUGO_SPECIES_DIR = Path(__file__).parent.parent.parent / "hugo/content/species"
 
     species = []
     for folder in HUGO_SPECIES_DIR.iterdir():
-        if folder.is_dir():
-            species.append(folder.name)
+        if not folder.is_dir():
+            continue
+
+        index_file = folder / "_index.md"
+        if not index_file.exists():
+            continue
+
+        with index_file.open() as file_in:
+            content = file_in.read()
+            if "draft: true" not in content:
+                species.append(folder.name)
 
     return species
+
+
+SPECIES_LIST = get_list_of_species()
 
 
 def all_intro_page_paths() -> list[str]:
     """
     Return all species intro page paths as strings.
     """
-    return get_list_of_species()
+    return SPECIES_LIST
 
 
 def all_assembly_page_paths() -> list[str]:
@@ -33,7 +47,7 @@ def all_assembly_page_paths() -> list[str]:
     Return all species assembly page paths as strings.
     """
     assembly_paths = []
-    for species in get_list_of_species():
+    for species in SPECIES_LIST:
         assembly_paths.append(f"{species}/assembly")
     return assembly_paths
 
@@ -43,7 +57,7 @@ def all_download_page_paths() -> list[str]:
     Return all species download page paths as strings.
     """
     download_paths = []
-    for species in get_list_of_species():
+    for species in SPECIES_LIST:
         download_paths.append(f"{species}/download")
     return download_paths
 
@@ -58,6 +72,8 @@ def all_non_species_pages_paths() -> list[str]:
         "about/sv",
         "contact",
         "contribute",
+        "contribute/recommendations_for_file_formats",
+        "contribute/recommendations_for_making_data_public",
         "glossary",
         "privacy",
     ]

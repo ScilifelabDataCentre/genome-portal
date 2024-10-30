@@ -20,7 +20,6 @@ def test_for_placeholder_text(page_obj: Page) -> None:
     By using indirect=True, we can pass the list of paths to the fixture (instead of the directly to test function).
     The fixture converts them to page objects and passes them to the test function.
     """
-    print(page_obj.url)
     PLACEHOLDERS = ["EDIT", "TODO", "XXXXXX", "DD/MM/YYYY"]
     for placeholder in PLACEHOLDERS:
         locator = page_obj.get_by_text(placeholder)
