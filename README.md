@@ -1,4 +1,4 @@
-The Swedish Reference Genome Portal
+Swedish Reference Genome Portal
 ========
 
 This repository contains the source code for the Swedish Reference Genome Portal (https://genomes.scilifelab.se/), which:
