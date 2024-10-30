@@ -1,7 +1,7 @@
 Swedish Reference Genome Portal
 ========
 
-This repository contains the source code for the Swedish Reference Genome Portal (https://genomes.scilifelab.se/), which:
+This repository contains the source code for the [Swedish Reference Genome Portal](https://genomes.scilifelab.se/), which:
 
 - Showcases genome research performed in Sweden on non-model eukaryotic species.
 - Lowers the barrier of entry to access, visualise, and interpret genome data.
@@ -23,11 +23,16 @@ This repository contains the source code for the Swedish Reference Genome Portal
 
 ## Overview
 
-- The Swedish Reference Genome Portal website is built using the [Hugo](https://gohugo.io/) static web generator.
+- The Swedish Reference Genome Portal website is built using the
+[Hugo](https://gohugo.io/) static web generator.
 
--  The [JBrowse2](https://jbrowse.org/jb2/) genome browser is embedded within the website to visually explore genomic datasets.
+-  The [JBrowse2](https://jbrowse.org/jb2/) genome browser is
+embedded within the website to visually explore genome datasets.
 
-- Primary data file sources are available in public repositories (such as [ENA](https://www.ebi.ac.uk/ena/browser/home)), and prepared for display on `JBrowse` by our `Makefile` recipes (essentially compressing and indexing).
+- Primary data file sources are available in public repositories
+(such as [ENA](https://www.ebi.ac.uk/ena/browser/home)), and prepared
+for display on `JBrowse` by our `Makefile` recipes (essentially
+compressing and indexing).
 
 - The code for the Genome Portal is available under an MIT (open
   source) license.
@@ -45,9 +50,13 @@ See 'Cite this repository' in the "About" section at the top right of this page.
 
 Two types of contributions are especially welcome:
 
-- **Datasets for display in the portal**: Consult our [requirements](https://genomes.scilifelab.se/contribute) for including a genome dataset to the portal, and contact us if you have any questions.
+- **Datasets for display in the portal**: Consult our
+[requirements](https://genomes.scilifelab.se/contribute) for including a
+genome dataset to the portal, and contact us if you have any questions.
 
-- **Source code and documentation**: We welcome contributions, small and large, to our codebase and documentation. They will be published after review and approval by the Genome Portal team. Fork, open a PR, or contact us to discuss ideas!
+- **Source code and documentation**: We welcome contributions, small and large,
+to our codebase and documentation. They will be published after review and
+approval by the Genome Portal team. Fork, open a PR, or contact us to discuss ideas!
 
 
 ## Funding
@@ -173,4 +182,10 @@ Either of these methods will serve you the website at http://localhost:8080/
 
 ## Credits
 
-The Swedish Reference Genome Portal is developed and maintained by the DDLS Data Science Node in Evolution and Biodiversity (DSN-EB) team as part of the [SciLifeLab Data Platform](https://data.scilifelab.se/), operated by the SciLifeLab Data Centre. Members if the DSN-EB team are affiliated with [SciLifeLab Data Centre](https://www.scilifelab.se/data/) and the [National Bioinformatics Infrastructure Sweden (NBIS)](https://nbis.se/), based at Uppsala University and the Swedish Museum of Natural History. 
+The Swedish Reference Genome Portal is developed and maintained by the DDLS 
+Data Science Node in Evolution and Biodiversity (DSN-EB) team as part of 
+the [SciLifeLab Data Platform](https://data.scilifelab.se/), operated by the 
+SciLifeLab Data Centre. Members if the DSN-EB team are affiliated 
+with [SciLifeLab Data Centre](https://www.scilifelab.se/data/) 
+and the [National Bioinformatics Infrastructure Sweden (NBIS)](https://nbis.se/), 
+based at Uppsala University and the Swedish Museum of Natural History. 
