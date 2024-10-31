@@ -10,16 +10,11 @@
 	    <div class="row align-items-center">
 		<div class="col-md scilife-subsection">
 		    <h3>Description</h3>
-		    <ul style="font-size: 1.125rem;">
-			{{ range slice "name" "type" "level" "representation" "accession" }}
-			    {{ $entry := index $metadata . }}
-			    <li><strong>{{ $entry.label }}: </strong> {{ $entry.value }}</li>
-			{{ end }}
-		    </ul>
+		    {{ partial "halloween/assembly_description.html" $metadata }}
 		</div>
 		<div class="col-md scilife-subsection text-md-center">
 		    <div class="mb-3">
-			<a href="https://www.ebi.ac.uk/ena/browser/view/{{ $metadata.accession.value }}" target="_blank">
+			<a href="https://www.ebi.ac.uk/ena/browser/view/{{ $metadata.accession }}" target="_blank">
 			    <button class="btn btn-lg scilife-ncbi-ena-btn">
 				Open assembly record in the ENA
 				<img src="/img/icons/open_new_tab_white.svg" alt="Open in new tab Icon" class="scilife-icon-lg">
@@ -27,7 +22,7 @@
 			</a>
 		    </div>
 		    <div>
-			<a href="https://www.ncbi.nlm.nih.gov/datasets/genome/{{ $metadata.accession.value }}" target="_blank">
+			<a href="https://www.ncbi.nlm.nih.gov/datasets/genome/{{ $metadata.accession }}" target="_blank">
 			    <button class="btn btn-lg scilife-ncbi-ena-btn">
 				Open assembly record in the NCBI
 				<img src="/img/icons/open_new_tab_white.svg" alt="Open in new tab Icon" class="scilife-icon-lg">

@@ -1,15 +1,5 @@
-name:
-  label: "Assembly Name"
-  value: "Foobarus"
-type:
-  label: "Assembly Type"
-  value: ""
-level:
-  label: "Assembly Level"
-  value: ""
-representation:
-  label: "Assembly Representation"
-  value: ""
-accession:
-  label: "Accession"
-  value: "GCA_XXX"
+name: "Jaco_Lant"
+type: "Spectroid"
+level: "Underwordly"
+repr: "Partially obscure"
+accession: "GCA_666"
