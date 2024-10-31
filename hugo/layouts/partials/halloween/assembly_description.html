@@ -1,0 +1,14 @@
+{{ $labels := dict
+"name" "Assembly Name"
+"type" "Assembly Type"
+"level" "Assembly Level"
+"repr" "Assembly Representation"
+"accession" "Accession"
+}}
+
+
+<ul style="font-size: 1.125rem;">
+    {{ range $key, $label := $labels }}
+	<li><strong>{{ $label }}: </strong> {{ index $ $key }}</li>
+    {{ end }}
+</ul>
