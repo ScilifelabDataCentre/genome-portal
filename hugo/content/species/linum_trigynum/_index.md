@@ -3,7 +3,7 @@
 title: "*Linum trigynum* L."
 subtitle: "French Flax"
 
-last_updated: "02/09/2024"
+last_updated: "31/10/2024"
 
 cover_image: "/img/species/Ltrigynum_field_B_Laenen_A_Desamore_4-3ratio_crop.webp"
 img_attrib_text: "Linum trigynum by Benjamin Laenen and Aurélie Désamoré, used with permission"
@@ -36,12 +36,21 @@ initialZoom: 1
 
 A recent genomic study has shown that *L. trigynum* is a short homostyle that primarily reproduces through self-fertilization in natural populations (Gutiérrez-Valencia et al. 2024). *L. trigynum* has lower genetic diversity and exhibits signatures of relaxed purifying and positive selection across its genome, compared to the related distylous species *L. tenue* (Gutiérrez-Valencia et al. 2024).
 
-#### Genome reference
+#### How to cite
 
 If you use the data presented in the genome portal from this species in your research, please cite the original publication:
 
 - <p> Gutiérrez-Valencia, J., Zervakis, P.-I., Postel, Z., Fracassetti, M., Losvik, A., Mehrabi, S., Bunikis, I., Soler, L., Hughes, P. W., Désamoré, A., Laenen, B., Abdelaziz, M., Pettersson, O. V., Arroyo, J., & Slotte, T. (2024). Genetic Causes and Genomic Consequences of Breakdown of Distyly in <i>Linum trigynum</i>. Molecular Biology and Evolution, 41(5), msae087. <a href="https://doi.org/10.1093/molbev/msae087">https://doi.org/10.1093/molbev/msae087</a> </p>
 
+If you have used the pages for this species in the Genome Portal, please refer to it in-text as: "The *Linum trigynum* entry in the Swedish Reference Genome Portal ([access date YYYY-MM-DD])." and use the following for the bibliography:
+
+- <p> Swedish Reference Genome Portal ([access date YYYY-MM-DD]), SciLifeLab Data Centre, version ([version number]) from <a href="https://www.genomes.scilifelab.se">https://www.genomes.scilifelab.se</a>. RRID:XXXXXX.
+
+#### References
+
+- Gutiérrez-Valencia, J., Zervakis, P.-I., Postel, Z., Fracassetti, M., Losvik, A., Mehrabi, S., Bunikis, I., Soler, L., Hughes, P. W., Désamoré, A., Laenen, B., Abdelaziz, M., Pettersson, O. V., Arroyo, J., & Slotte, T. (2024). Genetic Causes and Genomic Consequences of Breakdown of Distyly in *Linum trigynum*. Molecular Biology and Evolution, 41(5), msae087. <https://doi.org/10.1093/molbev/msae087>
+
 #### Changelog
 
+- 31/10/2024 - Population genomics tracks added to genome browser
 - 15/10/2024 - Species first published on the Portal

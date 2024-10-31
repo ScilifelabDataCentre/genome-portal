@@ -1,4 +1,5 @@
 ---
+draft: true # TODO - temporary
 # Required params below
 title: "*Clupea harengus*"
 subtitle: "Atlantic herring"
@@ -42,9 +43,13 @@ initialZoom: 1
 
 Write some content here in markdown for the introduction tab of the species page.
 
-#### Genome reference
+#### How to cite
 
 [EDIT]
+
+If you have used the pages for this species in the Genome Portal, please refer to it in-text as: "The *Clupea harengus* entry in the Swedish Reference Genome Portal ([access date YYYY-MM-DD])." and use the following for the bibliography:
+
+- <p> Swedish Reference Genome Portal ([access date YYYY-MM-DD]), SciLifeLab Data Centre, version ([version number]) from <a href="https://www.genomes.scilifelab.se">https://www.genomes.scilifelab.se</a>. RRID:XXXXXX.
 
 #### References
 

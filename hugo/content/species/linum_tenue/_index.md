@@ -3,7 +3,7 @@
 title: "*Linum tenue* Desf."
 subtitle: "A species of flax"
 
-last_updated: "02/09/2024"
+last_updated: "31/10/2024"
 
 cover_image: "/img/species/Ltenue_thrum_pin_B_Laenen_A_Desamore_4-3ratio_crop.webp"
 img_attrib_text: "Linum tenue by Benjamin Laenen and Aurélie Désamoré, used with permission. Flower morphs: thrum (left) and pin (right)."
@@ -36,11 +36,15 @@ initialZoom: 5
 
 The distyly supergene of *L. tenue* consists of an ~260 kb region on scaffold 10 of the genome assembly of *L. tenue* (Gutiérrez-Valencia et al. 2022). At the *L. tenue* distyly supergene, short-styled thrum morph individuals are hemizygous, harboring only the longer, dominant allele, whereas long-styled pin morph individuals are homozygous for the shorter, recessive allele.
 
-#### Genome reference
+#### How to cite
 
 If you use the data presented in the genome portal from this species in your research, please cite the original publication:
 
 - <p> Gutiérrez-Valencia, J., Fracassetti, M., Berdan, E. L., Bunikis, I., Soler, L., Dainat, J., Kutschera, V. E., Losvik, A., Désamoré, A., Hughes, P. W., Foroozani, A., Laenen, B., Pesquet, E., Abdelaziz, M., Pettersson, O. V., Nystedt, B., Brennan, A. C., Arroyo, J., & Slotte, T. (2022). Genomic analyses of the <i>Linum </i>distyly supergene reveal convergent evolution at the molecular level. Current Biology, 32(20), 4360-4371.e6. <a href="https://doi.org/10.1016/j.cub.2022.08.042"> https://doi.org/10.1016/j.cub.2022.08.042</a></p>
+
+If you have used the pages for this species in the Genome Portal, please refer to it in-text as: "The *Linum tenue* entry in the Swedish Reference Genome Portal ([access date YYYY-MM-DD])." and use the following for the bibliography:
+
+- <p> Swedish Reference Genome Portal ([access date YYYY-MM-DD]), SciLifeLab Data Centre, version ([version number]) from <a href="https://www.genomes.scilifelab.se">https://www.genomes.scilifelab.se</a>. RRID:XXXXXX.
 
 #### References
 
@@ -54,4 +58,5 @@ If you use the data presented in the genome portal from this species in your res
 
 #### Changelog
 
+- 31/10/2024 - Population genomics tracks added to genome browser
 - 15/10/2024 - Species first published on the Portal

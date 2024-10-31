@@ -3,7 +3,7 @@
 title: "*Littorina saxatilis*"
 subtitle: "Rough periwinkle"
 
-last_updated: "27/09/2024"
+last_updated: "15/10/2024"
 
 cover_image: "/img/species/littorina_saxatilis.webp"
 img_attrib_text: "Littorina saxatilis by Patrik Larsson, used with permission."
@@ -22,9 +22,9 @@ goat_webpage: "https://goat.genomehubs.org/record?recordId=31220&result=taxon&ta
 
 # These 3 params define the initial view for the map
 # latitude and longitude are for the map center.
-latitude: 0
-longitude: 0
-initialZoom: 1
+latitude: 37
+longitude: -37
+initialZoom: 2
 ---
 
 ### Description
@@ -37,11 +37,15 @@ initialZoom: 1
 - Number of chromosomes: 17
 - Current number of identified inversions: 22
 
-#### Genome reference
+#### How to cite
 
 If you use the data presented in the genome portal from this species in your research, please cite the original publication:
 
 - <p> De Jode, A., Faria, R., Formenti, G., Sims, Y., Smith, T. P., Tracey, A., Wood, J. M. D., Zagrodzka, Z. B., Johannesson, K., Butlin, R. K., & Leder, E. H. (2024). Chromosome-scale Genome Assembly of the Rough Periwinkle <i>Littorina saxatilis</i>. Genome Biology and Evolution, 16(4), evae076. <a href="https://doi.org/10.1093/gbe/evae076"> https://doi.org/10.1093/gbe/evae076</a></p>
+
+If you have used the pages for this species in the Genome Portal, please refer to it in-text as: "The *Littorina saxatilis* entry in the Swedish Reference Genome Portal ([access date YYYY-MM-DD])." and use the following in the bibliography:
+
+- <p> Swedish Reference Genome Portal ([access date YYYY-MM-DD]), SciLifeLab Data Centre, version ([version number]) from <a href="https://www.genomes.scilifelab.se">https://www.genomes.scilifelab.se</a>. RRID:XXXXXX.
 
 #### References
 
