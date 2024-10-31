@@ -14,7 +14,7 @@ On this page, you will find information about how to cite the Genome Portal and 
 To cite the Swedish Reference Genome Portal, please use the following:
 
 **APA format**:\
-Swedish Reference Genome Portal ([access date YYYY-MM-DD]), SciLifeLab Data Centre & NBIS, version ([version number]) from <https://www.genomes.scilifelab.se>. RRID:XXXXXX. Source code: <https://doi.org/10.5281/zenodo.XXXXXX>.
+Swedish Reference Genome Portal ([access date YYYY-MM-DD]), SciLifeLab Data Centre, version ([version number]) from <https://www.genomes.scilifelab.se>. RRID:XXXXXX.
 
 Since the information on the portal is updated continuously,  we ask you to specify the version number of the Genome Portal and the date you accessed it in the citation by replacing the [access date YYYY-MM-DD] and [version number] placeholders. You will find the version number of the portal at the bottom of the footer on any page, or on our <a target="_blank" href="https://github.com/ScilifelabDataCentre/genome-portal/">GitHub repository</a> under 'releases'.
 
@@ -36,6 +36,15 @@ Researchers who have submitted their data to the Genome Portal may want to inclu
 "Visualisations of the genome assemby and annotation tracks from this publication can be found in the Swedish Reference Genome Portal ([access date YYYY-MM-DD]) at <https://genomes.scilifelab.se/[species_name]>."
 
 where [species_name] should be replaced with the binomal name of your species in lower case letters and an underscore, and Swedish Reference Genome Portal ([access date YYYY-MM-DD]) is the APA formatted in-text pointer to the reference stated above in the [Citing the website and the source code](#citing-the-website-and-the-source-code) section.
+
+#### Citing the source code
+
+The Genome Portal is operated by the <a target="_blank" href="https://scilifelab.se/data">SciLifeLab Data Centre</a> and partners. All of the source code used to generate the website is available on [GitHub](https://github.com/ScilifelabDataCentre/genome-portal/). The code is published under the MIT license. If you have reused the code or otherwise want to cite the code, please use the following:
+
+**APA format:**\
+SciLifeLab Data Centre ([year]). genome-portal. Version: [version number] [Software]. Zenodo. <https://doi.org/10.5281/zenodo.XXXXXX>.
+
+where [year] and [version number] are placeholders for the year and version number of the code release you want to cite. This information can for instance be found on our <a target="_blank" href="https://github.com/ScilifelabDataCentre/genome-portal/">GitHub repository</a> or in our <a target="_blank" href="https://doi.org/10.5281/zenodo.XXXXXX">Zenodo record</a>.
 
 ### 2. Citing the data in the portal
 
