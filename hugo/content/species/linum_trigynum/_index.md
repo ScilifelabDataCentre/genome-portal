@@ -3,7 +3,7 @@
 title: "*Linum trigynum* L."
 subtitle: "French Flax"
 
-last_updated: "02/09/2024"
+last_updated: "31/10/2024"
 
 cover_image: "/img/species/Ltrigynum_field_B_Laenen_A_Desamore_4-3ratio_crop.webp"
 img_attrib_text: "Linum trigynum by Benjamin Laenen and Aurélie Désamoré, used with permission"
@@ -44,4 +44,5 @@ If you use the data presented in the genome portal from this species in your res
 
 #### Changelog
 
+- 31/10/2024 - Population genomics tracks added to genome browser
 - 15/10/2024 - Species first published on the Portal

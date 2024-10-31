@@ -342,11 +342,11 @@
         "type": "BedTabixAdapter",
         "scoreColumn": "TajimaD",
         "bedGzLocation": {
-          "uri": "Ltri_pop03_Pi.bed.bgz"
+          "uri": "Ltri_pop03_TD.bed.bgz"
         },
         "index": {
           "location": {
-            "uri": "Ltri_pop03_Pi.bed.bgz.tbi"
+            "uri": "Ltri_pop03_TD.bed.bgz.tbi"
           }
         }
       },
@@ -367,11 +367,11 @@
         "type": "BedTabixAdapter",
         "scoreColumn": "TajimaD",
         "bedGzLocation": {
-          "uri": "Ltri_pop04_Pi.bed.bgz"
+          "uri": "Ltri_pop04_TD.bed.bgz"
         },
         "index": {
           "location": {
-            "uri": "Ltri_pop04_Pi.bed.bgz.tbi"
+            "uri": "Ltri_pop04_TD.bed.bgz.tbi"
           }
         }
       },
@@ -392,11 +392,11 @@
         "type": "BedTabixAdapter",
         "scoreColumn": "TajimaD",
         "bedGzLocation": {
-          "uri": "Ltri_pop06_Pi.bed.bgz"
+          "uri": "Ltri_pop06_TD.bed.bgz"
         },
         "index": {
           "location": {
-            "uri": "Ltri_pop06_Pi.bed.bgz.tbi"
+            "uri": "Ltri_pop06_TD.bed.bgz.tbi"
           }
         }
       },
@@ -417,11 +417,11 @@
         "type": "BedTabixAdapter",
         "scoreColumn": "TajimaD",
         "bedGzLocation": {
-          "uri": "Ltri_pop07_Pi.bed.bgz"
+          "uri": "Ltri_pop07_TD.bed.bgz"
         },
         "index": {
           "location": {
-            "uri": "Ltri_pop07_Pi.bed.bgz.tbi"
+            "uri": "Ltri_pop07_TD.bed.bgz.tbi"
           }
         }
       },
@@ -442,11 +442,11 @@
         "type": "BedTabixAdapter",
         "scoreColumn": "TajimaD",
         "bedGzLocation": {
-          "uri": "Ltri_pop08_Pi.bed.bgz"
+          "uri": "Ltri_pop08_TD.bed.bgz"
         },
         "index": {
           "location": {
-            "uri": "Ltri_pop08_Pi.bed.bgz.tbi"
+            "uri": "Ltri_pop08_TD.bed.bgz.tbi"
           }
         }
       },
@@ -467,11 +467,11 @@
         "type": "BedTabixAdapter",
         "scoreColumn": "TajimaD",
         "bedGzLocation": {
-          "uri": "Ltri_pop10_Pi.bed.bgz"
+          "uri": "Ltri_pop10_TD.bed.bgz"
         },
         "index": {
           "location": {
-            "uri": "Ltri_pop10_Pi.bed.bgz.tbi"
+            "uri": "Ltri_pop10_TD.bed.bgz.tbi"
           }
         }
       },
@@ -492,11 +492,11 @@
         "type": "BedTabixAdapter",
         "scoreColumn": "TajimaD",
         "bedGzLocation": {
-          "uri": "Ltri_pop11_Pi.bed.bgz"
+          "uri": "Ltri_pop11_TD.bed.bgz"
         },
         "index": {
           "location": {
-            "uri": "Ltri_pop11_Pi.bed.bgz.tbi"
+            "uri": "Ltri_pop11_TD.bed.bgz.tbi"
           }
         }
       },
@@ -542,11 +542,11 @@
         "type": "BedTabixAdapter",
         "scoreColumn": "PI",
         "bedGzLocation": {
-          "uri": "Ltri_pop03_TD.bed.bgz"
+          "uri": "Ltri_pop03_Pi.bed.bgz"
         },
         "index": {
           "location": {
-            "uri": "Ltri_pop03_TD.bed.bgz.tbi"
+            "uri": "Ltri_pop03_Pi.bed.bgz.tbi"
           }
         }
       },
@@ -567,11 +567,11 @@
         "type": "BedTabixAdapter",
         "scoreColumn": "PI",
         "bedGzLocation": {
-          "uri": "Ltri_pop04_TD.bed.bgz"
+          "uri": "Ltri_pop04_Pi.bed.bgz"
         },
         "index": {
           "location": {
-            "uri": "Ltri_pop04_TD.bed.bgz.tbi"
+            "uri": "Ltri_pop04_Pi.bed.bgz.tbi"
           }
         }
       },
@@ -592,11 +592,11 @@
         "type": "BedTabixAdapter",
         "scoreColumn": "PI",
         "bedGzLocation": {
-          "uri": "Ltri_pop06_TD.bed.bgz"
+          "uri": "Ltri_pop06_Pi.bed.bgz"
         },
         "index": {
           "location": {
-            "uri": "Ltri_pop06_TD.bed.bgz.tbi"
+            "uri": "Ltri_pop06_Pi.bed.bgz.tbi"
           }
         }
       },
@@ -617,11 +617,11 @@
         "type": "BedTabixAdapter",
         "scoreColumn": "PI",
         "bedGzLocation": {
-          "uri": "Ltri_pop07_TD.bed.bgz"
+          "uri": "Ltri_pop07_Pi.bed.bgz"
         },
         "index": {
           "location": {
-            "uri": "Ltri_pop07_TD.bed.bgz.tbi"
+            "uri": "Ltri_pop07_Pi.bed.bgz.tbi"
           }
         }
       },
@@ -642,11 +642,11 @@
         "type": "BedTabixAdapter",
         "scoreColumn": "PI",
         "bedGzLocation": {
-          "uri": "Ltri_pop08_TD.bed.bgz"
+          "uri": "Ltri_pop08_Pi.bed.bgz"
         },
         "index": {
           "location": {
-            "uri": "Ltri_pop08_TD.bed.bgz.tbi"
+            "uri": "Ltri_pop08_Pi.bed.bgz.tbi"
           }
         }
       },
@@ -667,11 +667,11 @@
         "type": "BedTabixAdapter",
         "scoreColumn": "PI",
         "bedGzLocation": {
-          "uri": "Ltri_pop10_TD.bed.bgz"
+          "uri": "Ltri_pop10_Pi.bed.bgz"
         },
         "index": {
           "location": {
-            "uri": "Ltri_pop10_TD.bed.bgz.tbi"
+            "uri": "Ltri_pop10_Pi.bed.bgz.tbi"
           }
         }
       },
@@ -692,11 +692,11 @@
         "type": "BedTabixAdapter",
         "scoreColumn": "PI",
         "bedGzLocation": {
-          "uri": "Ltri_pop11_TD.bed.bgz"
+          "uri": "Ltri_pop11_Pi.bed.bgz"
         },
         "index": {
           "location": {
-            "uri": "Ltri_pop11_TD.bed.bgz.tbi"
+            "uri": "Ltri_pop11_Pi.bed.bgz.tbi"
           }
         }
       },
