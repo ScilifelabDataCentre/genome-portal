@@ -1,6 +1,6 @@
 ---
 title: "Download"
 layout: "species_download"
-url: "clupea_harengus/download"
+url: "jacobus_lanternibus/download"
 weight: 3
 ---

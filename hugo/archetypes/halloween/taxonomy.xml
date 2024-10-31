@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TAXON_SET>
+<taxon scientificName="Cucurbita pepo" taxId="3663" parentTaxId="3660" rank="species" hidden="true" taxonomicDivision="PLN" geneticCode="1" mitochondrialGeneticCode="1" plastIdGeneticCode="11">
+  <lineage>
+    <taxon scientificName="Cucurbita" commonName="marrows" taxId="3660" rank="genus" hidden="false"/>
+    <taxon scientificName="Cucurbiteae" taxId="1003878" rank="tribe" hidden="false"/>
+    <taxon scientificName="Cucurbitaceae" taxId="3650" rank="family" hidden="false"/>
+    <taxon scientificName="Cucurbitales" taxId="71239" rank="order" hidden="false"/>
+    <taxon scientificName="fabids" taxId="91835" rank="clade" hidden="false"/>
+    <taxon scientificName="rosids" taxId="71275" rank="clade" hidden="false"/>
+    <taxon scientificName="Pentapetalae" taxId="1437201" rank="clade" hidden="false"/>
+    <taxon scientificName="Gunneridae" taxId="91827" rank="clade" hidden="false"/>
+    <taxon scientificName="eudicotyledons" taxId="71240" rank="clade" hidden="false"/>
+    <taxon scientificName="Mesangiospermae" taxId="1437183" rank="clade" hidden="true"/>
+    <taxon scientificName="Magnoliopsida" commonName="flowering plants" taxId="3398" rank="class" hidden="false"/>
+    <taxon scientificName="Spermatophyta" taxId="58024" rank="clade" hidden="false"/>
+    <taxon scientificName="Euphyllophyta" taxId="78536" rank="clade" hidden="true"/>
+    <taxon scientificName="Tracheophyta" taxId="58023" rank="clade" hidden="false"/>
+    <taxon scientificName="Embryophyta" taxId="3193" rank="clade" hidden="false"/>
+    <taxon scientificName="Streptophytina" taxId="131221" rank="subphylum" hidden="true"/>
+    <taxon scientificName="Streptophyta" taxId="35493" rank="phylum" hidden="false"/>
+    <taxon scientificName="Viridiplantae" taxId="33090" rank="kingdom" hidden="false"/>
+    <taxon scientificName="Eukaryota" commonName="eucaryotes" taxId="2759" rank="superkingdom" hidden="false"/>
+    <taxon scientificName="cellular organisms" taxId="131567" hidden="true"/>
+    <taxon scientificName="root" taxId="1" hidden="true"/>
+  </lineage>
+  <children>
+    <taxon scientificName="Cucurbita pepo subsp. pepo" commonName="vegetable marrow" taxId="3664" rank="subspecies"/>
+    <taxon scientificName="Cucurbita pepo subsp. fraterna" taxId="37649" rank="subspecies"/>
+    <taxon scientificName="Cucurbita pepo subsp. ovifera" taxId="184141" rank="subspecies"/>
+    <taxon scientificName="Cucurbita pepo subsp. ovifera x subsp. fraterna" taxId="300824" rank="subspecies"/>
+    <taxon scientificName="Cucurbita pepo subsp. pepo x Cucurbita pepo subsp. fraterna" taxId="2591908" rank="subspecies"/>
+    <taxon scientificName="Cucurbita pepo subsp. texana" taxId="2726055" rank="subspecies"/>
+  </children>
+</taxon>
+</TAXON_SET>

@@ -62,7 +62,7 @@
 			{{ partial "halloween/lineage.html" . }}
 		    {{ end  }}
 		{{ else }}
-		    {{ errorf "Unable to get taxonomy file" }}
+		    {{ errorf "Missing taxonomy file: %s/taxonomy.json" $.Path }}
 		{{ end }}
 
             </div>
