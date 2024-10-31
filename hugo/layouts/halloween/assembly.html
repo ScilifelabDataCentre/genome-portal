@@ -4,17 +4,16 @@
 
     {{ partial "species_nav.html" . }}
 
-    <div class="container mt-3">
-	{{ with .Resources.Get "assembly.yaml" | transform.Unmarshal }}
-	    {{ $metadata := .description }}
+    {{ with .Resources.Get "assembly.yaml" | transform.Unmarshal }}
+	<div class="container mt-3">
 	    <div class="row align-items-center">
 		<div class="col-md scilife-subsection">
 		    <h3>Description</h3>
-		    {{ partial "halloween/assembly_description.html" $metadata }}
+		    {{ partial "halloween/assembly_description.html" .description }}
 		</div>
 		<div class="col-md scilife-subsection text-md-center">
 		    <div class="mb-3">
-			<a href="https://www.ebi.ac.uk/ena/browser/view/{{ $metadata.accession }}" target="_blank">
+			<a href="https://www.ebi.ac.uk/ena/browser/view/{{ .description.accession }}" target="_blank">
 			    <button class="btn btn-lg scilife-ncbi-ena-btn">
 				Open assembly record in the ENA
 				<img src="/img/icons/open_new_tab_white.svg" alt="Open in new tab Icon" class="scilife-icon-lg">
@@ -22,7 +21,7 @@
 			</a>
 		    </div>
 		    <div>
-			<a href="https://www.ncbi.nlm.nih.gov/datasets/genome/{{ $metadata.accession }}" target="_blank">
+			<a href="https://www.ncbi.nlm.nih.gov/datasets/genome/{{ .description.accession }}" target="_blank">
 			    <button class="btn btn-lg scilife-ncbi-ena-btn">
 				Open assembly record in the NCBI
 				<img src="/img/icons/open_new_tab_white.svg" alt="Open in new tab Icon" class="scilife-icon-lg">
@@ -31,18 +30,14 @@
 		    </div>
 		</div>
 	    </div>
-	{{ else }}
-	    No metadata was provided for this assembly.
-	{{ end }}
 
-	<div class="row">
-	    <div class="col scilife-subsection">
-		{{ .Content }}
+	    <div class="row">
+		<div class="col scilife-subsection">
+		    {{ .Content }}
+		</div>
 	    </div>
-	</div>
 
-	<div class="row row-cols-1 row-cols-lg-2">
-	    {{ with .Resources.Get "assembly.yaml" | transform.Unmarshal }}
+	    <div class="row row-cols-1 row-cols-lg-2">
 		<!-- assembly data table -->
 		<div class="col scilife-subsection">
 		    <h3>Assembly Statistics</h3>
@@ -53,21 +48,22 @@
 		<div class="col scilife-subsection">
 		    <h3> Annotation Statistics</h3>
 		    {{ partial "halloween/annotation_stats.html" .annotation }}
-	    {{ else  }}
-		<p>No assembly and annotation statistics have been provided for this species</p>
-	    {{ end }}
-	</div>
+		</div>
 
-    </div>
+	    </div>
 
 
-    <div class="row">
-	<div class="col scilife-subsection">
-            {{ with .Resources.Get "contrib.md" }}
-		{{ .Content }}
-	    {{ end }}
-	</div>
-    </div>
+	    <div class="row">
+		<div class="col scilife-subsection">
+		    {{ with .Resources.Get "contrib.md" }}
+			{{ .Content }}
+		    {{ end }}
+		</div>
+	    </div>
+    {{ else }}
+	    {{ warnf "Missing assembby statistics for %s" .Path }}
+	    <p> No statistics were provided for this assembly </p>
+    {{ end}}
 
     {{ partial "last_updated.html" . }}
 
