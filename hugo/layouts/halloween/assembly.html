@@ -52,32 +52,8 @@
 		<!-- annotation data table -->
 		<div class="col scilife-subsection">
 		    <h3> Annotation Statistics</h3>
-
-		    <div class="table-responsive">
-			<table id="annotationTable" class="table table-hover table-bordered">
-
-			    <thead class="table-light">
-				<tr>
-				    <th scope="col">Statistic</th>
-				    <th scope="col">Value</th>
-				</tr>
-			    </thead>
-
-			    <tbody class="table-responsive">
-				{{ range $idx, $statistic := .annotation }}
-				    {{ range $stat_name, $value := $statistic }}
-					<tr>
-					    <td> {{ $stat_name }} </td>
-					    <td> {{ $value }} </td>
-					</tr>
-				    {{ end }}
-				{{ end }}
-			    </tbody>
-
-			</table>
-		    </div>
-		</div>
-	    {{ else }}
+		    {{ partial "halloween/annotation_stats.html" .annotation }}
+	    {{ else  }}
 		<p>No assembly and annotation statistics have been provided for this species</p>
 	    {{ end }}
 	</div>

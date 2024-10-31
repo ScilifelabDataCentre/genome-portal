@@ -1,0 +1,31 @@
+{{ $labels := dict
+"gene_cnt" "Gene #"
+"transcript_cnt" "Transcript #"
+"exons_avg" "Avg exons per transcript"
+"gene_length_avg" "Avg gene length (bp)"
+"transcript_length_avg" "Avg transcript length (bp)"
+"exon_length_avg" "Avg exon length (bp)"
+"intron_length_avg" "Avg intron length (bp)"
+}}
+
+<div class="table-responsive">
+    <table id="annotationsTable" class="table table-hover table-bordered">
+
+	<thead class="table-light">
+	    <tr>
+		<th scope="col">Statistic</th>
+		<th scope="col">Value</th>
+	    </tr>
+	</thead>
+
+	<tbody class="table-responsive">
+	    {{ range $key, $label := $labels }}
+		<tr>
+		    <td> {{ $label }} </td>
+		    <td> {{ or (index $ $key) "Not provided" }} </td>
+		</tr>
+	    {{ end }}
+	</tbody>
+
+    </table>
+</div>

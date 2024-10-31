@@ -20,10 +20,10 @@ stats:
   scaffold_gt_10:
   busco:
 annotation:
-  - "Gene #": [EDIT]
-  - "Transcript #": [EDIT]
-  - "Avg exons per transcript": [EDIT]
-  - "Avg gene length (bp)": [EDIT]
-  - "Avg transcript length (bp)": [EDIT]
-  - "Avg exon length (bp)": [EDIT]
-  - "Avg intron length (bp)": [EDIT]
+  gene_cnt:
+  transcript_cnt:
+  exons_avg:
+  gene_length_avg:
+  transcript_length_avg:
+  exon_length_avg:
+  intron_length_avg:
