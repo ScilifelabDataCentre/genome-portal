@@ -1,16 +1,16 @@
 ---
+date: {{ .Date }}
 title: '{{ replace .File.ContentBaseName `_` ` ` | title }}'
 subtitle: Species common name
-lastmod: {{ time.Format "31/01/2014" .Date }}
+lastmod: {{ .Date }}
 
 resources:
   - title: '{{ replace .File.ContentBaseName `_` ` ` | title }}'
     name: cover_image
-    # Use relative path for a local image
-    src: "https://placehold.co/600x400"
+    src: "placeholder.png"
     params:
       attribution: CC-BY-SA
-      link: "https://placehold.co/600x400"
+      link: "https://placehold.co/600x400/png"
 
 layout: "species_intro"
 weight: 1
