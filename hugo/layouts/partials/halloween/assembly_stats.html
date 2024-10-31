@@ -1,0 +1,38 @@
+{{ $labels := dict
+"length" "Assembly length (Mbp)"
+"gc" "GC %"
+"contig" "Contig #"
+"contig_n50" "Contig N50 (Mbp)"
+"contig_l50" "Contig L50"
+"contig_n90" "Contig N90 (Mbp)"
+"contig_l90" "Contig L90"
+"scaffold" "Scaffold #"
+"scaffold_n50" "Scaffold N50 (Mbp)"
+"scaffold_l50" "Scaffold L50"
+"scaffold_n90" "Scaffold N90 (Mbp)"
+"scaffold_l90" "Scaffold L90"
+"scaffold_gt_10" "Scaffolds >= 10 kb"
+"busco" "BUSCO %"
+}}
+
+<div class="table-responsive">
+    <table id="assemblyTable" class="table table-hover table-bordered">
+
+	<thead class="table-light">
+	    <tr>
+		<th scope="col">Statistic</th>
+		<th scope="col">Value</th>
+	    </tr>
+	</thead>
+
+	<tbody class="table-responsive">
+	    {{ range $key, $label := $labels }}
+		<tr>
+		    <td> {{ $label }} </td>
+		    <td> {{ or (index $ $key) "Not provided" }} </td>
+		</tr>
+	    {{ end }}
+	</tbody>
+
+    </table>
+</div>
