@@ -5,8 +5,8 @@
     {{ partial "species_nav.html" . }}
 
     <div class="container mt-3">
-	{{ with .Resources.Get "assembly.yaml" }}
-	    {{ $metadata := transform.Unmarshal . }}
+	{{ with .Resources.Get "assembly.yaml" | transform.Unmarshal }}
+	    {{ $metadata := .description }}
 	    <div class="row align-items-center">
 		<div class="col-md scilife-subsection">
 		    <h3>Description</h3>
@@ -42,35 +42,11 @@
 	</div>
 
 	<div class="row row-cols-1 row-cols-lg-2">
-	    {{ with .Resources.Get "stats.yaml" }}
-		{{ $stats := transform.Unmarshal . }}
-
+	    {{ with .Resources.Get "assembly.yaml" | transform.Unmarshal }}
 		<!-- assembly data table -->
 		<div class="col scilife-subsection">
 		    <h3>Assembly Statistics</h3>
-		    <div class="table-responsive">
-			<table id="assemblyTable" class="table table-hover table-bordered">
-
-			    <thead class="table-light">
-				<tr>
-				    <th scope="col">Statistic</th>
-				    <th scope="col">Value</th>
-				</tr>
-			    </thead>
-
-			    <tbody class="table-responsive">
-				{{ range $idx, $statistic := $stats.assembly }}
-				    {{ range $stat_name, $value := $statistic }}
-					<tr>
-					    <td> {{ $stat_name }} </td>
-					    <td> {{ $value }} </td>
-					</tr>
-				    {{ end }}
-				{{ end }}
-			    </tbody>
-
-			</table>
-		    </div>
+		    {{ partial "halloween/assembly_stats.html" .stats }}
 		</div>
 
 		<!-- annotation data table -->
@@ -88,7 +64,7 @@
 			    </thead>
 
 			    <tbody class="table-responsive">
-				{{ range $idx, $statistic := $stats.annotation }}
+				{{ range $idx, $statistic := .annotation }}
 				    {{ range $stat_name, $value := $statistic }}
 					<tr>
 					    <td> {{ $stat_name }} </td>
