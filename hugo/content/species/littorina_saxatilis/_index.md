@@ -3,7 +3,7 @@
 title: "*Littorina saxatilis*"
 subtitle: "Rough periwinkle"
 
-last_updated: "27/09/2024"
+last_updated: "15/10/2024"
 
 cover_image: "/img/species/littorina_saxatilis.webp"
 img_attrib_text: "Littorina saxatilis by Patrik Larsson, used with permission."
@@ -22,9 +22,9 @@ goat_webpage: "https://goat.genomehubs.org/record?recordId=31220&result=taxon&ta
 
 # These 3 params define the initial view for the map
 # latitude and longitude are for the map center.
-latitude: 0
-longitude: 0
-initialZoom: 1
+latitude: 37
+longitude: -37
+initialZoom: 2
 ---
 
 ### Description
