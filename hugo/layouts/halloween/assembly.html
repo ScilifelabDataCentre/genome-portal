@@ -53,19 +53,19 @@
 	    </div>
 
 
-	    <div class="row">
-		<div class="col scilife-subsection">
-		    {{ with .Resources.Get "contrib.md" }}
-			{{ .Content }}
-		    {{ end }}
-		</div>
-	    </div>
     {{ else }}
 	    {{ warnf "Missing assembby statistics for %s" .Path }}
 	    <p> No statistics were provided for this assembly </p>
     {{ end}}
 
-    {{ partial "last_updated.html" . }}
+    <div class="row">
+	<div class="col scilife-subsection">
+	    {{ with .Resources.Get "contrib.md" }}
+		{{ .Content }}
+	    {{ end }}
+	</div>
+    </div>
 
+    {{ partial "last_updated.html" . }}
 
 {{ end }}
