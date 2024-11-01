@@ -28,7 +28,7 @@ authors:
     given-names: Bengt
 repository-code: "https://github.com/ScilifelabDataCentre/genome-portal"
 url: "https://genomes.scilifelab.se"
-abstract: "The Swedish Reference Genome Portal is a platform facilitating access and discovery of genome data of non-model eukaryotic species studied in Sweden."
+abstract: "The Swedish Reference Genome Portal is a service facilitating access and discovery of genome data of non-model eukaryotic species studied in Sweden."
 license: MIT
 references:
   - authors:
