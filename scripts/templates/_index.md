@@ -44,9 +44,9 @@ Write content here in markdown for the introduction tab of the species page.
 
 #### How to cite
 
-If you have used the pages for this species in the Genome Portal, please refer to it in-text as: "The *[EDIT Species name]* entry in the Swedish Reference Genome Portal ([access date YYYY-MM-DD])." and use the following for the bibliography:
+If you have used the pages for this species in the Genome Portal, please refer to it in-text as: "The *[EDIT Species name]* entry in the Swedish Reference Genome Portal (access date)." and use the following for the bibliography:
 
-- <p> Swedish Reference Genome Portal ([access date YYYY-MM-DD]), SciLifeLab Data Centre, version ([version number]) from <a href="https://www.genomes.scilifelab.se">https://www.genomes.scilifelab.se</a>. RRID:XXXXXX.
+- <p> Swedish Reference Genome Portal (access date), SciLifeLab Data Centre, version (version number) from <a href="https://genomes.scilifelab.se">https://genomes.scilifelab.se</a>, RRID:SCR_026008.
 
 #### References
 

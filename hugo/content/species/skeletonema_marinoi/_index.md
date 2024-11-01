@@ -36,9 +36,9 @@ The chain-forming marine centric diatom *Skeletonema marinoi* Sarno & Zingone wa
 
 There is currently no publication accociated with the genome of *S. marinoi* R05AC. In the meantime, please cite the genome assembly submission: GCA_030871285.1. A list of the submitting authors can be found at the [JATAAI000000000.1 record at NCBI](https://www.ncbi.nlm.nih.gov/nuccore/JATAAI000000000).
 
-If you have used the pages for this species in the Genome Portal, please refer to it in-text as: "The *Skeletonema marinoi* entry in the Swedish Reference Genome Portal ([access date YYYY-MM-DD])." and use the following in the bibliography:
+If you have used the pages for this species in the Genome Portal, please refer to it in-text as: "The *Skeletonema marinoi* entry in the Swedish Reference Genome Portal (access date)." and use the following for the bibliography:
 
-- <p> Swedish Reference Genome Portal ([access date YYYY-MM-DD]), SciLifeLab Data Centre, version ([version number]) from <a href="https://www.genomes.scilifelab.se">https://www.genomes.scilifelab.se</a>. RRID:XXXXXX.
+- <p> Swedish Reference Genome Portal (access date), SciLifeLab Data Centre, version (version number) from <a href="https://genomes.scilifelab.se">https://genomes.scilifelab.se</a>, RRID:SCR_026008.
 
 #### References
 
