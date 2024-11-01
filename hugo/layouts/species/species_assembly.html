@@ -1,18 +1,3 @@
-{{ define "early_connections" }}
-
-    <link rel="preconnect" href="https://code.jquery.com">
-
-{{ end }}
-
-
-{{ define "script_includes" }}
-
-{{ partial "add_datatables_jquery.html" . }}
-
-{{ end }}
-
-
-
 {{ define "main" }}
 
 {{ partial "species_title.html" . }}
@@ -163,27 +148,5 @@
 
 {{ partial "last_updated.html" . }}
 
-
-{{ end }}
-
-{{ define "scripts" }}
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        new DataTable('#assemblyTable', {
-            info: false,
-            ordering: false,
-            paging: false,
-            searching: false
-        });
-
-        new DataTable('#annotationTable', {
-            info: false,
-            ordering: false,
-            paging: false,
-            searching: false
-        });
-    });
-</script>
 
 {{ end }}
