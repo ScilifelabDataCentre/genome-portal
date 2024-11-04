@@ -18,8 +18,6 @@ stats_data_path: "linum_tenue/species_stats"
 lineage_data_path: "linum_tenue/taxonomy"
 ---
 
-|||||| Content divider - do not remove ||||||
-
 Notes: Assembly statistics were calculated for the primary genome assembly GCA_946122785.1. Busco statistics were taken from Gutiérrez-Valencia et al. (2022). Annotation statistics were calculated using Ltenue_v1_genes.gff.
 
 BUSCO notation: C: Complete; S: Single-copy; D: Duplicated; F: Fragmented; M: Missing; n: Total BUSCO genes included in the dataset (here: eudicots_odb10). See also [the official BUSCO manual](https://busco.ezlab.org/busco_userguide.html#interpreting-the-results).
