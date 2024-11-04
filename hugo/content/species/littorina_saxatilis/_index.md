@@ -45,7 +45,7 @@ If you use the data presented in the genome portal from this species in your res
 
 If you have used the pages for this species in the Genome Portal, please refer to it in-text as: "The *Littorina saxatilis* entry in the Swedish Reference Genome Portal (access date)." and use the following for the bibliography:
 
-- <p> Swedish Reference Genome Portal (access date), SciLifeLab Data Centre, version (version number) from <a href="https://genomes.scilifelab.se">https://genomes.scilifelab.se</a>, RRID:SCR_026008.
+- <p> Swedish Reference Genome Portal (access date), SciLifeLab Data Centre, version (version number) from <a href="https://genomes.scilifelab.se">https://genomes.scilifelab.se</a>, <a href="https://rrid.site/data/record/nlx_144509-1/SCR_026008/resolver?q=rrid:scr_026008">RRID:SCR_026008</a>.
 
 #### References
 
