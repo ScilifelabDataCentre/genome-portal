@@ -18,7 +18,7 @@ Swedish Reference Genome Portal (access date), SciLifeLab Data Centre, version (
 
 Since the information on the portal is updated continuously, we ask you to specify the version number of the Genome Portal and the date you accessed it in the citation by replacing the (access date) and (version number) placeholders. You will find the version number of the portal at the bottom of the footer on any page, or on our <a target="_blank" href="https://github.com/ScilifelabDataCentre/genome-portal/">GitHub repository</a> under 'releases'.
 
-#### 1.2. Citing a Species page in the Genome Portal
+#### 1.2. Citing a species page in the Genome Portal
 
 You can also cite a specific species page from the Genome Portal. The easiest way to find the citation information for a species page is to go to its _Description_ tab and copy the citation text. If you have used the data from a species page in your own work, please also consider citing the authors of the data ([Section 3](#3-citing-the-data-in-the-genome-portal)).
 
@@ -33,7 +33,7 @@ where [_Species name_] is a placeholder that should be replaced with the binomia
 
 Researchers who have submitted their data to the Genome Portal may want to include the following text in the Data Availability statement in their research manuscript(s).
 
-"Visualisations of the genome assemby and annotation tracks from this publication can be found in the Swedish Reference Genome Portal (access date) at <https://genomes.scilifelab.se/[species_name]>."
+"Visualisations of the genome assembly and annotation tracks from this publication can be found in the Swedish Reference Genome Portal (access date) at <https://genomes.scilifelab.se/[species_name]>."
 
 where [species_name] should be replaced with the binomial name of the species in lower case letters and an underscore, and Swedish Reference Genome Portal (access date) is the APA formatted in-text pointer to the reference stated above in [Section 1.1](#11-citing-the-genome-portal).
 
@@ -51,7 +51,7 @@ where (year) and (version number) are placeholders for the year and version numb
 Giving proper credit to the authors of the data is central to the principles of _FAIR_ and _Open Science_. Therefore, if you have used any data displayed on the Genome Portal
 (genome assemblies and annotation tracks) in your own work, we kindly ask you to cite the data.
 
-All datasets included in the Genome Portal are public, but the means as to how to cite them can vary from dataset to dataset. Instructions for how to cite each dataset is found on the _Description_ tab of each species. In general, many datasets in the Swedish Reference Genome Portal have been published as part of a research article and for those cases, we reccomend that you cite the original publication. For datasets that do not have an associated publication, please go to the _Download_ page for the species, click the _Show reduced table view_ button and use the accession number(s) or DOI(s) to refer to the data.
+All datasets included in the Genome Portal are public, but the means as to how to cite them can vary from dataset to dataset. Instructions for how to cite each dataset is found on the _Description_ tab of each species. In general, many datasets in the Swedish Reference Genome Portal have been published as part of a research article and for those cases, we recommend that you cite the original publication. For datasets that do not have an associated publication, please go to the _Download_ page for the species, click the _Show reduced table view_ button and use the accession number(s) or DOI(s) to refer to the data.
 
 ### 4. Citing the JBrowse 2 genome browser
 
