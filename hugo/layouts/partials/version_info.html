@@ -1,55 +1,46 @@
 <!--
 This partial generates version information for both the genome-portal and JBrowse which is displayed in the footer of each page.
 
+Several environment variables are used to determine the type of build of the genome-portal and therefore control the footer.
 Logic:
-1. If "hugo.Environment" contains a comma, it indicates a GitHub Actions triggered build:
-   - If the deployment type is "release", set the portalHref and hrefText to the release version.
-   - If the deployment type is "development", set the portalHref and hrefText to the commit SHA.
-   - For other deployment types (e.g. from a feature branches), set the portalHref and hrefText to the commit SHA and branch name.
-
-2. If "hugo.Environment" does not contain a comma, it indicates a local build:
-   - Set the portalHref to the GitHub repository URL and hrefText to "Local dev build".
+1. If the HUGO_PORTAL_VERSION is set:
+    then the build is a production build and the version number is displayed.
+2. If the HUGO_GIT_BRANCH is set to "main":
+    then the build is from a GH action push to main (aka dev) and the commit sha is displayed with a link to the commit.
+3. If the HUGO_GIT_BRANCH is set to another name than "main":
+    then the build is a workflow dispatch from a feature branch and the commit sha and branch name will be displayed.
+4. else:
+    the build is a local build and the footer will display "Local dev build".
 -->
 
 {{ $githubURL := "https://github.com/ScilifelabDataCentre/genome-portal" }}
-
-<!-- Split between portal version info and JBrowse version info -->
-{{ $envInfo := split hugo.Environment "|" }}
-{{ $portalInfo := index $envInfo 0 }}
-{{ $jBrowseVersion := index $envInfo 1 }}
-
 {{ $portalHref := "" }}
 {{ $hrefText := "" }}
 
-<!-- GH action triggered build -->
-{{ if strings.Contains $portalInfo "," }}
-    {{ $portalEnvInfo := split $portalInfo "," }}
-    {{ $deploymentType := index $portalEnvInfo 0 }}
+<!-- Extract all enviroment variables -->
+{{ $versionNumb :=  getenv "HUGO_PORTAL_VERSION" }}
+{{ $branch := getenv "HUGO_GIT_BRANCH" }}
+{{ $gitSha := getenv "HUGO_GIT_SHA" }}
+{{ $jBrowseVersion := getenv "HUGO_JBROWSE_VERSION" }}
 
-    <!-- GH action triggered by release -->
-    {{ if eq $deploymentType "release" }}
-        {{ $versionNumb := index $portalEnvInfo 1 }}
-        {{ $portalHref = printf "%s/releases/tag/%s" $githubURL $versionNumb }}
-        {{ $hrefText = $versionNumb }}
+<!-- Production build version -->
+{{ if ne $versionNumb "" }}
+    {{ $portalHref = printf "%s/releases/tag/%s" $githubURL $versionNumb }}
+    {{ $hrefText = $versionNumb }}
 
-    {{ else }}
-        {{ $gitShaFull := index $portalEnvInfo 1 }}
-        {{ $gitShaShort := substr $gitShaFull 0 7 }}
-        {{ $portalHref = printf "%s/commit/%s" $githubURL $gitShaFull }}
+<!-- GH action build on a push to main aka dev -->
+{{ else if eq $branch "main" }}
+    {{ $gitShaShort := substr $gitSha 0 7 }}
+    {{ $portalHref = printf "%s/commit/%s" $githubURL $gitSha }}
+    {{ $hrefText = printf "Built from commit: %s" $gitShaShort }}
 
-        <!-- GH action build on a push to main aka dev -->
-        {{ if eq $deploymentType "development" }}
-            {{ $hrefText = printf "Built from commit: %s" $gitShaShort }}
+<!-- GH action build on a feature branch -->
+{{ else if ne $branch "" }}
+    {{ $gitShaShort := substr $gitSha 0 7 }}
+    {{ $portalHref = printf "%s/commit/%s" $githubURL $gitSha }}
+    {{ $hrefText = printf "Built from commit: %s on branch: %s" $gitShaShort $branch }}
 
-        <!-- GH action build on a feature branch -->
-        {{ else }}
-            {{ $featureBranch := $deploymentType }}
-            {{ $hrefText = printf "Built from commit: %s on branch: %s" $gitShaShort $featureBranch }}
-        {{ end }}
-
-    {{ end }}
-
-<!-- local build -->
+<!-- Local build -->
 {{ else }}
     {{ $portalHref = $githubURL }}
     {{ $hrefText = "Local dev build" }}
@@ -66,7 +57,6 @@ Logic:
 {{ if eq $jBrowseVersion "" }}
     {{ $jBrowseVersion = "X.X.X" }}
 {{ end }}
-
 
 {{ $jBrowseHref := printf "https://github.com/GMOD/jbrowse-components/releases/tag/v%s" $jBrowseVersion }}
 <p class="mt-0 mb-3 text-start text-lg-center">

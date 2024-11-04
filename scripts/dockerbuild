@@ -6,9 +6,10 @@
 # build arguments. To disable this behavior and use the dockerfile
 # defaults, set the SWG_DEFAULT_USER environment variable to 1.
 #
-# The hugo image can be built with the SWG_HUGO_ENV_ARG environment variable
-# This can be used to create the version information shown on the footer of each page
+# The hugo image can be built with several optional build arguments:
+# These can be used to control the version information shown on the footer of each page.
 _DEFAULT_TAG=local
+declare -a _BUILD_ARGS
 
 docker_build () {
     docker build "${_BUILD_ARGS[@]}" \
@@ -20,7 +21,6 @@ if [[ -z "$1" || "$1" == "data" ]];
 then
     _DEFAULT_IMAGE=ghcr.io/scilifelabdatacentre/swg-data-builder
     _DEFAULT_DOCKERFILE=docker/data.dockerfile
-    declare -a _BUILD_ARGS
     if [[ -z ${SWG_DEFAULT_USER} ]];then
 	_BUILD_ARGS+=("--build-arg" "SWG_UID=$(id -u)")
 	_BUILD_ARGS+=("--build-arg" "SWG_GID=$(id -g)")
@@ -28,13 +28,18 @@ then
     docker_build && exit 0
 fi
 
+
+# Hugo potential build arguments
+SWG_PORTAL_VERSION=${SWG_HUGO_PORTAL_VERSION:-""}
+SWG_GIT_BRANCH=${SWG_HUGO_GIT_BRANCH:-""}
+SWG_GIT_SHA=${SWG_HUGO_GIT_SHA:-""}
+
 if [[ "$1" = hugo ]]; then
     _DEFAULT_IMAGE=ghcr.io/scilifelabdatacentre/swg-hugo-site
     _DEFAULT_DOCKERFILE=docker/hugo.dockerfile
-    declare -a _BUILD_ARGS
-    if [[ -n "${SWG_HUGO_ENV_ARG}" ]]; then
-    _BUILD_ARGS+=("--build-arg" "HUGO_ENV_ARG=${SWG_HUGO_ENV_ARG}")
-    fi
+    _BUILD_ARGS+=("--build-arg" "HUGO_PORTAL_VERSION=${SWG_PORTAL_VERSION}")
+    _BUILD_ARGS+=("--build-arg" "HUGO_GIT_BRANCH=${SWG_GIT_BRANCH}")
+    _BUILD_ARGS+=("--build-arg" "HUGO_GIT_SHA=${SWG_GIT_SHA}")
     docker_build  && exit 0
 fi
 

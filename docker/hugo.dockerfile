@@ -7,6 +7,11 @@ FROM alpine:latest AS build
 ARG JBROWSE_VERSION
 ARG HUGO_VERSION=0.128.2
 
+# GH actions triggered runs can overwrite these values
+ARG HUGO_PORTAL_VERSION=""
+ARG HUGO_GIT_BRANCH=""
+ARG HUGO_GIT_SHA=""
+
 RUN apk add --no-cache wget
 
 RUN wget --quiet "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.tar.gz" && \
@@ -18,14 +23,14 @@ RUN wget --quiet "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VER
 WORKDIR /src
 COPY ./hugo/ /src
 
-# GH actions triggered runs will overwrite HUGO_ENV_ARG 
-ARG HUGO_ENV_ARG="Local dev build"
-
-# Set the combined environment variable for hugo build
-ARG ENV_INFO="${HUGO_ENV_ARG}|${JBROWSE_VERSION}"
-
+# pass the environment variables to the build
 RUN mkdir /target && \
-    hugo -d /target --minify -e "${ENV_INFO}"
+    export HUGO_PORTAL_VERSION=${HUGO_PORTAL_VERSION} && \
+    export HUGO_GIT_BRANCH=${HUGO_GIT_BRANCH} && \
+    export HUGO_GIT_SHA=${HUGO_GIT_SHA} && \
+    export HUGO_JBROWSE_VERSION=${JBROWSE_VERSION} && \
+    hugo -d /target --minify --gc
+
 
 # Stage 2: Install JBrowse
 FROM node:${NODE_VERSION}-slim AS jbrowse
