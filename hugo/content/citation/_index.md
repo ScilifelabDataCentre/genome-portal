@@ -5,11 +5,11 @@ toc: true
 
 In line with the principles of _FAIR_ and _Open Science_, we encourage the reuse and recognition of material made available on the Swedish Reference Genome Portal.
 
-On this page, you will find information about how to cite the Genome Portal and its source code ([Section 1](#1-citing-the-genome-portal-and-specific-species-entries)), the specific datasets from each species ([Section 2](#2-citing-the-data-in-the-portal)), and the JBrowse 2 genome browser ([Section 3](#3-citing-the-jbrowse-2-genome-browser)).
+On this page, you will find information about how to cite the Genome Portal website ([Section 1](#1-citing-the-website)), the website source code ([Section 2](#2-citing-the-source-code-of-the-website)), the specific datasets from each species ([Section 3](#3-citing-the-data-in-the-genome-portal)), and the JBrowse 2 genome browser ([Section 4](#4-citing-the-jbrowse-2-genome-browser)).
 
-### 1. Citing the Genome Portal and specific species entries
+### 1. Citing the website
 
-#### Citing the website and the source code
+#### 1.1. Citing the Genome Portal
 
 To cite the Swedish Reference Genome Portal, please use the following:
 
@@ -18,37 +18,42 @@ Swedish Reference Genome Portal (access date), SciLifeLab Data Centre, version (
 
 Since the information on the portal is updated continuously, we ask you to specify the version number of the Genome Portal and the date you accessed it in the citation by replacing the (access date) and (version number) placeholders. You will find the version number of the portal at the bottom of the footer on any page, or on our <a target="_blank" href="https://github.com/ScilifelabDataCentre/genome-portal/">GitHub repository</a> under 'releases'.
 
-#### Citing a specific species entry
+#### 1.2. Citing a Species page in the Genome Portal
 
-You can also cite a specific species entry from the Genome Portal. The easiest way to find the citation information for a species entry is to go to its _Description_ page and copy the citation text. If you have used the data from a species entry in your own work, please also consider citing the authors of the data ([Section 2](#2-citing-the-data-in-the-portal)).
+You can also cite a specific species page from the Genome Portal. The easiest way to find the citation information for a species page is to go to its _Description_ tab and copy the citation text. If you have used the data from a species page in your own work, please also consider citing the authors of the data ([Section 3](#3-citing-the-data-in-the-genome-portal)).
 
-The general pattern for citing a species entry can also be filled out using the following template:
+The general pattern for citing a species page can also be filled out using the following template:
 
 **In-text citation (APA format)**:\
-The [_Species name_] entry in the Swedish Reference Genome Portal (access date).
+The [_Species name_] page in the Swedish Reference Genome Portal (access date).
 
-where [_Species name_] is a placeholder that should be replaced with the binomal name of your species in italics, and Swedish Reference Genome Portal (access date) is the APA formatted in-text pointer to the reference stated above in the [Citing the website and the source code](#citing-the-website-and-the-source-code) section.
+where [_Species name_] is a placeholder that should be replaced with the binomial name of the species in italics, and Swedish Reference Genome Portal (access date) is the APA formatted in-text pointer to the reference stated above in [Section 1.1](#11-citing-the-genome-portal).
 
-#### Data availability statement for submitting researchers
+#### 1.3. In-text citation in the Data Availability Statement of a manuscript
 
 Researchers who have submitted their data to the Genome Portal may want to include the following text in the Data Availability statement in their research manuscript(s).
 
 "Visualisations of the genome assemby and annotation tracks from this publication can be found in the Swedish Reference Genome Portal (access date) at <https://genomes.scilifelab.se/[species_name]>."
 
-where [species_name] should be replaced with the binomal name of your species in lower case letters and an underscore, and Swedish Reference Genome Portal (access date) is the APA formatted in-text pointer to the reference stated above in the [Citing the website and the source code](#citing-the-website-and-the-source-code) section.
+where [species_name] should be replaced with the binomial name of the species in lower case letters and an underscore, and Swedish Reference Genome Portal (access date) is the APA formatted in-text pointer to the reference stated above in [Section 1.1](#11-citing-the-genome-portal).
 
-#### Citing the source code
+### 2. Citing the source code of the website
 
-The Genome Portal is operated by the <a target="_blank" href="https://scilifelab.se/data">SciLifeLab Data Centre</a> and partners. All of the source code used to generate the website is available on [GitHub](https://github.com/ScilifelabDataCentre/genome-portal/). The code is published under the MIT license. If you have reused the code or otherwise want to cite the code, please use the citation instructions found on the GitHub repository.
+The Genome Portal is operated by the <a target="_blank" href="https://scilifelab.se/data">SciLifeLab Data Centre</a> and partners. All of the source code used to generate the website is available on [GitHub](https://github.com/ScilifelabDataCentre/genome-portal/). The code is published under an MIT license. If you have reused the code or otherwise want to cite the code, please use the following:
 
-### 2. Citing the data in the portal
+**APA format:**\
+SciLifeLab Data Centre (year). genome-portal. Version (version number) [Software]. Zenodo. <https://doi.org/10.5281/zenodo.XXXXXX>.
+
+where (year) and (version number) are placeholders for the year and version number of the code release you want to cite. This information can for instance be found on our <a target="_blank" href="https://github.com/ScilifelabDataCentre/genome-portal/">GitHub repository</a> or in our <a target="_blank" href="https://doi.org/10.5281/zenodo.XXXXXX">Zenodo record</a>.
+
+### 3. Citing the data in the Genome Portal
 
 Giving proper credit to the authors of the data is central to the principles of _FAIR_ and _Open Science_. Therefore, if you have used any data displayed on the Genome Portal
 (genome assemblies and annotation tracks) in your own work, we kindly ask you to cite the data.
 
-All datasets included in the Genome Portal are public, but the means as to how to cite them can vary from dataset to dataset. Instructions for how to cite each dataset is found on the _Description_ page of each species. In general, many datasets in the Swedish Reference Genome Portal have been published as part of a research article and for those cases, we reccomend that you cite the original publication. For datasets that do not have an associated publication, please go to the _Download_ page for the species, click the _Show reduced table view_ button and use the accession number(s) or DOI(s) to refer to the data.
+All datasets included in the Genome Portal are public, but the means as to how to cite them can vary from dataset to dataset. Instructions for how to cite each dataset is found on the _Description_ tab of each species. In general, many datasets in the Swedish Reference Genome Portal have been published as part of a research article and for those cases, we reccomend that you cite the original publication. For datasets that do not have an associated publication, please go to the _Download_ page for the species, click the _Show reduced table view_ button and use the accession number(s) or DOI(s) to refer to the data.
 
-### 3. Citing the JBrowse 2 genome browser
+### 4. Citing the JBrowse 2 genome browser
 
 You might also want to consider citing the JBrowse 2 genome browser, especially if you have used the genome browser to work with the data. The developers provide their own citation information on the [JBrowse website](https://jbrowse.org/). At the time of writing, the JBrowse developers ask users to cite the following publication:
 
