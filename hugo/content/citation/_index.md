@@ -14,7 +14,7 @@ On this page, you will find information about how to cite the Genome Portal webs
 To cite the Swedish Reference Genome Portal, please use the following:
 
 **APA format**:\
-Swedish Reference Genome Portal (access date), SciLifeLab Data Centre, version (version number) from <https://genomes.scilifelab.se>, RRID:SCR_026008.
+Swedish Reference Genome Portal (access date), SciLifeLab Data Centre, version (version number) from <https://genomes.scilifelab.se>, [RRID:SCR_026008](https://rrid.site/data/record/nlx_144509-1/SCR_026008/resolver?q=rrid:scr_026008).
 
 Since the information on the portal is updated continuously, we ask you to specify the version number of the Genome Portal and the date you accessed it in the citation by replacing the (access date) and (version number) placeholders. You will find the version number of the portal at the bottom of the footer on any page, or on our <a target="_blank" href="https://github.com/ScilifelabDataCentre/genome-portal/">GitHub repository</a> under 'releases'.
 
@@ -39,12 +39,7 @@ where [species_name] should be replaced with the binomial name of the species in
 
 ### 2. Citing the source code of the website
 
-The Genome Portal is operated by the <a target="_blank" href="https://scilifelab.se/data">SciLifeLab Data Centre</a> and partners. All of the source code used to generate the website is available on [GitHub](https://github.com/ScilifelabDataCentre/genome-portal/). The code is published under an MIT license. If you have reused the code or otherwise want to cite the code, please use the following:
-
-**APA format:**\
-SciLifeLab Data Centre (year). genome-portal. Version (version number) [Software]. Zenodo. <https://doi.org/10.5281/zenodo.XXXXXX>.
-
-where (year) and (version number) are placeholders for the year and version number of the code release you want to cite. This information can for instance be found on our <a target="_blank" href="https://github.com/ScilifelabDataCentre/genome-portal/">GitHub repository</a> or in our <a target="_blank" href="https://doi.org/10.5281/zenodo.XXXXXX">Zenodo record</a>.
+The Genome Portal is operated by the <a target="_blank" href="https://scilifelab.se/data">SciLifeLab Data Centre</a> and partners. All of the source code used to generate the website is available on [GitHub](https://github.com/ScilifelabDataCentre/genome-portal/). The code is published under an MIT license. If you have reused the code or otherwise want to cite the code, please use the citation instructions found on the GitHub repository.
 
 ### 3. Citing the data in the Genome Portal
 
