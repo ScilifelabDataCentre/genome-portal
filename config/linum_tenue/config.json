@@ -25,7 +25,7 @@
           "type": "LinearGenomeView",
           "trackLabels": "offset",
           "offsetPx": 0,
-          "bpPerPx": 50,
+          "bpPerPx": 100,
           "displayedRegions": [
             {
               "refName": "ENA|CAMGYJ010000002|CAMGYJ010000002.1",
@@ -59,7 +59,7 @@
                 {
                   "id": "lten_default_repeats_display",
                   "type": "LinearBasicDisplay",
-                  "heightPreConfig": 350,
+                  "heightPreConfig": 200,
                   "configuration": "L_tenue_v1_rep.bed-LinearBasicDisplay"
                 }
               ]
@@ -74,7 +74,13 @@
                   "id": "lten_default_lten_default_TD06_display",
                   "type": "LinearManhattanDisplay",
                   "heightPreConfig": 150,
-                  "configuration": "Lten_pop06_TD_init_config_display"
+                  "configuration": "Lten_pop06_TD_init_config_display",
+                  "selectedRendering": "",
+                  "resolution": 1,
+                  "constraints": {
+                    "max": 5,
+                    "min": -5
+                  }
                 }
               ]
             },
@@ -186,7 +192,8 @@
                   "id": "lten_default_lten_default_Pi06_display",
                   "type": "LinearManhattanDisplay",
                   "heightPreConfig": 150,
-                  "configuration": "Lten_pop06_TD_init_config_display"
+                  "configuration": "Lten_pop06_Pi_init_config_display",
+                  "color": "rgb(242, 142, 44)"
                 }
               ]
             },
@@ -200,7 +207,8 @@
                   "id": "lten_default_lten_default_Pi08_display",
                   "type": "LinearManhattanDisplay",
                   "heightPreConfig": 150,
-                  "configuration": "Lten_pop08_TD_init_config_display"
+                  "configuration": "Lten_pop08_Pi_init_config_display",
+                  "color": "rgb(242, 142, 44)"
                 }
               ]
             },
@@ -214,7 +222,8 @@
                   "id": "lten_default_lten_default_Pi17_display",
                   "type": "LinearManhattanDisplay",
                   "heightPreConfig": 150,
-                  "configuration": "Lten_pop17_TD_init_config_display"
+                  "configuration": "Lten_pop17_Pi_init_config_display",
+                  "color": "rgb(242, 142, 44)"
                 }
               ]
             },
@@ -228,7 +237,8 @@
                   "id": "lten_default_lten_default_Pi21_display",
                   "type": "LinearManhattanDisplay",
                   "heightPreConfig": 150,
-                  "configuration": "Lten_pop21_TD_init_config_display"
+                  "configuration": "Lten_pop21_Pi_init_config_display",
+                  "color": "rgb(242, 142, 44)"
                 }
               ]
             },
@@ -242,7 +252,8 @@
                   "id": "lten_default_lten_default_Pi23_display",
                   "type": "LinearManhattanDisplay",
                   "heightPreConfig": 150,
-                  "configuration": "Lten_pop23_TD_init_config_display"
+                  "configuration": "Lten_pop23_Pi_init_config_display",
+                  "color": "rgb(242, 142, 44)"
                 }
               ]
             },
@@ -256,7 +267,8 @@
                   "id": "lten_default_lten_default_Pi26_display",
                   "type": "LinearManhattanDisplay",
                   "heightPreConfig": 150,
-                  "configuration": "Lten_pop26_TD_init_config_display"
+                  "configuration": "Lten_pop26_Pi_init_config_display",
+                  "color": "rgb(242, 142, 44)"
                 }
               ]
             },
@@ -270,7 +282,8 @@
                   "id": "lten_default_lten_default_Pi32_display",
                   "type": "LinearManhattanDisplay",
                   "heightPreConfig": 150,
-                  "configuration": "Lten_pop32_TD_init_config_display"
+                  "configuration": "Lten_pop32_Pi_init_config_display",
+                  "color": "rgb(242, 142, 44)"
                 }
               ]
             },
@@ -284,7 +297,8 @@
                   "id": "lten_default_lten_default_Pi34_display",
                   "type": "LinearManhattanDisplay",
                   "heightPreConfig": 150,
-                  "configuration": "Lten_pop34_TD_init_config_display"
+                  "configuration": "Lten_pop34_Pi_init_config_display",
+                  "color": "rgb(242, 142, 44)"
                 }
               ]
             }
@@ -563,7 +577,7 @@
           },
           "index": {
             "location": {
-              "uri": "Lten_pop17_Pi.bed.bgz.tbi"
+              "uri": "Lten_pop17_Pi.bed.bgz"
             }
           }
         },

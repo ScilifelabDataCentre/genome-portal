@@ -40,6 +40,7 @@ If you have used the pages for this species in the Genome Portal, please refer t
 
 - <p> Swedish Reference Genome Portal (access date), SciLifeLab Data Centre, version (version number) from <a href="https://genomes.scilifelab.se">https://genomes.scilifelab.se</a>, RRID:SCR_026008.
 
+
 #### References
 
 - Godhe, A., & Härnström, K. (2010). Linking the planktonic and benthic habitat: Genetic structure of the marine diatom *Skeletonema marinoi*. Molecular Ecology, 19(20), 4478–4490. [https://doi.org/10.1111/j.1365-294X.2010.04841.x](https://doi.org/10.1111/j.1365-294X.2010.04841.x)

@@ -26,4 +26,4 @@ Everyone is welcome to use this website but in order to include a dataset into t
 
 The Swedish Reference Genome Portal website was built using the static website builder, [Hugo](https://gohugo.io/). The genome browser [JBrowse2](https://jbrowse.org/jb2/) is used to display the datasets and is embedded into the static website. All data shown on the Genome Portal is available in public repositories. We retrieve a copy of the data from the repositories for display on the genome browser.
 
-The code for the Genome Portal is publicly available on [GitHub](https://github.com/ScilifelabDataCentre/swedgene/) under an MIT (open source) license. The Genome Portal is deployed on a Kubernetes](<https://kubernetes.io/>) cluster located at the [KTH Royal Institute of Technology](https://www.kth.se/) in Stockholm.
+The code for the Genome Portal is publicly available on [GitHub](https://github.com/ScilifelabDataCentre/genome-portal/) under an MIT (open source) license. The Genome Portal is deployed on a Kubernetes](<https://kubernetes.io/>) cluster located at the [KTH Royal Institute of Technology](https://www.kth.se/) in Stockholm.

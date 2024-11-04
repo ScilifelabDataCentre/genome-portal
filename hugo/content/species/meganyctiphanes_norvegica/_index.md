@@ -35,6 +35,7 @@ The *Meganyctiphanes norvegica* species of krill is a macrozooplankton crustacea
 
 The tolerance of *M. norvegica* to a broader range of temperatures make it interesting for studies on ecological adaptation to the warming of the oceans. A challenge with genomic analysis of krill species is their huge genome size (19 Gb for *M. norvegica*) (Choquet et al. 2023; Jeffery, 2012; Unneberg et al., 2024). Genetic variation has been found to be widespread but divergent among specimens collected thoughout their geographic distribution, including polygeneic variants indicating adaptation potential to changes in light and temperature (Unneberg et al., 2024).
 
+
 #### How to cite
 
 If you use the data presented in the genome portal from this species in your research, please cite the original publication:
@@ -44,6 +45,7 @@ If you use the data presented in the genome portal from this species in your res
 If you have used the pages for this species in the Genome Portal, please refer to it in-text as: "The *Meganyctiphanes norvegica* entry in the Swedish Reference Genome Portal (access date)." and use the following for the bibliography:
 
 - <p> Swedish Reference Genome Portal (access date), SciLifeLab Data Centre, version (version number) from <a href="https://genomes.scilifelab.se">https://genomes.scilifelab.se</a>, RRID:SCR_026008.
+
 
 #### References
 

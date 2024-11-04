@@ -150,25 +150,3 @@
 
 
 {{ end }}
-
-{{ define "scripts" }}
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        new DataTable('#assemblyTable', {
-            info: false,
-            ordering: false,
-            paging: false,
-            searching: false
-        });
-
-        new DataTable('#annotationTable', {
-            info: false,
-            ordering: false,
-            paging: false,
-            searching: false
-        });
-    });
-</script>
-
-{{ end }}

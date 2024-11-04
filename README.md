@@ -1,166 +1,191 @@
-# Table of Contents
-
-1.  [Data organization](#org88ad8e6)
-2.  [Data operations](#org1408eb3)
-3.  [Up and running!](#org6eb5bf4)
-
-<a id="org88ad8e6"></a>
-
-Swedgene
+Swedish Reference Genome Portal
 ========
 
-# Data organization
+This repository contains the source code for the [Swedish Reference Genome Portal](https://genomes.scilifelab.se/), which:
 
-Each organism gets a sub-directory of `config/`, for example
-`data/clupea_harengus`.
-
-Each organism configuration directory includes a `config.yml` file
-specifying the assembly and tracks to be displayed in JBrowse.
-
-Different `make` recipes (documented below) use this information to
-download and prepare genome files when necessary, and generate a
-`config.json` configuration file used by JBrowse.
-
-All those generated assets are then moved by `make install` to the
-`hugo/static` directory, and thus made accessible to the development
-server.
+- Showcases genome research performed in Sweden on non-model eukaryotic species.
+- Lowers the barrier of entry to access, visualise, and interpret genome data.
+- Encourages sharing of genomic annotations, even the seldom-published kind.
+- Strives to present FAIR data, available in public repositories.
 
 
-<a id="org1408eb3"></a>
+## Table of Contents
 
-# Data operations
+1. [Overview](#overview)
+2. [Cite this portal](#cite-this-portal)
+3. [Contributing](#contributing)
+4. [Funding](#funding)
+5. [Contact us](#contact-us)
+6. [Technical overview](#technical-overview)
+	- [Repository Layout](#repository-layout)
+	- [Local development](#local-development)
+7. [Credits](#credits)
 
-Primary sources for genomic assemblies and annotations tracks should
-be hosted remotely. However, for some data formats such as `FASTA` and
-`GFF`, JBrowse expects acompanying index files.
+## Overview
 
-Therefore, remote `FASTA` and `GFF` files need to be downloaded for
-indexing. We keep local copies of those files and ensure they are
-compressed using the block gzip format.
+- The Swedish Reference Genome Portal website is built using the
+[Hugo](https://gohugo.io/) static web generator.
 
+-  The [JBrowse2](https://jbrowse.org/jb2/) genome browser is
+embedded within the website to visually explore genome datasets.
 
-<a id="org6eb5bf4"></a>
+- Primary data file sources are available in public repositories
+(such as [ENA](https://www.ebi.ac.uk/ena/browser/home)), and prepared
+for display on JBrowse by our `Makefile` recipes (essentially
+compressing and indexing).
 
-# Up and running!
+- The code for the Genome Portal is available under an MIT (open
+  source) license.
 
-As a prerequisite to running the site locally, `docker` and `hugo` must be installed. 
-
-To build and install JBrowse assets:
-
-	# Build local docker image
-	./scripts/dockerbuild.sh
-	
-	# Install JBrowse assets
-	SWG_DOCKER_TAG=local ./scripts/dockermake.sh
-	
-	# Run local development server
-    hugo server
-
-## Selectively build JBrowse assets
+- The Genome Portal website is currently hosted by the [KTH Royal
+  Institute of Technology](https://www.kth.se/) in Stockholm.
 
 
-To build JBrowse assests for a particular species:
-	
-	# Builds JBrowse assets for the herring only
-	./scripts/dockermake.sh SPECIES=clupea_harengus build
+## Cite this portal
 
-# Docker 
+See 'Cite this repository' in the "About" section at the top right of this page.
 
-This repository comes with 2 Dockerfiles:
 
-### 1. `docker/hugo.dockerfile` : Builds a docker image containing the hugo website ready to be run. 
-You can obtain the latest version of this image from the [packages section of this repository](https://github.com/orgs/ScilifelabDataCentre/packages?repo_name=swedgene). 
+## Contributing
 
-To build an run the Hugo site yourself/locally you can do the following from the root directory of the repository. 
+Two types of contributions are especially welcome:
 
-_Please note that you need to be in the root of the repository for this to work_
+- **Datasets for display in the portal**: Consult our
+[requirements](https://genomes.scilifelab.se/contribute) for including a
+genome dataset to the portal, and contact us if you have any questions.
 
-```bash 
-docker build -t swg-hugo-site:local -f docker/hugo.dockerfile .
+- **Source code and documentation**: We welcome contributions, small and large,
+to our codebase and documentation. They will be published after review and
+approval by the Genome Portal team. Fork, open a PR, or contact us to discuss ideas!
+
+
+## Funding
+
+This service is supported by [SciLifeLab](https://www.scilifelab.se/)
+and the [Knut and Alice Wallenberg
+Foundation](https://kaw.wallenberg.org/en) through the [Data-Driven
+Life Science (DDLS) program](https://www.scilifelab.se/data-driven/),
+as well as by the [Swedish Foundation for Strategic Research
+(SSF)](https://strategiska.se/en/).
+
+## Contact us
+
+We welcome all questions and suggestions (including feature requests or bug reports).
+
+- Email us at [dsn-eb@scilifelab.se](mailto:dsn-eb@scilifelab.se).
+- Fill out our [contact form on the website](https://genomes.scilifelab.se/contact/).
+- [Create an issue in Github](https://github.com/ScilifelabDataCentre/genome-portal/issues/new)
+
+
+## Technical overview
+
+This section contains high-level technical documentation about the
+source code.
+
+### Repository layout
+
+- The `config/` directory contains information about data sources
+  (tracks and assemblies) displayed in the genome browser.
+  - Each species subdirectory inclues:
+	- `config.yml` : specifies the assembly and tracks to be displayed in JBrowse2.
+	- `config.json` : starting point from which to generate a complete JBrowse2
+      configuration, based on `config.yaml`. A common use is to define
+      default browsing sessions.
+
+- Different `make` recipes prepare the material described in `config/`
+  for use by JBrowse2. The main operations are downloading data files,
+  compressing using `bgzip` and indexing with `samtools`.
+
+- The website content resides in the `hugo` directory.
+  - Most importantly, each species gets:
+    1. A content subdirectory in `hugo/content/species/` (e.g. `hugo/content/species/clupea_harengus`)
+	2. A data directory in `hugo/data/` (taxonomic information and statistics)
+	3. An assets directory in `hugo/assets` (data inventory)
+
+- The `scripts` folder contains executables to help:
+    1. build and serve the website using Docker
+	2. add a new species to the website content
+	3. add new datasets to the portal
+
+- The `tests` folder contains tests and fixtures, mainly covering the
+  data preparation scripts.
+
+- The `docker` folder contains two Dockerfiles:
+	1. `docker/data.dockerfile` used for data preparation (everything that `make` needs)
+	2. `docker/hugo.dockerfile` used to build and serve the website.
+
+### Local development
+
+The steps described below requires
+[`docker`](https://www.docker.com/) to be installed.
+
+**1. Clone the repository**
+
+```
+git clone git@github.com:ScilifelabDataCentre/genome-portal.git
+cd genome-portal
 ```
 
-You can run then run this image locally as follows: 
+**2. Build and install the genomic data**
 
-```bash 
-docker run -p 8080:8080 swg-hugo-site:local
+```bash
+# Build local image from `docker/data.dockerfile`
+./scripts/dockerbuild data
+
+# Run the dockermake script to build the assets and install them locally.
+./scripts/dockermake
 ```
 
-The site will be then visible to you at the address: http://localhost:8080/ on your web browser. 
+You may need to be patient, some files are tens of Gigabytes. Should
+only a subset of species be of interest, you can restrict the
+scope of the build:
 
-
-
-### 2. `docker/data.dockerfile` : Builds a Docker image that can be used to download and process the data assets needed for the JBrowse section of the website. 
-
-As above, you can obtain the latest version of this image from the [packages section of this repository](https://github.com/orgs/ScilifelabDataCentre/packages?repo_name=swedgene). 
-
-Then to use the image to build all the data files you can use the provided script: 
-
-```bash 
-./scripts/dockermake.sh build
+```bash
+./scripts/dockermake SPECIES=clupea_harengus,linum_tenue
 ```
 
-If you want to specfiy the image and/or tag used you can specify them via enviroment variables
-For example:
+**3. Run the web application container**
 
-```bash 
-SWG_DOCKER_IMAGE=ghcr.io/scilifelabdatacentre/swg-data-builder SWG_DOCKER_TAG=docker-dir ./scripts/dockermake.sh build
+Then to run the website locally, you have several options
+
+#### Using the latest development image
+
+```bash
+docker pull ghcr.io/scilifelabdatacentre/swg-hugo-site:dev
+./scripts/dockerserve
 ```
 
+#### Using a local build
 
-
-
-# pre-commit
-
-This repository uses [`pre-commit`](https://pre-commit.com/) which can be used to automatically test the changes made between each commit to check your code. Things like linting and bad formatting can be spott
-
-### Setup pre-commit
-##### Step 1
-
-To setup `pre-commit` when commiting to this repo you'll need to install the python package `pre-commit`. You can do that using either:
-
-```
-pip install -r requirements.txt
-# OR
-pip install pre-commit==3.7.0
+```bash
+./scripts/dockerbuild hugo
+SWG_TAG=local ./scripts/dockerserve
 ```
 
-##### Step 2
+#### Using the Hugo development server
 
-Then you'll need to install the precommit hooks (run from the root of the GitHub repository). 
+This last method is adequate when you want to see changes to the
+source immediately reflected in the web browser. 
 
-```
-pre-commit install
-```
+It requires the additional step of installing the JBrowse static
+bundle in `hugo/static/browser`
 
-### Commiting with pre-commit installed: 
-
-Now when you commit with pre-commit installed you're commits will be tested against the pre-commit hooks included in this branch and if everything goes well it will look something like this:
-
-``` 
-$ git commit 
-Check Yaml...............................................................Passed
-Check JSON...............................................................Passed
-Check for added large files..............................................Passed
-Fix End of Files.........................................................Passed
-Trim Trailing Whitespace.................................................Passed
-markdownlint-fix.........................................................Passed
-ruff.....................................................................Passed
-ruff-format..............................................................Passed
-[add-precommit-ghactions 71c6541] Run: "pre-commit run --all-files"
- 39 files changed, 59 insertions(+), 67 deletions(-)
+```bash
+./scripts/download_jbrowse v2.15.4 hugo/static/browser
+scripts/dockerserve --dev
 ```
 
-If one of the tests failed your commit will be blocked If a check fails during the `pre-commit` process, the commit will be blocked and will not proceed. The `pre-commit` tool will output a message indicating which hook failed and often provide some information about what caused the failure. 
+---
 
-Pre-commit will fix most issues itself the developer is expected to fix the issues that caused the failure and then attempt the commit again. Once all hooks pass, the commit will be allowed to proceed.
+Either of these methods will serve you the website at http://localhost:8080/
 
 
-Whilst not ideal, if you need to bypass the failing test, you could edit the `.pre-commit-config.yaml` file or skip running pre-commit on this test. 
+## Credits
 
-``` 
-git commit --no-verify 
-``` 
-
-### pre-commit and GitHub actions
-The pre-commit tests are also run using GitHub actions as a way to ensure the code commited passes the pre-commit tests (pre-commit is run locally on each developers PC). In some cases new rules/exceptions should be added to the pre-commit tests as they may be too strict we run so don't take it personally if your code fails a check.  
-
+The Swedish Reference Genome Portal is developed and maintained by the DDLS 
+Data Science Node in Evolution and Biodiversity (DSN-EB) team as part of 
+the [SciLifeLab Data Platform](https://data.scilifelab.se/), operated by the 
+SciLifeLab Data Centre. Members if the DSN-EB team are affiliated 
+with [SciLifeLab Data Centre](https://www.scilifelab.se/data/) 
+and the [National Bioinformatics Infrastructure Sweden (NBIS)](https://nbis.se/), 
+based at Uppsala University and the Swedish Museum of Natural History. 

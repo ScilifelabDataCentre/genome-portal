@@ -11,8 +11,8 @@
 # With the --dev option, run a hugo development server.
 
 : "${SWG_IMAGE:=ghcr.io/scilifelabdatacentre/swg-hugo-site}"
-: "${SWG_TAG:=main}"
-: "${SWG_NAME:=swedgene-site}"
+: "${SWG_TAG:=dev}"
+: "${SWG_NAME:=genome-portal}"
 : "${SWG_DATA_DIR:=data}"
 : "${SWG_PORT:=8080}"
 : "${SWG_HUGO_IMAGE:=hugomods/hugo}"
@@ -28,6 +28,7 @@ EOF
 fi
 
 if [[ "$1" == "--dev" ]]; then
+    SWG_NAME+="-dev"
     docker run --rm -d  \
 	   -p "${SWG_PORT}":1313 \
 	   -p 1313:1313 \
@@ -40,8 +41,8 @@ else
 	   -v "$(pwd)/${SWG_DATA_DIR}":"/usr/share/nginx/html/data" \
 	   --name "${SWG_NAME}" \
 	   "${SWG_IMAGE}:${SWG_TAG}"
-fi && \
-    cat <<EOF
+fi >/dev/null 2>/tmp/dockerserve.log && \
+    cat <<EOF || cat /tmp/dockerserve.log
 - Web server is running in container "${SWG_NAME}".
 - Site can be visited at http://localhost:${SWG_PORT}
 
