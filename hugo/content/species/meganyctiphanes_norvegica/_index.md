@@ -3,12 +3,10 @@
 title: "*Meganyctiphanes norvegica*"
 subtitle: "Northern krill"
 
-last_updated: "22/10/2024"
+last_updated: "05/11/2024"
 
-cover_image: "/img/species/northern_krill.webp"
-img_attrib_text: "Northern Krill by Uwe Kils, CC BY-SA 3.0"
-img_attrib_link: "https://commons.wikimedia.org/wiki/File:Meganyctiphanes_norvegica.jpg"
-
+cover_image: "/img/species/meganyctiphanes_norvegica.webp"
+img_attrib_text: "Northern Krill by Andreas Wallberg, used with permission"
 
 # The params below were auto-generated, you should not need to edit them...
 # unless you were warned by the add-new-species.py script.
@@ -31,9 +29,9 @@ initialZoom: 1
 
 ### Description
 
-The *Meganyctiphanes norvegica* species of krill is a macrozooplankton crustacean found in the Northen Atlantic (Unneberg et al., 2024). It is among the largest of the Euphausiid (krill) species, with total body length reaching up to 40 and 50 mm (Tarling et al., 2010). It can tolerate a broader range of temperatures than other krill species (Huenerlage & Buchholz, 2015), and consequently has a large latitudinal distribution ranging from Barents Sea to the Mediterranean Sea (Tarling et al., 2010; Unneberg et al., 2024).
+The *Meganyctiphanes norvegica* species of krill is a macrozooplankton crustacean found in the Northen Atlantic (Unneberg et al., 2024). It is among the largest of the Euphausiid (krill) species, with total body length reaching up to 40 and 50 mm (Tarling et al., 2010). It can tolerate a broader range of temperatures than many other krill species (Huenerlage & Buchholz, 2015), and consequently has a large latitudinal distribution ranging from Barents Sea to the Mediterranean Sea (Tarling et al., 2010; Unneberg et al., 2024).
 
-The tolerance of *M. norvegica* to a broader range of temperatures make it interesting for studies on ecological adaptation to the warming of the oceans. A challenge with genomic analysis of krill species is their huge genome size (19 Gb for *M. norvegica*) (Choquet et al. 2023; Jeffery, 2012; Unneberg et al., 2024). Genetic variation has been found to be widespread but divergent among specimens collected thoughout their geographic distribution, including polygeneic variants indicating adaptation potential to changes in light and temperature (Unneberg et al., 2024).
+The wide distribution and thermal tolerance of *M. norvegica* make it a powerful model to study ecological adaptation to different marine climates and rapid ocean warming. A challenge with genomic analysis of krill species is their huge genome size (19 Gb for *M. norvegica*) (Choquet et al. 2023; Jeffery, 2012; Unneberg et al., 2024). While most genetic variation appears to be widespread among individuals throughout range of the species, researchers have also identified many signatures of local genetic adaptations in genes involved in responses to light and temperature (Unneberg et al., 2024). In particular, krill from the Atlantic Ocean and the Mediterranean Sea are distinctly different at hundreds of genes. Such genetic variation could be crucial for allowing the krill to adapt to continued climate change and promote reliance of krill populations in a warmer ocean.
 
 #### How to cite
 
@@ -55,6 +53,13 @@ If you have used the pages for this species in the Genome Portal, please refer t
 
 - Tarling, G. A., Ensor, N. S., Fregin, T., Goodall-Copestake, W. P., & Fretwell, P. (2010). Chapter One—An Introduction to the Biology of Northern Krill (Meganyctiphanes norvegica Sars). In G. A. Tarling (Ed.), Advances in Marine Biology (Vol. 57, pp. 1–40). Academic Press. [https://doi.org/10.1016/B978-0-12-381308-4.00001-7](https://doi.org/10.1016/B978-0-12-381308-4.00001-7)
 
+#### Contact
+
+For questions about the data, please contact the principal investigator:
+
+- Andreas Wallberg, Uppsala University, <andreas.wallberg@imbim.uu.se>
+
 #### Changelog
 
+- 05/11/2024 - Update photo and species description
 - 15/10/2024 - Species first published on the Portal
