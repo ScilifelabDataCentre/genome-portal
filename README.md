@@ -162,7 +162,7 @@ docker pull ghcr.io/scilifelabdatacentre/swg-hugo-site:dev
 SWG_TAG=local ./scripts/dockerserve
 ```
 
-#### Using the Hugo developemt server
+#### Using the Hugo development server
 
 This last method is adequate when you want to see changes to the
 source immediately reflected in the web browser. 

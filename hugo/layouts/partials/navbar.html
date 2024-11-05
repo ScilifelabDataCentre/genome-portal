@@ -12,14 +12,28 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse scilife-navbar" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto">
-                {{ range .Site.Menus.main }}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ .URL }}">{{ .Name }}</a>
-                    </li>
-                {{ end }}
-            </ul>
+        <div class="d-flex align-items-start align-items-lg-end flex-column collapse navbar-collapse borders" >
+
+            <div class="collapse navbar-collapse scilife-navbar" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    {{ range .Site.Menus.main }}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ .URL }}">{{ .Name }}</a>
+                        </li>
+                    {{ end }}
+                </ul>
+            </div>
+
+            <div class="collapse navbar-collapse scilife-navbar" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    {{ range .Site.Menus.sub }}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ .URL }}">{{ .Name }}</a>
+                        </li>
+                    {{ end }}
+                </ul>
+            </div>
         </div>
+
     </div>
 </nav>

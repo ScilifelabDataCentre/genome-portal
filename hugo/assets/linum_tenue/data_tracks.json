@@ -45,224 +45,224 @@
     "dataTrackName": "Tajima's D, population 06",
     "description": "Whole genome Tajima's D estimates for individuals of population 06 of L. tenue per 100 kb windows.",
     "links": [
-      {"Download": "https://figshare.scilifelab.se/ndownloader/files/49006876"},
-      {"Website": "https://doi.org/10.17044/scilifelab.26937304.v1"},
+      {"Download": "https://figshare.scilifelab.se/ndownloader/files/50073936"},
+      {"Website": "https://doi.org/10.17044/scilifelab.26937304.v2"},
       {"Article": "https://doi.org/10.1016/j.cub.2022.08.042"}
     ],
     "accessionOrDOI": "10.17044/scilifelab.26937304.v1",
-    "fileName": "Lten_pop06_TD.bed.zip",
+    "fileName": "Lten_pop06_TD.bed.gz",
     "principalInvestigator": "Tanja Slotte",
     "principalInvestigatorAffiliation": "Stockholm University",
-    "firstDateOnPortal": "15 October 2024"
+    "firstDateOnPortal": "31 October 2024"
   },
   {
     "dataTrackName": "Tajima's D, population 08",
     "description": "Whole genome Tajima's D estimates for individuals of population 08 of L. tenue per 100 kb windows.",
     "links": [
-      {"Download": "https://figshare.scilifelab.se/ndownloader/files/49006879"},
-      {"Website": "https://doi.org/10.17044/scilifelab.26937304.v1"},
+      {"Download": "https://figshare.scilifelab.se/ndownloader/files/50073939"},
+      {"Website": "https://doi.org/10.17044/scilifelab.26937304.v2"},
       {"Article": "https://doi.org/10.1016/j.cub.2022.08.042"}
     ],
-    "accessionOrDOI": "10.17044/scilifelab.26937304.v1",
-    "fileName": "Lten_pop08_TD.bed.zip",
+    "accessionOrDOI": "10.17044/scilifelab.26937304.v2",
+    "fileName": "Lten_pop08_TD.bed.gz",
     "principalInvestigator": "Tanja Slotte",
     "principalInvestigatorAffiliation": "Stockholm University",
-    "firstDateOnPortal": "15 October 2024"
+    "firstDateOnPortal": "31 October 2024"
   },
   {
     "dataTrackName": "Tajima's D, population 17",
     "description": "Whole genome Tajima's D estimates for individuals of population 17 of L. tenue per 100 kb windows.",
     "links": [
-      {"Download": "https://figshare.scilifelab.se/ndownloader/files/49006882"},
-      {"Website": "https://doi.org/10.17044/scilifelab.26937304.v1"},
+      {"Download": "https://figshare.scilifelab.se/ndownloader/files/50073942"},
+      {"Website": "https://doi.org/10.17044/scilifelab.26937304.v2"},
       {"Article": "https://doi.org/10.1016/j.cub.2022.08.042"}
     ],
-    "accessionOrDOI": "10.17044/scilifelab.26937304.v1",
-    "fileName": "Lten_pop17_TD.bed.zip",
+    "accessionOrDOI": "10.17044/scilifelab.26937304.v2",
+    "fileName": "Lten_pop17_TD.bed.gz",
     "principalInvestigator": "Tanja Slotte",
     "principalInvestigatorAffiliation": "Stockholm University",
-    "firstDateOnPortal": "15 October 2024"
+    "firstDateOnPortal": "31 October 2024"
   },
   {
     "dataTrackName": "Tajima's D, population 21",
     "description": "Whole genome Tajima's D estimates for individuals of population 21 of L. tenue per 100 kb windows.",
     "links": [
-      {"Download": "https://figshare.scilifelab.se/ndownloader/files/49006888"},
-      {"Website": "https://doi.org/10.17044/scilifelab.26937304.v1"},
+      {"Download": "https://figshare.scilifelab.se/ndownloader/files/50073945"},
+      {"Website": "https://doi.org/10.17044/scilifelab.26937304.v2"},
       {"Article": "https://doi.org/10.1016/j.cub.2022.08.042"}
     ],
-    "accessionOrDOI": "10.17044/scilifelab.26937304.v1",
-    "fileName": "Lten_pop21_TD.bed.zip",
+    "accessionOrDOI": "10.17044/scilifelab.26937304.21",
+    "fileName": "Lten_pop21_TD.bed.gz",
     "principalInvestigator": "Tanja Slotte",
     "principalInvestigatorAffiliation": "Stockholm University",
-    "firstDateOnPortal": "15 October 2024"
+    "firstDateOnPortal": "31 October 2024"
   },
   {
     "dataTrackName": "Tajima's D, population 23",
     "description": "Whole genome Tajima's D estimates for individuals of population 23 of L. tenue per 100 kb windows.",
     "links": [
-      {"Download": "https://figshare.scilifelab.se/ndownloader/files/49006891"},
-      {"Website": "https://doi.org/10.17044/scilifelab.26937304.v1"},
+      {"Download": "https://figshare.scilifelab.se/ndownloader/files/50073951"},
+      {"Website": "https://doi.org/10.17044/scilifelab.26937304.v2"},
       {"Article": "https://doi.org/10.1016/j.cub.2022.08.042"}
     ],
-    "accessionOrDOI": "10.17044/scilifelab.26937304.v1",
-    "fileName": "Lten_pop23_TD.bed.zip",
+    "accessionOrDOI": "10.17044/scilifelab.26937304.v2",
+    "fileName": "Lten_pop23_TD.bed.gz",
     "principalInvestigator": "Tanja Slotte",
     "principalInvestigatorAffiliation": "Stockholm University",
-    "firstDateOnPortal": "15 October 2024"
+    "firstDateOnPortal": "31 October 2024"
   },
   {
     "dataTrackName": "Tajima's D, population 26",
     "description": "Whole genome Tajima's D estimates for individuals of population 26 of L. tenue per 100 kb windows.",
     "links": [
-      {"Download": "https://figshare.scilifelab.se/ndownloader/files/49007380"},
-      {"Website": "https://doi.org/10.17044/scilifelab.26937304.v1"},
+      {"Download": "https://figshare.scilifelab.se/ndownloader/files/50073954"},
+      {"Website": "https://doi.org/10.17044/scilifelab.26937304.v2"},
       {"Article": "https://doi.org/10.1016/j.cub.2022.08.042"}
     ],
-    "accessionOrDOI": "10.17044/scilifelab.26937304.v1",
-    "fileName": "Lten_pop26_TD.bed.zip",
+    "accessionOrDOI": "10.17044/scilifelab.26937304.v2",
+    "fileName": "Lten_pop26_TD.bed.gz",
     "principalInvestigator": "Tanja Slotte",
     "principalInvestigatorAffiliation": "Stockholm University",
-    "firstDateOnPortal": "15 October 2024"
+    "firstDateOnPortal": "31 October 2024"
   },
   {
     "dataTrackName": "Tajima's D, population 32",
     "description": "Whole genome Tajima's D estimates for individuals of population 32 of L. tenue per 100 kb windows.",
     "links": [
-      {"Download": "https://figshare.scilifelab.se/ndownloader/files/49006918"},
-      {"Website": "https://doi.org/10.17044/scilifelab.26937304.v1"},
+      {"Download": "https://figshare.scilifelab.se/ndownloader/files/50073957"},
+      {"Website": "https://doi.org/10.17044/scilifelab.26937304.v2"},
       {"Article": "https://doi.org/10.1016/j.cub.2022.08.042"}
     ],
-    "accessionOrDOI": "10.17044/scilifelab.26937304.v1",
-    "fileName": "Lten_pop32_TD.bed.zip",
+    "accessionOrDOI": "10.17044/scilifelab.26937304.v2",
+    "fileName": "Lten_pop32_TD.bed.gz",
     "principalInvestigator": "Tanja Slotte",
     "principalInvestigatorAffiliation": "Stockholm University",
-    "firstDateOnPortal": "15 October 2024"
+    "firstDateOnPortal": "31 October 2024"
   },
   {
     "dataTrackName": "Tajima's D, population 34",
     "description": "Whole genome Tajima's D estimates for individuals of population 34 of L. tenue per 100 kb windows.",
     "links": [
-      {"Download": "https://figshare.scilifelab.se/ndownloader/files/49006924"},
-      {"Website": "https://doi.org/10.17044/scilifelab.26937304.v1"},
+      {"Download": "https://figshare.scilifelab.se/ndownloader/files/50073960"},
+      {"Website": "https://doi.org/10.17044/scilifelab.26937304.v2"},
       {"Article": "https://doi.org/10.1016/j.cub.2022.08.042"}
     ],
-    "accessionOrDOI": "10.17044/scilifelab.26937304.v1",
-    "fileName": "Lten_pop34_TD.bed.zip",
+    "accessionOrDOI": "10.17044/scilifelab.26937304.v2",
+    "fileName": "Lten_pop34_TD.bed.gz",
     "principalInvestigator": "Tanja Slotte",
     "principalInvestigatorAffiliation": "Stockholm University",
-    "firstDateOnPortal": "15 October 2024"
+    "firstDateOnPortal": "31 October 2024"
   },
   {
     "dataTrackName": "Nucleotide diversity (π), population 06",
     "description": "Whole genome nucleotide diversity (π) estimates for individuals of population 06 of L. tenue per 100 kb windows.",
     "links": [
-      {"Download": "https://figshare.scilifelab.se/ndownloader/files/49006264"},
-      {"Website": "https://doi.org/10.17044/scilifelab.26937271.v1"},
+      {"Download": "https://figshare.scilifelab.se/ndownloader/files/50073987"},
+      {"Website": "https://doi.org/10.17044/scilifelab.26937271.v2"},
       {"Article": "https://doi.org/10.1016/j.cub.2022.08.042"}
     ],
-    "accessionOrDOI": "10.17044/scilifelab.26937271.v1",
-    "fileName": "Lten_pop06_Pi.bed.zip",
+    "accessionOrDOI": "10.17044/scilifelab.26937271.v2",
+    "fileName": "Lten_pop06_Pi.bed.gz",
     "principalInvestigator": "Tanja Slotte",
     "principalInvestigatorAffiliation": "Stockholm University",
-    "firstDateOnPortal": "15 October 2024"
+    "firstDateOnPortal": "31 October 2024"
   },
   {
     "dataTrackName": "Nucleotide diversity (π), population 08",
     "description": "Whole genome nucleotide diversity (π) estimates for individuals of population 08 of L. tenue per 100 kb windows.",
     "links": [
-      {"Download": "https://figshare.scilifelab.se/ndownloader/files/49006267"},
-      {"Website": "https://doi.org/10.17044/scilifelab.26937271.v1"},
+      {"Download": "https://figshare.scilifelab.se/ndownloader/files/50073990"},
+      {"Website": "https://doi.org/10.17044/scilifelab.26937271.v2"},
       {"Article": "https://doi.org/10.1016/j.cub.2022.08.042"}
     ],
-    "accessionOrDOI": "10.17044/scilifelab.26937271.v1",
-    "fileName": "Lten_pop08_Pi.bed.zip",
+    "accessionOrDOI": "10.17044/scilifelab.26937271.v2",
+    "fileName": "Lten_pop08_Pi.bed.gz",
     "principalInvestigator": "Tanja Slotte",
     "principalInvestigatorAffiliation": "Stockholm University",
-    "firstDateOnPortal": "15 October 2024"
+    "firstDateOnPortal": "31 October 2024"
   },
   {
     "dataTrackName": "Nucleotide diversity (π), population 17",
     "description": "Whole genome nucleotide diversity (π) estimates for individuals of population 17 of L. tenue per 100 kb windows.",
     "links": [
-      {"Download": "https://figshare.scilifelab.se/ndownloader/files/49006270"},
-      {"Website": "https://doi.org/10.17044/scilifelab.26937271.v1"},
+      {"Download": "https://figshare.scilifelab.se/ndownloader/files/50073993"},
+      {"Website": "https://doi.org/10.17044/scilifelab.26937271.v2"},
       {"Article": "https://doi.org/10.1016/j.cub.2022.08.042"}
     ],
-    "accessionOrDOI": "10.17044/scilifelab.26937271.v1",
-    "fileName": "Lten_pop17_Pi.bed.zip",
+    "accessionOrDOI": "10.17044/scilifelab.26937271.v2",
+    "fileName": "Lten_pop17_Pi.bed.gz",
     "principalInvestigator": "Tanja Slotte",
     "principalInvestigatorAffiliation": "Stockholm University",
-    "firstDateOnPortal": "15 October 2024"
+    "firstDateOnPortal": "31 October 2024"
   },
   {
     "dataTrackName": "Nucleotide diversity (π), population 21",
     "description": "Whole genome nucleotide diversity (π) estimates for individuals of population 21 of L. tenue per 100 kb windows.",
     "links": [
-      {"Download": "https://figshare.scilifelab.se/ndownloader/files/49006273"},
-      {"Website": "https://doi.org/10.17044/scilifelab.26937271.v1"},
+      {"Download": "https://figshare.scilifelab.se/ndownloader/files/50073999"},
+      {"Website": "https://doi.org/10.17044/scilifelab.26937271.v2"},
       {"Article": "https://doi.org/10.1016/j.cub.2022.08.042"}
     ],
-    "accessionOrDOI": "10.17044/scilifelab.26937271.v1",
-    "fileName": "Lten_pop21_Pi.bed.zip",
+    "accessionOrDOI": "10.17044/scilifelab.26937271.v2",
+    "fileName": "Lten_pop21_Pi.bed.gz",
     "principalInvestigator": "Tanja Slotte",
     "principalInvestigatorAffiliation": "Stockholm University",
-    "firstDateOnPortal": "15 October 2024"
+    "firstDateOnPortal": "31 October 2024"
   },
   {
     "dataTrackName": "Nucleotide diversity (π), population 23",
     "description": "Whole genome nucleotide diversity (π) estimates for individuals of population 23 of L. tenue per 100 kb windows.",
     "links": [
-      {"Download": "https://figshare.scilifelab.se/ndownloader/files/49006282"},
-      {"Website": "https://doi.org/10.17044/scilifelab.26937271.v1"},
+      {"Download": "https://figshare.scilifelab.se/ndownloader/files/50074002"},
+      {"Website": "https://doi.org/10.17044/scilifelab.26937271.v2"},
       {"Article": "https://doi.org/10.1016/j.cub.2022.08.042"}
     ],
-    "accessionOrDOI": "10.17044/scilifelab.26937271.v1",
-    "fileName": "Lten_pop23_Pi.bed.zip",
+    "accessionOrDOI": "10.17044/scilifelab.26937271.v2",
+    "fileName": "Lten_pop23_Pi.bed.gz",
     "principalInvestigator": "Tanja Slotte",
     "principalInvestigatorAffiliation": "Stockholm University",
-    "firstDateOnPortal": "15 October 2024"
+    "firstDateOnPortal": "31 October 2024"
   },
   {
     "dataTrackName": "Nucleotide diversity (π), population 26",
     "description": "Whole genome nucleotide diversity (π) estimates for individuals of population 26 of L. tenue per 100 kb windows.",
     "links": [
-      {"Download": "https://figshare.scilifelab.se/ndownloader/files/49006285"},
-      {"Website": "https://doi.org/10.17044/scilifelab.26937271.v1"},
+      {"Download": "https://figshare.scilifelab.se/ndownloader/files/50074005"},
+      {"Website": "https://doi.org/10.17044/scilifelab.26937271.v2"},
       {"Article": "https://doi.org/10.1016/j.cub.2022.08.042"}
     ],
-    "accessionOrDOI": "10.17044/scilifelab.26937271.v1",
-    "fileName": "Lten_pop26_Pi.bed.zip",
+    "accessionOrDOI": "10.17044/scilifelab.26937271.v2",
+    "fileName": "Lten_pop26_Pi.bed.gz",
     "principalInvestigator": "Tanja Slotte",
     "principalInvestigatorAffiliation": "Stockholm University",
-    "firstDateOnPortal": "15 October 2024"
+    "firstDateOnPortal": "31 October 2024"
   },
   {
     "dataTrackName": "Nucleotide diversity (π), population 32",
     "description": "Whole genome nucleotide diversity (π) estimates for individuals of population 32 of L. tenue per 100 kb windows.",
     "links": [
-      {"Download": "https://figshare.scilifelab.se/ndownloader/files/49006297"},
-      {"Website": "https://doi.org/10.17044/scilifelab.26937271.v1"},
+      {"Download": "https://figshare.scilifelab.se/ndownloader/files/50074008"},
+      {"Website": "https://doi.org/10.17044/scilifelab.26937271.v2"},
       {"Article": "https://doi.org/10.1016/j.cub.2022.08.042"}
     ],
-    "accessionOrDOI": "10.17044/scilifelab.26937271.v1",
-    "fileName": "Lten_pop32_Pi.bed.zip",
+    "accessionOrDOI": "10.17044/scilifelab.26937271.v2",
+    "fileName": "Lten_pop32_Pi.bed.gz",
     "principalInvestigator": "Tanja Slotte",
     "principalInvestigatorAffiliation": "Stockholm University",
-    "firstDateOnPortal": "15 October 2024"
+    "firstDateOnPortal": "31 October 2024"
   },
   {
     "dataTrackName": "Nucleotide diversity (π), population 34",
     "description": "Whole genome nucleotide diversity (π) estimates for individuals of population 34 of L. tenue per 100 kb windows.",
     "links": [
-      {"Download": "https://figshare.scilifelab.se/ndownloader/files/49006300"},
-      {"Website": "https://doi.org/10.17044/scilifelab.26937271.v1"},
+      {"Download": "https://figshare.scilifelab.se/ndownloader/files/50074011"},
+      {"Website": "https://doi.org/10.17044/scilifelab.26937271.v2"},
       {"Article": "https://doi.org/10.1016/j.cub.2022.08.042"}
     ],
-    "accessionOrDOI": "10.17044/scilifelab.26937271.v1",
-    "fileName": "Lten_pop34_Pi.bed.zip",
+    "accessionOrDOI": "10.17044/scilifelab.26937271.v2",
+    "fileName": "Lten_pop34_Pi.bed.gz",
     "principalInvestigator": "Tanja Slotte",
     "principalInvestigatorAffiliation": "Stockholm University",
-    "firstDateOnPortal": "15 October 2024"
+    "firstDateOnPortal": "31 October 2024"
   }
 ]

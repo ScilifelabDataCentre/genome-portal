@@ -1,13 +1,12 @@
 organism: "Skeletonema marinoi"
 assembly:
   name: GU_Smar_1.1.8
-  displayName: "Skeletonema marinoi genome assembly"
+  displayName: "S. marinoi genome assembly GCA_030871285.1"
   accession: GCA_030871285.1
   # The following url points to the original ENA upload of the assembly. It will require an alias file to be able to load the protein coding genes track
   url: "ftp://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/jat/JATAAI01.fasta.gz"
-  #url: "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/030/871/285/GCA_030871285.1_GU_Smar_1.1.8/GCA_030871285.1_GU_Smar_1.1.8_genomic.fna.gz"
+  # Temp storage for alias file.
   aliases: "https://raw.githubusercontent.com/ScilifelabDataCentre/swedgene/main/scripts/data_stewardship/alias_files_temp_storage/JATAAI01.fna.alias"
 tracks:
-  - name: "Protein coding genes"
-  # Note: this annotation file is compressed with zip, not gzip
+  - name: "Protein-coding genes"
     url: "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/030/871/285/GCA_030871285.1_GU_Smar_1.1.8/GCA_030871285.1_GU_Smar_1.1.8_genomic.gff.gz"

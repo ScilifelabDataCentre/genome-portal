@@ -3,7 +3,7 @@
 {{ $description := "" }}
 
 {{ if .IsHome }}
-    {{ $description = "A platform facilitating access and discovery of genome data of non-model eukaryotic species studied in Sweden, hosted by SciLifeLab" }}
+    {{ $description = "A service facilitating access and discovery of genome data of non-model eukaryotic species studied in Sweden, hosted by SciLifeLab" }}
 
 <!-- Individ pages -->
 {{ else if eq .Title "Contact" }}
@@ -53,7 +53,7 @@
 
 <!-- Just in case anything missed, should not be anything... -->
 {{ else }}
-    {{ $description = "A platform facilitating access and discovery of genome data of non-model eukaryotic species studied in Sweden, hosted by SciLifeLab." }}
+    {{ $description = "A service facilitating access and discovery of genome data of non-model eukaryotic species studied in Sweden, hosted by SciLifeLab." }}
 
 {{ end }}
 {{ return $description }}

@@ -18,8 +18,6 @@ stats_data_path: "skeletonema_marinoi/species_stats"
 lineage_data_path: "skeletonema_marinoi/taxonomy"
 ---
 
-|||||| Content divider - do not remove ||||||
-
 Notes: Assembly statistics and BUSCO percentages were calculated for the primary genome assembly GCA_030871285.1. Annotation statistics were calculated using GCA_030871285.1_GU_Smar_1.1.8_genomic.gff.
 
 BUSCO notation: C: Complete; S: Single-copy; D: Duplicated; F: Fragmented; M: Missing; n: Total BUSCO genes included in the dataset (here: stramenopiles_odb10). See also [the official BUSCO manual](https://busco.ezlab.org/busco_userguide.html#interpreting-the-results).
