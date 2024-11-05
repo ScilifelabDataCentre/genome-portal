@@ -1,26 +1,29 @@
 ---
-title: Recommendations of how to make data files publicly available
+title: Recommendations
 toc: true
 ---
 
-## Recommendations of how to make data files publicly available
+### How to make data files publicly available
 
-The Swedish Reference Genome Portal uses the FAIR principles as a guidance for sharing of research data. FAIR encourages researchers to make their data Findable, Accessible, Interoperable, and Reusable. One of the ways that we encourage this is by requiring that all data that is displayed on the Genome Portal is submitted to public data repositories. In this way, we hope that many valuable datasets that otherwise might not be shared via the main nucleotide repositories can be made public.
+The Swedish Reference Genome Portal follows the <a href="https://www.go-fair.org/fair-principles/" target="_blank">FAIR principles</a> for research data sharing, encouraging researchers to make their data Findable, Accessible, Interoperable, and Reusable. To promote this, we require that all data displayed on the Genome Portal be available in public repositories, helping ensure that valuable datasets (e.g., genomic annotations) not shared through primary nucleotide repositories are also publicly accessible.
 
 {{< info_block >}}
-Recommendations on how to find a suitable repository can be found in the <a href="https://data-guidelines.scilifelab.se/data-life-cycle/share/">SciLifeLab Research Data Management guidelines</a>.
+Recommendations for finding a suitable repository for a given data type can be found in the <a href="https://data-guidelines.scilifelab.se/data-life-cycle/share/" target="_blank">SciLifeLab Research Data Management guidelines</a>.
+
+Assistance to submit genome assemblies and protein-coding gene models to ENA can be obtained from <a href="https://nbis.se/services/data-management-support/apply" target="_blank">NBIS</a>.
+
 {{< /info_block >}}
 
-Below we list three recommendations on how to share research data in a manner that follows the FAIR principles and facilitates the integration with the Genome Portal. For information relating to the data files themselves, please also see the <a href="/contribute/recommendations_for_file_formats"> recommendations for file formats</a> for displaying data on the Genome Portal.
+Below, we describe three recommended ways to share genomic data in a manner that follows the FAIR principles and facilitates integration with the Genome Portal. For information about the data files themselves, please refer to the <a href="/contribute/supported_file_formats" target="_blank">supported data file formats</a>.
 
 ### Recommendations
 
 1. The files should be uploaded to a repository that provides a persistent identifier, such as a DOI.
 
-    - Assemblies and annotation of protein-coding genes should be uploaded to a discipline-specific repository such as the <a href="https://www.ebi.ac.uk/ena/browser/home">European Nucleotide Archive (ENA)</a>  or
-    <a href=" https://www.ncbi.nlm.nih.gov/genbank/"> National Center for Biotechnology Information NCBI - GenBank</a>. This is a *de facto* standard in genomics and is often a requirement for submission of manuscripts to scientific journals. Files uploaded to these repositories will get a persistent identifier in the form of an Accession Number.
+    - Assemblies and annotation of protein-coding genes should be uploaded to a discipline-specific repository such as the <a href="https://www.ebi.ac.uk/ena/browser/home" target="_blank">European Nucleotide Archive (ENA)</a>  or
+    <a href=" https://www.ncbi.nlm.nih.gov/genbank/" target="_blank"> National Center for Biotechnology Information NCBI - GenBank</a>. This is a *de facto* standard in genomics and is often a requirement for submission of manuscripts to scientific journals. Files uploaded to these repositories will get a persistent identifier in the form of an Accession Number.
 
-    - For other data types that can be displayed on the Genome Portal, there are likely no specialized repositories. Therefore, such files can be submitted to a general purpose repository, such as the <a href="https://figshare.scilifelab.se/">SciLifeLab Data Repository</a>, and <a href="https://zenodo.org/">Zenodo</a>.
+    - For other data types that can be displayed on the Genome Portal, there are likely no specialized repositories. Therefore, such files can be submitted to a general purpose repository, such as the <a href="https://figshare.scilifelab.se/" target="_blank">SciLifeLab Data Repository</a>, and <a href="https://zenodo.org/" target="_blank">Zenodo</a>.
 
         - The Genome Portal is developed and maintained as part of the Data-Drive Life Science (DDLS) program at SciLifeLab, and we recommend users to use SciLifeLab Data Repository since we are able to give detailed advice on how to make submissions there.
 
@@ -50,4 +53,4 @@ Let’s assume that a user wants to make three files publicly available by submi
 
 ### Questions?
 
-We are happy to discuss and advise on best practices for making research data publicly available. Please send us an email to [dsn-eb@scilifelab.se](mailto:dsn-eb@scilifelab.se) or contact us through the <a href="/contact">Contact page</a>.
+We are happy to discuss and advise on best practices for making research data publicly available. Please send us an email to [dsn-eb@scilifelab.se](mailto:dsn-eb@scilifelab.se) or contact us through the <a href="/contact" target="_blank">Contact</a> page.
