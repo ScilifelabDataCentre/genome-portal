@@ -1,0 +1,82 @@
+cff-version: 1.2.0
+title: The Swedish Reference Genome Portal
+message: "If you use or reuse this software, please cite it using the following metadata."
+type: software
+authors:
+  - family-names: Lantz
+    given-names: Henrik
+  - family-names: Brink
+    given-names: Daniel P.
+    orcid: "https://orcid.org/0000-0003-4041-0250"
+  - family-names: Crean
+    given-names: Rory
+  - family-names: Ågren
+    given-names: Quentin
+  - family-names: Fuentes-Pardo
+    given-names: Angela P. 
+    orcid: "https://orcid.org/0000-0002-5734-9030"
+  - family-names: Kochari
+    given-names: Arnold
+    orcid: "https://orcid.org/0000-0003-1373-5121"
+  - family-names: Kultima
+    given-names: Hanna
+    orcid: "https://orcid.org/0000-0001-7724-2567"
+  - family-names: Rung
+    given-names: Johan
+    orcid: "https://orcid.org/0000-0001-5875-8429"
+  - family-names: Persson
+    given-names: Bengt
+repository-code: "https://github.com/ScilifelabDataCentre/genome-portal"
+url: "https://genomes.scilifelab.se"
+abstract: "The Swedish Reference Genome Portal is a service facilitating access and discovery of genome data of non-model eukaryotic species studied in Sweden."
+license: MIT
+references:
+  - authors:
+      - family-names: Diesh
+        given-names: Colin
+      - family-names: Stevens
+        given-names: Garrett J.
+      - family-names: Xie
+        given-names: Peter
+      - family-names: De Jesus Martinez
+        given-names: Teresa
+      - family-names: Hershberg
+        given-names: Elliot A.
+      - family-names: Leung
+        given-names: Angel
+      - family-names: Guo
+        given-names: Emma
+      - family-names: Dider
+        given-names: Shihab
+      - family-names: Zhang
+        given-names: Junjun
+      - family-names: Bridge
+        given-names: Caroline
+      - family-names: Hogue
+        given-names: Gregory
+      - family-names: Duncan
+        given-names: Andrew
+      - family-names: Morgan
+        given-names: Matthew
+      - family-names: Flores
+        given-names: Tia
+      - family-names: Bimber
+        given-names: Benjamin N.
+      - family-names: Haw
+        given-names: Robin
+      - family-names: Cain
+        given-names: Scott
+      - family-names: Buels
+        given-names: Robert M.
+      - family-names: Stein
+        given-names: Lincoln D.
+      - family-names: Holmes
+        given-names: Ian H. 
+    doi: 10.1186/s13059-023-02914-z
+    issue: 1
+    journal: Genome Biology
+    scope: "Please cite this paper for referencing JBrowse 2, the genome browser software utilized on the Swedish Reference Genome Portal."
+    title: "JBrowse 2: a modular genome browser with views of synteny and structural variation"
+    type: article
+    volume: 24
+    year: 2023

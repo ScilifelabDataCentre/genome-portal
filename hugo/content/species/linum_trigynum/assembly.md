@@ -18,8 +18,6 @@ stats_data_path: "linum_trigynum/species_stats"
 lineage_data_path: "linum_trigynum/taxonomy"
 ---
 
-|||||| Content divider - do not remove ||||||
-
 Notes: Assembly statistics were calculated for the primary genome assembly GCA_964030455.1. Busco statistics were taken from Gutiérrez-Valencia et al. (2024). Annotation statistics were calculated using Ltrigynum_v1_genes.gtf.
 
 BUSCO notation: C: Complete; S: Single-copy; D: Duplicated; F: Fragmented; M: Missing; n: Total BUSCO genes included in the dataset (here: eukaryota_odb10). See also [the official BUSCO manual](https://busco.ezlab.org/busco_userguide.html#interpreting-the-results).

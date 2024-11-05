@@ -32,9 +32,13 @@ initialZoom: 1
 
 The chain-forming marine centric diatom *Skeletonema marinoi* Sarno & Zingone was described in 2005, as one of four new species identified in the *Skeletonema costatum* complex (Sarno et al., 2005). In the Baltic Sea, *S. marinoi* is the dominant species from this genus (Sjöqvist et al., 2015) and several studies have focused on its ecology and evolution (e.g. Godhe & Härnström, 2010; Härnström et al., 2011; Sefbom et al., 2018). The genomes of ten bacteria from the *S. marinoi* microbiome have also been sequenced, to inform on the interactions within the diatom-bacteria holobiont (Johansson et al., 2019a). Several molecular techniques have been developed for this species, including a method for genetic transformation, involving mutagenesis (Johansson et al., 2019b) and Secondary ion mass spectrometry (Stenow et. al 2024) making it a useful tool for studies of evolution, functional genomics and ecology. The sequenced strain R05AC is available from the algal bank at University of Gothenburg ([GUMACC](https://www.gu.se/en/marina-vetenskaper/about-us/algal-bank-gumacc)).
 
-#### Genome reference
+#### How to cite
 
 There is currently no publication accociated with the genome of *S. marinoi* R05AC. In the meantime, please cite the genome assembly submission: GCA_030871285.1. A list of the submitting authors can be found at the [JATAAI000000000.1 record at NCBI](https://www.ncbi.nlm.nih.gov/nuccore/JATAAI000000000).
+
+If you have used the pages for this species in the Genome Portal, please refer to it in-text as: "The *Skeletonema marinoi* entry in the Swedish Reference Genome Portal (access date)." and use the following for the bibliography:
+
+- <p> Swedish Reference Genome Portal (access date), SciLifeLab Data Centre, version (version number) from <a href="https://genomes.scilifelab.se">https://genomes.scilifelab.se</a>, <a href="https://rrid.site/data/record/nlx_144509-1/SCR_026008/resolver?q=rrid:scr_026008">RRID:SCR_026008</a>.
 
 #### References
 
