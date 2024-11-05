@@ -13,8 +13,11 @@ The DSN-EB team comprises system developers, data stewards, and bioinformatician
 The Swedish Reference Genome Portal aims to:
 
 - Highlight and showcase genome research performed in Sweden.
+
 - Make it easier to access, visualise, and interpret genome data by lowering the barriers to entry.
+
 - Promote the sharing of genomic annotations that are rarely published.
+
 - Ensure all data displayed on the Genome Portal aligns with the <a href="https://www.go-fair.org/fair-principles/" target="_blank">FAIR principles</a> and is available in public repositories.
 
 ### Technical implementation and source code
@@ -25,7 +28,7 @@ The source code for the Genome Portal is publicly available on <a href="https:/
 
 ### Citation guidelines
 
-The recommended citations for the Genome Portal, source code, species pages, genome browser, and source data files can be found on the <a href="/citation" target="_blank">Cite us</a>.
+The recommended citations for the Genome Portal, source code, species pages, genome browser, and source data files can be found on the <a href="/citation" target="_blank">Cite us</a> page.
 
 ### Terms of use
 
