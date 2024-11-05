@@ -34,17 +34,9 @@ In the navigation bar you can find links to various pages:
 
 - Glossary: A list arranged in alphabetical order, providing definitions for words or phrases in the website that may be unusual in common language.
 
-**NOTE>>> Here just trying different ways to call the images but none is working!**
-
-![Fig 1](img/user-guide/Fig01_Home_page.webp)
-
-![Fig 1](static/img/user-guide/Fig01_Home_page.webp)
-
-![Fig 1](user-guide/Fig01_Home_page.png)
-
-![Fig 1](hugo/static/img/user-guide/Fig01_Home_page.png)
-
-![Fig 1](hugo/static/img/user-guide/Fig01_Home_page.png)
+<img src="/img/user-guide/Fig01_Home_page.webp"
+    alt="Figure 1. Home page of the genome portal"
+    style="width: 100%;">
 
 Figure 1. Home page of the genome portal.
 
@@ -60,7 +52,9 @@ Each species included in the genome portal has a dedicated webpage called Specie
 
 This tab presents information about the species, including scientific and common names, a photo, a map showing species occurrences from the Global Biodiversity Information Facility (GBIF), taxonomic classification retrieved from XX, vulnerability status from the International Union for Conservation of Nature (IUCN) and Artdatabanken (SLU Swedish Species Information Centre), species information and references, recommended citation, and links to external resources such as GBIF, the Swedish Biodiversity Data Infrastructure (SBDI), and Genomes on a Tree (GoaT) (Figure 2).
 
-![Fig 2](static/img/user-guide/Fig02_Species_page_Description_tab.webp)
+<img src="/img/user-guide/Fig02_Species_page_Description_tab.webp"
+    alt="Figure 2. Description tab of a Species page on the genome portal"
+    style="width: 100%;">
 
 Figure 2. Description tab of a Species page on the genome portal.
 
@@ -73,7 +67,9 @@ External links
 
 This tab presents information about the genome assembly, including a general description from the European Nucleotide Archive (ENA), assembly and annotation statistics obtained with BUSCO, scientific article where the genome assembly was published, funding, acknowledgements, and links to genome assembly in ENA and the National Center for Biotechnology Information (NCBI) (Figure 3).
 
-![Fig 3](hugo/static/img/user-guide/Fig03_Species_page_Genome_assembly_tab.webp)
+<img src="/img/user-guide/Fig03_Species_page_Genome_assembly_tab.webp"
+    alt="Figure 3. Genome assembly tab of a Species page on the genome portal."
+    style="width: 100%;">
 
 Figure 3. Genome assembly tab of a Species page on the genome portal.
 
@@ -85,16 +81,18 @@ In the Links column, you can find external link buttons to download the original
 Use the toggle on the upper-right corner of the table to switch between the default and the expanded table view.
 Below the table, you can find links to download the table as a JSON file, open (in a new tab) the refNameAlias text file used in JBrowse to set the aliases for reference sequence names (e.g., to define that “chr1” is an alias for “1”), and open (in a new tab) the Glossary page.
 
-![Fig 4](hugo/static/img/user-guide/Fig04_Species_page_Download_tab.webp)
-
-Figure 4. Download tab of a Species page on the genome portal.
+<img src="/img/user-guide/Fig04_Species_page_Download_tab.webp"
+    alt="Figure 4. Download tab of a Species page on the genome portal."
+    style="width: 100%;">
 
 #### Genome browser
 
 When you click the Browse the genome button located on the upper-right side of a Species page, an embedded JBrowse genome browser opens in a new web browser tab (Figure 5).
 In the genome browser, the data tracks are displayed stacked horizontally.
 
-![Fig 5](hugo/static/img/user-guide/Fig05_Species_page_Genome_browser.webp)
+<img src="/img/user-guide/Fig05_Species_page_Genome_browser.webp"
+    alt="Figure 5. View of the embedded JBrowse genome browser in the genome portal."
+    style="width: 100%;">
 
 Figure 5. View of the embedded JBrowse genome browser in the genome portal.
 (1) FILE menu
