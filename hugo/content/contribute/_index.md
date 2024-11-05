@@ -1,6 +1,6 @@
 ---
 title: Contribute
-last_updated: "4 November 2024"
+last_updated: "5 November 2024"
 ---
 
 Are you a researcher affiliated with a Swedish institution who has genome data that you would like to see displayed on the Swedish Reference Genome Portal? Great! Please send us an email to [dsn-eb@scilifelab.se](mailto:dsn-eb@scilifelab.se) or contact us through the <a href="/contact" target="_blank">Contact</a> page. We would be happy to hear about your data and discuss how we can accommodate it.
@@ -33,11 +33,9 @@ Planning is key! Reach out to us via email at <dsn-eb@scilifelab.se> or through 
 
 *Please note that these requirements may be subject to change at any time and without notice, so we recommend checking them regularly*.
 
-### Supported formats and recommendations for making data public
+### Supported file formats and recommendations for making data public
 
 The Genome Portal staff can help you reserve an entry on the portal already during the manuscript writing stage and provide a reference to the entry that can be used in the Data Availability statement of the manuscript. If you desire, we will wait to activate the entry until the manuscript is accepted for publication and the data has been made public.
-
-## Recommendations
 
 The Genome Portal displays various data types commonly used in genomics studies. The links below provide information on supported data file formats and recommendations for sharing genomic data via public repositories. Following these guidelines will help ensure data compatibility for display on the Genome Portal.
 
