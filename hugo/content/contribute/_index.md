@@ -25,7 +25,6 @@ For a species dataset to be included in the Genome Portal, it needs to fulfil th
 
 4. The **data is available in public repositories**. Example repositories include the European Nucleotide Archive - ENA, National Center of Biotechnology Information - NCBI, SciLifeLab Data Repository, Zenodo, among others.
 
-
 {{< info_block >}}
 We can also accept data under embargo expected to become available after the manuscript under review is approved for publication. The data should be deposited in a public repository and have a reserved DOI and/or accession number. This allows you to indicate in the Data Availability Statement of your manuscript that your data can be visualised on the Genome Portal.
 
