@@ -52,7 +52,7 @@ Each species included in the genome portal has a dedicated webpage called Specie
 
 This tab presents information about the species, including scientific and common names, a photo, a map showing species occurrences from the Global Biodiversity Information Facility (GBIF), taxonomic classification retrieved from XX, vulnerability status from the International Union for Conservation of Nature (IUCN) and Artdatabanken (SLU Swedish Species Information Centre), species information and references, recommended citation, and links to external resources such as GBIF, the Swedish Biodiversity Data Infrastructure (SBDI), and Genomes on a Tree (GoaT) (Figure 2).
 
-<img src="/img/user-guide/Fig02_Species_page_Description_tab.webp"
+<img src="/img/user-guide/Fig02_Species_page_Description_tabo.webp"
     alt="Figure 2. Description tab of a Species page on the genome portal"
     style="width: 100%;">
 
@@ -84,6 +84,8 @@ Below the table, you can find links to download the table as a JSON file, open (
 <img src="/img/user-guide/Fig04_Species_page_Download_tab.webp"
     alt="Figure 4. Download tab of a Species page on the genome portal."
     style="width: 100%;">
+
+Figure 4. Download tab of a Species page on the genome portal
 
 #### Genome browser
 
