@@ -11,7 +11,7 @@ We gratefully welcome comments or questions via [email](mailto:dsn-eb@scilifelab
 
 ### 1. Website structure
 
-The Genome Portal website consists of two main components: A **Home page** and a **Species page** for for each species entry.
+The Genome Portal website mainly consists of a **Home page**, with a gallery of links to individual **Species pages**.
 
 ### 1.1. Home page
 
