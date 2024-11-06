@@ -259,8 +259,8 @@ body {
 
 .scilife-footer-text a {
   color: var(--scilife-teal);
-  font-size: 1.05rem;
-  font-weight: 600;
+  font-size: 1.00rem;
+  font-weight: 500;
   letter-spacing: 0.045rem;
   text-decoration: none;
 }
@@ -741,18 +741,6 @@ body {
 /* footer images */
 .scilife-footer-img {
   max-width: 150px;
-}
-
-@media (min-width: 992px) {
-  .scilife-footer-img {
-    max-width: 75px;
-  }
-}
-
-@media (min-width: 1100px) {
-  .scilife-footer-img {
-    max-width: 90px;
-  }
 }
 
 @media (min-width: 1200px) {

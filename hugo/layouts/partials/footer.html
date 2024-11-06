@@ -4,7 +4,7 @@
     <div class="container">
         <!-- Site links -->
         <div class="row">
-            <div class="col-lg-3">
+            <div class="col-xl-2">
                 <h2 class="scilife-footer-titles">Site navigation</h2>
                 <ul class="list-unstyled scilife-footer-text">
                     <li><a href="/">Home</a></li>
@@ -16,34 +16,28 @@
                     <li><a href="/glossary">Glossary</a></li>
                     <li><a href="/user-guide">User guide</a></li>
                     <li><a href="/terms">Terms of use</a></li>
+                    <li><a href="/faqs">FAQs</a></li>
                     <li><a href="/privacy">Privacy policy</a></li>
                 </ul>
             </div>
 
 
             <!-- Explanation about the site and more -->
-            <div class="col-lg-5 col-xl-4">
+            <div class="col-xl-5">
                 <h2 class="scilife-footer-titles">About the portal</h2>
-                <ul class="list-unstyled">
-                    <li>
-                        <p>
-                            The Swedish Reference Genome Portal is developed and maintained by the DDLS Data Science Node in Evolution and Biodiversity (DSN-EB) team as part of the <a href="https://data.scilifelab.se/" target="_blank">SciLifeLab Data Platform</a>, operated by the SciLifeLab Data Centre. Members of the DSN-EB team are affiliated with <a href="https://www.scilifelab.se/data/" target="_blank">SciLifeLab Data Centre</a>
-                            and <a href="https://nbis.se/" target="_blank">NBIS</a> (National Bioinformatics Infrastructure Sweden), based at Uppsala University and the Swedish Museum of Natural History. This service is supported by SciLifeLab and the Knut and Alice Wallenberg foundation through the Data-Driven Life Science (DDLS) program, as well as by the Swedish Foundation for Strategic Research (SSF).
-                        </p>
-                    </li>
-                    <li>
-                        <p> Contact: <a href="mailto:dsn-eb@scilifelab.se">dsn-eb@scilifelab.se</a>.</p>
-                    </li>
-                    <li>
-                        <p> <a href="https://github.com/ScilifelabDataCentre/genome-portal/" target="_blank">
-                            Website code on GitHub (v.1.0.0)
-                        </a></p>
-                    </li>
-                </ul>
+                <p>
+                    The Swedish Reference Genome Portal is developed and maintained by the Data-Driven Life Science (DDLS) Data Science Node in Evolution and Biodiversity (DSN-EB) team
+                    as part of the <a href="https://data.scilifelab.se/" target="_blank">SciLifeLab Data Platform</a>, operated by the
+                    SciLifeLab Data Centre. Members of the DSN-EB team are affiliated with <a href="https://www.scilifelab.se/data/" target="_blank">SciLifeLab Data Centre</a>
+                    and <a href="https://nbis.se/" target="_blank">NBIS</a> (National Bioinformatics Infrastructure Sweden),
+                    based at Uppsala University and the Swedish Museum of Natural History.
+                    This service is supported by SciLifeLab and the Knut and Alice Wallenberg foundation through the DDLS program,
+                    as well as by the Swedish Foundation for Strategic Research (SSF).
+                </p>
             </div>
 
 
-            <div class="col-lg-4 col-xl-5">
+            <div class="col-xl-5">
                 <!-- Funders etc... part -->
                 <h2 class="scilife-footer-titles mb-2">Supported by</h2>
 
@@ -78,12 +72,15 @@
 
             </div>
         </div>
+
+        <p class="mt-3 mt-xl-1 mb-0 text-start text-xl-center"> Contact: <a href="mailto:dsn-eb@scilifelab.se">dsn-eb@scilifelab.se</a></p>
         <!-- Version number hard coded for now, will be integrated with GH actions later and link will point to release too. -->
         {{ $versionNumb := "v1.0.0" }}
-        <p class="mt-2 mb-0 text-start text-lg-center">
-            <i> Last Updated: {{ now.Format "02 January 2006"}} </i>
+        <p class="mt-0 mb-0 text-start text-xl-center">
+            <i> Website last updated: {{ now.Format "02 January 2006"}} </i>
             (<a href="https://github.com/ScilifelabDataCentre/genome-portal" target="_blank" rel="noopener noreferrer">{{ $versionNumb }}</a>)
         </p>
+
         <div style="margin: 10px 0 10px 0;"></div>
     </div>
 </footer>
