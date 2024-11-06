@@ -75,7 +75,7 @@ We chose JBrowse 2 for several reasons. It is a robust, open-source genome brows
 {{< /faq_block >}}
 
 {{< faq_block title="Is it possible to customise how data tracks are displayed on the genome browser?" >}}
-Yes, it is to possible to modify attributes such as data track color or label. For this is necessary to change the settings of the JBrowse default session by editing the `config.json`. Please contact us by email to <dsn-eb@scilifelab.se> or through the <a href="/contact" target="_blank">Contact</a> form to help you with the customisation of your data tracks.
+Yes, it is to possible to modify several of the data track attributes, such as colors, labels, descriptions, groups, and more. To do this, it is necessary to change the settings of the JBrowse 2 default session by editing the `config.json` file associated with the species. Please contact us by email to <dsn-eb@scilifelab.se> or through the <a href="/contact" target="_blank">Contact</a> form to help you with the customisation of your data tracks.
 {{< /faq_block >}}
 
 {{< faq_block title="What could be causing my data to display slowly?" >}}
