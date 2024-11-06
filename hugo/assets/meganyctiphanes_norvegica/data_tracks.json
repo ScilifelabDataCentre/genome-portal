@@ -15,7 +15,7 @@
     "firstDateOnPortal": "15 October 2024"
   },
   {
-    "dataTrackName": "Protein coding genes (research group's version, used on the Genome Portal)",
+    "dataTrackName": "Protein-coding genes (research group's version, used on the Genome Portal)",
     "description": "Functional annotation of protein-coding genes with non-redundant isoforms. Missing stop-codons have been added if detected in the reference genome assembly",
     "links": [
       {"Download": "https://figshare.scilifelab.se/ndownloader/files/40569599"},
@@ -30,7 +30,7 @@
     "firstDateOnPortal": "15 October 2024"
   },
   {
-    "dataTrackName": "Protein coding genes (NCBI version, currently not displayed in the Genome Portal)",
+    "dataTrackName": "Protein-coding genes (NCBI version, currently not displayed in the Genome Portal)",
     "description": "Functional annotation of protein-coding genes with non-redundant isoforms. Missing stop-codons have been added if detected in the reference genome assembly",
     "links": [
       {"Download": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/964/058/975/GCA_964058975.1_Mnor_HA_v2/GCA_964058975.1_Mnor_HA_v2_genomic.gff.gz"},
