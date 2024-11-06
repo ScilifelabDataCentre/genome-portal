@@ -2,7 +2,7 @@
 title: Frequently Asked Questions
 ---
 
-### FAQs
+### FAQ
 
 #### About the Genome Portal
 
