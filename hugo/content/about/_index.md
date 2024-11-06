@@ -28,7 +28,7 @@ The source code for the Genome Portal is publicly available on <a href="https:/
 
 ### Citation guidelines
 
-The recommended citations for the Genome Portal, source code, species pages, genome browser, and source data files can be found on the <a href="/citation" target="_blank">Cite us</a> page.
+Consult the <a href="/citation" target="_blank">Cite us</a> page for detailed citation guidelines.
 
 ### Terms of use
 

@@ -6,7 +6,7 @@ title: Information på svenska
 
 The Swedish Reference Genome Portal ("Den svenska portalen för referens-genom") är en kostnadsfri nationell datatjänst som syftar till att samla, tillgängliggöra och visualisera genom-assemblies och -annoteringar från icke-humana eukaryota arter producerade av eller i samarbete med forskare med an­knytning till institutioner i Sverige.
 
-Denna tjänst är utvecklad och underhålls av *The Data Science Node in Evolution and Biodiversity (DSN-EB)*-teamet som del av <a href="https://data.scilifelab.se" target="_blank">SciLifeLab Data Platform</a> som drivs av SciLifeLab Data Centre.
+Denna tjänst är utvecklad och underhålls av *The Data Science Node in Evolution and Biodiversity*(DSN-EB-teamet) som del av <a href="https://data.scilifelab.se" target="_blank">SciLifeLab Data Platform</a> som drivs av SciLifeLab Data Centre.
 
 DSN-EB-teamet består av systemutvecklare, data stewards och bionformatiker affilierade med <a href="https://www.scilifelab.se/data/" target="_blank">SciLifeLab Data Centre</a> och <a href="https://nbis.se" target="_blank">National Bioinformatics Infrastructure Sweden (NBIS)</a> vid Uppsala Universitet och Naturhistoriska Riksmuseet i Stockholm.
 
@@ -28,7 +28,7 @@ Genomportalen använder sig av öppen källkod under en *MIT open source*-licens
 
 ### Riktlinjer för att citera material på genomportalen
 
-Rekommendationen för att citera genomportalen, källkoden, de olika artsidorna, genom-browsern och datafilerna finns på <a href="/citation" target="_blank">Cite us</a>-sidan (på engelska).
+Besök <a href="/citation" target="_blank">Cite us</a>-sidan för detaljerade riktlinjer (på engelska).
 
 ### Användarvilkor
 
