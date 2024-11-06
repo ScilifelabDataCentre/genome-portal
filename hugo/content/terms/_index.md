@@ -26,7 +26,7 @@ Genomic data attributed to individual species displayed on the Genome Portal com
 
 ### Using the content
 
-When you use the Swedish Reference Genome Portal website, its source code, the embedded genome browser, or the genomic data files in your work (e.g., publication, web page, presentation), we appreciate that you credit the respective contributor(s) by following the <a href="/citation" target="_blank">citation guidelines</a>.
+When you use the Swedish Reference Genome Portal website, its source code, the embedded genome browser, or the genomic data files in your work (e.g., publication, web page, presentation), we appreciate that you credit the respective contributor(s) by following the guidelines on the <a href="/citation" target="_blank">Cite us</a> page.
 
 ### Changes to the terms of use
 
