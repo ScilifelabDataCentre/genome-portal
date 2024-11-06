@@ -71,7 +71,7 @@ Once we have received the form listing the links and metadata associated with yo
 #### About the genome browser
 
 {{< faq_block title="Why is JBrowse the genome browser used in the Genome Portal?" >}}
-We chose JBrowse for several reasons. It is a robust genome browser with powerful features for visualizing genomic data. It receives active maintenance and support from both system developers and the research community. Additionally, it is highly customizable and allows for the creation of new view types via a plugin system, making it more than a genome browser—it serves as a versatile platform for development
+We chose JBrowse 2 for several reasons. It is a robust, open-source genome browser with powerful features for visualizing genomic data. It receives active maintenance and support from both system developers and the research community. Additionally, it is highly customizable and allows for the creation of new view types via a plugin system, making it more than a genome browser — it serves as a versatile platform for development.
 {{< /faq_block >}}
 
 {{< faq_block title="Is it possible to customise how data tracks are displayed on the genome browser?" >}}
