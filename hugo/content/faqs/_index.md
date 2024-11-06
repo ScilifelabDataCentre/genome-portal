@@ -13,7 +13,7 @@ The Swedish Reference Genome Portal (SRGP) does not replace existing genome port
 
 - The SRGP's primary goal is to facilitate access, visualisation, and interpretation of genomic data, with a focus on offering a powerful genome browser. Global genome portals like Ensembl and UCSC offer additional features including those related to comparative genomics, besides genome browser capabilities.
 
-- The SRGP is unique in that it allows researchers to decide what, when, and how their genomic data is displayed on the Genome Portal. While global genome portals can also address researchers' inquiries, users can generally expect much shorter processing times with the SRGP, as it is maintained by a local team.
+- The minimal requirement is that the species has a genome assembly in FASTA file format and an annotation of the protein-coding genes, preferably in GFF format. Other than that, the SRGP is unique in that it allows researchers to decide what, when, and how their genomic data is displayed on the Genome Portal. While global genome portals can also address researchers' inquiries, users can generally expect much shorter processing times with the SRGP, as it is maintained by a local team.
 
 - The SRGP displays unique genomic annotations (annotation tracks) that are rarely published. Global genome portals often index and retrieve data from public genomic repositories such as NCBI or ENA, which means they may overlook the specific genomic annotations contributed by researchers in Sweden.
 {{< /faq_block >}}
