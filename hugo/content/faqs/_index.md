@@ -46,7 +46,7 @@ If it does, feel free to reach out via email to <dsn-eb@scilifelab.se> or throug
 The Genome Portal uses the JBrowse 2 genome browser to display genomic datasets. <a href="https://jbrowse.org/jb2/features/#supported-data-formats" target="_blank">JBrowse 2 supports several formats</a> that are commonly used in genomics (e.g., BED, VCF, FASTA, GFF, among others), which could therefore be displayed in the Genome Portal. However, at the moment, we do not accept complete BAM files derived from shotgun sequencing, as they can be quite large and may impact performance. Users can, however, add and visualise BAM files as local data tracks in the Genome Portal’s genome browser.
 {{< /faq_block >}}
 
-{{< faq_block title="How can I add a data track to the genome browser of an existing Species page?" >}}
+{{< faq_block title="How can I display a local data track in the genome browser of an existing Species page?" >}}
 To add a new track to the genome browser, you have two options:
 
 1. Go to the menu bar (top-left corner) and open the form for adding a track by selecting `File > Open Track`.
