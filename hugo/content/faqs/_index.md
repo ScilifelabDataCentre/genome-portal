@@ -11,7 +11,7 @@ The Swedish Reference Genome Portal (SRGP) does not replace existing genome port
 
 The SRGP targets the Swedish research community and is restricted to non-human eukaryotic species. Therefore, the species displayed here are typically limited to those submitted by researchers affiliated with Swedish institutions. In contrast, global genome portals such as Ensembl and UCSC have much broader taxonomic scope, aiming to include species from around the world, including humans and prokaryotes.
 
-- The SRGP's primary goal is to facilitate access, visualisation, and interpretation of genomic data, with a focus on offering a powerful genome browser. Global genome portals like Ensembl and UCSC offer additional features including those related to comparative genomics, besides genome browser capabilities.
+- The SRGP's primary goal is to facilitate access, visualisation, and interpretation of genomic data, with a focus on offering a powerful genome browser. SRGP facilitates access and discovery by aggregating links to datasets associated with each genome assembly in a single page. Global genome portals like Ensembl and UCSC might, however, offer their own specific features besides their genome browser capabilities, such as support for comparative genomics analyses.
 
 - The minimal requirement is that the species has a genome assembly in FASTA file format and an annotation of the protein-coding genes, preferably in GFF format. Other than that, the SRGP is unique in that it allows researchers to decide what, when, and how their genomic data is displayed on the Genome Portal. While global genome portals can also address researchers' inquiries, users can generally expect much shorter processing times with the SRGP, as it is maintained by a local team.
 
