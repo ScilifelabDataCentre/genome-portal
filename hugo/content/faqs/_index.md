@@ -46,16 +46,6 @@ If it does, feel free to reach out via email to <dsn-eb@scilifelab.se> or throug
 The Genome Portal uses the JBrowse 2 genome browser to display genomic datasets. <a href="https://jbrowse.org/jb2/features/#supported-data-formats" target="_blank">JBrowse 2 supports several formats</a> that are commonly used in genomics (e.g., BED, VCF, FASTA, GFF, among others), which could therefore be displayed in the Genome Portal. However, at the moment, we do not accept complete BAM files derived from shotgun sequencing, as they can be quite large and may impact performance. Users can, however, add and visualise BAM files as local data tracks in the Genome Portal’s genome browser.
 {{< /faq_block >}}
 
-{{< faq_block title="How can I display a local data track in the genome browser of an existing Species page?" >}}
-To add a new track to the genome browser, you have two options:
-
-1. Go to the menu bar (top-left corner) and open the form for adding a track by selecting `File > Open Track`.
-
-2. Use the action button (circular `+`) inside the track selector (bottom-right corner) to access the `Add track` form, where you can provide a URL or select a local file to load. More details on <a href="https://jbrowse.org/jb2/docs/tutorials/config_gui/#adding-a-track" target="_blank">adding a data track</a> can be found in the JBrowse User Guide.
-
-*Note that for either of these options to work, your data must have the same genomic coordinates as the genome assembly available on the Genome Portal.*
-{{< /faq_block >}}
-
 {{< faq_block title="Can unpublished data be displayed on the Genome Portal?" >}}
 No, we require data be publicly available. However, we can begin adding data under embargo that will soon become available once the manuscript is accepted for publication. More details can be found in the next question.
 {{< /faq_block >}}
@@ -87,7 +77,7 @@ Yes, it is possible to modify several of the data track attributes, such as colo
 {{< faq_block title="How can I open a data track within the genome browser of a species in the Genome Portal?" >}}
 To open a new data track within the genome browser for a species in the Genome Portal:
 
-1. Access the 'Add a track' form by clicking on the **File** menu (Figure 5A), then **Open track**, or by clicking the **circular plus (+) icon** (Figure 5V) in the bottom right corner of the 'Available tracks widget' (right-side panel, Figure 5Q).
+1. Access the 'Add a track' form by clicking on the **File** menu, then **Open track**, or by clicking the **circular plus (+) icon** in the bottom right corner of the 'Available tracks widget' (right-side panel).
 2. In the 'Add a track' form, provide a URL to a file to load, or open a file stored in your local machine.
 
 Remember that your data should have the same genomic coordinates as the genome assembly available in the Genome Portal.
@@ -98,7 +88,7 @@ In some cases, you need to provide an index file for your data (e.g., a tabix fi
 {{< faq_block title="How can I share a genome browser session?" >}}
 To share a session with others:
 
-1. Click the **Share** link (Figure 5E) at the top center of the window.
+1. Click the **Share** link at the top center of the window.
 2. A window will appear displaying a URL for your session. To copy the URL, click on the **Copy to clipboard** button.
 
 Only the URL generated here should be shared with others. Sharing your browser's URL won't work.
@@ -127,7 +117,7 @@ As the bookmarks rely on the reference genome of a given species, it is recommen
 {{< faq_block title="How can I export genomic visualisation as an SVG file?" >}}
 To export genome browser visualisations as publication-quality images in SVG (Scalable Vector Graphics) format:
 
-1. Click the **View** menu (Figure 5F) at the top-left corner of the window (seen as three horizontal lines on the purple banner)
+1. Click the **View** menu at the top-left corner of the window (seen as three horizontal lines on the purple banner)
 2. Click **Export SVG**. Choose a filename, a 'Track level' positioning and a 'Theme', and press **Submit**.
 
 The SVG file will be saved to the Downloads folder on your machine.
@@ -138,7 +128,7 @@ The advantage of using vector files is that, unlike pixel-based raster files suc
 {{< faq_block title="How can I obtain the full sequence or the coding sequence of a gene?" >}}
 To view details or annotations for a specific genomic feature:
 
-1. Click on the genomic feature of interest (e.g., a protein-coding gene). A **Feature details** widget will appear on the right, in the Widget side panel area (Figure 5Q).
+1. Click on the genomic feature of interest (e.g., a protein-coding gene). A **Feature details** widget will appear on the right, in the Widget side panel area.
 2. Scroll down to browse the feature details. To obtain the full gene sequence, click the **Show feature sequence** button of the top panel, which corresponds to the gene. To obtain the coding sequence (CDS), go down to the **Subfeatures** section, and click on the correspondent **Show feature sequence** button.
 {{< /faq_block >}}
 
