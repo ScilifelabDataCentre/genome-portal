@@ -20,7 +20,7 @@ menus:
   - name: Contact
     pageRef: /contact
     weight: 2
-  - name: FAQs
+  - name: FAQ
     pageRef: /faqs
     weight: 3
   - name: Cite us
