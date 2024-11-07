@@ -577,7 +577,7 @@
           },
           "index": {
             "location": {
-              "uri": "Lten_pop17_Pi.bed.bgz"
+              "uri": "Lten_pop17_Pi.bed.bgz.tbi"
             }
           }
         },
