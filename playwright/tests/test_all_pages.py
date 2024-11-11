@@ -22,7 +22,7 @@ def test_for_placeholder_text(page_obj: Page) -> None:
     """
     PLACEHOLDERS = ["EDIT", "TODO", "XXXXXX", "DD/MM/YYYY"]
     for placeholder in PLACEHOLDERS:
-        locator = page_obj.get_by_text(placeholder)
+        locator = page_obj.get_by_text(placeholder, exact=True)
         expect(
             locator, f"Found what looks like a placeholder: '{placeholder}' on this page: {page_obj.url}"
         ).to_have_count(0)

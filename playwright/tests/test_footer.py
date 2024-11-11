@@ -18,9 +18,13 @@ def test_site_navigation(home_page: Page) -> None:
         "Contribute": "Contribute",
         "About the Portal": "About",
         "Information på svenska": "Information på svenska",
+        "Contact us": "Contact",
+        "Cite us": "How to cite the Genome Portal and the data",
         "Glossary": "Glossary",
-        "Contact": "Contact",
-        "Privacy policy": "Privacy Policy",
+        "User guide": "User guide",
+        "Terms of use": "Terms of use",
+        "Privacy policy": "Privacy policy",
+        "FAQ": "Frequently Asked Questions",
     }
     site_navigation = home_page.get_by_role("heading", name="Site navigation").locator("..")
 
@@ -36,7 +40,7 @@ def test_funding_logos(home_page: Page) -> None:
     LOGOS = {
         "Knut and Alice Wallenberg": "https://kaw.wallenberg.org/en",
         "Swedish Foundation for Strategic Research": "https://strategiska.se/en/",
-        "SciLifeLab": "https://www.scilifelab.se/",
+        "SciLifeLab's Logo": "https://www.scilifelab.se/",
     }
     for name, url in LOGOS.items():
         logo_link = home_page.get_by_role("link", name=re.compile(name))

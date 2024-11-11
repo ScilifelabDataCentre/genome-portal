@@ -10,7 +10,7 @@ from utils import all_intro_page_paths, validate_date_format
 from playwright.sync_api import Page, expect
 from playwright.sync_api import TimeoutError as PlaywrightTimeoutError
 
-REQUIRED_HEADERS = ["Taxonomy", "External links", "Description", "Genome reference", "References", "Changelog"]
+REQUIRED_HEADERS = ["Taxonomy", "External links", "Description", "How to cite", "References", "Changelog"]
 
 ALL_INTRO_PAGE_PATHS = all_intro_page_paths()
 
