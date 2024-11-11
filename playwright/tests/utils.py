@@ -6,6 +6,13 @@ from datetime import datetime
 from pathlib import Path
 
 
+def get_hugo_species_dir() -> Path:
+    """
+    Get the Hugo species directory.
+    """
+    return Path(__file__).parent.parent.parent / "hugo/content/species"
+
+
 def get_list_of_species() -> list[str]:
     """
     Search the Hugo content directory to get all the species on the website.
@@ -13,7 +20,7 @@ def get_list_of_species() -> list[str]:
 
     The function also validates each page is not in draft mode (wont show up on website yet)
     """
-    HUGO_SPECIES_DIR = Path(__file__).parent.parent.parent / "hugo/content/species"
+    HUGO_SPECIES_DIR = get_hugo_species_dir()
 
     species = []
     for folder in HUGO_SPECIES_DIR.iterdir():
