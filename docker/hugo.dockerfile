@@ -4,13 +4,7 @@ ARG JBROWSE_VERSION=2.15.4
 # Stage 1: Download HUGO + build static site. 
 FROM alpine:latest AS build
 
-ARG JBROWSE_VERSION
 ARG HUGO_VERSION=0.128.2
-
-# GH actions triggered runs can overwrite these values
-ARG HUGO_PORTAL_VERSION=""
-ARG HUGO_GIT_BRANCH=""
-ARG HUGO_GIT_SHA=""
 
 RUN apk add --no-cache wget
 
@@ -23,12 +17,16 @@ RUN wget --quiet "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VER
 WORKDIR /src
 COPY ./hugo/ /src
 
+# Docker build arguments (passed in Github actions for example) take
+# precendence over these values. These variables are available in the
+# environment of subsequent RUN instructions
+ARG JBROWSE_VERSION
+ARG HUGO_PORTAL_VERSION=""
+ARG HUGO_GIT_BRANCH=""
+ARG HUGO_GIT_SHA=""
+
 # pass the environment variables to the build
 RUN mkdir /target && \
-    export HUGO_PORTAL_VERSION=${HUGO_PORTAL_VERSION} && \
-    export HUGO_GIT_BRANCH=${HUGO_GIT_BRANCH} && \
-    export HUGO_GIT_SHA=${HUGO_GIT_SHA} && \
-    export HUGO_JBROWSE_VERSION=${JBROWSE_VERSION} && \
     hugo -d /target --minify --gc
 
 
