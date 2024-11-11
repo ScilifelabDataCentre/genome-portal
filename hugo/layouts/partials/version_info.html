@@ -21,7 +21,7 @@ Logic:
 {{ $versionNumb :=  getenv "HUGO_PORTAL_VERSION" }}
 {{ $branch := getenv "HUGO_GIT_BRANCH" }}
 {{ $gitSha := getenv "HUGO_GIT_SHA" }}
-{{ $jBrowseVersion := getenv "HUGO_JBROWSE_VERSION" }}
+{{ $jBrowseVersion := getenv "JBROWSE_VERSION" }}
 
 <!-- Production build version -->
 {{ if ne $versionNumb "" }}
@@ -61,6 +61,6 @@ Logic:
 {{ $jBrowseHref := printf "https://github.com/GMOD/jbrowse-components/releases/tag/v%s" $jBrowseVersion }}
 <p class="mt-0 mb-3 text-start text-lg-center">
     <i> JBrowse version used:
-        (<a href="{{ $jBrowseHref }}" target="_blank" rel="noopener noreferrer">v{{ $jBrowseVersion }}</a>)
+        <a href="{{ $jBrowseHref }}" target="_blank" rel="noopener noreferrer">v{{ $jBrowseVersion }}</a>
     </i>
 </p>
