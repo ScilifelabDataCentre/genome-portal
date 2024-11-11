@@ -11,11 +11,14 @@
                     <li><a href="/contribute">Contribute</a></li>
                     <li><a href="/about">About the portal</a></li>
                     <li><a href="/about/sv">Information på svenska</a></li>
+                    <li><a href="/contact">Contact us</a></li>
+                    <li><a href="/citation">Cite us</a></li>
                     <li><a href="/glossary">Glossary</a></li>
-                    <li><a href="/contact">Contact</a></li>
+                    <li><a href="/user-guide">User guide</a></li>
                     <li><a href="/privacy">Privacy policy</a></li>
                 </ul>
             </div>
+
 
             <!-- Explaination about the site and more -->
             <div class="col-lg-5 col-xl-4">
@@ -78,8 +81,12 @@
 
             </div>
         </div>
-
-        <p class="mt-2 mb-0 text-start text-lg-center"><i> Website last updated: {{ now.Format "02 January 2006"}} </i></p>
+        <!-- Version number hard coded for now, will be intergrated with GH actions later and link will point to release too. -->
+        {{ $versionNumb := "v1.0.0" }}
+        <p class="mt-2 mb-0 text-start text-lg-center">
+            <i> Last Updated: {{ now.Format "02 January 2006"}} </i>
+            (<a href="https://github.com/ScilifelabDataCentre/genome-portal" target="_blank" rel="noopener noreferrer">{{ $versionNumb }}</a>)
+        </p>
         <div style="margin: 10px 0 10px 0;"></div>
     </div>
 </footer>

@@ -1,0 +1,15 @@
+[
+    {
+      "dataTrackName": "Protein coding genes",
+      "description": "Functional annotation of protein-coding genes",
+      "links": [
+        {"Download": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/030/871/285/GCA_030871285.1_GU_Smar_1.1.8/GCA_030871285.1_GU_Smar_1.1.8_genomic.gff.gz"},
+        {"Website": "https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_030871285.1/"}
+      ],
+      "accessionOrDOI": "GCA_030871285.1",
+      "fileName": "GCA_030871285.1_GU_Smar_1.1.8_genomic.gff.gz",
+      "principalInvestigator": "Mats Töpel",
+      "principalInvestigatorAffiliation": "University of Gothenburg",
+      "firstDateOnPortal": "22 October 2024"
+    }
+]

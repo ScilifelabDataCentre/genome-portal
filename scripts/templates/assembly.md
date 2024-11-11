@@ -18,8 +18,6 @@ stats_data_path: "SPECIES_FOLDER/species_stats"
 lineage_data_path: "SPECIES_FOLDER/taxonomy"
 ---
 
-|||||| Content divider - do not remove ||||||
-
 ### Contributor(s)
 
 - [EDIT, Add information about provider and the research group that published the genome and data tracks]
@@ -29,24 +27,6 @@ lineage_data_path: "SPECIES_FOLDER/taxonomy"
 The data for *[ADD SPECIES NAME]* displayed in the genome portal comes from:
 
 - [EDIT ADD PUBLICATION]
-
-### Methods
-
-*Below is a brief summary of the methodology used to produce the genome data, based on [ADD INFORMATION ON PUBLICATION HERE].*
-
-#### Samples
-
-- [EDIT]
-
-#### Genome assembly
-
-- [EDIT]
-
-#### Genome annotation
-
-The data for *[EDIT:species_name]* displayed in the genome portal comes from:
-
-- <p> [EDIT] <a href="[EDIT:DOI_URL]"> [EDIT:DOI_number]]</a></p>
 
 ### Funding
 

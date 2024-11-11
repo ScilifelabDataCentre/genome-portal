@@ -1,0 +1,25 @@
+---
+assembly:
+  - "Assembly length (Mbp)": 54.79
+  - "GC %": 45.26
+  - "Contig #": 83
+  - "Contig N50 (Mbp)": 1.24
+  - "Contig L50": 17
+  - "Contig N90 (Mbp)": 0.32
+  - "Contig L90": 48
+  - "Scaffold #": 83
+  - "Scaffold N50 (Mbp)": 1.24
+  - "Scaffold L50": 17
+  - "Scaffold N90 (Mbp)": 0.32
+  - "Scaffold L90": 48
+  - "Scaffolds >= 10 kb": 80
+  - "BUSCO % (stramenopiles_odb10)": "C:97.0 [S:93.0, D:4.0], F:0.0, M:3.0, n:100"
+
+annotation:
+  - "Gene #": 17265
+  - "Transcript #": 17265
+  - "Avg exons per transcript": 1.9
+  - "Avg gene length (bp)": 1851
+  - "Avg transcript length (bp)": 1851
+  - "Avg exon length (bp)": 861
+  - "Avg intron length (bp)": 204

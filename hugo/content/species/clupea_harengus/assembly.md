@@ -1,4 +1,5 @@
 ---
+draft: true # TODO - temporary
 key_info:
   - "Assembly Name": "[EDIT]"
   - "Assembly Type": "[EDIT]"
@@ -21,8 +22,6 @@ lineage_data_path: "clupea_harengus/taxonomy"
 ### Methods
 
 [EDIT - add a short text about the methods here]
-
-|||||| Content divider - do not remove ||||||
 
 ### Contributor(s)
 

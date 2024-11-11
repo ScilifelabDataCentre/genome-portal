@@ -18,8 +18,6 @@ stats_data_path: "meganyctiphanes_norvegica/species_stats"
 lineage_data_path: "meganyctiphanes_norvegica/taxonomy"
 ---
 
-|||||| Content divider - do not remove ||||||
-
 Notes: Assembly statistics were calculated for the primary genome assembly GCA_964058975.1. Busco statistics were taken from Unneberg et al. (2024). Annotation statistics were calculated using GCA_964058975.1_Mnor_HA_v2_genomic.gff.
 
 BUSCO notation: C: Complete; S: Single-copy; D: Duplicated; F: Fragmented; M: Missing; n: Total BUSCO genes included in the dataset (here: arthropoda_odb10). See also [the official BUSCO manual](https://busco.ezlab.org/busco_userguide.html#interpreting-the-results).
@@ -29,22 +27,6 @@ BUSCO notation: C: Complete; S: Single-copy; D: Duplicated; F: Fragmented; M: Mi
 The *Meganyctiphanes norvegica* data displayed in the genome portal comes from:
 
 - <p> Unneberg, P., Larsson, M., Olsson, A., Wallerman, O., Petri, A., Bunikis, I., Vinnere Pettersson, O., Papetti, C., Gislason, A., Glenner, H., Cartes, J. E., Blanco-Bercial, L., Eriksen, E., Meyer, B., & Wallberg, A. (2024). Ecological genomics in the Northern krill uncovers loci for local adaptation across ocean basins. Nature Communications, 15(1), 6297. <a href="https://doi.org/10.1038/s41467-024-50239-7"> https://doi.org/10.1038/s41467-024-50239-7</a></p>
-
-### Methods
-
-*Below is a brief summary of the methodology used to produce the genome data, based on Unneberg et al. (2024).*
-
-#### Samples
-
-Tail muscle tissue from a single female specimen (Sample "K20"; Gullmarsfjord, Sweden) was used for producing the main *de novo* genome assembly. DNA from K20 was used to generate long-read (Oxford Nanopore PromethION) and linked-read data (10x Genomics Chromium sequencing). RNA/cDNA short-read (Illumina NovaSeq 6000 SP) and long-read (Oxford Nanopore PromethION and MinION) data from K20 were used for scaffolding and annotation purposes. Short-read sequences from 74 additional specimens (36 males; 32 females; 7 undetermined) were collected from eight locations in the  North Atlantic Ocean and the Mediterranean Sea and used to create a popilation dataset for studying genetic varation.
-
-#### Genome assembly
-
-The *M. norvegica* genome was assembled using the long-read data. Long-read and linked-reads were used for polishing and scaffolding. A preliminary mitochondrial assembly generated from Oxford Nanopore MinION reads from another specimen (K4) was used to identify mitochondrial scaffolds in the assembly.
-
-#### Genome annotation
-
-Gene models were produced using Illumina RNA-seq data, Trinity assembled transcripts, and genomic data from other crustaceans. A non-redundant repeat library was generated with the identified simple, tandem and interspersed repeats and transposable elements.
 
 ### Funding
 
