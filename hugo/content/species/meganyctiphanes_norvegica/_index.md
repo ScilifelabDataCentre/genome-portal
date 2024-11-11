@@ -51,7 +51,7 @@ If you have used the pages for this species in the Genome Portal, please refer t
 
 - Jeffery, N. W. (2012). The first genome size estimates for six species of krill (Malacostraca, Euphausiidae): Large genomes at the north and south poles. Polar Biology, 35(6), 959–962. [https://doi.org/10.1007/s00300-011-1137-4](https://doi.org/10.1007/s00300-011-1137-4)
 
-- Tarling, G. A., Ensor, N. S., Fregin, T., Goodall-Copestake, W. P., & Fretwell, P. (2010). Chapter One—An Introduction to the Biology of Northern Krill (Meganyctiphanes norvegica Sars). In G. A. Tarling (Ed.), Advances in Marine Biology (Vol. 57, pp. 1–40). Academic Press. [https://doi.org/10.1016/B978-0-12-381308-4.00001-7](https://doi.org/10.1016/B978-0-12-381308-4.00001-7)
+- Tarling, G. A., Ensor, N. S., Fregin, T., Goodall-Copestake, W. P., & Fretwell, P. (2010). Chapter One—An Introduction to the Biology of Northern Krill (*Meganyctiphanes norvegica* Sars). In G. A. Tarling (Ed.), Advances in Marine Biology (Vol. 57, pp. 1–40). Academic Press. [https://doi.org/10.1016/B978-0-12-381308-4.00001-7](https://doi.org/10.1016/B978-0-12-381308-4.00001-7)
 
 #### Contact
 
