@@ -39,7 +39,12 @@ where [species_name] should be replaced with the binomial name of the species in
 
 ### 2. Citing the source code of the website
 
-The Genome Portal is operated by the <a target="_blank" href="https://scilifelab.se/data">SciLifeLab Data Centre</a> and partners. All of the source code used to generate the website is available on [GitHub](https://github.com/ScilifelabDataCentre/genome-portal/). The code is published under an MIT license. If you have reused the code or otherwise want to cite the code, please use the citation instructions found on the GitHub repository.
+The Genome Portal is operated by the <a target="_blank" href="https://scilifelab.se/data">SciLifeLab Data Centre</a> and partners. All of the source code used to generate the website is available on [GitHub](https://github.com/ScilifelabDataCentre/genome-portal/). The code is published under an MIT license. If you have reused the code or otherwise want to cite the code, please use the following:
+
+**APA format:**\
+SciLifeLab Data Centre (year). genome-portal. Version: (version number) [Software]. Zenodo. <https://doi.org/10.5281/zenodo.14049736>.
+
+using the year and version number of the code release you want to cite. That information can be found on our <a target="_blank" href="https://github.com/ScilifelabDataCentre/genome-portal/">GitHub repository</a> or in our <a target="_blank" href="https://doi.org/10.5281/zenodo.14049736">Zenodo record</a>.
 
 ### 3. Citing the data in the Genome Portal
 

@@ -21,15 +21,19 @@ authors:
   - family-names: Kultima
     given-names: Hanna
     orcid: "https://orcid.org/0000-0001-7724-2567"
+  - family-names: Persson
+    given-names: Bengt
   - family-names: Rung
     given-names: Johan
     orcid: "https://orcid.org/0000-0001-5875-8429"
-  - family-names: Persson
-    given-names: Bengt
 repository-code: "https://github.com/ScilifelabDataCentre/genome-portal"
 url: "https://genomes.scilifelab.se"
 abstract: "The Swedish Reference Genome Portal is a service facilitating access and discovery of genome data of non-model eukaryotic species studied in Sweden."
 license: MIT
+identifiers:
+  - description: "This is the collection of archived snapshots of all versions of the Swedish Reference Genome Portal"
+    type: doi
+    value: 10.5281/zenodo.14049736
 references:
   - authors:
       - family-names: Diesh
