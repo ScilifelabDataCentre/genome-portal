@@ -43,6 +43,8 @@ compressing and indexing).
 
 ## Cite this portal
 
+<a href="https://doi.org/10.5281/zenodo.14049736"><img src="https://zenodo.org/badge/768569366.svg" alt="DOI"></a>
+
 See 'Cite this repository' in the "About" section at the top right of this page.
 
 

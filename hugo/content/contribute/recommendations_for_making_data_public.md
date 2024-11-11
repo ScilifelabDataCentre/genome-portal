@@ -1,5 +1,5 @@
 ---
-title: Recommendations
+title: Recommendations for making data publicly available
 toc: true
 ---
 
