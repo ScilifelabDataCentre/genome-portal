@@ -33,10 +33,6 @@ fi
 if [[ "$1" = hugo ]]; then
     _DEFAULT_IMAGE=ghcr.io/scilifelabdatacentre/swg-hugo-site
     _DEFAULT_DOCKERFILE=docker/hugo.dockerfile
-    # Hugo build arguments
-    _BUILD_ARGS+=("--build-arg" "HUGO_PORTAL_VERSION=$(git describe --always)")
-    _BUILD_ARGS+=("--build-arg" "HUGO_GIT_BRANCH=$(git branch --show-current)")
-    _BUILD_ARGS+=("--build-arg" "HUGO_GIT_SHA=$(git rev-parse --short HEAD)")
     # CI context
     _BUILD_ARG+=(
 	"--build-arg" "CI_EVENT_NAME=local_build"
