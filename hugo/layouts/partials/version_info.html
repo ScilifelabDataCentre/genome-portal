@@ -2,23 +2,16 @@
 This partial generates version information for both the genome-portal and JBrowse which is displayed in the footer of each page.
 
 Several environment variables are used to determine the type of build of the genome-portal and therefore control the footer.
+
 Logic:
-1. If the HUGO_PORTAL_VERSION is set:
-    then the build is a production build and the version number is displayed.
-2. If the HUGO_GIT_BRANCH is set to "main":
-    then the build is from a GH action push to main (aka dev) and the commit sha is displayed with a link to the commit.
-3. If the HUGO_GIT_BRANCH is set to another name than "main":
-    then the build is a workflow dispatch from a feature branch and the commit sha and branch name will be displayed.
-4. else:
-    the build is a local build and the footer will display "Local dev build".
+1. If the build is triggered by a release or dispatched manually from a release branch, display the version number
+2. Otherwise, display the branch name and abbreviated commit hash
 -->
 
 {{ $githubURL := "https://github.com/ScilifelabDataCentre/genome-portal" }}
-{{ $portalHref := "" }}
-{{ $hrefText := "" }}
 
-<!-- Extract all enviroment variables -->
-{{ $CIEventName := or (getenv "CI_EVENT_NAME") .Site.Params.ci_event_name }}
+<!-- Extract CI enviroment variables -->
+{{ $eventName := or (getenv "CI_EVENT_NAME") .Site.Params.ci_event_name }}
 {{ $gitRefName := or (getenv "CI_GIT_REF_NAME") .Site.Params.ci_git_ref_name }}
 {{ $gitSha := or (getenv "CI_GIT_SHA") .Site.Params.ci_git_sha }}
 {{ $gitShaShort := substr $gitSha 0 7 }}
@@ -26,12 +19,12 @@ Logic:
 
 
 <!-- Local build -->
-{{ if eq $CIEventName "local_build"}}
+{{ if eq $eventName "local_build"}}
     {{ $portalHref = $githubURL }}
     {{ $hrefText = printf "%s@%s" $gitRefName $gitShaShort }}
 
 <!-- Production build version -->
-{{ else if eq $CIEventName "release" }}
+{{ else if eq $eventName "release" }}
     {{ $portalHref = printf "%s/releases/tag/%s" $githubURL $gitRefName }}
     {{ $hrefText = $gitRefName }}
 <!-- Workflow dispatch from a release branch -->
