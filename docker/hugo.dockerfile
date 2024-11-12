@@ -25,6 +25,11 @@ ARG HUGO_PORTAL_VERSION=""
 ARG HUGO_GIT_BRANCH=""
 ARG HUGO_GIT_SHA=""
 
+ARG CI_EVENT_NAME
+    CI_GIT_REF_NAME
+    CI_GIT_REF
+    CI_GIT_SHA
+
 # pass the environment variables to the build
 RUN mkdir /target && \
     hugo -d /target --minify --gc

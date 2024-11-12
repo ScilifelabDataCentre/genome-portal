@@ -8,6 +8,7 @@ security:
     getenv:
       - ^JBROWSE_VERSION$
       - ^HUGO_
+      - ^CI_
 
 markup:
   goldmark:
