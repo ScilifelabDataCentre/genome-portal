@@ -9,7 +9,7 @@ This is because the tables and filenames in the HTML part of each page do not ne
 import re
 from pathlib import Path
 
-import pytest  # noqa
+import pytest
 from utils import all_intro_page_paths, get_hugo_species_dir
 
 
@@ -19,12 +19,19 @@ def is_italicized(line: str, word: str) -> bool:
     (Used on the species names).
     Can handle multiple italicized words in the same line.
     """
-    ITALIC_FORMATS = [f"<i>{word}</i>", f"<em>{word}</em>", f"_{word}_", f"*{word}*"]
+    ITALIC_FORMATS = [
+        f"<i>{word}</i>",
+        f"<em>{word}</em>",
+        f"<i> {word} </i>",
+        f"<em> {word} </em>",
+        f"_{word}_",
+        f"*{word}*",
+    ]
 
     for match in re.finditer(word, line):
         # max and min used to handle if start or end of line
-        context_start = max(match.span()[0] - 3, 0)
-        context_end = min(match.span()[1] + 4, len(line))
+        context_start = max(match.span()[0] - 4, 0)
+        context_end = min(match.span()[1] + 5, len(line))
         word_context = line[context_start:context_end]
 
         if not any(format in word_context for format in ITALIC_FORMATS):
