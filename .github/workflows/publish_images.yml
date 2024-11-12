@@ -59,28 +59,6 @@ jobs:
           esac
           echo "tag=${tag:-dev}" >> $GITHUB_OUTPUT
 
-      - name: Set enviroment variable for hugo build command
-        id: set-hugo-env-arg
-        # 1) If the event is a release, provide version number from git tag
-        # 2) If the event is a push to the main branch, provide branch name and sha
-        # 3) If the event is a workflow_dispatch:
-        #    - If the branch name is release-*, get version number from branch name
-        #    - Else provide branch name and sha
-        run: |
-          if [ "${{ github.event_name }}" == "release" ]; then
-            echo "HUGO_PORTAL_VERSION=${{ github.ref_name }}"
-          elif [ "${{ github.ref }}" == "refs/heads/main" ]; then
-            echo "HUGO_GIT_BRANCH"="main"
-          elif [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
-            branch_name="${{ github.ref_name }}"
-            if [[ "$branch_name" == release-* ]]; then
-              version_number="${branch_name/release-/}"
-              echo "HUGO_PORTAL_VERSION=${version_number}"
-            else
-              echo "HUGO_GIT_BRANCH"="$branch_name"
-            fi
-          fi >> $GITHUB_OUTPUT
-
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
@@ -93,6 +71,3 @@ jobs:
             CI_GIT_REF_NAME=${{ github.ref_name }}
             CI_GIT_REF=${{ github.ref }}
             CI_GIT_SHA=${{ github.sha }}            
-            HUGO_PORTAL_VERSION=${{ steps.set-hugo-env-arg.outputs.HUGO_PORTAL_VERSION }}
-            HUGO_GIT_BRANCH=${{ steps.set-hugo-env-arg.outputs.HUGO_GIT_BRANCH }}
-            HUGO_GIT_SHA=${{ github.SHA }}

@@ -7,7 +7,6 @@ security:
   funcs:
     getenv:
       - ^JBROWSE_VERSION$
-      - ^HUGO_
       - ^CI_
 
 markup:

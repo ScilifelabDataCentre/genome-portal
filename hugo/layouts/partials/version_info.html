@@ -18,32 +18,30 @@ Logic:
 {{ $hrefText := "" }}
 
 <!-- Extract all enviroment variables -->
-{{ $versionNumb :=  getenv "HUGO_PORTAL_VERSION" }}
-{{ $branch := getenv "HUGO_GIT_BRANCH" }}
-{{ $gitSha := getenv "HUGO_GIT_SHA" }}
+{{ $gitRefName := getenv "CI_GIT_REF_NAME" }}
+{{ $gitSha := getenv "CI_GIT_SHA" }}
+{{ $gitShaShort := substr $gitSha 0 7 }}
 {{ $jBrowseVersion := getenv "JBROWSE_VERSION" }}
 
-<!-- Production build version -->
-{{ if hasPrefix $versionNumb "v" }}
-    {{ $portalHref = printf "%s/releases/tag/%s" $githubURL $versionNumb }}
-    {{ $hrefText = $versionNumb }}
-
-<!-- GH action build on a push to main aka dev -->
-{{ else if eq $branch "main" }}
-    {{ $gitShaShort := substr $gitSha 0 7 }}
-    {{ $portalHref = printf "%s/commit/%s" $githubURL $gitSha }}
-    {{ $hrefText = printf "Built from commit: %s" $gitShaShort }}
-
-<!-- GH action build on a feature branch -->
-{{ else if ne $branch "" }}
-    {{ $gitShaShort := substr $gitSha 0 7 }}
-    {{ $portalHref = printf "%s/commit/%s" $githubURL $gitSha }}
-    {{ $hrefText = printf "Built from commit: %s on branch: %s" $gitShaShort $branch }}
 
 <!-- Local build -->
-{{ else }}
+{{ if eq (getenv "CI_EVENT_NAME") "local_build"}}
     {{ $portalHref = $githubURL }}
-    {{ $hrefText = "Local dev build" }}
+    {{ $hrefText = printf "%s@%s" $gitRefName $gitShaShort }}
+
+<!-- Production build version -->
+{{ else if eq (getenv "CI_EVENT_NAME") "release" }}
+    {{ $portalHref = printf "%s/releases/tag/%s" $githubURL $gitRefName }}
+    {{ $hrefText = $gitRefName }}
+<!-- Workflow dispatch from a release branch -->
+{{ else if hasPrefix $gitRefName "release-" }}
+    {{ $version := strings.TrimPrefix "release-" $gitRefName }}
+    {{ $portalHref = printf "%s/releases/tag/%s" $githubURL $version }}
+    {{ $hrefText = $version }}
+<!-- Push to main or manual dispatch from feature branch -->
+{{ else }}
+    {{ $portalHref = printf "%s/commit/%s" $githubURL $gitSha }}
+    {{ $hrefText = printf "%s@%s" $gitRefName $gitShaShort }}
 {{ end }}
 
 <!-- Portal version info -->

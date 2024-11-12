@@ -21,9 +21,6 @@ COPY ./hugo/ /src
 # precendence over these values. These variables are available in the
 # environment of subsequent RUN instructions
 ARG JBROWSE_VERSION
-ARG HUGO_PORTAL_VERSION=""
-ARG HUGO_GIT_BRANCH=""
-ARG HUGO_GIT_SHA=""
 
 ARG CI_EVENT_NAME
     CI_GIT_REF_NAME
