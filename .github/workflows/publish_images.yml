@@ -68,21 +68,21 @@ jobs:
         #    - Else provide branch name and sha
         run: |
           if [ "${{ github.event_name }}" == "release" ]; then
-            echo "HUGO_PORTAL_VERSION=${{ github.ref_name }}" >> $GITHUB_OUTPUT;
+            echo "HUGO_PORTAL_VERSION=${{ github.ref_name }}"
           elif [ "${{ github.ref }}" == "refs/heads/main" ]; then
-            echo "HUGO_GIT_BRANCH"="main" >> $GITHUB_OUTPUT;
-            echo "HUGO_GIT_SHA"=${{ github.sha }} >> $GITHUB_OUTPUT;
+            echo "HUGO_GIT_BRANCH"="main"
+            echo "HUGO_GIT_SHA"=${{ github.sha }}
           elif [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
             branch_name="${{ github.ref_name }}"
             if [[ "$branch_name" == release-* ]]; then
               version_number=$(echo "$branch_name" | cut -d '-' -f2)
-              echo "HUGO_PORTAL_VERSION=${version_number}" >> $GITHUB_OUTPUT;
+              echo "HUGO_PORTAL_VERSION=${version_number}"
             else
-              echo "HUGO_GIT_BRANCH"="$branch_name" >> $GITHUB_OUTPUT;
-              echo "HUGO_GIT_SHA"=${{ github.sha }} >> $GITHUB_OUTPUT;
+              echo "HUGO_GIT_BRANCH"="$branch_name"
+              echo "HUGO_GIT_SHA"=${{ github.sha }}
             fi
-          fi
-        
+          fi >> $GITHUB_OUTPUT
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
