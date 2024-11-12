@@ -71,7 +71,6 @@ jobs:
             echo "HUGO_PORTAL_VERSION=${{ github.ref_name }}"
           elif [ "${{ github.ref }}" == "refs/heads/main" ]; then
             echo "HUGO_GIT_BRANCH"="main"
-            echo "HUGO_GIT_SHA"=${{ github.sha }}
           elif [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
             branch_name="${{ github.ref_name }}"
             if [[ "$branch_name" == release-* ]]; then
@@ -79,7 +78,6 @@ jobs:
               echo "HUGO_PORTAL_VERSION=${version_number}"
             else
               echo "HUGO_GIT_BRANCH"="$branch_name"
-              echo "HUGO_GIT_SHA"=${{ github.sha }}
             fi
           fi >> $GITHUB_OUTPUT
 
@@ -93,4 +91,4 @@ jobs:
           build-args: |
             HUGO_PORTAL_VERSION=${{ steps.set-hugo-env-arg.outputs.HUGO_PORTAL_VERSION }}
             HUGO_GIT_BRANCH=${{ steps.set-hugo-env-arg.outputs.HUGO_GIT_BRANCH }}
-            HUGO_GIT_SHA=${{ steps.set-hugo-env-arg.outputs.HUGO_GIT_SHA }}
+            HUGO_GIT_SHA=${{ github.SHA }}
