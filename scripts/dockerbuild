@@ -37,6 +37,13 @@ if [[ "$1" = hugo ]]; then
     _BUILD_ARGS+=("--build-arg" "HUGO_PORTAL_VERSION=$(git describe --always)")
     _BUILD_ARGS+=("--build-arg" "HUGO_GIT_BRANCH=$(git branch --show-current)")
     _BUILD_ARGS+=("--build-arg" "HUGO_GIT_SHA=$(git rev-parse --short HEAD)")
+    # CI context
+    _BUILD_ARG+=(
+	"--build-arg" "CI_EVENT_NAME=local_build"
+	"--build-arg" "CI_GIT_REF_NAME=$(git branch --show-current)"
+	"--build-arg" "CI_GIT_REF=$(git rev-parse --synbolic-full-name HEAD)"
+	"--build-arg" "CI_GIT_SHA=$(git rev-parse HEAD)"
+    )
     docker_build  && exit 0
 fi
 
