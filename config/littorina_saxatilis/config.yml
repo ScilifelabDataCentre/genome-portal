@@ -1,12 +1,11 @@
 organism: "Littorina saxatilis"
 assembly:
   name: US_GU_Lsax_2.0
-  displayName: "Littorina saxatilis genome assembly"
+  displayName: "L. saxatilis genome assembly GCA_037325665.1"
   accession: "GCA_037325665.1"
-  # The following url points to the original ENA upload of the assembly. It will require an alias file to be able to load the protein coding genes track
-  #url: "https://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/jba/JBAMIC01.fasta.gz"
+  # Use the NCBI version of the assembly to get a user-friendly sorting in the JBrowse dropdown by default
+  # (the 17 chroms on top of the list and the 4000+ unplaced scaffolds below)
   url: "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/037/325/665/GCA_037325665.1_US_GU_Lsax_2.0/GCA_037325665.1_US_GU_Lsax_2.0_genomic.fna.gz"
-  #aliases: ""
 tracks:
-  - name: "Protein coding genes"
+  - name: "Protein-coding genes"
     url: "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/037/325/665/GCA_037325665.1_US_GU_Lsax_2.0/GCA_037325665.1_US_GU_Lsax_2.0_genomic.gff.gz"

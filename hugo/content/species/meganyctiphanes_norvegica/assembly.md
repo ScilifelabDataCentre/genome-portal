@@ -18,8 +18,6 @@ stats_data_path: "meganyctiphanes_norvegica/species_stats"
 lineage_data_path: "meganyctiphanes_norvegica/taxonomy"
 ---
 
-|||||| Content divider - do not remove ||||||
-
 Notes: Assembly statistics were calculated for the primary genome assembly GCA_964058975.1. Busco statistics were taken from Unneberg et al. (2024). Annotation statistics were calculated using GCA_964058975.1_Mnor_HA_v2_genomic.gff.
 
 BUSCO notation: C: Complete; S: Single-copy; D: Duplicated; F: Fragmented; M: Missing; n: Total BUSCO genes included in the dataset (here: arthropoda_odb10). See also [the official BUSCO manual](https://busco.ezlab.org/busco_userguide.html#interpreting-the-results).

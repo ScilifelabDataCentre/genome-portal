@@ -1,18 +1,3 @@
-{{ define "early_connections" }}
-
-    <link rel="preconnect" href="https://code.jquery.com">
-
-{{ end }}
-
-
-{{ define "script_includes" }}
-
-{{ partial "add_datatables_jquery.html" . }}
-
-{{ end }}
-
-
-
 {{ define "main" }}
 
 {{ partial "species_title.html" . }}
@@ -34,12 +19,6 @@
 
 {{ $ena_link := print "https://www.ebi.ac.uk/ena/browser/view/" $accession }}
 {{ $ncbi_link := print "https://www.ncbi.nlm.nih.gov/datasets/genome/" $accession }}
-
-
-<!-- break down content into 2 parts based on divider ... -->
-{{ $content := split .Content "|||||| Content divider - do not remove ||||||" }}
-{{ $contentp1 := index $content 0 }}
-{{ $contentp2 := index $content 1 }}
 
 
 <div class="container mt-3">
@@ -76,12 +55,6 @@
 
     </div>
 
-
-    <div class="row">
-        <div class="col scilife-subsection">
-            {{ $contentp1 | safeHTML }}
-        </div>
-    </div>
 
     <div class="row row-cols-1 row-cols-lg-2">
 
@@ -157,33 +130,11 @@
 
 <div class="row">
     <div class="col scilife-subsection">
-        {{ $contentp2 | safeHTML }}
+        {{ .Content }}
     </div>
 </div>
 
 {{ partial "last_updated.html" . }}
 
-
-{{ end }}
-
-{{ define "scripts" }}
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        new DataTable('#assemblyTable', {
-            info: false,
-            ordering: false,
-            paging: false,
-            searching: false
-        });
-
-        new DataTable('#annotationTable', {
-            info: false,
-            ordering: false,
-            paging: false,
-            searching: false
-        });
-    });
-</script>
 
 {{ end }}
