@@ -1,0 +1,6 @@
+params:
+  ci_event_name: workflow_dispatch
+  ci_git_ref_name: feature-branch
+  ci_git_ref: refs/tags/feature-branch
+  ci_git_sha: 1234abcd
+  jbrowse_version: 3.4.6

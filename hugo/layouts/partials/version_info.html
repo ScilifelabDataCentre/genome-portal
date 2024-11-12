@@ -18,19 +18,20 @@ Logic:
 {{ $hrefText := "" }}
 
 <!-- Extract all enviroment variables -->
-{{ $gitRefName := getenv "CI_GIT_REF_NAME" }}
-{{ $gitSha := getenv "CI_GIT_SHA" }}
+{{ $CIEventName := or (getenv "CI_EVENT_NAME") .Site.Params.ci_event_name }}
+{{ $gitRefName := or (getenv "CI_GIT_REF_NAME") .Site.Params.ci_git_ref_name }}
+{{ $gitSha := or (getenv "CI_GIT_SHA") .Site.Params.ci_git_sha }}
 {{ $gitShaShort := substr $gitSha 0 7 }}
-{{ $jBrowseVersion := getenv "JBROWSE_VERSION" }}
+{{ $jBrowseVersion := or (getenv "JBROWSE_VERSION") .Site.Params.jbrowse_version "x.x.x"}}
 
 
 <!-- Local build -->
-{{ if eq (getenv "CI_EVENT_NAME") "local_build"}}
+{{ if eq $CIEventName "local_build"}}
     {{ $portalHref = $githubURL }}
     {{ $hrefText = printf "%s@%s" $gitRefName $gitShaShort }}
 
 <!-- Production build version -->
-{{ else if eq (getenv "CI_EVENT_NAME") "release" }}
+{{ else if eq $CIEventName "release" }}
     {{ $portalHref = printf "%s/releases/tag/%s" $githubURL $gitRefName }}
     {{ $hrefText = $gitRefName }}
 <!-- Workflow dispatch from a release branch -->
@@ -50,11 +51,6 @@ Logic:
     (<a href="{{ $portalHref }}" target="_blank" rel="noopener noreferrer">{{ $hrefText }}</a>)
 </p>
 
-
-<!-- Happens if site built using Hugo not docker -->
-{{ if eq $jBrowseVersion "" }}
-    {{ $jBrowseVersion = "X.X.X" }}
-{{ end }}
 
 {{ $jBrowseHref := printf "https://github.com/GMOD/jbrowse-components/releases/tag/v%s" $jBrowseVersion }}
 <p class="mt-0 mb-3 text-start text-lg-center">
