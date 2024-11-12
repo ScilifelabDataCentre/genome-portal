@@ -22,10 +22,7 @@ COPY ./hugo/ /src
 # environment of subsequent RUN instructions
 ARG JBROWSE_VERSION
 
-ARG CI_EVENT_NAME
-    CI_GIT_REF_NAME
-    CI_GIT_REF
-    CI_GIT_SHA
+ARG CI_EVENT_NAME CI_GIT_REF_NAME CI_GIT_REF CI_GIT_SHA
 
 # pass the environment variables to the build
 RUN mkdir /target && \

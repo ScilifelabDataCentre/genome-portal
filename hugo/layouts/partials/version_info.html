@@ -17,6 +17,8 @@ Logic:
 {{ $gitShaShort := substr $gitSha 0 7 }}
 {{ $jBrowseVersion := or (getenv "JBROWSE_VERSION") .Site.Params.jbrowse_version "x.x.x"}}
 
+{{ $portalHref := "" }}
+{{ $hrefText := "" }}
 
 <!-- Local build -->
 {{ if eq $eventName "local_build"}}
