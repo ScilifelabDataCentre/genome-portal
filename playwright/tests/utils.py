@@ -9,6 +9,11 @@ HUGO_SPECIES_DIR = Path(__file__).parent.parent.parent / "hugo/content/species"
 ALLOWED_DATE_FORMATS = ["%d %B %Y", "%d/%m/%Y"]
 
 
+def not_draft(content: str) -> bool:
+    """This is the Hugo markdown file param to indicate a file is in draft mode."""
+    return "draft: true" not in content
+
+
 def get_list_of_species() -> list[str]:
     """
     Search the Hugo content directory to get all the species on the website.
@@ -18,18 +23,9 @@ def get_list_of_species() -> list[str]:
     """
     species = []
     for folder in HUGO_SPECIES_DIR.iterdir():
-        if not folder.is_dir():
-            continue
-
         index_file = folder / "_index.md"
-        if not index_file.exists():
-            continue
-
-        with index_file.open() as file_in:
-            content = file_in.read()
-            if "draft: true" not in content:
-                species.append(folder.name)
-
+        if index_file.exists() and not_draft(index_file.read_text()):
+            species.append(folder.name)
     return species
 
 
