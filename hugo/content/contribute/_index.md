@@ -39,6 +39,6 @@ The Genome Portal staff can help you reserve an entry on the portal already duri
 
 The Genome Portal displays various data types commonly used in genomics studies. The links below provide information on supported data file formats and recommendations for sharing genomic data via public repositories. Following these guidelines will help ensure data compatibility for display on the Genome Portal.
 
-* <a href="/contribute/supported_file_formats"  target="_blank">Supported data file formats</a>
+* <a href="/contribute/supported_file_formats">Supported data file formats</a>
 
-* <a href="/contribute/recommendations_for_making_data_public"  target="_blank">Recommendations on how to make data files publicly available</a>
+* <a href="/contribute/recommendations_for_making_data_public">Recommendations on how to make data files publicly available</a>

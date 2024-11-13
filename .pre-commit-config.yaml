@@ -30,10 +30,10 @@ repos:
     # Run the linter.
     - id: ruff
       args: [ --fix ]
-      files: '^scripts/.*'
+      files: '^(scripts|playwright)/.*'
     # Run the formatter.
     - id: ruff-format
-      files: '^scripts/.*'
+      files: '^(scripts|playwright)/.*'
 
 - repo: https://github.com/koalaman/shellcheck-precommit
   rev: v0.10.0
