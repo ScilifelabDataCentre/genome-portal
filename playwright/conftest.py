@@ -5,7 +5,7 @@ Fixtures for Playwright tests.
 import pytest
 from pytest import FixtureRequest
 
-from playwright.sync_api import BrowserContext, Page
+from playwright.sync_api import Page
 
 
 @pytest.fixture
@@ -27,46 +27,45 @@ def page_obj(page: Page, request: FixtureRequest, base_url: str) -> Page:
     return page
 
 
-def generate_single_page(context: BrowserContext, url: str) -> Page:
+def generate_single_page(page: Page, url: str) -> Page:
     """
     Generate a single page object.
     Helper function to generate unique pages like about, contact, etc.
     """
-    page = context.new_page()
     page.goto(url)
     return page
 
 
 @pytest.fixture
-def home_page(context: BrowserContext, base_url: str) -> Page:
-    return generate_single_page(context=context, url=f"{base_url}/")
+def home_page(page: Page, base_url: str) -> Page:
+    return generate_single_page(page=page, url=f"{base_url}/")
 
 
 @pytest.fixture
-def about_page(context: BrowserContext, base_url: str) -> Page:
-    return generate_single_page(context=context, url=f"{base_url}/about/")
+def about_page(page: Page, base_url: str) -> Page:
+    return generate_single_page(page=page, url=f"{base_url}/about/")
 
 
 @pytest.fixture
-def about_page_swedish(context: BrowserContext, base_url: str) -> Page:
-    return generate_single_page(context=context, url=f"{base_url}/about/sv/")
+def about_page_swedish(page: Page, base_url: str) -> Page:
+    return generate_single_page(page=page, url=f"{base_url}/about/sv/")
 
 
 @pytest.fixture
-def glossary_page(context: BrowserContext, base_url: str) -> Page:
-    return generate_single_page(context=context, url=f"{base_url}/glossary/")
+def glossary_page(page: Page, base_url: str) -> Page:
+    return generate_single_page(page=page, url=f"{base_url}/glossary/")
 
 
 @pytest.fixture
-def contact_page(context: BrowserContext, base_url: str) -> Page:
-    return generate_single_page(context=context, url=f"{base_url}/contact/")
+def contact_page(page: Page, base_url: str) -> Page:
+    return generate_single_page(page=page, url=f"{base_url}/contact/")
 
 
 @pytest.fixture
-def contribute_page(context: BrowserContext, base_url: str) -> Page:
-    return generate_single_page(context=context, url=f"{base_url}/contribute/")
+def contribute_page(page: Page, base_url: str) -> Page:
+    return generate_single_page(page=page, url=f"{base_url}/contribute/")
 
 
 @pytest.fixture
-def privacy_page(context: BrowserContext, base_url: str) -> Page:
-    return generate_single_page(context=context, url=f"{base_url}/privacy/")
+def privacy_page(page: Page, base_url: str) -> Page:
+    return generate_single_page(page=page, url=f"{base_url}/privacy/")
