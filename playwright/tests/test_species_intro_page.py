@@ -5,17 +5,15 @@ Tests for each species introduction page.
 import re
 
 import pytest
-from utils import all_intro_page_paths, validate_date_format
+from utils import INTRO_PAGE_PATHS, validate_date_format
 
 from playwright.sync_api import Page, expect
 from playwright.sync_api import TimeoutError as PlaywrightTimeoutError
 
 REQUIRED_HEADERS = ["Taxonomy", "External links", "Description", "How to cite", "References", "Changelog"]
 
-ALL_INTRO_PAGE_PATHS = all_intro_page_paths()
 
-
-@pytest.mark.parametrize("page_obj", ALL_INTRO_PAGE_PATHS, indirect=True)
+@pytest.mark.parametrize("page_obj", INTRO_PAGE_PATHS, indirect=True)
 @pytest.mark.parametrize("heading_text", REQUIRED_HEADERS)
 def test_required_headers_visible(page_obj: Page, heading_text: str) -> None:
     """
@@ -25,7 +23,7 @@ def test_required_headers_visible(page_obj: Page, heading_text: str) -> None:
     expect(locator, f"The heading: {heading_text} is not visible on page: {page_obj.url}").to_be_visible()
 
 
-@pytest.mark.parametrize("page_obj", ALL_INTRO_PAGE_PATHS, indirect=True)
+@pytest.mark.parametrize("page_obj", INTRO_PAGE_PATHS, indirect=True)
 def test_for_changelog(page_obj: Page) -> None:
     """
     Check if all species pages have a changelog.
@@ -34,7 +32,7 @@ def test_for_changelog(page_obj: Page) -> None:
     expect(changelog, f"Changelog not found on page: {page_obj.url}").to_be_visible(timeout=1_000)
 
 
-@pytest.mark.parametrize("page_obj", ALL_INTRO_PAGE_PATHS, indirect=True)
+@pytest.mark.parametrize("page_obj", INTRO_PAGE_PATHS, indirect=True)
 def test_banner_title_correct(page_obj: Page) -> None:
     """
     Check all species pages have the correct banner title.
@@ -43,7 +41,7 @@ def test_banner_title_correct(page_obj: Page) -> None:
     expect(banner_title, f"Species banner not found/correct on page: {page_obj.url}").to_be_visible(timeout=1_000)
 
 
-@pytest.mark.parametrize("page_obj", ALL_INTRO_PAGE_PATHS, indirect=True)
+@pytest.mark.parametrize("page_obj", INTRO_PAGE_PATHS, indirect=True)
 def test_browse_genome_button(page_obj: Page) -> None:
     """
     Test clicking the browse the genome button resolves to the genome browser page.
@@ -55,7 +53,7 @@ def test_browse_genome_button(page_obj: Page) -> None:
     expect(heading, f"Navigation to genome browser for page {page_obj.url} went wrong").to_be_visible()
 
 
-@pytest.mark.parametrize("page_obj", ALL_INTRO_PAGE_PATHS, indirect=True)
+@pytest.mark.parametrize("page_obj", INTRO_PAGE_PATHS, indirect=True)
 def test_has_last_updated(page_obj: Page) -> None:
     """Test that all intro page have a last updated text and that it is correctly formatted."""
     # Check if the last updated date is visible on the page.
@@ -74,7 +72,7 @@ def test_has_last_updated(page_obj: Page) -> None:
     assert valid_date, f"Date format incorrect on page: {page_obj.url}"
 
 
-@pytest.mark.parametrize("page_obj", ALL_INTRO_PAGE_PATHS, indirect=True)
+@pytest.mark.parametrize("page_obj", INTRO_PAGE_PATHS, indirect=True)
 def test_sbdi_gbif_links(page_obj: Page) -> None:
     """
     Test the SBDI and GBIF links found in the external links are correct.
@@ -91,7 +89,7 @@ def test_sbdi_gbif_links(page_obj: Page) -> None:
     )
 
 
-@pytest.mark.parametrize("page_obj", ALL_INTRO_PAGE_PATHS, indirect=True)
+@pytest.mark.parametrize("page_obj", INTRO_PAGE_PATHS, indirect=True)
 def test_vulnerability_links(page_obj: Page) -> None:
     """
     Vulnerability links are optional, so these should have been deleted from a species page if not present.

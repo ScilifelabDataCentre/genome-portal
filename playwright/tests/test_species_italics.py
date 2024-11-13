@@ -10,7 +10,7 @@ import re
 from pathlib import Path
 
 import pytest
-from utils import all_intro_page_paths, get_hugo_species_dir
+from utils import HUGO_SPECIES_DIR, SPECIES_LIST
 
 
 def is_italicized(line: str, word: str) -> bool:
@@ -44,10 +44,9 @@ def prepare_species_pages_names() -> dict[str, tuple[str, str]]:
     Helper function to prepare the all the species markdown files to check,
     alongside the associated long form and short form of the species name.
     """
-    HUGO_SPECIES_DIR = get_hugo_species_dir()
 
     species_pages_to_check = {}
-    for species_path in all_intro_page_paths():
+    for species_path in SPECIES_LIST:
         intro_md_file = HUGO_SPECIES_DIR / species_path / "_index.md"
         assembly_md_file = HUGO_SPECIES_DIR / species_path / "assembly.md"
         download_md_file = HUGO_SPECIES_DIR / species_path / "download.md"

@@ -5,11 +5,9 @@ Tests that are applied to every page on the website.
 import re
 
 import pytest
-from utils import all_page_paths
+from utils import ALL_PAGE_PATHS
 
 from playwright.sync_api import Page, expect
-
-ALL_PAGE_PATHS = all_page_paths()
 
 
 @pytest.mark.parametrize("page_obj", ALL_PAGE_PATHS, indirect=True)

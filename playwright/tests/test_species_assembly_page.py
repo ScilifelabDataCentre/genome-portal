@@ -3,17 +3,15 @@ Tests for each species assembly page.
 """
 
 import pytest
-from utils import all_assembly_page_paths
+from utils import ASSEMBLY_PAGE_PATHS
 
 from playwright.sync_api import Page, expect
 
 REQUIRED_HEADERS = ["Description", "Annotation Statistics", "Assembly Statistics"]
 
-ALL_ASSEMBLY_PAGE_PATHS = all_assembly_page_paths()
-
 
 @pytest.mark.parametrize("heading_text", REQUIRED_HEADERS)
-@pytest.mark.parametrize("page_obj", ALL_ASSEMBLY_PAGE_PATHS, indirect=True)
+@pytest.mark.parametrize("page_obj", ASSEMBLY_PAGE_PATHS, indirect=True)
 def test_required_headers_visible(page_obj: Page, heading_text: str) -> None:
     """
     Test the required headers for the assembly page are present.

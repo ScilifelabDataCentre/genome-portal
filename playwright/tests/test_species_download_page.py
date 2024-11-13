@@ -5,12 +5,10 @@ Tests for each species download page.
 import re
 
 import pytest
-from utils import all_download_page_paths, validate_date_format
+from utils import DOWNLOAD_PAGE_PATHS, validate_date_format
 
 from playwright.sync_api import Locator, Page, expect
 from playwright.sync_api import TimeoutError as PlaywrightTimeoutError
-
-ALL_DOWNLOAD_PAGE_PATHS = all_download_page_paths()
 
 
 def get_links_column(page: Page) -> list[str]:
@@ -31,7 +29,7 @@ def get_date_column_texts(page: Page) -> list[str]:
     return short_table.locator("td:nth-child(8)").all_inner_texts()
 
 
-@pytest.mark.parametrize("page_obj", ALL_DOWNLOAD_PAGE_PATHS, indirect=True)
+@pytest.mark.parametrize("page_obj", DOWNLOAD_PAGE_PATHS, indirect=True)
 def test_required_header_visible(page_obj: Page) -> None:
     """
     Test the required header 'Data availability' is present in the download page.
@@ -41,7 +39,7 @@ def test_required_header_visible(page_obj: Page) -> None:
     expect(locator, f"The heading: {HEADER_TEXT} is not visible on page: {page_obj.url}").to_be_visible()
 
 
-@pytest.mark.parametrize("page_obj", ALL_DOWNLOAD_PAGE_PATHS, indirect=True)
+@pytest.mark.parametrize("page_obj", DOWNLOAD_PAGE_PATHS, indirect=True)
 def test_toggle_switch(page_obj: Page) -> None:
     """
     Test the toggle switch correctly swaps between the long and short table views.
@@ -62,7 +60,7 @@ def test_toggle_switch(page_obj: Page) -> None:
     expect(short_table).to_be_visible()
 
 
-@pytest.mark.parametrize("page_obj", ALL_DOWNLOAD_PAGE_PATHS, indirect=True)
+@pytest.mark.parametrize("page_obj", DOWNLOAD_PAGE_PATHS, indirect=True)
 def test_date_format_in_download_table(page_obj: Page) -> None:
     """
     Validates the date format in the download table is correct.
@@ -84,7 +82,7 @@ def test_date_format_in_download_table(page_obj: Page) -> None:
         ), f"Download table date formatting incorrect on page: {page_obj.url}. Format should be e.g.: 15 October 2024"
 
 
-@pytest.mark.parametrize("page_obj", ALL_DOWNLOAD_PAGE_PATHS, indirect=True)
+@pytest.mark.parametrize("page_obj", DOWNLOAD_PAGE_PATHS, indirect=True)
 def test_table_links(page_obj: Page):
     """
     For each species download table, there is a "Links" column. Each cell in this column can contain up to 3 links.
