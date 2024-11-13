@@ -11,33 +11,22 @@ Logic:
 {{ $githubURL := "https://github.com/ScilifelabDataCentre/genome-portal" }}
 
 <!-- Extract CI enviroment variables -->
-{{ $eventName := or (getenv "CI_EVENT_NAME") .Site.Params.ci_event_name }}
 {{ $gitRefName := or (getenv "CI_GIT_REF_NAME") .Site.Params.ci_git_ref_name }}
 {{ $gitSha := or (getenv "CI_GIT_SHA") .Site.Params.ci_git_sha }}
-{{ $gitShaShort := substr $gitSha 0 7 }}
 {{ $jBrowseVersion := or (getenv "JBROWSE_VERSION") .Site.Params.jbrowse_version "x.x.x"}}
 
 {{ $portalHref := "" }}
 {{ $hrefText := "" }}
 
-<!-- Local build -->
-{{ if eq $eventName "local_build"}}
-    {{ $portalHref = $githubURL }}
-    {{ $hrefText = printf "%s@%s" $gitRefName $gitShaShort }}
-
-<!-- Production build version -->
-{{ else if eq $eventName "release" }}
-    {{ $portalHref = printf "%s/releases/tag/%s" $githubURL $gitRefName }}
-    {{ $hrefText = $gitRefName }}
-<!-- Workflow dispatch from a release branch -->
-{{ else if hasPrefix $gitRefName "release-" }}
-    {{ $version := strings.TrimPrefix "release-" $gitRefName }}
+<!-- Production release -->
+{{ $version := findRE $gitRefName `v\d+(\.\d+){2}` }}
+{{ if $version }}
+    {{ $version := index $version 1 }}
     {{ $portalHref = printf "%s/releases/tag/%s" $githubURL $version }}
     {{ $hrefText = $version }}
-<!-- Push to main or manual dispatch from feature branch -->
 {{ else }}
-    {{ $portalHref = printf "%s/commit/%s" $githubURL $gitSha }}
-    {{ $hrefText = printf "%s@%s" $gitRefName $gitShaShort }}
+    {{ $portalHref := printf "%s/commit/%s" $githubURL $gitSha }}
+    {{ $hrefText := printf "%s@%s" $gitRefName (substr $gitSha 0 7) }}
 {{ end }}
 
 <!-- Portal version info -->

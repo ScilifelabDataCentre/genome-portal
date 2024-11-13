@@ -67,7 +67,6 @@ jobs:
           file: ./docker/${{ matrix.dockerfile }}
           tags: ghcr.io/scilifelabdatacentre/${{ matrix.image_name }}:${{ steps.set-tag.outputs.tag }}
           build-args: |
-            CI_EVENT_NAME=${{ github.event_name }}
             CI_GIT_REF_NAME=${{ github.ref_name }}
             CI_GIT_REF=${{ github.ref }}
             CI_GIT_SHA=${{ github.sha }}            
