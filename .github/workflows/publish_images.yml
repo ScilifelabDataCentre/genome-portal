@@ -28,6 +28,9 @@ jobs:
     permissions:
       contents: read
       packages: write
+    defaults:
+      run:
+        working-directory: ./scripts/ci
 
     strategy:
       matrix:
@@ -51,13 +54,9 @@ jobs:
       - name: Set Docker tag
         id: set-tag
         run: |
-          case "${{ github.event_name }}" in
-            release)
-              tag=prod;;
-            workflow_dispatch)
-              tag="${{ github.event.inputs.docker_tag }}";;
-          esac
-          echo "tag=${tag:-dev}" >> $GITHUB_OUTPUT
+          ./set_docker_tag ${{ github.event_name }} \
+                           ${{ github.event.inputs.docker_tag }} \
+                           >> $GITHUB_OUTPUT
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
