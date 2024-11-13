@@ -19,14 +19,14 @@ Logic:
 {{ $hrefText := "" }}
 
 <!-- Production release -->
-{{ $version := findRE $gitRefName `v\d+(\.\d+){2}` }}
+{{ $version := findRE `v\d+(\.\d+){2}` $gitRefName }}
 {{ if $version }}
-    {{ $version := index $version 1 }}
+    {{ $version := index $version 0 }}
     {{ $portalHref = printf "%s/releases/tag/%s" $githubURL $version }}
     {{ $hrefText = $version }}
 {{ else }}
-    {{ $portalHref := printf "%s/commit/%s" $githubURL $gitSha }}
-    {{ $hrefText := printf "%s@%s" $gitRefName (substr $gitSha 0 7) }}
+    {{ $portalHref = printf "%s/commit/%s" $githubURL $gitSha }}
+    {{ $hrefText = printf "%s@%s" $gitRefName (substr $gitSha 0 7) }}
 {{ end }}
 
 <!-- Portal version info -->
