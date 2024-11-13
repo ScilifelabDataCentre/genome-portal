@@ -11,9 +11,9 @@ Logic:
 {{ $githubURL := "https://github.com/ScilifelabDataCentre/genome-portal" }}
 
 <!-- Extract CI enviroment variables -->
-{{ $gitRefName := or (getenv "CI_GIT_REF_NAME") .Site.Params.ci_git_ref_name }}
-{{ $gitSha := or (getenv "CI_GIT_SHA") .Site.Params.ci_git_sha }}
-{{ $jBrowseVersion := or (getenv "JBROWSE_VERSION") .Site.Params.jbrowse_version "x.x.x"}}
+{{ $gitRefName := or (getenv "HUGO_GIT_REF_NAME") .Site.Params.ci_git_ref_name }}
+{{ $gitSha := or (getenv "HUGO_GIT_SHA") .Site.Params.ci_git_sha }}
+{{ $jBrowseVersion := or (getenv "HUGO_JBROWSE_VERSION") .Site.Params.jbrowse_version "x.x.x"}}
 
 {{ $portalHref := "" }}
 {{ $hrefText := "" }}

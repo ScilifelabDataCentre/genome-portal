@@ -5,6 +5,7 @@ ARG JBROWSE_VERSION=2.15.4
 FROM alpine:latest AS build
 
 ARG HUGO_VERSION=0.128.2
+ARG JBROWSE_VERSION
 
 RUN apk add --no-cache wget
 
@@ -20,9 +21,9 @@ COPY ./hugo/ /src
 # Docker build arguments (passed in Github actions for example) take
 # precendence over these values. These variables are available in the
 # environment of subsequent RUN instructions
-ARG JBROWSE_VERSION
-
-ARG CI_EVENT_NAME CI_GIT_REF_NAME CI_GIT_REF CI_GIT_SHA
+ARG HUGO_JBROWSE_VERSION=${JBROWSE_VERSION}
+ARG HUGO_GIT_REF_NAME
+ARG HUGO_GIT_SHA
 
 # pass the environment variables to the build
 RUN mkdir /target && \

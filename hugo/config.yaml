@@ -3,12 +3,6 @@ languageCode: "en-us"
 title: "Swedish Reference Genome Portal, hosted by SciLifeLab"
 buildFuture: true
 
-security:
-  funcs:
-    getenv:
-      - ^JBROWSE_VERSION$
-      - ^CI_
-
 markup:
   goldmark:
     renderer:
