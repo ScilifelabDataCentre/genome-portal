@@ -3,7 +3,7 @@ ARG NODE_VERSION=22.2.0
 # Stage 1: Download HUGO + build static site. 
 FROM alpine:latest AS build
 RUN apk add --no-cache wget
-ARG HUGO_VERSION="0.128.2"
+ARG HUGO_VERSION="0.138.0"
 
 RUN wget --quiet "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.tar.gz" && \
     tar xzf hugo_${HUGO_VERSION}_Linux-64bit.tar.gz && \

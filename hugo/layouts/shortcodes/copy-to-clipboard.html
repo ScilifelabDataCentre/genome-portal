@@ -1,0 +1,8 @@
+{{ $type := .Get "type" | default "citation" }}
+{{ $class := printf "%s-block" $type }}
+
+{{ if eq $type "citation" }}
+    <pre class="{{ $class }}"><code>{{- strings.TrimSpace .Inner | markdownify -}}</code></pre>
+{{ else }}
+    <pre class="{{ $class }}"><code>{{- strings.TrimSpace .Inner | safeHTML -}}</code></pre>
+{{ end }}
