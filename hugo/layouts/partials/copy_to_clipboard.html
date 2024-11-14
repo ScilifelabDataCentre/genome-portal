@@ -1,0 +1,4 @@
+{{ if (findRE "<pre" .Content 1) }}
+    {{ $clipboardJS := resources.Get "js/clipboard.js" }}
+    <script>{{ $clipboardJS.Content | safeJS }}</script>
+{{ end }}

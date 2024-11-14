@@ -92,6 +92,7 @@
         {{ if not $isGenomePage }}
             <div style="margin: 10px 0 10px 0;"></div>
             {{- partial "footer.html" . -}}
+            {{- partial "copy_to_clipboard.html" . -}}
         {{ end }}
     </body>
 </html>
