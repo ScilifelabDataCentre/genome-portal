@@ -841,7 +841,7 @@ iframe#matoOpOut {
   }
 }
 
-/* Styles for markdown formatting of inline code and code blocks */
+/* Styles for markdown formatting of inline code and code blocks and copy to clipboard button */
 code {
   color: black;
   background-color: var(--scilife-light-grey);
@@ -855,8 +855,47 @@ pre {
   -moz-tab-size: 4;
   -o-tab-size: 4;
   tab-size: 4;
-  border: 1px solid var(--scilife-medium-grey);
+  border: 1px solid var(--scilife-dark-grey);
   border-radius: 10px;
   line-height: 1.5;
   padding: 5px;
+}
+
+.clipboard {
+  display: flex;
+  justify-content: flex-end;
+}
+
+p + .clipboard {
+  margin-top: -1rem; /* Reduce space between <p> above and .clipboard */
+}
+
+.clipboard-button {
+  padding: 2px 7px 5px 7px;
+  margin-bottom: 0.2rem;
+  color: var(--scilife-dark-grey);
+  background-color: #ededed;
+  border: 1px solid var(--scilife-dark-grey);
+  border-radius: 10px;
+  font-size: 0.8rem;
+  transition: 0.1s;
+}
+.clipboard-button > svg {
+  fill: var(--scilife-dark-grey);
+  font-size: 0.8rem;
+}
+.clipboard-button:hover {
+  cursor: pointer;
+  background-color: #e0e0e0;
+}
+.clipboard-button:hover > svg {
+  fill: #696969;
+}
+.clipboard-button:focus {
+  outline: 0;
+}
+
+/* Enable text wraps for citations - wont apply to code blocks.. */
+.citation-block {
+  white-space: pre-wrap;
 }
