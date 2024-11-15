@@ -1,0 +1,46 @@
+name: Playwright e2e tests
+on:
+  push:
+    branches: playwright-gh-actions # TODO - temp for testing purposes 
+    paths:
+      - 'hugo/**'
+      - 'playwright/**'
+      - 'requirements.txt'
+      - 'dockerfiles/hugo.dockerfile'
+      - '.github/workflows/playwright.yml'
+  pull_request:
+    branches: main
+    paths:
+      - 'hugo/**'
+      - 'playwright/**'
+      - 'requirements.txt'
+      - 'dockerfiles/hugo.dockerfile'
+      - '.github/workflows/playwright.yml'
+
+jobs:
+  test:
+    timeout-minutes: 20
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Install playwright
+      run: python -m playwright install 
+
+    - name: Build and run the Hugo docker image
+      run: | 
+        docker build -f dockerfiles/hugo.dockerfile -t hugo-playwright .
+        docker run -d -p 8080:8080 --name hugo-container hugo-playwright  
+
+    - name: Run playwright tests
+      run: pytest playwright/tests/ --base-url http://localhost:8080 --numprocesses auto
