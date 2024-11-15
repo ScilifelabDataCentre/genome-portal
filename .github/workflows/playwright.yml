@@ -39,7 +39,7 @@ jobs:
 
     - name: Build and run the Hugo docker image
       run: | 
-        docker build -f dockerfiles/hugo.dockerfile -t hugo-playwright .
+        docker build -f docker/hugo.dockerfile -t hugo-playwright .
         docker run -d -p 8080:8080 --name hugo-container hugo-playwright  
 
     - name: Run playwright tests
