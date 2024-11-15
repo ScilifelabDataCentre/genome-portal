@@ -1,13 +1,5 @@
 name: Playwright e2e tests
 on:
-  push:
-    branches: playwright-gh-actions # TODO - temp for testing purposes 
-    paths:
-      - 'hugo/**'
-      - 'playwright/**'
-      - 'requirements.txt'
-      - 'dockerfiles/hugo.dockerfile'
-      - '.github/workflows/playwright.yml'
   pull_request:
     branches: main
     paths:
