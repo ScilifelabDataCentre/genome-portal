@@ -4,12 +4,25 @@
 
     {{ partial "species_nav.html" . }}
 
+    {{ $fields :=  dict
+    "default" .Site.Params.assembly_fields
+    "extra" (or .Params.assembly_fields dict)
+    }}
+
     {{ with .Resources.Get "assembly.yaml" | transform.Unmarshal }}
+	{{/* Common context for partials rendering assembly description tables */}}
+	{{ $context := dict
+	"path" $.Page.Path
+	"fields" $fields
+	"values" .
+	}}
+
 	<div class="container mt-3">
 	    <div class="row align-items-center">
 		<div class="col-md scilife-subsection">
 		    <h3>Description</h3>
-		    {{ partial "halloween/assembly_description.html" .description }}
+		    {{ $context = (merge $context (dict "section" "description")) }}
+		    {{ partial "halloween/assembly_description.html" $context }}
 		</div>
 		<div class="col-md scilife-subsection text-md-center">
 		    <div class="mb-3">
@@ -41,17 +54,18 @@
 		<!-- assembly data table -->
 		<div class="col scilife-subsection">
 		    <h3>Assembly Statistics</h3>
-		    {{ partial "halloween/assembly_stats.html" .stats }}
+		    {{ $context = merge $context (dict "section" "stats") }}
+		    {{ partial "halloween/assembly_stats.html" $context }}
 		</div>
 
 		<!-- annotation data table -->
 		<div class="col scilife-subsection">
 		    <h3> Annotation Statistics</h3>
-		    {{ partial "halloween/annotation_stats.html" .annotation }}
+		    {{ $context = merge $context (dict "section" "annotation") }}
+		    {{ partial "halloween/assembly_stats.html" $context }}
 		</div>
 
 	    </div>
-
 
     {{ else }}
 	    {{ warnf "Missing assembby statistics for %s" .Path }}

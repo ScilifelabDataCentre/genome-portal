@@ -4,26 +4,28 @@ description:
   level: "Underwordly"
   repr: "Partially obscure"
   accession: "GCA_666"
+  extra_1: 666
+  extra_2: 999
 stats:
-  length:
-  gc:
-  contig:
-  contig_n50:
-  contig_l50:
-  contig_n90:
-  contig_l90:
-  scaffold:
-  scaffold_n50:
-  scaffold_l50:
-  scaffold_n90:
-  scaffold_l90:
-  scaffold_gt_10:
-  busco:
+  length: 1
+  gc: 2
+  contig: 3
+  contig_n50: 4
+  contig_l50: 5
+  contig_n90: 6
+  contig_l90: 7
+  scaffold: 8
+  scaffold_n50: 9
+  scaffold_l50: 10
+  scaffold_n90: 11
+  scaffold_l90: 12
+  scaffold_gt_10: 13
+  busco: 34
 annotation:
-  gene_cnt:
-  transcript_cnt:
-  exons_avg:
-  gene_length_avg:
-  transcript_length_avg:
-  exon_length_avg:
-  intron_length_avg:
+  gene_cnt: 14
+  transcript_cnt: 15
+  exons_avg: 16
+  gene_length_avg: 17
+  transcript_length_avg: 18
+  exon_length_avg: 19
+  intron_length_avg: 20

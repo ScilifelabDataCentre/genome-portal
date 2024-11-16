@@ -1,38 +1,31 @@
-{{ $labels := dict
-"length" "Assembly length (Mbp)"
-"gc" "GC %"
-"contig" "Contig #"
-"contig_n50" "Contig N50 (Mbp)"
-"contig_l50" "Contig L50"
-"contig_n90" "Contig N90 (Mbp)"
-"contig_l90" "Contig L90"
-"scaffold" "Scaffold #"
-"scaffold_n50" "Scaffold N50 (Mbp)"
-"scaffold_l50" "Scaffold L50"
-"scaffold_n90" "Scaffold N90 (Mbp)"
-"scaffold_l90" "Scaffold L90"
-"scaffold_gt_10" "Scaffolds >= 10 kb"
-"busco" "BUSCO %"
-}}
+{{ $fields := append (or (index .fields.extra .section) slice) (index .fields.default .section) }}
+{{ $values := index .values .section }}
+{{ with $fields }}
+    <div class="table-responsive">
+	<table id="assemblyTable" class="table table-hover table-bordered">
 
-<div class="table-responsive">
-    <table id="assemblyTable" class="table table-hover table-bordered">
-
-	<thead class="table-light">
-	    <tr>
-		<th scope="col">Statistic</th>
-		<th scope="col">Value</th>
-	    </tr>
-	</thead>
-
-	<tbody class="table-responsive">
-	    {{ range $key, $label := $labels }}
+	    <thead class="table-light">
 		<tr>
-		    <td> {{ $label }} </td>
-		    <td> {{ or (index $ $key) "Not provided" }} </td>
+		    <th scope="col">Statistic</th>
+		    <th scope="col">Value</th>
 		</tr>
-	    {{ end }}
-	</tbody>
-
-    </table>
-</div>
+	    </thead>
+	    <tbody class="table-responsive">
+		{{ range $fields }}
+		    {{ $key := index . 0 }}
+		    {{ $label := or (index . 1) (replace $key "_" " " | title ) }}
+		    {{ with index $values $key | string }}
+			<tr>
+			    <td> {{ $label }} </td>
+			    <td> {{ . }} </td>
+			</tr>
+		    {{ else }}
+			{{ warnidf "missing-assembly-stat" "%s/assembly.yaml: %s undefined" $.path $key }}
+		    {{ end }}
+		{{ end }}
+	    </tbody>
+	</table>
+    </div>
+{{ else }}
+    {{ warnf "No assembly fields declared for section: %s" .section }}
+{{ end }}

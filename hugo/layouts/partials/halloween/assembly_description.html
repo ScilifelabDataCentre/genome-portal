@@ -1,14 +1,17 @@
-{{ $labels := dict
-"name" "Assembly Name"
-"type" "Assembly Type"
-"level" "Assembly Level"
-"repr" "Assembly Representation"
-"accession" "Accession"
-}}
-
-
-<ul style="font-size: 1.125rem;">
-    {{ range $key, $label := $labels }}
-	<li><strong>{{ $label }}: </strong> {{ index $ $key }}</li>
-    {{ end }}
-</ul>
+{{ $fields := append (or (index .fields.extra .section) slice) (index .fields.default .section) }}
+{{ $values := index .values .section }}
+{{ with $fields }}
+    <ul style="font-size: 1.125rem;">
+	{{ range $fields }}
+	    {{ $key := index . 0 }}
+	    {{ $label := or (index . 1) (replace $key "_" " " | title ) }}
+	    {{ with index $values $key }}
+		<li><strong>{{ $label }}: </strong> {{ . }}</li>
+	    {{ else }}
+		{{ warnidf "missing-assembly-meta" "%s/assembly.yaml lacks key %s" $.path $key }}
+	    {{ end }}
+	{{ end }}
+    </ul>
+{{ else }}
+    {{ warnf "No assembly fields declared for section: %s" .section }}
+{{ end }}
