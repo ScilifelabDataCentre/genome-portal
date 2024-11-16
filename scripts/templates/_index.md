@@ -14,13 +14,13 @@ img_attrib_link: "[EDIT] - if there is no hyperlink available for this file, the
 # unless you were warned by the add-new-species.py script.
 layout: "species_intro"
 banner_title: "Species overview"
-url: "SPECIES_FOLDER"
+url: "${slug}"
 weight: 1
-science_name: "SPECIES_NAME"
-lineage_data_path: "SPECIES_FOLDER/taxonomy"
+science_name: "${species_name}"
+lineage_data_path: "${slug}/taxonomy"
 
-gbif_taxon_id: "GBIF_TAXON_ID"
-goat_webpage: "GOAT_WEBPAGE"
+gbif_taxon_id: "${gbif_taxon_id}"
+goat_webpage: "${goat_webpage}"
 
 
 # Optional params below,
