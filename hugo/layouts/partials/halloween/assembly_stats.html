@@ -12,15 +12,16 @@
 	    </thead>
 	    <tbody class="table-responsive">
 		{{ range $fields }}
-		    {{ $key := index . 0 }}
-		    {{ $label := or (index . 1) (replace $key "_" " " | title ) }}
-		    {{ with index $values $key | string }}
+		    {{ $label := .key | default (replace .key "_" " " | title ) }}
+		    {{ with index $values .key | string }}
 			<tr>
 			    <td> {{ $label }} </td>
 			    <td> {{ . }} </td>
 			</tr>
 		    {{ else }}
-			{{ warnidf "missing-assembly-stat" "%s/assembly.yaml: %s undefined" $.path $key }}
+			{{ if not .optional }}
+			    {{ warnidf "missing-assembly-stat" "%s/assembly.yaml: %s undefined" $.path .key }}
+			{{ end}}
 		    {{ end }}
 		{{ end }}
 	    </tbody>

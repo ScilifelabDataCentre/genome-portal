@@ -1,30 +1,54 @@
 assembly_fields:
   description:
-    - ["name", "Assembly Name"]
-    - ["type", "Assembly Type"]
-    - ["level", "Assembly Level"]
-    - ["repr", "Assembly Representation"]
-    - ["accession"]
+    - key: name
+      label: Assembly Name
+    - key: type
+      label: Assembly Type
+    - key: level
+      label: Assembly Level
+    - key: repr
+      label: Assembly Representation
+    - key: accession
   stats:
-    - ["length",  "Assembly length (Mbp)"]
-    - ["gc", "GC %"]
-    - ["contig", "Contig #" ]
-    - ["contig_n50", "Contig N50 (Mbp)" ]
-    - ["contig_l50"]
-    - ["contig_n90", "Contig N90 (Mbp)" ]
-    - ["contig_l90"]
-    - ["scaffold", "Scaffold #"]
-    - ["scaffold_n50", "Scaffold N50 (Mbp)"]
-    - ["scaffold_l50"]
-    - ["scaffold_n90", "Scaffold N90 (Mbp)"]
-    - ["scaffold_l90"]
-    - ["scaffold_gt_10", "Scaffolds >= 10 kb"]
-    - ["busco", "BUSCO %"]
+    - key: length
+      label: "Assembly length (Mbp)"
+    - key: gc
+      label: "GC %"
+    - key: contig
+      label: "Contig #"
+    - key: contig_n50
+      label: "Contig N50 (Mbp)"
+    - key: contig_l50
+    - key: contig_n90
+      label: "Contig N90 (Mbp)"
+    - key: contig_l90
+    - key: scaffold
+      label: "Scaffold #"
+    - key: scaffold_n50
+      label: "Scaffold N50 (Mbp)"
+    - key: scaffold_l50
+    - key: scaffold_n90
+      label: Scaffold N90 (Mbp)
+    - key: scaffold_l90
+    - key: scaffold_gt_10
+      label: "Scaffolds >= 10 kb"
+    - key: busco
+      label: BUSCO %
   annotation:
-    - ["gene_cnt", "Gene #"]
-    - ["transcript_cnt", "Transcript #"]
-    - ["exons_avg", "Avg exons per transcript"]
-    - ["gene_length_avg","Avg gene length (bp)"]
-    - ["transcript_length_avg", "Avg transcript length (bp)"]
-    - ["exon_length_avg", "Avg exon length (bp)"]
-    - ["intron_length_avg", "Avg intron length (bp)"]
+    - key: gene_cnt
+      label: "Gene #"
+    - key: transcript_cnt
+      label: "Transcript #"
+    - key: exons_avg
+      label: Avg exons per transcript
+    - key: gene_length_avg
+      label: Avg gene length (bp)
+    - key: transcript_length_avg
+      label: Avg transcript length (bp)
+    - key: exon_length_avg
+      label: Avg exon length (bp)
+    - key: intron_length_avg
+      label: Avg intron length (bp)
+    - key: busco
+      label: BUSCO %
+      optional: true

@@ -3,12 +3,13 @@
 {{ with $fields }}
     <ul style="font-size: 1.125rem;">
 	{{ range $fields }}
-	    {{ $key := index . 0 }}
-	    {{ $label := or (index . 1) (replace $key "_" " " | title ) }}
-	    {{ with index $values $key }}
+	    {{ $label := .label | default (replace .key "_" " " | title ) }}
+	    {{ with index $values .key }}
 		<li><strong>{{ $label }}: </strong> {{ . }}</li>
 	    {{ else }}
-		{{ warnidf "missing-assembly-meta" "%s/assembly.yaml lacks key %s" $.path $key }}
+		{{ if not .optional }}
+		    {{ warnidf "missing-assembly-meta" "%s/assembly.yaml: %s undefined" $.path .key }}
+		{{ end }}
 	    {{ end }}
 	{{ end }}
     </ul>

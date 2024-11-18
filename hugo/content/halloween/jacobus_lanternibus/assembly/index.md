@@ -4,8 +4,10 @@ layout: assembly
 params:
   assembly_fields:
     description:
-      - ["extra_1", "Additional field"]
-      - ["extra_2", "Another Additional field"]
+      - key: extra_1
+        label: Additional field
+      - key: extra_2
+        label: Another Additional field
 ---
 
 ### Methods
