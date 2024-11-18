@@ -895,7 +895,15 @@ p + .clipboard {
   outline: 0;
 }
 
-/* Enable text wraps for citations - wont apply to code blocks.. */
+/* Differences between citation and code blocks - these wont apply to code blocks.. */
 .citation-block {
   white-space: pre-wrap;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+/* Highlighting that can be applied to version/date in citation blocks */
+.highlight {
+  background-color: var(--scilife-grape);
+  color: white;
 }

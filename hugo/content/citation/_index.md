@@ -15,7 +15,7 @@ To cite the Swedish Reference Genome Portal, please use the following:
 
 **APA format**:\
 {{< citation_block >}}
-Swedish Reference Genome Portal (access date), SciLifeLab Data Centre, version (version number) from <https://genomes.scilifelab.se>, [RRID:SCR_026008](https://rrid.site/data/record/nlx_144509-1/SCR_026008/resolver?q=rrid:scr_026008).
+Swedish Reference Genome Portal <span class="highlight">(access date)</span>, SciLifeLab Data Centre, version <span class="highlight">(version number)</span> from <https://genomes.scilifelab.se>, [RRID:SCR_026008](https://rrid.site/data/record/nlx_144509-1/SCR_026008/resolver?q=rrid:scr_026008).
 {{< /citation_block >}}
 
 Since the information on the portal is updated continuously, we ask you to specify the version number of the Genome Portal and the date you accessed it in the citation by replacing the (access date) and (version number) placeholders. You will find the version number of the portal at the bottom of the footer on any page, or on our <a target="_blank" href="https://github.com/ScilifelabDataCentre/genome-portal/">GitHub repository</a> under 'releases'.
@@ -28,7 +28,7 @@ The general pattern for citing a species page can also be filled out using the f
 
 **In-text citation (APA format)**:\
 {{< citation_block >}}
-The [_Species name_] page in the Swedish Reference Genome Portal (access date).
+The <span class="highlight">[_Species name_]</span> page in the Swedish Reference Genome Portal <span class="highlight">(access date)</span>.
 {{< /citation_block >}}
 
 where [_Species name_] is a placeholder that should be replaced with the binomial name of the species in italics, and Swedish Reference Genome Portal (access date) is the APA formatted in-text pointer to the reference stated above in [Section 1.1](#11-citing-the-genome-portal).
@@ -47,7 +47,7 @@ The Genome Portal is operated by the <a target="_blank" href="https://scilifelab
 
 **APA format:**\
 {{< citation_block >}}
-SciLifeLab Data Centre (year). genome-portal. Version: (version number) [Software]. Zenodo. <https://doi.org/10.5281/zenodo.14049736>.
+SciLifeLab Data Centre <span class="highlight">(year)</span>. genome-portal. Version: <span class="highlight">(version number)</span> [Software]. Zenodo. <https://doi.org/10.5281/zenodo.14049736>.
 {{< /citation_block >}}
 
 using the year and version number of the code release you want to cite. That information can be found on our <a target="_blank" href="https://github.com/ScilifelabDataCentre/genome-portal/">GitHub repository</a> or in our <a target="_blank" href="https://doi.org/10.5281/zenodo.14049736">Zenodo record</a>.
