@@ -1,0 +1,3 @@
+{{ $url := replace . " " "%20" | printf "https://www.ebi.ac.uk/ena/taxonomy/rest/scientific-name/%s" }}
+{{ $data := resources.GetRemote $url | transform.Unmarshal }}
+{{ return index $data 0 "taxId" }}

@@ -1,7 +1,8 @@
+{{ $scientificName := replace .File.ContentBaseName `_` ` ` | title }}
 ---
 date: {{ .Date }}
-title: '{{ replace .File.ContentBaseName `_` ` ` | title }}'
-subtitle: Species common name
+title: {{ $scientificName }}
+subtitle:
 lastmod: {{ .Date }}
 
 resources:
@@ -15,7 +16,9 @@ resources:
 layout: "species_intro"
 weight: 1
 
+{{ $taxId := partial "halloween/FetchTaxId" $scientificName }}
 params:
+  lineage: {{ partial "halloween/LineageConfig" $taxId }}
   banner_title: "Species overview"
   goat_webpage: "https://goat.genomehubs.org"
 
