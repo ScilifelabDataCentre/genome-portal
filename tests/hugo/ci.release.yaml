@@ -1,0 +1,4 @@
+params:
+  git_ref_name: v1.2.3
+  git_sha: 1234abcd
+  jbrowse_version: 3.4.6
