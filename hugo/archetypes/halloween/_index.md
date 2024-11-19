@@ -1,4 +1,5 @@
 {{ $scientificName := replace .File.ContentBaseName `_` ` ` | title }}
+---
 date: {{ .Date }}
 title: {{ $scientificName }}
 subtitle:
