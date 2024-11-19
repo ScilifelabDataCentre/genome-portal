@@ -1,0 +1,8 @@
+#!/bin/sh
+case "$1" in
+    release)
+        tag=prod;;
+    workflow_dispatch)
+        tag="$2";;
+esac
+echo "tag=${tag:-dev}"

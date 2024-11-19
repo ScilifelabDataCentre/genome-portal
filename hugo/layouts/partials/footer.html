@@ -15,7 +15,7 @@
                     <li><a href="/citation">Cite us</a></li>
                     <li><a href="/glossary">Glossary</a></li>
                     <li><a href="/user-guide">User guide</a></li>
-                    <li><a href="/terms">Terms of use</a></li>
+l                    <li><a href="/terms">Terms of use</a></li>
                     <li><a href="/privacy">Privacy policy</a></li>
                     <li><a href="/faqs">FAQ</a></li>
                 </ul>
@@ -73,15 +73,8 @@
             </div>
         </div>
 
-        <p class="mt-3 mt-xl-1 mb-0 text-start text-xl-center"> Contact: <a href="mailto:dsn-eb@scilifelab.se">dsn-eb@scilifelab.se</a></p>
-        <!-- Version number hard coded for now, will be integrated with GH actions later and link will point to release too. -->
-        {{ $versionNumb := "v1.0.0" }}
-        <p class="mt-0 mb-0 text-start text-xl-center">
-            <i> Website last updated: {{ now.Format "02 January 2006"}} </i>
-            (<a href="https://github.com/ScilifelabDataCentre/genome-portal" target="_blank" rel="noopener noreferrer">{{ $versionNumb }}</a>)
-        </p>
+        {{ partial "version_info.html" . }}
 
-        <div style="margin: 10px 0 10px 0;"></div>
     </div>
 </footer>
 
