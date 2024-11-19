@@ -1,40 +1,24 @@
 {{ $ena_url := "https://www.ebi.ac.uk/ena/browser/view/Taxon:" }}
 {{ $ncbi_url := "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=" }}
-
-{{ $order := slice
-"superkingdom"
-"kingdom"
-"phylum"
-"class"
-"order"
-"family"
-"genus"
-"species"
-}}
-
-{{/* Ranks that need special labels */}}
-{{ $labels := dict "superkingdom" "Domain"}}
-
-{{/* Ranks that need special name formatting */}}
-{{ $fmt := dict "genus" "<i>%s</i>" "species" "<i>%s</i>" }}
-
-{{ range $order }}
-    {{ $rank := . }}
+{{ range site.Params.taxonomy_ranks }}
+    {{ $rank := .key }}
+    {{/* Uppercased rank or custom label */}}
+    {{ $label := .label | default $rank | strings.FirstUpper }}
+    {{/* Optional formatting for the scientific name */}}
+    {{ $fmt := .format | default "%s" }}
     {{ with index $ $rank }}
 	<div class="row pb-1">
             <div class="col-12">
-		{{/* Uppercased rank or custom label */}}
-                <b>{{ or (index $labels $rank) $rank | strings.FirstUpper }}:</b>
+                <b>{{ $label }}:</b>
 		<a href="{{ $ena_url }}{{ .taxId }}" target="_blank">
-		    {{/* Scientific name with optional formatting */}}
-		    {{ printf (or (index $fmt $rank) "%s") .scientificName | safe.HTML }}
+		    {{ printf $fmt .scientificName | safe.HTML }}
 		</a>
             </div>
             <!-- Force next columns to break to new line -->
             <div class="w-100"></div>
         </div>
     {{ else  }}
-	{{ warnf "Missing lineage entry %s for %s" . $.species.scientificName }}
+	{{ warnf "Missing lineage entry %s for %s" $rank $.species.scientificName }}
     {{ end }}
 {{ end }}
 <div class="row pb-1 mb-3">

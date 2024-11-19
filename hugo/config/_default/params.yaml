@@ -52,3 +52,15 @@ assembly_fields:
     - key: busco
       label: BUSCO %
       optional: true
+taxonomy_ranks:
+  - key: "superkingdom"
+    label: "Domain"
+  - key: "kingdom"
+  - key: "phylum"
+  - key: "class"
+  - key: "order"
+  - key: "family"
+  - key: "genus"
+    format: "<i>%s</i>"
+  - key: "species"
+    format: "<i>%s</i>"

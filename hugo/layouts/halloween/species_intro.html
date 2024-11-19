@@ -57,12 +57,10 @@
             <!-- Lineage Info -->
             <div class="col-lg-4 col-md-12 scilife-subsection">
 		<h3>Taxonomy</h3>
-		{{ with .Resources.Get "taxonomy.xml" | transform.Unmarshal  }}
-		    {{ with partial "halloween/GetTaxonomyRanks.html" . }}
-			{{ partial "halloween/lineage.html" . }}
-		    {{ end  }}
+		{{ with .Params.lineage }}
+		    {{ partial "halloween/lineage.html" . }}
 		{{ else }}
-		    {{ errorf "Missing taxonomy file: %s/taxonomy.json" $.Path }}
+		    {{ warnidf "missing-taxonomy" "Missing taxonmomy lineage for %s" $.Path }}
 		{{ end }}
 
             </div>
