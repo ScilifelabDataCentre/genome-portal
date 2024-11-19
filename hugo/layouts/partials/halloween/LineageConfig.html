@@ -1,0 +1,10 @@
+{{- $taxId := . -}}
+{{- with resources.GetRemote (printf "https://www.ebi.ac.uk/ena/browser/api/xml/%s" $taxId) -}}
+    {{ with .Err }}
+	{{ errorf "Error fetching lineage of taxon %s: %s. Consider editing .Params.lineage" $taxId . }}
+    {{ else }}
+	{{- transform.Unmarshal . | partial "halloween/GetTaxonomyRanks" | jsonify (dict "prefix" "    " "indent" "  ") -}}
+    {{ end }}
+{{- else -}}
+    {{ warnf "Missing lineage information. Consider editing .Params.lineage" $taxId . }}
+{{- end -}}

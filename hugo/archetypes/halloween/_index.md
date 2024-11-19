@@ -1,12 +1,11 @@
 {{ $scientificName := replace .File.ContentBaseName `_` ` ` | title }}
----
 date: {{ .Date }}
 title: {{ $scientificName }}
 subtitle:
 lastmod: {{ .Date }}
 
 resources:
-  - title: '{{ replace .File.ContentBaseName `_` ` ` | title }}'
+  - title: '{{ $scientificName }}'
     name: cover_image
     src: "placeholder.png"
     params:

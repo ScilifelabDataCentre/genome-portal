@@ -1,3 +1,0 @@
-{{- $taxId := . -}}
-{{- $taxonomy := resources.GetRemote (printf "https://www.ebi.ac.uk/ena/browser/api/xml/%s" $taxId) | transform.Unmarshal -}}
-{{- partial "halloween/GetTaxonomyRanks" $taxonomy | encoding.Jsonify (dict "prefix" "    " "indent" "  ") -}}
