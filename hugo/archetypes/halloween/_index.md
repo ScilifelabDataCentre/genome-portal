@@ -24,7 +24,7 @@ taxonomy_ranks:
 params:
   banner_title: "Species overview"
   goat_webpage: "{{ printf
-  "https://goat.genomehubs.org/record?recordId=%s&result=taxon&taxonomy=ncbi"
+  'https://goat.genomehubs.org/record?recordId=%s&result=taxon&taxonomy=ncbi'
   $taxId
   }}"
 
