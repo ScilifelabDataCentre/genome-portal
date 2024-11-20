@@ -49,4 +49,4 @@ params:
 
 #### Changelog
 
-- {{ .Date | time.Format "31/10/2024" }} - Species first published on the Portal
+- {{ .Date | time.Format ":date_medium" }} - Species first published on the Portal
