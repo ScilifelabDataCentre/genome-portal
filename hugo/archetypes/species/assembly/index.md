@@ -1,6 +1,8 @@
 ---
 title: "Genome assembly"
-layout: "species_bundle/assembly"
+type: species_bundle
+layout: "assembly"
+lastmod: {{ .Date }}
 ---
 
 ### Methods

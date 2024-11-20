@@ -5,6 +5,10 @@ title: {{ $scientificName }}
 subtitle:
 lastmod: {{ .Date }}
 
+type: species_bundle
+layout: "species_intro"
+weight: 1
+
 resources:
   - title: '{{ $scientificName }}'
     name: cover_image
@@ -12,9 +16,6 @@ resources:
     params:
       attribution: CC-BY-SA
       link: "https://placehold.co/600x400/png"
-
-layout: "species_bundle/species_intro"
-weight: 1
 
 {{ $taxId := partial "species_bundle/GetTaxId" $scientificName }}
 lineage: {{ partial "species_bundle/LineageConfig" $taxId }}

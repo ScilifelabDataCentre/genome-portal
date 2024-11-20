@@ -1,6 +1,7 @@
 ---
 title: "Download"
-layout: "species_bundle/species_download"
-url: "jacobus_lanternibus/download"
+type: species_bundle
+layout: "species_download"
 weight: 3
+lastmod: {{ .Date }}
 ---
