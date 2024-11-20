@@ -1,12 +1,9 @@
 {{ $url := replace . " " "%20" | printf "https://www.ebi.ac.uk/ena/taxonomy/rest/scientific-name/%s" }}
+{{ $data := partial "halloween/get-remote-data.html" $url }}
 {{ $taxId := "" }}
-{{ with resources.GetRemote $url }}
-    {{ with .Err }}
-	{{ errorf "Error fetch ENA taxon ID for species %s: %s" $ . }}
-    {{ else }}
-	{{ $taxId = index (transform.Unmarshal .) 0 "taxId" }}
-	{{ return $taxId }}
-    {{ end }}
+{{ with index $data 0 "taxId" }}
+    {{ $taxId = . }}
 {{ else }}
-    {{ warnf "Could not find ENA taxon ID for species %s." $ }}
+    {{ warnf "Could not find ENA taxon ID for species: %s" $ }}
 {{ end }}
+{{ return $taxId }}
