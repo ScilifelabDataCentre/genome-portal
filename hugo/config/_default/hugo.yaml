@@ -12,6 +12,12 @@ markup:
     endLevel: 4
     ordered: false
 
+permalinks:
+  section:
+    species: /:sections[1:]
+  page:
+    species: /:sections[1:]/:slug
+
 menus:
   main:
   - name: Home
