@@ -1,0 +1,9 @@
+{{ $url := replace . " " "%20" | lower |  printf "https://api.gbif.org/v1/species/match?name=%s" }}
+{{ $data := partial "halloween/get-remote-data.html" $url }}
+{{ $key := "" }}
+{{ with $data.usageKey | string }}
+    {{ $key = . }}
+{{ else }}
+    {{ warnf "%s: could not find GBIF taxon key" $ }}
+{{ end }}
+{{ return $key }}

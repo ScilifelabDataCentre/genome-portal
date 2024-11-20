@@ -1,7 +1,7 @@
 {{- $taxId := . -}}
 {{- $url := printf "https://www.ebi.ac.uk/ena/browser/api/xml/%s" $taxId -}}
 {{- with partial "halloween/get-remote-data.html" $url -}}
-    {{ . | partial "halloween/GetTaxonomyRanks" | jsonify (dict "prefix" "  " "indent" "  ") }}
+    {{ . | partial "halloween/TaxonomyRanks" | jsonify (dict "prefix" "  " "indent" "  ") }}
 {{- else -}}
     {{ warnf "Missing lineage information. Consider editing .Params.lineage" $taxId . }}
 {{- end -}}
