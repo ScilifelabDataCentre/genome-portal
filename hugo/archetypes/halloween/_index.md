@@ -23,10 +23,10 @@ lineage: {{ partial "halloween/LineageConfig" $taxId }}
 taxonomy_ranks:
 params:
   banner_title: "Species overview"
-  goat_webpage: "{{ printf
-  'https://goat.genomehubs.org/record?recordId=%s&result=taxon&taxonomy=ncbi'
+  goat_webpage: '{{ printf
+  "https://goat.genomehubs.org/record?recordId=%s&result=taxon&taxonomy=ncbi"
   $taxId
-  }}"
+  }}'
 
   # Map
   gbif_taxon_id: {{ partial "halloween/GetGbifKey.html" $scientificName }}
@@ -43,12 +43,10 @@ params:
 
 ### Description
 
-Write some content here in markdown for the introduction tab of the species page.
-
 #### Genome reference
 
 #### References
 
 #### Changelog
 
-- 31/10/2024 - Species first published on the Portal
+- {{ .Date | time.Format "31/10/2024" }} - Species first published on the Portal
