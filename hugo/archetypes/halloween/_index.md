@@ -30,9 +30,9 @@ params:
 
   # Map
   gbif_taxon_id: {{ partial "halloween/GetGbifKey.html" $scientificName }}
-  latitude: 60
-  longitude: -40
-  initialZoom: 1.5
+  latitude: 0
+  longitude: 0
+  initialZoom: 1
 
   # Optional
   iucn_category:
