@@ -1,9 +1,9 @@
 description:
-  name: "Jaco_Lant"
-  type: "Spectroid"
-  level: "Underwordly"
-  repr: "Partially obscure"
-  accession: "GCA_666"
+  name:
+  type:
+  level:
+  repr:
+  accession:
 stats:
   length:
   gc:
