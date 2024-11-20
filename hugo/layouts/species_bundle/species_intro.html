@@ -63,7 +63,7 @@
 		    "lineage" .
 		    "taxonomy_ranks" (or $.Page.Params.taxonomy_ranks $.Site.Params.taxonomy_ranks)
 		    }}
-		    {{ partial "halloween/lineage.html" $context }}
+		    {{ partial "species_bundle/lineage.html" $context }}
 		{{ else }}
 		    {{ warnidf "missing-taxonomy" "Missing taxonmomy lineage for %s" .Path }}
 		{{ end }}

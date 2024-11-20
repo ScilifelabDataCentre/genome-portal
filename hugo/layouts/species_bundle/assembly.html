@@ -22,7 +22,7 @@
 		<div class="col-md scilife-subsection">
 		    <h3>Description</h3>
 		    {{ $context = (merge $context (dict "section" "description")) }}
-		    {{ partial "halloween/assembly_description.html" $context }}
+		    {{ partial "species_bundle/assembly_description.html" $context }}
 		</div>
 		<div class="col-md scilife-subsection text-md-center">
 		    <div class="mb-3">
@@ -55,14 +55,14 @@
 		<div class="col scilife-subsection">
 		    <h3>Assembly Statistics</h3>
 		    {{ $context = merge $context (dict "section" "stats") }}
-		    {{ partial "halloween/assembly_stats.html" $context }}
+		    {{ partial "species_bundle/assembly_stats.html" $context }}
 		</div>
 
 		<!-- annotation data table -->
 		<div class="col scilife-subsection">
 		    <h3> Annotation Statistics</h3>
 		    {{ $context = merge $context (dict "section" "annotation") }}
-		    {{ partial "halloween/assembly_stats.html" $context }}
+		    {{ partial "species_bundle/assembly_stats.html" $context }}
 		</div>
 
 	    </div>

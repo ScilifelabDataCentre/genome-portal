@@ -1,6 +1,6 @@
 ---
 title: "Genome assembly"
-layout: assembly
+layout: "species_bundle/assembly"
 ---
 
 ### Methods
