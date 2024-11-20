@@ -58,9 +58,14 @@
             <div class="col-lg-4 col-md-12 scilife-subsection">
 		<h3>Taxonomy</h3>
 		{{ with .Params.lineage }}
-		    {{ partial "halloween/lineage.html" . }}
+		    {{ $context := dict
+		    "path" $.Path
+		    "lineage" .
+		    "taxonomy_ranks" (or $.Page.Params.taxonomy_ranks $.Site.Params.taxonomy_ranks)
+		    }}
+		    {{ partial "halloween/lineage.html" $context }}
 		{{ else }}
-		    {{ warnidf "missing-taxonomy" "Missing taxonmomy lineage for %s" $.Path }}
+		    {{ warnidf "missing-taxonomy" "Missing taxonmomy lineage for %s" .Path }}
 		{{ end }}
 
             </div>

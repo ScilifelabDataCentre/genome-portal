@@ -1,12 +1,15 @@
+{{ $path := .path }}
+{{ $lineage := .lineage }}
+{{ $ranks := .taxonomy_ranks }}
 {{ $ena_url := "https://www.ebi.ac.uk/ena/browser/view/Taxon:" }}
 {{ $ncbi_url := "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=" }}
-{{ range site.Params.taxonomy_ranks }}
+{{ range $ranks }}
     {{ $rank := .key }}
     {{/* Uppercased rank or custom label */}}
     {{ $label := .label | default $rank | strings.FirstUpper }}
     {{/* Optional formatting for the scientific name */}}
     {{ $fmt := .format | default "%s" }}
-    {{ with index $ $rank }}
+    {{ with index $lineage $rank }}
 	<div class="row pb-1">
             <div class="col-12">
                 <b>{{ $label }}:</b>
@@ -18,14 +21,14 @@
             <div class="w-100"></div>
         </div>
     {{ else  }}
-	{{ warnf "Missing lineage entry %s for %s" $rank $.species.scientificName }}
+	{{ warnf "%s: missing lineage entry %s" $path $rank }}
     {{ end }}
 {{ end }}
 <div class="row pb-1 mb-3">
     <div class="col-12">
         <b>NCBI Taxonomy ID:</b>
-        <a href="{{ $ncbi_url }}{{ .species.taxId }}" target="_blank">
-	    {{ .species.taxId }}
+        <a href="{{ $ncbi_url }}{{ $lineage.species.taxId }}" target="_blank">
+	    {{ $lineage.species.taxId }}
         </a>
     </div>
 </div>

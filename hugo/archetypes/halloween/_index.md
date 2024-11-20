@@ -17,8 +17,11 @@ layout: "species_intro"
 weight: 1
 
 {{ $taxId := partial "halloween/FetchTaxId" $scientificName }}
+lineage: {{ partial "halloween/LineageConfig" $taxId }}
+# Use this setting to override the default taxonomy ranks to display.
+# See config/_default/params.yaml for the syntax to use.
+taxonomy_ranks:
 params:
-  lineage: {{ partial "halloween/LineageConfig" $taxId }}
   banner_title: "Species overview"
   goat_webpage: "https://goat.genomehubs.org"
 
