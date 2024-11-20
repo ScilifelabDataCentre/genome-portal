@@ -1,4 +1,4 @@
-{{ $scientificName := replace .File.ContentBaseName `_` ` ` | title }}
+{{ $scientificName := replace .File.ContentBaseName `_` ` ` | strings.FirstUpper }}
 ---
 date: {{ .Date }}
 title: {{ $scientificName }}
