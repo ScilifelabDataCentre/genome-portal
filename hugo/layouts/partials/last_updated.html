@@ -1,5 +1,10 @@
+{{ $lastUpdated := .Params.last_updated }}
+{{ if not (or .IsHome .IsSection) }}
+    {{ $lastUpdated = .Parent.Params.last_updated }}
+{{ end }}
+
 <div>
     <p class="last-updated_text">
-        Page last updated: {{ .Lastmod | time.Format ":date_long"}}
+        Page last updated: {{ $lastUpdated }}
     </p>
 </div>
