@@ -5,6 +5,10 @@ title: {{ $scientificName }}
 subtitle:
 lastmod: {{ .Date }}
 
+draft: true
+cascade:
+  params:
+    draft: true
 type: species_bundle
 layout: "species_intro"
 weight: 1
