@@ -35,3 +35,5 @@ Otherwise, rendered as regular code block.
 {{ else }}
     <pre><code>{{ $content }}</code></pre>
 {{ end }}
+
+{{ .Page.Store.Set "needsClipboardJS" true }}
