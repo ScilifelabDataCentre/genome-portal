@@ -1,0 +1,3 @@
+permalinks:
+  page:
+    species_bundle: /:sections[1:]/:slug

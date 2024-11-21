@@ -12,11 +12,9 @@ markup:
     endLevel: 4
     ordered: false
 
-permalinks:
-  section:
-    species: /:sections[1:]
-  page:
-    species: /:sections[1:]/:slug
+module:
+  imports:
+    - path: genome-portal-kit
 
 menus:
   main:
