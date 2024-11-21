@@ -10,7 +10,7 @@ cascade:
   params:
     draft: true
 type: species_bundle
-layout: "species_intro"
+layout: intro
 weight: 1
 
 resources:

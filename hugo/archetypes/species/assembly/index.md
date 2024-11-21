@@ -1,7 +1,7 @@
 ---
 title: "Genome assembly"
 type: species_bundle
-layout: "assembly"
+layout: assembly
 lastmod: {{ .Date }}
 ---
 
