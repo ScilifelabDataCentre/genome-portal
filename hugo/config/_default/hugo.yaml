@@ -20,18 +20,55 @@ permalinks:
 
 menus:
   main:
+  - name: About
+    pageRef: /about
+    weight: 1
+  - name: Contact
+    pageRef: /contact
+    weight: 2
+  - name: FAQ
+    pageRef: /faqs
+    weight: 3
+  - name: Cite us
+    pageRef: /citation
+    weight: 4
+
+  sub:
   - name: Home
     pageRef: /
     weight: 1
   - name: Contribute
     pageRef: /contribute
     weight: 2
-  - name: About
-    pageRef: /about
+  - name: User guide
+    pageRef: /user-guide
     weight: 3
   - name: Glossary
     pageRef: /glossary
     weight: 4
-  - name: Contact
-    pageRef: /contact
-    weight: 5
+
+  mobile:
+    - name: Home
+      pageRef: /
+      weight: 1
+    - name: About
+      pageRef: /about
+      weight: 2
+    - name: Contact
+      pageRef: /contact
+      weight: 3
+    - name: Contribute
+      pageRef: /contribute
+      weight: 4
+    - name: User guide
+      pageRef: /user-guide
+      weight: 5
+    - name: Glossary
+      pageRef: /glossary
+      weight: 6
+    - name: Cite us
+      pageRef: /citation
+      weight: 7
+    - name: FAQ
+      pageRef: /faqs
+      weight: 8

@@ -18,8 +18,6 @@ stats_data_path: "littorina_saxatilis/species_stats"
 lineage_data_path: "littorina_saxatilis/taxonomy"
 ---
 
-|||||| Content divider - do not remove ||||||
-
 Notes: Assembly statistics were calculated for the primary genome assembly GCA_037325665.1. Busco statistics were taken from Supplemental Table S1 in De Jode et al. (2024). Annotation statistics were calculated using GCA_037325665.1_US_GU_Lsax_2.0_genomic.gff.gz.
 
 BUSCO notation: C: Complete; S: Single-copy; D: Duplicated; F: Fragmented; M: Missing; n: Total BUSCO genes included in the dataset (here: mollusca_odb10). See also [the official BUSCO manual](https://busco.ezlab.org/busco_userguide.html#interpreting-the-results).

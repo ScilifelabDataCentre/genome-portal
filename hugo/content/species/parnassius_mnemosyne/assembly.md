@@ -18,8 +18,6 @@ stats_data_path: "parnassius_mnemosyne/species_stats"
 lineage_data_path: "parnassius_mnemosyne/taxonomy"
 ---
 
-|||||| Content divider - do not remove ||||||
-
 Notes: Assembly statistics and BUSCO percentages were calculated for the primary genome assembly GCA_963668995.1, which does not include the mitochondrial assembly (OZ075093.1). Annotation statistics were calculated using pmne_functional_edit1.gff.gz, which is the orignal version of the protein-coding genes annotation and was the version that was used for the submission to ENA.
 
 BUSCO notation: C: Complete; S: Single-copy; D: Duplicated; F: Fragmented; M: Missing; n: Total BUSCO genes included in the dataset (here: lepidoptera_odb10). See also [the official BUSCO manual](https://busco.ezlab.org/busco_userguide.html#interpreting-the-results).

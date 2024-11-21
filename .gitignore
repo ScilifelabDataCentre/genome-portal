@@ -29,6 +29,7 @@ scripts/data_stewardship/*.agat.log
 # python 
 __pycache__/
 *.py[cod]
+.venv
 
 # vscode
 .vscode/

@@ -1,7 +1,7 @@
 [
   {
     "dataTrackName": "Genome",
-    "description": "Reference genome sequence",
+    "description": "Reference genome sequence from ENA",
     "links": [
       {"Download": "https://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/cax/CAXKWB01.fasta.gz"},
       {"Website": "https://www.ebi.ac.uk/ena/browser/view/GCA_964058975.1"},
@@ -15,8 +15,8 @@
     "firstDateOnPortal": "15 October 2024"
   },
   {
-    "dataTrackName": "Protein coding genes",
-    "description": "Functional annotation of protein-coding genes with non-redundant isoforms. Missing stop-codons have been added if detected in the reference genome assembly ",
+    "dataTrackName": "Protein-coding genes (research group's version, used on the Genome Portal)",
+    "description": "Functional annotation of protein-coding genes with non-redundant isoforms. Missing stop-codons have been added if detected in the reference genome assembly",
     "links": [
       {"Download": "https://figshare.scilifelab.se/ndownloader/files/40569599"},
       {"Website": "https://doi.org/10.17044/scilifelab.22786925.v1"},
@@ -28,5 +28,49 @@
     "principalInvestigator": "Andreas Wallberg",
     "principalInvestigatorAffiliation": "Uppsala University",
     "firstDateOnPortal": "15 October 2024"
+  },
+  {
+    "dataTrackName": "Protein-coding genes (NCBI version, currently not displayed in the Genome Portal)",
+    "description": "Functional annotation of protein-coding genes with non-redundant isoforms. Missing stop-codons have been added if detected in the reference genome assembly",
+    "links": [
+      {"Download": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/964/058/975/GCA_964058975.1_Mnor_HA_v2/GCA_964058975.1_Mnor_HA_v2_genomic.gff.gz"},
+      {"Website": "https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_964058975.1/"},
+      {"Article": "https://doi.org/10.1038/s41467-024-50239-7"}
+    ],
+    "accessionOrDOI": "GCA_964058975.1",
+    "fileName": "GCA_964058975.1_Mnor_HA_v2_genomic.gff.gz",
+    "submitterName": "Andreas Wallberg",
+    "principalInvestigator": "Andreas Wallberg",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "31 October 2024"
+  },
+  {
+    "dataTrackName": "Genetic variation (currently not displayed in the Genome Portal)",
+    "description": "VCF file with 760 million SNPs",
+    "links": [
+      {"Download": "https://ftp.sra.ebi.ac.uk/vol1/analysis/ERZ247/ERZ24798783/m_norvegica.variation.vcf.gz"},
+      {"Website": "https://www.ebi.ac.uk/ena/browser/view/PRJEB77093"},
+      {"Article": "https://doi.org/10.1038/s41467-024-50239-7"}
+    ],
+    "accessionOrDOI": "PRJEB77093",
+    "fileName": "m_norvegica.variation.vcf.gz",
+    "submitterName": "Andreas Wallberg",
+    "principalInvestigator": "Andreas Wallberg",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "5 November 2024"
+  },
+  {
+    "dataTrackName": "Other genomic resources (currently not displayed in the Genome Portal)",
+    "description": "Reference genome sequence and annotations at the SciLifeLab Data Repository. These data and annotations include genes, transposable elements, DNA methylation, genetic variation data and other elements based on the original sequence names used in the article.",
+    "links": [
+      {"Website": "https://doi.org/10.17044/scilifelab.c.6626216"},
+      {"Article": "https://doi.org/10.1038/s41467-024-50239-7"}
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.c.6626216",
+    "fileName": "Several different files, please see the linked website for more information",
+    "submitterName": "Andreas Wallberg",
+    "principalInvestigator": "Andreas Wallberg",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "5 November 2024"
   }
 ]

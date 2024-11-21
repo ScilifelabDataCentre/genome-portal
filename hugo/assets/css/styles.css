@@ -187,72 +187,122 @@ body {
 }
 
 
-.navbar-nav .nav-item {
-  margin-right: 0.3rem;
+.navbar-brand {
+  padding-top: auto;
+  padding-bottom: 0;
 }
 
 .navbar-nav .nav-item:last-child {
   margin-right: 0;
 }
 
-.scilife-navbar {
+.scilife-navbar-main .nav-item {
+  margin-right: 0.1rem;
+}
+
+.scilife-navbar-sub .nav-item {
+  margin-right: 0.3rem;
+}
+
+
+
+
+.scilife-navbar-main li a {
+  color: var(--scilife-contrast-okay-grey);
+}
+
+.scilife-navbar-sub li a {
+  color: var(--scilife-teal-075);
+}
+
+.scilife-navbar-main {
   font-weight: 400;
-  letter-spacing: 0.045rem;
+  letter-spacing: 0.04rem;
+  font-size: 1.1rem;
 }
 
-.scilife-navbar li a {
-  color: var(--scilife-contrast-okay-grey);;
+.scilife-navbar-sub {
+  font-weight: 400;
+  letter-spacing: 0.04rem;
+  font-size: 1.1rem;
 }
 
-.scilife-navbar-logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.scilife-navbar-main .navbar-nav {
+  --bs-nav-link-padding-y: 0.2rem;
 }
 
+.scilife-navbar-sub .navbar-nav {
+  --bs-nav-link-padding-y: 0.2rem;
+}
 
 @media (max-width: 767px) {
   .scilife-navbar-logo {
-      height: 1.5rem;
+      height:  1.5rem;
   }
-  .scilife-navbar {
-    font-size: 1.2rem;
+  .scilife-navbar-sub li a {
+    color: var(--scilife-contrast-okay-grey);
   }
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
   .scilife-navbar-logo {
-      height: 2rem;
+      height: 1.7rem;
   }
-  .scilife-navbar {
-    font-size: 1.3rem;
+  .scilife-navbar-sub li a {
+    color: var(--scilife-contrast-okay-grey);
   }
 }
 
 
 @media (min-width: 992px) and (max-width: 1199px) {
   .scilife-navbar-logo {
-      height: 1.5rem;
+      height:  1.4rem;
   }
-  .scilife-navbar {
-    font-size: 1.3rem;
+  .scilife-navbar-main {
+    font-size: 1.05rem;
+  }
+  .scilife-navbar-sub {
+    font-size: 1.2rem;
+  }
+  .scilife-navbar-sub .navbar-nav {
+    --bs-nav-link-padding-y: 0;
   }
 }
 
-
-@media (min-width: 1200px) {
+@media (min-width: 1200px) and (max-width: 1399px)  {
   .scilife-navbar-logo {
-      height: 2rem;
+      height: 1.8rem;
   }
-  .scilife-navbar {
-    font-size: 1.5rem;
+  .scilife-navbar-main {
+    font-size: 1.15rem;
+  }
+  .scilife-navbar-sub {
+    font-size: 1.35rem;
+  }
+  .scilife-navbar-sub .navbar-nav {
+    --bs-nav-link-padding-y: 0;
+  }
+}
+
+@media (min-width: 1400px) {
+  .scilife-navbar-logo {
+      height: 2.3rem;
+  }
+  .scilife-navbar-main {
+    font-size: 1.25rem;
+  }
+  .scilife-navbar-sub {
+    font-size: 1.45rem;
+  }
+  .scilife-navbar-sub .navbar-nav {
+    --bs-nav-link-padding-y: 0;
   }
 }
 
 .scilife-footer-text a {
   color: var(--scilife-teal);
-  font-size: 1.05rem;
-  font-weight: 600;
+  font-size: 1.00rem;
+  font-weight: 500;
   letter-spacing: 0.045rem;
   text-decoration: none;
 }
@@ -733,18 +783,6 @@ body {
 /* footer images */
 .scilife-footer-img {
   max-width: 150px;
-}
-
-@media (min-width: 992px) {
-  .scilife-footer-img {
-    max-width: 75px;
-  }
-}
-
-@media (min-width: 1100px) {
-  .scilife-footer-img {
-    max-width: 90px;
-  }
 }
 
 @media (min-width: 1200px) {

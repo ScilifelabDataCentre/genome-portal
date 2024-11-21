@@ -18,8 +18,6 @@ stats_data_path: "${slug}/species_stats"
 lineage_data_path: "${slug}/taxonomy"
 ---
 
-|||||| Content divider - do not remove ||||||
-
 ### Contributor(s)
 
 - [EDIT, Add information about provider and the research group that published the genome and data tracks]

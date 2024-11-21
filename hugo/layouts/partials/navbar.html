@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg">
-    <div class="container">
+    <div class="container my-2">
 
         <!-- aria-hidden set to prevent 2 homepage links in a row for screen readers -->
         <a class="navbar-brand" href="/" aria-hidden="true">
@@ -7,19 +7,44 @@
                 alt="The DDLS Evolution and Biodiveristy node's logo">
         </a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        <button class="navbar-toggler my-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse scilife-navbar" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto">
-                {{ range .Site.Menus.main }}
+        <!-- First 2 navbars show up on lg screens, mobile navbar shows up for smaller screens -->
+        <div class="d-flex align-items-start align-items-lg-end flex-column collapse navbar-collapse borders">
+
+            <div class="collapse navbar-collapse scilife-navbar-main" id="navbarSupportedContent">
+                <ul class="navbar-nav d-none d-lg-flex">
+                    {{ range .Site.Menus.main }}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ .URL }}">{{ .Name }}</a>
+                        </li>
+                    {{ end }}
+                </ul>
+            </div>
+
+            <div class="collapse navbar-collapse scilife-navbar-sub mb-0" id="navbarSupportedContent">
+                <ul class="navbar-nav d-none d-lg-flex">
+                    {{ range .Site.Menus.sub }}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ .URL }}">{{ .Name }}</a>
+                        </li>
+                    {{ end }}
+                </ul>
+            </div>
+
+            <div class="collapse navbar-collapse scilife-navbar-main" id="navbarSupportedContent">
+                <ul class="navbar-nav d-lg-none">
+                    {{ range .Site.Menus.mobile }}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ .URL }}">{{ .Name }}</a>
                     </li>
-                {{ end }}
-            </ul>
+                    {{ end }}
+                </ul>
+            </div>
+
         </div>
     </div>
 </nav>

@@ -3,12 +3,10 @@ name: Run pre-commit checks
 on:
   push:
     branches:
-      - prod # Branch to be deployed in production, through builds tagged prod
-      - main # Branch to be deployed in development, through builds tagged dev 
+      - main 
   pull_request:
     branches:
-      - prod # Branch to be deployed in production, through builds tagged prod
-      - main # Branch to be deployed in development, through builds tagged dev 
+      - main 
 
 jobs:
   pre_commit:
