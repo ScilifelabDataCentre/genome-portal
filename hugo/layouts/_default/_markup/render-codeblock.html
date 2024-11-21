@@ -1,0 +1,44 @@
+<!-- Creates a copy to clipboard button above each code block that switches between a copy and copied state
+by controlling the buttons visibility with js.
+If code block marked as citation style, placeholders inside the citation text will be replaced and
+the code block will be styled as a citation block.
+Otherwise, rendered as regular code block.
+-->
+
+{{- $content := .Inner | safeHTML -}}
+{{- $style := index .Attributes "style" | default "code" -}}
+
+<div class="clipboard">
+    <button id="copy-button" class="clipboard-button" type="button">
+        <span>Copy </span>
+        <img class="clipboard-icon" src="/img/icons/copy.svg" alt="Copy to clipboard icon">
+    </button>
+    <button id="copied-button" class="clipboard-button" type="button" style="display: none;">
+        <span>Copied </span>
+        <img class="clipboard-icon" src="/img/icons/check.svg" alt="Copy to clipboard icon">
+    </button>
+</div>
+
+
+{{ if eq $style "citation" }}
+    {{ $year := now.Year }}
+    {{ $date := now.Format "January 2, 2006" }}
+
+    <!-- get the version number if prod build or set to X.X.X. if not -->
+    {{ $version := partial "GetVersion.html" }}
+    {{ $portalVersion := "X.X.X" }}
+    {{ if $version.tag }}
+        {{ $portalVersion = index $version "tag" }}
+        {{ $portalVersion = replace $portalVersion "v" "" }}
+    {{ end }}
+
+    <!-- can't pipe the replace command, hence multiline-->
+    {{ $content := replace $content "DATE_ACCESSED" $date }}
+    {{ $content := replace $content "YEAR" $year }}
+    {{ $content := replace $content "VERSION_NUMBER" $portalVersion }}
+
+    <pre class="citation-block"><code>{{- strings.TrimSpace $content | markdownify -}}</code></pre>
+
+{{ else }}
+    <pre><code>{{ $content }}</code></pre>
+{{ end }}

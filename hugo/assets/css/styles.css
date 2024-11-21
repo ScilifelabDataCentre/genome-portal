@@ -880,16 +880,10 @@ p + .clipboard {
   font-size: 0.8rem;
   transition: 0.1s;
 }
-.clipboard-button > svg {
-  fill: var(--scilife-dark-grey);
-  font-size: 0.8rem;
-}
+
 .clipboard-button:hover {
   cursor: pointer;
   background-color: #e0e0e0;
-}
-.clipboard-button:hover > svg {
-  fill: #696969;
 }
 .clipboard-button:focus {
   outline: 0;
