@@ -7,12 +7,8 @@ Places to fill in will be marked with: "[EDIT]"
 """
 
 import argparse
-import logging
-import re
 import shutil
-from collections import defaultdict
 from pathlib import Path
-from string import Template
 
 import requests
 from get_taxonomy import EbiRestException, get_taxonomy
@@ -77,47 +73,42 @@ def create_dirs(dir_name: str) -> tuple[Path, Path, Path]:
     return content_dir_path, data_dir_path, assets_dir_path
 
 
-def slugify(name):
-    return re.sub(r"\s+", "_", name)
-
-
-def get_template_context(species_name: str, tax_id: str | None = None) -> dict:
-    ctxt = defaultdict(
-        lambda: "[EDIT]",
-        species_name=species_name,
-        slug=slugify(species_name),
-    )
-    try:
-        ctxt["gbif_taxon_key"] = get_gbif_taxon_key(species_name)
-    except (requests.HTTPError, KeyError):
-        logging.warn("Failed to get GBIF key for species: %s", species_name)
-    if tax_id:
-        ctxt["goat_link"] = make_goat_weblink(species_name=species_name, tax_id=tax_id)
-    return ctxt
-
-
-def render(template_str, context):
-    return Template(template_str).substitute(context)
-
-
-def load_template(template_name):
-    try:
-        return (TEMPLATE_DIR / template_name).read_text()
-    except IOError:
-        raise ValueError(f"Template not found: {template_name}") from None
-
-
 def add_content_files(species_name: str, content_dir_path: Path, tax_id: str) -> None:
     """
     Add the species name to the template content files,
     then write them to disk.
     """
-    ctxt = get_template_context(species_name, tax_id)
+    dir_name = species_name.replace(" ", "_").lower()
     for file_name in CONTENT_FILES:
-        template_str = load_template(file_name)
-        content = render(template_str, ctxt)
-        (out_file := content_dir_path / file_name).write_text(content)
-        logging.info("File created: %s", out_file.resolve())
+        with open(TEMPLATE_DIR / file_name, "r") as file_in:
+            template = file_in.read()
+
+        template = template.replace("SPECIES_NAME", species_name)
+        template = template.replace("SPECIES_FOLDER", dir_name)
+
+        if file_name == INDEX_FILE:
+            try:
+                gbif_taxon_key = get_gbif_taxon_key(species_name=species_name)
+                template = template.replace("GBIF_TAXON_ID", gbif_taxon_key)
+            except (requests.exceptions.HTTPError, KeyError):
+                print(
+                    f"""WARNING: Failed to get GBIF key for species: {args.species_name}.
+                    Not to worry,
+                    you can instead add it manually to the _index.md file in the species directory."""
+                )
+                template = template.replace("GBIF_TAXON_ID", "[EDIT]")
+
+            if tax_id:
+                goat_link = make_goat_weblink(species_name=species_name, tax_id=tax_id)
+                template = template.replace("GOAT_WEBPAGE", goat_link)
+            else:
+                template = template.replace("GOAT_WEBPAGE", "[EDIT]")
+
+        output_file_path = content_dir_path / file_name
+
+        with open(output_file_path, "w") as file_out:
+            file_out.write(template)
+        print(f"File created: {output_file_path.resolve()}")
 
 
 def add_stats_file(data_dir_path: Path) -> None:
