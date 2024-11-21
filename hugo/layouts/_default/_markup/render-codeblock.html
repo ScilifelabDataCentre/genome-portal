@@ -19,26 +19,19 @@ Otherwise, rendered as regular code block.
     </button>
 </div>
 
-
 {{ if eq $style "citation" }}
     {{ $year := now.Year }}
     {{ $date := now.Format "January 2, 2006" }}
 
-    <!-- get the version number if prod build or set to X.X.X. if not -->
+    <!-- Replace citation text placeholders -->
     {{ $version := partial "GetVersion.html" }}
-    {{ $portalVersion := "X.X.X" }}
-    {{ if $version.tag }}
-        {{ $portalVersion = index $version "tag" }}
-        {{ $portalVersion = replace $portalVersion "v" "" }}
-    {{ end }}
+    {{ $portalVersion := $version.tag | default "X.X.X" | strings.TrimPrefix "v" }}
 
-    <!-- can't pipe the replace command, hence multiline-->
     {{ $content := replace $content "DATE_ACCESSED" $date }}
     {{ $content := replace $content "YEAR" $year }}
     {{ $content := replace $content "VERSION_NUMBER" $portalVersion }}
 
     <pre class="citation-block"><code>{{- strings.TrimSpace $content | markdownify -}}</code></pre>
-
 {{ else }}
     <pre><code>{{ $content }}</code></pre>
 {{ end }}
