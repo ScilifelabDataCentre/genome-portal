@@ -4,7 +4,7 @@ ARG JBROWSE_VERSION=2.15.4
 # Stage 1: Download HUGO + build static site. 
 FROM alpine:latest AS build
 
-ARG HUGO_VERSION=0.128.2
+ARG HUGO_VERSION=0.138.0
 ARG JBROWSE_VERSION
 
 RUN apk add --no-cache wget

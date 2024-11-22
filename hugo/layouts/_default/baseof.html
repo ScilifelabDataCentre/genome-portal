@@ -93,5 +93,10 @@
             <div style="margin: 10px 0 10px 0;"></div>
             {{- partial "footer.html" . -}}
         {{ end }}
+
+    {{ if .Store.Get "needsClipboardJS" }}
+        {{ $clipboardJS := resources.Get "js/clipboard.js" | fingerprint }}
+        <script src="{{ $clipboardJS.RelPermalink }}"></script>
+    {{ end }}
     </body>
 </html>
