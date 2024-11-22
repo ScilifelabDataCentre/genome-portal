@@ -40,7 +40,7 @@ where [_Species name_] is a placeholder that should be replaced with the binomia
 Researchers who have submitted their data to the Genome Portal may want to include the following text in the Data Availability statement in their research manuscript(s).
 
 ```{style=citation}
-Visualisations of the genome assembly and annotation tracks from this publication can be found in the Swedish Reference Genome Portal (DATE_ACCESSED) at <https://genomes.scilifelab.se/[species_name]>.
+Visualisations of the genome assembly and annotation tracks from this publication can be found in the Swedish Reference Genome Portal (Retrieved DATE_ACCESSED) at <https://genomes.scilifelab.se/[species_name]>.
 ```
 
 where [species_name] should be replaced with the binomial name of the species in lower case letters and an underscore, and Swedish Reference Genome Portal with the access date provided is the APA formatted in-text pointer to the reference stated above in [Section 1.1](#11-citing-the-genome-portal).
