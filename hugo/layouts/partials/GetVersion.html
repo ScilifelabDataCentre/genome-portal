@@ -1,0 +1,11 @@
+{{ $result := newScratch }}
+{{ with getenv "HUGO_GIT_REF_NAME" | default site.Params.git_ref_name }}
+    {{ $result.Set "ref_name" . }}
+    {{ $result.Set "sha" (getenv "HUGO_GIT_SHA" | default site.Params.git_sha | default "") }}
+    {{ with findRE `v\d+(\.\d+){2}` . }}
+	{{ $result.Set "tag" (index . 0) }}
+    {{ end }}
+{{ else }}
+    {{ warnidf "missing-version" "Unable to get site version: set HUGO_GIT_REF_NAME or site.Params.git_ref_name" }}
+{{ end }}
+{{ return $result.Values }}

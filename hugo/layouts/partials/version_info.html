@@ -1,0 +1,35 @@
+<!--
+This partial generates version information for both the genome-portal and JBrowse which is displayed in the footer of each page.
+
+Version is extracted from HUGO_GIT_REF_NAME environment variable, falling back on HUGO_GIT_SHA for an exact commit reference.
+-->
+
+{{ $githubURL := "https://github.com/ScilifelabDataCentre/genome-portal" }}
+{{ $portalHref := "" }}
+{{ $hrefText := "" }}
+
+
+{{ $version := partial "GetVersion.html" }}
+<!-- Production release -->
+{{ if $version.tag }}
+    {{ $portalHref = printf "%s/releases/tag/%s" $githubURL $version.tag }}
+    {{ $hrefText = $version.tag }}
+<!-- Development build -->
+{{ else }}
+    {{ $portalHref = printf "%s/commit/%s" $githubURL $version.sha }}
+    {{ $hrefText = printf "%s@%s" $version.ref_name (substr $version.sha 0 7) }}
+{{ end }}
+
+<!-- Portal version info -->
+<p class="mt-3 mt-xl-0 mb-0 text-start text-lg-center">
+    <i> Website last updated: {{ now.Format "02 January 2006"}} </i>
+    (<a href="{{ $portalHref }}" target="_blank" rel="noopener noreferrer">{{ $hrefText }}</a>)
+</p>
+
+{{ $jBrowseVersion := partial "GetJBrowseVersion.html" }}
+{{ $jBrowseHref := printf "https://github.com/GMOD/jbrowse-components/releases/tag/v%s" $jBrowseVersion }}
+<p class="mt-0 mb-3 text-start text-lg-center">
+    <i> JBrowse version used:
+        <a href="{{ $jBrowseHref }}" target="_blank" rel="noopener noreferrer">{{ $jBrowseVersion }}</a>
+    </i>
+</p>
