@@ -11,11 +11,11 @@ Otherwise, rendered as regular code block.
 {{- $style := index .Attributes "style" | default "code" -}}
 
 <div class="clipboard">
-    <button id="copy-button" class="clipboard-button" type="button">
+    <button class="clipboard-button copy-button" type="button">
         <span>Copy </span>
         <img class="clipboard-icon" src="/img/icons/copy.svg" alt="Copy to clipboard icon">
     </button>
-    <button id="copied-button" class="clipboard-button" type="button" style="display: none;">
+    <button class="clipboard-button copied-button" type="button" style="display: none;">
         <span>Copied </span>
         <img class="clipboard-icon" src="/img/icons/check.svg" alt="Copy to clipboard icon">
     </button>

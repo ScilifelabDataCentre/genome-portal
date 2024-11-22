@@ -3,8 +3,10 @@
 Adapted from https://logfetch.com/hugo-add-copy-to-clipboard-button/
 */
 
+const clipboard = navigator.clipboard;
+
 // on click swap the copy button with the copied button for a few seconds
-const handleButtonClick = (copyButton, copiedButton, codeBlock, clipboard) => {
+const handleButtonClick = (copyButton, copiedButton, codeBlock) => {
     clipboard.writeText(codeBlock.innerText).then(
         () => {
             copyButton.style.display = 'none';
@@ -21,25 +23,18 @@ const handleButtonClick = (copyButton, copiedButton, codeBlock, clipboard) => {
     );
 };
 
-// create the copy to clipboard button above the code/citation block
-const createClipboard = (codeBlock, clipboard) => {
-    const copyButton = container.querySelector('#copy-button');
-    const copiedButton = container.querySelector('#copied-button');
-    copyButton.addEventListener('click', () => handleButtonClick(copyButton, copiedButton, codeBlock, clipboard));
-    return container;
-};
 
 // attach event listeners to the existing clipboard buttons
-const attachClipboardListeners = (clipboard) => {
+const attachClipboardListeners = () => {
     document.querySelectorAll(".clipboard").forEach((clipboardContainer) => {
-        const copyButton = clipboardContainer.querySelector('#copy-button');
-        const copiedButton = clipboardContainer.querySelector('#copied-button');
+        const copyButton = clipboardContainer.querySelector('.copy-button');
+        const copiedButton = clipboardContainer.querySelector('.copied-button');
         const codeBlock = clipboardContainer.nextElementSibling.querySelector('code');
 
-        copyButton.addEventListener('click', () => handleButtonClick(copyButton, copiedButton, codeBlock, clipboard));
+        copyButton.addEventListener('click', () => handleButtonClick(copyButton, copiedButton, codeBlock));
     });
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-    attachClipboardListeners(navigator.clipboard);
+    attachClipboardListeners();
 });
