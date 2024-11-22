@@ -1,5 +1,7 @@
-// Adapted from https://logfetch.com/hugo-add-copy-to-clipboard-button/
-// Adds functionality to copy-to-clipboard buttonswhich sit above each code/citation block.
+/*  Adds functionality to copy-to-clipboard buttons which sit above each code/citation block.
+
+Adapted from https://logfetch.com/hugo-add-copy-to-clipboard-button/
+*/
 
 // on click swap the copy button with the copied button for a few seconds
 const handleButtonClick = (copyButton, copiedButton, codeBlock, clipboard) => {
