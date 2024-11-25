@@ -89,7 +89,6 @@ def test_table_links(page_obj: Page):
     Links are of type: "Download", "Article", "Website".
     This test validates each link in the table as precisely as possible.
     """
-    failed_download_links = []
     links_table_column = get_links_column(page=page_obj)
     for single_cell in links_table_column:
         links_in_the_cell = single_cell.locator("a").all()
@@ -98,9 +97,7 @@ def test_table_links(page_obj: Page):
             link_href = link_locator.get_attribute("href")
 
             if link_type == "Download":
-                result = validate_download_link(page=page_obj, link_locator=link_locator, link_href=link_href)
-                if result:
-                    failed_download_links.append(result)
+                validate_download_link(page=page_obj, link_locator=link_locator, link_href=link_href)
             elif link_type == "Article":
                 validate_article_link(page=page_obj, link_href=link_href)
             elif link_type == "Website":
@@ -108,30 +105,24 @@ def test_table_links(page_obj: Page):
             else:
                 raise ValueError("Unknown link type: {link_type} for url {link_info.page.url}")
 
-    # raise all the errors at once at the end so all the links can be ran.
-    if len(failed_download_links) > 0:
-        raise AssertionError(failed_download_links)
 
-
-def validate_download_link(page: Page, link_locator: Locator, link_href: str) -> None | str:
+def validate_download_link(page: Page, link_locator: Locator, link_href: str) -> None:
     """
-    Temporary - collect the error and return them to test function.
-
     Validate a download link on each download page's table.
     Checks the link is a direct download link, but does not wait for the download to complete.
     That could take way too long.
     """
+    download_works = True
     try:
-        with page.expect_download(timeout=5000) as download_info:
+        with page.expect_download() as _:
             link_locator.click()
-    except PlaywrightTimeoutError as e:
-        return (
-            f"A Download button link on the table on page: {page.url} does not appear to be a link.\n"
-            f"This is the href: {link_href}\n"
-            f"download_info: {download_info}\n"
-            f"Error: {e}\n"
-        )
-    return
+    except PlaywrightTimeoutError:
+        download_works = False
+
+    assert download_works, (
+        f"A Download button link on the table on page: {page.url} does not appear to be a link.\n"
+        f"This is the href: {link_href}"
+    )
 
 
 def validate_article_link(page: Page, link_href: str) -> None:
