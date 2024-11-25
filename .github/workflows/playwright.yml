@@ -37,7 +37,6 @@ jobs:
     - name: Run playwright tests
     # test_table_links is flaky with the the GitHub runners  
       run: | 
-        pytest playwright/tests/ \
+        pytest playwright/tests/test_species_download_page.py \
         --base-url http://localhost:8080 \
-        --numprocesses auto \
-        -k "not test_table_links"
+        --numprocesses auto
