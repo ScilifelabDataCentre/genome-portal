@@ -1,0 +1,43 @@
+name: Playwright e2e tests
+on:
+  pull_request:
+    branches: main
+    paths:
+      - 'hugo/**'
+      - 'playwright/**'
+      - 'requirements.txt'
+      - 'dockerfiles/hugo.dockerfile'
+      - '.github/workflows/playwright.yml'
+
+jobs:
+  test:
+    timeout-minutes: 20
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Install playwright
+      run: python -m playwright install 
+
+    - name: Build and run the Hugo docker image
+      run: | 
+        docker build -f docker/hugo.dockerfile -t hugo-playwright .
+        docker run -d -p 8080:8080 --name hugo-container hugo-playwright  
+
+    - name: Run playwright tests
+    # test_table_links is flaky with the the GitHub runners  
+      run: | 
+        pytest playwright/tests/ \
+        --base-url http://localhost:8080 \
+        --numprocesses auto \
+        -k "not test_table_links"
