@@ -27,7 +27,7 @@ BUSCO notation: C: Complete; S: Single-copy; D: Duplicated; F: Fragmented; M: Mi
 The data for *Linum trigynum* displayed in the genome portal comes from:
 
 ```{style=citation}
-Gutiérrez-Valencia, J., Zervakis, P.-I., Postel, Z., Fracassetti, M., Losvik, A., Mehrabi, S., Bunikis, I., Soler, L., Hughes, P. W., Désamoré, A., Laenen, B., Abdelaziz, M., Pettersson, O. V., Arroyo, J., & Slotte, T. (2024). Genetic Causes and Genomic Consequences of Breakdown of Distyly in <i>Linum trigynum</i>. Molecular Biology and Evolution, 41(5), msae087. <a href="https://doi.org/10.1093/molbev/msae087">https://doi.org/10.1093/molbev/msae087</a>
+Gutiérrez-Valencia, J., Zervakis, P.-I., Postel, Z., Fracassetti, M., Losvik, A., Mehrabi, S., Bunikis, I., Soler, L., Hughes, P. W., Désamoré, A., Laenen, B., Abdelaziz, M., Pettersson, O. V., Arroyo, J., & Slotte, T. (2024). Genetic Causes and Genomic Consequences of Breakdown of Distyly in *Linum trigynum*. Molecular Biology and Evolution, 41(5), msae087. <https://doi.org/10.1093/molbev/msae087>
 ```
 
 ### Funding

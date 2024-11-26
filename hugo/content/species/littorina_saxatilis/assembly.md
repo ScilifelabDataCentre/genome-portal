@@ -27,7 +27,7 @@ BUSCO notation: C: Complete; S: Single-copy; D: Duplicated; F: Fragmented; M: Mi
 The data for *Littorina saxatilis* displayed in the genome portal comes from:
 
 ```{style=citation}
-De Jode, A., Faria, R., Formenti, G., Sims, Y., Smith, T. P., Tracey, A., Wood, J. M. D., Zagrodzka, Z. B., Johannesson, K., Butlin, R. K., & Leder, E. H. (2024). Chromosome-scale Genome Assembly of the Rough Periwinkle <i>Littorina saxatilis</i>. Genome Biology and Evolution, 16(4), evae076. <a href="https://doi.org/10.1093/gbe/evae076"> https://doi.org/10.1093/gbe/evae076</a>
+De Jode, A., Faria, R., Formenti, G., Sims, Y., Smith, T. P., Tracey, A., Wood, J. M. D., Zagrodzka, Z. B., Johannesson, K., Butlin, R. K., & Leder, E. H. (2024). Chromosome-scale Genome Assembly of the Rough Periwinkle *Littorina saxatilis*. Genome Biology and Evolution, 16(4), evae076. <https://doi.org/10.1093/gbe/evae076>
 ```
 
 ### Funding
