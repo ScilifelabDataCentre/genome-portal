@@ -41,11 +41,15 @@ initialZoom: 2
 
 If you use the data presented in the genome portal from this species in your research, please cite the original publication:
 
-- <p> De Jode, A., Faria, R., Formenti, G., Sims, Y., Smith, T. P., Tracey, A., Wood, J. M. D., Zagrodzka, Z. B., Johannesson, K., Butlin, R. K., & Leder, E. H. (2024). Chromosome-scale Genome Assembly of the Rough Periwinkle <i>Littorina saxatilis</i>. Genome Biology and Evolution, 16(4), evae076. <a href="https://doi.org/10.1093/gbe/evae076"> https://doi.org/10.1093/gbe/evae076</a></p>
+```{style=citation}
+De Jode, A., Faria, R., Formenti, G., Sims, Y., Smith, T. P., Tracey, A., Wood, J. M. D., Zagrodzka, Z. B., Johannesson, K., Butlin, R. K., & Leder, E. H. (2024). Chromosome-scale Genome Assembly of the Rough Periwinkle <i>Littorina saxatilis</i>. Genome Biology and Evolution, 16(4), evae076. <a href="https://doi.org/10.1093/gbe/evae076"> https://doi.org/10.1093/gbe/evae076</a>
+```
 
-If you have used the pages for this species in the Genome Portal, please refer to it in-text as: "The *Littorina saxatilis* entry in the Swedish Reference Genome Portal (access date)." and use the following for the bibliography:
+If you have used the pages for this species in the Genome Portal, please refer to it in-text as: "The *Littorina saxatilis* entry in the Swedish Reference Genome Portal (Retrieved access date)." and use the following for the bibliography:
 
-- <p> Swedish Reference Genome Portal (access date), SciLifeLab Data Centre, version (version number) from <a href="https://genomes.scilifelab.se">https://genomes.scilifelab.se</a>, <a href="https://rrid.site/data/record/nlx_144509-1/SCR_026008/resolver?q=rrid:scr_026008">RRID:SCR_026008</a>.
+```{style=citation}
+Swedish Reference Genome Portal (Retrieved DATE_ACCESSED), SciLifeLab Data Centre, version VERSION_NUMBER from <a href="https://genomes.scilifelab.se">https://genomes.scilifelab.se</a>, <a href="https://rrid.site/data/record/nlx_144509-1/SCR_026008/resolver?q=rrid:scr_026008">RRID:SCR_026008.
+```
 
 #### References
 

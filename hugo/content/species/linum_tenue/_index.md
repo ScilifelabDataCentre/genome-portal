@@ -40,11 +40,15 @@ The distyly supergene of *L. tenue* consists of an ~260 kb region on scaffold 10
 
 If you use the data presented in the genome portal from this species in your research, please cite the original publication:
 
-- <p> Gutiérrez-Valencia, J., Fracassetti, M., Berdan, E. L., Bunikis, I., Soler, L., Dainat, J., Kutschera, V. E., Losvik, A., Désamoré, A., Hughes, P. W., Foroozani, A., Laenen, B., Pesquet, E., Abdelaziz, M., Pettersson, O. V., Nystedt, B., Brennan, A. C., Arroyo, J., & Slotte, T. (2022). Genomic analyses of the <i>Linum </i>distyly supergene reveal convergent evolution at the molecular level. Current Biology, 32(20), 4360-4371.e6. <a href="https://doi.org/10.1016/j.cub.2022.08.042"> https://doi.org/10.1016/j.cub.2022.08.042</a></p>
+```{style=citation}
+Gutiérrez-Valencia, J., Fracassetti, M., Berdan, E. L., Bunikis, I., Soler, L., Dainat, J., Kutschera, V. E., Losvik, A., Désamoré, A., Hughes, P. W., Foroozani, A., Laenen, B., Pesquet, E., Abdelaziz, M., Pettersson, O. V., Nystedt, B., Brennan, A. C., Arroyo, J., & Slotte, T. (2022). Genomic analyses of the <i>Linum </i>distyly supergene reveal convergent evolution at the molecular level. Current Biology, 32(20), 4360-4371.e6. <a href="https://doi.org/10.1016/j.cub.2022.08.042">https://doi.org/10.1016/j.cub.2022.08.042</a>
+```
 
-If you have used the pages for this species in the Genome Portal, please refer to it in-text as: "The *Linum tenue* entry in the Swedish Reference Genome Portal (access date)." and use the following for the bibliography:
+If you have used the pages for this species in the Genome Portal, please refer to it in-text as: "The *Linum tenue* entry in the Swedish Reference Genome Portal (Retrieved access date)." and use the following for the bibliography:
 
-- <p> Swedish Reference Genome Portal (access date), SciLifeLab Data Centre, version (version number) from <a href="https://genomes.scilifelab.se">https://genomes.scilifelab.se</a>, <a href="https://rrid.site/data/record/nlx_144509-1/SCR_026008/resolver?q=rrid:scr_026008">RRID:SCR_026008</a>.
+```{style=citation}
+Swedish Reference Genome Portal (Retrieved DATE_ACCESSED), SciLifeLab Data Centre, version VERSION_NUMBER from <a href="https://genomes.scilifelab.se">https://genomes.scilifelab.se</a>, <a href="https://rrid.site/data/record/nlx_144509-1/SCR_026008/resolver?q=rrid:scr_026008">RRID:SCR_026008</a>.
+```
 
 #### References
 

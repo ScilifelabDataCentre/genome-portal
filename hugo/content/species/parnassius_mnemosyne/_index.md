@@ -48,11 +48,15 @@ The genome assembly hosted in the portal was generated in a study by Höglund et
 
 If you use the data presented in the genome portal from this species in your research, please cite the original publication(s):
 
-- <p> Höglund, J., Dias, G., Olsen, R. A., Soares, A., Bunikis, I., Talla, V., & Backström, N. (2024). A Chromosome-Level Genome Assembly and Annotation for the Clouded Apollo Butterfly (<i>Parnassius mnemosyne</i>): A Species of Global Conservation Concern. Genome Biology and Evolution, 16(2), evae031. <a href="https://doi.org/10.1093/gbe/evae031"> https://doi.org/10.1093/gbe/evae031</a> </p>
+```{style=citation}
+Höglund, J., Dias, G., Olsen, R. A., Soares, A., Bunikis, I., Talla, V., & Backström, N. (2024). A Chromosome-Level Genome Assembly and Annotation for the Clouded Apollo Butterfly (<i>Parnassius mnemosyne</i>): A Species of Global Conservation Concern. Genome Biology and Evolution, 16(2), evae031. <a href="https://doi.org/10.1093/gbe/evae031"> https://doi.org/10.1093/gbe/evae031</a>
+```
 
-If you have used the pages for this species in the Genome Portal, please refer to it in-text as: "The *Parnassius mnemosyne* entry in the Swedish Reference Genome Portal (access date)." and use the following for the bibliography:
+If you have used the pages for this species in the Genome Portal, please refer to it in-text as: "The *Parnassius mnemosyne* entry in the Swedish Reference Genome Portal (Retrieved access date)." and use the following for the bibliography:
 
-- <p> Swedish Reference Genome Portal (access date), SciLifeLab Data Centre, version (version number) from <a href="https://genomes.scilifelab.se">https://genomes.scilifelab.se</a>, <a href="https://rrid.site/data/record/nlx_144509-1/SCR_026008/resolver?q=rrid:scr_026008">RRID:SCR_026008</a>.
+```{style=citation}
+Swedish Reference Genome Portal (Retrieved DATE_ACCESSED), SciLifeLab Data Centre, version VERSION_NUMBER from <a href="https://genomes.scilifelab.se">https://genomes.scilifelab.se</a>, <a href="https://rrid.site/data/record/nlx_144509-1/SCR_026008/resolver?q=rrid:scr_026008">RRID:SCR_026008</a>.
+```
 
 #### References
 

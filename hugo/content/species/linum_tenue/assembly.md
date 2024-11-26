@@ -26,7 +26,9 @@ BUSCO notation: C: Complete; S: Single-copy; D: Duplicated; F: Fragmented; M: Mi
 
 The data for *Linum tenue* displayed in the genome portal comes from:
 
-- <p> Gutiérrez-Valencia, J., Fracassetti, M., Berdan, E. L., Bunikis, I., Soler, L., Dainat, J., Kutschera, V. E., Losvik, A., Désamoré, A., Hughes, P. W., Foroozani, A., Laenen, B., Pesquet, E., Abdelaziz, M., Pettersson, O. V., Nystedt, B., Brennan, A. C., Arroyo, J., & Slotte, T. (2022). Genomic analyses of the <i>Linum </i>distyly supergene reveal convergent evolution at the molecular level. Current Biology, 32(20), 4360-4371.e6. <a href="https://doi.org/10.1016/j.cub.2022.08.042"> https://doi.org/10.1016/j.cub.2022.08.042</a></p>
+```{style=citation}
+Gutiérrez-Valencia, J., Fracassetti, M., Berdan, E. L., Bunikis, I., Soler, L., Dainat, J., Kutschera, V. E., Losvik, A., Désamoré, A., Hughes, P. W., Foroozani, A., Laenen, B., Pesquet, E., Abdelaziz, M., Pettersson, O. V., Nystedt, B., Brennan, A. C., Arroyo, J., & Slotte, T. (2022). Genomic analyses of the <i>Linum </i>distyly supergene reveal convergent evolution at the molecular level. Current Biology, 32(20), 4360-4371.e6. <a href="https://doi.org/10.1016/j.cub.2022.08.042"> https://doi.org/10.1016/j.cub.2022.08.042</a>
+```
 
 ### Funding
 

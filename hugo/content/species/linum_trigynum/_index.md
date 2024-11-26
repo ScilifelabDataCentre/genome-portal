@@ -40,11 +40,15 @@ A recent genomic study has shown that *L. trigynum* is a short homostyle that pr
 
 If you use the data presented in the genome portal from this species in your research, please cite the original publication:
 
-- <p> Gutiérrez-Valencia, J., Zervakis, P.-I., Postel, Z., Fracassetti, M., Losvik, A., Mehrabi, S., Bunikis, I., Soler, L., Hughes, P. W., Désamoré, A., Laenen, B., Abdelaziz, M., Pettersson, O. V., Arroyo, J., & Slotte, T. (2024). Genetic Causes and Genomic Consequences of Breakdown of Distyly in <i>Linum trigynum</i>. Molecular Biology and Evolution, 41(5), msae087. <a href="https://doi.org/10.1093/molbev/msae087">https://doi.org/10.1093/molbev/msae087</a> </p>
+```{style=citation}
+Gutiérrez-Valencia, J., Zervakis, P.-I., Postel, Z., Fracassetti, M., Losvik, A., Mehrabi, S., Bunikis, I., Soler, L., Hughes, P. W., Désamoré, A., Laenen, B., Abdelaziz, M., Pettersson, O. V., Arroyo, J., & Slotte, T. (2024). Genetic Causes and Genomic Consequences of Breakdown of Distyly in <i>Linum trigynum</i>. Molecular Biology and Evolution, 41(5), msae087. <a href="https://doi.org/10.1093/molbev/msae087">https://doi.org/10.1093/molbev/msae087</a>
+```
 
 If you have used the pages for this species in the Genome Portal, please refer to it in-text as: "The *Linum trigynum* entry in the Swedish Reference Genome Portal (access date)." and use the following for the bibliography:
 
-- <p> Swedish Reference Genome Portal (access date), SciLifeLab Data Centre, version (version number) from <a href="https://genomes.scilifelab.se">https://genomes.scilifelab.se</a>, <a href="https://rrid.site/data/record/nlx_144509-1/SCR_026008/resolver?q=rrid:scr_026008">RRID:SCR_026008</a>.
+```{style=citation}
+Swedish Reference Genome Portal (Retrieved DATE_ACCESSED), SciLifeLab Data Centre, version VERSION_NUMBER from <a href="https://genomes.scilifelab.se">https://genomes.scilifelab.se</a>, <a href="https://rrid.site/data/record/nlx_144509-1/SCR_026008/resolver?q=rrid:scr_026008">RRID:SCR_026008</a>.
+```
 
 #### References
 
