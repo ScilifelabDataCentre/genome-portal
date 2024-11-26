@@ -37,13 +37,13 @@ By using the Genome Portal, a free national data service, you can benefit from:
 {{< /faq_block >}}
 
 {{< faq_block title="How can I get my data displayed on the Genome Portal?" >}}
-Please begin by checking that your data meets the minimal requirements listed on the <a href="/contribute" target="_blank">Contribute</a> page.
+Please begin by checking that your data meets the minimal requirements listed on the <a href="/contribute">Contribute</a> page.
 
-If it does, feel free to reach out via email to <dsn-eb@scilifelab.se> or through the <a href="/contact" target="_blank">Contact</a> form. We would be happy to learn more about your genomic project, and will provide a brief form to collect additional details about your data.
+If it does, feel free to reach out via email to <dsn-eb@scilifelab.se> or through the <a href="/contact">Contact</a> form. We would be happy to learn more about your genomic project, and will provide a brief form to collect additional details about your data.
 {{< /faq_block >}}
 
 {{< faq_block title="What data file formats are supported for display on the Genome Portal?" >}}
-The Genome Portal uses the JBrowse 2 genome browser to display genomic datasets. <a href="https://jbrowse.org/jb2/features/#supported-data-formats" target="_blank">JBrowse 2 supports several formats</a> that are commonly used in genomics (e.g., BED, VCF, FASTA, GFF, among others), which could therefore be displayed in the Genome Portal. However, at the moment, we do not accept complete BAM files derived from shotgun sequencing, as they can be quite large and may impact performance. Users can, however, add and visualise BAM files as local data tracks in the Genome Portal’s genome browser.
+The Genome Portal uses the JBrowse 2 genome browser to display genomic datasets. <a href="https://jbrowse.org/jb2/features/#supported-data-formats">JBrowse 2 supports several formats</a> that are commonly used in genomics (e.g., BED, VCF, FASTA, GFF, among others), which could therefore be displayed in the Genome Portal. However, at the moment, we do not accept complete BAM files derived from shotgun sequencing, as they can be quite large and may impact performance. Users can, however, add and visualise BAM files as local data tracks in the Genome Portal’s genome browser.
 {{< /faq_block >}}
 
 {{< faq_block title="Can unpublished data be displayed on the Genome Portal?" >}}
@@ -51,7 +51,7 @@ No, we require data be publicly available. However, we can begin adding data und
 {{< /faq_block >}}
 
 {{< faq_block title="Is it possible to add my data to the Genome Portal while a manuscript is under review?" >}}
-Yes, we accept data under embargo expected to become available after the manuscript under review is approved for publication. The data should be deposited in a public repository and have a reserved DOI and/or accession number. This allows you to indicate in the Data Availability Statement of your manuscript that your data can be visualised on the Genome Portal. Planning is key! Reach out to us via email <dsn-eb@scilifelab.se> or through the <a href="/contact" target="_blank">Contact</a> form as soon as you wish to start this process.
+Yes, we accept data under embargo expected to become available after the manuscript under review is approved for publication. The data should be deposited in a public repository and have a reserved DOI and/or accession number. This allows you to indicate in the Data Availability Statement of your manuscript that your data can be visualised on the Genome Portal. Planning is key! Reach out to us via email <dsn-eb@scilifelab.se> or through the <a href="/contact">Contact</a> form as soon as you wish to start this process.
 {{< /faq_block >}}
 
 {{< faq_block title="How long does it take for my data to be displayed on the Genome Portal?" >}}
@@ -71,7 +71,7 @@ We chose JBrowse 2 for several reasons. It is a robust, open-source genome brows
 {{< /faq_block >}}
 
 {{< faq_block title="Is it possible to customise how data tracks are displayed on the genome browser?" >}}
-Yes, it is possible to modify several of the data track attributes, such as colors, labels, descriptions, groups, and more. To do this, it is necessary to change the settings of the JBrowse 2 default session by editing the `config.json` file associated with the species. Please contact us by email to <dsn-eb@scilifelab.se> or through the <a href="/contact" target="_blank">Contact</a> form to help you with the customisation of your data tracks.
+Yes, it is possible to modify several of the data track attributes, such as colors, labels, descriptions, groups, and more. To do this, it is necessary to change the settings of the JBrowse 2 default session by editing the `config.json` file associated with the species. Please contact us by email to <dsn-eb@scilifelab.se> or through the <a href="/contact">Contact</a> form to help you with the customisation of your data tracks.
 {{< /faq_block >}}
 
 {{< faq_block title="How can I open a data track within the genome browser of a species in the Genome Portal?" >}}
@@ -82,7 +82,7 @@ To open a new data track within the genome browser for a species in the Genome P
 
 Remember that your data should have the same genomic coordinates as the genome assembly available in the Genome Portal.
 
-In some cases, you need to provide an index file for your data (e.g., a tabix files is required for VCF/GFF/BED files). Guidance on generating index files can be found in the <a href="/contribute/supported_file_formats/#data-file-indexing" target="_blank">data file indexing section of the Supported data file formats</a> page.
+In some cases, you need to provide an index file for your data (e.g., a tabix files is required for VCF/GFF/BED files). Guidance on generating index files can be found in the <a href="/contribute/supported_file_formats/#data-file-indexing">data file indexing section of the Supported data file formats</a> page.
 {{< /faq_block >}}
 
 {{< faq_block title="How can I share a genome browser session?" >}}
@@ -133,11 +133,11 @@ To view details or annotations for a specific genomic feature:
 {{< /faq_block >}}
 
 {{< faq_block title="What could be causing my data to display slowly?" >}}
-The genome browser tracks may display slowly for various reasons, including having too many tracks open at once, viewing a large genomic window, a high number of custom tracks, numerous large data files, or a slow/unstable internet connection. If the problems persist, please do not hesitate to contact us at <dsn-eb@scilifelab.se> or through the <a href="/contact" target="_blank">Contact</a> form.
+The genome browser tracks may display slowly for various reasons, including having too many tracks open at once, viewing a large genomic window, a high number of custom tracks, numerous large data files, or a slow/unstable internet connection. If the problems persist, please do not hesitate to contact us at <dsn-eb@scilifelab.se> or through the <a href="/contact">Contact</a> form.
 {{< /faq_block >}}
 
 #### About citation guidelines
 
 {{< faq_block title="How can I cite the Genome Portal content?" >}}
-Depending on how you use the Genome Portal in your work (e.g., manuscript, presentation, etc.), there are various options for citing its content. For example, you can cite: the Genome Portal website, the website source code, the specific datasets from each species, or the JBrowse 2 genome browser. More details on citation guidelines can be found on the <a href="/citation" target="_blank">Cite us</a> page.
+Depending on how you use the Genome Portal in your work (e.g., manuscript, presentation, etc.), there are various options for citing its content. For example, you can cite: the Genome Portal website, the website source code, the specific datasets from each species, or the JBrowse 2 genome browser. More details on citation guidelines can be found on the <a href="/citation">Cite us</a> page.
 {{< /faq_block >}}

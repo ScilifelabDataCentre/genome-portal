@@ -14,7 +14,7 @@ Assistance to submit genome assemblies and protein-coding gene models to ENA can
 
 {{< /info_block >}}
 
-Below, we describe three recommended ways to share genomic data in a manner that follows the FAIR principles and facilitates integration with the Genome Portal. For information about the data files themselves, please refer to the <a href="/contribute/supported_file_formats" target="_blank">supported data file formats</a>.
+Below, we describe three recommended ways to share genomic data in a manner that follows the FAIR principles and facilitates integration with the Genome Portal. For information about the data files themselves, please refer to the <a href="/contribute/supported_file_formats">supported data file formats</a>.
 
 ### Recommendations
 
@@ -53,4 +53,4 @@ Let’s assume that a user wants to make three files publicly available by submi
 
 ### Questions?
 
-We are happy to discuss and advise on best practices for making research data publicly available. Please send us an email to [dsn-eb@scilifelab.se](mailto:dsn-eb@scilifelab.se) or contact us through the <a href="/contact" target="_blank">Contact</a> page.
+We are happy to discuss and advise on best practices for making research data publicly available. Please send us an email to [dsn-eb@scilifelab.se](mailto:dsn-eb@scilifelab.se) or contact us through the <a href="/contact">Contact</a> page.

@@ -28,15 +28,15 @@ Genomportalen använder sig av öppen källkod under en *MIT open source*-licens
 
 ### Riktlinjer för att citera material på genomportalen
 
-Besök <a href="/citation" target="_blank">Cite us</a>-sidan för detaljerade riktlinjer (på engelska).
+Besök <a href="/citation">Cite us</a>-sidan för detaljerade riktlinjer (på engelska).
 
 ### Användarvilkor
 
-Information om vad du kan förvänta dig av den här tjänsten, samt ansvarsfriskrivningar och begränsningar för denna webbplats och dess innehåll, finns på <a href="/terms" target="_blank">Terms of use</a>-sidan (på engelska).
+Information om vad du kan förvänta dig av den här tjänsten, samt ansvarsfriskrivningar och begränsningar för denna webbplats och dess innehåll, finns på <a href="/terms">Terms of use</a>-sidan (på engelska).
 
 ### Sekretess och integritetspolicy
 
-Information om vad, hur och varför personuppgifter och tekniska data hanteras och skyddas vid användning av denna webbplats finns på sidan <a href="/privacy" target="_blank">Privacy policy</a>-sidan (på engelska).
+Information om vad, hur och varför personuppgifter och tekniska data hanteras och skyddas vid användning av denna webbplats finns på sidan <a href="/privacy">Privacy policy</a>-sidan (på engelska).
 
 ### Finansiering
 
@@ -44,4 +44,4 @@ Denna tjänst är finansierat av [SciLifeLab](https://www.scilifelab.se) och [Kn
 
 ### Be om hjälp
 
-För frågor, kommentarer eller problem relaterade till genomportalen, vänligen kontakta oss per e-post på [dsn-eb@scilifelab.se](mailto:dsn-eb@scilifelab.se eller använd vårt <a href="/contact" target="_blank">kontaktformulär</a> (på engelska).
+För frågor, kommentarer eller problem relaterade till genomportalen, vänligen kontakta oss per e-post på [dsn-eb@scilifelab.se](mailto:dsn-eb@scilifelab.se eller använd vårt <a href="/contact">kontaktformulär</a> (på engelska).

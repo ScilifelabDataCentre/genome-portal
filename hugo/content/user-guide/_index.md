@@ -7,7 +7,7 @@ toc: true
 
 On this page, you will find documentation for the **Swedish Reference Genome Portal**, which provides a general overview of its graphical user interface, structure, and useful features.
 
-We gratefully welcome comments or questions via [email](mailto:dsn-eb@scilifelab.se), or through our <a href="/contact" target="_blank">contact</a> form.
+We gratefully welcome comments or questions via [email](mailto:dsn-eb@scilifelab.se), or through our <a href="/contact">contact</a> form.
 
 ### 1. Website structure
 
@@ -109,7 +109,7 @@ Use the toggle in the upper-right corner of the table to switch between default 
 
 The 'Links' column provides buttons to download the original data file, visit the website of the public repository where the data was obtained, and, if applicable, visit the associated scientific article(s) related to the data.
 
-Below the table, you will find links to download the table as a JSON file, open the `refNameAlias` text file in a new window (used in JBrowse to set aliases for differing sequence header names, e.g., to define that “chr1” is an alias for “1”), and open the <a href="/glossary" target="_blank">Glossary</a> page in a new window.
+Below the table, you will find links to download the table as a JSON file, open the `refNameAlias` text file in a new window (used in JBrowse to set aliases for differing sequence header names, e.g., to define that “chr1” is an alias for “1”), and open the <a href="/glossary">Glossary</a> page in a new window.
 
 <p align=center><img src="/img/user-guide/Fig04_Species_page_Download_tab.webp"
     alt="Figure 4. Download tab of a Species page on the Genome Portal."
@@ -121,7 +121,7 @@ Below the table, you will find links to download the table as a JSON file, open 
 
 When you click the **Browse the genome** button in the upper-right corner of a **Species page**, a JBrowse 2 genome browser opens in a new window, displaying the data tracks for the current species (Figure 5).
 
-For a definition of what a genome browser is and its utility, visit the <a href="/faqs" target="_blank">FAQ</a> page.
+For a definition of what a genome browser is and its utility, visit the <a href="/faqs">FAQ</a> page.
 
 Below, you will find a brief description of basic functionalities of the JBrowse 2 genome browser, adapted from the <a href="https://jbrowse.org/jb2/docs/" target="_blank">JBrowse 2 documentation</a> and <a href="https://doi.org/10.1186/s13059-023-02914-z" target="_blank">publication</a>.
 
@@ -160,7 +160,7 @@ Remember that your data should have the same genomic coordinates as the genome a
 {{< /info_block >}}
 
 {{< info_block >}}
-In some cases, you need to provide an index file for your data (e.g., a tabix files is required for VCF/GFF/BED files). Guidance on generating index files can be found in the <a href="/contribute/supported_file_formats/#data-file-indexing" target="_blank">data file indexing section of the Supported data file formats</a> page.
+In some cases, you need to provide an index file for your data (e.g., a tabix files is required for VCF/GFF/BED files). Guidance on generating index files can be found in the <a href="/contribute/supported_file_formats/#data-file-indexing">data file indexing section of the Supported data file formats</a> page.
 {{< /info_block >}}
 
 #### Share sessions

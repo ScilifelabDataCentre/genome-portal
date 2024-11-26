@@ -28,15 +28,15 @@ The source code for the Genome Portal is publicly available on <a href="https:/
 
 ### Citation guidelines
 
-Consult the <a href="/citation" target="_blank">Cite us</a> page for detailed citation guidelines.
+Consult the <a href="/citation">Cite us</a> page for detailed citation guidelines.
 
 ### Terms of use
 
-Information about what to expect from this service, as well as disclaimers and limitations of this website and its content, can be found on the <a href="/terms" target="_blank">Terms of use</a> page.
+Information about what to expect from this service, as well as disclaimers and limitations of this website and its content, can be found on the <a href="/terms">Terms of use</a> page.
 
 ### Privacy policy
 
-Information about what, how, and why personal and technical data is handled and protected when using this website can be found on the <a href="/privacy" target="_blank">Privacy policy</a> page.
+Information about what, how, and why personal and technical data is handled and protected when using this website can be found on the <a href="/privacy">Privacy policy</a> page.
 
 ### Funding
 
@@ -44,4 +44,4 @@ This service is supported by SciLifeLab and the Knut and Alice Wallenberg Founda
 
 ### Getting help
 
-For questions, comments, or issues related to the Genome Portal, please contact us via email at [dsn-eb@scilifelab.se](mailto:dsn-eb@scilifelab.se), or use the <a href="/contact" target="_blank">Contact</a> form.
+For questions, comments, or issues related to the Genome Portal, please contact us via email at [dsn-eb@scilifelab.se](mailto:dsn-eb@scilifelab.se), or use the <a href="/contact">Contact</a> form.
