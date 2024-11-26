@@ -35,7 +35,16 @@ def test_has_title(home_page: Page) -> None:
 
 def test_navbar_links(home_page: Page) -> None:
     """Test navbar links redirect to the correct page."""
-    NAVBAR_LINKS = {"Home": "Home", "About": "About", "Glossary": "Glossary", "Contact": "Contact"}
+    NAVBAR_LINKS = {
+        "Home": "Home",
+        "Contribute": "Contribute",
+        "User guide": "User guide",
+        "Glossary": "Glossary",
+        "About": "About",
+        "Contact": "Contact",
+        "FAQ": "Frequently Asked Questions",
+        "Cite us": "How to cite the Genome Portal and the data",
+    }
 
     for name, title in NAVBAR_LINKS.items():
         home_page.locator("#navbarSupportedContent").get_by_role("link", name=name).click()

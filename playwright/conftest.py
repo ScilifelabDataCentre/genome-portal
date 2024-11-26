@@ -52,8 +52,8 @@ def about_page_swedish(page: Page, base_url: str) -> Page:
 
 
 @pytest.fixture
-def glossary_page(page: Page, base_url: str) -> Page:
-    return generate_single_page(page=page, url=f"{base_url}/glossary/")
+def cite_us_page(page: Page, base_url: str) -> Page:
+    return generate_single_page(page=page, url=f"{base_url}/citation/")
 
 
 @pytest.fixture
@@ -67,5 +67,15 @@ def contribute_page(page: Page, base_url: str) -> Page:
 
 
 @pytest.fixture
+def glossary_page(page: Page, base_url: str) -> Page:
+    return generate_single_page(page=page, url=f"{base_url}/glossary/")
+
+
+@pytest.fixture
 def privacy_page(page: Page, base_url: str) -> Page:
     return generate_single_page(page=page, url=f"{base_url}/privacy/")
+
+
+@pytest.fixture
+def supported_formats_page(page: Page, base_url: str) -> Page:
+    return generate_single_page(page=page, url=f"{base_url}/contribute/supported_file_formats/")

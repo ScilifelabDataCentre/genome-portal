@@ -37,18 +37,18 @@ DOWNLOAD_PAGE_PATHS = [f"{species}/download" for species in SPECIES_LIST]
 
 ALL_NON_SPECIES_PAGES_PATHS = [
     "home",
-    "about",
-    "about/sv",
-    "citation",
-    "contact",
     "contribute",
     "contribute/supported_file_formats",
     "contribute/recommendations_for_making_data_public",
-    "faqs",
+    "about",
+    "about/sv",
+    "contact",
+    "citation",
     "glossary",
-    "privacy",
-    "terms",
     "user-guide",
+    "terms",
+    "privacy",
+    "faqs",
 ]
 
 ALL_PAGE_PATHS = ALL_NON_SPECIES_PAGES_PATHS + INTRO_PAGE_PATHS + ASSEMBLY_PAGE_PATHS + DOWNLOAD_PAGE_PATHS

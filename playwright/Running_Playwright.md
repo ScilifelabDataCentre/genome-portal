@@ -19,13 +19,13 @@
 
 ```bash
 python -m venv --prompt=genome-portal .venv
-source ./venv/bin/activate
+source .venv/bin/activate
 python -m pip install -r requirements.txt
 ```
 
 **2. Install playwright**
 ```bash
-playwright install
+python -m playwright install
 ```
 
 **3. Start running a local version of the server:**
