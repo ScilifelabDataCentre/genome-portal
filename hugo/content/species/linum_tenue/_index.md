@@ -44,7 +44,7 @@ If you use the data presented in the genome portal from this species in your res
 Gutiérrez-Valencia, J., Fracassetti, M., Berdan, E. L., Bunikis, I., Soler, L., Dainat, J., Kutschera, V. E., Losvik, A., Désamoré, A., Hughes, P. W., Foroozani, A., Laenen, B., Pesquet, E., Abdelaziz, M., Pettersson, O. V., Nystedt, B., Brennan, A. C., Arroyo, J., & Slotte, T. (2022). Genomic analyses of the *Linum* distyly supergene reveal convergent evolution at the molecular level. Current Biology, 32(20), 4360-4371.e6. <https://doi.org/10.1016/j.cub.2022.08.042>
 ```
 
-If you have used the pages for this species in the Genome Portal, please refer to it in-text as: "The *Linum tenue* entry in the Swedish Reference Genome Portal (Retrieved access date)." and use the following for the bibliography:
+If you have used the pages for this species in the Genome Portal, please refer to it in-text as: "The *Linum tenue* entry in the Swedish Reference Genome Portal (Retrieved {{< date_accessed >}})." and use the following for the bibliography:
 
 ```{style=citation}
 Swedish Reference Genome Portal (Retrieved DATE_ACCESSED), SciLifeLab Data Centre, version VERSION_NUMBER from <https://genomes.scilifelab.se>, [RRID:SCR_026008](https://rrid.site/data/record/nlx_144509-1/SCR_026008/resolver?q=rrid:scr_026008)
