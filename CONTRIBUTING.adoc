@@ -17,7 +17,7 @@ the
 https://github.com/ScilifelabDataCentre/genome-portal/fork[genome-portal]
 repository from your Github account.
 
-Clone the on your computer, and create a branch to work on. Name the
+Clone the repository to your computer, and create a branch to work on. Name the
 branch after the scientific name of the species:
 
 ```
