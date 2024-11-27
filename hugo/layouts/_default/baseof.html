@@ -95,12 +95,12 @@
         {{ end }}
 
     {{ if .Store.Get "needsClipboardJS" }}
-        {{ $clipboardJS := resources.Get "js/clipboard.js" | fingerprint }}
+        {{ $clipboardJS := resources.Get "js/clipboard.js" | fingerprint | minify }}
         <script src="{{ $clipboardJS.RelPermalink }}"></script>
     {{ end }}
 
     {{ if .Store.Get "needsDate" }}
-        {{ $todaysDateJS := resources.Get "js/todays_date.js" | fingerprint }}
+        {{ $todaysDateJS := resources.Get "js/todays_date.js" | fingerprint | minify }}
         <script src="{{ $todaysDateJS.RelPermalink }}"></script>
     {{ end }}
 

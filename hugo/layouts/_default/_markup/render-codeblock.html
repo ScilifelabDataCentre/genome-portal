@@ -5,6 +5,8 @@ by controlling the buttons visibility with js.
 If the code block is marked as citation style, placeholders inside the citation text will be replaced and
 the code block will be styled as a citation block.
 Otherwise, rendered as regular code block.
+
+Date accessed needs to be set by JS, hence the span element.
 */}}
 
 {{- $content := .Inner | safeHTML -}}
@@ -29,7 +31,7 @@ Otherwise, rendered as regular code block.
     {{ $version := partial "GetVersion.html" }}
     {{ $portalVersion := $version.tag | default "X.X.X" | strings.TrimPrefix "v" }}
 
-    {{ $content := replace $content "DATE_ACCESSED" $date }}
+    {{ $content := replace $content "DATE_ACCESSED" "<span class=\"todays-date\"></span>" }}
     {{ $content := replace $content "YEAR" $year }}
     {{ $content := replace $content "VERSION_NUMBER" $portalVersion }}
 
@@ -39,3 +41,4 @@ Otherwise, rendered as regular code block.
 {{ end }}
 
 {{ .Page.Store.Set "needsClipboardJS" true }}
+{{ .Page.Store.Set "needsDate" true }}
