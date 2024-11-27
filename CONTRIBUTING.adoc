@@ -69,7 +69,7 @@ Now to start the onboarding process, create a
 https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request[pull
 request].
 
-In the pull request descriptin, tell us a few words about yourself and
+In the pull request description, tell us a few words about yourself and
 your academic involvement with the proposed species.
 
 That's it for a start: we will be notified guide you through the
