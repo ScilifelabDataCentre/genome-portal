@@ -4,15 +4,15 @@ title: Terms of use
 
 ### Description
 
-By accessing the Swedish Reference Genome Portal website, you agree to the following terms of use and to the <a href="/privacy" target="_blank">privacy policy</a>.
+By accessing the Swedish Reference Genome Portal website, you agree to the following terms of use and to the <a href="/privacy">privacy policy</a>.
 
 This is a public website, so no licence or permission is needed to use it. Additionally, no licence or permission is required to reproduce graphics generated using the embedded genome browser.
 
 While the genomic data displayed on the Genome Portal is freely accessible from public repositories, some other data (e.g., images) may be protected by copyright or other intellectual property rights belonging to third parties. Accessing and using this data is subject to the rights claimed by the data authors, including, but not limited to, Creative Commons licences.
 
-To display a genomic dataset on the Genome Portal, which may include the creation of a 'Species page', certain requirements must be met. You can read about these requirements in the <a href="/contribute" target="_blank">Contribute</a> page.
+To display a genomic dataset on the Genome Portal, which may include the creation of a 'Species page', certain requirements must be met. You can read about these requirements in the <a href="/contribute">Contribute</a> page.
 
-To temporarily upload and visualise your own data on the genome browser, assuming that the data shares the same genomic coordinates (i.e., it was mapped to the same species genome assembly), please follow the instructions on <a href="/faqs" target="_blank">how to add a data track to the genome browser</a>. Note that once the web browser is closed, the data is lost and must be re-uploaded.
+To temporarily upload and visualise your own data on the genome browser, assuming that the data shares the same genomic coordinates (i.e., it was mapped to the same species genome assembly), please follow the instructions on <a href="/faqs">how to add a data track to the genome browser</a>. Note that once the web browser is closed, the data is lost and must be re-uploaded.
 
 ### Disclaimer
 
@@ -26,7 +26,7 @@ Genomic data attributed to individual species displayed on the Genome Portal com
 
 ### Using the content
 
-When you use the Swedish Reference Genome Portal website, its source code, the embedded genome browser, or the genomic data files in your work (e.g., publication, web page, presentation), we appreciate that you credit the respective contributor(s) by following the guidelines on the <a href="/citation" target="_blank">Cite us</a> page.
+When you use the Swedish Reference Genome Portal website, its source code, the embedded genome browser, or the genomic data files in your work (e.g., publication, web page, presentation), we appreciate that you credit the respective contributor(s) by following the guidelines on the <a href="/citation">Cite us</a> page.
 
 ### Changes to the terms of use
 
@@ -34,4 +34,4 @@ We may update our terms of use at any time and without notice. Thus, we advise y
 
 ### Contact us
 
-If you have any questions or suggestions about our terms of use, do not hesitate to contact us via email at [dsn-eb@scilifelab.se](mailto:dsn-eb@scilifelab.se) or via the <a href="/contact" target="_blank">Contact</a> form.
+If you have any questions or suggestions about our terms of use, do not hesitate to contact us via email at [dsn-eb@scilifelab.se](mailto:dsn-eb@scilifelab.se) or via the <a href="/contact">Contact</a> form.
