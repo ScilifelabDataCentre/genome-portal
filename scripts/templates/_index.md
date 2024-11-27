@@ -51,7 +51,7 @@ If you use the data presented in the genome portal from this species in your res
 [EDIT - Add the publication here using markdown formatting]
 ```
 
-If you have used the pages for this species in the Genome Portal, please refer to it in-text as: "The *[EDIT Species name]* entry in the Swedish Reference Genome Portal (Retrieved {{<todays_date>}})." and use the following for the bibliography:
+If you have used the pages for this species in the Genome Portal, please refer to it in-text as: "The *[EDIT Species name]* entry in the Swedish Reference Genome Portal (Retrieved <span class="todays-date"></span>)." and use the following for the bibliography:
 
 ```{style=citation}
 Swedish Reference Genome Portal (Retrieved DATE_ACCESSED), SciLifeLab Data Centre, version VERSION_NUMBER from <https://genomes.scilifelab.se>, [RRID:SCR_026008](https://rrid.site/data/record/nlx_144509-1/SCR_026008/resolver?q=rrid:scr_026008)
