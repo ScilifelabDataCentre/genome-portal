@@ -42,15 +42,26 @@ initialZoom: 1
 
 Write content here in markdown for the introduction tab of the species page.
 
+
 #### How to cite
 
-If you have used the pages for this species in the Genome Portal, please refer to it in-text as: "The *[EDIT Species name]* entry in the Swedish Reference Genome Portal (access date)." and use the following for the bibliography:
+If you use the data presented in the genome portal from this species in your research, please cite the original publication:
 
-- <p> Swedish Reference Genome Portal (access date), SciLifeLab Data Centre, version (version number) from <a href="https://genomes.scilifelab.se">https://genomes.scilifelab.se</a>, <a href="https://rrid.site/data/record/nlx_144509-1/SCR_026008/resolver?q=rrid:scr_026008">RRID:SCR_026008</a>.
+```{style=citation}
+[EDIT - Add the publication here using markdown formatting]
+```
+
+If you have used the pages for this species in the Genome Portal, please refer to it in-text as: "The *[EDIT Species name]* entry in the Swedish Reference Genome Portal (Retrieved {{<todays_date>}})." and use the following for the bibliography:
+
+```{style=citation}
+Swedish Reference Genome Portal (Retrieved DATE_ACCESSED), SciLifeLab Data Centre, version VERSION_NUMBER from <https://genomes.scilifelab.se>, [RRID:SCR_026008](https://rrid.site/data/record/nlx_144509-1/SCR_026008/resolver?q=rrid:scr_026008)
+```
 
 #### References
+
+- [EDIT - Add any additional references here as bullet points]
 
 
 #### Changelog
 
-- [TODO - Add date] - Species first published on the Portal
+- [EDIT - Add date] - Species first published on the Portal
