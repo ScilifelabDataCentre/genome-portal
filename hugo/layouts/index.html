@@ -52,45 +52,33 @@
 </div>
 
 
-
-<!-- Species cards -->
+<!-- Species cards are populated using a JSON containing all species info and JS -->
 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-4" id="card-container">
-    {{ $species := .Site.GetPage "section" "Species" }}
-    {{ range $species.Sections }}
+    {{ range seq 1 6 }}
     <div class="col">
-        <div class="card h-100 scilife-species-card">
+        <div class="card h-100 scilife-species-card" id="species-card-{{ . }}">
+
             <div class="card-image">
                 <figure>
-                    <a href="{{ .RelPermalink }}" title="Go to the {{ .Title | markdownify }} page">
-                        <img src="{{ .Params.cover_image }}" class="card-img-top"
-                            alt="Image of {{ .Title | markdownify }}">
+                    <a href="#" title="">
+                        <img src="" class="card-img-top" alt="">
                     </a>
-
-                    {{ if .Params.img_attrib_link }}
-                    <a href="{{ .Params.img_attrib_link }}" title="Go to the image source" target="_blank">
-                        <figcaption class="scilife-card-image-attrib"> {{ .Params.img_attrib_text }} </figcaption>
-                    </a>
-                    {{ else }}
-                    <p class="scilife-card-image-attrib">
-                        {{ .Params.img_attrib_text }}
-                    </p>
-                    {{ end }}
-
+                    <figcaption class="scilife-card-image-attrib"></figcaption>
                 </figure>
             </div>
 
             <div class="card-body">
-                <h2 class="card-title" id="science-name">{{ .Title | markdownify }}</h2>
-                <h3 class="card-title" id="common-name">{{ .Params.subtitle | markdownify }}</h3>
+                <h2 class="card-title" id="science-name"></h2>
+                <h3 class="card-title" id="common-name"></h3>
             </div>
 
             <div class="d-flex justify-content-between align-items-center">
-                <p class="card-text mb-0 mt-auto">Last updated: {{ .Params.last_updated }}</p>
+                <p class="card-text mb-0 mt-auto"></p>
                 <!-- The date below is hidden because used only in the sorting algo for easier date parsing -->
-                <div class="hidden-date" style="display: none;">{{ .Params.last_updated }}</div>
+                <div class="hidden-date" style="display: none;"></div>
 
-                <a href="{{ .RelPermalink }}" class="btn btn-primary scilife-species-button"
-                    title="Go to the {{ .Title | markdownify }} page">
+                <a href="#" class="btn btn-primary scilife-species-button"
+                    title="">
                     <i class="bi bi-arrow-right" style="font-size: 1.25em;"></i>
                 </a>
             </div>
@@ -98,8 +86,8 @@
         </div>
     </div>
     {{ end }}
-
 </div>
+
 
 <!-- shows if no search results -->
 <div id="no-filtered-card" class="alert alert-primary mt-3" style="display: none;" role="alert">
@@ -111,13 +99,5 @@
 {{ $speciesCardsJS := resources.Get "js/species_cards.js" | fingerprint | minify }}
 <script src="{{ $speciesCardsJS.RelPermalink }}"></script>
 
-<script>
-    fetch('/species_catalog.json')
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-        })
-        .catch(error => console.error('Error fetching species data:', error));
-</script>
 
 {{ end }}

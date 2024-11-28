@@ -1,3 +1,45 @@
+// Function to fetch the JSON data
+function fetchSpeciesData() {
+    return fetch('/species_catalog.json')
+        .then(response => response.json())
+        .catch(error => {
+            console.error('Error fetching species data:', error);
+            return [];
+        });
+}
+
+// Function to populate the species cards with the fetched data
+function populateSpeciesCards(data) {
+    data.forEach((species, index) => {
+        if (index < 6) {
+            const card = document.getElementById(`species-card-${index + 1}`);
+            if (card) {
+                card.querySelector('a').href = species.rel_permalink;
+                card.querySelector('a').title = `Go to the ${species.title} page`;
+                card.querySelector('img').src = species.cover_image;
+                card.querySelector('img').alt = `Image of ${species.title}`;
+                if (species.img_attrib_link) {
+                    card.querySelector('.scilife-card-image-attrib').innerHTML = `<a href="${species.img_attrib_link}" title="Go to the image source" target="_blank">${species.img_attrib_text}</a>`;
+                } else {
+                    card.querySelector('.scilife-card-image-attrib').textContent = species.img_attrib_text;
+                }
+                card.querySelector('#science-name').innerHTML = species.title;
+                card.querySelector('#common-name').innerHTML = species.subtitle;
+                card.querySelector('.card-text').textContent = `Last updated: ${species.last_updated}`;
+                card.querySelector('.hidden-date').textContent = species.last_updated;
+                card.querySelector('.btn').href = species.rel_permalink;
+                card.querySelector('.btn').title = `Go to the ${species.title} page`;
+            }
+        }
+    });
+}
+
+
+
+
+
+
+
 
 const speciesCards = Array.from(document.querySelectorAll('.scilife-species-card'));
 
@@ -95,11 +137,15 @@ sortingButtons.forEach(buttonId => {
 
         dropdown.textContent = sortOptionSelected;
         dropdown.innerHTML = `<i class="bi ${icon}"></i> ` + sortOptionSelected;
-
-        searchAndFilter();
     });
 });
 
+
+
+
+// On initial load...
+// Fetch the data and populate the species cards
+fetchSpeciesData().then(data => populateSpeciesCards(data));
+
 // Event listners for when page fully loaded or search box input
-document.addEventListener("DOMContentLoaded", searchAndFilter);
-document.querySelector("#Search").addEventListener("input", searchAndFilter);
+// document.querySelector("#Search").addEventListener("input", searchAndFilter);

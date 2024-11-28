@@ -1,16 +1,17 @@
 {{/* This template generates a .json with all data needed to build each species's card */}}
 {{- $species := .Site.GetPage "section" "Species" -}}
+
 [
 {{- range $index, $page := $species.Sections -}}
     {{- if $index }},{{ end -}}
     {
-        "title": {{ $page.Title | jsonify }},
-        "subtitle": {{ $page.Params.subtitle | jsonify }},
+        "title": {{ $page.Title | markdownify | jsonify }},
+        "subtitle": {{ $page.Params.subtitle | markdownify | jsonify }},
         "cover_image": {{ $page.Params.cover_image | jsonify }},
         "img_attrib_link": {{ $page.Params.img_attrib_link | jsonify }},
-        "img_attrib_text": {{ $page.Params.img_attrib_text | jsonify }},
+        "img_attrib_text": {{ $page.Params.img_attrib_text | markdownify | jsonify }},
         "last_updated": {{ $page.Params.last_updated | jsonify }},
-        "rel_permalink": {{ $page.RelPermalink | jsonify }}
+        "rel_permalink": {{ $page.RelPermalink | jsonify }},
     }
 {{- end -}}
 ]
