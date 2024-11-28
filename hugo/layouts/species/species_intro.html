@@ -18,6 +18,8 @@ integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="" d
 
 {{ define "main" }}
 
+{{ .Page.Store.Set "needsDate" true }}
+
 {{ partial "species_title.html" . }}
 
 {{ partial "species_nav.html" . }}

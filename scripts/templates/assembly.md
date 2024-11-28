@@ -18,7 +18,6 @@ stats_data_path: "SPECIES_FOLDER/species_stats"
 lineage_data_path: "SPECIES_FOLDER/taxonomy"
 ---
 
-### Contributor(s)
 
 - [EDIT, Add information about provider and the research group that published the genome and data tracks]
 
@@ -26,7 +25,9 @@ lineage_data_path: "SPECIES_FOLDER/taxonomy"
 
 The data for *[ADD SPECIES NAME]* displayed in the genome portal comes from:
 
-- [EDIT ADD PUBLICATION]
+```{style=citation}
+[EDIT - Add the publication here using markdown formatting]
+```
 
 ### Funding
 

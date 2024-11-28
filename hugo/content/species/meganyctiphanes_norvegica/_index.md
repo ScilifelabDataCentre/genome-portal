@@ -37,11 +37,15 @@ The wide distribution and thermal tolerance of *M. norvegica* make it a powerful
 
 If you use the data presented in the genome portal from this species in your research, please cite the original publication:
 
-- <p> Unneberg, P., Larsson, M., Olsson, A., Wallerman, O., Petri, A., Bunikis, I., Vinnere Pettersson, O., Papetti, C., Gislason, A., Glenner, H., Cartes, J. E., Blanco-Bercial, L., Eriksen, E., Meyer, B., & Wallberg, A. (2024). Ecological genomics in the Northern krill uncovers loci for local adaptation across ocean basins. Nature Communications, 15(1), 6297. <a href="https://doi.org/10.1038/s41467-024-50239-7"> https://doi.org/10.1038/s41467-024-50239-7</a></p>
+```{style=citation}
+Unneberg, P., Larsson, M., Olsson, A., Wallerman, O., Petri, A., Bunikis, I., Vinnere Pettersson, O., Papetti, C., Gislason, A., Glenner, H., Cartes, J. E., Blanco-Bercial, L., Eriksen, E., Meyer, B., & Wallberg, A. (2024). Ecological genomics in the Northern krill uncovers loci for local adaptation across ocean basins. Nature Communications, 15(1), 6297. <https://doi.org/10.1038/s41467-024-50239-7>
+```
 
-If you have used the pages for this species in the Genome Portal, please refer to it in-text as: "The *Meganyctiphanes norvegica* entry in the Swedish Reference Genome Portal (access date)." and use the following for the bibliography:
+If you have used the pages for this species in the Genome Portal, please refer to it in-text as: "The *Meganyctiphanes norvegica* entry in the Swedish Reference Genome Portal (Retrieved <span class="todays-date"></span>)." and use the following for the bibliography:
 
-- <p> Swedish Reference Genome Portal (access date), SciLifeLab Data Centre, version (version number) from <a href="https://genomes.scilifelab.se">https://genomes.scilifelab.se</a>, <a href="https://rrid.site/data/record/nlx_144509-1/SCR_026008/resolver?q=rrid:scr_026008">RRID:SCR_026008</a>.
+```{style=citation}
+Swedish Reference Genome Portal (Retrieved DATE_ACCESSED), SciLifeLab Data Centre, version VERSION_NUMBER from <https://genomes.scilifelab.se">, [RRID:SCR_026008](https://rrid.site/data/record/nlx_144509-1/SCR_026008/resolver?q=rrid:scr_026008)
+```
 
 #### References
 
