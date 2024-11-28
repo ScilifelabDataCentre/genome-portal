@@ -3,6 +3,17 @@ languageCode: "en-us"
 title: "Swedish Reference Genome Portal, hosted by SciLifeLab"
 buildFuture: true
 
+outputs:
+  home:
+    - HTML
+    - JSON
+
+outputFormats:
+  JSON:
+    mediaType: "application/json"
+    baseName: "species_catalog"
+    isPlainText: true
+
 markup:
   goldmark:
     renderer:

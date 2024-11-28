@@ -4,6 +4,7 @@ repos:
   hooks:
   - id: check-yaml
   - id: check-json
+    exclude: ^hugo/layouts/index\.json\.json$
   - id: check-added-large-files
   - id: check-merge-conflict
   - id: detect-private-key
