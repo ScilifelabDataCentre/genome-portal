@@ -1,79 +1,68 @@
+const NUM_CARDS = 6;
+let speciesData = [];
+
 // Function to fetch the JSON data
 function fetchSpeciesData() {
     return fetch('/species_catalog.json')
         .then(response => response.json())
+        .then(data => {
+            speciesData = data;
+            return data;
+        })
         .catch(error => {
             console.error('Error fetching species data:', error);
             return [];
         });
 }
 
+// hide the cards that are not populated
+function hideRemainingCards(startIndex) {
+    for (let i = startIndex; i < NUM_CARDS; i++) {
+        const card = document.getElementById(`species-card-${i + 1}`);
+        if (card) {
+            card.style.display = 'none';
+        }
+    }
+}
+
+
+
 // Function to populate the species cards with the fetched data
 function populateSpeciesCards(data) {
     data.forEach((species, index) => {
-        if (index < 6) {
-            const card = document.getElementById(`species-card-${index + 1}`);
-            if (card) {
-                card.querySelector('a').href = species.rel_permalink;
-                card.querySelector('a').title = `Go to the ${species.title} page`;
-                card.querySelector('img').src = species.cover_image;
-                card.querySelector('img').alt = `Image of ${species.title}`;
-                if (species.img_attrib_link) {
-                    card.querySelector('.scilife-card-image-attrib').innerHTML = `<a href="${species.img_attrib_link}" title="Go to the image source" target="_blank">${species.img_attrib_text}</a>`;
-                } else {
-                    card.querySelector('.scilife-card-image-attrib').textContent = species.img_attrib_text;
-                }
-                card.querySelector('#science-name').innerHTML = species.title;
-                card.querySelector('#common-name').innerHTML = species.subtitle;
-                card.querySelector('.card-text').textContent = `Last updated: ${species.last_updated}`;
-                card.querySelector('.hidden-date').textContent = species.last_updated;
-                card.querySelector('.btn').href = species.rel_permalink;
-                card.querySelector('.btn').title = `Go to the ${species.title} page`;
+        const card = document.getElementById(`species-card-${index + 1}`);
+        if (card) {
+            card.querySelector('a').href = species.rel_permalink;
+            card.querySelector('a').title = `Go to the ${species.title} page`;
+            card.querySelector('img').src = species.cover_image;
+            card.querySelector('img').alt = `Image of ${species.title}`;
+            if (species.img_attrib_link) {
+                card.querySelector('.scilife-card-image-attrib').innerHTML = `<a href="${species.img_attrib_link}" title="Go to the image source" target="_blank">${species.img_attrib_text}</a>`;
+            } else {
+                card.querySelector('.scilife-card-image-attrib').textContent = species.img_attrib_text;
             }
+            card.querySelector('.science-name').innerHTML = species.title;
+            card.querySelector('.common-name').innerHTML = species.subtitle;
+            card.querySelector('.card-text').textContent = `Last updated: ${species.last_updated}`;
+            card.querySelector('.hidden-date').textContent = species.last_updated;
+            card.querySelector('.btn').href = species.rel_permalink;
+            card.querySelector('.btn').title = `Go to the ${species.title} page`;
+            card.style.display = 'block'; // Ensure the card is visible
         }
     });
 }
 
-
-
-
-
-
-
-
-const speciesCards = Array.from(document.querySelectorAll('.scilife-species-card'));
-
-// helper function to handle missing elements by returning empty string
-function getElementText(root, selector) {
-    const element = root.querySelector(selector);
-    if (!element) {
-        console.warn(`Element not found for selector: ${selector} in root: ${root}`);
-        return '';
-    }
-    return element.textContent;
-}
-
+// Sort alphabetically
 function sortAlphabetically(a, b) {
-    const titleA = getElementText(a, '#science-name');
-    const titleB = getElementText(b, '#science-name');
-    return titleA.localeCompare(titleB);
+    return a.title.localeCompare(b.title);
 }
 
 const sortRevAlphabetically = (a, b) => -sortAlphabetically(a, b);
 
-// All dates have DD/MM/YYYY format but
-// JS Dates object need standard define in stringToDate function
-function stringToDate(str) {
-    const [dd, mm, yyyy] = str.split('/');
-    return new Date(yyyy, mm - 1, dd);
-}
-
+// Sort by last updated
 function sortUpdated(a, b) {
-    const dateStrA = getElementText(a, '.hidden-date');
-    const dateStrB = getElementText(b, '.hidden-date');
-
-    const dateA = stringToDate(dateStrA);
-    const dateB = stringToDate(dateStrB);
+    const dateA = new Date(a.last_updated);
+    const dateB = new Date(b.last_updated);
     return dateB - dateA;
 }
 
@@ -83,42 +72,44 @@ function searchAndFilter() {
     const RevAlphabetSet = document.querySelector("#RevAlphabet").classList.contains("active");
     const UpdatedSet = document.querySelector("#Updated").classList.contains("active");
 
-    document.querySelector("#card-container").innerHTML = "";
-    let cardsToAppend = [];
+    let filteredData = speciesData;
 
-    if (searchText === "") {
-        cardsToAppend = speciesCards.slice();
-    } else {
-        cardsToAppend = speciesCards.filter(function (card) {
-            const title = getElementText(card, '#science-name').toLowerCase();
-            const subtitle = getElementText(card, '#common-name').toLowerCase();
-            const cardText = getElementText(card, '.card-text').toLowerCase();
+    if (searchText !== "") {
+        filteredData = speciesData.filter(species => {
+            const title = species.title.toLowerCase();
+            const subtitle = species.subtitle.toLowerCase();
+            const cardText = species.last_updated.toLowerCase();
             return title.includes(searchText) || subtitle.includes(searchText) || cardText.includes(searchText);
         });
     }
 
-    if (cardsToAppend.length === 0) {
+    if (filteredData.length === 0) {
         document.querySelector("#no-filtered-card").style.display = 'block';
     } else {
         document.querySelector("#no-filtered-card").style.display = 'none';
 
         if (RevAlphabetSet) {
-            cardsToAppend.sort(sortRevAlphabetically);
-        }
-        else if (UpdatedSet) {
-            cardsToAppend.sort(sortUpdated);
-        }
-        else {
-            cardsToAppend.sort(sortAlphabetically)
+            filteredData.sort(sortRevAlphabetically);
+        } else if (UpdatedSet) {
+            filteredData.sort(sortUpdated);
+        } else {
+            filteredData.sort(sortAlphabetically);
         }
 
-        cardsToAppend.forEach(function (card) {
-            document.querySelector("#card-container").appendChild(card.parentElement);
-        });
+        // Get the first set of results and populate the species cards
+        const topResults = filteredData.slice(0, NUM_CARDS);
+        populateSpeciesCards(topResults);
     }
 }
 
-// Event listeners for sorting buttons and then search box
+// On initial load...
+// Fetch the data and populate the species cards then filter according to defaults.
+fetchSpeciesData().then(data => {
+    populateSpeciesCards(data);
+    searchAndFilter();
+});
+
+// Event listeners for click on sorting buttons
 const sortingButtons = ["Alphabet", "RevAlphabet", "Updated"];
 sortingButtons.forEach(buttonId => {
     document.getElementById(buttonId).addEventListener("click", function () {
@@ -137,15 +128,13 @@ sortingButtons.forEach(buttonId => {
 
         dropdown.textContent = sortOptionSelected;
         dropdown.innerHTML = `<i class="bi ${icon}"></i> ` + sortOptionSelected;
+        // TODO - do I need to add hideRemainingCards(0) here? when pagination in place?
+        searchAndFilter(); // Re-filter and sort on button click
     });
 });
 
-
-
-
-// On initial load...
-// Fetch the data and populate the species cards
-fetchSpeciesData().then(data => populateSpeciesCards(data));
-
-// Event listners for when page fully loaded or search box input
-// document.querySelector("#Search").addEventListener("input", searchAndFilter);
+// Event listeners for search box input
+document.querySelector("#Search").addEventListener("input", function() {
+    hideRemainingCards(0);
+    searchAndFilter();
+});
