@@ -52,7 +52,7 @@
 </div>
 
 
-{{ $numbSpeciesPerPage := 1 }}
+{{ $numbSpeciesPerPage := 2 }}
 <!-- Species cards are populated using a JSON containing all species info and JS -->
 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-4" id="card-container">
     {{ range seq 1 $numbSpeciesPerPage }}
@@ -92,7 +92,6 @@
 </div>
 
 
-
 <!-- Add pagination if numb of species cards is > than number of species per page  -->
 <!-- TODO - if no pagination - will everything still work? -->
 {{- $species:= .Site.GetPage "section" "Species" -}}
@@ -103,13 +102,8 @@
 {{end}}
 
 
-
-
-
-
-
 {{ $speciesCardsJS := resources.Get "js/species_cards.js" | fingerprint | minify }}
-<script src="{{ $speciesCardsJS.RelPermalink }}"></script>
+<script type="module" src="{{ $speciesCardsJS.RelPermalink }}"></script>
 
 
 {{ end }}

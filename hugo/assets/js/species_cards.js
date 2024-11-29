@@ -1,17 +1,19 @@
+/*
+Docstring TODO
+*/
 let speciesData = [];
 let currentPage = 1;
 let NUM_CARDS = 0; // updated once JSON data is fetched
 const CARDS_PER_PAGE = document.querySelectorAll('.scilife-species-card').length;
 
-
 // Function to fetch the JSON data
 function fetchSpeciesData() {
     return fetch('/species_catalog.json')
         .then(response => response.json())
-        .then(data => {
-            speciesData = data;
+        .then(fetchedData => {
+            speciesData = fetchedData;
             NUM_CARDS = speciesData.length;
-            return data;
+            return speciesData; // Return the global speciesData variable
         })
         .catch(error => {
             console.error('Error fetching species data:', error);
@@ -19,18 +21,71 @@ function fetchSpeciesData() {
         });
 }
 
-// hide the cards that are not populated
-function hideRemainingCards(startIndex) {
-    for (let i = startIndex; i < NUM_CARDS; i++) {
-        const card = document.getElementById(`species-card-${i + 1}`);
-        if (card) {
-            card.style.display = 'none';
+
+// Sort alphabetically
+function sortAlphabetically(a, b) {
+    return a.title.localeCompare(b.title);
+}
+
+const sortRevAlphabetically = (a, b) => -sortAlphabetically(a, b);
+
+// All dates have DD/MM/YYYY format but
+// JS Dates object need standard define in stringToDate function
+function stringToDate(str) {
+    const [dd, mm, yyyy] = str.split('/');
+    return new Date(yyyy, mm - 1, dd);
+}
+
+function sortUpdated(a, b) {
+    const dateA = stringToDate(a.last_updated);
+    const dateB = stringToDate(b.last_updated);
+    return dateB - dateA;
+}
+
+function searchAndFilter() {
+    const searchText = document.querySelector("#Search").value.toLowerCase();
+    const RevAlphabetSet = document.querySelector("#RevAlphabet").classList.contains("active");
+    const UpdatedSet = document.querySelector("#Updated").classList.contains("active");
+
+    let filteredData = speciesData;
+
+    if (searchText !== "") {
+        filteredData = speciesData.filter(species => {
+            const title = species.title.toLowerCase();
+            const subtitle = species.subtitle.toLowerCase();
+            const cardText = species.last_updated.toLowerCase();
+            return title.includes(searchText) || subtitle.includes(searchText) || cardText.includes(searchText);
+        });
+    }
+
+    if (filteredData.length !== 0) {
+        if (RevAlphabetSet) {
+            filteredData.sort(sortRevAlphabetically);
+        } else if (UpdatedSet) {
+            filteredData.sort(sortUpdated);
+        } else {
+            filteredData.sort(sortAlphabetically);
         }
     }
+    return filteredData;
+}
+
+
+// Function to hide all cards
+function hideAllCards() {
+    const cards = document.querySelectorAll('.scilife-species-card');
+    cards.forEach(card => {
+        card.style.display = 'none';
+    });
 }
 
 // Function to populate the species cards with the fetched data
 function populateSpeciesCards(data) {
+
+    // Hide all cards initially
+    hideAllCards();
+
+    // Add back the cards that match the search up to the page limit
     data.forEach((species, index) => {
         const card = document.getElementById(`species-card-${index + 1}`);
         if (card) {
@@ -52,11 +107,9 @@ function populateSpeciesCards(data) {
         }
     });
 
-    // Hide any remaining cards
-    hideRemainingCards(data.length);
 }
 
-// Function to handle pagination
+// Updates the page number shown as active in the pagination
 function updateActivePage(page) {
     document.querySelectorAll('.pagination .page-item').forEach(item => {
         item.classList.remove('active');
@@ -68,6 +121,7 @@ function updateActivePage(page) {
     }
 }
 
+// Function to handle pagination
 function handlePagination(page) {
     if (page === 'prev') {
         currentPage = Math.max(currentPage - 1, 1);
@@ -76,7 +130,6 @@ function handlePagination(page) {
     } else {
         currentPage = parseInt(page);
     }
-
     updateActivePage(currentPage);
 }
 
@@ -112,58 +165,11 @@ function updatePaginationButtons(numPages) {
 
 
 
-// Sort alphabetically
-function sortAlphabetically(a, b) {
-    return a.title.localeCompare(b.title);
-}
-
-const sortRevAlphabetically = (a, b) => -sortAlphabetically(a, b);
-
-// All dates have DD/MM/YYYY format but
-// JS Dates object need standard define in stringToDate function
-function stringToDate(str) {
-    const [dd, mm, yyyy] = str.split('/');
-    return new Date(yyyy, mm - 1, dd);
-}
-
-function sortUpdated(a, b) {
-    const dateA = stringToDate(a.last_updated);
-    const dateB = stringToDate(b.last_updated);
-    console.log(dateA, dateB);
-    return dateB - dateA;
-}
-
-function searchAndOrder() {
-    const searchText = document.querySelector("#Search").value.toLowerCase();
-    const RevAlphabetSet = document.querySelector("#RevAlphabet").classList.contains("active");
-    const UpdatedSet = document.querySelector("#Updated").classList.contains("active");
-
-    let filteredData = speciesData;
-
-    if (searchText !== "") {
-        filteredData = speciesData.filter(species => {
-            const title = species.title.toLowerCase();
-            const subtitle = species.subtitle.toLowerCase();
-            const cardText = species.last_updated.toLowerCase();
-            return title.includes(searchText) || subtitle.includes(searchText) || cardText.includes(searchText);
-        });
-    }
-
-    if (filteredData.length !== 0) {
-        if (RevAlphabetSet) {
-            filteredData.sort(sortRevAlphabetically);
-        } else if (UpdatedSet) {
-            filteredData.sort(sortUpdated);
-        } else {
-            filteredData.sort(sortAlphabetically);
-        }
-    }
-    return filteredData;
-}
-
 function displayResults(filteredData) {
     if (filteredData.length === 0) {
         document.querySelector("#no-filtered-card").style.display = 'block';
+        hideAllCards();
+        updatePaginationButtons(1);
     } else {
         document.querySelector("#no-filtered-card").style.display = 'none';
 
@@ -188,7 +194,7 @@ function handlePaginationEvent(event) {
     const target = event.target;
     const page = target.getAttribute('data-page');
     handlePagination(page);
-    const filteredData = searchAndOrder();
+    const filteredData = searchAndFilter();
     displayResults(filteredData);
 }
 
@@ -213,28 +219,30 @@ function handleSortingEvent(event) {
     dropdown.innerHTML = `<i class="bi ${icon}"></i> ` + sortOptionSelected;
 
     currentPage = 1; // Reset to page 1 when a sort event occurs
-    const filteredData = searchAndOrder();
+    const filteredData = searchAndFilter();
     displayResults(filteredData);
 }
 
 function handleSearchEvent(event) {
     currentPage = 1; // Reset to page 1 when a search input event occurs
-    const filteredData = searchAndOrder();
+    handlePagination(currentPage); // Update the active page
+    const filteredData = searchAndFilter();
     displayResults(filteredData);
 }
 
 
 
-
 // On initial load...
 // Fetch the data and populate the species cards
-fetchSpeciesData().then(data => {
-    populateSpeciesCards(data.slice(0, CARDS_PER_PAGE));
-    const filteredData = searchAndOrder();
+fetchSpeciesData().then(speciesData => {
+    const filteredData = searchAndFilter();
     displayResults(filteredData);
 });
 
-// Attach the event listener to pagination buttons, sorting buttons, and search input
+
+
+
+// Attach event listeners to pagination buttons, sorting buttons, and search input
 document.querySelectorAll('.page-link').forEach(element => {
     element.addEventListener('click', handlePaginationEvent);
 });
