@@ -148,7 +148,7 @@ def get_first_fasta_header_and_sequence_length(file_path):
 
 def get_protein_coding_genes_file_name(config):
     for track in config["tracks"]:
-        if track["name"] == "Protein coding genes":
+        if track["name"].lower() in ["protein coding genes", "protein-coding genes"]:
             protein_coding_genes_found = True
             if "fileName" in track:
                 protein_coding_gene_file_name = strip_extension(track["fileName"])
@@ -161,15 +161,12 @@ def get_protein_coding_genes_file_name(config):
         raise ValueError("No track with name 'Protein coding genes' found. Exiting.")
 
 
-def populate_placeholder_values(data, config, git_root):
-    species_name = config["organism"]
-    species_abbreviation = get_species_abbreviation(species_name)
+def populate_placeholder_values(data, config, git_root, species_name, species_abbreviation, species_name_underscored):
     assembly_name = config["assembly"]["name"]
     assembly_file_name = os.path.basename(config["assembly"]["url"])
     protein_coding_gene_file_name = get_protein_coding_genes_file_name(config)
 
     # Check if the assembly URL filename exists in ./data/[SPECIES_NAME]/ after being downloaded by the makefile
-    species_name_underscored = species_name.replace(" ", "_").lower()
     assembly_file_path = os.path.join(
         git_root, "data", species_name_underscored, assembly_file_name.replace(".fasta", ".fna")
     )
@@ -214,7 +211,37 @@ def populate_placeholder_values(data, config, git_root):
         0
     ]["tracks"][0]["displays"][0]["configuration"].replace("[TRACK_FILE_NAME]", protein_coding_gene_file_name)
 
-    return data, species_name_underscored
+    return data
+
+
+def add_defaultSession_true_tracks(config, data, species_abbreviation):
+    for track in config["tracks"]:
+        if "defaultSession" in track and track["defaultSession"]:
+            print(track)
+            print(track["defaultSession"])
+            # Ensure protein-coding genes are not added to the default session again if the user has set its with efaultSession: true in the config.yml
+            if track["name"].lower() in ["protein coding genes", "protein-coding genes"]:
+                continue
+
+            track_outer_id = f"{species_abbreviation}_default_{track['name'].replace(' ', '_').lower()}"
+            track_file_name = f"{track['fileName'].rstrip('.gz').rstrip('.zip').rstrip('.bgz')}"
+            new_track = {
+                "id": track_outer_id,
+                "type": "FeatureTrack",
+                "configuration": track_file_name,
+                "minimized": False,
+                "displays": [
+                    {
+                        "id": f"{track_outer_id}_display",
+                        "type": "LinearBasicDisplay",
+                        "heightPreConfig": 150,
+                        "configuration": f"{track_file_name}-LinearBasicDisplay",
+                    }
+                ],
+            }
+            data["defaultSession"]["views"][0]["tracks"].append(new_track)
+
+    return data
 
 
 def save_json(data, output_json_path, config_path):
@@ -240,12 +267,20 @@ def main():
         raise ValueError("The configuration file does not contain 'tracks'. Exiting.")
     data = load_json_template(json_path)
 
-    populated_data, species_name_underscored = populate_placeholder_values(data, config, git_root)
+    species_name = config["organism"]
+    species_abbreviation = get_species_abbreviation(species_name)
+    species_name_underscored = species_name.replace(" ", "_").lower()
+
+    populated_data = populate_placeholder_values(
+        data, config, git_root, species_name, species_abbreviation, species_name_underscored
+    )
+    populated_data = add_defaultSession_true_tracks(config, populated_data, species_abbreviation)
     output_json_path = args.out
     if not output_json_path:
         output_json_path = os.path.join(
             git_root, f"scripts/data_stewardship/temp/{species_name_underscored}_default_session.json"
         )
+
     save_json(populated_data, output_json_path, config_path)
 
 
