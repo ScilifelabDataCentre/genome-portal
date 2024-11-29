@@ -1,5 +1,8 @@
-const NUM_CARDS = 6;
 let speciesData = [];
+let currentPage = 1;
+let NUM_CARDS = 0; // updated once JSON data is fetched
+const CARDS_PER_PAGE = document.querySelectorAll('.scilife-species-card').length;
+
 
 // Function to fetch the JSON data
 function fetchSpeciesData() {
@@ -7,6 +10,7 @@ function fetchSpeciesData() {
         .then(response => response.json())
         .then(data => {
             speciesData = data;
+            NUM_CARDS = speciesData.length;
             return data;
         })
         .catch(error => {
@@ -25,8 +29,6 @@ function hideRemainingCards(startIndex) {
     }
 }
 
-
-
 // Function to populate the species cards with the fetched data
 function populateSpeciesCards(data) {
     data.forEach((species, index) => {
@@ -44,13 +46,71 @@ function populateSpeciesCards(data) {
             card.querySelector('.science-name').innerHTML = species.title;
             card.querySelector('.common-name').innerHTML = species.subtitle;
             card.querySelector('.card-text').textContent = `Last updated: ${species.last_updated}`;
-            card.querySelector('.hidden-date').textContent = species.last_updated;
             card.querySelector('.btn').href = species.rel_permalink;
             card.querySelector('.btn').title = `Go to the ${species.title} page`;
             card.style.display = 'block'; // Ensure the card is visible
         }
     });
+
+    // Hide any remaining cards
+    hideRemainingCards(data.length);
 }
+
+// Function to handle pagination
+function updateActivePage(page) {
+    document.querySelectorAll('.pagination .page-item').forEach(item => {
+        item.classList.remove('active');
+    });
+
+    const activeItem = document.querySelector(`.pagination .page-link[data-page="${page}"]`).parentElement;
+    if (activeItem) {
+        activeItem.classList.add('active');
+    }
+}
+
+function handlePagination(page) {
+    if (page === 'prev') {
+        currentPage = Math.max(currentPage - 1, 1);
+    } else if (page === 'next') {
+        currentPage = Math.min(currentPage + 1, Math.ceil(speciesData.length / CARDS_PER_PAGE));
+    } else {
+        currentPage = parseInt(page);
+    }
+
+    updateActivePage(currentPage);
+}
+
+function updatePaginationButtons(numPages) {
+    const paginationItems = document.querySelectorAll('.pagination .page-item');
+    paginationItems.forEach((item, index) => {
+        const pageLink = item.querySelector('.page-link');
+        if (pageLink) {
+            const page = pageLink.getAttribute('data-page');
+            if (page === 'prev') {
+                if (currentPage === 1) {
+                    item.classList.add('disabled');
+                } else {
+                    item.classList.remove('disabled');
+                }
+            } else if (page === 'next') {
+                if (currentPage === numPages) {
+                    item.classList.add('disabled');
+                } else {
+                    item.classList.remove('disabled');
+                }
+            } else {
+                const pageIndex = parseInt(page);
+                if (pageIndex > numPages) {
+                    item.classList.add('disabled');
+                } else {
+                    item.classList.remove('disabled');
+                }
+            }
+        }
+    });
+}
+
+
 
 // Sort alphabetically
 function sortAlphabetically(a, b) {
@@ -59,16 +119,22 @@ function sortAlphabetically(a, b) {
 
 const sortRevAlphabetically = (a, b) => -sortAlphabetically(a, b);
 
-// Sort by last updated
+// All dates have DD/MM/YYYY format but
+// JS Dates object need standard define in stringToDate function
+function stringToDate(str) {
+    const [dd, mm, yyyy] = str.split('/');
+    return new Date(yyyy, mm - 1, dd);
+}
+
 function sortUpdated(a, b) {
-    const dateA = new Date(a.last_updated);
-    const dateB = new Date(b.last_updated);
+    const dateA = stringToDate(a.last_updated);
+    const dateB = stringToDate(b.last_updated);
+    console.log(dateA, dateB);
     return dateB - dateA;
 }
 
-function searchAndFilter() {
+function searchAndOrder() {
     const searchText = document.querySelector("#Search").value.toLowerCase();
-    const AlphabetSet = document.querySelector("#Alphabet").classList.contains("active");
     const RevAlphabetSet = document.querySelector("#RevAlphabet").classList.contains("active");
     const UpdatedSet = document.querySelector("#Updated").classList.contains("active");
 
@@ -83,11 +149,7 @@ function searchAndFilter() {
         });
     }
 
-    if (filteredData.length === 0) {
-        document.querySelector("#no-filtered-card").style.display = 'block';
-    } else {
-        document.querySelector("#no-filtered-card").style.display = 'none';
-
+    if (filteredData.length !== 0) {
         if (RevAlphabetSet) {
             filteredData.sort(sortRevAlphabetically);
         } else if (UpdatedSet) {
@@ -95,46 +157,88 @@ function searchAndFilter() {
         } else {
             filteredData.sort(sortAlphabetically);
         }
+    }
+    return filteredData;
+}
 
-        // Get the first set of results and populate the species cards
-        const topResults = filteredData.slice(0, NUM_CARDS);
-        populateSpeciesCards(topResults);
+function displayResults(filteredData) {
+    if (filteredData.length === 0) {
+        document.querySelector("#no-filtered-card").style.display = 'block';
+    } else {
+        document.querySelector("#no-filtered-card").style.display = 'none';
+
+        // Calculate the number of pages based on the filtered data
+        const numPages = Math.ceil(filteredData.length / CARDS_PER_PAGE);
+        updatePaginationButtons(numPages);
+
+        // Calculate the start and end indices based on the current page
+        const startIndex = (currentPage - 1) * CARDS_PER_PAGE;
+        const endIndex = startIndex + CARDS_PER_PAGE;
+
+        // Get the subset of results for the current page and populate the species cards
+        const paginatedResults = filteredData.slice(startIndex, endIndex);
+        populateSpeciesCards(paginatedResults);
     }
 }
 
+
+
+function handlePaginationEvent(event) {
+    event.preventDefault();
+    const target = event.target;
+    const page = target.getAttribute('data-page');
+    handlePagination(page);
+    const filteredData = searchAndOrder();
+    displayResults(filteredData);
+}
+
+function handleSortingEvent(event) {
+    event.preventDefault();
+    const target = event.target;
+    const sortingButtons = ["Alphabet", "RevAlphabet", "Updated"];
+    sortingButtons.forEach(id => document.getElementById(id).classList.remove("active"));
+    target.classList.add("active");
+
+    // (Update the dropdown text with selected item)
+    const dropdown = document.querySelector(".scilife-sort-dropdown");
+    const sortOptionSelected = target.textContent.trim();
+    const iconMapping = {
+        'Name (A to Z)': 'bi-sort-alpha-down',
+        'Name (Z to A)': 'bi-sort-alpha-up',
+        'Last updated': 'bi-clock'
+    };
+    const icon = iconMapping[sortOptionSelected];
+
+    dropdown.textContent = sortOptionSelected;
+    dropdown.innerHTML = `<i class="bi ${icon}"></i> ` + sortOptionSelected;
+
+    currentPage = 1; // Reset to page 1 when a sort event occurs
+    const filteredData = searchAndOrder();
+    displayResults(filteredData);
+}
+
+function handleSearchEvent(event) {
+    currentPage = 1; // Reset to page 1 when a search input event occurs
+    const filteredData = searchAndOrder();
+    displayResults(filteredData);
+}
+
+
+
+
 // On initial load...
-// Fetch the data and populate the species cards then filter according to defaults.
+// Fetch the data and populate the species cards
 fetchSpeciesData().then(data => {
-    populateSpeciesCards(data);
-    searchAndFilter();
+    populateSpeciesCards(data.slice(0, CARDS_PER_PAGE));
+    const filteredData = searchAndOrder();
+    displayResults(filteredData);
 });
 
-// Event listeners for click on sorting buttons
-const sortingButtons = ["Alphabet", "RevAlphabet", "Updated"];
-sortingButtons.forEach(buttonId => {
-    document.getElementById(buttonId).addEventListener("click", function () {
-        sortingButtons.forEach(id => document.getElementById(id).classList.remove("active"));
-        this.classList.add("active");
-
-        // (Update the dropdown text with selected item)
-        const dropdown = document.querySelector(".scilife-sort-dropdown");
-        const sortOptionSelected = this.textContent.trim();
-        const iconMapping = {
-            'Name (A to Z)': 'bi-sort-alpha-down',
-            'Name (Z to A)': 'bi-sort-alpha-up',
-            'Last updated': 'bi-clock'
-        };
-        const icon = iconMapping[sortOptionSelected];
-
-        dropdown.textContent = sortOptionSelected;
-        dropdown.innerHTML = `<i class="bi ${icon}"></i> ` + sortOptionSelected;
-        // TODO - do I need to add hideRemainingCards(0) here? when pagination in place?
-        searchAndFilter(); // Re-filter and sort on button click
-    });
+// Attach the event listener to pagination buttons, sorting buttons, and search input
+document.querySelectorAll('.page-link').forEach(element => {
+    element.addEventListener('click', handlePaginationEvent);
 });
-
-// Event listeners for search box input
-document.querySelector("#Search").addEventListener("input", function() {
-    hideRemainingCards(0);
-    searchAndFilter();
+document.querySelectorAll('.scilife-dropdown-item').forEach(element => {
+    element.addEventListener('click', handleSortingEvent);
 });
+document.querySelector('#Search').addEventListener('input', handleSearchEvent);

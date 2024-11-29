@@ -52,9 +52,10 @@
 </div>
 
 
+{{ $numbSpeciesPerPage := 1 }}
 <!-- Species cards are populated using a JSON containing all species info and JS -->
 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-4" id="card-container">
-    {{ range seq 1 6 }}
+    {{ range seq 1 $numbSpeciesPerPage }}
     <div class="col">
         <div class="card h-100 scilife-species-card" id="species-card-{{ . }}">
 
@@ -89,6 +90,21 @@
 <div id="no-filtered-card" class="alert alert-primary mt-3" style="display: none;" role="alert">
     No results found with your search term
 </div>
+
+
+
+<!-- Add pagination if numb of species cards is > than number of species per page  -->
+<!-- TODO - if no pagination - will everything still work? -->
+{{- $species:= .Site.GetPage "section" "Species" -}}
+{{- $numbSpecies := len $species.Sections -}}
+
+{{if gt $numbSpecies $numbSpeciesPerPage}}
+    {{ partial "pagination.html" (dict "numbSpecies" $numbSpecies "numbSpeciesPerPage" $numbSpeciesPerPage) }}
+{{end}}
+
+
+
+
 
 
 
