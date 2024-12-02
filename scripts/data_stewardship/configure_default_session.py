@@ -1,5 +1,5 @@
 """
-This scripts takes a populated config.yml file for a species in the Swedish Reference Genome Portal and generates a
+This script takes a populated config.yml file for a species in the Swedish Reference Genome Portal and generates a
 minimal JBrowse 2 defaultSession from it. The resulting output file can be copied to the config.json file in the species
 directory, from where it will be parsed by the makefile and used to generate the final config.json that will be used by
 the JBrowse 2 instance.
@@ -15,15 +15,13 @@ for download of files where the file names is hidden in the url (e.g. Figshare).
 The path to a config.yml file configured for the Swedish Reference Genome Portal. The option --yaml is required.
 
 ### Output:
-A json file with a minimal JBrowse 2 defaultSession for the Swedish Reference Genome Portal. The output will be saved to
-./scripts/data_stewardship/temp/test_default_session.json in the Genome Portal git repository. The file or its content can
-then be copied to config.json in .config/[SPECIES_NAMES].
+A json file with a minimal JBrowse 2 defaultSession for the Swedish Reference Genome Portal. Unless specified otherwise,
+the output will be saved to ./scripts/data_stewardship/temp/test_default_session.json in the Genome Portal git directory.
+The file or its content can then be copied to config.json in .config/[SPECIES_NAMES].
 
 ### Dependencies:
 pyyaml                          -   Used for parsing the yaml file.
                                     Can be for instance be installed with pip: pip install pyyaml
-minimal_default_session.json    -   A template default_session.json file with placeholders for the values that will be
-                                    fetched from the config.yml. The template is located in ./scripts/templates .
 
 ### Usage:
 (Assuming that the following two steps have already been completed:
@@ -226,45 +224,16 @@ def populate_mandatory_values(config, git_root, species_name, species_abbreviati
     return data
 
 
-def add_defaultSession_true_tracks(config, data, species_abbreviation):
+def populate_values_from_optional_tracks(config, data, species_abbreviation):
     plugin_added = False
     assembly_name = config.get("assembly", {}).get("name", "")
+
     for track in config["tracks"]:
         if "defaultSession" in track and track["defaultSession"]:
             # Ensure protein-coding genes are not added to the default session again if the user has happened to set it with defaultSession: true in the config.yml
             if track["name"].lower() in ["protein coding genes", "protein-coding genes"]:
                 continue
-            track_outer_id = (
-                f"{species_abbreviation}_default_{track['name'].replace(' ', '_').replace('\'', '').replace(',', '')}"
-            )
-            track_file_name = f"{track['fileName'].rstrip('.gz').rstrip('.zip').rstrip('.bgz')}"
-            track_type = "LinearBasicDisplay"
-            track_config = track_file_name
-            display_config = f"{track_file_name}-LinearBasicDisplay"
-            if "GWAS" in track and track["GWAS"]:
-                track_type = "LinearManhattanDisplay"
-                # this next line needs can be improved: it serves to to reproduce the same output as the old handcrafted config.json for L. tenue.
-                # (the line is based on the track_outer_id form the GWAS handler below)
-                track_config = (
-                    f"{species_abbreviation}_init_{track['name'].replace(' ', '_').replace('\'', '').replace(',', '')}"
-                )
-                display_config = f"{track_config}_display"
-
-            new_track = {
-                "id": track_outer_id,
-                "type": "FeatureTrack",
-                "configuration": track_config,
-                "minimized": False,
-                "displays": [
-                    {
-                        "id": f"{track_outer_id}_display",
-                        "type": track_type,
-                        "heightPreConfig": 150,
-                        "configuration": display_config,
-                    }
-                ],
-            }
-            data["defaultSession"]["views"][0]["tracks"].append(new_track)
+            data = add_defaultSession_true_tracks(track, data, species_abbreviation)
 
         if "GWAS" in track and track["GWAS"]:
             if not plugin_added:
@@ -276,48 +245,93 @@ def add_defaultSession_true_tracks(config, data, species_abbreviation):
                     data["plugins"] = []
                 data["plugins"].append(plugin_call)
                 plugin_added = True
+            data = add_gwas_true_tracks(track, data, species_abbreviation, assembly_name)
 
-            track_outer_id = (
-                f"{species_abbreviation}_init_{track['name'].replace(' ', '_').replace('\'', '').replace(',', '')}"
-            )
+    return data
 
-            # Function nested here for now, future refinement could be to move it to a separate function
-            def get_base_extension(file_name):
-                base_name = os.path.splitext(file_name)[0] if file_name.endswith((".gz", ".zip")) else file_name
-                return os.path.splitext(base_name)[1].lstrip(".")
 
-            base_extension = get_base_extension(track["fileName"])
+def add_defaultSession_true_tracks(track, data, species_abbreviation):
+    track_outer_id = (
+        f"{species_abbreviation}_default_{track['name'].replace(' ', '_').replace('\'', '').replace(',', '')}"
+    )
+    track_file_name = f"{track['fileName'].rstrip('.gz').rstrip('.zip').rstrip('.bgz')}"
+    track_type = "LinearBasicDisplay"
+    track_config = track_file_name
+    display_config = f"{track_file_name}-LinearBasicDisplay"
 
-            # Eventually we need to support more file types here.
-            # There is also a discussion to be had if the makefile should handle GWAS files instead of this script
-            if base_extension == "bed":
-                adapter_type = "BedTabixAdapter"
-                bed_gz_location = track["fileName"]
-                if bed_gz_location.endswith((".gz", ".zip")):
-                    bed_gz_location = bed_gz_location.replace(".gz", ".bgz").replace(".zip", ".bgz")
-                index_location = f"{bed_gz_location}.tbi"
-            adapter_scoreColumn = track["scoreColumnGWAS"]
+    # For the case when a track true for both defaultSession and GWAS:
+    if "GWAS" in track and track["GWAS"]:
+        track_type = "LinearManhattanDisplay"
+        # this next line needs can be improved: it serves to to reproduce the same output as the old handcrafted config.json for L. tenue.
+        # (the line is based on the track_outer_id form the GWAS function below)
+        track_config = (
+            f"{species_abbreviation}_init_{track['name'].replace(' ', '_').replace('\'', '').replace(',', '')}"
+        )
+        display_config = f"{track_config}_display"
 
-            # category is hardcoded for now, but could be added to the config.yml in the future
-            # An added benefit of having the category is that it ensures that the tracks come below the protein-codon genes in the track selector
-            new_GWAS_track = {
-                "type": "FeatureTrack",
-                "trackId": track_outer_id,
-                "name": track["name"],
-                "assemblyNames": [assembly_name],
-                "category": ["GWAS"],
-                "adapter": {
-                    "type": adapter_type,
-                    "scoreColumn": adapter_scoreColumn,
-                    "bedGzLocation": {"uri": bed_gz_location},
-                    "index": {"location": {"uri": index_location}},
-                },
-                "displays": [{"displayId": f"{track_outer_id}_display", "type": "LinearManhattanDisplay"}],
+    new_track = {
+        "id": track_outer_id,
+        "type": "FeatureTrack",
+        "configuration": track_config,
+        "minimized": False,
+        "displays": [
+            {
+                "id": f"{track_outer_id}_display",
+                "type": track_type,
+                "heightPreConfig": 150,
+                "configuration": display_config,
             }
+        ],
+    }
+    data["defaultSession"]["views"][0]["tracks"].append(new_track)
 
-            if "tracks" not in data:
-                data["tracks"] = []
-            data["tracks"].append(new_GWAS_track)
+    return data
+
+
+def add_gwas_true_tracks(track, data, species_abbreviation, assembly_name):
+    if "scoreColumnGWAS" not in track:
+        raise ValueError(
+            f"Track '{track['name']}' is configured to be treated as a GWAS track but is missing 'scoreColumnGWAS' in the config.yml. Please update this and re-run the script."
+        )
+    adapter_scoreColumn = track["scoreColumnGWAS"]
+
+    track_outer_id = f"{species_abbreviation}_init_{track['name'].replace(' ', '_').replace('\'', '').replace(',', '')}"
+
+    def get_base_extension(file_name):
+        base_name = os.path.splitext(file_name)[0] if file_name.endswith((".gz", ".zip")) else file_name
+        return os.path.splitext(base_name)[1].lstrip(".")
+
+    base_extension = get_base_extension(track["fileName"])
+
+    # Eventually we need to support more file types here as we encounter them.
+    # There is also a discussion to be had if the makefile should handle GWAS files instead of this script
+    if base_extension == "bed":
+        adapter_type = "BedTabixAdapter"
+        bed_gz_location = track["fileName"]
+        if bed_gz_location.endswith((".gz", ".zip")):
+            bed_gz_location = bed_gz_location.replace(".gz", ".bgz").replace(".zip", ".bgz")
+        index_location = f"{bed_gz_location}.tbi"
+
+    # category is hardcoded for now, but could be added to the config.yml in the future
+    # An added benefit of having the category is that it ensures that the tracks come below the protein-codon genes in the track selector
+    new_GWAS_track = {
+        "type": "FeatureTrack",
+        "trackId": track_outer_id,
+        "name": track["name"],
+        "assemblyNames": [assembly_name],
+        "category": ["GWAS"],
+        "adapter": {
+            "type": adapter_type,
+            "scoreColumn": adapter_scoreColumn,
+            "bedGzLocation": {"uri": bed_gz_location},
+            "index": {"location": {"uri": index_location}},
+        },
+        "displays": [{"displayId": f"{track_outer_id}_display", "type": "LinearManhattanDisplay"}],
+    }
+
+    if "tracks" not in data:
+        data["tracks"] = []
+    data["tracks"].append(new_GWAS_track)
 
     return data
 
@@ -356,7 +370,7 @@ def main():
     populated_data = populate_mandatory_values(
         config, git_root, species_name, species_abbreviation, species_name_underscored
     )
-    populated_data = add_defaultSession_true_tracks(config, populated_data, species_abbreviation)
+    populated_data = populate_values_from_optional_tracks(config, populated_data, species_abbreviation)
     save_json(populated_data, output_json_path, config_path)
 
 
