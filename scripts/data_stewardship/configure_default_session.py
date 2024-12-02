@@ -81,7 +81,7 @@ def parse_arguments():
     return parser.parse_args()
 
 
-def get_git_root():
+def get_git_repo_root():
     try:
         git_root = subprocess.check_output(["git", "rev-parse", "--show-toplevel"]).strip().decode("utf-8")
         return git_root
@@ -95,11 +95,6 @@ def get_git_root():
 def load_yaml_config(config_path):
     with open(config_path, "r") as file:
         return yaml.safe_load(file)
-
-
-def load_json_template(json_path):
-    with open(json_path, "r") as file:
-        return json.load(file)
 
 
 def get_species_abbreviation(organism):
@@ -118,32 +113,45 @@ def strip_extension(file_name):
     return file_name
 
 
-def get_first_fasta_header_and_sequence_length(file_path):
-    first_sequence_length = 0
-    parser_is_in_sequence = False
+def get_fasta_header_and_sequence_length(file_path, default_scaffold=None):
+    def parse_fasta_file(file, default_scaffold):
+        first_fasta_header = None
+        sequence_length = 0
+        parser_is_in_sequence = False
+        header_found = False
+
+        for line in file:
+            if line.startswith(">"):
+                current_header = line[1:].strip().split()[0]
+                if default_scaffold:
+                    if current_header == default_scaffold:
+                        header_found = True
+                        parser_is_in_sequence = True
+                    elif parser_is_in_sequence:
+                        break
+                else:
+                    if parser_is_in_sequence:
+                        break
+                    first_fasta_header = current_header
+                    parser_is_in_sequence = True
+            elif parser_is_in_sequence:
+                sequence_length += len(line.strip())
+
+        return first_fasta_header, sequence_length, header_found
 
     if file_path.endswith(".gz"):
         with gzip.open(file_path, "rt") as file:
-            for line in file:
-                if line.startswith(">"):
-                    if parser_is_in_sequence:
-                        break
-                    first_fasta_header = line[1:].strip().split()[0]
-                    parser_is_in_sequence = True
-                elif parser_is_in_sequence:
-                    first_sequence_length += len(line.strip())
+            first_fasta_header, sequence_length, header_found = parse_fasta_file(file, default_scaffold)
     else:
         with open(file_path, "r") as file:
-            for line in file:
-                if line.startswith(">"):
-                    if parser_is_in_sequence:
-                        break
-                    first_fasta_header = line[1:].strip().split()[0]
-                    parser_is_in_sequence = True
-                elif parser_is_in_sequence:
-                    first_sequence_length += len(line.strip())
+            first_fasta_header, sequence_length, header_found = parse_fasta_file(file, default_scaffold)
 
-    return first_fasta_header, first_sequence_length
+    if default_scaffold and not header_found:
+        raise ValueError(
+            f"No FASTA header named '{default_scaffold}' was found in the file. Please check the defaultScaffold value in the config.yml."
+        )
+
+    return (default_scaffold if default_scaffold else first_fasta_header), sequence_length
 
 
 def get_protein_coding_genes_file_name(config):
@@ -161,7 +169,7 @@ def get_protein_coding_genes_file_name(config):
         raise ValueError("No track with name 'Protein coding genes' found. Exiting.")
 
 
-def populate_placeholder_values(data, config, git_root, species_name, species_abbreviation, species_name_underscored):
+def populate_mandatory_values(config, git_root, species_name, species_abbreviation, species_name_underscored):
     assembly_name = config["assembly"]["name"]
     assembly_file_name = os.path.basename(config["assembly"]["url"])
     protein_coding_gene_file_name = get_protein_coding_genes_file_name(config)
@@ -170,47 +178,65 @@ def populate_placeholder_values(data, config, git_root, species_name, species_ab
     assembly_file_path = os.path.join(
         git_root, "data", species_name_underscored, assembly_file_name.replace(".fasta", ".fna")
     )
+
     if os.path.exists(assembly_file_path):
-        first_fasta_header, first_sequence_length = get_first_fasta_header_and_sequence_length(assembly_file_path)
+        # The get method returns none if the key is not found
+        default_scaffold = config["assembly"].get("defaultScaffold")
+        default_scaffold, sequence_length = get_fasta_header_and_sequence_length(assembly_file_path, default_scaffold)
     else:
-        first_fasta_header = None
         print(
             f"Assembly file {assembly_file_path} does not exist in ./data/{species_name_underscored}/. If the assembly url has been configured, it can be downloaded by running the makefile."
         )
 
-    # Populate the JSON template with the values that were fetched from or via the config file
-    data["defaultSession"]["id"] = data["defaultSession"]["id"].replace("[SPECIES_ABBREVIATION]", species_abbreviation)
-    data["defaultSession"]["name"] = species_name
-    data["defaultSession"]["widgets"]["hierarchicalTrackSelector"]["view"] = data["defaultSession"]["widgets"][
-        "hierarchicalTrackSelector"
-    ]["view"].replace("[SPECIES_ABBREVIATION]", species_abbreviation)
-    data["defaultSession"]["views"][0]["id"] = data["defaultSession"]["views"][0]["id"].replace(
-        "[SPECIES_ABBREVIATION]", species_abbreviation
-    )
-    if first_fasta_header:
-        data["defaultSession"]["views"][0]["displayedRegions"][0]["refName"] = first_fasta_header
-    else:
-        print(
-            "Warning: The first fasta header in the assembly file could not be found. The 'refName' field in the JSON template will not be populated by the script. Please update the output file manually."
-        )
-    if first_sequence_length:
-        data["defaultSession"]["views"][0]["displayedRegions"][0]["end"] = first_sequence_length
-    else:
-        print(
-            "Warning: The length of the first sequence in the in the assembly file could not be found. The 'end' and 'bpPerPx' fields in the JSON template will not be populated by the script. Please update the output file manually."
-        )
-    data["defaultSession"]["views"][0]["displayedRegions"][0]["assemblyName"] = assembly_name
-    data["defaultSession"]["views"][0]["tracks"][0]["id"] = data["defaultSession"]["views"][0]["tracks"][0][
-        "id"
-    ].replace("[SPECIES_ABBREVIATION]", species_abbreviation)
-    data["defaultSession"]["views"][0]["tracks"][0]["configuration"] = protein_coding_gene_file_name
-    data["defaultSession"]["views"][0]["tracks"][0]["displays"][0]["id"] = data["defaultSession"]["views"][0]["tracks"][
-        0
-    ]["displays"][0]["id"].replace("[SPECIES_ABBREVIATION]", species_abbreviation)
-    data["defaultSession"]["views"][0]["tracks"][0]["displays"][0]["configuration"] = data["defaultSession"]["views"][
-        0
-    ]["tracks"][0]["displays"][0]["configuration"].replace("[TRACK_FILE_NAME]", protein_coding_gene_file_name)
-
+    data = {}
+    data["defaultSession"] = {
+        "id": f"{species_abbreviation}_default_session",
+        "name": species_name,
+        "widgets": {
+            "hierarchicalTrackSelector": {
+                "id": "hierarchicalTrackSelector",
+                "type": "HierarchicalTrackSelectorWidget",
+                "view": f"{species_abbreviation}_default_session_view",
+                "faceted": {"showSparse": False, "showFilters": True, "showOptions": False, "panelWidth": 400},
+            }
+        },
+        "activeWidgets": {"hierarchicalTrackSelector": "hierarchicalTrackSelector"},
+        "views": [
+            {
+                "id": f"{species_abbreviation}_default_session_view",
+                "minimized": False,
+                "type": "LinearGenomeView",
+                "trackLabels": "offset",
+                "offsetPx": 0,
+                "bpPerPx": 50,
+                "displayedRegions": [
+                    {
+                        "refName": default_scaffold if default_scaffold else "[SCAFFOLD_HEADER]",
+                        "start": 0,
+                        "end": sequence_length if sequence_length else 100000,
+                        "reversed": False,
+                        "assemblyName": assembly_name,
+                    }
+                ],
+                "tracks": [
+                    {
+                        "id": f"{species_abbreviation}_default_protein_coding_genes",
+                        "type": "FeatureTrack",
+                        "configuration": protein_coding_gene_file_name,
+                        "minimized": False,
+                        "displays": [
+                            {
+                                "id": f"{species_abbreviation}_default_protein_coding_genes_display",
+                                "type": "LinearBasicDisplay",
+                                "heightPreConfig": 150,
+                                "configuration": f"{protein_coding_gene_file_name}-LinearBasicDisplay",
+                            }
+                        ],
+                    }
+                ],
+            }
+        ],
+    }
     return data
 
 
@@ -326,20 +352,20 @@ def save_json(data, output_json_path, config_path):
 def main():
     args = parse_arguments()
     config_path = args.yaml
-    git_root = get_git_root()
-    json_path = os.path.join(git_root, "scripts/templates/minimal_default_session.json")
+    git_root = get_git_repo_root()
 
     config = load_yaml_config(config_path)
     if "tracks" not in config:
-        raise ValueError("The configuration file does not contain 'tracks'. Exiting.")
-    data = load_json_template(json_path)
+        raise ValueError(
+            "The configuration file does not contain 'tracks'. Thus there are no tracks to set for the defaultSession. Exiting."
+        )
 
     species_name = config["organism"]
     species_abbreviation = get_species_abbreviation(species_name)
     species_name_underscored = species_name.replace(" ", "_").lower()
 
-    populated_data = populate_placeholder_values(
-        data, config, git_root, species_name, species_abbreviation, species_name_underscored
+    populated_data = populate_mandatory_values(
+        config, git_root, species_name, species_abbreviation, species_name_underscored
     )
     populated_data = add_defaultSession_true_tracks(config, populated_data, species_abbreviation)
     output_json_path = args.out
