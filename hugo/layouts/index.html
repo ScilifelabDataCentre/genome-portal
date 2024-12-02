@@ -96,10 +96,10 @@
 </div>
 
 
-<!-- Add pagination if numb of species cards is > than number of species per page  -->
-<!-- TODO - if no pagination - will everything still work? -->
-{{- $species:= .Site.GetPage "section" "Species" -}}
-{{- $numbSpecies := len $species.Sections -}}
+<!-- Add pagination if numb of species cards is > than number of species per page
+    numb species per page set in main config.yaml file -->
+{{ $species:= .Site.GetPage "section" "Species" }}
+{{ $numbSpecies := len $species.Sections }}
 
 {{if gt $numbSpecies $numbSpeciesPerPage}}
     {{ partial "pagination.html" (dict "numbSpecies" $numbSpecies "numbSpeciesPerPage" $numbSpeciesPerPage) }}

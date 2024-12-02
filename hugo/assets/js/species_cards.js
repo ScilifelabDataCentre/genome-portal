@@ -1,19 +1,25 @@
 /*
-Docstring TODO
-*/
-let speciesData = [];
-let currentPage = 1;
-let NUM_CARDS = 0; // updated once JSON data is fetched
-const CARDS_PER_PAGE = document.querySelectorAll('.scilife-species-card').length;
+Handles searching, ordering and pagination of the species cards
 
-// Function to fetch the JSON data
+*/
+let currentPage = 1;
+const cardsPerPage = document.querySelectorAll('.scilife-species-card').length;
+const noResultsCard = document.getElementById('no-filtered-card');
+const paginationItems = document.querySelectorAll('.pagination .page-item');
+const paginationExists = paginationItems.length > 0; // if not enough species, there will be no pagination yet.
+let speciesData = []; // updated once JSON data is fetched
+
+
+/**
+ * Fetch the JSON data with all species info, Updates the global speciesData variable
+ * Runs once on page load.
+ */
 function fetchSpeciesData() {
     return fetch('/species_catalog.json')
         .then(response => response.json())
         .then(fetchedData => {
             speciesData = fetchedData;
-            NUM_CARDS = speciesData.length;
-            return speciesData; // Return the global speciesData variable
+            return speciesData;
         })
         .catch(error => {
             console.error('Error fetching species data:', error);
@@ -22,7 +28,49 @@ function fetchSpeciesData() {
 }
 
 
-// Sort alphabetically
+/**
+ * Function to populate the species cards with the fetched data.
+ *
+ * @param {Array} species_data - An array of species data objects.
+ */
+function populateSpeciesCards(species_data) {
+    species_data.forEach((species, index) => {
+        const card = document.getElementById(`species-card-${index + 1}`);
+        if (card) {
+            card.querySelector('a').href = species.rel_permalink;
+            card.querySelector('a').title = `Go to the ${species.title} page`;
+            card.querySelector('img').src = species.cover_image;
+            card.querySelector('img').alt = `Image of ${species.title}`;
+            card.querySelector('.science-name').innerHTML = species.title;
+            card.querySelector('.common-name').innerHTML = species.subtitle;
+            card.querySelector('.card-text').textContent = `Last updated: ${species.last_updated}`;
+            card.querySelector('.btn').href = species.rel_permalink;
+            card.querySelector('.btn').title = `Go to the ${species.title} page`;
+
+            // Handles attribution text with or without link
+            if (species.img_attrib_link) {
+                const captionWithLink = card.querySelector('.caption-with-link');
+                captionWithLink.href = species.img_attrib_link;
+                captionWithLink.querySelector('.scilife-card-image-attrib').textContent = species.img_attrib_text;
+                captionWithLink.style.display = 'flex';
+
+                const captionNoLink = card.querySelector('.caption-no-link');
+                captionNoLink.style.display = 'none';
+            } else {
+                const captionNoLink = card.querySelector('.caption-no-link');
+                captionNoLink.textContent = species.img_attrib_text;
+                captionNoLink.style.display = 'flex';
+
+                const captionWithLink = card.querySelector('.caption-with-link');
+                captionWithLink.style.display = 'none';
+            }
+
+            card.style.display = 'flex';
+        }
+    });
+}
+
+// Sorting functions below
 function sortAlphabetically(a, b) {
     return a.title.localeCompare(b.title);
 }
@@ -42,36 +90,6 @@ function sortUpdated(a, b) {
     return dateB - dateA;
 }
 
-function searchAndFilter() {
-    const searchText = document.querySelector("#Search").value.toLowerCase();
-    const RevAlphabetSet = document.querySelector("#RevAlphabet").classList.contains("active");
-    const UpdatedSet = document.querySelector("#Updated").classList.contains("active");
-
-    let filteredData = speciesData;
-
-    if (searchText !== "") {
-        filteredData = speciesData.filter(species => {
-            const title = species.title.toLowerCase();
-            const subtitle = species.subtitle.toLowerCase();
-            const cardText = species.last_updated.toLowerCase();
-            return title.includes(searchText) || subtitle.includes(searchText) || cardText.includes(searchText);
-        });
-    }
-
-    if (filteredData.length !== 0) {
-        if (RevAlphabetSet) {
-            filteredData.sort(sortRevAlphabetically);
-        } else if (UpdatedSet) {
-            filteredData.sort(sortUpdated);
-        } else {
-            filteredData.sort(sortAlphabetically);
-        }
-    }
-    return filteredData;
-}
-
-
-// Function to hide all cards
 function hideAllCards() {
     const cards = document.querySelectorAll('.scilife-species-card');
     cards.forEach(card => {
@@ -79,39 +97,37 @@ function hideAllCards() {
     });
 }
 
-// Function to populate the species cards with the fetched data
-function populateSpeciesCards(data) {
+/**
+ * Updates the dropdown view with the selected sorting option.
+ *
+ * @param {HTMLElement} target - The dropdown item that was selected.
+ */
+function updateSortDropdown(target) {
+    const SORTING_BUTTONS = ["Alphabet", "RevAlphabet", "Updated"];
+    const ICON_MAPPING = {
+        'Name (A to Z)': 'bi-sort-alpha-down',
+        'Name (Z to A)': 'bi-sort-alpha-up',
+        'Last updated': 'bi-clock'
+    };
 
-    // Hide all cards initially
-    hideAllCards();
+    SORTING_BUTTONS.forEach(id => document.getElementById(id).classList.remove("active"));
+    target.classList.add("active");
 
-    // Add back the cards that match the search up to the page limit
-    data.forEach((species, index) => {
-        const card = document.getElementById(`species-card-${index + 1}`);
-        if (card) {
-            card.querySelector('a').href = species.rel_permalink;
-            card.querySelector('a').title = `Go to the ${species.title} page`;
-            card.querySelector('img').src = species.cover_image;
-            card.querySelector('img').alt = `Image of ${species.title}`;
-            if (species.img_attrib_link) {
-                card.querySelector('.scilife-card-image-attrib').innerHTML = `<a href="${species.img_attrib_link}" title="Go to the image source" target="_blank">${species.img_attrib_text}</a>`;
-            } else {
-                card.querySelector('.scilife-card-image-attrib').textContent = species.img_attrib_text;
-            }
-            card.querySelector('.science-name').innerHTML = species.title;
-            card.querySelector('.common-name').innerHTML = species.subtitle;
-            card.querySelector('.card-text').textContent = `Last updated: ${species.last_updated}`;
-            card.querySelector('.btn').href = species.rel_permalink;
-            card.querySelector('.btn').title = `Go to the ${species.title} page`;
-            card.style.display = 'block'; // Ensure the card is visible
-        }
-    });
+    const dropdown = document.querySelector(".scilife-sort-dropdown");
+    const sortOptionSelected = target.textContent.trim();
+    const icon = ICON_MAPPING[sortOptionSelected];
 
+    dropdown.textContent = sortOptionSelected;
+    dropdown.innerHTML = `<i class="bi ${icon}"></i> ` + sortOptionSelected;
 }
 
-// Updates the page number shown as active in the pagination
+/**
+ * Updates the page number shown as active in the pagination
+ *
+ * @param {string|number} page - Can be 'prev', 'next', or a specific page number.
+ */
 function updateActivePage(page) {
-    document.querySelectorAll('.pagination .page-item').forEach(item => {
+    paginationItems.forEach(item => {
         item.classList.remove('active');
     });
 
@@ -121,132 +137,139 @@ function updateActivePage(page) {
     }
 }
 
-// Function to handle pagination
-function handlePagination(page) {
+/**
+ * Changes page based on the provided page identifier.
+ *
+ * @param {string|number} page - Can be 'prev', 'next', or a specific page number.
+ */
+function changeCurrentPage(page) {
     if (page === 'prev') {
         currentPage = Math.max(currentPage - 1, 1);
     } else if (page === 'next') {
-        currentPage = Math.min(currentPage + 1, Math.ceil(speciesData.length / CARDS_PER_PAGE));
+        currentPage = Math.min(currentPage + 1, Math.ceil(speciesData.length / cardsPerPage));
     } else {
         currentPage = parseInt(page);
     }
     updateActivePage(currentPage);
 }
 
+/**
+ * Sets which buttons are enabled/disabled based on the number of pages with results and the current page.
+ *
+ * @param {number} numPages - The total number of pages with results/cards.
+ */
 function updatePaginationButtons(numPages) {
-    const paginationItems = document.querySelectorAll('.pagination .page-item');
-    paginationItems.forEach((item, index) => {
+    paginationItems.forEach((item) => {
         const pageLink = item.querySelector('.page-link');
         if (pageLink) {
             const page = pageLink.getAttribute('data-page');
             if (page === 'prev') {
-                if (currentPage === 1) {
-                    item.classList.add('disabled');
-                } else {
-                    item.classList.remove('disabled');
-                }
+                item.classList.toggle('disabled', currentPage === 1);
             } else if (page === 'next') {
-                if (currentPage === numPages) {
-                    item.classList.add('disabled');
-                } else {
-                    item.classList.remove('disabled');
-                }
+                item.classList.toggle('disabled', currentPage === numPages);
             } else {
                 const pageIndex = parseInt(page);
-                if (pageIndex > numPages) {
-                    item.classList.add('disabled');
-                } else {
-                    item.classList.remove('disabled');
-                }
+                item.classList.toggle('disabled', pageIndex > numPages);
             }
         }
     });
 }
 
+/**
+ * Search/filter all species and order them according to dropdown selection
+ * speciesData is the global variable containing all species data
+ */
+function filterAndOrderSpecies() {
+    let filteredData = speciesData;
+
+    const searchText = document.querySelector("#Search").value.toLowerCase();
+    const revAlphabetSet = document.querySelector("#RevAlphabet").classList.contains("active");
+    const lastUpdatedSet = document.querySelector("#Updated").classList.contains("active");
+    if (searchText !== "") {
+        filteredData = speciesData.filter(species => {
+            const title = species.title.toLowerCase();
+            const subtitle = species.subtitle.toLowerCase();
+            return title.includes(searchText) || subtitle.includes(searchText);
+        });
+    }
+
+    if (filteredData.length !== 0) {
+        if (revAlphabetSet) {
+            filteredData.sort(sortRevAlphabetically);
+        } else if (lastUpdatedSet) {
+            filteredData.sort(sortUpdated);
+        } else {
+            filteredData.sort(sortAlphabetically);
+        }
+    }
+    return filteredData;
+}
 
 
+/**
+ * Displays the filtered species on the cards.
+ *
+ * @param {Array} filteredData - An array of filtered species data objects.
+ */
 function displayResults(filteredData) {
+    hideAllCards();
     if (filteredData.length === 0) {
-        document.querySelector("#no-filtered-card").style.display = 'block';
-        hideAllCards();
+        noResultsCard.style.display = 'block';
         updatePaginationButtons(1);
     } else {
-        document.querySelector("#no-filtered-card").style.display = 'none';
-
-        // Calculate the number of pages based on the filtered data
-        const numPages = Math.ceil(filteredData.length / CARDS_PER_PAGE);
+        noResultsCard.style.display = 'none';
+        const numPages = Math.ceil(filteredData.length / cardsPerPage);
         updatePaginationButtons(numPages);
 
-        // Calculate the start and end indices based on the current page
-        const startIndex = (currentPage - 1) * CARDS_PER_PAGE;
-        const endIndex = startIndex + CARDS_PER_PAGE;
-
-        // Get the subset of results for the current page and populate the species cards
+        const startIndex = (currentPage - 1) * cardsPerPage;
+        const endIndex = startIndex + cardsPerPage;
         const paginatedResults = filteredData.slice(startIndex, endIndex);
         populateSpeciesCards(paginatedResults);
     }
 }
 
 
-
-function handlePaginationEvent(event) {
-    event.preventDefault();
-    const target = event.target;
-    const page = target.getAttribute('data-page');
-    handlePagination(page);
-    const filteredData = searchAndFilter();
+// On initial load: Fetch the data and populate the species cards
+fetchSpeciesData().then(() => {
+    const filteredData = filterAndOrderSpecies();
     displayResults(filteredData);
-}
+});
 
-function handleSortingEvent(event) {
-    event.preventDefault();
-    const target = event.target;
-    const sortingButtons = ["Alphabet", "RevAlphabet", "Updated"];
-    sortingButtons.forEach(id => document.getElementById(id).classList.remove("active"));
-    target.classList.add("active");
+// Event listeners below for each type of possible user interaction
 
-    // (Update the dropdown text with selected item)
-    const dropdown = document.querySelector(".scilife-sort-dropdown");
-    const sortOptionSelected = target.textContent.trim();
-    const iconMapping = {
-        'Name (A to Z)': 'bi-sort-alpha-down',
-        'Name (Z to A)': 'bi-sort-alpha-up',
-        'Last updated': 'bi-clock'
-    };
-    const icon = iconMapping[sortOptionSelected];
-
-    dropdown.textContent = sortOptionSelected;
-    dropdown.innerHTML = `<i class="bi ${icon}"></i> ` + sortOptionSelected;
-
-    currentPage = 1; // Reset to page 1 when a sort event occurs
-    const filteredData = searchAndFilter();
-    displayResults(filteredData);
-}
-
-function handleSearchEvent(event) {
-    currentPage = 1; // Reset to page 1 when a search input event occurs
-    handlePagination(currentPage); // Update the active page
-    const filteredData = searchAndFilter();
-    displayResults(filteredData);
-}
-
-
-
-// On initial load...
-// Fetch the data and populate the species cards
-fetchSpeciesData().then(speciesData => {
-    const filteredData = searchAndFilter();
+// Event: type in search box
+// Reset to page 1, filter results and display them
+document.querySelector('#Search').addEventListener('input', (event) => {
+    if (paginationExists) {
+        changeCurrentPage(1);
+    }
+    const filteredData = filterAndOrderSpecies();
     displayResults(filteredData);
 });
 
 
 
+// Event: Change the ordering of the species via dropdown
+// Update the dropdown text with selected item, filter results and display them
+document.querySelector('.dropdown-menu').addEventListener('click', (event) => {
+    if (event.target.classList.contains('scilife-dropdown-item')) {
+        event.preventDefault();
+        updateSortDropdown(event.target);
+        const filteredData = filterAndOrderSpecies();
+        displayResults(filteredData);
+    }
+});
 
-// Attach event listeners to pagination buttons, sorting buttons, and search input
-document.querySelectorAll('.page-link').forEach(element => {
-    element.addEventListener('click', handlePaginationEvent);
-});
-document.querySelectorAll('.scilife-dropdown-item').forEach(element => {
-    element.addEventListener('click', handleSortingEvent);
-});
-document.querySelector('#Search').addEventListener('input', handleSearchEvent);
+// Event: Change the page
+// Change the page, update the cards with species in that slice of the data
+if (paginationExists) {
+    document.querySelector('.pagination').addEventListener('click', (event) => {
+        if (event.target.classList.contains('page-link')) {
+            event.preventDefault();
+            const page = event.target.getAttribute('data-page');
+            changeCurrentPage(page);
+            const filteredData = filterAndOrderSpecies();
+            displayResults(filteredData);
+        }
+    });
+}
