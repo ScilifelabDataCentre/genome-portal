@@ -52,7 +52,7 @@
 </div>
 
 
-{{ $numbSpeciesPerPage := 2 }}
+{{ $numbSpeciesPerPage := .Site.Params.numbSpeciesPerPage }}
 <!-- Species cards are populated using a JSON containing all species info and JS -->
 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-4" id="card-container">
     {{ range seq 1 $numbSpeciesPerPage }}
@@ -64,7 +64,11 @@
                     <a href="#" title="">
                         <img src="" class="card-img-top" alt="">
                     </a>
-                    <figcaption class="scilife-card-image-attrib"></figcaption>
+                    <!-- Include format for with and without link, JS decides which to display.-->
+                    <a class="caption-with-link" href="#" title="Go to the image source" target="_blank" style="display: none;">
+                        <figcaption class="scilife-card-image-attrib"></figcaption>
+                    </a>
+                    <p class="caption-no-link scilife-card-image-attrib" style="display: none;"></p>
                 </figure>
             </div>
 
