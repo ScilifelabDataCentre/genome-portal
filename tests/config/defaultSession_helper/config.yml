@@ -1,27 +1,33 @@
-organism: "Parnassius mnemosyne"
+organism: "Linum tenue"
 assembly:
-  name: Parnassius_mnemosyne_n_2023_11
-  displayName: "P. mnemosyne genome assembly GCA_963668995.1"
-  accession: GCA_963668995.1
-  url: "https://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/cav/CAVLGL01.fasta.gz"
+  name: Linum_tenue_thrum_v1
+  displayName: "L. tenue genome assembly GCA_946122785.1"
+  accession: GCA_946122785.1
+  # The following url points to the original ENA upload of the assembly. It will require an alias file to be able to load the protein coding genes track
+  url: "https://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/cam/CAMGYJ01.fasta.gz"
   # Temp storage for alias file.
-  aliases: "https://raw.githubusercontent.com/ScilifelabDataCentre/genome-portal/main/scripts/data_stewardship/alias_files_temp_storage/CAVLGL01.fna.alias"
-
+  aliases: "https://raw.githubusercontent.com/ScilifelabDataCentre/genome-portal/refs/heads/main/scripts/data_stewardship/alias_files_temp_storage/CAMGYJ01.fna.alias"
 tracks:
   - name: "Protein-coding genes"
-    url: "https://figshare.scilifelab.se/ndownloader/files/47209624"
-    fileName: "pmne_functional_edit1.gff.gz"
+    url: "https://figshare.scilifelab.se/ndownloader/files/45076090"
+    fileName: "ltenue_v1_genes.gff.zip"
     # the below flag is an unintended use for this track (it is mandatory), but set here to be implement a catch that ignores it in the script
     defaultSession: true
-  - name: "Illumina RNAseq transcript assembly (thorax muscle tissue)"
-    url: "https://figshare.scilifelab.se/ndownloader/files/47209648"
-    fileName: "pmne_Illumina_RNAseq_StringTie_sorted-transcripts_match.gff.gz"
+  - name: "Repeats"
+    url: "https://figshare.scilifelab.se/ndownloader/files/48879751"
+    fileName: "L_tenue_v1_rep.bed.gz"
     defaultSession: true
-  - name: "Non-coding RNA (ncRNA) genes"
-    url: "https://figshare.scilifelab.se/ndownloader/files/47209660"
-    fileName: "pmne_ncRNAs.gff.gz"
+  - name: "Tajima's D, population 06"
+    url: "https://figshare.scilifelab.se/ndownloader/files/50073936"
+    fileName: "Lten_pop06_TD.bed.gz"
+    addTrack: false
     defaultSession: true
-  - name: "tRNA genes and putative pseudogenes"
-    url: "https://figshare.scilifelab.se/ndownloader/files/47209663"
-    fileName: "pmne_tRNAs_and_pseudogenes.gff.gz"
+    GWAS: true
+    scoreColumnGWAS: "TajimaD"
+  - name: "Tajima's D, population 08"
+    url: "https://figshare.scilifelab.se/ndownloader/files/50073939"
+    fileName: "Lten_pop08_TD.bed.gz"
+    addTrack: false
     defaultSession: true
+    GWAS: true
+    scoreColumnGWAS: "TajimaD"
