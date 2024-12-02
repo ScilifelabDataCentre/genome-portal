@@ -1,12 +1,12 @@
 {
   "defaultSession": {
-    "id": "pmne_default_session",
-    "name": "Parnassius mnemosyne",
+    "id": "lten_default_session",
+    "name": "Linum tenue",
     "widgets": {
       "hierarchicalTrackSelector": {
         "id": "hierarchicalTrackSelector",
         "type": "HierarchicalTrackSelectorWidget",
-        "view": "pmne_default_session_view",
+        "view": "lten_default_session_view",
         "faceted": {
           "showSparse": false,
           "showFilters": true,
@@ -20,7 +20,7 @@
     },
     "views": [
       {
-        "id": "pmne_default_session_view",
+        "id": "lten_default_session_view",
         "minimized": false,
         "type": "LinearGenomeView",
         "trackLabels": "offset",
@@ -28,72 +28,138 @@
         "bpPerPx": 50,
         "displayedRegions": [
           {
-            "refName": "ENA|CAVLGL010000001|CAVLGL010000001.1",
+            "refName": "ENA|CAMGYJ010000001|CAMGYJ010000001.1",
             "start": 0,
-            "end": 73713281,
+            "end": 153438,
             "reversed": false,
-            "assemblyName": "Parnassius_mnemosyne_n_2023_11"
+            "assemblyName": "Linum_tenue_thrum_v1"
           }
         ],
         "tracks": [
           {
-            "id": "pmne_default_protein_coding_genes",
+            "id": "lten_default_protein_coding_genes",
             "type": "FeatureTrack",
-            "configuration": "pmne_functional_edit1.gff",
+            "configuration": "ltenue_v1_genes.gff",
             "minimized": false,
             "displays": [
               {
-                "id": "pmne_default_protein_coding_genes_display",
+                "id": "lten_default_protein_coding_genes_display",
                 "type": "LinearBasicDisplay",
                 "heightPreConfig": 150,
-                "configuration": "pmne_functional_edit1.gff-LinearBasicDisplay"
+                "configuration": "ltenue_v1_genes.gff-LinearBasicDisplay"
               }
             ]
           },
           {
-            "id": "pmne_default_illumina_rnaseq_transcript_assembly_(thorax_muscle_tissue)",
+            "id": "lten_default_Repeats",
             "type": "FeatureTrack",
-            "configuration": "pmne_Illumina_RNAseq_StringTie_sorted-transcripts_match.gff",
+            "configuration": "L_tenue_v1_rep.bed",
             "minimized": false,
             "displays": [
               {
-                "id": "pmne_default_illumina_rnaseq_transcript_assembly_(thorax_muscle_tissue)_display",
+                "id": "lten_default_Repeats_display",
                 "type": "LinearBasicDisplay",
                 "heightPreConfig": 150,
-                "configuration": "pmne_Illumina_RNAseq_StringTie_sorted-transcripts_match.gff-LinearBasicDisplay"
+                "configuration": "L_tenue_v1_rep.bed-LinearBasicDisplay"
               }
             ]
           },
           {
-            "id": "pmne_default_non-coding_rna_(ncrna)_genes",
+            "id": "lten_default_Tajimas_D_population_06",
             "type": "FeatureTrack",
-            "configuration": "pmne_ncRNAs.gff",
+            "configuration": "lten_init_Tajimas_D_population_06",
             "minimized": false,
             "displays": [
               {
-                "id": "pmne_default_non-coding_rna_(ncrna)_genes_display",
-                "type": "LinearBasicDisplay",
+                "id": "lten_default_Tajimas_D_population_06_display",
+                "type": "LinearManhattanDisplay",
                 "heightPreConfig": 150,
-                "configuration": "pmne_ncRNAs.gff-LinearBasicDisplay"
+                "configuration": "lten_init_Tajimas_D_population_06_display"
               }
             ]
           },
           {
-            "id": "pmne_default_trna_genes_and_putative_pseudogenes",
+            "id": "lten_default_Tajimas_D_population_08",
             "type": "FeatureTrack",
-            "configuration": "pmne_tRNAs_and_pseudogenes.gff",
+            "configuration": "lten_init_Tajimas_D_population_08",
             "minimized": false,
             "displays": [
               {
-                "id": "pmne_default_trna_genes_and_putative_pseudogenes_display",
-                "type": "LinearBasicDisplay",
+                "id": "lten_default_Tajimas_D_population_08_display",
+                "type": "LinearManhattanDisplay",
                 "heightPreConfig": 150,
-                "configuration": "pmne_tRNAs_and_pseudogenes.gff-LinearBasicDisplay"
+                "configuration": "lten_init_Tajimas_D_population_08_display"
               }
             ]
           }
         ]
       }
     ]
-  }
+  },
+  "plugins": [
+    {
+      "name": "GWAS",
+      "url": "https://unpkg.com/jbrowse-plugin-gwas/dist/jbrowse-plugin-gwas.umd.production.min.js"
+    }
+  ],
+  "tracks": [
+    {
+      "type": "FeatureTrack",
+      "trackId": "lten_init_Tajimas_D_population_06",
+      "name": "Tajima's D, population 06",
+      "assemblyNames": [
+        "Linum_tenue_thrum_v1"
+      ],
+      "category": [
+        "GWAS"
+      ],
+      "adapter": {
+        "type": "BedTabixAdapter",
+        "scoreColumn": "TajimaD",
+        "bedGzLocation": {
+          "uri": "Lten_pop06_TD.bed.bgz"
+        },
+        "index": {
+          "location": {
+            "uri": "Lten_pop06_TD.bed.bgz.tbi"
+          }
+        }
+      },
+      "displays": [
+        {
+          "displayId": "lten_init_Tajimas_D_population_06_display",
+          "type": "LinearManhattanDisplay"
+        }
+      ]
+    },
+    {
+      "type": "FeatureTrack",
+      "trackId": "lten_init_Tajimas_D_population_08",
+      "name": "Tajima's D, population 08",
+      "assemblyNames": [
+        "Linum_tenue_thrum_v1"
+      ],
+      "category": [
+        "GWAS"
+      ],
+      "adapter": {
+        "type": "BedTabixAdapter",
+        "scoreColumn": "TajimaD",
+        "bedGzLocation": {
+          "uri": "Lten_pop08_TD.bed.bgz"
+        },
+        "index": {
+          "location": {
+            "uri": "Lten_pop08_TD.bed.bgz.tbi"
+          }
+        }
+      },
+      "displays": [
+        {
+          "displayId": "lten_init_Tajimas_D_population_08_display",
+          "type": "LinearManhattanDisplay"
+        }
+      ]
+    }
+  ]
 }
