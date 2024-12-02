@@ -92,25 +92,12 @@ def get_git_repo_root():
         ) from None
 
 
-def load_yaml_config(config_path):
-    with open(config_path, "r") as file:
-        return yaml.safe_load(file)
-
-
 def get_species_abbreviation(organism):
     words = organism.split()
     if len(words) >= 2:
         return (words[0][0] + words[1][:3]).lower()
     # Fallback if the organism name is not formatted with white space delimiter:
     return (organism[:4]).lower()
-
-
-def strip_extension(file_name):
-    if file_name.endswith(".gz"):
-        return file_name.replace(".gz", "")
-    elif file_name.endswith(".zip"):
-        return file_name.replace(".zip", "")
-    return file_name
 
 
 def get_fasta_header_and_sequence_length(file_path, default_scaffold=None):
@@ -157,30 +144,29 @@ def get_fasta_header_and_sequence_length(file_path, default_scaffold=None):
 def get_protein_coding_genes_file_name(config):
     for track in config["tracks"]:
         if track["name"].lower() in ["protein coding genes", "protein-coding genes"]:
-            protein_coding_genes_found = True
             if "fileName" in track:
-                protein_coding_gene_file_name = strip_extension(track["fileName"])
-                return protein_coding_gene_file_name
+                if track["fileName"].endswith((".gz", ".zip")):
+                    return track["fileName"].rsplit(".", 1)[0]
+                else:
+                    return track["fileName"]
             elif "url" in track:
-                protein_coding_gene_file_name = strip_extension(os.path.basename(track["url"]))
-                return protein_coding_gene_file_name
-
-    if not protein_coding_genes_found:
-        raise ValueError("No track with name 'Protein coding genes' found. Exiting.")
+                file_name = os.path.basename(track["url"])
+                if file_name.endswith((".gz", ".zip")):
+                    return file_name.rsplit(".", 1)[0]
+                else:
+                    return file_name
+    raise ValueError("No track with name 'Protein coding genes' found. Exiting.")
 
 
 def populate_mandatory_values(config, git_root, species_name, species_abbreviation, species_name_underscored):
-    assembly_name = config["assembly"]["name"]
     assembly_file_name = os.path.basename(config["assembly"]["url"])
     protein_coding_gene_file_name = get_protein_coding_genes_file_name(config)
 
-    # Check if the assembly URL filename exists in ./data/[SPECIES_NAME]/ after being downloaded by the makefile
     assembly_file_path = os.path.join(
         git_root, "data", species_name_underscored, assembly_file_name.replace(".fasta", ".fna")
     )
-
     if os.path.exists(assembly_file_path):
-        # The get method returns none if the key is not found
+        # The "get" method returns None if the key is not found
         default_scaffold = config["assembly"].get("defaultScaffold")
         default_scaffold, sequence_length = get_fasta_header_and_sequence_length(assembly_file_path, default_scaffold)
     else:
@@ -215,7 +201,7 @@ def populate_mandatory_values(config, git_root, species_name, species_abbreviati
                         "start": 0,
                         "end": sequence_length if sequence_length else 100000,
                         "reversed": False,
-                        "assemblyName": assembly_name,
+                        "assemblyName": config["assembly"]["name"],
                     }
                 ],
                 "tracks": [
@@ -245,10 +231,9 @@ def add_defaultSession_true_tracks(config, data, species_abbreviation):
     assembly_name = config.get("assembly", {}).get("name", "")
     for track in config["tracks"]:
         if "defaultSession" in track and track["defaultSession"]:
-            # Ensure protein-coding genes are not added to the default session again if the user has set its with efaultSession: true in the config.yml
+            # Ensure protein-coding genes are not added to the default session again if the user has happened to set it with defaultSession: true in the config.yml
             if track["name"].lower() in ["protein coding genes", "protein-coding genes"]:
                 continue
-
             track_outer_id = (
                 f"{species_abbreviation}_default_{track['name'].replace(' ', '_').replace('\'', '').replace(',', '')}"
             )
@@ -352,28 +337,26 @@ def save_json(data, output_json_path, config_path):
 def main():
     args = parse_arguments()
     config_path = args.yaml
-    git_root = get_git_repo_root()
-
-    config = load_yaml_config(config_path)
+    with open(config_path, "r") as file:
+        config = yaml.safe_load(file)
     if "tracks" not in config:
         raise ValueError(
             "The configuration file does not contain 'tracks'. Thus there are no tracks to set for the defaultSession. Exiting."
         )
-
     species_name = config["organism"]
     species_abbreviation = get_species_abbreviation(species_name)
     species_name_underscored = species_name.replace(" ", "_").lower()
-
-    populated_data = populate_mandatory_values(
-        config, git_root, species_name, species_abbreviation, species_name_underscored
-    )
-    populated_data = add_defaultSession_true_tracks(config, populated_data, species_abbreviation)
+    git_root = get_git_repo_root()
     output_json_path = args.out
     if not output_json_path:
         output_json_path = os.path.join(
             git_root, f"scripts/data_stewardship/temp/{species_name_underscored}_default_session.json"
         )
 
+    populated_data = populate_mandatory_values(
+        config, git_root, species_name, species_abbreviation, species_name_underscored
+    )
+    populated_data = add_defaultSession_true_tracks(config, populated_data, species_abbreviation)
     save_json(populated_data, output_json_path, config_path)
 
 
