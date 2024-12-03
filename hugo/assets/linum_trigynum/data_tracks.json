@@ -113,14 +113,14 @@
   },
   {
     "dataTrackName": "Tajima's D, population 08",
-    "description": "Whole genome Tajima's D estimates for individuals of population 08 of L. trigynum per 100 kb windows.",
+    "description": "Whole genome Tajima's D estimates for individuals of population 08 of L. trigynum per 100 kb windows. (NOTE! File linked here has the correct data, but the file name is Ltri_pop08_Pi.bed.gz.)",
     "links": [
-      {"Download": "https://figshare.scilifelab.se/ndownloader/files/50074047"},
-      {"Website": "https://doi.org/10.17044/scilifelab.26937202.v2"},
+      {"Download": "https://figshare.scilifelab.se/ndownloader/files/49005208"},
+      {"Website": "https://doi.org/10.17044/scilifelab.26937202.v1"},
       {"Article": "https://doi.org/10.1016/j.cub.2022.08.042"}
     ],
-    "accessionOrDOI": "10.17044/scilifelab.26937202.v2",
-    "fileName": "Ltri_pop08_TD.bed.gz",
+    "accessionOrDOI": "10.17044/scilifelab.26937202.v1",
+    "fileName": "Ltri_pop08_Pi.bed.gz",
     "principalInvestigator": "Tanja Slotte",
     "principalInvestigatorAffiliation": "Stockholm University",
     "firstDateOnPortal": "31 October 2024"
