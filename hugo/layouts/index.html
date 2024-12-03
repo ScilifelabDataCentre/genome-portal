@@ -7,7 +7,12 @@
 
 {{ define "main" }}
 
-<!-- markdown file content here -->
+{{ $species := .Site.GetPage "section" "Species" }}
+{{ $numbSpecies := len $species.Sections }}
+{{ $maxSpeciesPerPage := .Site.Params.maxSpeciesPerPage }}
+{{ $numbSpeciesCards := math.Min $numbSpecies $maxSpeciesPerPage }}
+
+
 <div class="row scilife-subsection mt-2">
     <h2>Explore species</h2>
     <p> Scroll down to see the available species or use the search box below to filter which species to show.</p>
@@ -52,10 +57,9 @@
 </div>
 
 
-{{ $numbSpeciesPerPage := .Site.Params.numbSpeciesPerPage }}
 <!-- Species cards are populated using a JSON containing all species info and JS -->
 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-4" id="card-container">
-    {{ range seq 1 $numbSpeciesPerPage }}
+    {{ range seq 1 $numbSpeciesCards }}
     <div class="col">
         <div class="card h-100 scilife-species-card" id="species-card-{{ . }}">
 
@@ -90,19 +94,16 @@
 </div>
 
 
-<!-- shows if no search results -->
+<!-- shows only if no search results -->
 <div id="no-filtered-card" class="alert alert-primary mt-3" style="display: none;" role="alert">
     No results found with your search term
 </div>
 
 
 <!-- Add pagination if numb of species cards is > than number of species per page
-    numb species per page set in main config.yaml file -->
-{{ $species:= .Site.GetPage "section" "Species" }}
-{{ $numbSpecies := len $species.Sections }}
-
-{{if gt $numbSpecies $numbSpeciesPerPage}}
-    {{ partial "pagination.html" (dict "numbSpecies" $numbSpecies "numbSpeciesPerPage" $numbSpeciesPerPage) }}
+     numb species per page set in main config.yaml file -->
+{{if gt $numbSpecies $numbSpeciesCards }}
+    {{ partial "pagination.html" (dict "numbSpecies" $numbSpecies "numbSpeciesCards" $numbSpeciesCards) }}
 {{end}}
 
 

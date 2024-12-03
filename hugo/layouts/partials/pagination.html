@@ -1,8 +1,7 @@
 <!-- Pagination toggle below species cards. -->
 {{ $numbSpecies := .numbSpecies }}
-{{ $numbSpeciesPerPage := .numbSpeciesPerPage }}
+{{ $numbSpeciesPerPage := .numbSpeciesCards }}
 {{ $numbPages := div $numbSpecies $numbSpeciesPerPage | math.Max 2 }}
-
 
 
 <nav aria-label="Species cards navigation">
