@@ -1,7 +1,22 @@
 /*
-Handles searching, ordering and pagination of the species cards
+Handles searching/filtering, ordering and pagination of the species cards on the home page.
+
+This script works with 'index.html' and 'index.json.json' inside the hugo/layouts folder.
+
+On load:
+1. JSON data with all species attributes fetched ('index.json.json' defines the structure of the data)
+2. Species cards populated with this data
+
+Once loaded:
+- Event listners created for search box, dropdown and pagination (if pagination exists).
+
+Notes:
+- Hugo determines if there should be pagination based on the number of species and param 'maxSpeciesPerPage' in 'hugo/config.yaml'
+- This script handles if pagination does not exist (i.e. not enough species to warrant it), via: 'paginationExists' variable.
 
 */
+
+
 let currentPage = 1;
 const cardsPerPage = document.querySelectorAll('.scilife-species-card').length;
 const noResultsCard = document.getElementById('no-filtered-card');
@@ -70,32 +85,34 @@ function populateSpeciesCards(species_data) {
     });
 }
 
-// Sorting functions below
-function sortAlphabetically(a, b) {
-    return a.title.localeCompare(b.title);
-}
-
-const sortRevAlphabetically = (a, b) => -sortAlphabetically(a, b);
-
-// All dates have DD/MM/YYYY format but
-// JS Dates object need standard define in stringToDate function
-function stringToDate(str) {
-    const [dd, mm, yyyy] = str.split('/');
-    return new Date(yyyy, mm - 1, dd);
-}
-
-function sortUpdated(a, b) {
-    const dateA = stringToDate(a.last_updated);
-    const dateB = stringToDate(b.last_updated);
-    return dateB - dateA;
-}
-
 function hideAllCards() {
     const cards = document.querySelectorAll('.scilife-species-card');
     cards.forEach(card => {
         card.style.display = 'none';
     });
 }
+
+
+// Sorting functions below
+
+function stringToDate(str) {
+    // Need to use reformat date standard to use JS Date constructor
+    const [dd, mm, yyyy] = str.split('/');
+    return new Date(yyyy, mm - 1, dd);
+}
+
+function sortLastUpdated(a, b) {
+    const dateA = stringToDate(a.last_updated);
+    const dateB = stringToDate(b.last_updated);
+    return dateB - dateA;
+}
+
+function sortAlphabetically(a, b) {
+    return a.title.localeCompare(b.title);
+}
+
+const sortRevAlphabetically = (a, b) => -sortAlphabetically(a, b);
+
 
 /**
  * Updates the dropdown view with the selected sorting option.
@@ -178,6 +195,8 @@ function updatePaginationButtons(numPages) {
 /**
  * Search/filter all species and order them according to dropdown selection
  * speciesData is the global variable containing all species data
+ *
+ * @returns {Array} - An array of filtered species.
  */
 function filterAndOrderSpecies() {
     let filteredData = speciesData;
@@ -197,7 +216,7 @@ function filterAndOrderSpecies() {
         if (revAlphabetSet) {
             filteredData.sort(sortRevAlphabetically);
         } else if (lastUpdatedSet) {
-            filteredData.sort(sortUpdated);
+            filteredData.sort(sortLastUpdated);
         } else {
             filteredData.sort(sortAlphabetically);
         }
@@ -205,11 +224,10 @@ function filterAndOrderSpecies() {
     return filteredData;
 }
 
-
 /**
  * Displays the filtered species on the cards.
  *
- * @param {Array} filteredData - An array of filtered species data objects.
+ * @param {Array} filteredData - An array of filtered species.
  */
 function displayResults(filteredData) {
     hideAllCards();
@@ -235,6 +253,7 @@ fetchSpeciesData().then(() => {
     displayResults(filteredData);
 });
 
+
 // Event listeners below for each type of possible user interaction
 
 // Event: type in search box
@@ -248,7 +267,6 @@ document.querySelector('#Search').addEventListener('input', (event) => {
 });
 
 
-
 // Event: Change the ordering of the species via dropdown
 // Update the dropdown text with selected item, filter results and display them
 document.querySelector('.dropdown-menu').addEventListener('click', (event) => {
@@ -259,6 +277,7 @@ document.querySelector('.dropdown-menu').addEventListener('click', (event) => {
         displayResults(filteredData);
     }
 });
+
 
 // Event: Change the page
 // Change the page, update the cards with species in that slice of the data
