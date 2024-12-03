@@ -15,7 +15,9 @@ INSTALL_DIR := $(SWG_INSTALL_DIR)
 # comma-separated list to the SPECIES variable. Example:
 #
 #     make SPECIES=linum_tenue,clupea_harengus build
-CONFIGS := $(shell find $(CONFIG_DIR)/$(SPECIES:%={%}) -type f -name 'config.yml')
+SPECIES := $(SPECIES:%:{%})
+
+CONFIGS := $(shell find $(CONFIG_DIR)/$(SPECIES) -type f -name 'config.yml')
 JBROWSE_CONFIGS := $(patsubst $(CONFIG_DIR)/%,$(DATA_DIR)/%,$(CONFIGS:.yml=.json))
 
 # Files to download for further processing (typically compressing and
