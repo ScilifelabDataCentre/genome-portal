@@ -72,5 +72,4 @@ request].
 In the pull request description, tell us a few words about yourself and
 your academic involvement with the proposed species.
 
-That's it for a start: we will be notified guide you through the
-next steps in the pull request discussion.
+That's it for a start: we will be notified when you make the pull request and guide you through the next steps in the pull request discussion.
