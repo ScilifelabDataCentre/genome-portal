@@ -112,15 +112,13 @@ def validate_download_link(page: Page, link_locator: Locator, link_href: str) ->
     Checks the link is a direct download link, but does not wait for the download to complete.
     That could take way too long.
     """
-    KNOWN_FAILING_LINKS = "https://figshare.scilifelab.se/ndownloader/files/50074047"
 
     download_works = True
     try:
         with page.expect_download() as _:
             link_locator.click()
     except PlaywrightTimeoutError:
-        if link_href not in KNOWN_FAILING_LINKS:
-            download_works = False
+        download_works = False
 
     assert download_works, (
         f"A Download button link on the table on page: {page.url} does not appear to be a link.\n"
