@@ -4,7 +4,41 @@ Tests for the home page and the navbar.
 
 import re
 
+import pytest
+
 from playwright.sync_api import Locator, Page, expect
+
+
+def pagination_exists(home_page: Page) -> bool:
+    """
+    Check if there is pagination on the home page.
+    Controls what tests need to be run.
+    """
+    return home_page.locator(".pagination").count() > 0
+
+
+def get_page_button_link(home_page: Page, button_name: str | int) -> Locator:
+    """
+    TODO
+    """
+    return home_page.locator(f'.pagination .page-link[data-page="{button_name}"]')
+
+
+def get_numb_pages(home_page: Page) -> int:
+    """(-2 for prev and next btns.)"""
+    return home_page.locator(".pagination .page-item").count() - 2
+
+
+@pytest.fixture
+def pagination_btns(home_page: Page) -> dict[str, Locator]:
+    """Fixture that returns a dictionary of pagination buttons."""
+    buttons = {
+        "prev": get_page_button_link(home_page, "prev"),
+        "next": get_page_button_link(home_page, "next"),
+    }
+    for i in range(1, get_numb_pages(home_page) + 1):
+        buttons[str(i)] = get_page_button_link(home_page, str(i))
+    return buttons
 
 
 def get_search_bar(page: Page) -> Locator:
@@ -71,27 +105,79 @@ def test_no_results_alert_responsive(home_page: Page) -> None:
     expect(no_results_alert).not_to_be_visible()
 
 
-def test_search_cards_responsive(home_page: Page) -> None:
+def test_pagination_page_number_nav(home_page: Page, pagination_btns: dict[str, Locator]) -> None:
     """
-    Test the species cards are responsive to the search.
-    As in the appear and disappear based on the search term used.
+    Test changing the page of the species results works as expected.
+    Just navigates to each page using the page numbers.
+    """
+    if not pagination_exists(home_page):
+        return
+
+    expect(pagination_btns["1"].locator("..")).to_have_class(re.compile("active"))
+    expect(pagination_btns["prev"].locator("..")).to_have_class(re.compile("disabled"))
+
+    numb_pages = get_numb_pages(home_page)
+    for page_numb in range(2, numb_pages + 1):
+        pagination_btns[f"{str(page_numb)}"].click()
+
+        expect(pagination_btns[f"{str(page_numb)}"].locator("..")).to_have_class(re.compile("active"))
+
+        if page_numb == numb_pages:
+            expect(pagination_btns["next"].locator("..")).to_have_class(re.compile("disabled"))
+
+
+def test_pagination_nav_buttons(home_page: Page, pagination_btns: dict[str, Locator]) -> None:
+    """
+    Test using "Next" and "Previous" buttons to navigate through the results pages.
+    """
+    if not pagination_exists(home_page):
+        return
+
+    first_page_link = pagination_btns["1"]
+    numb_of_pages = get_numb_pages(home_page)
+    last_page_link = pagination_btns[str(numb_of_pages)]
+
+    expect(pagination_btns["prev"].locator("..")).to_have_class(re.compile("disabled"))
+
+    for _ in range(1, numb_of_pages):
+        pagination_btns["next"].click()
+    expect(pagination_btns["next"].locator("..")).to_have_class(re.compile("disabled"))
+    expect(last_page_link.locator("..")).to_have_class(re.compile("active"))
+
+    for _ in range(1, numb_of_pages):
+        pagination_btns["prev"].click()
+    expect(pagination_btns["prev"].locator("..")).to_have_class(re.compile("disabled"))
+    expect(first_page_link.locator("..")).to_have_class(re.compile("active"))
+
+
+def count_visible_cards(species_cards: list[Locator]) -> int:
+    """Helper function to count the number of visible species cards."""
+    visible_cards = 0
+    for card in species_cards:
+        if card.is_visible():
+            visible_cards += 1
+    return visible_cards
+
+
+def test_search_box_responsive(home_page: Page) -> None:
+    """
+    Test the search box is responsive, results appear and disappear based on the search term used.
     """
     search_bar = get_search_bar(home_page)
-    species_cards = get_species_cards(home_page)
+    species_cards = home_page.locator(".scilife-species-card").all()
+    total_numb_cards = len(species_cards)
 
-    total_numb_cards = species_cards.count()
-
-    search_bar.fill("sdsdsdsdsd")
-    assert species_cards.count() == 0
+    search_bar.fill("sdsdsdsdsdghjjj")
+    assert count_visible_cards(species_cards) == 0
 
     search_bar.fill("Littorina saxatilis")  # species that exists.
-    assert species_cards.count() == 1
+    assert count_visible_cards(species_cards) == 1
 
     search_bar.fill("Linum")  # gives at least 2 results.
-    assert species_cards.count() >= 2
+    assert count_visible_cards(species_cards) >= 2
 
     search_bar.fill("")
-    assert species_cards.count() == total_numb_cards
+    assert count_visible_cards(species_cards) == total_numb_cards
 
 
 def test_search_dropdown_ordering(home_page: Page) -> None:

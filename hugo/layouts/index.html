@@ -7,7 +7,12 @@
 
 {{ define "main" }}
 
-<!-- markdown file content here -->
+{{ $species := .Site.GetPage "section" "Species" }}
+{{ $numbSpecies := len $species.Sections }}
+{{ $maxSpeciesPerPage := .Site.Params.maxSpeciesPerPage }}
+{{ $numbSpeciesCards := math.Min $numbSpecies $maxSpeciesPerPage }}
+
+
 <div class="row scilife-subsection mt-2">
     <h2>Explore species</h2>
     <p> Scroll down to see the available species or use the search box below to filter which species to show.</p>
@@ -52,45 +57,33 @@
 </div>
 
 
-
-<!-- Species cards -->
+<!-- Species cards are populated using a JSON containing all species info and JS -->
 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-4" id="card-container">
-    {{ $species := .Site.GetPage "section" "Species" }}
-    {{ range $species.Sections }}
+    {{ range seq 1 $numbSpeciesCards }}
     <div class="col">
-        <div class="card h-100 scilife-species-card">
+        <div class="card h-100 scilife-species-card" id="species-card-{{ . }}">
+
             <div class="card-image">
                 <figure>
-                    <a href="{{ .RelPermalink }}" title="Go to the {{ .Title | markdownify }} page">
-                        <img src="{{ .Params.cover_image }}" class="card-img-top"
-                            alt="Image of {{ .Title | markdownify }}">
+                    <a href="#" title="">
+                        <img src="" class="card-img-top" alt="">
                     </a>
-
-                    {{ if .Params.img_attrib_link }}
-                    <a href="{{ .Params.img_attrib_link }}" title="Go to the image source" target="_blank">
-                        <figcaption class="scilife-card-image-attrib"> {{ .Params.img_attrib_text }} </figcaption>
+                    <!-- Include format for with and without link, JS decides which to display.-->
+                    <a class="caption-with-link" href="#" title="Go to the image source" target="_blank" style="display: none;">
+                        <figcaption class="scilife-card-image-attrib"></figcaption>
                     </a>
-                    {{ else }}
-                    <p class="scilife-card-image-attrib">
-                        {{ .Params.img_attrib_text }}
-                    </p>
-                    {{ end }}
-
+                    <p class="caption-no-link scilife-card-image-attrib" style="display: none;"></p>
                 </figure>
             </div>
 
             <div class="card-body">
-                <h2 class="card-title" id="science-name">{{ .Title | markdownify }}</h2>
-                <h3 class="card-title" id="common-name">{{ .Params.subtitle | markdownify }}</h3>
+                <h2 class="card-title science-name"></h2>
+                <h3 class="card-title common-name"></h3>
             </div>
 
             <div class="d-flex justify-content-between align-items-center">
-                <p class="card-text mb-0 mt-auto">Last updated: {{ .Params.last_updated }}</p>
-                <!-- The date below is hidden because used only in the sorting algo for easier date parsing -->
-                <div class="hidden-date" style="display: none;">{{ .Params.last_updated }}</div>
-
-                <a href="{{ .RelPermalink }}" class="btn btn-primary scilife-species-button"
-                    title="Go to the {{ .Title | markdownify }} page">
+                <p class="card-text mb-0 mt-auto"></p>
+                <a href="#" class="btn btn-primary scilife-species-button"title="">
                     <i class="bi bi-arrow-right" style="font-size: 1.25em;"></i>
                 </a>
             </div>
@@ -98,122 +91,24 @@
         </div>
     </div>
     {{ end }}
-
 </div>
 
-<!-- shows if no search results -->
+
+<!-- shows only if no search results -->
 <div id="no-filtered-card" class="alert alert-primary mt-3" style="display: none;" role="alert">
     No results found with your search term
 </div>
 
 
+<!-- Add pagination if numb of species cards is > than number of species per page
+     numb species per page set in main config.yaml file -->
+{{if gt $numbSpecies $numbSpeciesCards }}
+    {{ partial "pagination.html" (dict "numbSpecies" $numbSpecies "numbSpeciesCards" $numbSpeciesCards) }}
+{{end}}
 
-<script>
-    const speciesCards = Array.from(document.querySelectorAll('.scilife-species-card'));
 
-    // helper function to handle missing elements by returning empty string
-    function getElementText(root, selector) {
-        const element = root.querySelector(selector);
-        if (!element) {
-            console.warn(`Element not found for selector: ${selector} in root: ${root}`);
-            return '';
-        }
-        return element.textContent;
-    }
+{{ $speciesCardsJS := resources.Get "js/species_cards.js" | fingerprint | minify }}
+<script type="module" src="{{ $speciesCardsJS.RelPermalink }}"></script>
 
-    function sortAlphabetically(a, b) {
-        const titleA = getElementText(a, '#science-name');
-        const titleB = getElementText(b, '#science-name');
-        return titleA.localeCompare(titleB);
-    }
-
-    const sortRevAlphabetically = (a, b) => -sortAlphabetically(a, b);
-
-    // All dates have DD/MM/YYYY format but
-    // JS Dates object need standard define in stringToDate function
-    function stringToDate(str) {
-        const [dd, mm, yyyy] = str.split('/');
-        return new Date(yyyy, mm - 1, dd);
-    }
-
-    function sortUpdated(a, b) {
-        const dateStrA = getElementText(a, '.hidden-date');
-        const dateStrB = getElementText(b, '.hidden-date');
-
-        const dateA = stringToDate(dateStrA);
-        const dateB = stringToDate(dateStrB);
-        return dateB - dateA;
-    }
-
-    function searchAndFilter() {
-        const searchText = document.querySelector("#Search").value.toLowerCase();
-        const AlphabetSet = document.querySelector("#Alphabet").classList.contains("active");
-        const RevAlphabetSet = document.querySelector("#RevAlphabet").classList.contains("active");
-        const UpdatedSet = document.querySelector("#Updated").classList.contains("active");
-
-        document.querySelector("#card-container").innerHTML = "";
-        let cardsToAppend = [];
-
-        if (searchText === "") {
-            cardsToAppend = speciesCards.slice();
-        } else {
-            cardsToAppend = speciesCards.filter(function (card) {
-                const title = getElementText(card, '#science-name').toLowerCase();
-                const subtitle = getElementText(card, '#common-name').toLowerCase();
-                const cardText = getElementText(card, '.card-text').toLowerCase();
-                return title.includes(searchText) || subtitle.includes(searchText) || cardText.includes(searchText);
-            });
-        }
-
-        if (cardsToAppend.length === 0) {
-            document.querySelector("#no-filtered-card").style.display = 'block';
-        } else {
-            document.querySelector("#no-filtered-card").style.display = 'none';
-
-            if (RevAlphabetSet) {
-                cardsToAppend.sort(sortRevAlphabetically);
-            }
-            else if (UpdatedSet) {
-                cardsToAppend.sort(sortUpdated);
-            }
-            else {
-                cardsToAppend.sort(sortAlphabetically)
-            }
-
-            cardsToAppend.forEach(function (card) {
-                document.querySelector("#card-container").appendChild(card.parentElement);
-            });
-        }
-    }
-
-    // Event listeners for sorting buttons and then search box
-    const sortingButtons = ["Alphabet", "RevAlphabet", "Updated"];
-    sortingButtons.forEach(buttonId => {
-        document.getElementById(buttonId).addEventListener("click", function () {
-            sortingButtons.forEach(id => document.getElementById(id).classList.remove("active"));
-            this.classList.add("active");
-
-            // (Update the dropdown text with selected item)
-            const dropdown = document.querySelector(".scilife-sort-dropdown");
-            const sortOptionSelected = this.textContent.trim();
-            const iconMapping = {
-                'Name (A to Z)': 'bi-sort-alpha-down',
-                'Name (Z to A)': 'bi-sort-alpha-up',
-                'Last updated': 'bi-clock'
-            };
-            const icon = iconMapping[sortOptionSelected];
-
-            dropdown.textContent = sortOptionSelected;
-            dropdown.innerHTML = `<i class="bi ${icon}"></i> ` + sortOptionSelected;
-
-            searchAndFilter();
-        });
-    });
-
-    // Event listners for when page fully loaded or search box input
-    document.addEventListener("DOMContentLoaded", searchAndFilter);
-    document.querySelector("#Search").addEventListener("input", searchAndFilter);
-
-</script>
 
 {{ end }}
