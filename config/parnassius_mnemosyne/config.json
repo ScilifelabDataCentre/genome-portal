@@ -93,6 +93,39 @@
               ]
             }
           ]
+        },
+        {
+          "id": "pmne_mito_default_session_view",
+          "minimized": false,
+          "type": "LinearGenomeView",
+          "trackLabels": "offset",
+          "offsetPx": 0,
+          "bpPerPx": 5,
+          "displayedRegions": [
+            {
+              "refName": "ENA|OZ075093|OZ075093.1",
+              "start": 0,
+              "end": 15425,
+              "reversed": false,
+              "assemblyName": "Parnassius_mnemosyne_mito_2024_06"
+            }
+          ],
+          "tracks": [
+            {
+              "id": "pmne_mito_genes",
+              "type": "FeatureTrack",
+              "configuration": "pmne_mtdna.gff",
+              "minimized": false,
+              "displays": [
+                {
+                  "id": "pmne_mito_genes_display",
+                  "type": "LinearBasicDisplay",
+                  "heightPreConfig": 150,
+                  "configuration": "pmne_mtdna.gff-LinearBasicDisplay"
+                }
+              ]
+            }
+          ]
         }
       ]
     }
