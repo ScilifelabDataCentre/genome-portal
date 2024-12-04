@@ -67,9 +67,13 @@ git push origin ostracion-cubicum
 
 Now to start the onboarding process, create a
 https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request[pull
-request].
+request]. (We encourage you to tick the option allowing us to
+https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/allowing-changes-to-a-pull-request-branch-created-from-a-fork[make
+changes], for the ease of collaboration)
 
 In the pull request description, tell us a few words about yourself and
 your academic involvement with the proposed species.
 
-That's it for a start: we will be notified when you make the pull request and guide you through the next steps in the pull request discussion.
+That's it for a start: we will be notified and guide you through the
+next steps in the pull request discussion. 
+
