@@ -12,10 +12,21 @@ DATA_DIR := $(SWG_DATA_DIR)
 INSTALL_DIR := $(SWG_INSTALL_DIR)
 
 # To restrict operations to a subset of species, assign them as a
-# comma-separated list to the SPECIES variable. Example:
+# comma-separated list to the SPECIES variable, either in the
+# environment or as command-line option. Equivalent examples:
 #
 #     make SPECIES=linum_tenue,clupea_harengus build
-CONFIGS := $(shell find $(CONFIG_DIR)/$(SPECIES:%={%}) -type f -name 'config.yml')
+#
+#     export SPECIES=linum_tenue,clupea_harengue
+#     make build
+ifneq ($(strip $(SPECIES)),)
+comma = ,
+SPECIES_DIRS := $(addprefix $(CONFIG_DIR)/, $(sort $(subst $(comma), ,$(SPECIES))))
+else
+SPECIES_DIRS := $(CONFIG_DIR)
+endif
+
+CONFIGS := $(shell find $(SPECIES_DIRS) -type f -name 'config.yml')
 JBROWSE_CONFIGS := $(patsubst $(CONFIG_DIR)/%,$(DATA_DIR)/%,$(CONFIGS:.yml=.json))
 
 # Files to download for further processing (typically compressing and
@@ -38,7 +49,7 @@ GFF := $(addsuffix .bgz, $(filter %.gff,$(unzipped)))
 GFF_INDICES := $(addsuffix .tbi,$(GFF))
 
 # GTF files
-GTF := $(filter %.gtf,$(unzipped)) 
+GTF := $(filter %.gtf,$(unzipped))
 
 # BED files
 BED := $(addsuffix .bgz,$(filter %.bed,$(unzipped)))
@@ -64,7 +75,7 @@ define log_info
 @printf $(INFO)$(1)$(RESET)'\n'
 endef
 
-define log_list	
+define log_list
 @printf $(1)"\n"
 @printf "  - %s\n" $(sort $(2))
 endef
@@ -77,14 +88,15 @@ build: download recompress index jbrowse-config
 
 .PHONY: debug
 debug:
-	$(call log_list, "Configuration files :", $(CONFIGS))
-	$(call log_list, "JBrowse configuration files :", $(JBROWSE_CONFIGS))
-	$(call log_list, "Files to download :", $(DOWNLOAD_TARGETS))
-	$(call log_list, "Recompressed files :", $(FASTA) $(GFF) $(GTF) $(BED)) 
-	$(call log_list, "FASTA indices :", $(FASTA_INDICES) $(FASTA_GZINDICES))
-	$(call log_list, "GFF indices :", $(GFF_INDICES))
-	$(call log_list, "BED indices :", $(BED_INDICES))
-	$(call log_list, "Files to install :", $(INSTALLED_FILES))
+	$(call log_list, "Configuration directories: ", $(SPECIES_DIRS))
+	$(call log_list, "Configuration files:", $(CONFIGS))
+	$(call log_list, "JBrowse configuration files:", $(JBROWSE_CONFIGS))
+	$(call log_list, "Files to download:", $(DOWNLOAD_TARGETS))
+	$(call log_list, "Recompressed files:", $(FASTA) $(GFF) $(GTF) $(BED))
+	$(call log_list, "FASTA indices:", $(FASTA_INDICES) $(FASTA_GZINDICES))
+	$(call log_list, "GFF indices:", $(GFF_INDICES))
+	$(call log_list, "BED indices:", $(BED_INDICES))
+	$(call log_list, "Files to install:", $(INSTALLED_FILES))
 
 .PHONY: jbrowse-config
 jbrowse-config: $(JBROWSE_CONFIGS)
@@ -109,9 +121,9 @@ clean-config:
 	rm -f $(JBROWSE_CONFIGS)
 
 # Remove built data files
-.PHONY: clean-local 
+.PHONY: clean-local
 clean-local:
-	rm -f $(LOCAL_FILES)  
+	rm -f $(LOCAL_FILES)
 
 
 # Remove all artifacts
