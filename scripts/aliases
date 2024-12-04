@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Produce JBrowse2-compatible aliases from ENA FASTA headers
+#
+# Example:
+#   ENA-formatted FASTA header:
+#     >ENA|CAVLGL010000001|CAVLGL010000001.1 Parnassius mnemosyne genome assembly, contig: scaffold_1
+#   Alias line produced:
+#     CAVLGL010000001 CAVLGL010000001.1 scaffold_1
+# Arguments:
+#   List of file names to read from. Default: read from standard input
+# Outputs:
+#   Space-separated aliases are written to standard output
+echo "#ENA NCBI original"
+sed -En 's/^>(ENA\|[^|]+\|([^[:blank:]|]+))[[:blank:]].*contig: (.+)$/\1 \2 \3/p' "${@:--}"
