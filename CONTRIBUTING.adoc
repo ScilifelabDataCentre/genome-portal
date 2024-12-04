@@ -1,0 +1,79 @@
+= Contributing
+
+This guide describes how to submit a new species for the
+https://genomes.scilifelab.se[Swedish Reference Genome Portal]
+
+In the following examples, we will assume that you (Github user
+`insidethebox`) want to add the
+https://en.wikipedia.org/wiki/Yellow_boxfish[Yellow boxfish]
+(described as _Ostracion cubicum_ by Linné in 1758) species to the
+Genome Portal.
+
+== Prerequisites
+
+Start by
+https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo#forking-a-repository[forking]
+the
+https://github.com/ScilifelabDataCentre/genome-portal/fork[genome-portal]
+repository from your Github account.
+
+Clone the repository to your computer, and create a branch to work on. Name the
+branch after the scientific name of the species:
+
+```
+git clone git@github.com:insidethebox/genome-portal.git
+cd genome-portal
+git checkout -b ostracion-cubicum
+```
+
+== Reference genome and gene annotation
+
+The first elements we ask you to provide are a reference assembly and
+a genome annotation.
+
+Create a file named `config.yml` using the following model:
+
+```yaml
+assembly:
+  name: yellow_boxfish_assembly
+  displayName: "Yellow boxfish genome assembly"
+  # The following URL points to the public repository hosting the assembly
+  url: "https://example.com/repository/GCA_255255000.fasta.gz"
+  fileName: GCA_255255000.fasta.gz
+tracks:
+  - name: "Protein coding genes"
+    # Ditto
+    url: "https://example.com/repository/GCA_255255000.gff.gz"
+    fileName: GCA_255255000.gff.gz
+```
+
+Within the `genome-portal` repository, place this file its own
+directory under `config/`, named after the species scientific name:
+
+```
+cd genome-portal
+mkdir config/ostracion_cubicum
+mv config.yml config/ostracion_cubicum
+```
+
+Commit and push your changes
+
+```
+git commit -am "Base configuration for Ostracion cubicum"
+git push origin ostracion-cubicum
+```
+
+== Open a pull request
+
+Now to start the onboarding process, create a
+https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request[pull
+request]. (We encourage you to tick the option allowing us to
+https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/allowing-changes-to-a-pull-request-branch-created-from-a-fork[make
+changes], for the ease of collaboration)
+
+In the pull request description, tell us a few words about yourself and
+your academic involvement with the proposed species.
+
+That's it for a start: we will be notified and guide you through the
+next steps in the pull request discussion. 
+
