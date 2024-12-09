@@ -45,7 +45,8 @@ FASTA_INDICES := $(addsuffix .fai,$(FASTA))
 FASTA_GZINDICES := $(FASTA_INDICES:.fai=.gzi)
 
 # Fasta aliases
-ALIASES := $(FASTA:.bgz=.alias)
+# One aliases.txt file per directory where we have an assembly
+ALIASES := $(addsuffix aliases.txt,$(sort $(dir $(FASTA))))
 
 # GFF files and indices
 GFF := $(addsuffix .bgz, $(filter %.gff,$(unzipped)))
@@ -104,9 +105,6 @@ debug:
 .PHONY:
 aliases: $(ALIASES)
 	$(call log_list, "Generated aliases: ", $(ALIASES))
-
-$(ALIASES): %.alias: %.bgz
-	$(SHELL) -o pipefail -c "zcat -f < $< | ./scripts/aliases > $@"
 
 .PHONY: clean-aliases
 clean-aliases:
@@ -218,3 +216,8 @@ $(FASTA) $(GFF) $(BED): %.bgz: $$(filter $$*$$(_pattern),$$(DOWNLOAD_TARGETS))
 
 $(GTF): $$(filter $$@$$(_pattern),$$(DOWNLOAD_TARGETS))
 	@$(SHELL) -o pipefail -c "zcat -f < $< > $@"
+
+# The prerequisites of an alias file are all the FASTA files
+# downloaded in the same species directory.
+$(ALIASES): %/aliases.txt: $$(filter $$*$$(_pattern),$$(FASTA))
+	@$(SHELL) -o pipefail -c "zcat -f $^ | ./scripts/aliases > $@"
