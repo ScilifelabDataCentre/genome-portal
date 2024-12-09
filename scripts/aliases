@@ -12,4 +12,4 @@
 # Outputs:
 #   Space-separated aliases are written to standard output
 echo "#ENA NCBI original"
-sed -En 's/^>(ENA\|[^|]+\|([^[:blank:]|]+))[[:blank:]].*contig: (.+)$/\1 \2 \3/p' "${@:--}"
+sed -En 's/^>(ENA\|[^|]+\|([^[:blank:]|]+))[[:blank:]].*contig: ([^[:blank:]]+).*$/\1 \2 \3/p' "${@:--}"

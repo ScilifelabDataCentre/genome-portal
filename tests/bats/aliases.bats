@@ -18,7 +18,8 @@ setup() {
     run aliases <<EOF
 >ENA|CAMGYJ010000001|CAMGYJ010000001.1 Linum tenue genome assembly, contig: CHL
 >ENA|CAMGYJ010000002|CAMGYJ010000002.1 Linum tenue genome assembly, contig: LG1
->ENA|CAMGYJ010000003|CAMGYJ010000003.1 Linum tenue genome assembly, contig: LG10
+# Extra space at the end of next line
+>ENA|CAMGYJ010000003|CAMGYJ010000003.1 Linum tenue genome assembly, contig: LG10$(printf '\t  ')
 EOF
     expected=$(cat <<EOF
 #ENA NCBI original
