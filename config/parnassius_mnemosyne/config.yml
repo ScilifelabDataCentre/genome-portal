@@ -4,9 +4,6 @@ assembly:
   displayName: "P. mnemosyne genome assembly GCA_963668995.1"
   accession: GCA_963668995.1
   url: "https://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/cav/CAVLGL01.fasta.gz"
-  # Temp storage for alias file. 
-  aliases: "https://raw.githubusercontent.com/ScilifelabDataCentre/genome-portal/main/scripts/data_stewardship/alias_files_temp_storage/CAVLGL01.fna.alias"
-
 tracks:
   - name: "Protein-coding genes"
     #trackDescription: "Annotation of protein-coding genes, original version that was submitted to ENA"

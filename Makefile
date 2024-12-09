@@ -44,6 +44,10 @@ FASTA := $(addsuffix .bgz, $(filter %.fna,$(unzipped)))
 FASTA_INDICES := $(addsuffix .fai,$(FASTA))
 FASTA_GZINDICES := $(FASTA_INDICES:.fai=.gzi)
 
+# Fasta aliases
+# One aliases.txt file per directory where we have an assembly
+ALIASES := $(addsuffix aliases.txt,$(sort $(dir $(FASTA))))
+
 # GFF files and indices
 GFF := $(addsuffix .bgz, $(filter %.gff,$(unzipped)))
 GFF_INDICES := $(addsuffix .tbi,$(GFF))
@@ -84,7 +88,7 @@ all: build install
 	$(greet)
 
 .PHONY: build
-build: download recompress index jbrowse-config
+build: download recompress index aliases jbrowse-config
 
 .PHONY: debug
 debug:
@@ -97,6 +101,14 @@ debug:
 	$(call log_list, "GFF indices:", $(GFF_INDICES))
 	$(call log_list, "BED indices:", $(BED_INDICES))
 	$(call log_list, "Files to install:", $(INSTALLED_FILES))
+
+.PHONY:
+aliases: $(ALIASES)
+	$(call log_list, "Generated aliases: ", $(ALIASES))
+
+.PHONY: clean-aliases
+clean-aliases:
+	@rm -f $(ALIASES)
 
 .PHONY: jbrowse-config
 jbrowse-config: $(JBROWSE_CONFIGS)
@@ -125,11 +137,9 @@ clean-config:
 clean-local:
 	rm -f $(LOCAL_FILES)
 
-
 # Remove all artifacts
 .PHONY: clean
 clean: clean-upstream clean-local clean-config
-
 
 .PHONY: recompress
 recompress: $(GFF) $(FASTA) $(GTF) $(BED);
@@ -147,7 +157,6 @@ $(INSTALLED_FILES): $(INSTALL_DIR)/%: $(DATA_DIR)/%
 .PHONY: uninstall
 uninstall:
 	rm -f $(INSTALLED_FILES)
-
 
 .PHONY: index
 index: $(FASTA_INDICES) $(GFF_INDICES) $(BED_INDICES)
@@ -207,3 +216,8 @@ $(FASTA) $(GFF) $(BED): %.bgz: $$(filter $$*$$(_pattern),$$(DOWNLOAD_TARGETS))
 
 $(GTF): $$(filter $$@$$(_pattern),$$(DOWNLOAD_TARGETS))
 	@$(SHELL) -o pipefail -c "zcat -f < $< > $@"
+
+# The prerequisites of an alias file are all the FASTA files
+# downloaded in the same species directory.
+$(ALIASES): %/aliases.txt: $$(filter $$*$$(_pattern),$$(FASTA))
+	@$(SHELL) -o pipefail -c "zcat -f $^ | ./scripts/aliases > $@"
