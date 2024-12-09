@@ -1,95 +1,60 @@
 /*
 Handles searching/filtering, ordering and pagination of the species cards on the home page.
-
-This script works with 'index.html' and 'index.json.json' inside the hugo/layouts folder.
+This script works with 'index.html' inside the hugo/layouts folder.
 
 On load:
-1. JSON data with all species attributes fetched ('index.json.json' defines the structure of the data)
-2. Species cards populated with this data
+1. Species attributes needed for searching fetched from the <template> cards built for each species.
+2. Determine if pagination exists (decided by Hugo based on number of species and 'maxSpeciesPerPage' in 'hugo/config.yaml').
+3. Run the render function to display the species cards that should be shown.
 
 Once loaded:
 - Event listners created for search box, dropdown and pagination (if pagination exists).
+- Each event listner calls the main render function (renderSpeciesCards) alongside some others dependant on the event.
 
 Notes:
-- Hugo determines if there should be pagination based on the number of species and param 'maxSpeciesPerPage' in 'hugo/config.yaml'
-- This script handles if pagination does not exist (i.e. not enough species to warrant it), via: 'paginationExists' variable.
-
+- This code can handle both pagination and no pagination (i.e. not enough species to warrant it). So can the Playwright tests assocaited with this page.
 */
 
+const SORT_OPTIONS = {
+    LAST_UPDATED: 'lastUpdated',
+    A_TO_Z: 'alphabet',
+    Z_TO_A: 'revAlphabet'
+};
 
-let currentPage = 1;
-const cardsPerPage = document.querySelectorAll('.scilife-species-card').length;
-const noResultsCard = document.getElementById('no-filtered-card');
 const paginationItems = document.querySelectorAll('.pagination .page-item');
-const paginationExists = paginationItems.length > 0; // if not enough species, there will be no pagination yet.
-let speciesData = []; // updated once JSON data is fetched
+const noResultsCard = document.getElementById('no-filtered-card');
+const PAGINATION_EXISTS = paginationItems.length > 0; // if not enough species, there will be no pagination yet.
+const CARDS_PER_PAGE = parseInt(document.getElementById('card-container').dataset.numbCardsPerPage);
+
+let state = {
+    speciesData: [], // updated by reading from the <template>s in the HTML
+    currentPage: 1,
+    sortOrder: SORT_OPTIONS.LAST_UPDATED,
+    searchText: '',
+    numbMatches: 0 // updated when search ran.
+};
 
 
 /**
- * Fetch the JSON data with all species info, Updates the global speciesData variable
- * Runs once on page load.
+ * Runs on page load.
+ * Gets the info needed to search and order the species cards from each <template> card.
+ * Runs the render function to display the species cards.
  */
-function fetchSpeciesData() {
-    return fetch('/species_catalog.json')
-        .then(response => response.json())
-        .then(fetchedData => {
-            speciesData = fetchedData;
-            return speciesData;
-        })
-        .catch(error => {
-            console.error('Error fetching species data:', error);
-            return [];
-        });
-}
-
-
-/**
- * Function to populate the species cards with the fetched data.
- *
- * @param {Array} species_data - An array of species data objects.
- */
-function populateSpeciesCards(species_data) {
-    species_data.forEach((species, index) => {
-        const card = document.getElementById(`species-card-${index + 1}`);
-        if (card) {
-            card.querySelector('a').href = species.rel_permalink;
-            card.querySelector('a').title = `Go to the ${species.title} page`;
-            card.querySelector('img').src = species.cover_image;
-            card.querySelector('img').alt = `Image of ${species.title}`;
-            card.querySelector('.science-name').innerHTML = species.title;
-            card.querySelector('.common-name').innerHTML = species.subtitle;
-            card.querySelector('.card-text').textContent = `Last updated: ${species.last_updated}`;
-            card.querySelector('.btn').href = species.rel_permalink;
-            card.querySelector('.btn').title = `Go to the ${species.title} page`;
-
-            // Handles attribution text with or without link
-            if (species.img_attrib_link) {
-                const captionWithLink = card.querySelector('.caption-with-link');
-                captionWithLink.href = species.img_attrib_link;
-                captionWithLink.querySelector('.scilife-card-image-attrib').textContent = species.img_attrib_text;
-                captionWithLink.style.display = 'flex';
-
-                const captionNoLink = card.querySelector('.caption-no-link');
-                captionNoLink.style.display = 'none';
-            } else {
-                const captionNoLink = card.querySelector('.caption-no-link');
-                captionNoLink.textContent = species.img_attrib_text;
-                captionNoLink.style.display = 'flex';
-
-                const captionWithLink = card.querySelector('.caption-with-link');
-                captionWithLink.style.display = 'none';
-            }
-
-            card.style.display = 'flex';
-        }
+function prepareSpeciesPage() {
+    const templates = document.querySelectorAll('template[id^="card-"]');
+    templates.forEach(template => {
+        const title = template.content.querySelector('.science-name').textContent.toLowerCase();
+        const subtitle = template.content.querySelector('.common-name').textContent.toLowerCase();
+        const species = {
+            id: template.id,
+            speciesText: title + ' ' + subtitle, // used for searching
+            last_updated: template.content.querySelector('.card-text').textContent.replace('Last updated: ', ''),
+        };
+        state.speciesData.push(species);
     });
-}
+    state.numbMatches = templates.length
 
-function hideAllCards() {
-    const cards = document.querySelectorAll('.scilife-species-card');
-    cards.forEach(card => {
-        card.style.display = 'none';
-    });
+    renderSpeciesCards();
 }
 
 
@@ -108,162 +73,161 @@ function sortLastUpdated(a, b) {
 }
 
 function sortAlphabetically(a, b) {
-    return a.title.localeCompare(b.title);
+    return a.speciesText.localeCompare(b.speciesText);
 }
 
 const sortRevAlphabetically = (a, b) => -sortAlphabetically(a, b);
 
 
 /**
+ * Run on page load and every time an event listener is triggered.
+ * Based on current state, updates: species cards, pagination buttons and the no results card.
+ */
+function renderSpeciesCards() {
+    const cardContainer = document.getElementById('card-container');
+    cardContainer.innerHTML = '';
+
+    const speciesToDisplay = filterAndOrderSpecies();
+
+    if (speciesToDisplay.length === 0) {
+        noResultsCard.style.display = 'block';
+        state.currentPage = 1
+        updatePaginationButtons();
+    } else {
+        noResultsCard.style.display = 'none';
+        speciesToDisplay.forEach((speciesId) => {
+            const template = document.getElementById(speciesId);
+            const content = template.content.cloneNode(true);
+            cardContainer.appendChild(content);
+        });
+        updatePaginationButtons();
+    }
+}
+
+
+/**
+ * Search/filter all species and order them according to active dropdown selection
+ * The id's of each species <template> is returned (in order of display).
+ *
+ * @returns {Array} - An array of filtered species HTML <template> ids.
+ *                    (Returns empty array if no matches.)
+ */
+function filterAndOrderSpecies() {
+    let filteredSpecies = state.speciesData;
+
+    // filter by text content
+    if (state.searchText !== "") {
+        filteredSpecies = state.speciesData.filter(species => {
+            return species.speciesText.includes(state.searchText);
+        });
+    }
+
+    state.numbMatches = filteredSpecies.length
+
+    // order species
+    if (filteredSpecies.length !== 0) {
+        if (state.sortOrder === SORT_OPTIONS.LAST_UPDATED) {
+            filteredSpecies.sort(sortLastUpdated);
+        } else if (state.sortOrder === SORT_OPTIONS.A_TO_Z) {
+            filteredSpecies.sort(sortAlphabetically);
+        } else {
+            filteredSpecies.sort(sortRevAlphabetically);
+        }
+    }
+
+    // select results to show based on page number
+    if (PAGINATION_EXISTS) {
+        const startIndex = (state.currentPage - 1) * CARDS_PER_PAGE;
+        const endIndex = startIndex + CARDS_PER_PAGE;
+        filteredSpecies = filteredSpecies.slice(startIndex, endIndex);
+    }
+    return filteredSpecies.map(species => species.id);
+}
+
+
+/**
  * Updates the dropdown view with the selected sorting option.
+ * Fills in the dropdown inner HTML using 1 of 3 pre-prepared <templates> items.
  *
  * @param {HTMLElement} target - The dropdown item that was selected.
  */
-function updateSortDropdown(target) {
-    const SORTING_BUTTONS = ["Alphabet", "RevAlphabet", "Updated"];
-    const ICON_MAPPING = {
-        'Name (A to Z)': 'bi-sort-alpha-down',
-        'Name (Z to A)': 'bi-sort-alpha-up',
-        'Last updated': 'bi-clock'
-    };
-
-    SORTING_BUTTONS.forEach(id => document.getElementById(id).classList.remove("active"));
-    target.classList.add("active");
-
+function updateSortDropdown() {
     const dropdown = document.querySelector(".scilife-sort-dropdown");
-    const sortOptionSelected = target.textContent.trim();
-    const icon = ICON_MAPPING[sortOptionSelected];
+    const dropdownButtons = Object.values(SORT_OPTIONS);
+    dropdownButtons.forEach(id => document.getElementById(id).classList.remove("active"));
 
-    dropdown.textContent = sortOptionSelected;
-    dropdown.innerHTML = `<i class="bi ${icon}"></i> ` + sortOptionSelected;
+    const activeButton = document.getElementById(state.sortOrder);
+    activeButton.classList.add("active");
+
+    const templateId = `text-${state.sortOrder}`;
+    const template = document.getElementById(templateId);
+    const clone = template.content.cloneNode(true);
+    dropdown.innerHTML = '';
+    dropdown.appendChild(clone);
 }
+
 
 /**
  * Updates the page number shown as active in the pagination
- *
- * @param {string|number} page - Can be 'prev', 'next', or a specific page number.
  */
-function updateActivePage(page) {
+function updateActivePage() {
     paginationItems.forEach(item => {
         item.classList.remove('active');
     });
-
-    const activeItem = document.querySelector(`.pagination .page-link[data-page="${page}"]`).parentElement;
-    if (activeItem) {
-        activeItem.classList.add('active');
-    }
+    const activePage = document.querySelector(`.pagination .page-link[data-page="${state.currentPage}"]`).parentElement;
+    activePage.classList.add('active');
 }
 
 /**
- * Changes page based on the provided page identifier.
+ * Update the page number based on on the provided page identifier.
  *
- * @param {string|number} page - Can be 'prev', 'next', or a specific page number.
+ * @param {string|number} pageSelection - Can be 'prev', 'next', or a specific page number.
  */
-function changeCurrentPage(page) {
-    if (page === 'prev') {
-        currentPage = Math.max(currentPage - 1, 1);
-    } else if (page === 'next') {
-        currentPage = Math.min(currentPage + 1, Math.ceil(speciesData.length / cardsPerPage));
+function changeCurrentPage(pageSelection) {
+    if (pageSelection === 'prev') {
+        state.currentPage = Math.max(state.currentPage - 1, 1);
+    } else if (pageSelection === 'next') {
+        state.currentPage = Math.min(state.currentPage + 1, Math.ceil(state.speciesData.length / CARDS_PER_PAGE));
     } else {
-        currentPage = parseInt(page);
+        state.currentPage = parseInt(pageSelection);
     }
-    updateActivePage(currentPage);
+    updateActivePage();
 }
 
 /**
  * Sets which buttons are enabled/disabled based on the number of pages with results and the current page.
- *
- * @param {number} numPages - The total number of pages with results/cards.
  */
-function updatePaginationButtons(numPages) {
+function updatePaginationButtons() {
+    const numbActivePages = Math.ceil(state.numbMatches / CARDS_PER_PAGE)
+
     paginationItems.forEach((item) => {
         const pageLink = item.querySelector('.page-link');
-        if (pageLink) {
-            const page = pageLink.getAttribute('data-page');
-            if (page === 'prev') {
-                item.classList.toggle('disabled', currentPage === 1);
-            } else if (page === 'next') {
-                item.classList.toggle('disabled', currentPage === numPages);
-            } else {
-                const pageIndex = parseInt(page);
-                item.classList.toggle('disabled', pageIndex > numPages);
-            }
+        const page = pageLink.getAttribute('data-page');
+        if (page === 'prev') {
+            item.classList.toggle('disabled', state.currentPage === 1);
+        } else if (page === 'next') {
+            item.classList.toggle('disabled', state.currentPage >= numbActivePages);
+        } else {
+            const pageIndex = parseInt(page);
+            item.classList.toggle('disabled', pageIndex > numbActivePages);
         }
     });
 }
 
-/**
- * Search/filter all species and order them according to dropdown selection
- * speciesData is the global variable containing all species data
- *
- * @returns {Array} - An array of filtered species.
- */
-function filterAndOrderSpecies() {
-    let filteredData = speciesData;
 
-    const searchText = document.querySelector("#Search").value.toLowerCase();
-    const revAlphabetSet = document.querySelector("#RevAlphabet").classList.contains("active");
-    const lastUpdatedSet = document.querySelector("#Updated").classList.contains("active");
-    if (searchText !== "") {
-        filteredData = speciesData.filter(species => {
-            const title = species.title.toLowerCase();
-            const subtitle = species.subtitle.toLowerCase();
-            return title.includes(searchText) || subtitle.includes(searchText);
-        });
-    }
+// On load
+prepareSpeciesPage();
 
-    if (filteredData.length !== 0) {
-        if (revAlphabetSet) {
-            filteredData.sort(sortRevAlphabetically);
-        } else if (lastUpdatedSet) {
-            filteredData.sort(sortLastUpdated);
-        } else {
-            filteredData.sort(sortAlphabetically);
-        }
-    }
-    return filteredData;
-}
-
-/**
- * Displays the filtered species on the cards.
- *
- * @param {Array} filteredData - An array of filtered species.
- */
-function displayResults(filteredData) {
-    hideAllCards();
-    if (filteredData.length === 0) {
-        noResultsCard.style.display = 'block';
-        updatePaginationButtons(1);
-    } else {
-        noResultsCard.style.display = 'none';
-        const numPages = Math.ceil(filteredData.length / cardsPerPage);
-        updatePaginationButtons(numPages);
-
-        const startIndex = (currentPage - 1) * cardsPerPage;
-        const endIndex = startIndex + cardsPerPage;
-        const paginatedResults = filteredData.slice(startIndex, endIndex);
-        populateSpeciesCards(paginatedResults);
-    }
-}
-
-
-// On initial load: Fetch the data and populate the species cards
-fetchSpeciesData().then(() => {
-    const filteredData = filterAndOrderSpecies();
-    displayResults(filteredData);
-});
-
-
-// Event listeners below for each type of possible user interaction
 
 // Event: type in search box
 // Reset to page 1, filter results and display them
 document.querySelector('#Search').addEventListener('input', (event) => {
-    if (paginationExists) {
+    state.searchText = event.target.value.toLowerCase();
+    if (PAGINATION_EXISTS) {
+        state.currentPage = 1;
         changeCurrentPage(1);
     }
-    const filteredData = filterAndOrderSpecies();
-    displayResults(filteredData);
+    renderSpeciesCards();
 });
 
 
@@ -272,23 +236,24 @@ document.querySelector('#Search').addEventListener('input', (event) => {
 document.querySelector('.dropdown-menu').addEventListener('click', (event) => {
     if (event.target.classList.contains('scilife-dropdown-item')) {
         event.preventDefault();
-        updateSortDropdown(event.target);
-        const filteredData = filterAndOrderSpecies();
-        displayResults(filteredData);
+        const sortSelected = event.target.id;
+        const sortOrder = Object.keys(SORT_OPTIONS).find(key => SORT_OPTIONS[key] === sortSelected);
+        state.sortOrder = SORT_OPTIONS[sortOrder];
+        updateSortDropdown();
+        renderSpeciesCards();
     }
 });
 
 
 // Event: Change the page
 // Change the page, update the cards with species in that slice of the data
-if (paginationExists) {
+if (PAGINATION_EXISTS) {
     document.querySelector('.pagination').addEventListener('click', (event) => {
         if (event.target.classList.contains('page-link')) {
             event.preventDefault();
-            const page = event.target.getAttribute('data-page');
-            changeCurrentPage(page);
-            const filteredData = filterAndOrderSpecies();
-            displayResults(filteredData);
+            const pageSelection = event.target.getAttribute('data-page');
+            changeCurrentPage(pageSelection);
+            renderSpeciesCards();
         }
     });
 }

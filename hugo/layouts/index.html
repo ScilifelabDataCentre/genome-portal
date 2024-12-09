@@ -22,23 +22,23 @@
 <div class="row g-3 align-items-center mb-3">
     <div class="col-12 col-lg-12 mb-2 d-md-flex align-items-center">
         <div class="dropdown mb-2 mb-md-0">
-            <button class="btn btn-lg dropdown-toggle scilife-sort-dropdown" type="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
+            <button class="btn btn-lg dropdown-toggle scilife-sort-dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <!-- The HTML below will be autoupdated by JS if user changes active dropdown item. -->
                 <i class="bi bi-clock"></i> Last updated
             </button>
             <ul class="dropdown-menu">
                 <li>
-                    <div id="Updated" role="button" class="dropdown-item scilife-dropdown-item active">
+                    <div id="lastUpdated" role="button" class="dropdown-item scilife-dropdown-item active">
                         <i class="bi bi-clock"></i> Last updated
                     </div>
                 </li>
                 <li>
-                    <div id="Alphabet" role="button" class="dropdown-item scilife-dropdown-item">
+                    <div id="alphabet" role="button" class="dropdown-item scilife-dropdown-item">
                         <i class="bi bi-sort-alpha-down"></i> Name (A to Z)
                     </div>
                 </li>
                 <li>
-                    <div id="RevAlphabet" role="button" class="dropdown-item scilife-dropdown-item">
+                    <div id="revAlphabet" role="button" class="dropdown-item scilife-dropdown-item">
                         <i class="bi bi-sort-alpha-up"></i> Name (Z to A)
                     </div>
                 </li>
@@ -57,40 +57,10 @@
 </div>
 
 
-<!-- Species cards are populated using a JSON containing all species info and JS -->
-<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-4" id="card-container">
-    {{ range seq 1 $numbSpeciesCards }}
-    <div class="col">
-        <div class="card h-100 scilife-species-card" id="species-card-{{ . }}">
 
-            <div class="card-image">
-                <figure>
-                    <a href="#" title="">
-                        <img src="" class="card-img-top" alt="">
-                    </a>
-                    <!-- Include format for with and without link, JS decides which to display.-->
-                    <a class="caption-with-link" href="#" title="Go to the image source" target="_blank" style="display: none;">
-                        <figcaption class="scilife-card-image-attrib"></figcaption>
-                    </a>
-                    <p class="caption-no-link scilife-card-image-attrib" style="display: none;"></p>
-                </figure>
-            </div>
-
-            <div class="card-body">
-                <h2 class="card-title science-name"></h2>
-                <h3 class="card-title common-name"></h3>
-            </div>
-
-            <div class="d-flex justify-content-between align-items-center">
-                <p class="card-text mb-0 mt-auto"></p>
-                <a href="#" class="btn btn-primary scilife-species-button"title="">
-                    <i class="bi bi-arrow-right" style="font-size: 1.25em;"></i>
-                </a>
-            </div>
-
-        </div>
-    </div>
-    {{ end }}
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-4" id="card-container"
+    data-numb-cards-per-page="{{ $numbSpeciesCards }}">
+    <!-- Species cards are added here using JS -->
 </div>
 
 
@@ -103,12 +73,74 @@
 <!-- Add pagination if numb of species cards is > than number of species per page
      numb species per page set in main config.yaml file -->
 {{if gt $numbSpecies $numbSpeciesCards }}
-    {{ partial "pagination.html" (dict "numbSpecies" $numbSpecies "numbSpeciesCards" $numbSpeciesCards) }}
+{{ partial "pagination.html" (dict "numbSpecies" $numbSpecies "numbSpeciesCards" $numbSpeciesCards) }}
 {{end}}
 
 
-{{ $speciesCardsJS := resources.Get "js/species_cards.js" | fingerprint | minify }}
-<script type="module" src="{{ $speciesCardsJS.RelPermalink }}"></script>
 
+
+<!--Templates for active ordering button text. When the order is changed, JS clones one of these tempaltes into the active button -->
+<template id="text-lastUpdated">
+    <i class="bi bi-clock"></i> Last updated
+</template>
+
+<template id="text-alphabet">
+    <i class="bi bi-sort-alpha-down"></i> Name (A to Z)
+</template>
+
+<template id="text-revAlphabet">
+    <i class="bi bi-sort-alpha-up"></i> Name (Z to A)
+</template>
+
+
+<!-- Species cards built as HTML templates -->
+{{ $species := .Site.GetPage "section" "Species" }}
+{{ range $species.Sections }}
+    {{ $speciesName := .Title | markdownify }}
+    <template id="card-{{ .Params.url }}">
+        <div class="col">
+            <div class="card h-100 scilife-species-card">
+                <div class="card-image">
+                    <figure>
+                        <a href="{{ .RelPermalink }}" title="Go to the {{ $speciesName }} page">
+                            <img src="{{ .Params.cover_image }}" class="card-img-top"
+                                alt="Image of {{ $speciesName }}">
+                        </a>
+
+                        {{ if .Params.img_attrib_link }}
+                        <a href="{{ .Params.img_attrib_link }}" title="Go to the image source" target="_blank">
+                            <figcaption class="scilife-card-image-attrib"> {{ .Params.img_attrib_text }} </figcaption>
+                        </a>
+                        {{ else }}
+                        <p class="scilife-card-image-attrib">
+                            {{ .Params.img_attrib_text }}
+                        </p>
+                        {{ end }}
+
+                    </figure>
+                </div>
+
+                <div class="card-body">
+                    <h2 class="card-title science-name">{{ $speciesName }}</h2>
+                    <h3 class="card-title common-name">{{ .Params.subtitle | markdownify }}</h3>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <p class="card-text mb-0 mt-auto">Last updated: {{ .Params.last_updated }}</p>
+
+                    <a href="{{ .RelPermalink }}" class="btn btn-primary scilife-species-button"
+                        title="Go to the {{ .Title | markdownify }} page">
+                        <i class="bi bi-arrow-right" style="font-size: 1.25em;"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </template>
+{{ end }}
+
+
+{{ $speciesCardsJS := resources.Get "js/species_cards.js" | fingerprint | minify }}
+<script src="{{ $speciesCardsJS.RelPermalink }}"></script>
 
 {{ end }}
