@@ -58,7 +58,7 @@ ensure_local() {
 list_assemblies() {
     yq --no-doc '
     .assembly |
-    [.url, .name, .displayName // "", .aliases // "", .fileName // ""] |
+    [.url, .name, .displayName // "", .aliases // "aliases.txt", .fileName // ""] |
     # Strip empty lines
     select(any) |
     join(";")' "$1"
