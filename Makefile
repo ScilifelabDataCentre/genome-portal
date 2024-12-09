@@ -44,6 +44,9 @@ FASTA := $(addsuffix .bgz, $(filter %.fna,$(unzipped)))
 FASTA_INDICES := $(addsuffix .fai,$(FASTA))
 FASTA_GZINDICES := $(FASTA_INDICES:.fai=.gzi)
 
+# Fasta aliases
+ALIASES := $(FASTA:.bgz=.alias)
+
 # GFF files and indices
 GFF := $(addsuffix .bgz, $(filter %.gff,$(unzipped)))
 GFF_INDICES := $(addsuffix .tbi,$(GFF))
@@ -84,7 +87,7 @@ all: build install
 	$(greet)
 
 .PHONY: build
-build: download recompress index jbrowse-config
+build: download recompress index aliases jbrowse-config
 
 .PHONY: debug
 debug:
@@ -97,6 +100,17 @@ debug:
 	$(call log_list, "GFF indices:", $(GFF_INDICES))
 	$(call log_list, "BED indices:", $(BED_INDICES))
 	$(call log_list, "Files to install:", $(INSTALLED_FILES))
+
+.PHONY:
+aliases: $(ALIASES)
+	$(call log_list, "Generated aliases: ", $(ALIASES))
+
+$(ALIASES): %.alias: %.bgz
+	$(SHELL) -o pipefail -c "zcat -f < $< | ./scripts/aliases > $@"
+
+.PHONY: clean-aliases
+clean-aliases:
+	@rm -f $(ALIASES)
 
 .PHONY: jbrowse-config
 jbrowse-config: $(JBROWSE_CONFIGS)
@@ -125,11 +139,9 @@ clean-config:
 clean-local:
 	rm -f $(LOCAL_FILES)
 
-
 # Remove all artifacts
 .PHONY: clean
 clean: clean-upstream clean-local clean-config
-
 
 .PHONY: recompress
 recompress: $(GFF) $(FASTA) $(GTF) $(BED);
@@ -147,7 +159,6 @@ $(INSTALLED_FILES): $(INSTALL_DIR)/%: $(DATA_DIR)/%
 .PHONY: uninstall
 uninstall:
 	rm -f $(INSTALLED_FILES)
-
 
 .PHONY: index
 index: $(FASTA_INDICES) $(GFF_INDICES) $(BED_INDICES)
