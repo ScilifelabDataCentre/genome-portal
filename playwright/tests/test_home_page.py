@@ -9,24 +9,44 @@ import pytest
 from playwright.sync_api import Locator, Page, expect
 
 
-def pagination_exists(home_page: Page) -> bool:
+def pagination_exists(page: Page) -> bool:
     """
     Check if there is pagination on the home page.
     Controls what tests need to be run.
     """
-    return home_page.locator(".pagination").count() > 0
+    return page.locator(".pagination").count() > 0
 
 
-def get_page_button_link(home_page: Page, button_name: str | int) -> Locator:
-    """
-    TODO
-    """
-    return home_page.locator(f'.pagination .page-link[data-page="{button_name}"]')
+def get_page_button_link(page: Page, button_name: str | int) -> Locator:
+    """Return the locator for the page button."""
+    return page.locator(f'.pagination .page-link[data-page="{button_name}"]')
 
 
-def get_numb_pages(home_page: Page) -> int:
-    """(-2 for prev and next btns.)"""
-    return home_page.locator(".pagination .page-item").count() - 2
+def get_numb_pages(page: Page) -> int:
+    return page.locator(".pagination .page-item").count() - 2  # -2 for prev and next btns.
+
+
+def get_species_cards(page: Page) -> Locator:
+    """Helper function to return the species cards."""
+    return page.locator("div.card")
+
+
+def get_species_card_order(page: Page) -> list[str]:
+    """Helper function to return the the species cards titles (science names) in order."""
+    species_cards = get_species_cards(page)
+    return species_cards.locator("#science-name").all_inner_texts()
+
+
+@pytest.fixture
+def search_bar(home_page: Page) -> Locator:
+    """Helper function to return the search bar."""
+    return home_page.locator("#Search")
+
+
+@pytest.fixture
+def no_results_alert(home_page: Page) -> Locator:
+    """Fixture for the no results alert that goes from hidden to displayed if no results from the search."""
+    return home_page.get_by_text("No results found with your search term")
 
 
 @pytest.fixture
@@ -39,27 +59,6 @@ def pagination_btns(home_page: Page) -> dict[str, Locator]:
     for i in range(1, get_numb_pages(home_page) + 1):
         buttons[str(i)] = get_page_button_link(home_page, str(i))
     return buttons
-
-
-def get_search_bar(page: Page) -> Locator:
-    """Helper function to return the search bar."""
-    return page.locator("#Search")
-
-
-def get_no_results_alert(page: Page) -> Locator:
-    """Helper function to return the no results alert."""
-    return page.get_by_text("No results found with your search term")
-
-
-def get_species_cards(page: Page) -> Locator:
-    """Helper function to return the species cards."""
-    return page.locator("div.card")
-
-
-def get_species_card_order(page: Page) -> list[str]:
-    """Helper function to return the the species cards titles (science names) in order."""
-    species_cards = get_species_cards(page)
-    return species_cards.locator("#science-name").all_inner_texts()
 
 
 def test_has_title(home_page: Page) -> None:
@@ -85,13 +84,10 @@ def test_navbar_links(home_page: Page) -> None:
         expect(home_page).to_have_title(re.compile(title))
 
 
-def test_no_results_alert_responsive(home_page: Page) -> None:
+def test_no_results_alert_responsive(home_page: Page, no_results_alert: Locator, search_bar: Locator) -> None:
     """
     Test updating text in search bar shows/hides the no results alert.
     """
-    no_results_alert = get_no_results_alert(home_page)
-    search_bar = get_search_bar(home_page)
-
     search_bar.fill("dnskfdslfdf")
     expect(no_results_alert).to_be_visible()
 
@@ -159,11 +155,10 @@ def count_visible_cards(species_cards: list[Locator]) -> int:
     return visible_cards
 
 
-def test_search_box_responsive(home_page: Page) -> None:
+def test_search_box_responsive(home_page: Page, search_bar: Locator) -> None:
     """
     Test the search box is responsive, results appear and disappear based on the search term used.
     """
-    search_bar = get_search_bar(home_page)
     species_cards = home_page.locator(".scilife-species-card").all()
     total_numb_cards = len(species_cards)
 
@@ -207,14 +202,12 @@ def test_search_dropdown_ordering(home_page: Page) -> None:
     assert new_cards_order == initial_cards_order
 
 
-def test_search_and_dropdown_work_together(home_page: Page) -> None:
+def test_search_and_dropdown_work_together(home_page: Page, search_bar: Locator) -> None:
     """
     Test after searching for something, changing the ordering of the search via the dropdown still works.
 
     Uses the "test_search_dropdown_ordering" function as identical to above but now with the search bar filled.
     """
-    search_bar = get_search_bar(home_page)
-
     search_bar.fill("Linum")  # gives at least 2 results.
     test_search_dropdown_ordering(home_page)
 
