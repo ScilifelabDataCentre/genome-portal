@@ -30,3 +30,15 @@ EOF
 	    )
     assert_output "${expected}"
 }
+
+@test "Headers without original contigs" {
+    run aliases <<EOF
+>ENA|CAMGYJ010000001|CAMGYJ010000001.1 Skeletonema marinoi strain R05AC Sm_000078F, whole genome shotgun sequence.
+EOF
+    expected=$(cat <<EOF
+#ENA NCBI original
+ENA|CAMGYJ010000001|CAMGYJ010000001.1 CAMGYJ010000001.1
+EOF
+	    )
+    assert_output "${expected}"
+}
