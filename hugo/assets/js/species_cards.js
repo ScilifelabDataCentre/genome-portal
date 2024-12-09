@@ -215,20 +215,45 @@ function updatePaginationButtons() {
 }
 
 
-// On load
-prepareSpeciesPage();
+/**
+ * Debounce a function (used for species search)
+ * @param {Function} callback - Function to debounce.
+ * @param {number} delay - Delay in ms.
+ * @returns {Function} - A debounced version of the function.
+ */
+function debounce(callback, delay) {
+    let timer
+    return function (...args) {
+        clearTimeout(timer)
+        timer = setTimeout(() => {
+            callback.apply(this, args);
+        }, delay)
+    }
+}
 
-
-// Event: type in search box
-// Reset to page 1, filter results and display them
-document.querySelector('#Search').addEventListener('input', (event) => {
+/**
+ * Handles the search input event.
+ *
+ * @param {Event} event - The input event from the search box.
+ */
+function speciesSearch(event) {
     state.searchText = event.target.value.toLowerCase();
     if (PAGINATION_EXISTS) {
         state.currentPage = 1;
         changeCurrentPage(1);
     }
     renderSpeciesCards();
-});
+}
+
+const debouncedSearch = debounce(speciesSearch, 200)
+
+
+// On load
+prepareSpeciesPage();
+
+// Event: type in search box
+// Reset to page 1, filter results and display them
+document.querySelector('#Search').addEventListener('input', debouncedSearch);
 
 
 // Event: Change the ordering of the species via dropdown

@@ -3,6 +3,7 @@ Tests for the home page and the navbar.
 """
 
 import re
+import time
 
 import pytest
 
@@ -158,20 +159,25 @@ def count_visible_cards(species_cards: list[Locator]) -> int:
 def test_search_box_responsive(home_page: Page, search_bar: Locator) -> None:
     """
     Test the search box is responsive, results appear and disappear based on the search term used.
+    Search bar is debounced, hence time.sleep usage.
     """
     species_cards = home_page.locator(".scilife-species-card").all()
     total_numb_cards = len(species_cards)
 
     search_bar.fill("sdsdsdsdsdghjjj")
+    time.sleep(0.3)
     assert count_visible_cards(species_cards) == 0
 
     search_bar.fill("Littorina saxatilis")  # species that exists.
+    time.sleep(0.3)
     assert count_visible_cards(species_cards) == 1
 
     search_bar.fill("Linum")  # gives at least 2 results.
+    time.sleep(0.3)
     assert count_visible_cards(species_cards) >= 2
 
     search_bar.fill("")
+    time.sleep(0.3)
     assert count_visible_cards(species_cards) == total_numb_cards
 
 
