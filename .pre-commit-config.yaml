@@ -9,6 +9,8 @@ repos:
   - id: check-merge-conflict
   - id: detect-private-key
   - id: end-of-file-fixer
+    files: 'hugo/'
+    exclude: '^(hugo/static/|hugo/content/)'
   - id: trailing-whitespace
     files: '^(hugo/|scripts/|tests/)'
     exclude: 'hugo/static/'
