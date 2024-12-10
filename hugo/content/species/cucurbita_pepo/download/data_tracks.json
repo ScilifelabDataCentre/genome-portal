@@ -1,0 +1,16 @@
+[
+  {
+    "dataTrackName": "Genome",
+    "description": "Reference genome sequence",
+    "fileName": "placeholder.fasta.gz",
+    "links": [
+      {"Download": "#"},
+      {"Website": "#"},
+      {"Article": "#"}
+    ],
+    "accessionOrDOI": "GCA_1234",
+    "principalInvestigator": "Someone",
+    "principalInvestigatorAffiliation": "Some university",
+    "firstDateOnPortal": "15 October 2024"
+  }
+]

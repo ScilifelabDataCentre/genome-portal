@@ -1,0 +1,18 @@
+{{ $fields := append (or (index .fields.extra .section) slice) (index .fields.default .section) }}
+{{ $values := index .values .section }}
+{{ with $fields }}
+    <ul style="font-size: 1.125rem;">
+	{{ range $fields }}
+	    {{ $label := .label | default (replace .key "_" " " | title ) }}
+	    {{ with index $values .key }}
+		<li><strong>{{ $label }}: </strong> {{ . }}</li>
+	    {{ else }}
+		{{ if not .optional }}
+		    {{ warnidf "missing-assembly-meta" "%s/assembly.yaml: %s undefined" $.path .key }}
+		{{ end }}
+	    {{ end }}
+	{{ end }}
+    </ul>
+{{ else }}
+    {{ warnf "No assembly fields declared for section: %s" .section }}
+{{ end }}
