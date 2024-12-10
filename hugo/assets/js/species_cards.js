@@ -23,8 +23,8 @@ const SORT_OPTIONS = {
 
 const paginationItems = document.querySelectorAll('.pagination .page-item');
 const noResultsCard = document.getElementById('no-filtered-card');
-const PAGINATION_EXISTS = paginationItems.length > 0; // if not enough species, there will be no pagination yet.
-const CARDS_PER_PAGE = parseInt(document.getElementById('card-container').dataset.numbCardsPerPage);
+const paginationExists = paginationItems.length > 0; // if not enough species, there will be no pagination yet.
+const cardsPerPage = parseInt(document.getElementById('card-container').dataset.numbCardsPerPage);
 
 let state = {
     speciesData: [], // updated by reading from the <template>s in the HTML
@@ -136,9 +136,9 @@ function filterAndOrderSpecies() {
     }
 
     // select results to show based on page number
-    if (PAGINATION_EXISTS) {
-        const startIndex = (state.currentPage - 1) * CARDS_PER_PAGE;
-        const endIndex = startIndex + CARDS_PER_PAGE;
+    if (paginationExists) {
+        const startIndex = (state.currentPage - 1) * cardsPerPage;
+        const endIndex = startIndex + cardsPerPage;
         filteredSpecies = filteredSpecies.slice(startIndex, endIndex);
     }
     return filteredSpecies.map(species => species.id);
@@ -187,7 +187,7 @@ function changeCurrentPage(pageSelection) {
     if (pageSelection === 'prev') {
         state.currentPage = Math.max(state.currentPage - 1, 1);
     } else if (pageSelection === 'next') {
-        state.currentPage = Math.min(state.currentPage + 1, Math.ceil(state.speciesData.length / CARDS_PER_PAGE));
+        state.currentPage = Math.min(state.currentPage + 1, Math.ceil(state.speciesData.length / cardsPerPage));
     } else {
         state.currentPage = parseInt(pageSelection);
     }
@@ -198,7 +198,7 @@ function changeCurrentPage(pageSelection) {
  * Sets which buttons are enabled/disabled based on the number of pages with results and the current page.
  */
 function updatePaginationButtons() {
-    const numbActivePages = Math.ceil(state.numbMatches / CARDS_PER_PAGE)
+    const numbActivePages = Math.ceil(state.numbMatches / cardsPerPage)
 
     paginationItems.forEach((item) => {
         const pageLink = item.querySelector('.page-link');
@@ -238,7 +238,7 @@ function debounce(callback, delay) {
  */
 function speciesSearch(event) {
     state.searchText = event.target.value.toLowerCase();
-    if (PAGINATION_EXISTS) {
+    if (paginationExists) {
         state.currentPage = 1;
         changeCurrentPage(1);
     }
@@ -272,7 +272,7 @@ document.querySelector('.dropdown-menu').addEventListener('click', (event) => {
 
 // Event: Change the page
 // Change the page, update the cards with species in that slice of the data
-if (PAGINATION_EXISTS) {
+if (paginationExists) {
     document.querySelector('.pagination').addEventListener('click', (event) => {
         if (event.target.classList.contains('page-link')) {
             event.preventDefault();
