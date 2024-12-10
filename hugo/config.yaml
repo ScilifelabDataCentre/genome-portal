@@ -6,17 +6,6 @@ buildFuture: true
 params:
   maxSpeciesPerPage: 2
 
-outputs:
-  home:
-    - HTML
-    - JSON
-
-outputFormats:
-  JSON:
-    mediaType: "application/json"
-    baseName: "species_catalog"
-    isPlainText: true
-
 markup:
   goldmark:
     renderer:
