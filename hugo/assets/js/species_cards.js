@@ -8,8 +8,8 @@ On load:
 3. Run the render function to display the species cards that should be shown.
 
 Once loaded:
-- Event listners created for search box, dropdown and pagination (if pagination exists).
-- Each event listner calls the main render function (renderSpeciesCards) alongside some others dependant on the event.
+- Event listners created for search box, sort options dropdown and pagination controls (if pagination is enabled).
+- Event listeners perform state modification and call the main render function anew (renderSpeciesCards)
 
 Notes:
 - This code can handle both pagination and no pagination (i.e. not enough species to warrant it). So can the Playwright tests assocaited with this page.
