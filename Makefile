@@ -106,6 +106,9 @@ debug:
 aliases: $(ALIASES)
 	$(call log_list, "Generated aliases: ", $(ALIASES))
 
+$(CONFIG_DIR)/%/aliases.txt:
+	touch "$@"
+
 .PHONY: clean-aliases
 clean-aliases:
 	@rm -f $(ALIASES)
@@ -219,6 +222,13 @@ $(GTF): $$(filter $$@$$(_pattern),$$(DOWNLOAD_TARGETS))
 
 # The prerequisites of an alias file are all the FASTA files
 # downloaded in the same species directory.
-$(ALIASES): %/aliases.txt: $$(filter $$*$$(_pattern),$$(FASTA))
-	@echo "[aliases] Generating aliases from $^" >&2
-	@$(SHELL) ./scripts/aliases $^ > $@
+define tail
+$(wordlist 2,$(words $(1)),$(1))
+endef
+$(ALIASES): $(DATA_DIR)/%/aliases.txt: $(CONFIG_DIR)/%/aliases.txt \
+$$(filter $$(DATA_DIR)/$$*$$(_pattern),$$(FASTA))
+	@echo "[aliases] Extending $< with aliases parsed from $(call tail,$^)" >&2
+	@cat $< > $@; echo "" >> $@
+	# Redirect /dev/null to zcat stdin to avoid hanging in case
+	# the prerequisite exapansion is empty.
+	@$(SHELL) ./scripts/aliases $(call tail,$^) >> $@
