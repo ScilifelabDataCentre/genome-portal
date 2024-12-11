@@ -16,6 +16,8 @@
 #   Space-separated aliases are written to standard output
 echo -e "#ENA\tNCBI\toriginal"
 sed -En '
+    # Not an ENA assemnbly, bail out
+    /^>/{ /^>ENA/!{ Q } }
     # Header with contig
     s/^>(ENA\|\S+\|(\S+)).*contig:\s(\S+).*$/\1\t\2\t\3/p
     # If the substitution is successful, exit by branching to :x
