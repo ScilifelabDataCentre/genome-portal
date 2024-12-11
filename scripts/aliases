@@ -16,11 +16,11 @@
 #   Space-separated aliases are written to standard output
 echo -e "#ENA\tNCBI\toriginal"
 sed -En '
-    # If the header includes original contig, branch to :c
-    /contig:/b c
-    # Header without contig
-    s/^>(ENA\|[^|]+\|([^[:blank:]|]+))[[:blank:]].*$/\1\t\2/p
-    :c
     # Header with contig
-    s/^>(ENA\|[^|]+\|([^[:blank:]|]+))[[:blank:]].*contig: ([^[:blank:]]+).*?$/\1\t\2\t\3/p' \
-	"${@:--}" # Filename argument if given, else standard input
+    s/^>(ENA\|\S+\|(\S+)).*contig:\s(\S+).*$/\1\t\2\t\3/p
+    # If the substitution is successful, exit by branching to :x
+    t x
+    # Header without contig
+    s/^>(ENA\|\S+\|(\S+)).*$/\1\t\2/p
+    :x
+    ' "${@:--}" # Filename argument if given, else standard input
