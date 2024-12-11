@@ -7,8 +7,6 @@ assembly:
   # this file only contains the unplaced scaffolds, and not the ten chromosome sequences. Will circumvent this for now by using the NCBI mirror instead.
   #url: "https://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/cax/CAXIPQ01.fasta.gz"
   url: "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/964/030/455/GCA_964030455.1_Ltrigynum_genome/GCA_964030455.1_Ltrigynum_genome_genomic.fna.gz"
-  # Temp storage for alias file.
-  aliases: "https://raw.githubusercontent.com/ScilifelabDataCentre/genome-portal/main/scripts/data_stewardship/alias_files_temp_storage/GCA_964030455.1_Ltrigynum_genome_genomic.fna.alias"
 tracks:
   - name: "Protein-coding genes"
     url: "https://figshare.scilifelab.se/ndownloader/files/48853129"
