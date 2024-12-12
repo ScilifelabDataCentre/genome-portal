@@ -4,7 +4,7 @@ title: "Swedish Reference Genome Portal, hosted by SciLifeLab"
 buildFuture: true
 
 params:
-  maxSpeciesPerPage: 2
+  maxSpeciesPerPage: 8
 
 markup:
   goldmark:
