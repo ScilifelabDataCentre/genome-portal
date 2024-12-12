@@ -6,6 +6,7 @@ import re
 import time
 
 import pytest
+from utils import validate_date_format
 
 from playwright.sync_api import Locator, Page, expect
 
@@ -83,6 +84,17 @@ def test_navbar_links(home_page: Page) -> None:
     for name, title in NAVBAR_LINKS.items():
         home_page.locator("#navbarSupportedContent").get_by_role("link", name=name).click()
         expect(home_page).to_have_title(re.compile(title))
+
+
+def test_last_updated_format(home_page: Page) -> None:
+    """
+    Test that the last updated date on each species card has the correct format.
+    **Note** changing the date format used would impact the home page species search function.
+    """
+    last_updated_texts = home_page.get_by_text("Last updated:").all_inner_texts()
+    for text in last_updated_texts:
+        date = text.split(":")[1].strip()
+        validate_date_format(date=date, date_format="%d/%m/%Y")
 
 
 def test_no_results_alert_responsive(home_page: Page, no_results_alert: Locator, search_bar: Locator) -> None:
