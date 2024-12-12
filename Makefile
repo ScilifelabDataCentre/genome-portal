@@ -220,5 +220,5 @@ $(GTF): $$(filter $$@$$(_pattern),$$(DOWNLOAD_TARGETS))
 # The prerequisites of an alias file are all the FASTA files
 # downloaded in the same species directory.
 $(ALIASES): %/aliases.txt: $$(filter $$*$$(_pattern),$$(FASTA))
-	@echo "Generating aliases from $^" >&2
-	@$(SHELL) -o pipefail -c "zcat -f $^ | ./scripts/aliases > $@"
+	@echo "[aliases] Generating aliases from $^" >&2
+	@$(SHELL) ./scripts/aliases $^ > $@

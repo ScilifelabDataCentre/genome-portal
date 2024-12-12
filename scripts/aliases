@@ -2,6 +2,10 @@
 
 # Produce JBrowse2-compatible aliases from ENA FASTA headers
 #
+# Assumes that all ENA FASTA headers will begin by >ENA, and exits
+# early if a header is found that does not match this pattern, to
+# avoid needless streaming of large files.
+#
 # Example:
 #   ENA-formatted FASTA header:
 #     >ENA|CAVLGL010000001|CAVLGL010000001.1 Parnassius mnemosyne genome assembly, contig: scaffold_1
@@ -11,18 +15,47 @@
 # The "contig:" field may not always be present.
 #
 # Arguments:
-#   List of file names to read from. Default: read from standard input
+#   List of file names to read from.
 # Outputs:
 #   Space-separated aliases are written to standard output
-echo -e "#ENA\tNCBI\toriginal"
-sed -En '
-    # Not an ENA assemnbly, bail out
-    /^>/{ /^>ENA/!{ Q } }
-    # Header with contig
-    s/^>(ENA\|\S+\|(\S+)).*contig:\s(\S+).*$/\1\t\2\t\3/p
-    # If the substitution is successful, exit by branching to :x
-    t x
-    # Header without contig
-    s/^>(ENA\|\S+\|(\S+)).*$/\1\t\2/p
-    :x
-    ' "${@:--}" # Filename argument if given, else standard input
+main() {
+    header
+    for file in "$@"; do
+	parse_aliases <(zcat -f "${file}") \
+	    || >&2 echo "[aliases] Skipped ${file}: not ENA-formatted"
+    done
+}
+
+# Output tab-separated alias header
+header() {
+    printf "#%s\t%s\t%s\n" ENA NCBI original
+}
+
+# Parse aliases from ENA fasta headers
+#
+# Arguments:
+#   FASTA file name
+# Outputs:
+#   One line of tab-separated aliases for each FASTA header found
+parse_aliases() {
+    sed -En '
+    /^>/{
+        # If not an ENA assembly, exit immediately
+	/^>ENA/!Q 1
+        # Header with contig
+        s/^>(ENA\|\S+\|(\S+)).*contig:\s(\S+).*$/\1\t\2\t\3/p
+        # If the substitution is successful branch to :x
+        t x
+        # Header without contig
+        s/^>(ENA\|\S+\|(\S+)).*$/\1\t\2/p
+       :x
+    }
+    ' "$1"
+}
+
+
+if [[ ${BASH_SOURCE[0]} == "$0" ]];
+then
+    main "$@"
+fi
+
