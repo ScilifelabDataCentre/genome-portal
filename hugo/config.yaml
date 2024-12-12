@@ -3,6 +3,9 @@ languageCode: "en-us"
 title: "Swedish Reference Genome Portal, hosted by SciLifeLab"
 buildFuture: true
 
+params:
+  maxSpeciesPerPage: 8
+
 markup:
   goldmark:
     renderer:

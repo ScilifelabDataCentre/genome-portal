@@ -5,13 +5,13 @@ repos:
   - id: check-yaml
     args: [--allow-multiple-documents]
   - id: check-json
+    exclude: ^hugo/layouts/index\.json\.json$
   - id: check-added-large-files
   - id: check-merge-conflict
   - id: detect-private-key
   - id: end-of-file-fixer
     files: 'hugo/'
     exclude: '^(hugo/static/|hugo/content/)'
-
   - id: trailing-whitespace
     files: '^(hugo/|scripts/|tests/)'
     exclude: 'hugo/static/'
