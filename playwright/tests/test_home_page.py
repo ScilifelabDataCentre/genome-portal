@@ -91,7 +91,8 @@ def test_last_updated_format(home_page: Page) -> None:
     Test that the last updated date on each species card has the correct format.
     **Note** changing the date format used would impact the home page species search function.
     """
-    last_updated_texts = home_page.get_by_text("Last updated:").all_inner_texts()
+    species_cards = get_species_cards(home_page)
+    last_updated_texts = species_cards.get_by_text("Last updated:").all_inner_texts()
     for text in last_updated_texts:
         date = text.split(":")[1].strip()
         validate_date_format(date=date, date_format="%d/%m/%Y")
