@@ -18,3 +18,14 @@ tracks:
   - name: "tRNA genes and putative pseudogenes"
     url: "https://figshare.scilifelab.se/ndownloader/files/47209663"
     fileName: "pmne_tRNAs_and_pseudogenes.gff.gz"
+---
+assembly:
+  name: "Parnassius_mnemosyne_mito_2024_06"
+  displayName: "P. mnemosyne mitochondrial assembly GCA_964186615"
+  url: "https://www.ebi.ac.uk/ena/browser/api/fasta/GCA_964186615?download=true&lineLimit=0&gzip=true"
+  fileName: "GCA_964186615.fasta.gz"
+  aliases: "https://raw.githubusercontent.com/ScilifelabDataCentre/genome-portal/refs/heads/main/scripts/data_stewardship/alias_files_temp_storage/GCA_964186615.fna.alias"
+tracks:
+  - name: "Mitochondrial genes"
+    url: "https://figshare.scilifelab.se/ndownloader/files/47209654"
+    fileName: "pmne_mtdna.gff.gz"
