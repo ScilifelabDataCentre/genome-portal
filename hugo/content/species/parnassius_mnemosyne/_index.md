@@ -74,5 +74,4 @@ Swedish Reference Genome Portal (Retrieved DATE_ACCESSED), SciLifeLab Data Centr
 
 #### Changelog
 
-- 04/12/2024 - Mitochondrial assembly and annotation track added to genome browser
 - 15/10/2024 - Species first published on the Portal
