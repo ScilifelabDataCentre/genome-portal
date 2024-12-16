@@ -156,13 +156,33 @@ def get_protein_coding_genes_file_name(config):
     raise ValueError("No track with name 'Protein coding genes' found. Exiting.")
 
 
-def populate_mandatory_values(config, git_root, species_name, species_abbreviation, species_name_underscored):
+def populate_defaultSession_object(data, species_info):
+    data["defaultSession"] = {
+        "id": f"{species_info["species_abbreviation"]}_default_session",
+        "name": species_info["species_name"],
+        "widgets": {
+            "hierarchicalTrackSelector": {
+                "id": "hierarchicalTrackSelector",
+                "type": "HierarchicalTrackSelectorWidget",
+                "view": f"{species_info["species_abbreviation"]}_default_session_view",
+                "faceted": {"showSparse": False, "showFilters": True, "showOptions": False, "panelWidth": 400},
+            }
+        },
+        "activeWidgets": {"hierarchicalTrackSelector": "hierarchicalTrackSelector"},
+    }
+    return data
+
+
+def initiate_views_and_populate_mandatory_tracks(data, species_info, config, git_root, config_dir, assembly_counter):
+    species_abbreviation = species_info["species_abbreviation"]
+    species_name_underscored = species_info["species_name_underscored"]
     assembly_file_name = os.path.basename(config["assembly"]["url"])
-    protein_coding_gene_file_name = get_protein_coding_genes_file_name(config)
 
     assembly_file_path = os.path.join(
-        git_root, "data", species_name_underscored, assembly_file_name.replace(".fasta", ".fna")
+        git_root, config_dir.replace("config", "data"), assembly_file_name.replace(".fasta", ".fna")
     )
+    print(assembly_file_path)
+
     if os.path.exists(assembly_file_path):
         # The "get" method returns None if the key is not found
         default_scaffold = config["assembly"].get("defaultScaffold")
@@ -171,86 +191,101 @@ def populate_mandatory_values(config, git_root, species_name, species_abbreviati
         print(
             f"Assembly file {assembly_file_path} does not exist in ./data/{species_name_underscored}/. If the assembly url has been configured, it can be downloaded by running the makefile."
         )
+    views = [
+        {
+            "id": f"{species_abbreviation}_default_session_view_{assembly_counter}",
+            "minimized": False,
+            "type": "LinearGenomeView",
+            "trackLabels": "offset",
+            "offsetPx": 0,
+            "bpPerPx": 50,
+            "displayedRegions": [
+                {
+                    "refName": default_scaffold if default_scaffold else "[SCAFFOLD_HEADER]",
+                    "start": 0,
+                    "end": sequence_length if sequence_length else 100000,
+                    "reversed": False,
+                    "assemblyName": config["assembly"]["name"],
+                }
+            ],
+            "tracks": [],
+        }
+    ]
 
-    data = {}
-    data["defaultSession"] = {
-        "id": f"{species_abbreviation}_default_session",
-        "name": species_name,
-        "widgets": {
-            "hierarchicalTrackSelector": {
-                "id": "hierarchicalTrackSelector",
-                "type": "HierarchicalTrackSelectorWidget",
-                "view": f"{species_abbreviation}_default_session_view",
-                "faceted": {"showSparse": False, "showFilters": True, "showOptions": False, "panelWidth": 400},
-            }
-        },
-        "activeWidgets": {"hierarchicalTrackSelector": "hierarchicalTrackSelector"},
-        "views": [
+    if "views" in data["defaultSession"]:
+        data["defaultSession"]["views"].extend(views)
+    else:
+        data["defaultSession"]["views"] = views
+
+    # Primary assemblies are required to have a protein-coding genes track. This is added to the first view.
+    if assembly_counter == 0:
+        protein_coding_gene_file_name = get_protein_coding_genes_file_name(config)
+        protein_coding_genes_track = [
             {
-                "id": f"{species_abbreviation}_default_session_view",
+                "id": f"{species_abbreviation}_default_protein_coding_genes",
+                "type": "FeatureTrack",
+                "configuration": protein_coding_gene_file_name,
                 "minimized": False,
-                "type": "LinearGenomeView",
-                "trackLabels": "offset",
-                "offsetPx": 0,
-                "bpPerPx": 50,
-                "displayedRegions": [
+                "displays": [
                     {
-                        "refName": default_scaffold if default_scaffold else "[SCAFFOLD_HEADER]",
-                        "start": 0,
-                        "end": sequence_length if sequence_length else 100000,
-                        "reversed": False,
-                        "assemblyName": config["assembly"]["name"],
-                    }
-                ],
-                "tracks": [
-                    {
-                        "id": f"{species_abbreviation}_default_protein_coding_genes",
-                        "type": "FeatureTrack",
-                        "configuration": protein_coding_gene_file_name,
-                        "minimized": False,
-                        "displays": [
-                            {
-                                "id": f"{species_abbreviation}_default_protein_coding_genes_display",
-                                "type": "LinearBasicDisplay",
-                                "heightPreConfig": 150,
-                                "configuration": f"{protein_coding_gene_file_name}-LinearBasicDisplay",
-                            }
-                        ],
+                        "id": f"{species_abbreviation}_default_protein_coding_genes_display",
+                        "type": "LinearBasicDisplay",
+                        "heightPreConfig": 150,
+                        "configuration": f"{protein_coding_gene_file_name}-LinearBasicDisplay",
                     }
                 ],
             }
-        ],
-    }
+        ]
+        data["defaultSession"]["views"][assembly_counter]["tracks"].extend(protein_coding_genes_track)
+    else:
+        # Secondary assemblies do not need to have a track name "Protein coding genes", but need to have at least one track.
+        if not ("tracks" in config and isinstance(config["tracks"], list) and len(config["tracks"]) > 0):
+            raise ValueError(
+                f"There seem to be no tracks configured for assembly number {assembly_counter+1} in the config.yml. "
+                "In order to configure a defaultSession, there need to be at least one track. Exiting."
+            )
+
     return data
 
 
-def populate_values_from_optional_tracks(config, data, species_abbreviation):
+def populate_values_from_optional_tracks(config, data, species_abbreviation, assembly_counter):
     plugin_added = False
     assembly_name = config.get("assembly", {}).get("name", "")
 
-    for track in config["tracks"]:
-        if "defaultSession" in track and track["defaultSession"]:
-            # Ensure protein-coding genes are not added to the default session again if the user has happened to set it with defaultSession: true in the config.yml
-            if track["name"].lower() in ["protein coding genes", "protein-coding genes"]:
-                continue
-            data = add_defaultSession_true_tracks(track, data, species_abbreviation)
+    at_least_one_default_session_flag = any(
+        "defaultSession" in track and track["defaultSession"] for track in config.get("tracks", [])
+    )
 
-        if "GWAS" in track and track["GWAS"]:
-            if not plugin_added:
-                plugin_call = {
-                    "name": "GWAS",
-                    "url": "https://unpkg.com/jbrowse-plugin-gwas/dist/jbrowse-plugin-gwas.umd.production.min.js",
-                }
-                if "plugins" not in data:
-                    data["plugins"] = []
-                data["plugins"].append(plugin_call)
-                plugin_added = True
-            data = add_gwas_true_tracks(track, data, species_abbreviation, assembly_name)
+    if at_least_one_default_session_flag:
+        for track in config["tracks"]:
+            if "defaultSession" in track and track["defaultSession"]:
+                # Ensure protein-coding genes are not added to the default session again if the user has happened to set it with defaultSession: true in the config.yml
+                if track["name"].lower() in ["protein coding genes", "protein-coding genes"]:
+                    continue
+                data = add_defaultSession_true_tracks(track, data, species_abbreviation, assembly_counter)
+
+            if "GWAS" in track and track["GWAS"]:
+                if not plugin_added:
+                    plugin_call = {
+                        "name": "GWAS",
+                        "url": "https://unpkg.com/jbrowse-plugin-gwas/dist/jbrowse-plugin-gwas.umd.production.min.js",
+                    }
+                    if "plugins" not in data:
+                        data["plugins"] = []
+                    data["plugins"].append(plugin_call)
+                    plugin_added = True
+                data = add_gwas_true_tracks(track, data, species_abbreviation, assembly_name)
+    else:
+        raise ValueError(
+            f"There seem to be no tracks set with the defaultSession: true flag for assembly number {assembly_counter+1} in the config.yml. "
+            "In order to configure a defaultSession, there need to be at least one track set to defaultSession: true "
+            "(protein-coding genes tracks are treated as defaultSession: true by default). Exiting."
+        )
 
     return data
 
 
-def add_defaultSession_true_tracks(track, data, species_abbreviation):
+def add_defaultSession_true_tracks(track, data, species_abbreviation, assembly_counter):
     track_outer_id = (
         f"{species_abbreviation}_default_{track['name'].replace(' ', '_').replace('\'', '').replace(',', '')}"
     )
@@ -283,7 +318,7 @@ def add_defaultSession_true_tracks(track, data, species_abbreviation):
             }
         ],
     }
-    data["defaultSession"]["views"][0]["tracks"].append(new_track)
+    data["defaultSession"]["views"][assembly_counter]["tracks"].append(new_track)
 
     return data
 
@@ -351,26 +386,38 @@ def save_json(data, output_json_path, config_path):
 def main():
     args = parse_arguments()
     config_path = args.yaml
+    config_dir = os.path.dirname(config_path)
     with open(config_path, "r") as file:
-        config = yaml.safe_load(file)
-    if "tracks" not in config:
-        raise ValueError(
-            "The configuration file does not contain 'tracks'. Thus there are no tracks to set for the defaultSession. Exiting."
-        )
-    species_name = config["organism"]
-    species_abbreviation = get_species_abbreviation(species_name)
-    species_name_underscored = species_name.replace(" ", "_").lower()
+        configs = list(yaml.safe_load_all(file))
+
     git_root = get_git_repo_root()
-    output_json_path = args.out
-    if not output_json_path:
-        output_json_path = os.path.join(
-            git_root, f"scripts/data_stewardship/temp/{species_name_underscored}_default_session.json"
+
+    for assembly_counter, config in enumerate(configs):
+        # The organism key is intended to be present once in the config.yml file, and thus it is considered part of the first YAML document.
+        # The below logic is dependent on there not being multiple organism keys in the same config.yml file.
+        if "organism" in config and assembly_counter == 0:
+            species_info = {
+                "species_name": config["organism"],
+                "species_abbreviation": get_species_abbreviation(config["organism"]),
+                "species_name_underscored": config["organism"].replace(" ", "_").lower(),
+            }
+            output_json_path = args.out
+            if not output_json_path:
+                output_json_path = os.path.join(
+                    git_root,
+                    f"scripts/data_stewardship/temp/{species_info['species_name_underscored']}_default_session.json",
+                )
+
+            populated_data = {}
+            populated_data = populate_defaultSession_object(populated_data, species_info)
+
+        populated_data = initiate_views_and_populate_mandatory_tracks(
+            populated_data, species_info, config, git_root, config_dir, assembly_counter
+        )
+        populated_data = populate_values_from_optional_tracks(
+            config, populated_data, species_info["species_abbreviation"], assembly_counter
         )
 
-    populated_data = populate_mandatory_values(
-        config, git_root, species_name, species_abbreviation, species_name_underscored
-    )
-    populated_data = populate_values_from_optional_tracks(config, populated_data, species_abbreviation)
     save_json(populated_data, output_json_path, config_path)
 
 
