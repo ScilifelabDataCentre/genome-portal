@@ -15,12 +15,6 @@ setup() {
     load generate_jbrowse_config
 }
 
-teardown() {
-    if [[ "${config}" != "" && -f "${config}" ]]; then
-	rm -f "${config}"
-    fi
-}
-
 @test "list_tracks" {
     run list_tracks - <<EOF
 assembly:
@@ -51,20 +45,6 @@ assembly:
   aliases: aliases.txt
   fileName: foo.fna
 EOF
-    assert_output "example.com;foo;FOO;aliases.txt;foo.fna"
-}
-
-
-@test "list_assemblies, with default aliases" {
-    config=$(mktemp --suffix=.bgz)
-    cat <<EOF > "${config}"
-assembly:
-  url: example.com
-  name: foo
-  displayName: FOO
-  fileName: foo.fna
-EOF
-    run list_assemblies "${config}"
     assert_output "example.com;foo;FOO;aliases.txt;foo.fna"
 }
 

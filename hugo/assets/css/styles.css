@@ -429,36 +429,6 @@ body {
 }
 
 
-.scilife-pagination .page-item {
-  margin-right: 0.5rem;
-}
-
-.scilife-pagination .page-link {
-  color: var(--scilife-teal);
-  background-color: #fff;
-}
-
-.scilife-pagination .page-link:hover {
-  color: #fff;
-  background-color: var(--scilife-teal);;
-  border-color: var(--scilife-teal);;
-}
-
-.scilife-pagination .page-item.active .page-link {
-  color: #fff;
-  background-color: var(--scilife-teal);;
-  border-color: var(--scilife-teal);;
-}
-
-.scilife-pagination .page-item.disabled .page-link {
-  color: #6c757d;
-  pointer-events: none;
-  background-color: #fff;
-  border-color: #dee2e6;
-}
-
-
-
 .scilife-intro-map-img {
   width: auto;
   height: 400px;

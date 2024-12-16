@@ -28,6 +28,7 @@ authors:
     orcid: "https://orcid.org/0000-0001-5875-8429"
 repository-code: "https://github.com/ScilifelabDataCentre/genome-portal"
 url: "https://genomes.scilifelab.se"
+abstract: "The Swedish Reference Genome Portal is a service facilitating access and discovery of genome data of non-model eukaryotic species studied in Sweden."
 license: MIT
 identifiers:
   - description: "This is the collection of archived snapshots of all versions of the Swedish Reference Genome Portal"

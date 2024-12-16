@@ -7,12 +7,7 @@
 
 {{ define "main" }}
 
-{{ $species := .Site.GetPage "section" "Species" }}
-{{ $numbSpecies := len $species.Sections }}
-{{ $maxSpeciesPerPage := .Site.Params.maxSpeciesPerPage }}
-{{ $numbSpeciesCards := math.Min $numbSpecies $maxSpeciesPerPage }}
-
-
+<!-- markdown file content here -->
 <div class="row scilife-subsection mt-2">
     <h2>Explore species</h2>
     <p> Scroll down to see the available species or use the search box below to filter which species to show.</p>
@@ -22,23 +17,23 @@
 <div class="row g-3 align-items-center mb-3">
     <div class="col-12 col-lg-12 mb-2 d-md-flex align-items-center">
         <div class="dropdown mb-2 mb-md-0">
-            <button class="btn btn-lg dropdown-toggle scilife-sort-dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <!-- The HTML below will be autoupdated by JS if user changes active dropdown item. -->
+            <button class="btn btn-lg dropdown-toggle scilife-sort-dropdown" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
                 <i class="bi bi-clock"></i> Last updated
             </button>
             <ul class="dropdown-menu">
                 <li>
-                    <div id="lastUpdated" role="button" class="dropdown-item scilife-dropdown-item active">
+                    <div id="Updated" role="button" class="dropdown-item scilife-dropdown-item active">
                         <i class="bi bi-clock"></i> Last updated
                     </div>
                 </li>
                 <li>
-                    <div id="alphabet" role="button" class="dropdown-item scilife-dropdown-item">
+                    <div id="Alphabet" role="button" class="dropdown-item scilife-dropdown-item">
                         <i class="bi bi-sort-alpha-down"></i> Name (A to Z)
                     </div>
                 </li>
                 <li>
-                    <div id="revAlphabet" role="button" class="dropdown-item scilife-dropdown-item">
+                    <div id="RevAlphabet" role="button" class="dropdown-item scilife-dropdown-item">
                         <i class="bi bi-sort-alpha-up"></i> Name (Z to A)
                     </div>
                 </li>
@@ -58,89 +53,167 @@
 
 
 
-<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-4" id="card-container"
-    data-numb-cards-per-page="{{ $numbSpeciesCards }}">
-    <!-- Species cards are added here using JS -->
+<!-- Species cards -->
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-4" id="card-container">
+    {{ $species := .Site.GetPage "section" "Species" }}
+    {{ range $species.Sections }}
+    <div class="col">
+        <div class="card h-100 scilife-species-card">
+            <div class="card-image">
+                <figure>
+                    <a href="{{ .RelPermalink }}" title="Go to the {{ .Title | markdownify }} page">
+                        <img src="{{ .Params.cover_image }}" class="card-img-top"
+                            alt="Image of {{ .Title | markdownify }}">
+                    </a>
+
+                    {{ if .Params.img_attrib_link }}
+                    <a href="{{ .Params.img_attrib_link }}" title="Go to the image source" target="_blank">
+                        <figcaption class="scilife-card-image-attrib"> {{ .Params.img_attrib_text }} </figcaption>
+                    </a>
+                    {{ else }}
+                    <p class="scilife-card-image-attrib">
+                        {{ .Params.img_attrib_text }}
+                    </p>
+                    {{ end }}
+
+                </figure>
+            </div>
+
+            <div class="card-body">
+                <h2 class="card-title" id="science-name">{{ .Title | markdownify }}</h2>
+                <h3 class="card-title" id="common-name">{{ .Params.subtitle | markdownify }}</h3>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center">
+                <p class="card-text mb-0 mt-auto">Last updated: {{ .Params.last_updated }}</p>
+                <!-- The date below is hidden because used only in the sorting algo for easier date parsing -->
+                <div class="hidden-date" style="display: none;">{{ .Params.last_updated }}</div>
+
+                <a href="{{ .RelPermalink }}" class="btn btn-primary scilife-species-button"
+                    title="Go to the {{ .Title | markdownify }} page">
+                    <i class="bi bi-arrow-right" style="font-size: 1.25em;"></i>
+                </a>
+            </div>
+
+        </div>
+    </div>
+    {{ end }}
+
 </div>
 
-
-<!-- shows only if no search results -->
+<!-- shows if no search results -->
 <div id="no-filtered-card" class="alert alert-primary mt-3" style="display: none;" role="alert">
     No results found with your search term
 </div>
 
 
-<!-- Add pagination if numb of species cards is > than number of species per page
-     numb species per page set in main config.yaml file -->
-{{if gt $numbSpecies $numbSpeciesCards }}
-{{ partial "pagination.html" (dict "numbSpecies" $numbSpecies "numbSpeciesCards" $numbSpeciesCards) }}
-{{end}}
 
+<script>
+    const speciesCards = Array.from(document.querySelectorAll('.scilife-species-card'));
 
+    // helper function to handle missing elements by returning empty string
+    function getElementText(root, selector) {
+        const element = root.querySelector(selector);
+        if (!element) {
+            console.warn(`Element not found for selector: ${selector} in root: ${root}`);
+            return '';
+        }
+        return element.textContent;
+    }
 
+    function sortAlphabetically(a, b) {
+        const titleA = getElementText(a, '#science-name');
+        const titleB = getElementText(b, '#science-name');
+        return titleA.localeCompare(titleB);
+    }
 
-<!--Templates for active ordering button text. When the order is changed, JS clones one of these tempaltes into the active button -->
-<template id="text-lastUpdated">
-    <i class="bi bi-clock"></i> Last updated
-</template>
+    const sortRevAlphabetically = (a, b) => -sortAlphabetically(a, b);
 
-<template id="text-alphabet">
-    <i class="bi bi-sort-alpha-down"></i> Name (A to Z)
-</template>
+    // All dates have DD/MM/YYYY format but
+    // JS Dates object need standard define in stringToDate function
+    function stringToDate(str) {
+        const [dd, mm, yyyy] = str.split('/');
+        return new Date(yyyy, mm - 1, dd);
+    }
 
-<template id="text-revAlphabet">
-    <i class="bi bi-sort-alpha-up"></i> Name (Z to A)
-</template>
+    function sortUpdated(a, b) {
+        const dateStrA = getElementText(a, '.hidden-date');
+        const dateStrB = getElementText(b, '.hidden-date');
 
+        const dateA = stringToDate(dateStrA);
+        const dateB = stringToDate(dateStrB);
+        return dateB - dateA;
+    }
 
-<!-- Species cards built as HTML templates -->
-{{ $species := .Site.GetPage "section" "Species" }}
-{{ range $species.Sections }}
-    {{ $speciesName := .Title | markdownify }}
-    <template id="card-{{ .Params.url }}">
-        <div class="col">
-            <div class="card h-100 scilife-species-card">
-                <div class="card-image">
-                    <figure>
-                        <a href="{{ .RelPermalink }}" title="Go to the {{ $speciesName }} page">
-                            <img src="{{ .Params.cover_image }}" class="card-img-top"
-                                alt="Image of {{ $speciesName }}">
-                        </a>
+    function searchAndFilter() {
+        const searchText = document.querySelector("#Search").value.toLowerCase();
+        const AlphabetSet = document.querySelector("#Alphabet").classList.contains("active");
+        const RevAlphabetSet = document.querySelector("#RevAlphabet").classList.contains("active");
+        const UpdatedSet = document.querySelector("#Updated").classList.contains("active");
 
-                        {{ if .Params.img_attrib_link }}
-                        <a href="{{ .Params.img_attrib_link }}" title="Go to the image source" target="_blank">
-                            <figcaption class="scilife-card-image-attrib"> {{ .Params.img_attrib_text }} </figcaption>
-                        </a>
-                        {{ else }}
-                        <p class="scilife-card-image-attrib">
-                            {{ .Params.img_attrib_text }}
-                        </p>
-                        {{ end }}
+        document.querySelector("#card-container").innerHTML = "";
+        let cardsToAppend = [];
 
-                    </figure>
-                </div>
+        if (searchText === "") {
+            cardsToAppend = speciesCards.slice();
+        } else {
+            cardsToAppend = speciesCards.filter(function (card) {
+                const title = getElementText(card, '#science-name').toLowerCase();
+                const subtitle = getElementText(card, '#common-name').toLowerCase();
+                const cardText = getElementText(card, '.card-text').toLowerCase();
+                return title.includes(searchText) || subtitle.includes(searchText) || cardText.includes(searchText);
+            });
+        }
 
-                <div class="card-body">
-                    <h2 class="card-title science-name">{{ $speciesName }}</h2>
-                    <h3 class="card-title common-name">{{ .Params.subtitle | markdownify }}</h3>
-                </div>
+        if (cardsToAppend.length === 0) {
+            document.querySelector("#no-filtered-card").style.display = 'block';
+        } else {
+            document.querySelector("#no-filtered-card").style.display = 'none';
 
-                <div class="d-flex justify-content-between align-items-center">
-                    <p class="card-text mb-0 mt-auto">Last updated: {{ .Params.last_updated }}</p>
+            if (RevAlphabetSet) {
+                cardsToAppend.sort(sortRevAlphabetically);
+            }
+            else if (UpdatedSet) {
+                cardsToAppend.sort(sortUpdated);
+            }
+            else {
+                cardsToAppend.sort(sortAlphabetically)
+            }
 
-                    <a href="{{ .RelPermalink }}" class="btn btn-primary scilife-species-button"
-                        title="Go to the {{ .Title | markdownify }} page">
-                        <i class="bi bi-arrow-right" style="font-size: 1.25em;"></i>
-                    </a>
-                </div>
+            cardsToAppend.forEach(function (card) {
+                document.querySelector("#card-container").appendChild(card.parentElement);
+            });
+        }
+    }
 
-            </div>
-        </div>
-    </template>
-{{ end }}
+    // Event listeners for sorting buttons and then search box
+    const sortingButtons = ["Alphabet", "RevAlphabet", "Updated"];
+    sortingButtons.forEach(buttonId => {
+        document.getElementById(buttonId).addEventListener("click", function () {
+            sortingButtons.forEach(id => document.getElementById(id).classList.remove("active"));
+            this.classList.add("active");
 
+            // (Update the dropdown text with selected item)
+            const dropdown = document.querySelector(".scilife-sort-dropdown");
+            const sortOptionSelected = this.textContent.trim();
+            const iconMapping = {
+                'Name (A to Z)': 'bi-sort-alpha-down',
+                'Name (Z to A)': 'bi-sort-alpha-up',
+                'Last updated': 'bi-clock'
+            };
+            const icon = iconMapping[sortOptionSelected];
 
-{{ $speciesCardsJS := resources.Get "js/species_cards.js" | fingerprint | minify }}
-<script src="{{ $speciesCardsJS.RelPermalink }}"></script>
+            dropdown.textContent = sortOptionSelected;
+            dropdown.innerHTML = `<i class="bi ${icon}"></i> ` + sortOptionSelected;
+
+            searchAndFilter();
+        });
+    });
+
+    // Event listners for when page fully loaded or search box input
+    document.addEventListener("DOMContentLoaded", searchAndFilter);
+    document.querySelector("#Search").addEventListener("input", searchAndFilter);
+
+</script>
 
 {{ end }}
