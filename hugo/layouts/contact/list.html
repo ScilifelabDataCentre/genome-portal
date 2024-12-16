@@ -8,8 +8,15 @@
 
 {{ define "script_includes" }}
 
-<!-- Load the Google reCAPTCHA API asynchronously and defer its execution until the page has finished parsing -->
+<!-- onload callback function needs to be loaded before reCAPTCHA API to avoid race conditions. -->
+{{ $recaptchaJS := resources.Get "js/recaptcha.js" | fingerprint | minify }}
+<script src="{{ $recaptchaJS.RelPermalink }}"></script>
+
 <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
+
+<!-- For submission of contact form -->
+{{ $contactFormJS := resources.Get "js/contact_form.js" | fingerprint | minify }}
+<script src="{{ $contactFormJS.RelPermalink }}"></script>
 
 {{ end }}
 
@@ -23,14 +30,5 @@
         </div>
     </div>
 </div>
-
-
-<script type="text/javascript">
-    var onloadCallback = function () {
-        grecaptcha.render(id = "recaptcha-widget", {
-            'sitekey': '6LfLRQMqAAAAACSectjtigWkNvif1G2J8EFlj1nV'
-        });
-    };
-</script>
 
 {{ end }}
