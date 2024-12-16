@@ -12,6 +12,10 @@ markup:
     endLevel: 4
     ordered: false
 
+module:
+  imports:
+    - path: genome-portal-kit
+
 menus:
   main:
   - name: About
