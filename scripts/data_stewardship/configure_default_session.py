@@ -170,6 +170,7 @@ def populate_defaultSession_object(data, species_info):
         },
         "activeWidgets": {"hierarchicalTrackSelector": "hierarchicalTrackSelector"},
     }
+    data["configuration"] = {"disableAnalytics": True}
     return data
 
 
@@ -212,23 +213,23 @@ def initiate_views_and_populate_mandatory_tracks(data, species_info, config, git
         }
     ]
 
-    if "views" in data["defaultSession"]:
-        data["defaultSession"]["views"].extend(views)
-    else:
-        data["defaultSession"]["views"] = views
+    has_protein_coding_genes_track_in_config = any(
+        "name" in track and track["name"].lower() in ["protein coding genes", "protein-coding genes"]
+        for track in config.get("tracks", [])
+    )
 
     # Primary assemblies are required to have a protein-coding genes track. This is added to the first view.
-    if assembly_counter == 0:
+    if has_protein_coding_genes_track_in_config:
         protein_coding_gene_file_name = get_protein_coding_genes_file_name(config)
         protein_coding_genes_track = [
             {
-                "id": f"{species_abbreviation}_default_protein_coding_genes",
+                "id": f"{species_abbreviation}_default_protein_coding_genes_view_{assembly_counter}",
                 "type": "FeatureTrack",
                 "configuration": protein_coding_gene_file_name,
                 "minimized": False,
                 "displays": [
                     {
-                        "id": f"{species_abbreviation}_default_protein_coding_genes_display",
+                        "id": f"{species_abbreviation}_default_protein_coding_genes_view_{assembly_counter}_display",
                         "type": "LinearBasicDisplay",
                         "heightPreConfig": 150,
                         "configuration": f"{protein_coding_gene_file_name}-LinearBasicDisplay",
@@ -236,14 +237,24 @@ def initiate_views_and_populate_mandatory_tracks(data, species_info, config, git
                 ],
             }
         ]
-        data["defaultSession"]["views"][assembly_counter]["tracks"].extend(protein_coding_genes_track)
     else:
+        if assembly_counter == 0:
+            raise ValueError(
+                f"The primary assembly (assembly number {assembly_counter+1}) is required to have a track named 'Protein coding genes'. Exiting."
+            )
         # Secondary assemblies do not need to have a track name "Protein coding genes", but need to have at least one track.
         if not ("tracks" in config and isinstance(config["tracks"], list) and len(config["tracks"]) > 0):
             raise ValueError(
                 f"There seem to be no tracks configured for assembly number {assembly_counter+1} in the config.yml. "
                 "In order to configure a defaultSession, there need to be at least one track. Exiting."
             )
+
+    if "views" in data["defaultSession"]:
+        data["defaultSession"]["views"].extend(views)
+    else:
+        data["defaultSession"]["views"] = views
+    if has_protein_coding_genes_track_in_config:
+        data["defaultSession"]["views"][assembly_counter]["tracks"].extend(protein_coding_genes_track)
 
     return data
 
@@ -252,18 +263,22 @@ def populate_values_from_optional_tracks(config, data, species_abbreviation, ass
     plugin_added = False
     assembly_name = config.get("assembly", {}).get("name", "")
 
-    at_least_one_default_session_flag = any(
+    has_at_least_one_default_session_flag = any(
         "defaultSession" in track and track["defaultSession"] for track in config.get("tracks", [])
     )
 
-    if at_least_one_default_session_flag:
+    has_protein_coding_genes_track_in_dict = any(
+        (track_id := track.get("id")) and "protein_coding_genes" in track_id
+        for track in data["defaultSession"]["views"][assembly_counter]["tracks"]
+    )
+
+    if has_at_least_one_default_session_flag:
         for track in config["tracks"]:
             if "defaultSession" in track and track["defaultSession"]:
                 # Ensure protein-coding genes are not added to the default session again if the user has happened to set it with defaultSession: true in the config.yml
                 if track["name"].lower() in ["protein coding genes", "protein-coding genes"]:
                     continue
                 data = add_defaultSession_true_tracks(track, data, species_abbreviation, assembly_counter)
-
             if "GWAS" in track and track["GWAS"]:
                 if not plugin_added:
                     plugin_call = {
@@ -276,11 +291,12 @@ def populate_values_from_optional_tracks(config, data, species_abbreviation, ass
                     plugin_added = True
                 data = add_gwas_true_tracks(track, data, species_abbreviation, assembly_name)
     else:
-        raise ValueError(
-            f"There seem to be no tracks set with the defaultSession: true flag for assembly number {assembly_counter+1} in the config.yml. "
-            "In order to configure a defaultSession, there need to be at least one track set to defaultSession: true "
-            "(protein-coding genes tracks are treated as defaultSession: true by default). Exiting."
-        )
+        if not has_protein_coding_genes_track_in_dict:
+            raise ValueError(
+                f"There seem to be no tracks set with the defaultSession: true flag for assembly number {assembly_counter+1} in the config.yml. "
+                "In order to configure a defaultSession, there need to be at least one track set to defaultSession: true "
+                "(protein-coding genes tracks are treated as defaultSession: true by default). Exiting."
+            )
 
     return data
 
@@ -294,7 +310,7 @@ def add_defaultSession_true_tracks(track, data, species_abbreviation, assembly_c
     track_config = track_file_name
     display_config = f"{track_file_name}-LinearBasicDisplay"
 
-    # For the case when a track true for both defaultSession and GWAS:
+    # For the case when a track is true for both the defaultSession and GWAS keys:
     if "GWAS" in track and track["GWAS"]:
         track_type = "LinearManhattanDisplay"
         # this next line needs can be improved: it serves to to reproduce the same output as the old handcrafted config.json for L. tenue.
@@ -393,6 +409,10 @@ def main():
     git_root = get_git_repo_root()
 
     for assembly_counter, config in enumerate(configs):
+        if not config:
+            raise ValueError(
+                f"Document {assembly_counter+1} in the config.yml is empty. Each document must contain data. Exiting."
+            )
         # The organism key is intended to be present once in the config.yml file, and thus it is considered part of the first YAML document.
         # The below logic is dependent on there not being multiple organism keys in the same config.yml file.
         if "organism" in config and assembly_counter == 0:

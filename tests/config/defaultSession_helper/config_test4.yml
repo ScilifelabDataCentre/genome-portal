@@ -1,6 +1,19 @@
-#This configuration tests the case: protein-codings in assembly 1 and in 2; GWAS in assembly 1, but not in 2;
-# defaultSession flag set for all tracks in assembly 1 and assembly 2 despite some being protein-coding genes.
-organism: "Linum tenue"
+#This configuration tests the case is config_test0 inverted to have the pmne track on top
+organism: "Parnassius mnemosyne"
+assembly:
+  name: "Mito_assembly"
+  displayName: "Pmne mito assembly"
+  url: "http://fixtures/mito_clouded_apollo/OZ075093.1.fasta.gz"
+  aliases: "https://raw.githubusercontent.com/ScilifelabDataCentre/genome-portal/refs/heads/main/scripts/data_stewardship/alias_files_temp_storage/GCA_964186615.fna.alias"
+tracks:
+  - name: "protein-coding genes"
+    url: "https://figshare.scilifelab.se/ndownloader/files/47209654"
+    fileName: "pmne_mtdna.gff.gz"
+    defaultSession: true
+
+---
+#This second YAML document is a Frankenstein's monster, since it is a mix of two different species. This is only for testing purposes
+#The reason is that Linum has GWAS tracks, and Clouded Apollo has a organelle assembly and as such lacks a track named protein-coding genes.
 assembly:
   name: Linum_tenue_thrum_v1
   displayName: "L. tenue genome assembly GCA_946122785.1"
@@ -34,16 +47,3 @@ tracks:
     defaultSession: true
     GWAS: true
     scoreColumnGWAS: "TajimaD"
----
-#This second YAML document is a Frankenstein's monster, since it is a mix of two different species. This is only for testing purposes
-#The reason is that Linum has GWAS tracks, and Clouded Apollo has a organelle assembly and as such lacks a track named protein-coding genes.
-assembly:
-  name: "Mito_assembly"
-  displayName: "Pmne mito assembly"
-  url: "http://fixtures/mito_clouded_apollo/OZ075093.1.fasta.gz"
-  aliases: "https://raw.githubusercontent.com/ScilifelabDataCentre/genome-portal/refs/heads/main/scripts/data_stewardship/alias_files_temp_storage/GCA_964186615.fna.alias"
-tracks:
-  - name: "Protein-coding genes"
-    url: "https://figshare.scilifelab.se/ndownloader/files/47209654"
-    fileName: "pmne_mtdna.gff.gz"
-    defaultSession: true

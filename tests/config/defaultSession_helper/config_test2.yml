@@ -1,4 +1,4 @@
-#This configuration tests the case: protein-codings in assembly 1 and in 2; GWAS in assembly 1, but not in 2;
+#This configuration tests the case: protein-codings in assembly 2 but not in 1; GWAS in assembly 1, but not in 2;
 # defaultSession flag set for all tracks in assembly 1 and assembly 2 despite some being protein-coding genes.
 organism: "Linum tenue"
 assembly:
@@ -11,11 +11,6 @@ assembly:
   aliases: "https://raw.githubusercontent.com/ScilifelabDataCentre/genome-portal/refs/heads/main/scripts/data_stewardship/alias_files_temp_storage/CAMGYJ01.fna.alias"
   defaultScaffold: "ENA|CAMGYJ010000002|CAMGYJ010000002.1"
 tracks:
-  - name: "Protein-coding genes"
-    url: "https://figshare.scilifelab.se/ndownloader/files/45076090"
-    fileName: "ltenue_v1_genes.gff.zip"
-    # the below flag is an unintended use for this track (it is mandatory), but set here to be implement a catch that ignores it in the script
-    defaultSession: true
   - name: "Repeats"
     url: "https://figshare.scilifelab.se/ndownloader/files/48879751"
     fileName: "L_tenue_v1_rep.bed.gz"
