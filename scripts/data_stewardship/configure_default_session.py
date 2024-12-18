@@ -144,36 +144,22 @@ def get_fasta_header_and_sequence_length(file_path, default_scaffold=None):
 
         return first_fasta_header, sequence_length, header_found
 
-    if file_path.endswith(".gz"):
-        with gzip.open(file_path, "rt") as file:
-            first_fasta_header, sequence_length, header_found = parse_fasta_file(file, default_scaffold)
-    else:
-        with open(file_path, "r") as file:
-            first_fasta_header, sequence_length, header_found = parse_fasta_file(file, default_scaffold)
+    try:
+        if file_path.endswith(".gz"):
+            with gzip.open(file_path, "rt") as file:
+                first_fasta_header, sequence_length, header_found = parse_fasta_file(file, default_scaffold)
+        else:
+            with open(file_path, "r") as file:
+                first_fasta_header, sequence_length, header_found = parse_fasta_file(file, default_scaffold)
+    except IOError as e:
+        raise IOError(f"Error: Failed to open the assembly file from the given path at {file_path}. Error: {e}") from e
 
     if default_scaffold and not header_found:
         raise ValueError(
-            f"No FASTA header named '{default_scaffold}' was found in the file. Please check the defaultScaffold value in the config.yml."
+            f"Error: No FASTA header named '{default_scaffold}' was found in the file. Please check the defaultScaffold value in the config.yml."
         )
 
     return (default_scaffold if default_scaffold else first_fasta_header), sequence_length
-
-
-def get_protein_coding_genes_file_name(config):
-    for track in config["tracks"]:
-        if track["name"].lower() in ["protein coding genes", "protein-coding genes"]:
-            if "fileName" in track:
-                if track["fileName"].endswith((".gz", ".zip")):
-                    return track["fileName"].rsplit(".", 1)[0]
-                else:
-                    return track["fileName"]
-            elif "url" in track:
-                file_name = os.path.basename(track["url"])
-                if file_name.endswith((".gz", ".zip")):
-                    return file_name.rsplit(".", 1)[0]
-                else:
-                    return file_name
-    raise ValueError("No track with name 'Protein coding genes' found. Exiting.")
 
 
 def get_track_file_name(track):
@@ -187,20 +173,14 @@ def get_track_file_name(track):
         filename = get_track_file_name(track)
     """
     if "fileName" in track:
-        if track["fileName"].endswith((".gz", ".bgz", ".zip")):
-            return track["fileName"].rsplit(".", 1)[0]
-        else:
-            return track["fileName"]
+        file_name = track["fileName"]
     elif "url" in track:
         file_name = os.path.basename(track["url"])
-        if file_name.endswith((".gz", ".bgz", ".zip")):
-            return file_name.rsplit(".", 1)[0]
-        else:
-            return file_name
     else:
         raise ValueError(
             "Error: Was not able to obtain the track filenames from the URLs or the fileName keys. Exiting."
         )
+    return file_name.rsplit(".", 1)[0] if file_name.endswith((".gz", ".bgz", ".zip")) else file_name
 
 
 def populate_defaultSession_object(data, species_info):
@@ -233,14 +213,33 @@ def initiate_views_and_populate_mandatory_tracks(data, species_info, config, git
     have a protein-coding genes track, but at least one track is required. (The populate_values_from_optional_tracks()
     is later called by main() to also ensure that the secondary assemblies have at least one track set to defaultSession: true.)
     """
+
+    # Check if there is a protein-coding genes track configured for the current assembly
+    protein_coding_gene_file_name = None
+    for track in config.get("tracks", []):
+        if "name" in track and track["name"].lower() in ["protein coding genes", "protein-coding genes"]:
+            protein_coding_gene_file_name = get_track_file_name(track)
+            break
+
+    if not protein_coding_gene_file_name:
+        # Primary assemblies are required to have a protein-coding genes track; it is optional for secondary assemblies.
+        if assembly_counter == 0:
+            raise ValueError(
+                f"Error: The primary assembly (assembly number {assembly_counter+1}) is required to have a track named 'Protein coding genes'. Exiting."
+            )
+        # Secondary assemblies do not need to have a track name "Protein coding genes", but need to have at least one track.
+        elif not ("tracks" in config and isinstance(config["tracks"], list) and len(config["tracks"]) > 0):
+            raise ValueError(
+                f"Error: There seem to be no tracks configured for assembly number {assembly_counter+1} in the config.yml. "
+                "In order to configure a defaultSession, there need to be at least one track. Exiting."
+            )
+
     species_abbreviation = species_info["species_abbreviation"]
     species_name_underscored = species_info["species_name_underscored"]
     assembly_file_name = os.path.basename(config["assembly"]["url"])
-
     assembly_file_path = os.path.join(
         git_root, config_dir.replace("config", "data"), assembly_file_name.replace(".fasta", ".fna")
     )
-    print(assembly_file_path)
 
     if os.path.exists(assembly_file_path):
         # The "get" method returns None if the key is not found
@@ -271,14 +270,11 @@ def initiate_views_and_populate_mandatory_tracks(data, species_info, config, git
         }
     ]
 
-    # Check if there is a protein-coding genes track configured for the current assembly that
-    protein_coding_gene_file_name = None
-    for track in config.get("tracks", []):
-        if "name" in track and track["name"].lower() in ["protein coding genes", "protein-coding genes"]:
-            protein_coding_gene_file_name = get_track_file_name(track)
-            break
+    if "views" in data["defaultSession"]:
+        data["defaultSession"]["views"].extend(views)
+    else:
+        data["defaultSession"]["views"] = views
 
-    # Primary assemblies are required to have a protein-coding genes track; it is optional for secondary assemblies.
     if protein_coding_gene_file_name:
         protein_coding_genes_track = [
             {
@@ -296,23 +292,6 @@ def initiate_views_and_populate_mandatory_tracks(data, species_info, config, git
                 ],
             }
         ]
-    else:
-        if assembly_counter == 0:
-            raise ValueError(
-                f"The primary assembly (assembly number {assembly_counter+1}) is required to have a track named 'Protein coding genes'. Exiting."
-            )
-        # Secondary assemblies do not need to have a track name "Protein coding genes", but need to have at least one track.
-        if not ("tracks" in config and isinstance(config["tracks"], list) and len(config["tracks"]) > 0):
-            raise ValueError(
-                f"There seem to be no tracks configured for assembly number {assembly_counter+1} in the config.yml. "
-                "In order to configure a defaultSession, there need to be at least one track. Exiting."
-            )
-
-    if "views" in data["defaultSession"]:
-        data["defaultSession"]["views"].extend(views)
-    else:
-        data["defaultSession"]["views"] = views
-    if protein_coding_gene_file_name:
         data["defaultSession"]["views"][assembly_counter]["tracks"].extend(protein_coding_genes_track)
 
     return data
@@ -366,7 +345,7 @@ def populate_values_from_optional_tracks(config, data, species_abbreviation, ass
         # since the makefile currently does not support the extra configuration needed for GWAS tracks.
         if "scoreColumnGWAS" not in track:
             raise ValueError(
-                f"Track '{track['name']}' is configured to be treated as a GWAS track but is missing 'scoreColumnGWAS' in the config.yml. "
+                f"Error: Track '{track['name']}' is configured to be treated as a GWAS track but is missing 'scoreColumnGWAS' in the config.yml. "
                 "Please update this and re-run the script."
             )
         adapter_scoreColumn = track["scoreColumnGWAS"]
@@ -451,7 +430,7 @@ def populate_values_from_optional_tracks(config, data, species_abbreviation, ass
     else:
         if not has_protein_coding_genes_track_in_dict:
             raise ValueError(
-                f"There seem to be no tracks set with the defaultSession: true flag for assembly number {assembly_counter+1} in the config.yml. "
+                f"Error: There seem to be no tracks set with the defaultSession: true flag for assembly number {assembly_counter+1} in the config.yml. "
                 "In order to configure a defaultSession, there need to be at least one track set to defaultSession: true "
                 "(protein-coding genes tracks are treated as defaultSession: true by default). Exiting."
             )
@@ -494,11 +473,8 @@ def main():
     try:
         with open(config_path, "r") as file:
             configs = list(yaml.safe_load_all(file))
-    except FileNotFoundError:
-        print(f"Error: The file {config_path} was not found.")
-        return
-    except yaml.YAMLError as e:
-        print(f"Error: Failed to parse YAML file {config_path}. Error: {e}")
+    except (FileNotFoundError, yaml.YAMLError) as e:
+        print(f"Error: {e}")
         return
 
     git_root = get_git_repo_root()
@@ -506,12 +482,12 @@ def main():
     for assembly_counter, config in enumerate(configs):
         if not config:
             raise ValueError(
-                f"Document {assembly_counter+1} in the config.yml is empty. Each document must contain data. Exiting."
+                f"Error: Document {assembly_counter+1} in the config.yml is empty. Each document must contain data. Exiting."
             )
         if assembly_counter == 0:
             if "organism" not in config or not config["organism"]:
                 raise ValueError(
-                    f"The primary assembly (assembly number {assembly_counter+1} in config.yml) is required to have a non-empty 'organism' key. Exiting."
+                    f"Error: The primary assembly (assembly number {assembly_counter+1} in config.yml) is required to have a non-empty 'organism' key. Exiting."
                 )
             species_info = {
                 "species_name": config["organism"],

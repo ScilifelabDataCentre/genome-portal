@@ -15,7 +15,7 @@ tracks:
     url: "https://figshare.scilifelab.se/ndownloader/files/45076090"
     fileName: "ltenue_v1_genes.gff.zip"
     # the below flag is an unintended use for this track (it is mandatory), but set here to be implement a catch that ignores it in the script
-    defaultSession: true
+    # defaultSession: true
   - name: "Repeats"
     url: "https://figshare.scilifelab.se/ndownloader/files/48879751"
     fileName: "L_tenue_v1_rep.bed.gz"
@@ -31,7 +31,7 @@ tracks:
     url: "https://figshare.scilifelab.se/ndownloader/files/50073939"
     fileName: "Lten_pop08_TD.bed.gz"
     addTrack: false
-    defaultSession: true
+    # defaultSession: true
     GWAS: true
     scoreColumnGWAS: "TajimaD"
 ---
@@ -43,7 +43,7 @@ assembly:
   url: "http://fixtures/mito_clouded_apollo/OZ075093.1.fasta.gz"
   aliases: "https://raw.githubusercontent.com/ScilifelabDataCentre/genome-portal/refs/heads/main/scripts/data_stewardship/alias_files_temp_storage/GCA_964186615.fna.alias"
 tracks:
-  - name: "Protein-coding genes"
+  - name: "Mito genes"
     url: "https://figshare.scilifelab.se/ndownloader/files/47209654"
     fileName: "pmne_mtdna.gff.gz"
     defaultSession: true

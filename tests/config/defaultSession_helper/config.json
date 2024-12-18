@@ -20,7 +20,7 @@
     },
     "views": [
       {
-        "id": "lten_default_session_view",
+        "id": "lten_default_session_view_0",
         "minimized": false,
         "type": "LinearGenomeView",
         "trackLabels": "offset",
@@ -28,22 +28,22 @@
         "bpPerPx": 50,
         "displayedRegions": [
           {
-            "refName": "ENA|CAMGYJ010000001|CAMGYJ010000001.1",
+            "refName": "ENA|CAMGYJ010000002|CAMGYJ010000002.1",
             "start": 0,
-            "end": 153438,
+            "end": 72476498,
             "reversed": false,
             "assemblyName": "Linum_tenue_thrum_v1"
           }
         ],
         "tracks": [
           {
-            "id": "lten_default_protein_coding_genes",
+            "id": "lten_default_protein_coding_genes_view_0",
             "type": "FeatureTrack",
             "configuration": "ltenue_v1_genes.gff",
             "minimized": false,
             "displays": [
               {
-                "id": "lten_default_protein_coding_genes_display",
+                "id": "lten_default_protein_coding_genes_view_0_display",
                 "type": "LinearBasicDisplay",
                 "heightPreConfig": 150,
                 "configuration": "ltenue_v1_genes.gff-LinearBasicDisplay"
@@ -67,34 +67,56 @@
           {
             "id": "lten_default_Tajimas_D_population_06",
             "type": "FeatureTrack",
-            "configuration": "lten_init_Tajimas_D_population_06",
+            "configuration": "lten_gwas_Tajimas_D_population_06",
             "minimized": false,
             "displays": [
               {
                 "id": "lten_default_Tajimas_D_population_06_display",
                 "type": "LinearManhattanDisplay",
                 "heightPreConfig": 150,
-                "configuration": "lten_init_Tajimas_D_population_06_display"
+                "configuration": "lten_gwas_Tajimas_D_population_06_display"
               }
             ]
-          },
+          }
+        ]
+      },
+      {
+        "id": "lten_default_session_view_1",
+        "minimized": false,
+        "type": "LinearGenomeView",
+        "trackLabels": "offset",
+        "offsetPx": 0,
+        "bpPerPx": 50,
+        "displayedRegions": [
           {
-            "id": "lten_default_Tajimas_D_population_08",
+            "refName": "ENA|OZ075093|OZ075093.1",
+            "start": 0,
+            "end": 15425,
+            "reversed": false,
+            "assemblyName": "Mito_assembly"
+          }
+        ],
+        "tracks": [
+          {
+            "id": "lten_default_Mito_genes",
             "type": "FeatureTrack",
-            "configuration": "lten_init_Tajimas_D_population_08",
+            "configuration": "pmne_mtdna.gff",
             "minimized": false,
             "displays": [
               {
-                "id": "lten_default_Tajimas_D_population_08_display",
-                "type": "LinearManhattanDisplay",
+                "id": "lten_default_Mito_genes_display",
+                "type": "LinearBasicDisplay",
                 "heightPreConfig": 150,
-                "configuration": "lten_init_Tajimas_D_population_08_display"
+                "configuration": "pmne_mtdna.gff-LinearBasicDisplay"
               }
             ]
           }
         ]
       }
     ]
+  },
+  "configuration": {
+    "disableAnalytics": true
   },
   "plugins": [
     {
@@ -105,7 +127,7 @@
   "tracks": [
     {
       "type": "FeatureTrack",
-      "trackId": "lten_init_Tajimas_D_population_06",
+      "trackId": "lten_gwas_Tajimas_D_population_06",
       "name": "Tajima's D, population 06",
       "assemblyNames": [
         "Linum_tenue_thrum_v1"
@@ -127,14 +149,14 @@
       },
       "displays": [
         {
-          "displayId": "lten_init_Tajimas_D_population_06_display",
+          "displayId": "lten_gwas_Tajimas_D_population_06_display",
           "type": "LinearManhattanDisplay"
         }
       ]
     },
     {
       "type": "FeatureTrack",
-      "trackId": "lten_init_Tajimas_D_population_08",
+      "trackId": "lten_gwas_Tajimas_D_population_08",
       "name": "Tajima's D, population 08",
       "assemblyNames": [
         "Linum_tenue_thrum_v1"
@@ -156,7 +178,7 @@
       },
       "displays": [
         {
-          "displayId": "lten_init_Tajimas_D_population_08_display",
+          "displayId": "lten_gwas_Tajimas_D_population_08_display",
           "type": "LinearManhattanDisplay"
         }
       ]
