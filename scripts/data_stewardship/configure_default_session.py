@@ -4,18 +4,22 @@ minimal JBrowse 2 defaultSession from it. The resulting output file can be copie
 directory, from where it will be parsed by the makefile and used to generate the final config.json that will be used by
 the JBrowse 2 instance.
 
-To get the most out of this script, the config.yml for the species should be populated with at least the assembly and
-protein-coding genes tracks, and `makefile build` should preferrably have been run once so that the files have been
-downloaded to ./data/[SPECIES_NAME].
+The config.yml for the species should be populated with at least one assembly and its protein-coding genes tracks,
+and `./scripts/dockermake` should have been run once so that the files have been downloaded to ./data/[SPECIES_NAME].
+For the tracks, both explicit file names in the URLs, and tracks that use the key `fileName` for download of files where
+the file names is hidden in the url (e.g. Figshare) are supported.
 
-The script supports config.yml tracks that are have explicit file names in the urls, and tracks that use the key `fileName`
-for download of files where the file names is hidden in the url (e.g. Figshare).
+The script supports multi-assembly configurations, where the `---` YAML document notation is used after each assembly
+to indicate that the next assembly and its associated tracks should be configured in its own JBrowse view in the session.
+
+Furthermore, the script also supports the configuration of GWAS tracks: it adds them to the defaultSession, handles calling of the GWAS
+plugin, and the setup of the GWAS tracks in the tracks section of the JSON object.
 
 ### Input:
 The path to a config.yml file configured for the Swedish Reference Genome Portal. The option --yaml is required.
 
 ### Output:
-A json file with a minimal JBrowse 2 defaultSession for the Swedish Reference Genome Portal. Unless specified otherwise,
+A JSON file with a minimal JBrowse 2 defaultSession for the Swedish Reference Genome Portal. Unless specified otherwise,
 the output will be saved to ./scripts/data_stewardship/temp/test_default_session.json in the Genome Portal git directory.
 The file or its content can then be copied to config.json in .config/[SPECIES_NAMES].
 
@@ -26,7 +30,7 @@ pyyaml                          -   Used for parsing the yaml file.
 ### Usage:
 (Assuming that the following two steps have already been completed:
 1. Populate the config.yml file for the species.
-2. Run `makefile build` to download the assembly and protein-coding genes files.)
+2. Run `./scripts/dockermake` to download the assembly and protein-coding genes files.)
 
 python ./scripts/data_stewardship/configure_default_session.py --yaml ./config/linum_tenue/config.yml
 
@@ -172,6 +176,33 @@ def get_protein_coding_genes_file_name(config):
     raise ValueError("No track with name 'Protein coding genes' found. Exiting.")
 
 
+def get_track_file_name(track):
+    """
+    Subfunction that extracts the base file name from a config.yml dictionary. The base file name is used as a
+    non-arbirtary value in the JBrowse config.json, and it cannot contain file extensions such as .gz, .zip,
+    or .bgz. Filenames can either be fetched from explict URLs or from the fileName key.
+
+    This function is intended to be run within a loop as per the following:
+    for track in config["tracks"]:
+        filename = get_track_file_name(track)
+    """
+    if "fileName" in track:
+        if track["fileName"].endswith((".gz", ".bgz", ".zip")):
+            return track["fileName"].rsplit(".", 1)[0]
+        else:
+            return track["fileName"]
+    elif "url" in track:
+        file_name = os.path.basename(track["url"])
+        if file_name.endswith((".gz", ".bgz", ".zip")):
+            return file_name.rsplit(".", 1)[0]
+        else:
+            return file_name
+    else:
+        raise ValueError(
+            "Error: Was not able to obtain the track filenames from the URLs or the fileName keys. Exiting."
+        )
+
+
 def populate_defaultSession_object(data, species_info):
     """
     Subfunction that populates the outer parts of the defaultSession JSON object with the species name and abbreviation.
@@ -240,14 +271,15 @@ def initiate_views_and_populate_mandatory_tracks(data, species_info, config, git
         }
     ]
 
-    has_protein_coding_genes_track_in_config = any(
-        "name" in track and track["name"].lower() in ["protein coding genes", "protein-coding genes"]
-        for track in config.get("tracks", [])
-    )
+    # Check if there is a protein-coding genes track configured for the current assembly that
+    protein_coding_gene_file_name = None
+    for track in config.get("tracks", []):
+        if "name" in track and track["name"].lower() in ["protein coding genes", "protein-coding genes"]:
+            protein_coding_gene_file_name = get_track_file_name(track)
+            break
 
     # Primary assemblies are required to have a protein-coding genes track; it is optional for secondary assemblies.
-    if has_protein_coding_genes_track_in_config:
-        protein_coding_gene_file_name = get_protein_coding_genes_file_name(config)
+    if protein_coding_gene_file_name:
         protein_coding_genes_track = [
             {
                 "id": f"{species_abbreviation}_default_protein_coding_genes_view_{assembly_counter}",
@@ -280,7 +312,7 @@ def initiate_views_and_populate_mandatory_tracks(data, species_info, config, git
         data["defaultSession"]["views"].extend(views)
     else:
         data["defaultSession"]["views"] = views
-    if has_protein_coding_genes_track_in_config:
+    if protein_coding_gene_file_name:
         data["defaultSession"]["views"][assembly_counter]["tracks"].extend(protein_coding_genes_track)
 
     return data
@@ -296,11 +328,11 @@ def populate_values_from_optional_tracks(config, data, species_abbreviation, ass
     subfunction add_gwas_true_tracks()
     """
 
-    def add_defaultSession_true_tracks(track, data, species_abbreviation, assembly_counter):
+    def add_defaultSession_true_tracks(track, data, species_abbreviation, assembly_counter, gwas_track_id):
         track_outer_id = (
             f"{species_abbreviation}_default_{track['name'].replace(' ', '_').replace('\'', '').replace(',', '')}"
         )
-        track_file_name = f"{track['fileName'].rstrip('.gz').rstrip('.zip').rstrip('.bgz')}"
+        track_file_name = get_track_file_name(track)
         track_type = "LinearBasicDisplay"
         track_config = track_file_name
         display_config = f"{track_file_name}-LinearBasicDisplay"
@@ -308,12 +340,8 @@ def populate_values_from_optional_tracks(config, data, species_abbreviation, ass
         # For the case when a track is true for both the defaultSession and GWAS keys:
         if "GWAS" in track and track["GWAS"]:
             track_type = "LinearManhattanDisplay"
-            # this next line needs can be improved: it serves to to reproduce the same output as the old handcrafted config.json for L. tenue.
-            # (the line is based on the track_outer_id form the GWAS function below)
-            track_config = (
-                f"{species_abbreviation}_init_{track['name'].replace(' ', '_').replace('\'', '').replace(',', '')}"
-            )
-            display_config = f"{track_config}_display"
+            track_config = gwas_track_id
+            display_config = f"{gwas_track_id}_display"
 
         new_track = {
             "id": track_outer_id,
@@ -333,7 +361,9 @@ def populate_values_from_optional_tracks(config, data, species_abbreviation, ass
 
         return data
 
-    def add_gwas_true_tracks(track, data, species_abbreviation, assembly_name):
+    def add_gwas_true_tracks(track, data, species_abbreviation, assembly_name, gwas_track_id):
+        # This sub-subfunction handles adding of GWAS tracks to config.json (not to the defaultSession object),
+        # since the makefile currently does not support the extra configuration needed for GWAS tracks.
         if "scoreColumnGWAS" not in track:
             raise ValueError(
                 f"Track '{track['name']}' is configured to be treated as a GWAS track but is missing 'scoreColumnGWAS' in the config.yml. "
@@ -341,18 +371,13 @@ def populate_values_from_optional_tracks(config, data, species_abbreviation, ass
             )
         adapter_scoreColumn = track["scoreColumnGWAS"]
 
-        track_outer_id = (
-            f"{species_abbreviation}_init_{track['name'].replace(' ', '_').replace('\'', '').replace(',', '')}"
-        )
-
         def get_base_extension(file_name):
             base_name = os.path.splitext(file_name)[0] if file_name.endswith((".gz", ".zip")) else file_name
             return os.path.splitext(base_name)[1].lstrip(".")
 
         base_extension = get_base_extension(track["fileName"])
 
-        # Eventually we need to support more file types here as we encounter them.
-        # There is also a discussion to be had if the makefile should handle GWAS files instead of this script
+        # Currently, this only support BED(-like) GWAS tracks. Eventually we need to support more file types here as we encounter them.
         if base_extension == "bed":
             adapter_type = "BedTabixAdapter"
             bed_gz_location = track["fileName"]
@@ -360,11 +385,12 @@ def populate_values_from_optional_tracks(config, data, species_abbreviation, ass
                 bed_gz_location = bed_gz_location.replace(".gz", ".bgz").replace(".zip", ".bgz")
             index_location = f"{bed_gz_location}.tbi"
 
-        # category is hardcoded for now, but could be added to the config.yml in the future
-        # An added benefit of having the category is that it ensures that the tracks come below the protein-codon genes in the track selector
+        # The category value is hardcoded for now, but could be added to the config.yml in the future
+        # The benefit of having definied a category is that it ensures that the GWAS tracks become sorted
+        # below the protein-codon genes in the track selector.
         new_GWAS_track = {
             "type": "FeatureTrack",
-            "trackId": track_outer_id,
+            "trackId": gwas_track_id,
             "name": track["name"],
             "assemblyNames": [assembly_name],
             "category": ["GWAS"],
@@ -374,7 +400,7 @@ def populate_values_from_optional_tracks(config, data, species_abbreviation, ass
                 "bedGzLocation": {"uri": bed_gz_location},
                 "index": {"location": {"uri": index_location}},
             },
-            "displays": [{"displayId": f"{track_outer_id}_display", "type": "LinearManhattanDisplay"}],
+            "displays": [{"displayId": f"{gwas_track_id}_display", "type": "LinearManhattanDisplay"}],
         }
 
         if "tracks" not in data:
@@ -397,11 +423,9 @@ def populate_values_from_optional_tracks(config, data, species_abbreviation, ass
 
     if has_at_least_one_default_session_flag or has_protein_coding_genes_track_in_dict:
         for track in config["tracks"]:
-            if "defaultSession" in track and track["defaultSession"]:
-                # Ensure protein-coding genes are not added to the default session again if the user has happened to set it with defaultSession: true in the config.yml
-                if track["name"].lower() in ["protein coding genes", "protein-coding genes"]:
-                    continue
-                data = add_defaultSession_true_tracks(track, data, species_abbreviation, assembly_counter)
+            gwas_track_id = None
+            # First, check if there are any GWAS tracks that need to be handled. They are currently not
+            # configured by the makefile, but instead are added to config.json by the if statement below.
             if "GWAS" in track and track["GWAS"]:
                 if not plugin_added:
                     plugin_call = {
@@ -412,7 +436,18 @@ def populate_values_from_optional_tracks(config, data, species_abbreviation, ass
                         data["plugins"] = []
                     data["plugins"].append(plugin_call)
                     plugin_added = True
-                data = add_gwas_true_tracks(track, data, species_abbreviation, assembly_name)
+                gwas_track_id = (
+                    f"{species_abbreviation}_gwas_{track['name'].replace(' ', '_').replace('\'', '').replace(',', '')}"
+                )
+                data = add_gwas_true_tracks(track, data, species_abbreviation, assembly_name, gwas_track_id)
+            # Secondly, check if there are any tracks that are set to defaultSession: true. If so, add them to the defaultSession JSON object.
+            if "defaultSession" in track and track["defaultSession"]:
+                # Ensure protein-coding genes are not added to the default session again if the user has happened to set it with defaultSession: true in the config.yml
+                if track["name"].lower() in ["protein coding genes", "protein-coding genes"]:
+                    continue
+                data = add_defaultSession_true_tracks(
+                    track, data, species_abbreviation, assembly_counter, gwas_track_id
+                )
     else:
         if not has_protein_coding_genes_track_in_dict:
             raise ValueError(
