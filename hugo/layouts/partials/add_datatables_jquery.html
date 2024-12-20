@@ -1,3 +1,11 @@
+<!-- dependancies -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"> </script>
 <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css" integrity="sha256-4hHaMf5CR1wPHcp6GUIDIR7CE2se3xdqoAWigV63YEw=" crossorigin="anonymous">
 <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js" integrity="sha256-PSmeeEFHx/Xs2Jb23S6XwbhgCh7n1HGv8NnLtZhSiDA=" crossorigin="anonymous"></script>
+
+<!--
+    Find and init datatables located on the page.
+    Tables with data-table="true" attribute are made into datatables.
+-->
+{{ $initDatatablesJS := resources.Get "js/init_datatables.js" | fingerprint | minify }}
+<script src="{{ $initDatatablesJS.RelPermalink }}"></script>
