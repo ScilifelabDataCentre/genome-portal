@@ -1,0 +1,16 @@
+organism: "Linum tenue"
+assembly:
+  name: Linum_tenue_thrum_v1
+  displayName: "L. tenue genome assembly GCA_946122785.1"
+  accession: GCA_946122785.1
+  # The following url points to the original ENA upload of the assembly. It will require an alias file to be able to load the protein coding genes track
+  url: "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/946/122/785/GCA_946122785.1_Linum_tenue_thrum_v1/GCA_946122785.1_Linum_tenue_thrum_v1_genomic.fna.gz"
+  # Temp storage for alias file.
+  aliases: "sequence_report.tsv"
+tracks:
+  - name: "Protein-coding genes"
+    url: "https://figshare.scilifelab.se/ndownloader/files/45076090"
+    fileName: "ltenue_v1_genes.gff.zip"
+  - name: "Repeats"
+    url: "https://figshare.scilifelab.se/ndownloader/files/48879751"
+    fileName: "L_tenue_v1_rep.bed.gz"
