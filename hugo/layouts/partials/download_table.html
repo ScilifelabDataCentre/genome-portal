@@ -4,7 +4,7 @@
 {{ $aliasFileURL := .aliasFileURL }}
 
 <div class="table-responsive">
-    <table id="downloadTable{{ $tableType | title}}" class="table table-hover table-bordered">
+    <table id="downloadTable{{ $tableType | title}}" class="table table-hover table-bordered" data-table="true" data-ordering="true">
         <thead class="table-light">
             <tr style="white-space: nowrap;">
                 <th>Data track name</th>
@@ -115,14 +115,3 @@
       </caption>
     </div>
 </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        new DataTable('#downloadTable{{ $tableType | title}}', {
-            info: false,
-            ordering: true,
-            paging: false,
-            searching: false
-        });
-    });
-</script>

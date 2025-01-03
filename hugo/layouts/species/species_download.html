@@ -8,9 +8,11 @@
 {{ define "script_includes" }}
 
 {{ partial "add_datatables_jquery.html" . }}
+<!-- Toggle between long and short form of download load table -->
+{{ $tableToggleJS := resources.Get "js/toggle_tables.js" | fingerprint | minify }}
+<script src="{{ $tableToggleJS.RelPermalink }}"></script>
 
 {{ end }}
-
 
 
 {{ define "main" }}
@@ -75,33 +77,6 @@
 
 {{ partial "last_updated.html" . }}
 
-<script>
-    document.getElementById('flexSwitchCheckChecked').addEventListener('change', function() {
-        const longTable = document.getElementById('table-container-long');
-        const shortTable = document.getElementById('table-container-short');
 
-        if (this.checked) {
-            longTable.style.display = 'none';
-            shortTable.style.display = 'block';
-        } else {
-            longTable.style.display = 'block';
-            shortTable.style.display = 'none';
-        }
-
-        // Initialize DataTables if not already initialized
-        if (!document.querySelector('#downloadTableLong').classList.contains('dataTable')) {
-            new DataTable('#downloadTableLong');
-        }
-        if (!document.querySelector('#downloadTableShort').classList.contains('dataTable')) {
-            new DataTable('#downloadTableShort');
-        }
-    });
-
-    // Initial state setup
-    document.addEventListener('DOMContentLoaded', function() {
-        const checkbox = document.getElementById('flexSwitchCheckChecked');
-        checkbox.dispatchEvent(new Event('change'));
-    });
-</script>
 
 {{ end }}
