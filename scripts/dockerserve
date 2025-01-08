@@ -3,49 +3,95 @@
 # Serve hugo site in a Docker container
 #
 # Customize the run by setting the corresponding SWG-prefixed
-# environment variables. For example, to serve on host port 8000 with
-# the image tagged `latest`:
+# environment variables, or by using command line options. For
+# example, to serve on host port 8000 with the image tagged `latest`,
+# the following are equivalent:
 #
-# SWG_PORT=8000 SWG_TAG=latest ./scripts/dockerserve.sh
+# SWG_PORT=8000 SWG_TAG=latest ./scripts/dockerserve
 #
-# With the --dev option, run a hugo development server.
+# ./scripts/dockerserve -t latest -p 8000
+#
+# With the -d option, run a hugo development server with a filesystem
+# mount. The -h options prints the list of available options.
+main() {
 
-: "${SWG_IMAGE:=ghcr.io/scilifelabdatacentre/swg-hugo-site}"
-: "${SWG_TAG:=dev}"
-: "${SWG_NAME:=genome-portal}"
-: "${SWG_DATA_DIR:=data}"
-: "${SWG_PORT:=8080}"
-: "${SWG_HUGO_IMAGE:=hugomods/hugo}"
-: "${SWG_HUGO_TAG:=std-base-0.138.0}"
+    declare -A options=(
+	[image]="${SWG_IMAGE:-ghcr.io/scilifelabdatacentre/swg-hugo-site}"
+	[tag]="${SWG_TAG:-local}"
+	[port]="${SWG_PORT:-8080}"
+	[dev]=false
+    )
 
-if [[ -n "${cid:=$(docker ps -qaf name=${SWG_NAME})}" ]]; then
-    cat <<EOF
-Name '${SWG_NAME}' already taken by container ${cid}.
-To remove:
+    declare container_name=genome-portal \
+	    datadir="${SWG_DATA_DIR:-data}" \
+	    hugo_image="${SWG_HUGO_IMAGE:=hugomods/hugo}" \
+	    hugo_tag="${SWG_HUGO_TAG:=std-base-0.138.0}"
+
+    while getopts i:t:p:dh opt; do
+	case "${opt}" in
+	    i)
+		options[image]="${OPTARG}";;
+	    t)
+		options[tag]="${OPTARG}";;
+	    p)
+		options[port]="${OPTARG}";;
+	    d)
+		options[dev]=true;;
+	    h)
+		usage
+		exit 0
+		;;
+	    *)
+		echo "Invalid option: ${opt}"
+		usage
+		exit 1
+		;;
+	esac
+    done
+
+    if [[ -n "${cid:=$(docker ps -qaf name=${container_name})}" ]]; then
+    cat <<-EOF
+Name '${container_name}' already taken by container ${cid}.
+To stop and remove:
     docker rm -f ${cid}
 EOF
-    exit 1
-fi
+    return 1
+    fi
 
-if [[ "$1" == "--dev" ]]; then
-    SWG_NAME+="-dev"
-    docker run --rm -d  \
-	   -p "${SWG_PORT}":1313 \
-	   -p 1313:1313 \
-	   -v "$(pwd)/hugo":"/src" \
-	   --name "${SWG_NAME}" \
-	   "${SWG_HUGO_IMAGE}:${SWG_HUGO_TAG}" hugo server --bind 0.0.0.0
-else
-    docker run -d  \
-	   -p "${SWG_PORT}":8080 \
-	   -v "$(pwd)/${SWG_DATA_DIR}":"/usr/share/nginx/html/data" \
-	   --name "${SWG_NAME}" \
-	   "${SWG_IMAGE}:${SWG_TAG}"
-fi >/dev/null 2>/tmp/dockerserve.log && \
-    cat <<EOF || cat /tmp/dockerserve.log
-- Web server is running in container "${SWG_NAME}".
-- Site can be visited at http://localhost:${SWG_PORT}
+    if run >/dev/null 2>/tmp/dockerserve.log; then
+	cat <<-EOF
+    - Web server is running in container "${container_name}".
+    - Site can be visited at http://localhost:${options[port]}
 
-To shut down:
-    docker rm -f "${SWG_NAME}"
+    To shut down:
+	docker rm -f "${container_name}"
 EOF
+    else
+	cat /tmp/dockerserve.log
+    fi
+}
+
+run() {
+    if [[ "${options[dev]}" = true ]]; then
+	docker run --rm -d  \
+	       -p "${options[port]}":1313 \
+	       -p 1313:1313 \
+	       -v "$(pwd)/hugo":"/src" \
+	       --name "${container_name}" \
+	       "${hugo_image}:${hugo_tag}" hugo server --bind 0.0.0.0
+    else
+	docker run -d  \
+	       -p "${options[port]}":8080 \
+	       -v "$(pwd)/${datadir}":"/usr/share/nginx/html/data" \
+	       --name "${container_name}" \
+	       "${options[image]}:${options[tag]}"
+    fi
+}
+
+usage() {
+    cat <<EOF
+Usage: dockerserve [-t TAG] [-i IMAGE] [-p PORT] [-d]
+EOF
+}
+
+main "$@"
