@@ -1,18 +1,8 @@
 #!/bin/bash
-#
+
 # Serve hugo site in a Docker container
 #
-# Customize the run by setting the corresponding SWG-prefixed
-# environment variables, or by using command line options. For
-# example, to serve on host port 8000 with the image tagged `latest`,
-# the following are equivalent:
-#
-# SWG_PORT=8000 SWG_TAG=latest ./scripts/dockerserve
-#
-# ./scripts/dockerserve -t latest -p 8000
-#
-# With the -d option, run a hugo development server with a filesystem
-# mount. The -h options prints the list of available options.
+# See usage function below
 main() {
 
   local image="${SWG_IMAGE:-ghcr.io/scilifelabdatacentre/swg-hugo-site}" \
@@ -86,7 +76,24 @@ run() {
 
 usage() {
   cat <<EOF
-Usage: dockerserve [-t TAG] [-i IMAGE] [-p PORT] [-d]
+dockerserve [-t TAG] [-i IMAGE] [-p PORT] [-d]
+
+Serve Genome Portal in a Docker container
+
+Customize the run using the options below, or the corresponding
+SWG-prefixed environment variables. For example, to serve on host port
+8000 with the image tagged 'latest', the following are equivalent:
+
+  SWG_PORT=8000 SWG_TAG=latest ./scripts/dockerserve
+
+  ./scripts/dockerserve -t latest -p 8000
+
+Options:
+  -d            Use Hugo development server
+  -i IMAGE      Docker image to use.
+                Default: ghcr.io/scilifelabdatacentre/swg-hugo-site
+  -p PORT       Host port. Default: 8080
+  -t TAG        Docker image tag. Default: local
 EOF
 }
 
