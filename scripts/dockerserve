@@ -15,81 +15,77 @@
 # mount. The -h options prints the list of available options.
 main() {
 
-    declare -A options=(
-	[image]="${SWG_IMAGE:-ghcr.io/scilifelabdatacentre/swg-hugo-site}"
-	[tag]="${SWG_TAG:-local}"
-	[port]="${SWG_PORT:-8080}"
-	[dev]=false
-    )
+  local image="${SWG_IMAGE:-ghcr.io/scilifelabdatacentre/swg-hugo-site}" \
+        tag="${SWG_TAG:-local}" \
+        port="${SWG_PORT:-8080}" \
+        datadir="${SWG_DATA_DIR:-data}" \
+        hugo_image="${SWG_HUGO_IMAGE:=hugomods/hugo}" \
+        hugo_tag="${SWG_HUGO_TAG:=std-base-0.138.0}" \
+        dev=false \
+        container_name=genome-portal
 
-    declare container_name=genome-portal \
-	    datadir="${SWG_DATA_DIR:-data}" \
-	    hugo_image="${SWG_HUGO_IMAGE:=hugomods/hugo}" \
-	    hugo_tag="${SWG_HUGO_TAG:=std-base-0.138.0}"
+  while getopts i:t:p:dh opt; do
+    case "${opt}" in
+      i)
+        image="${OPTARG}";;
+      t)
+        tag="${OPTARG}";;
+      p)
+        port="${OPTARG}";;
+      d)
+        dev=true;;
+      h)
+        usage
+        exit 0
+        ;;
+      \?)
+        usage
+        exit 1
+        ;;
+    esac
+  done
 
-    while getopts i:t:p:dh opt; do
-	case "${opt}" in
-	    i)
-		options[image]="${OPTARG}";;
-	    t)
-		options[tag]="${OPTARG}";;
-	    p)
-		options[port]="${OPTARG}";;
-	    d)
-		options[dev]=true;;
-	    h)
-		usage
-		exit 0
-		;;
-	    *)
-		echo "Invalid option: ${opt}"
-		usage
-		exit 1
-		;;
-	esac
-    done
-
-    if [[ -n "${cid:=$(docker ps -qaf name=${container_name})}" ]]; then
+  if [[ -n "${cid:=$(docker ps -qaf name=${container_name})}" ]]; then
     cat <<-EOF
 Name '${container_name}' already taken by container ${cid}.
 To stop and remove:
     docker rm -f ${cid}
 EOF
     return 1
-    fi
+  fi
 
-    if run >/dev/null 2>/tmp/dockerserve.log; then
-	cat <<-EOF
+  if run >/dev/null 2>/tmp/dockerserve.log; then
+    cat <<-EOF
     - Web server is running in container "${container_name}".
-    - Site can be visited at http://localhost:${options[port]}
+    - Site can be visited at http://localhost:${port}
 
     To shut down:
-	docker rm -f "${container_name}"
+        docker rm -f "${container_name}"
 EOF
-    else
-	cat /tmp/dockerserve.log
-    fi
+  else
+    cat /tmp/dockerserve.log
+  fi
 }
 
 run() {
-    if [[ "${options[dev]}" = true ]]; then
-	docker run --rm -d  \
-	       -p "${options[port]}":1313 \
-	       -p 1313:1313 \
-	       -v "$(pwd)/hugo":"/src" \
-	       --name "${container_name}" \
-	       "${hugo_image}:${hugo_tag}" hugo server --bind 0.0.0.0
-    else
-	docker run -d  \
-	       -p "${options[port]}":8080 \
-	       -v "$(pwd)/${datadir}":"/usr/share/nginx/html/data" \
-	       --name "${container_name}" \
-	       "${options[image]}:${options[tag]}"
-    fi
+  if [[ "${dev}" = true ]]; then
+    docker run --rm -d  \
+           -p "${port}":1313 \
+           -p 1313:1313 \
+           -v "$(pwd)/hugo":"/src" \
+           --name "${container_name}" \
+           "${hugo_image}:${hugo_tag}" hugo server --bind 0.0.0.0
+  else
+    docker run -d  \
+           -p "${port}":8080 \
+           -v "$(pwd)/${datadir}":"/usr/share/nginx/html/data" \
+           --name "${container_name}" \
+           "${image}:${tag}"
+  fi
 }
 
 usage() {
-    cat <<EOF
+  cat <<EOF
 Usage: dockerserve [-t TAG] [-i IMAGE] [-p PORT] [-d]
 EOF
 }
