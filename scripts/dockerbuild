@@ -12,33 +12,33 @@ _DEFAULT_TAG=local
 declare -a _BUILD_ARGS
 
 docker_build () {
-    docker build "${_BUILD_ARGS[@]}" \
-	   -t "${SWG_IMAGE:-$_DEFAULT_IMAGE}:${SWG_TAG:-$_DEFAULT_TAG}" \
-	   -f "${SWG_DOCKERFILE:-$_DEFAULT_DOCKERFILE}" .
+  docker build "${_BUILD_ARGS[@]}" \
+         -t "${SWG_IMAGE:-$_DEFAULT_IMAGE}:${SWG_TAG:-$_DEFAULT_TAG}" \
+         -f "${SWG_DOCKERFILE:-$_DEFAULT_DOCKERFILE}" .
 }
 
 if [[ -z "$1" || "$1" == "data" ]];
 then
-    _DEFAULT_IMAGE=ghcr.io/scilifelabdatacentre/swg-data-builder
-    _DEFAULT_DOCKERFILE=docker/data.dockerfile
-    if [[ -z ${SWG_DEFAULT_USER} ]];then
-	_BUILD_ARGS+=("--build-arg" "SWG_UID=$(id -u)")
-	_BUILD_ARGS+=("--build-arg" "SWG_GID=$(id -g)")
-    fi
-    docker_build && exit 0
+  _DEFAULT_IMAGE=ghcr.io/scilifelabdatacentre/swg-data-builder
+  _DEFAULT_DOCKERFILE=docker/data.dockerfile
+  if [[ -z ${SWG_DEFAULT_USER} ]];then
+    _BUILD_ARGS+=("--build-arg" "SWG_UID=$(id -u)")
+    _BUILD_ARGS+=("--build-arg" "SWG_GID=$(id -g)")
+  fi
+  docker_build && exit 0
 fi
 
 
 
 if [[ "$1" = hugo ]]; then
-    _DEFAULT_IMAGE=ghcr.io/scilifelabdatacentre/swg-hugo-site
-    _DEFAULT_DOCKERFILE=docker/hugo.dockerfile
-    # CI context
-    _BUILD_ARGS+=(
-	"--build-arg" "HUGO_GIT_REF_NAME=${HUGO_GIT_REF_NAME:-$(git branch --show-current)}"
-	"--build-arg" "HUGO_GIT_SHA=${HUGO_GIT_SHA:-$(git rev-parse HEAD)}"
-    )
-    docker_build  && exit 0
+  _DEFAULT_IMAGE=ghcr.io/scilifelabdatacentre/swg-hugo-site
+  _DEFAULT_DOCKERFILE=docker/hugo.dockerfile
+  # CI context
+  _BUILD_ARGS+=(
+    "--build-arg" "HUGO_GIT_REF_NAME=${HUGO_GIT_REF_NAME:-$(git branch --show-current)}"
+    "--build-arg" "HUGO_GIT_SHA=${HUGO_GIT_SHA:-$(git rev-parse HEAD)}"
+  )
+  docker_build  && exit 0
 fi
 
 echo "Usage: ./scripts/dockerbuild.sh [data | hugo]" && exit 1

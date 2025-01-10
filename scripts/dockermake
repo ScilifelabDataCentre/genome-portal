@@ -40,85 +40,84 @@ declare -a docker_flags
 # Arguments:
 #   All passsed arguments are forwarded to `make`
 docker_make() {
-    local -r docker_workdir='/swedgene'
-    # Make sure writable directories exist on the host
-    mkdir -p "$SWG_DATA_DIR" "$SWG_INSTALL_DIR"
+  local -r docker_workdir='/swedgene'
+  # Make sure writable directories exist on the host
+  mkdir -p "$SWG_DATA_DIR" "$SWG_INSTALL_DIR"
 
-    # Build the docker argument list, specifying mount points and
-    # environment variables
-    for dir in SWG_DATA_DIR SWG_INSTALL_DIR SWG_CONFIG_DIR; do
-	# The ! in the parameter expansion introductes a level of
-	# indirection: the result is the value of the variable whose
-	# name is $dir
-	docker_flags+=(
-	    -v "$CWD/${!dir}:$docker_workdir/${!dir}"
-	    -e "$dir=${!dir}"
-	)
-    done
-    # Don't forget the Makefile and script directory
+  # Build the docker argument list, specifying mount points and
+  # environment variables
+  for dir in SWG_DATA_DIR SWG_INSTALL_DIR SWG_CONFIG_DIR; do
+    # The ! in the parameter expansion introductes a level of
+    # indirection: the result is the value of the variable whose
+    # name is $dir
     docker_flags+=(
-	-v "$CWD/Makefile:$docker_workdir/Makefile"
-	-v "$CWD/scripts:$docker_workdir/scripts"
+      -v "$CWD/${!dir}:$docker_workdir/${!dir}"
+      -e "$dir=${!dir}"
     )
-    docker run --rm "${docker_flags[@]}" "${SWG_IMAGE}:${SWG_TAG}" make "$@"
+  done
+  # Don't forget the Makefile and script directory
+  docker_flags+=(
+    -v "$CWD/Makefile:$docker_workdir/Makefile"
+    -v "$CWD/scripts:$docker_workdir/scripts"
+  )
+  docker run --rm "${docker_flags[@]}" "${SWG_IMAGE}:${SWG_TAG}" make "$@"
 }
 
 if [[ -n $SWG_UID || -n $SWG_GID ]];
 then
-    docker_flags+=("-u" "${SWG_UID:-$(id -u)}:${SWG_GID:-$(id -g)}")
+  docker_flags+=("-u" "${SWG_UID:-$(id -u)}:${SWG_GID:-$(id -g)}")
 fi
 
 if [[ "$1" == "--test" || "$1" == "-t" ]]; then
+  shift
+
+  if [[ "$1" == "--keep" || "$1" == "-k" ]]; then
+    _NO_TEARDOWN=1
     shift
+  fi
 
-    if [[ "$1" == "--keep" || "$1" == "-k" ]]; then
-	_NO_TEARDOWN=1
-	shift
-    fi
+  SWG_DATA_DIR=tests/data
+  SWG_INSTALL_DIR=tests/public
+  SWG_CONFIG_DIR=tests/config
+  SWG_FIXTURES_DIR=tests/fixtures
+  _TEST_NET=swg-test-net
+  _TEST_SERVER_NAME=fixtures
+  _WORKDIR=/swedgene
 
-    SWG_DATA_DIR=tests/data
-    SWG_INSTALL_DIR=tests/public
-    SWG_CONFIG_DIR=tests/config
-    SWG_FIXTURES_DIR=tests/fixtures
-    _TEST_NET=swg-test-net
-    _TEST_SERVER_NAME=fixtures
-    _WORKDIR=/swedgene
+  if [[ "$(docker network ls -q -f name=$_TEST_NET)" ]]; then
+    echo "Using existing network: $_TEST_NET"
+  else
+    echo "Creating test network $_TEST_NET"
+    docker network create $_TEST_NET
+  fi
 
-    if [[ "$(docker network ls -q -f name=$_TEST_NET)" ]]; then
-	echo "Using existing network: $_TEST_NET"
-    else
-	echo "Creating test network $_TEST_NET"
-	docker network create $_TEST_NET
-    fi
+  if [[ "${_CID:=$(docker ps -a -q -f name=$_TEST_SERVER_NAME)}" ]]; then
+    echo "Using existing test server container: ${_TEST_SERVER_NAME}"
+  else
+    echo "Starting test server..."
+    docker run -d -q --name=$_TEST_SERVER_NAME \
+           --network=$_TEST_NET \
+           -v "$CWD/$SWG_FIXTURES_DIR":/usr/share/nginx/html \
+           nginx:alpine
+  fi
 
-    if [[ "${_CID:=$(docker ps -a -q -f name=$_TEST_SERVER_NAME)}" ]]; then
-	echo "Using existing test server container: ${_TEST_SERVER_NAME}"
-    else
-	    echo "Starting test server..."
-	    docker run -d -q --name=$_TEST_SERVER_NAME \
-		   --network=$_TEST_NET \
-		   -v "$CWD/$SWG_FIXTURES_DIR":/usr/share/nginx/html \
-		   nginx:alpine
-    fi
+  # Run the test build
+  docker_flags+=(--network="$_TEST_NET")
+  docker_make "$@"
 
-    # Run the test build
-    docker_flags+=(--network="$_TEST_NET")
-    docker_make "$@"
-
-    if [[ $_NO_TEARDOWN == 1 ]]; then
-	echo "Keeping test resources running"
-	echo "To clean up manually:"
-	echo "    docker container rm -f $_TEST_SERVER_NAME"
-	echo "    docker network rm $_TEST_NET"
-	exit
-    fi
-    echo "Cleaning up..."
-    {
-	docker container rm -f $_TEST_SERVER_NAME
-	docker network rm -f $_TEST_NET
-    } > /dev/null
+  if [[ $_NO_TEARDOWN == 1 ]]; then
+    echo "Keeping test resources running"
+    echo "To clean up manually:"
+    echo "    docker container rm -f $_TEST_SERVER_NAME"
+    echo "    docker network rm $_TEST_NET"
+    exit
+  fi
+  echo "Cleaning up..."
+  {
+    docker container rm -f $_TEST_SERVER_NAME
+    docker network rm -f $_TEST_NET
+  } > /dev/null
 
 else
-    docker_make "$@"
+  docker_make "$@"
 fi
-
