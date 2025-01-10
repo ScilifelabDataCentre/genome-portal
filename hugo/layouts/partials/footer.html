@@ -77,7 +77,3 @@
 
     </div>
 </footer>
-
-<!-- Matomo tracking info -->
-{{ $matomoJS := resources.Get "js/matomo.js" | fingerprint | minify }}
-<script src="{{ $matomoJS.RelPermalink }}"></script>
