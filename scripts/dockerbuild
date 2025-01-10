@@ -35,8 +35,13 @@ main () {
   declare -a build_args
 
   kind=data
-  tag=local
-  use_host_uid=1
+  # Support SWG-prefixed environment variables for backward compatibility
+  tag="${SWG_TAG:-local}"
+  if [[ -z "${SWG_DEFAULT_USER}" ]]; then
+    use_host_uid=1
+  else
+    use_host_uid=0
+  fi
   dry_run=0
 
   while getopts k:t:udh opt; do
