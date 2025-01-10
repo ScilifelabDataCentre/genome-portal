@@ -4,14 +4,15 @@ help() {
   echo "\
 Build the Genome Portal Docker images
 
-Usage: dockerbuild [-k data|hugo ] [-t TAG] [-i IMAGE] [-u]
+Usage: dockerbuild [-h] [-k data|hugo ] [-t TAG] [-i IMAGE] [-u]
 
 Options:
+  -h            Display this help message and exit
   -k KIND       Kind of image to build, 'data' (the default) or 'hugo'.
   -t TAG        Docker tag
   -i IMAGE      Docker image name. Defaults: ghcr.io/scilifelabdatacentre/{swg-data-builder,swg-hugo-site}
   -u            Use default user and group IDs in the data builder image (see below)
-  -d            Dry run, prints the arguments passed to the Docker run command
+  -d            Dry run, print the Docker build command
 
 Data builder (docker/data.dockerfile):
 
@@ -44,14 +45,14 @@ main () {
   fi
   dry_run=0
 
-  while getopts k:t:udh opt; do
+  while getopts k:t:unh opt; do
     case "${opt}" in
-      h) help && exit 0 ;;
-      \?) help && exit 1 ;;
       k) kind="${OPTARG}" ;;
       t) tag="${OPTARG}" ;;
       u) use_host_uid=0 ;;
-      d) dry_run=1 ;;
+      n) dry_run=1 ;;
+      h) help && exit 0 ;;
+      \?) >&2 help && exit 1 ;;
     esac
   done
 
@@ -77,17 +78,15 @@ main () {
     exit 1
   fi
 
-  if ! ((dry_run)); then
-    docker_build
-  else
-    echo "Build arguments: ${build_args[*]}"
-    echo "Image:           ${image}:${tag}"
-    echo "Dockerfile:      ${dockerfile}"
-  fi
+  docker_build
 }
 
 docker_build () {
-  docker build "${build_args[@]}" \
+  cmd="docker build"
+  if ((dry_run)); then
+    cmd="echo ${cmd}"
+  fi
+  ${cmd} "${build_args[@]}" \
          -t "${image}:${tag}" \
          -f "${dockerfile}" .
 }

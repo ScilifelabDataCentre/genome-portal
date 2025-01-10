@@ -1,8 +1,28 @@
 #!/bin/bash
 
-# Serve hugo site in a Docker container
-#
-# See usage function below
+help() {
+  echo "\
+Serve Genome Portal in a Docker container
+
+Usage: dockerserve [-h] [-t TAG] [-p PORT] [-d] [-n]
+
+Options:
+  -h            Display this help message and exit
+  -t TAG        Docker image tag. Default: local
+  -p PORT       Host port. Default: 8080
+  -d            Use Hugo development server (formerly --dev)
+  -n            Dry run
+
+Legacy SWG-prefixed environment variables are still supported
+(but command line counterparts take precedence). For example, to serve on
+port 8000 with the 'latest' tag, the following are equivalent:
+
+  SWG_PORT=8000 SWG_TAG=latest ./scripts/dockerserve
+
+  ./scripts/dockerserve -t latest -p 8000
+"
+}
+
 main() {
 
   local image="${SWG_IMAGE:-ghcr.io/scilifelabdatacentre/swg-hugo-site}" \
@@ -11,46 +31,37 @@ main() {
         datadir="${SWG_DATA_DIR:-data}" \
         hugo_image="${SWG_HUGO_IMAGE:=hugomods/hugo}" \
         hugo_tag="${SWG_HUGO_TAG:=std-base-0.138.0}" \
-        dev=false \
-        container_name=genome-portal
+        dev=0 \
+        container_name=genome-portal \
+        dry_run=0
 
-  while getopts i:t:p:dh opt; do
+  while getopts t:p:dhn opt; do
     case "${opt}" in
-      i)
-        image="${OPTARG}";;
-      t)
-        tag="${OPTARG}";;
-      p)
-        port="${OPTARG}";;
-      d)
-        dev=true;;
-      h)
-        usage
-        exit 0
-        ;;
-      \?)
-        usage
-        exit 1
-        ;;
+      t) tag="${OPTARG}" ;;
+      p) port="${OPTARG}" ;;
+      d) dev=1 ;;
+      h) help; exit 0 ;;
+      n) dry_run=1 ;;
+      \?) >&2 help; exit 1 ;;
     esac
   done
 
   if [[ -n "${cid:=$(docker ps -qaf name=${container_name})}" ]]; then
     cat <<-EOF
-Name '${container_name}' already taken by container ${cid}.
-To stop and remove:
-    docker rm -f ${cid}
+	Name '${container_name}' already taken by container ${cid}.
+	To stop and remove:
+	  docker rm -f ${cid}
 EOF
     return 1
   fi
 
-  if run >/dev/null 2>/tmp/dockerserve.log; then
+  if run 2>/tmp/dockerserve.log && ! ((dry_run)); then
     cat <<-EOF
-    - Web server is running in container "${container_name}".
-    - Site can be visited at http://localhost:${port}
+	- Web server is running in container "${container_name}".
+	- Site can be visited at http://localhost:${port}
 
-    To shut down:
-        docker rm -f "${container_name}"
+	To shut down:
+	  docker rm -f "${container_name}"
 EOF
   else
     cat /tmp/dockerserve.log
@@ -58,43 +69,25 @@ EOF
 }
 
 run() {
-  if [[ "${dev}" = true ]]; then
-    docker run --rm -d  \
+  run_cmd="docker run"
+  if ((dry_run)); then
+    run_cmd="echo ${run_cmd}"
+  fi
+
+  if ((dev)); then
+    ${run_cmd} --rm -d  \
            -p "${port}":1313 \
            -p 1313:1313 \
            -v "$(pwd)/hugo":"/src" \
            --name "${container_name}" \
            "${hugo_image}:${hugo_tag}" hugo server --bind 0.0.0.0
   else
-    docker run -d  \
+    ${run_cmd} -d  \
            -p "${port}":8080 \
            -v "$(pwd)/${datadir}":"/usr/share/nginx/html/data" \
            --name "${container_name}" \
            "${image}:${tag}"
   fi
-}
-
-usage() {
-  cat <<EOF
-dockerserve [-t TAG] [-i IMAGE] [-p PORT] [-d]
-
-Serve Genome Portal in a Docker container
-
-Customize the run using the options below, or the corresponding
-SWG-prefixed environment variables. For example, to serve on host port
-8000 with the image tagged 'latest', the following are equivalent:
-
-  SWG_PORT=8000 SWG_TAG=latest ./scripts/dockerserve
-
-  ./scripts/dockerserve -t latest -p 8000
-
-Options:
-  -d            Use Hugo development server
-  -i IMAGE      Docker image to use.
-                Default: ghcr.io/scilifelabdatacentre/swg-hugo-site
-  -p PORT       Host port. Default: 8080
-  -t TAG        Docker image tag. Default: local
-EOF
 }
 
 main "$@"
