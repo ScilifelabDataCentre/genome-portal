@@ -1,3 +1,14 @@
+{{ define "script_includes" }}
+
+<!-- Check if the config file exists - if not display error message -->
+{{ $configCheckJS := resources.Get "js/check_for_config.js" | fingerprint | minify }}
+<script src="{{ $configCheckJS.RelPermalink }}"></script>
+
+<script defer src="/browser/static/js/main.js"></script>
+
+{{ end }}
+
+
 {{ define "main" }}
 
 <div class="container-fluid mt-3">
@@ -29,32 +40,5 @@
     </script>
 {{ end }}
 
-<!-- Check if the config file exists before loading JBrowse2 -->
-<script>
-    document.addEventListener('DOMContentLoaded', async function() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const configFile = urlParams.get('config');
-
-
-        if (!configFile) {
-            document.getElementById('no-config').style.display = 'block';
-            return;
-        }
-
-        try {
-            const response = await fetch(configFile);
-            if (response.ok) {
-                const script = document.createElement('script');
-                script.defer = true;
-                script.src = '/browser/static/js/main.js';
-                document.head.appendChild(script);
-            } else {
-                document.getElementById('no-config').style.display = 'block';
-            }
-        } catch (error) {
-            document.getElementById('no-config').style.display = 'block';
-        }
-    });
-</script>
 
 {{ end }}

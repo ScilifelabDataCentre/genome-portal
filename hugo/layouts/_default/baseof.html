@@ -51,8 +51,11 @@
 
         <!-- Any page specific scripts included here. -->
         {{ block "script_includes" . }} {{ end }}
-    </head>
 
+        <!-- Matomo tracking - Matomo recommends having it immediately before the closing </head> tag -->
+        {{ $matomoJS := resources.Get "js/matomo.js" | fingerprint | minify }}
+        <script src="{{ $matomoJS.RelPermalink }}"></script>
+    </head>
 
 
     <body class="d-flex flex-column min-vh-100">

@@ -713,5 +713,8 @@
           }
         ]
       }
-    ]
+    ],
+    "configuration": {
+      "disableAnalytics": true
+    }
 }

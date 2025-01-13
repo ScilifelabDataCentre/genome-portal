@@ -31,7 +31,7 @@
         <div class="table-responsive">
             {{ with resources.Get "glossary.csv" }}
                 {{ with . | transform.Unmarshal (dict "delimiter" "|" "lazyQuotes" true) }}
-                <table id="glossaryTable" class="table table-hover table-bordered">
+                <table id="glossaryTable" class="table table-hover table-bordered" data-table="true" data-searching="true">
                     <thead class="table-light">
                         <tr>
                             {{ range index . 0 }}
@@ -116,16 +116,5 @@
 
 
 </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        new DataTable('#glossaryTable', {
-            info: false,
-            ordering: false,
-            paging: false,
-            searching: true
-        });
-    });
-</script>
 
 {{ end }}
