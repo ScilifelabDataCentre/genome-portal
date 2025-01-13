@@ -8,18 +8,8 @@
 
 {{ define "script_includes" }}
 
-<!--
-    Google recapatcha V2 implementation:
-    These scripts work with the contact_form.html and contact_form.js files to prevent form submission if not verified.
-    Docs: https://developers.google.com/recaptcha/docs/display
-
-    Note that the "onloadCallback" function needs to be loaded before reCAPTCHA API to avoid race conditions.
-    The reCAPTCHA API calls the "onloadCallback" function so it needs to be ready when the API calls it.
--->
-{{ $recaptchaJS := resources.Get "js/recaptcha.js" | fingerprint | minify }}
-<script src="{{ $recaptchaJS.RelPermalink }}"></script>
-
-<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
+<!-- Google recapatcha V2 -->
+ <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 <!-- For submission of contact form -->
 {{ $contactFormJS := resources.Get "js/contact_form.js" | fingerprint | minify }}
