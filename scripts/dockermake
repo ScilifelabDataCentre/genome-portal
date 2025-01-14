@@ -56,46 +56,49 @@ main() {
 
   if ((test)); then
 
-    data_dir=tests/data
-    install_dir=tests/public
-    config_dir=tests/config
-    SWG_FIXTURES_DIR=tests/fixtures
-    _TEST_NET=swg-test-net
-    _TEST_SERVER_NAME=fixtures
-    _WORKDIR=/swedgene
+    TEST_DIR="${SWG_TEST_DIR:-tests}"
+    FIXTURES_DIR="${TEST_DIR}/fixtures"
+    TEST_NET=swg-test-net
+    TEST_SERVER_NAME=fixtures
+    readonly TEST_DIR FIXTURES_DIR TEST_NET TEST_SERVER_NAME
 
-    if [[ "$(docker network ls -q -f name=$_TEST_NET)" ]]; then
-      echo "Using existing network: $_TEST_NET"
+    data_dir="${TEST_DIR}/data"
+    install_dir="${TEST_DIR}/public"
+    config_dir="${TEST_DIR}/config"
+
+
+    if [[ "$(docker network ls -q -f name=${TEST_NET})" ]]; then
+      echo "Using existing network: ${TEST_NET}"
     else
-      echo "Creating test network $_TEST_NET"
-      docker network create $_TEST_NET
+      echo "Creating test network ${TEST_NET}"
+      docker network create "${TEST_NET}"
     fi
 
-    if [[ "${_CID:=$(docker ps -a -q -f name=$_TEST_SERVER_NAME)}" ]]; then
-      echo "Using existing test server container: ${_TEST_SERVER_NAME}"
+    if [[ "$(docker ps -a -q -f name=${TEST_SERVER_NAME})" ]]; then
+      echo "Using existing test server container: ${TEST_SERVER_NAME}"
     else
       echo "Starting test server..."
-      docker run -d -q --name=$_TEST_SERVER_NAME \
-             --network=$_TEST_NET \
-             -v "$CWD/$SWG_FIXTURES_DIR":/usr/share/nginx/html \
+      docker run -d -q --name="${TEST_SERVER_NAME}" \
+             --network="${TEST_NET}" \
+             -v "${CWD}/${FIXTURES_DIR}":/usr/share/nginx/html \
              nginx:alpine
     fi
 
     # Run the test build
-    docker_flags+=(--network="$_TEST_NET")
+    docker_flags+=(--network="${TEST_NET}")
     docker_make "$@"
 
     if ((no_teardown)); then
       echo "Keeping test resources running"
       echo "To clean up manually:"
-      echo "    docker container rm -f $_TEST_SERVER_NAME"
-      echo "    docker network rm $_TEST_NET"
+      echo "    docker container rm -f ${TEST_SERVER_NAME}"
+      echo "    docker network rm ${TEST_NET}"
       exit
     fi
     echo "Cleaning up..."
     {
-      docker container rm -f $_TEST_SERVER_NAME
-      docker network rm -f $_TEST_NET
+      docker container rm -f "${TEST_SERVER_NAME}"
+      docker network rm -f "${TEST_NET}"
     } > /dev/null
 
   else
