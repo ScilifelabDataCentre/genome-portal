@@ -1,15 +1,26 @@
 #!/bin/bash
-#
-# Run `make` in a Docker container
-#
-# The environment variables SWG_UID and SWG_GID can be used to run the
-# container as a specific user and group. By default, the effective
-# user and group id of the host are used.
-#
-# The environment variables SWG_IMAGE and SWG_TAG can be
-# used to override the Docker image to use. For example:
-#
-# SWG_IMAGE=industrious-squirrel SWG_TAG=slim-buster scripts/dockerbuild.sh build
+
+help() {
+  echo "\
+Run 'make' in a Docker container
+
+Usage: dockermake [options] [arg...]
+
+Non-option command line arguments are passed to 'make'.
+
+The environment variables SWG_UID and SWG_GID can be used to run the
+container as a specific user and group. By default, the effective user
+and group id of the host are used.
+
+The environment variables SWG_IMAGE and SWG_TAG can be used to
+override the Docker image to use. For example:
+
+export SWG_IMAGE=industrious-squirrel SWG_TAG=slim-buster
+scripts/dockerbuild.sh build
+"
+
+}
+
 main() {
   CWD="$(pwd)"
   readonly CWD
