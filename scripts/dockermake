@@ -2,21 +2,28 @@
 
 help() {
   echo "\
-Run 'make' in a Docker container
+Run 'make' in a Docker container, using our Makefile recipes.
 
-Usage: dockermake [options] [arg...]
+The Docker image used is
+'ghcr.io/scilifelabdatacentre/swg-data-builder:local', and an alternative
+tag can be chosen with the -t option.
 
-Non-option command line arguments are passed to 'make'.
+Usage: dockermake [-T] [-k] [-t TAG] [-u USER] [arg...]
 
-The environment variables SWG_UID and SWG_GID can be used to run the
-container as a specific user and group. By default, the effective user
-and group id of the host are used.
+Positional arguments are passed to 'make'
 
-The environment variables SWG_IMAGE and SWG_TAG can be used to
-override the Docker image to use. For example:
+Options:
+  -h            Display this help message and exit
+  -T            Use test configuration, found in SWG_TEST_DIR (default: tests)
+                Start a web server rooted at SWG_TEST_DIR/fixtures.
+  -k            Keep test resources running, no teardown is performed.
+                Useful for consecutive test runs.
+  -t  TAG       Docker tag to use for the data builder image
+  -u  USER      Docker user, specified as '<USER>:<GROUP>'.
+                Default: host user and group IDs, so that files
+                created in mounted directories have convenient ownership.
 
-export SWG_IMAGE=industrious-squirrel SWG_TAG=slim-buster
-scripts/dockerbuild.sh build
+
 "
 
 }
