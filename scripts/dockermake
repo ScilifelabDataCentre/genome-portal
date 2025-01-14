@@ -31,17 +31,19 @@ main() {
 
   # Directories on the host that are mounted in the container, and used
   # by `make`. Paths must be *relative* to the repository root.
-  declare data_dir install_dir config_dir
+  declare data_dir install_dir config_dir docker_user
   data_dir="${SWG_DATA_DIR:=data}"
   install_dir="${SWG_INSTALL_DIR:=hugo/static/data}"
   config_dir="${SWG_CONFIG_DIR:=config}"
+  docker_user="$(id -u):$(id -g)"
 
-  declare test no_teardown
-  while getopts hTkt: opt; do
+  declare test no_teardown docker_user
+  while getopts hTkt:u: opt; do
     case "${opt}" in
       T) test=1 ;;
       k) no_teardown=1 ;;
       t) tag="${OPTARG}" ;;
+      u) docker_user="${OPTARG}" ;;
       h) help && exit 0 ;;
       \?) >&2 help && exit 1 ;;
     esac
@@ -49,10 +51,8 @@ main() {
   shift $((OPTIND - 1))
 
   declare -a docker_flags
-  if [[ -n ${SWG_UID} || -n ${SWG_GID} ]];
-  then
-    docker_flags+=("-u" "${SWG_UID:-$(id -u)}:${SWG_GID:-$(id -g)}")
-  fi
+  docker_flags=("-u" "${docker_user}")
+
 
   if ((test)); then
 
