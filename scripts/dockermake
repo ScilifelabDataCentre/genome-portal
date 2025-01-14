@@ -22,11 +22,12 @@ scripts/dockerbuild.sh build
 }
 
 main() {
-  CWD="$(pwd)"
+  CWD="$(git rev-parse --show-toplevel)"
   readonly CWD
 
-  : ${SWG_TAG="main"}
-  : ${SWG_IMAGE:="ghcr.io/scilifelabdatacentre/swg-data-builder"}
+  declare tag image
+  tag="${SWG_TAG:-local}"
+  image="${SWG_IMAGE:-ghcr.io/scilifelabdatacentre/swg-data-builder}"
 
   # Directories on the host that are mounted in the container, and used
   # by `make`. Paths must be *relative* to the repository root.
@@ -131,7 +132,7 @@ docker_make() {
     -v "$CWD/Makefile:$docker_workdir/Makefile"
     -v "$CWD/scripts:$docker_workdir/scripts"
   )
-  docker run --rm "${docker_flags[@]}" "${SWG_IMAGE}:${SWG_TAG}" make "$@"
+  docker run --rm "${docker_flags[@]}" "${image}:${tag}" make "$@"
 }
 
 main "$@"
