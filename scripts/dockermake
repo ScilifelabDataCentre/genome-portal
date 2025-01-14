@@ -36,20 +36,25 @@ main() {
   install_dir="${SWG_INSTALL_DIR:=hugo/static/data}"
   config_dir="${SWG_CONFIG_DIR:=config}"
 
-  declare -a docker_flags
+  declare test no_teardown
+  while getopts hTkt: opt; do
+    case "${opt}" in
+      T) test=1 ;;
+      k) no_teardown=1 ;;
+      t) tag="${OPTARG}" ;;
+      h) help && exit 0 ;;
+      \?) >&2 help && exit 1 ;;
+    esac
+  done
+  shift $((OPTIND - 1))
 
-  if [[ -n $SWG_UID || -n $SWG_GID ]];
+  declare -a docker_flags
+  if [[ -n ${SWG_UID} || -n ${SWG_GID} ]];
   then
     docker_flags+=("-u" "${SWG_UID:-$(id -u)}:${SWG_GID:-$(id -g)}")
   fi
 
-  if [[ "$1" == "--test" || "$1" == "-t" ]]; then
-    shift
-
-    if [[ "$1" == "--keep" || "$1" == "-k" ]]; then
-      _NO_TEARDOWN=1
-      shift
-    fi
+  if ((test)); then
 
     data_dir=tests/data
     install_dir=tests/public
@@ -80,7 +85,7 @@ main() {
     docker_flags+=(--network="$_TEST_NET")
     docker_make "$@"
 
-    if [[ $_NO_TEARDOWN == 1 ]]; then
+    if ((no_teardown)); then
       echo "Keeping test resources running"
       echo "To clean up manually:"
       echo "    docker container rm -f $_TEST_SERVER_NAME"
