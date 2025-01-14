@@ -31,9 +31,10 @@ main() {
 
   # Directories on the host that are mounted in the container, and used
   # by `make`. Paths must be *relative* to the repository root.
-  : ${SWG_DATA_DIR:="data"}
-  : ${SWG_INSTALL_DIR:="hugo/static/data"}
-  : ${SWG_CONFIG_DIR:="config"}
+  declare data_dir install_dir config_dir
+  data_dir="${SWG_DATA_DIR:=data}"
+  install_dir="${SWG_INSTALL_DIR:=hugo/static/data}"
+  config_dir="${SWG_CONFIG_DIR:=config}"
 
   declare -a docker_flags
 
@@ -50,9 +51,9 @@ main() {
       shift
     fi
 
-    SWG_DATA_DIR=tests/data
-    SWG_INSTALL_DIR=tests/public
-    SWG_CONFIG_DIR=tests/config
+    data_dir=tests/data
+    install_dir=tests/public
+    config_dir=tests/config
     SWG_FIXTURES_DIR=tests/fixtures
     _TEST_NET=swg-test-net
     _TEST_SERVER_NAME=fixtures
@@ -102,35 +103,40 @@ main() {
 # Mount Makefile and directories to use for data, configuration and
 # installation
 #
-# Globals:
-#   SWG_DATA_DIR
-#   SWG_INSTALL_DIR
-#   SWG_CONFIG_DIR
-#   SWG_IMAGE
-#   SWG_TAG
-#   CWD
+# Non-locals:
+#   data_dir
+#   install_dir
+#   config_dir
+#   image
+#   tag
+#   cwd
+#   docker_flags
 # Arguments:
-#   All passsed arguments are forwarded to `make`
+#   All arguments are passed to 'make'
 docker_make() {
   local -r docker_workdir='/swedgene'
   # Make sure writable directories exist on the host
-  mkdir -p "$SWG_DATA_DIR" "$SWG_INSTALL_DIR"
+  mkdir -p "${data_dir}" "${install_dir}"
 
-  # Build the docker argument list, specifying mount points and
-  # environment variables
-  for dir in SWG_DATA_DIR SWG_INSTALL_DIR SWG_CONFIG_DIR; do
-    # The ! in the parameter expansion introductes a level of
-    # indirection: the result is the value of the variable whose
-    # name is $dir
-    docker_flags+=(
-      -v "$CWD/${!dir}:$docker_workdir/${!dir}"
-      -e "$dir=${!dir}"
-    )
-  done
-  # Don't forget the Makefile and script directory
+  # Specify Docker mount points and environment variables used by make
   docker_flags+=(
-    -v "$CWD/Makefile:$docker_workdir/Makefile"
-    -v "$CWD/scripts:$docker_workdir/scripts"
+    # Data directory
+    -v "${CWD}/${data_dir}:${docker_workdir}/${data_dir}"
+    -e "SWG_DATA_DIR=${data_dir}"
+
+    # Installation directory
+    -v "${CWD}/${install_dir}:${docker_workdir}/${install_dir}"
+    -e "SWG_INSTALL_DIR=${install_dir}"
+
+    # Configuration directory
+    -v "${CWD}/${config_dir}:${docker_workdir}/${config_dir}"
+    -e "SWG_CONFIG_DIR=${config_dir}"
+  )
+
+  # Mount Makefile and script directory as well
+  docker_flags+=(
+    -v "${CWD}/Makefile:${docker_workdir}/Makefile"
+    -v "${CWD}/scripts:${docker_workdir}/scripts"
   )
   docker run --rm "${docker_flags[@]}" "${image}:${tag}" make "$@"
 }
