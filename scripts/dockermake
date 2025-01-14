@@ -25,44 +25,6 @@ readonly CWD
 
 declare -a docker_flags
 
-# Run make in Docker container
-#
-# Mount Makefile and directories to use for data, configuration and
-# installation
-#
-# Globals:
-#   SWG_DATA_DIR
-#   SWG_INSTALL_DIR
-#   SWG_CONFIG_DIR
-#   SWG_IMAGE
-#   SWG_TAG
-#   CWD
-# Arguments:
-#   All passsed arguments are forwarded to `make`
-docker_make() {
-  local -r docker_workdir='/swedgene'
-  # Make sure writable directories exist on the host
-  mkdir -p "$SWG_DATA_DIR" "$SWG_INSTALL_DIR"
-
-  # Build the docker argument list, specifying mount points and
-  # environment variables
-  for dir in SWG_DATA_DIR SWG_INSTALL_DIR SWG_CONFIG_DIR; do
-    # The ! in the parameter expansion introductes a level of
-    # indirection: the result is the value of the variable whose
-    # name is $dir
-    docker_flags+=(
-      -v "$CWD/${!dir}:$docker_workdir/${!dir}"
-      -e "$dir=${!dir}"
-    )
-  done
-  # Don't forget the Makefile and script directory
-  docker_flags+=(
-    -v "$CWD/Makefile:$docker_workdir/Makefile"
-    -v "$CWD/scripts:$docker_workdir/scripts"
-  )
-  docker run --rm "${docker_flags[@]}" "${SWG_IMAGE}:${SWG_TAG}" make "$@"
-}
-
 if [[ -n $SWG_UID || -n $SWG_GID ]];
 then
   docker_flags+=("-u" "${SWG_UID:-$(id -u)}:${SWG_GID:-$(id -g)}")
@@ -121,3 +83,44 @@ if [[ "$1" == "--test" || "$1" == "-t" ]]; then
 else
   docker_make "$@"
 fi
+
+
+# Run make in Docker container
+#
+# Mount Makefile and directories to use for data, configuration and
+# installation
+#
+# Globals:
+#   SWG_DATA_DIR
+#   SWG_INSTALL_DIR
+#   SWG_CONFIG_DIR
+#   SWG_IMAGE
+#   SWG_TAG
+#   CWD
+# Arguments:
+#   All passsed arguments are forwarded to `make`
+docker_make() {
+  local -r docker_workdir='/swedgene'
+  # Make sure writable directories exist on the host
+  mkdir -p "$SWG_DATA_DIR" "$SWG_INSTALL_DIR"
+
+  # Build the docker argument list, specifying mount points and
+  # environment variables
+  for dir in SWG_DATA_DIR SWG_INSTALL_DIR SWG_CONFIG_DIR; do
+    # The ! in the parameter expansion introductes a level of
+    # indirection: the result is the value of the variable whose
+    # name is $dir
+    docker_flags+=(
+      -v "$CWD/${!dir}:$docker_workdir/${!dir}"
+      -e "$dir=${!dir}"
+    )
+  done
+  # Don't forget the Makefile and script directory
+  docker_flags+=(
+    -v "$CWD/Makefile:$docker_workdir/Makefile"
+    -v "$CWD/scripts:$docker_workdir/scripts"
+  )
+  docker run --rm "${docker_flags[@]}" "${SWG_IMAGE}:${SWG_TAG}" make "$@"
+}
+
+
