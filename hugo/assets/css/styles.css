@@ -354,14 +354,20 @@ body {
   color: var(--scilife-teal);
 }
 
-@media (min-width: 770px) {
+/* species navbar collapses at 768 (bootstrap "md") */
+@media (min-width: 768px) {
   .scilife-species-nav .nav-link {
-    border: 3px solid transparent;
-  }
-  .scilife-species-nav .nav-link.active {
-    border-color: #dee2e6 #dee2e6 #fff;
+    border: 2px solid;
+    border-color: transparent transparent var(--scilife-medium-grey) transparent;
   }
 }
+.scilife-species-nav .nav-link.active,
+.scilife-species-nav .nav-link:hover {
+  border: 2px solid;
+  border-color: var(--scilife-medium-grey);
+}
+
+
 
 .scilife-species-titles h1 {
   font-size: 3rem;
