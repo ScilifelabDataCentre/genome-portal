@@ -5,6 +5,14 @@
 {{ end }}
 
 
+{{ define "script_includes" }}
+
+{{ $speciesCardsJS := resources.Get "js/species_cards.js" | fingerprint | minify }}
+<script src="{{ $speciesCardsJS.RelPermalink }}"></script>
+
+{{ end }}
+
+
 {{ define "main" }}
 
 {{ $species := .Site.GetPage "section" "Species" }}
@@ -67,7 +75,7 @@
 
 
 <!-- shows only if no search results -->
-<div id="no-filtered-card" class="alert alert-primary mt-3" style="display: none;" role="alert">
+<div id="no-filtered-card" class="alert alert-primary scilife-no-results-alert mt-3" style="display: none;" role="alert">
     No results found with your search term
 </div>
 
@@ -140,9 +148,5 @@
         </div>
     </template>
 {{ end }}
-
-
-{{ $speciesCardsJS := resources.Get "js/species_cards.js" | fingerprint | minify }}
-<script src="{{ $speciesCardsJS.RelPermalink }}"></script>
 
 {{ end }}
