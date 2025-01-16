@@ -3,6 +3,11 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!--Runs immediately to assign correct theme (aka dark or light mode) -->
+        {{ $determineThemeJS := resources.Get "js/determine_theme.js" | fingerprint | minify }}
+        <script src="{{ $determineThemeJS.RelPermalink }}"></script>
+
         <!-- Site meta -->
         <title>{{ printf "%s | %s" (or .Params.banner_title .Title) .Site.Title }}</title>
 
@@ -48,6 +53,10 @@
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
             crossorigin="anonymous">
         </script>
+
+        <!-- Clickable option to swap between dark and light mode/theme -->
+        {{ $changeThemeJS := resources.Get "js/change_theme.js" | fingerprint | minify }}
+        <script src="{{ $changeThemeJS.RelPermalink }}"></script>
 
         <!-- Any page specific scripts included here. -->
         {{ block "script_includes" . }} {{ end }}
