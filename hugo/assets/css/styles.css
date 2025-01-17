@@ -763,6 +763,12 @@ body {
   font-style: italic;
 }
 
+
+.scilife-faq-block summary {
+  font-size: 1.2rem;
+}
+
+
 /* footer images */
 .scilife-footer-img {
   max-width: 150px;
