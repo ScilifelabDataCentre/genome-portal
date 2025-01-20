@@ -70,9 +70,7 @@ EOF
 
 run() {
   run_cmd="docker run"
-  if ((dry_run)); then
-    run_cmd="echo ${run_cmd}"
-  fi
+  ((dry_run)) && run_cmd="echo ${run_cmd}"
 
   if ((dev)); then
     ${run_cmd} --rm -d  \
