@@ -1,124 +1,167 @@
 #!/bin/bash
-#
-# Run `make` in a Docker container
-#
-# The environment variables SWG_UID and SWG_GID can be used to run the
-# container as a specific user and group. By default, the effective
-# user and group id of the host are used.
-#
-# The environment variables SWG_IMAGE and SWG_TAG can be
-# used to override the Docker image to use. For example:
-#
-# SWG_IMAGE=industrious-squirrel SWG_TAG=slim-buster scripts/dockerbuild.sh build
 
-CWD="$(pwd)"
-readonly CWD
+help() {
+  echo "\
+Run 'make' in a Docker container, using our Makefile recipes.
 
-: ${SWG_TAG="main"}
-: ${SWG_IMAGE:="ghcr.io/scilifelabdatacentre/swg-data-builder"}
+The Docker image used is
+'ghcr.io/scilifelabdatacentre/swg-data-builder:local', and an alternative
+tag can be chosen with the -t option.
 
-# Directories on the host that are mounted in the container, and used
-# by `make`. Paths must be *relative* to the repository root.
-: ${SWG_DATA_DIR:="data"}
-: ${SWG_INSTALL_DIR:="hugo/static/data"}
-: ${SWG_CONFIG_DIR:="config"}
+Usage: dockermake [-T] [-k] [-t TAG] [-u USER] [arg...]
 
-declare -a docker_flags
+Positional arguments are passed to 'make'
+
+Options:
+  -h            Display this help message and exit
+  -T            Use test configuration, found in SWG_TEST_DIR (default: tests)
+                Start a web server rooted at SWG_TEST_DIR/fixtures.
+  -k            Keep test resources running, no teardown is performed.
+                Useful for consecutive test runs.
+  -t  TAG       Docker tag to use for the data builder image
+  -u  USER      Docker user, specified as '<USER>:<GROUP>'.
+                Default: host user and group IDs, so that files
+                created in mounted directories have convenient ownership.
+  -n            Dry run. Only print the make commands that would be issued.
+"
+
+}
+
+main() {
+  CWD="$(git rev-parse --show-toplevel)"
+  readonly CWD
+
+  declare tag image
+  tag="${SWG_TAG:-local}"
+  image="${SWG_IMAGE:-ghcr.io/scilifelabdatacentre/swg-data-builder}"
+
+  # Directories on the host that are mounted in the container, and used
+  # by `make`. Paths must be *relative* to the repository root.
+  declare data_dir install_dir config_dir docker_user dry_run
+  data_dir="${SWG_DATA_DIR:=data}"
+  install_dir="${SWG_INSTALL_DIR:=hugo/static/data}"
+  config_dir="${SWG_CONFIG_DIR:=config}"
+  docker_user="$(id -u):$(id -g)"
+  dry_run=0
+
+  declare test no_teardown docker_user
+  while getopts hTkt:u:n opt; do
+    case "${opt}" in
+      T) test=1 ;;
+      k) no_teardown=1 ;;
+      t) tag="${OPTARG}" ;;
+      u) docker_user="${OPTARG}" ;;
+      n) dry_run=1 ;;
+      h) help && exit 0 ;;
+      \?) >&2 help && exit 1 ;;
+    esac
+  done
+  shift $((OPTIND - 1))
+
+  declare cmd
+  declare -a docker_flags
+  docker_flags=("-u" "${docker_user}")
+
+
+  if ((test)); then
+
+    TEST_DIR="${SWG_TEST_DIR:-tests}"
+    FIXTURES_DIR="${TEST_DIR}/fixtures"
+    TEST_NET=swg-test-net
+    TEST_SERVER_NAME=fixtures
+    readonly TEST_DIR FIXTURES_DIR TEST_NET TEST_SERVER_NAME
+
+    data_dir="${TEST_DIR}/data"
+    install_dir="${TEST_DIR}/public"
+    config_dir="${TEST_DIR}/config"
+
+
+    if [[ "$(docker network ls -q -f name=${TEST_NET})" ]]; then
+      echo "Using existing network: ${TEST_NET}"
+    else
+      echo "Creating test network ${TEST_NET}"
+      cmd="docker network create"
+      ((dry_run)) && cmd="echo ${cmd}"
+      ${cmd} "${TEST_NET}"
+    fi
+
+    if [[ "$(docker ps -a -q -f name=${TEST_SERVER_NAME})" ]]; then
+      echo "Using existing test server container: ${TEST_SERVER_NAME}"
+    else
+      echo "Starting test server..."
+      cmd="docker run"
+      ((dry_run)) && cmd="echo ${cmd}"
+      ${cmd} -d -q --name="${TEST_SERVER_NAME}" \
+             --network="${TEST_NET}" \
+             -v "${CWD}/${FIXTURES_DIR}":/usr/share/nginx/html \
+             nginx:alpine
+    fi
+
+    # Run the test build
+    docker_flags+=(--network="${TEST_NET}")
+    docker_make "$@"
+
+    if ((no_teardown)); then
+      echo "Keeping test resources running"
+      echo "To clean up manually:"
+      echo "    docker container rm -f ${TEST_SERVER_NAME}"
+      echo "    docker network rm ${TEST_NET}"
+      exit
+    fi
+    echo "Cleaning up..."
+    ((dry_run)) || {
+      docker container rm -f "${TEST_SERVER_NAME}"
+      docker network rm -f "${TEST_NET}"
+    } > /dev/null
+
+  else
+    docker_make "$@"
+  fi
+}
 
 # Run make in Docker container
 #
 # Mount Makefile and directories to use for data, configuration and
 # installation
 #
-# Globals:
-#   SWG_DATA_DIR
-#   SWG_INSTALL_DIR
-#   SWG_CONFIG_DIR
-#   SWG_IMAGE
-#   SWG_TAG
-#   CWD
+# Non-locals:
+#   data_dir
+#   install_dir
+#   config_dir
+#   image
+#   tag
+#   cwd
+#   docker_flags
 # Arguments:
-#   All passsed arguments are forwarded to `make`
+#   All arguments are passed to 'make'
 docker_make() {
-    local -r docker_workdir='/swedgene'
-    # Make sure writable directories exist on the host
-    mkdir -p "$SWG_DATA_DIR" "$SWG_INSTALL_DIR"
+  local -r docker_workdir='/swedgene'
+  # Make sure writable directories exist on the host
+  mkdir -p "${data_dir}" "${install_dir}"
 
-    # Build the docker argument list, specifying mount points and
-    # environment variables
-    for dir in SWG_DATA_DIR SWG_INSTALL_DIR SWG_CONFIG_DIR; do
-	# The ! in the parameter expansion introductes a level of
-	# indirection: the result is the value of the variable whose
-	# name is $dir
-	docker_flags+=(
-	    -v "$CWD/${!dir}:$docker_workdir/${!dir}"
-	    -e "$dir=${!dir}"
-	)
-    done
-    # Don't forget the Makefile and script directory
-    docker_flags+=(
-	-v "$CWD/Makefile:$docker_workdir/Makefile"
-	-v "$CWD/scripts:$docker_workdir/scripts"
-    )
-    docker run --rm "${docker_flags[@]}" "${SWG_IMAGE}:${SWG_TAG}" make "$@"
+  # Specify Docker mount points and environment variables used by make
+  docker_flags+=(
+    # Data directory
+    -v "${CWD}/${data_dir}:${docker_workdir}/${data_dir}"
+    -e "SWG_DATA_DIR=${data_dir}"
+
+    # Installation directory
+    -v "${CWD}/${install_dir}:${docker_workdir}/${install_dir}"
+    -e "SWG_INSTALL_DIR=${install_dir}"
+
+    # Configuration directory
+    -v "${CWD}/${config_dir}:${docker_workdir}/${config_dir}"
+    -e "SWG_CONFIG_DIR=${config_dir}"
+  )
+
+  # Mount Makefile and script directory as well
+  docker_flags+=(
+    -v "${CWD}/Makefile:${docker_workdir}/Makefile"
+    -v "${CWD}/scripts:${docker_workdir}/scripts"
+  )
+  cmd="docker run"
+  ((dry_run)) && cmd="echo ${cmd}"
+  ${cmd} --rm "${docker_flags[@]}" "${image}:${tag}" make "$@"
 }
 
-if [[ -n $SWG_UID || -n $SWG_GID ]];
-then
-    docker_flags+=("-u" "${SWG_UID:-$(id -u)}:${SWG_GID:-$(id -g)}")
-fi
-
-if [[ "$1" == "--test" || "$1" == "-t" ]]; then
-    shift
-
-    if [[ "$1" == "--keep" || "$1" == "-k" ]]; then
-	_NO_TEARDOWN=1
-	shift
-    fi
-
-    SWG_DATA_DIR=tests/data
-    SWG_INSTALL_DIR=tests/public
-    SWG_CONFIG_DIR=tests/config
-    SWG_FIXTURES_DIR=tests/fixtures
-    _TEST_NET=swg-test-net
-    _TEST_SERVER_NAME=fixtures
-    _WORKDIR=/swedgene
-
-    if [[ "$(docker network ls -q -f name=$_TEST_NET)" ]]; then
-	echo "Using existing network: $_TEST_NET"
-    else
-	echo "Creating test network $_TEST_NET"
-	docker network create $_TEST_NET
-    fi
-
-    if [[ "${_CID:=$(docker ps -a -q -f name=$_TEST_SERVER_NAME)}" ]]; then
-	echo "Using existing test server container: ${_TEST_SERVER_NAME}"
-    else
-	    echo "Starting test server..."
-	    docker run -d -q --name=$_TEST_SERVER_NAME \
-		   --network=$_TEST_NET \
-		   -v "$CWD/$SWG_FIXTURES_DIR":/usr/share/nginx/html \
-		   nginx:alpine
-    fi
-
-    # Run the test build
-    docker_flags+=(--network="$_TEST_NET")
-    docker_make "$@"
-
-    if [[ $_NO_TEARDOWN == 1 ]]; then
-	echo "Keeping test resources running"
-	echo "To clean up manually:"
-	echo "    docker container rm -f $_TEST_SERVER_NAME"
-	echo "    docker network rm $_TEST_NET"
-	exit
-    fi
-    echo "Cleaning up..."
-    {
-	docker container rm -f $_TEST_SERVER_NAME
-	docker network rm -f $_TEST_NET
-    } > /dev/null
-
-else
-    docker_make "$@"
-fi
-
+main "$@"

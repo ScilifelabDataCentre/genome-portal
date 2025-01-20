@@ -154,14 +154,14 @@ Then to run the website locally, you have several options
 
 ```bash
 docker pull ghcr.io/scilifelabdatacentre/swg-hugo-site:dev
-./scripts/dockerserve
+./scripts/dockerserve -t dev
 ```
 
 #### Using a local build
 
 ```bash
-./scripts/dockerbuild hugo
-SWG_TAG=local ./scripts/dockerserve
+./scripts/dockerbuild -t local hugo
+./scripts/dockerserve -t local
 ```
 
 #### Using the Hugo development server
@@ -174,7 +174,7 @@ bundle in `hugo/static/browser`
 
 ```bash
 ./scripts/download_jbrowse v2.15.4 hugo/static/browser
-scripts/dockerserve --dev
+./scripts/dockerserve -d
 ```
 
 ---

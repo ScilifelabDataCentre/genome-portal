@@ -32,7 +32,7 @@ python -m playwright install
 
 ```bash
 ./scripts/dockerbuild hugo
-SWG_TAG=local ./scripts/dockerserve
+./scripts/dockerserve -t local
 ```
 
 **4. Run the tests**

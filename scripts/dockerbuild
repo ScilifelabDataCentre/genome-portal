@@ -1,46 +1,93 @@
 #!/bin/bash
 
-# Helper script to build Docker images
-#
-# By default, the host user ID and group ID are forwarded through
-# build arguments. To disable this behavior and use the dockerfile
-# defaults, set the SWG_DEFAULT_USER environment variable to 1.
-#
-# The hugo image can be built with several optional build arguments:
-# These can be used to control the version information shown on the footer of each page.
-_DEFAULT_TAG=local
-declare -a _BUILD_ARGS
+help() {
+  echo "\
+Build the Genome Portal Docker images
 
-docker_build () {
-    docker build "${_BUILD_ARGS[@]}" \
-	   -t "${SWG_IMAGE:-$_DEFAULT_IMAGE}:${SWG_TAG:-$_DEFAULT_TAG}" \
-	   -f "${SWG_DOCKERFILE:-$_DEFAULT_DOCKERFILE}" .
+Usage: dockerbuild [-h] [-k data|hugo ] [-t TAG] [-u]
+
+Options:
+  -h            Display this help message and exit
+  -k KIND       Kind of image to build, 'data' (the default) or 'hugo'.
+  -t TAG        Docker tag
+  -u            Use default user and group IDs in the data builder image (see below)
+  -n            Dry run, print the Docker build command
+
+Data builder (docker/data.dockerfile):
+
+By default, user ID and group ID used in the image are made to match
+those of the host, so that files created in mounted directories get
+convenient permissions. To disable this behavior and use the
+dockerfile defaults, use the -u flag or set the SWG_DEFAULT_USER
+environment variable to 1.
+
+Hugo (docker/hugo.dockerfile):
+
+The HUGO_GIT_REF_NAME and HUGO_GIT_SHA environment variables can be
+set to control the version information shown on the footer of each
+page They both default to the checked out branch name and commit hash
+respectively.
+"
 }
 
-if [[ -z "$1" || "$1" == "data" ]];
-then
-    _DEFAULT_IMAGE=ghcr.io/scilifelabdatacentre/swg-data-builder
-    _DEFAULT_DOCKERFILE=docker/data.dockerfile
-    if [[ -z ${SWG_DEFAULT_USER} ]];then
-	_BUILD_ARGS+=("--build-arg" "SWG_UID=$(id -u)")
-	_BUILD_ARGS+=("--build-arg" "SWG_GID=$(id -g)")
+main () {
+  local kind tag image use_host_uid dry_run
+  declare -a build_args
+
+  kind=data
+  # Support SWG-prefixed environment variables for backward compatibility
+  tag="${SWG_TAG:-local}"
+  if [[ -z "${SWG_DEFAULT_USER}" ]]; then
+    use_host_uid=1
+  else
+    use_host_uid=0
+  fi
+  dry_run=0
+
+  while getopts k:t:unh opt; do
+    case "${opt}" in
+      k) kind="${OPTARG}" ;;
+      t) tag="${OPTARG}" ;;
+      u) use_host_uid=0 ;;
+      n) dry_run=1 ;;
+      h) help && exit 0 ;;
+      \?) >&2 help && exit 1 ;;
+    esac
+  done
+
+  if [[ "${kind}" == data ]]; then
+    image=ghcr.io/scilifelabdatacentre/swg-data-builder
+    dockerfile=docker/data.dockerfile
+    if ((use_host_uid)); then
+      build_args=(
+        "--build-arg" "SWG_UID=$(id -u)"
+        "--build-arg" "SWG_GID=$(id -g)"
+      )
     fi
-    docker_build && exit 0
-fi
-
-
-
-if [[ "$1" = hugo ]]; then
-    _DEFAULT_IMAGE=ghcr.io/scilifelabdatacentre/swg-hugo-site
-    _DEFAULT_DOCKERFILE=docker/hugo.dockerfile
-    # CI context
-    _BUILD_ARGS+=(
-	"--build-arg" "HUGO_GIT_REF_NAME=${HUGO_GIT_REF_NAME:-$(git branch --show-current)}"
-	"--build-arg" "HUGO_GIT_SHA=${HUGO_GIT_SHA:-$(git rev-parse HEAD)}"
+  elif [[ "${kind}" == hugo ]]; then
+    image=ghcr.io/scilifelabdatacentre/swg-hugo-site
+    dockerfile=docker/hugo.dockerfile
+    build_args=(
+      "--build-arg" "HUGO_GIT_REF_NAME=${HUGO_GIT_REF_NAME:-$(git branch --show-current)}"
+      "--build-arg" "HUGO_GIT_SHA=${HUGO_GIT_SHA:-$(git rev-parse HEAD)}"
     )
-    docker_build  && exit 0
-fi
+  else
+    >&2 echo "Argument to option -k must be either 'data' or 'hugo'"
+    >&2 help
+    exit 1
+  fi
 
-echo "Usage: ./scripts/dockerbuild.sh [data | hugo]" && exit 1
+  docker_build
+}
 
+docker_build () {
+  cmd="docker build"
+  ((dry_run)) && cmd="echo ${cmd}"
+
+  ${cmd} "${build_args[@]}" \
+         -t "${image}:${tag}" \
+         -f "${dockerfile}" .
+}
+
+main "$@"
 
