@@ -4,15 +4,14 @@ help() {
   echo "\
 Build the Genome Portal Docker images
 
-Usage: dockerbuild [-h] [-k data|hugo ] [-t TAG] [-i IMAGE] [-u]
+Usage: dockerbuild [-h] [-k data|hugo ] [-t TAG] [-u]
 
 Options:
   -h            Display this help message and exit
   -k KIND       Kind of image to build, 'data' (the default) or 'hugo'.
   -t TAG        Docker tag
-  -i IMAGE      Docker image name. Defaults: ghcr.io/scilifelabdatacentre/{swg-data-builder,swg-hugo-site}
   -u            Use default user and group IDs in the data builder image (see below)
-  -d            Dry run, print the Docker build command
+  -n            Dry run, print the Docker build command
 
 Data builder (docker/data.dockerfile):
 
