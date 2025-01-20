@@ -82,9 +82,8 @@ main () {
 
 docker_build () {
   cmd="docker build"
-  if ((dry_run)); then
-    cmd="echo ${cmd}"
-  fi
+  ((dry_run)) && cmd="echo ${cmd}"
+
   ${cmd} "${build_args[@]}" \
          -t "${image}:${tag}" \
          -f "${dockerfile}" .
