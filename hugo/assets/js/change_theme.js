@@ -10,10 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // helper function to swap image srcs.
     const updateImages = (theme) => {
+        let srcAttr = `data-${theme}-src`;
         document.querySelectorAll('img[data-dark-src]').forEach((img) => {
-            const lightSrc = img.getAttribute('data-light-src');
-            const darkSrc = img.getAttribute('data-dark-src');
-            img.src = theme === 'dark' ? darkSrc : lightSrc;
+            img.src = img.getAttribute(srcAttr);
         });
     };
 

@@ -747,7 +747,6 @@ body {
 .scilife-contrib-subheader {
   font-size: 1.5rem;
   font-weight: 700;
-  color: black;
 }
 
 .scilife-contrib-subtext {
@@ -900,6 +899,13 @@ p + .clipboard {
   }
   a {
     color: var(--scilife-aqua);
+  }
+
+  /* Controls the <thead> part */
+  .table-light {
+    --bs-table-bg: var(--scilife-dark-grey);
+    --bs-table-color: white;
+    --bs-table-border-color: #495057;
   }
 
   .scilife-navbar-main li a,
