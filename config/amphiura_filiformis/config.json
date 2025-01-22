@@ -1,0 +1,57 @@
+{
+  "defaultSession": {
+    "id": "afil_default_session",
+    "name": "Amphiura filiformis",
+    "widgets": {
+      "hierarchicalTrackSelector": {
+        "id": "hierarchicalTrackSelector",
+        "type": "HierarchicalTrackSelectorWidget",
+        "view": "afil_default_session_view",
+        "faceted": {
+          "showSparse": false,
+          "showFilters": true,
+          "showOptions": false,
+          "panelWidth": 400
+        }
+      }
+    },
+    "activeWidgets": {
+      "hierarchicalTrackSelector": "hierarchicalTrackSelector"
+    },
+    "views": [
+      {
+        "id": "afil_default_session_view",
+        "minimized": false,
+        "type": "LinearGenomeView",
+        "offsetPx": 0,
+        "bpPerPx": 500,
+        "displayedRegions": [
+          {
+            "refName": "ENA|JAZBNO010000001|JAZBNO010000001.1",
+            "start": 0,
+            "end": 102728465,
+            "reversed": false,
+            "assemblyName": "Afil_fr2py"
+          }
+        ],
+        "tracks": [
+          {
+            "id": "afil_default_protein_coding_genes",
+            "type": "FeatureTrack",
+            "configuration": "Afil_fr2py.wn.filt.final.chroms.sorted",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "afil_default_protein_coding_genes_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 350,
+                "configuration": "Afil_fr2py.wn.filt.final.chroms.sorted-LinearBasicDisplay"
+              }
+            ]
+          }
+        ],
+        "trackLabels": "offset"
+      }
+    ]
+  }
+}
