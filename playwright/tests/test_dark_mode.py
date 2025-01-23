@@ -19,14 +19,17 @@ def html_locator(home_page: Page) -> Locator:
 def test_correct_color_scheme_on_load(home_page: Page, html_locator: Locator) -> None:
     """
     Test the page has the correct color scheme on page load.
+    (Need to clear localStorage to avoid the saved color scheme being used - expected behavior)
     """
     expect(html_locator).to_have_attribute("data-bs-theme", "light")
 
     home_page.emulate_media(color_scheme="dark")
+    home_page.evaluate("localStorage.clear()")
     home_page.reload()
     expect(html_locator).to_have_attribute("data-bs-theme", "dark")
 
     home_page.emulate_media(color_scheme="light")
+    home_page.evaluate("localStorage.clear()")
     home_page.reload()
     expect(html_locator).to_have_attribute("data-bs-theme", "light")
 
