@@ -4,6 +4,7 @@ assembly:
   displayName: "A. filiformis genome assembly GCA_039555335.1"
   accession: GCA_039555335.1
   url: "ftp://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/jaz/JAZBNO01.fasta.gz"
+  aliases: "https://raw.githubusercontent.com/ScilifelabDataCentre/genome-portal/d229013fc5eeba973fab5c778cfb4ac8351d45b2/scripts/data_stewardship/alias_files_temp_storage/JAZBNO01.fna.alias"
 tracks:
   - name: "Protein-coding genes"
     url: https://figshare.scilifelab.se/ndownloader/files/51825167
