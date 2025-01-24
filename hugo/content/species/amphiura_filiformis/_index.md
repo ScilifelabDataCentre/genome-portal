@@ -51,6 +51,10 @@ If you have used the pages for this species in the Genome Portal, please refer t
 Swedish Reference Genome Portal (Retrieved DATE_ACCESSED), SciLifeLab Data Centre, version VERSION_NUMBER from <https://genomes.scilifelab.se>, [RRID:SCR_026008](https://rrid.site/data/record/nlx_144509-1/SCR_026008/resolver?q=rrid:scr_026008)
 ```
 
+#### References
+
+- <p> Parey, E., Ortega-Martinez, O., Delroisse, J., Piovani, L., Czarkwiani, A., Dylus, D., Arya, S., Dupont, S., Thorndyke, M., Larsson, T., Johannesson, K., Buckley, K. M., Martinez, P., Oliveri, P., & Marlétaz, F. (2024). The brittle star genome illuminates the genetic basis of animal appendage regeneration. Nature Ecology & Evolution, 8(8), 1505–1521. <a href="https://doi.org/10.1038/s41559-024-02456-y">https://doi.org/10.1038/s41559-024-02456-y</a> </p>
+
 #### Changelog
 
 - 23/01/2025 - Species first published on the Portal
