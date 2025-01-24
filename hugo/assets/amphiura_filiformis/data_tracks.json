@@ -1,0 +1,30 @@
+[
+    {
+      "dataTrackName": "Genome",
+      "description": "Reference genome sequence",
+      "links": [
+        {"Download": "https://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/jaz/JAZBNO01.fasta.gz"},
+        {"Website": "https://www.ebi.ac.uk/ena/browser/view/GCA_039555335.1"},
+        {"Article": "https://doi.org/10.1038/s41559-024-02456-y"}
+      ],
+      "accessionOrDOI": "GCA_039555335.1",
+      "fileName": "JAZBNO01.fasta.gz",
+      "principalInvestigator": "Ferdinand Marlétaz",
+      "principalInvestigatorAffiliation": "University College London",
+      "firstDateOnPortal": "23 January 2025"
+    },
+    {
+      "dataTrackName": "Protein-coding genes",
+      "description": "Functional annotation of protein-coding genes",
+      "links": [
+        {"Download": "https://zenodo.org/records/11175500/files/Amphiura-filiformis_supp-datasets.zip?download=1"},
+        {"Website": "https://doi.org/10.5281/zenodo.10036671"},
+        {"Article": "https://doi.org/10.1038/s41559-024-02456-y"}
+      ],
+      "accessionOrDOI": "10.5281/zenodo.10036671",
+      "fileName": "Amphiura-filiformis_supp-datasets.zip/dataset_s1/genes/Afil_fr2py.wn.filt.final.chroms.sorted.gtf",
+      "principalInvestigator": "Ferdinand Marlétaz",
+      "principalInvestigatorAffiliation": "University College London",
+      "firstDateOnPortal": "23 January 2025"
+    }
+]

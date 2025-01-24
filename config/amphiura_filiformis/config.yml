@@ -1,0 +1,20 @@
+organism: "Amphiura filiformis"
+assembly:
+  name: Afil_fr2py
+  displayName: "A. filiformis genome assembly GCA_039555335.1"
+  accession: GCA_039555335.1
+  url: "ftp://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/jaz/JAZBNO01.fasta.gz"
+  aliases: "https://raw.githubusercontent.com/ScilifelabDataCentre/genome-portal/d229013fc5eeba973fab5c778cfb4ac8351d45b2/scripts/data_stewardship/alias_files_temp_storage/JAZBNO01.fna.alias"
+tracks:
+  - name: "Protein-coding genes"
+    url: https://figshare.scilifelab.se/ndownloader/files/51825167
+    fileName: "Afil_fr2py.wn.filt.final.chroms.sorted.gtf"
+
+### Note! To generate ./config/amphiura_filiformis/aliases.txt, the following commands was used:
+## echo -e "#ENA\tNCBI\toriginal" > ./config/amphiura_filiformis/aliases.txt
+##
+## gzcat ./data/amphiura_filiformis/JAZBNO01.fna.gz | grep ">" | \
+## awk -F'[>| ]' '{split($0, a, " "); gsub(/[ \t]+$/, "", a[6]); \
+## print substr($2, 1) "|" $3 "|" $4 "\t" $4 "\t" \
+## substr($0, index($0, a[6]), index($0, ", whole genome shotgun sequence.") - index($0, a[6]))}' | \
+## awk '{gsub(/chromosome /, "chr"); print}' >> ./config/amphiura_filiformis/aliases.txt
