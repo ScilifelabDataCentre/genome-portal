@@ -3,7 +3,7 @@
       "dataTrackName": "Genome",
       "description": "Reference genome sequence",
       "links": [
-        {"Download": "ftp://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/jaz/JAZBNO01.fasta.gz"},
+        {"Download": "https://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/jaz/JAZBNO01.fasta.gz"},
         {"Website": "https://www.ebi.ac.uk/ena/browser/view/GCA_039555335.1"},
         {"Article": "https://doi.org/10.1038/s41559-024-02456-y"}
       ],
