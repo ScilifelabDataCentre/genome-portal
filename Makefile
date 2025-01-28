@@ -62,7 +62,8 @@ BED_INDICES := $(addsuffix .tbi,$(BED))
 LOCAL_FILES := $(GFF) $(GFF_INDICES) \
 	$(FASTA) $(FASTA_INDICES) $(FASTA_GZINDICES) \
 	$(GTF) \
-	$(BED) $(BED_INDICES)
+	$(BED) $(BED_INDICES) \
+	$(ALIASES)
 
 # Files to install
 INSTALLED_FILES := $(patsubst $(DATA_DIR)/%,$(INSTALL_DIR)/%, $(LOCAL_FILES) $(JBROWSE_CONFIGS))
