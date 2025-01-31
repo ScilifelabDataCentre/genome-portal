@@ -76,7 +76,7 @@ We welcome all questions and suggestions (including feature requests or bug repo
 
 - Email us at [dsn-eb@scilifelab.se](mailto:dsn-eb@scilifelab.se).
 - Fill out our [contact form on the website](https://genomes.scilifelab.se/contact/).
-- [Create an issue in Github](https://github.com/ScilifelabDataCentre/genome-portal/issues/new)
+- [Create an issue in Github](https://github.com/ScilifelabDataCentre/genome-portal/issues/new).
 
 
 ## Technical overview
@@ -88,7 +88,7 @@ source code.
 
 - The `config/` directory contains information about data sources
   (tracks and assemblies) displayed in the genome browser.
-  - Each species subdirectory inclues:
+  - Each species subdirectory includes:
 	- `config.yml` : specifies the assembly and tracks to be displayed in JBrowse2.
 	- `config.json` : starting point from which to generate a complete JBrowse2
       configuration, based on `config.yaml`. A common use is to define
@@ -100,20 +100,20 @@ source code.
 
 - The website content resides in the `hugo` directory.
   - Most importantly, each species gets:
-    1. A content subdirectory in `hugo/content/species/` (e.g. `hugo/content/species/clupea_harengus`)
-	2. A data directory in `hugo/data/` (taxonomic information and statistics)
-	3. An assets directory in `hugo/assets` (data inventory)
+    1. A content subdirectory in `hugo/content/species/` (e.g. `hugo/content/species/clupea_harengus`).
+	2. A data directory in `hugo/data/` (taxonomic information and statistics).
+	3. An assets directory in `hugo/assets` (data inventory).
 
 - The `scripts` folder contains executables to help:
-    1. build and serve the website using Docker
-	2. add a new species to the website content
-	3. add new datasets to the portal
+    1. Build and serve the website using Docker.
+	2. Add a new species to the website content.
+	3. Add new datasets to the portal.
 
 - The `tests` folder contains tests and fixtures, mainly covering the
   data preparation scripts.
 
-- The `docker` folder contains two Dockerfiles:
-	1. `docker/data.dockerfile` used for data preparation (everything that `make` needs)
+- The `docker` folder contains two Docker files:
+	1. `docker/data.dockerfile` used for data preparation (everything that `make` needs).
 	2. `docker/hugo.dockerfile` used to build and serve the website.
 
 ### Local development
@@ -148,7 +148,7 @@ scope of the build:
 
 **3. Run the web application container**
 
-Then to run the website locally, you have several options
+Then to run the website locally, you have several options:
 
 #### Using the latest development image
 
@@ -170,7 +170,7 @@ This last method is adequate when you want to see changes to the
 source immediately reflected in the web browser. 
 
 It requires the additional step of installing the JBrowse static
-bundle in `hugo/static/browser`
+bundle in `hugo/static/browser`:
 
 ```bash
 ./scripts/download_jbrowse v2.15.4 hugo/static/browser
@@ -179,7 +179,7 @@ bundle in `hugo/static/browser`
 
 ---
 
-Either of these methods will serve you the website at http://localhost:8080/
+Either of these methods will serve you the website at `http://localhost:8080/`.
 
 
 ## Credits
