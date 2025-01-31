@@ -763,8 +763,11 @@ body {
 }
 
 
-.scilife-faq-block summary {
+.accordion-button {
   font-size: 1.2rem;
+}
+.accordion-button:focus {
+  box-shadow: None;
 }
 
 
@@ -889,6 +892,12 @@ p + .clipboard {
   .scilife-search-box::placeholder {
     color: var(--scilife-dark-grey) !important;
   }
+
+  .accordion-button:not(.collapsed) {
+    color: var(--scilife-teal);
+    background-color: var(--scilife-teal-025);
+  }
+
 }
 
 /* Dark mode specific styles */
@@ -907,6 +916,12 @@ p + .clipboard {
     --bs-table-color: white;
     --bs-table-border-color: #495057;
   }
+
+  .accordion-button:not(.collapsed) {
+    color: var(--scilife-teal-025);
+    background-color: var(--scilife-teal);
+  }
+
 
   .scilife-navbar-main li a,
   .scilife-navbar-sub li a,

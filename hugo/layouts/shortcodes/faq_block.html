@@ -1,4 +1,34 @@
-<details class="scilife-faq-block">
-    <summary><b>{{ .Get "title" | default "Click to expand" | markdownify }}</b></summary>
-    <div><p>{{ .Inner | markdownify }}</p></div>
-</details>&nbsp;
+{{/*
+    This shortcode renders a single accordion-item for use with the FAQs page. Each FAQ is an accordion item.
+
+    Parameters:
+    - accordionID: The ID of the accordion container, as we have multiple accordions on the page.
+    - title: The question.
+    - collapsed: Boolean (default = true). Whether item should be collapsed or showing on page load.
+
+    The Inner text content of the shortcode is used as the awnser to the FAQ.
+
+
+*/}}
+
+{{ $accordionID := .Get "accordionID" }}
+{{ $collapsed := .Get "collapsed" | default true }}
+
+{{/*
+    $faqID is generated randomly to ensure that each accordion-item has a unique ID (so that the expanding/collapsing JS works).
+    Yes, this is a bit of a hack (but prevents having to pass an extra param in the markdown file).
+*/}}
+{{ $faqID := math.Rand | string }}
+
+<div class="accordion-item">
+    <h2 class="accordion-header">
+        <button class="accordion-button {{ if $collapsed }}collapsed{{ end }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ $faqID }}" aria-expanded="false" aria-controls="collapse-{{ $faqID }}">
+            {{ .Get "title" | markdownify }}
+        </button>
+    </h2>
+    <div id="collapse-{{ $faqID }}" class="accordion-collapse collapse {{ if not $collapsed }}show{{ end }}" data-bs-parent="#{{ $accordionID }}">
+        <div class="accordion-body">
+            {{ .Inner | markdownify }}
+        </div>
+    </div>
+</div>
