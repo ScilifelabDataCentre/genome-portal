@@ -28,7 +28,7 @@
     </h2>
     <div id="collapse-{{ $faqID }}" class="accordion-collapse collapse {{ if not $collapsed }}show{{ end }}" data-bs-parent="#{{ $accordionID }}">
         <div class="accordion-body">
-            {{ .Inner | markdownify }}
+            <p>{{ .Inner | markdownify }}</p>
         </div>
     </div>
 </div>

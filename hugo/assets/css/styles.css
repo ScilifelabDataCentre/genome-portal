@@ -497,7 +497,8 @@ body {
   font-weight: 700;
   letter-spacing: -0.04rem;
 }
-.scilife-subsection p {
+.scilife-subsection p,
+.scilife-subsection li {
   font-size: 1.125rem;
   font-weight: 400;
   line-height: 1.7rem;
