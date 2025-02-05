@@ -3,7 +3,8 @@
 
         <!-- aria-hidden set to prevent 2 homepage links in a row for screen readers -->
         <a class="navbar-brand" href="/" aria-hidden="true">
-            <img class="scilife-navbar-logo" src="/img/logos/logo_SRGP.webp"
+            <img class="scilife-navbar-logo" src="/img/logos/srgp_logo.webp"
+                data-light-src="/img/logos/srgp_logo.webp" data-dark-src="/img/logos/srgp_logo_dark.webp"
                 alt="The DDLS Evolution and Biodiveristy node's logo">
         </a>
 
@@ -22,6 +23,7 @@
                             <a class="nav-link" href="{{ .URL }}">{{ .Name }}</a>
                         </li>
                     {{ end }}
+                    {{ partial "change_theme.html" . }}
                 </ul>
             </div>
 
@@ -42,6 +44,7 @@
                         <a class="nav-link" href="{{ .URL }}">{{ .Name }}</a>
                     </li>
                     {{ end }}
+                    {{ partial "change_theme.html" . }}
                 </ul>
             </div>
 

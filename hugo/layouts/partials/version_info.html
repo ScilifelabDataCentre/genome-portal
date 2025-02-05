@@ -22,8 +22,9 @@ Version is extracted from HUGO_GIT_REF_NAME environment variable, falling back o
 
 <!-- Portal version info -->
 <p class="mt-3 mt-xl-0 mb-0 text-start text-lg-center">
-    <i> Website last updated: {{ now.Format "02 January 2006"}} </i>
-    (<a href="{{ $portalHref }}" target="_blank" rel="noopener noreferrer">{{ $hrefText }}</a>)
+    <i>Swedish Reference Genome Portal version:
+        <a href="{{ $portalHref }}" target="_blank" rel="noopener noreferrer">{{ $hrefText }}</a>
+    </i>
 </p>
 
 {{ $jBrowseVersion := partial "GetJBrowseVersion.html" }}

@@ -1,7 +1,7 @@
 {{ $current_page := .Page }}
 {{ $currentSection := .Section }}
 
-<ul class="nav nav-tabs nav-justified scilife-species-nav">
+<nav class="nav nav-justified nav-tabs flex-column flex-md-row scilife-species-nav">
     <li class="nav-item">
         {{ $indexPage := .CurrentSection }}
 
@@ -23,4 +23,4 @@
         </li>
 
     {{ end }}
-</ul>
+</nav>

@@ -15,17 +15,6 @@ Notes:
 - This code can handle both pagination and no pagination (i.e. not enough species to warrant it). So can the Playwright tests assocaited with this page.
 */
 
-const SORT_OPTIONS = {
-    LAST_UPDATED: 'lastUpdated',
-    A_TO_Z: 'alphabet',
-    Z_TO_A: 'revAlphabet'
-};
-
-const cardContainer = document.getElementById('card-container');
-const paginationItems = document.querySelectorAll('.pagination .page-item');
-const noResultsCard = document.getElementById('no-filtered-card');
-const paginationExists = paginationItems.length > 0; // if not enough species, there will be no pagination yet.
-const cardsPerPage = parseInt(document.getElementById('card-container').dataset.numbCardsPerPage);
 
 /**
  * Reformat Hugo generated date to be used in JS Date object.
@@ -267,12 +256,29 @@ function debounce(callback, delay) {
 }
 
 
+// Global variables
+const SORT_OPTIONS = {
+    LAST_UPDATED: 'lastUpdated',
+    A_TO_Z: 'alphabet',
+    Z_TO_A: 'revAlphabet'
+};
+let cardContainer;
+let paginationItems;
+let noResultsCard;
+let paginationExists;
+let cardsPerPage;
+
 /**
  * Setup on page load and addition of event listners.
  */
 function main() {
+    cardContainer = document.getElementById('card-container');
+    paginationItems = document.querySelectorAll('.pagination .page-item');
+    noResultsCard = document.getElementById('no-filtered-card');
+    paginationExists = paginationItems.length > 0; // if not enough species, there will be no pagination yet.
+    cardsPerPage = parseInt(cardContainer.dataset.numbCardsPerPage);
+
     let state = initState();
-    let cardContainer = document.getElementById('card-container');
     const numbSpecies = state.speciesData.length;
     renderSpeciesCards(state, cardContainer);
 
@@ -289,15 +295,15 @@ function main() {
 
     // Event: Change the ordering of the species via dropdown
     // Update the dropdown text with selected item, filter results and display them
-    document.querySelector('.dropdown-menu').addEventListener('click', (event) => {
-        if (event.target.classList.contains('scilife-dropdown-item')) {
+    document.querySelectorAll('.scilife-dropdown-item').forEach(item => {
+        item.addEventListener('click', (event) => {
             event.preventDefault();
             const sortSelected = event.target.id;
             const sortOrder = Object.keys(SORT_OPTIONS).find(key => SORT_OPTIONS[key] === sortSelected);
             state.sortOrder = SORT_OPTIONS[sortOrder];
             updateSortDropdown(state.sortOrder);
             renderSpeciesCards(state, cardContainer);
-        }
+        });
     });
 
     // Event: Change the page
@@ -314,4 +320,4 @@ function main() {
     }
 }
 
-main();
+document.addEventListener('DOMContentLoaded', main);

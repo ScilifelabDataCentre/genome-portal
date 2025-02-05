@@ -4,8 +4,6 @@ Tests for the footer, using the home page (even if footer present on every page)
 
 import re
 
-from utils import validate_date_format
-
 from playwright.sync_api import Page, expect
 
 
@@ -64,15 +62,3 @@ def test_social_media_links(home_page: Page) -> None:
         link = socials_section.get_by_role("link", name=name)
         expect(link).to_be_visible()
         expect(link).to_have_attribute("href", url)
-
-
-def test_site_last_updated(home_page: Page) -> None:
-    """
-    Test footer has a last updated section with a correctly formatted date.
-    """
-    last_updated_text = home_page.get_by_text(re.compile("Website last updated:"))
-    expect(last_updated_text).to_be_visible()
-
-    date = last_updated_text.inner_text().split(":")[1].strip()
-    # Check that the date is in the correct format
-    validate_date_format(date=date, date_format="%d %B %Y")

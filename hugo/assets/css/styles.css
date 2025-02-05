@@ -32,7 +32,6 @@ a {
   color: var(--scilife-teal);
 }
 
-
 body {
   font-family: "Roboto", Arial, sans-serif;
 }
@@ -45,14 +44,12 @@ body {
   padding: 1.2rem 0rem;
   margin-bottom: 1rem;
 }
-
 .scilife-banner h1{
   color: #FFF;
   font-size: 3rem;
   font-weight: 700;
   letter-spacing: -0.06rem;
 }
-
 .scilife-banner img {
   width: 100%;
   height: auto;
@@ -80,7 +77,6 @@ body {
   min-height: 60vh;
   max-width: 1444px;
 }
-
 .scilife-hero::before {
   content: "";
   position: absolute;
@@ -91,39 +87,34 @@ body {
   background-color: rgba(0, 0, 0, 0.2);
   z-index: 0;
 }
-
 .scilife-hero-content {
   position: relative;
   z-index: 1;
   margin: 2rem;
   text-align: left;
 }
-
 .scilife-hero-title {
   font-size: 3rem;
   font-weight: 600;
 }
-
 .scilife-hero-subtitle {
   font-size: 1.4rem;
   font-weight: 400;
 }
 
-@media (max-width: 575.98px) {
+@media (max-width: 575px) {
   .scilife-hero {
     min-height: 40vh;
     background-position: 80% center
   }
 }
-
-@media (min-width: 576px) and (max-width: 767.98px) {
+@media (min-width: 576px) and (max-width: 767px) {
   .scilife-hero {
     min-height: 30vh;
     background-position: 80% center
   }
 }
-
-@media (min-width: 768px) and (max-width: 991.98px) {
+@media (min-width: 768px) and (max-width: 991px) {
   .scilife-hero {
     min-height: 35vh;
     background-position: 75% center
@@ -135,8 +126,7 @@ body {
     margin-right: 30%;
   }
 }
-
-@media (min-width: 992px) and (max-width: 1199.98px) {
+@media (min-width: 992px) and (max-width: 1199px) {
   .scilife-hero {
     min-height: 30vh;
     background-position: 70% center
@@ -148,8 +138,7 @@ body {
     margin-right: 30%;
   }
 }
-
-@media (min-width: 1200px) and (max-width: 1399.98px) {
+@media (min-width: 1200px) and (max-width: 1399px) {
   .scilife-hero {
     min-height: 24vh;
   }
@@ -160,7 +149,6 @@ body {
     margin-right: 43%;
   }
 }
-
 @media (min-width: 1400px) {
   .scilife-hero {
     min-height: 27vh;
@@ -173,9 +161,6 @@ body {
   }
 }
 
-.scilife-search-box:focus {
-  box-shadow: 0 0 0 0.2rem rgba(4, 92, 100, 0.25);
-}
 
 .scilife-contact-form:focus {
   box-shadow: 0 0 0 0.2rem rgba(4, 92, 100, 0.25);
@@ -196,64 +181,67 @@ body {
   margin-right: 0;
 }
 
-.scilife-navbar-main .nav-item {
-  margin-right: 0.1rem;
-}
-
-.scilife-navbar-sub .nav-item {
-  margin-right: 0.3rem;
-}
-
-
-
-
-.scilife-navbar-main li a {
-  color: var(--scilife-contrast-okay-grey);
-}
-
-.scilife-navbar-sub li a {
-  color: var(--scilife-teal);
-}
-
-.scilife-navbar-main {
-  font-weight: 400;
-  letter-spacing: 0.04rem;
-  font-size: 1.1rem;
-}
-
+.scilife-navbar-main,
 .scilife-navbar-sub {
   font-weight: 400;
   letter-spacing: 0.04rem;
   font-size: 1.1rem;
 }
 
-.scilife-navbar-main .navbar-nav {
-  --bs-nav-link-padding-y: 0.2rem;
+.scilife-navbar-main .nav-item {
+  margin-right: 0.1rem;
+}
+.scilife-navbar-sub .nav-item {
+  margin-right: 0.3rem;
 }
 
+.scilife-navbar-main li a {
+  color: var(--scilife-contrast-okay-grey);
+}
+.scilife-navbar-sub li a {
+  color: var(--scilife-teal);
+}
+
+.scilife-navbar-main .navbar-nav,
 .scilife-navbar-sub .navbar-nav {
   --bs-nav-link-padding-y: 0.2rem;
 }
 
-@media (max-width: 767px) {
-  .scilife-navbar-logo {
-      height:  1.5rem;
-  }
+/* when navbar in collapsed mode, make all items grey */
+@media (max-width: 991px) {
   .scilife-navbar-sub li a {
     color: var(--scilife-contrast-okay-grey);
   }
 }
 
+
+@media (max-width: 435px) {
+  .scilife-navbar-logo {
+      height: 1.0rem;
+  }
+}
+@media (min-width: 436px) and (max-width: 495px) {
+  .scilife-navbar-logo {
+      height: 1.2rem;
+  }
+}
+@media (min-width: 496px) and (max-width: 575px) {
+  .scilife-navbar-logo {
+      height: 1.4rem;
+  }
+}
+@media (min-width: 576px) and (max-width: 767px) {
+  .scilife-navbar-logo {
+      height:  1.5rem;
+  }
+}
 @media (min-width: 768px) and (max-width: 991px) {
   .scilife-navbar-logo {
       height: 1.7rem;
   }
-  .scilife-navbar-sub li a {
-    color: var(--scilife-contrast-okay-grey);
-  }
 }
 
-
+/* Navbar no longer in collapsed mode beyond this point */
 @media (min-width: 992px) and (max-width: 1199px) {
   .scilife-navbar-logo {
       height:  1.4rem;
@@ -268,7 +256,6 @@ body {
     --bs-nav-link-padding-y: 0;
   }
 }
-
 @media (min-width: 1200px) and (max-width: 1399px)  {
   .scilife-navbar-logo {
       height: 1.8rem;
@@ -283,7 +270,6 @@ body {
     --bs-nav-link-padding-y: 0;
   }
 }
-
 @media (min-width: 1400px) {
   .scilife-navbar-logo {
       height: 2.3rem;
@@ -299,8 +285,8 @@ body {
   }
 }
 
+
 .scilife-footer-text a {
-  color: var(--scilife-teal);
   font-size: 1.00rem;
   font-weight: 500;
   letter-spacing: 0.045rem;
@@ -321,7 +307,6 @@ body {
   letter-spacing: 0.045rem;
   color: var(--scilife-contrast-okay-grey)
 }
-
 .scilife-breadcrumbs a {
   color: var(--scilife-contrast-okay-grey);
 }
@@ -339,34 +324,38 @@ body {
   color: var(--scilife-teal);
 }
 
-@media (min-width: 770px) {
+/* species navbar collapses at 768 (bootstrap "md") */
+@media (min-width: 768px) {
   .scilife-species-nav .nav-link {
-    border: 3px solid transparent;
-  }
-  .scilife-species-nav .nav-link.active {
-    border-color: #dee2e6 #dee2e6 #fff;
+    border: 2px solid;
+    border-color: transparent transparent var(--scilife-medium-grey) transparent;
   }
 }
+.scilife-species-nav .nav-link.active,
+.scilife-species-nav .nav-link:hover {
+  border: 2px solid;
+  border-color: var(--scilife-medium-grey);
+}
+
 
 .scilife-species-titles h1 {
   font-size: 3rem;
   font-weight: 700;
   letter-spacing: -0.06rem;
 }
-
 .scilife-species-titles h2 {
   color: var(--scilife-contrast-okay-grey);
   font-size: 2.5rem;
   font-weight: 700;
   letter-spacing: -0.05rem;
 }
-
 .scilife-species-titles h3 {
   color: var(--scilife-grape);
   font-size: 2rem;
   font-weight: 700;
   letter-spacing: -0.04rem;
 }
+
 
 .scilife-species-card {
   display: flex;
@@ -375,6 +364,19 @@ body {
   padding: 0.5rem;
   border: 0.1rem solid var(--scilife-medium-grey);
   box-shadow: 0 0 0.2rem 0.2rem rgba(0, 0, 0, 0.08);
+}
+.scilife-species-card h2 {
+  color: #222;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.0625rem;
+  margin-top: auto;
+}
+.scilife-species-card h3 {
+  color: var(--scilife-dark-grey);
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: 0.0625rem;
 }
 
 .scilife-species-card .card-image {
@@ -387,21 +389,6 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   padding: 0rem;
-}
-
-.scilife-species-card h2 {
-  color: #222;
-  font-size: 1.25rem;
-  font-weight: 700;
-  letter-spacing: 0.0625rem;
-  margin-top: auto;
-}
-
-.scilife-species-card h3 {
-  color: var(--scilife-dark-grey);
-  font-size: 1.125rem;
-  font-weight: 700;
-  letter-spacing: 0.0625rem;
 }
 
 .scilife-card-image-attrib {
@@ -418,7 +405,6 @@ body {
   background-color: white;
   border-color: var(--scilife-aqua);
 }
-
 .scilife-species-button:hover,
 .scilife-species-button:focus,
 .scilife-species-button:active,
@@ -432,31 +418,22 @@ body {
 .scilife-pagination .page-item {
   margin-right: 0.5rem;
 }
-
 .scilife-pagination .page-link {
   color: var(--scilife-teal);
   background-color: #fff;
 }
-
-.scilife-pagination .page-link:hover {
-  color: #fff;
-  background-color: var(--scilife-teal);;
-  border-color: var(--scilife-teal);;
-}
-
+.scilife-pagination .page-link:hover,
 .scilife-pagination .page-item.active .page-link {
   color: #fff;
-  background-color: var(--scilife-teal);;
-  border-color: var(--scilife-teal);;
+  background-color: var(--scilife-teal);
+  border-color: var(--scilife-teal);
 }
-
 .scilife-pagination .page-item.disabled .page-link {
   color: #6c757d;
   pointer-events: none;
   background-color: #fff;
   border-color: #dee2e6;
 }
-
 
 
 .scilife-intro-map-img {
@@ -508,23 +485,20 @@ body {
   font-weight: 700;
   letter-spacing: -0.04rem;
 }
-
-
 .scilife-subsection h3 {
   color: var(--scilife-teal);
   font-size: 2rem;
   font-weight: 700;
   letter-spacing: -0.04rem;
 }
-
 .scilife-subsection h4 {
   color: var(--scilife-teal);
   font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: -0.04rem;
 }
-
-.scilife-subsection p {
+.scilife-subsection p,
+.scilife-subsection li {
   font-size: 1.125rem;
   font-weight: 400;
   line-height: 1.7rem;
@@ -538,7 +512,6 @@ body {
   font-weight: 700;
   letter-spacing: 0.045rem;
 }
-
 .scilife-subsection .btn:focus {
   background-color: var(--scilife-teal);
   color: white;
@@ -582,7 +555,6 @@ body {
   background-color: var(--scilife-lime-025);
   border-color: var(--scilife-lime-025);
 }
-
 .scilife-alert a {
   color: var(--scilife-grape);
 }
@@ -590,7 +562,6 @@ body {
 .scilife-sort-dropdown,
 .scilife-search-box,
 .scilife-search-icon {
-  color: var(--scilife-dark-grey);
   border-color: var(--scilife-dark-grey);
   border-width: 0.5px;
   padding: 6px 6px;
@@ -602,18 +573,12 @@ body {
 
 .scilife-sort-dropdown {
   background-color: var(--scilife-light-grey);
+  color: var(--scilife-dark-grey);
   margin-left: 0.5px;
   z-index: 1;
   padding-left: 10px;
   padding-right: 10px;
 }
-
-.scilife-search-box {
-  margin-right: 0.5px;
-  z-index: 0;
-  padding-left: 10px;
-}
-
 .scilife-sort-dropdown:hover {
   border-color: var(--scilife-teal);
   background-color: var(--scilife-teal-025);
@@ -632,27 +597,24 @@ body {
   font-size: 1.2rem;
   font-weight: 500;
 }
-
 .scilife-dropdown-item:hover {
   background-color: var(--scilife-light-grey);
 }
-
 .scilife-dropdown-item.active {
   color: var(--scilife-teal);
   background-color: var(--scilife-teal-025);
 }
 
-.scilife-search-box::placeholder {
-  color: var(--scilife-contrast-okay-grey);
+.scilife-search-box {
+  margin-right: 0.5px;
+  z-index: 0;
+  padding-left: 10px;
 }
-
-
-
 .scilife-search-box:focus {
-  color: var(--scilife-dark-grey) !important;
-  border-color: var(--scilife-dark-grey) !important;
   border-width: 2px;
   outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(4, 92, 100, 0.25);
+  border-color: var(--scilife-dark-grey) !important;
 }
 
 
@@ -675,24 +637,22 @@ body {
   text-align: left;
 }
 
+
 .scilife-icon-sm {
   margin-left: 0.2rem;
   width: 1.1rem;
   height: 1.1rem;
 }
-
 .scilife-icon {
   margin-left: 0.25rem;
   width: 1.3rem;
   height: 1.3rem;
 }
-
 .scilife-icon-lg {
   margin-left: 0.25rem;
   width: 1.6rem;
   height: 1.6rem;
 }
-
 .scilife-icon-xl {
   margin-left: 0.25rem;
   width: 2rem;
@@ -707,7 +667,6 @@ body {
   line-height: 1.575rem;
   letter-spacing: 0.0625rem;
 }
-
 .scilife-download-table-caption img {
   margin-right: 0.5rem;
 }
@@ -725,7 +684,6 @@ body {
   text-decoration: none;
   font-size: 0.7rem;
 }
-
 .scilife-download-link img {
   margin-bottom: 0.2rem;
   width: 2.1rem;
@@ -738,23 +696,19 @@ body {
   justify-content: right;
   align-items: right;
 }
-
 .scilife-toggle .form-check-input:checked {
   background-color: var(--scilife-teal);
   border-color: var(--scilife-teal);
   box-shadow: 0 0 0 0.2rem rgba(4, 92, 100, 0.5);
 }
-
 .scilife-toggle .form-check-input::before {
   background-color: #fff;
 }
-
 .scilife-toggle .form-check-label {
   font-size: 1.1rem;
   margin-left: 0.5rem;
   margin-right: 0.6rem;
 }
-
 
 /* contribute page */
 .scilife-numbered-circle {
@@ -794,7 +748,6 @@ body {
 .scilife-contrib-subheader {
   font-size: 1.5rem;
   font-weight: 700;
-  color: black;
 }
 
 .scilife-contrib-subtext {
@@ -810,23 +763,29 @@ body {
   font-style: italic;
 }
 
+
+.accordion-button {
+  font-size: 1.2rem;
+}
+.accordion-button:focus {
+  box-shadow: None;
+}
+
+
 /* footer images */
 .scilife-footer-img {
   max-width: 150px;
 }
-
 @media (min-width: 1200px) {
   .scilife-footer-img {
     max-width: 140px;
   }
 }
-
 @media (min-width: 1400px) {
   .scilife-footer-img {
     max-width: 150px;
   }
 }
-
 
 
 /* privacy optout */
@@ -839,32 +798,26 @@ iframe#matoOpOut {
   border-radius: 0.3rem;
   border-color: var(--scilife-dark-grey);
 }
-
-/* Styles for different screen sizes */
 @media (max-width: 360px) {
   iframe#matoOpOut {
     height: 50vh;
   }
 }
-
 @media (min-width: 361px) {
   iframe#matoOpOut {
     height: 25vh;
   }
 }
-
 @media (min-width: 492px) {
   iframe#matoOpOut {
     height: 20vh;
   }
 }
-
 @media (min-width: 768px) {
   iframe#matoOpOut {
     height: 15vh;
   }
 }
-
 @media (min-width: 1024px) {
   iframe#matoOpOut {
     height: 14vh;
@@ -895,7 +848,6 @@ pre {
   display: flex;
   justify-content: flex-end;
 }
-
 p + .clipboard {
   margin-top: -1rem; /* Reduce space between <p> above and .clipboard */
 }
@@ -910,7 +862,6 @@ p + .clipboard {
   font-size: 0.8rem;
   transition: 0.1s;
 }
-
 .clipboard-button:hover {
   cursor: pointer;
   background-color: #e0e0e0;
@@ -930,4 +881,119 @@ p + .clipboard {
 .highlight {
   background-color: var(--scilife-grape);
   color: white;
+}
+
+
+/* Light mode specific styles*/
+[data-bs-theme="light"] {
+  footer {
+    background-color: #ebebeb;
+  }
+  .scilife-search-box:focus,
+  .scilife-search-box::placeholder {
+    color: var(--scilife-dark-grey) !important;
+  }
+
+  .accordion-button:not(.collapsed) {
+    color: var(--scilife-teal);
+    background-color: var(--scilife-teal-025);
+  }
+
+}
+
+/* Dark mode specific styles */
+[data-bs-theme="dark"] {
+  body {
+    background-color: #212121;
+    color: #dee2e6;
+  }
+  a {
+    color: var(--scilife-aqua);
+  }
+
+  /* Controls the <thead> part */
+  .table-light {
+    --bs-table-bg: var(--scilife-dark-grey);
+    --bs-table-color: white;
+    --bs-table-border-color: #495057;
+  }
+
+  .accordion-button:not(.collapsed) {
+    color: var(--scilife-teal-025);
+    background-color: var(--scilife-teal);
+  }
+
+
+  .scilife-navbar-main li a,
+  .scilife-navbar-sub li a,
+  .scilife-breadcrumbs,
+  .scilife-breadcrumbs a,
+  .scilife-search-icon,
+  .scilife-species-card h3,
+  .scilife-footer-titles,
+  .last-updated_text {
+    color: var(--scilife-light-grey);
+  }
+  .scilife-search-box,
+  .scilife-search-box:active,
+  .scilife-search-box:focus,
+  .scilife-search-box::placeholder {
+    color: var(--scilife-light-grey) !important;
+  }
+
+  .scilife-search-box,
+  .scilife-search-icon {
+    border-color: var(--scilife-teal);
+  }
+
+  .scilife-search-icon {
+    background-color: var(--scilife-teal);
+  }
+
+  .scilife-sort-dropdown {
+    background-color: var(--scilife-light-grey);
+  }
+
+  .scilife-sort-dropdown:hover {
+    color: var(--scilife-dark-grey);
+  }
+
+  .scilife-sort-dropdown:focus {
+    color: black;
+    border-color: var(--scilife-teal);
+    background-color: var(--scilife-teal-025);
+  }
+
+  .scilife-dropdown-item:hover {
+    background-color: var(--scilife-teal);
+    color: white;
+  }
+
+  .scilife-species-card h2,
+  footer {
+    color: white;
+  }
+
+  .scilife-species-titles h3,
+  .scilife-subsection h2,
+  .scilife-subsection h3,
+  .scilife-subsection h4,
+  .scilife-contrib-enjoy-subtext,
+  .scilife-card-image-attrib {
+    color: var(--scilife-aqua);
+  }
+
+  .scilife-alert {
+    color: var(--scilife-dark-grey);
+  }
+
+  .scilife-alert a,
+  .citation-block a {
+    color: var(--scilife-grape);
+  }
+  .scilife-no-results-alert {
+    color: #f8f9fa;
+    background-color: var(--scilife-dark-grey);
+    border-color: var(--scilife-medium-grey);
+  }
 }
