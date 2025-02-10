@@ -8,7 +8,7 @@ title: Frequently Asked Questions
 
 <div class="accordion mb-4" id="accordion-1">
 
-{{< faq_block accordionID="accordion-1" collapsed=false title="How does the Swedish Reference Genome Portal differ from other genome portal initiatives? (e.g., Ensembl, UCSC)" >}}
+{{< faq_block accordionID="accordion-1" title="How does the Swedish Reference Genome Portal differ from other genome portal initiatives? (e.g., Ensembl, UCSC)" >}}
 The Swedish Reference Genome Portal (SRGP) does not replace existing genome portal initiatives, as it has specific aims and scope:
 
 - The SRGP targets the Swedish research community and is restricted to non-human eukaryotic species. Therefore, the species displayed here are typically limited to those submitted by researchers affiliated with Swedish institutions. In contrast, global genome portals such as Ensembl and UCSC have much broader taxonomic scope, aiming to include species from around the world, including humans and prokaryotes.
