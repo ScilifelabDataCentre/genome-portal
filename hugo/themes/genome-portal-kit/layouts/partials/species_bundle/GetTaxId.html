@@ -1,0 +1,9 @@
+{{ $url := replace . " " "%20" | printf "https://www.ebi.ac.uk/ena/taxonomy/rest/scientific-name/%s" }}
+{{ $data := partial "species_bundle/get-remote-data.html" $url }}
+{{ $taxId := "" }}
+{{ with index $data 0 "taxId" }}
+    {{ $taxId = . }}
+{{ else }}
+    {{ warnf "Could not find ENA taxon ID for species: %s" $ }}
+{{ end }}
+{{ return $taxId }}
