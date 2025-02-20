@@ -162,16 +162,6 @@ body {
 }
 
 
-.scilife-contact-form:focus {
-  box-shadow: 0 0 0 0.2rem rgba(4, 92, 100, 0.25);
-}
-
-#contactForm .form-check-input:checked {
-  background-color: var(--scilife-teal);
-  border-color: var(--scilife-teal);
-}
-
-
 .navbar-brand {
   padding-top: auto;
   padding-bottom: 0;

@@ -2,15 +2,15 @@
 title: Contact
 ---
 
-We welcome all questions and suggestions regarding the genome portal. Please feel free to send an email to the team behind the portal at [dsn-eb@scilifelab.se](mailto:dsn-eb@scilifelab.se) or fill in the contact form below and we'll get back to you as soon as possible.
+### Contact us
 
-If you would like to get in contact due to an issue with the website and have a GitHub account you are also very welcome to [create an issue on the projects repository](https://github.com/ScilifelabDataCentre/genome-portal/issues/new), but it is of course fine to use our email or the form below.
+We welcome all questions and suggestions regarding the genome portal. Please feel free to send an email to the team behind the portal at [dsn-eb@scilifelab.se](mailto:dsn-eb@scilifelab.se) and we'll get back to you as soon as possible.
 
-{{< contact_form >}}
+If you would like to get in contact due to an issue with the website and have a GitHub account you are also very welcome to [create an issue on the projects repository](https://github.com/ScilifelabDataCentre/genome-portal/issues/new), but it is of course fine to use our email.
 
 ### Personal data policy
 
-The personal data you provide in this form including your name and email address,
+The personal data you provide when contacting us including your name and email address,
 will be used solely to address your questions/suggestions regarding the Genome Portal.
 
 This Portal is run by the SciLifeLab Data Centre and the following parties
