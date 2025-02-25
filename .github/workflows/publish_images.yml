@@ -16,9 +16,8 @@ on:
   workflow_dispatch:
     inputs:
       docker_tag:
-        description: 'Docker tag for the image, default is dev. Use prod for a release branch fix'
+        description: 'Docker tag for the image, if left blank tag will be: dev-[commit hash]'
         required: false
-        default: 'dev'
 
 jobs:
   push-to-container-registry:
@@ -55,6 +54,8 @@ jobs:
         id: set-tag
         run: |
           ./set_docker_tag ${{ github.event_name }} \
+                           ${{ github.ref_name }} \
+                           ${{ github.sha }} \
                            ${{ github.event.inputs.docker_tag }} \
                            >> $GITHUB_OUTPUT
 
