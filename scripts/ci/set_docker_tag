@@ -1,8 +1,17 @@
 #!/bin/sh
-case "$1" in
-    release)
-        tag=prod;;
-    workflow_dispatch)
-        tag="$2";;
-esac
-echo "tag=${tag:-dev}"
+# Note: using getopts here could be a awkward as DOCKER_TAG sometimes exists, sometimes doesn't.
+# DOCKER_TAG occurs if triggered by workflow_dispatch and tag added.
+
+EVENT_NAME=$1
+REF_NAME=$2
+SHA=$3
+DOCKER_TAG=$4
+
+if [ -n "$DOCKER_TAG" ]; then
+   tag="$DOCKER_TAG"
+elif [ "$EVENT_NAME" = "release" ]; then
+    tag="$REF_NAME"
+else
+    tag="dev-$SHA"
+fi
+echo "tag=$tag"
