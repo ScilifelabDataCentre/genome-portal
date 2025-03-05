@@ -22,12 +22,6 @@ We use a third party service, Matomo Analytics (hosted on SciLifeLab servers and
 
 <iframe id="matoOpOut" src="https://matomo.dc.scilifelab.se/index.php?module=CoreAdminHome&action=optOut&language=en&fontSize=16px&fontFamily=Helvetica"></iframe>
 
-### Contact form
-
-Our **Service** contains a <a href="/contact">contact form</a> that visitors can use to contact us or send us suggestions. The website visitors may choose to provide their personal information such as their name and e-mail address through this form.
-
-The following parties will have access to processing the personal data provided through the form; SciLifeLab Data Centre, Uppsala University, KTH Royal Institute of Technology and Swedish Museum of Natural History. Your personal data will be deleted when no longer needed, or when stipulated by the archival rules for the university as a government authority. If you want to update or remove your personal data, please contact the controller SciLifeLab Data Centre at Uppsala University using [dsn-eb@scilifelab.se](mailto:dsn-eb@scilifelab.se).
-
 ### Links to other sites
 
 Our **Service** may contain links to other sites. If you click on a third-party link, you will be directed to that site. Note that these external sites are not operated by us. Therefore, we strongly advise you to review the privacy policy of these websites. We have no control over, and assume no responsibility for, the content, privacy policies, or practices of any third-party sites or services.

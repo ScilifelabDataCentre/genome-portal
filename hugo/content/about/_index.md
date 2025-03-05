@@ -44,4 +44,4 @@ This service is supported by SciLifeLab and the Knut and Alice Wallenberg Founda
 
 ### Getting help
 
-For questions, comments, or issues related to the Genome Portal, please contact us via email at [dsn-eb@scilifelab.se](mailto:dsn-eb@scilifelab.se), or use the <a href="/contact">Contact</a> form.
+For questions, comments, or issues related to the Genome Portal, please contact us via email at [dsn-eb@scilifelab.se](mailto:dsn-eb@scilifelab.se).

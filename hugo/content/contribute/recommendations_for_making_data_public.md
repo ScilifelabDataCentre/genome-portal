@@ -53,4 +53,4 @@ Let’s assume that a user wants to make three files publicly available by submi
 
 ### Questions?
 
-We are happy to discuss and advise on best practices for making research data publicly available. Please send us an email to [dsn-eb@scilifelab.se](mailto:dsn-eb@scilifelab.se) or contact us through the <a href="/contact">Contact</a> page.
+We are happy to discuss and advise on best practices for making research data publicly available. Please send us an email to [dsn-eb@scilifelab.se](mailto:dsn-eb@scilifelab.se) to get in contact with us.
