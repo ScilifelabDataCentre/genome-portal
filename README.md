@@ -75,8 +75,7 @@ as well as by the [Swedish Foundation for Strategic Research
 We welcome all questions and suggestions (including feature requests or bug reports).
 
 - Email us at [dsn-eb@scilifelab.se](mailto:dsn-eb@scilifelab.se).
-- Fill out our [contact form on the website](https://genomes.scilifelab.se/contact/).
-- [Create an issue in Github](https://github.com/ScilifelabDataCentre/genome-portal/issues/new).
+- [Create an issue on Github](https://github.com/ScilifelabDataCentre/genome-portal/issues/new).
 
 
 ## Technical overview

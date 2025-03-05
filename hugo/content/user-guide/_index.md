@@ -7,7 +7,7 @@ toc: true
 
 On this page, you will find documentation for the **Swedish Reference Genome Portal**, which provides a general overview of its graphical user interface, structure, and useful features.
 
-We gratefully welcome comments or questions via [email](mailto:dsn-eb@scilifelab.se), or through our <a href="/contact">contact</a> form.
+We gratefully welcome comments or questions via [email](mailto:dsn-eb@scilifelab.se).
 
 ### 1. Website structure
 
@@ -25,7 +25,7 @@ The **navigation bar** includes links to various pages:
 - **Frequently Asked Questions (FAQs)**: Answers to common questions that users may have regarding the Genome Portal.
 - **Glossary**: An alphabetically arranged list providing definitions for terms on the website that might be unfamiliar to users.
 - **About**: Overview of the Genome Portal service, terms of use, privacy policy, funding, and implementation details.
-- **Contact**: A form to reach out to the Genome Portal's staff.
+- **Contact**: How to get in touch with the staff behing the Genome Portal.
 - **Cite us**: Guidelines on recommended citations for the Genome Portal website, species pages, data files, and genome browser.
 
 <p align=center><img src="/img/user-guide/Fig01_Home_page.webp"
