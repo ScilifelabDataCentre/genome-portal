@@ -97,6 +97,13 @@
                                         </a>
                                     </td>
 
+                                {{ else if strings.HasPrefix $accessionCode "NGBO" }}
+                                    <td>
+                                        <a href="https://ontobee.org/ontology/NGBO?iri=http://purl.obolibrary.org/obo/{{$accessionCode}}" target="_blank">
+                                            {{ $accessionCode }}
+                                        </a>
+                                    </td>
+
                                 {{ else }}
                                     <td>{{ $accessionCode | markdownify }}</td>
                                 {{ end }}
