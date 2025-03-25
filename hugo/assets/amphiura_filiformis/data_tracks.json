@@ -15,7 +15,7 @@
     },
     {
       "dataTrackName": "Protein-coding genes",
-      "description": "Functional annotation of protein-coding genes",
+      "description": "Structural annotation of protein-coding genes",
       "links": [
         {"Download": "https://zenodo.org/records/11175500/files/Amphiura-filiformis_supp-datasets.zip?download=1"},
         {"Website": "https://doi.org/10.5281/zenodo.10036671"},
