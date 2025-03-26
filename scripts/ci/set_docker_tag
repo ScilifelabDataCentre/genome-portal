@@ -7,11 +7,10 @@ REF_NAME=$2
 SHA=$3
 DOCKER_TAG=$4
 
-if [ -n "$DOCKER_TAG" ]; then
-   tag="$DOCKER_TAG"
-elif [ "$EVENT_NAME" = "release" ]; then
+
+if [ "$EVENT_NAME" = "release" ]; then
     tag="$REF_NAME"
 else
-    tag="dev-$SHA"
+    tag="${DOCKER_TAG:-$SHA}"
 fi
 echo "tag=$tag"
