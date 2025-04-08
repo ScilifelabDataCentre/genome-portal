@@ -181,6 +181,39 @@ bundle in `hugo/static/browser`:
 Either of these methods will serve you the website at `http://localhost:8080/`.
 
 
+
+### Making a new release/updating the dev cluster
+
+We use [kubernetes](https://kubernetes.io/) to deploy and manage both the production and development instances of the genome portal.
+
+This repository is responsible for making the 2 docker images needed for the deployment. This is controlled by this [GH actions workflow file](https://github.com/ScilifelabDataCentre/genome-portal/blob/main/.github/workflows/publish_images.yml).
+
+**To update the production instance we need to create a new release with GitHub:**
+- Identify a commit to base the release on.
+- Agree with the team on the: 
+  - commit to tag.
+  - the planned version number (we use semantic versioning)
+  - The contents of the release, [use the previous releases as inspiration](https://github.com/ScilifelabDataCentre/genome-portal/releases) 
+- Once you have the go ahead, either:
+  - Create an annotated tag locally (e.g: `git tag -a v1.3.1 "v1.3.1"` ) and push the tag, Then create the release (on that tag) using GitHubs interface.
+  - Create the release using GitHubs interface and specify the commit you want to use and get GitHub to automatically create the tag for you.   
+
+- Once the release is published, a GH actions workflow will be triggered automatically to build the two images. The docker images will be tagged with the same string as used for the git tag (i.e. vX.X.X). They will also be given the tag "latest". You can see [the docker images created from this repository here](https://github.com/orgs/ScilifelabDataCentre/packages?repo_name=genome-portal). 
+
+- With the 2 images made, you can follow the instructions in the README of our [private repository that contains the kubernetes manifest files](https://github.com/ScilifelabDataCentre/argocd-genome-portal) which we use in combination with [ArgoCD](https://argo-cd.readthedocs.io/en/stable/) to define the desired state of the cluster. 
+
+**To update the development instance** 
+
+- Identify the commit you want the docker images to be built off of. 
+- If the commit is on the main branch a GH actions workflow run will have already built the images ([unless the commit message was prefixed to skip CI](https://docs.github.com/en/actions/managing-workflow-runs-and-deployments/managing-workflow-runs/skipping-workflow-runs)). The images will be tagged with the full commit hash. If the image is already built your job on this repository is already done. 
+- If the commit is on any other branch you'll need to trigger a [workflow_dispatch](https://docs.github.com/en/actions/managing-workflow-runs-and-deployments/managing-workflow-runs/manually-running-a-workflow) to create the docker images. 
+- Head to the actions tag on GitHub and to the action "Build and push both docker images to the GitHub Container Registry". From there click run manual workflow. You can choose to specify the name of the image tag if you want. Otherwise leave the input blank and it will be tagged with the full commit hash.  
+
+
+**Once the images are built you can head over to our [private repository that contains the kubernetes manifest files](https://github.com/ScilifelabDataCentre/argocd-genome-portal) and follow the instructions there on how to apply your changes to the cluster.**
+
+
+
 ## Credits
 
 The Swedish Reference Genome Portal is developed and maintained by the DDLS 
