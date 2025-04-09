@@ -183,7 +183,7 @@ def get_track_file_name(track):
     return file_name.rsplit(".", 1)[0] if file_name.endswith((".gz", ".bgz", ".zip")) else file_name
 
 
-def populate_defaultSession_object(data, species_info):
+def populate_defaultSession_object(data, species_info, assembly_counter):
     """
     Subfunction that populates the outer parts of the defaultSession JSON object with the species name and abbreviation.
     Also adds disableAnalytics to the dictionary to prevent Google Analytics from being loaded when running JBrowse.
@@ -195,7 +195,7 @@ def populate_defaultSession_object(data, species_info):
             "hierarchicalTrackSelector": {
                 "id": "hierarchicalTrackSelector",
                 "type": "HierarchicalTrackSelectorWidget",
-                "view": f"{species_info["species_abbreviation"]}_default_session_view",
+                "view": f"{species_info["species_abbreviation"]}_default_session_view_{assembly_counter}",
                 "faceted": {"showSparse": False, "showFilters": True, "showOptions": False, "panelWidth": 400},
             }
         },
@@ -501,7 +501,7 @@ def main():
                     f"scripts/data_stewardship/temp/{species_info['species_name_underscored']}_default_session.json",
                 )
             populated_data = {}
-            populated_data = populate_defaultSession_object(populated_data, species_info)
+            populated_data = populate_defaultSession_object(populated_data, species_info, assembly_counter)
 
         populated_data = initiate_views_and_populate_mandatory_tracks(
             populated_data, species_info, config, git_root, config_dir, assembly_counter
