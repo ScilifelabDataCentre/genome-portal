@@ -11,7 +11,7 @@ import shutil
 from pathlib import Path
 
 import requests
-from get_taxonomy import EbiRestException, get_taxonomy
+from add_new_species.get_taxonomy import EbiRestException, get_taxonomy
 
 TEMPLATE_DIR = Path(__file__).parent / "templates"
 
@@ -23,7 +23,6 @@ CONTENT_FILES = (INDEX_FILE, ASSEMBLY_FILE, DOWNLOAD_FILE)
 STATS_FILE = "species_stats.yml"
 DATA_FILES = (STATS_FILE,)
 
-LINEAGE_FILE = "lineage.json"
 DATA_TRACKS_FILE = "data_tracks.json"
 
 

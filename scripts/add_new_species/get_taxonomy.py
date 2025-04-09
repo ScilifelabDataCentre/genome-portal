@@ -40,7 +40,7 @@ ENA_BASE_URL = r"https://www.ebi.ac.uk/ena/browser/view/Taxon:"
 NCBI_BASE_URL = r"https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id="
 
 FILE_NAME = "taxonomy.json"
-TEMPLATE_FILE_PATH = Path(__file__).parent / "templates" / FILE_NAME
+TEMPLATE_FILE_PATH = Path(__file__).parent.parent / "templates" / FILE_NAME
 
 TAXONOMIC_RANKS = [
     "genus",
@@ -69,7 +69,7 @@ def prep_out_dir(out_dir: str | None, species_name: str) -> Path:
     """
     if out_dir is None:
         folder_name = species_name.replace(" ", "_").lower()
-        out_dir_path = Path(__file__).parent / f"../hugo/data/{folder_name}"
+        out_dir_path = Path(__file__).parent.parent / f"../hugo/data/{folder_name}"
     else:
         out_dir_path = Path(out_dir)
 
