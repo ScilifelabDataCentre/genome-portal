@@ -1,0 +1,58 @@
+{
+    "Species": {
+        "science_name": "Bufotes viridis",
+        "tax_id": "30338",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:30338",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=30338",
+        "display_order": 1
+    },
+    "Genus": {
+        "science_name": "Bufotes",
+        "tax_id": "651673",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:651673",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=651673",
+        "display_order": 2
+    },
+    "Family": {
+        "science_name": "Bufonidae",
+        "tax_id": "8382",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:8382",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=8382",
+        "display_order": 3
+    },
+    "Order": {
+        "science_name": "Anura",
+        "tax_id": "8342",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:8342",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=8342",
+        "display_order": 4
+    },
+    "Class": {
+        "science_name": "Amphibia",
+        "tax_id": "8292",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:8292",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=8292",
+        "display_order": 5
+    },
+    "Phylum": {
+        "science_name": "Chordata",
+        "tax_id": "7711",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:7711",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=7711",
+        "display_order": 6
+    },
+    "Kingdom": {
+        "science_name": "Metazoa",
+        "tax_id": "33208",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:33208",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=33208",
+        "display_order": 7
+    },
+    "Superkingdom": {
+        "science_name": "",
+        "tax_id": "",
+        "ena_link": "",
+        "ncbi_link": "",
+        "display_order": 8
+    }
+}
