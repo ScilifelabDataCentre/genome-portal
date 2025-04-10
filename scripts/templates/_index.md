@@ -5,7 +5,6 @@ subtitle: "[EDIT]"
 
 last_updated: "[EDIT - USE FORMAT LIKE THIS: DD/MM/YYYY]"
 
-cover_image: "/img/species/[EDIT]"
 img_attrib_text: "[EDIT]"
 img_attrib_link: "[EDIT] - if there is no hyperlink available for this file, then you should delete this line"
 
@@ -18,6 +17,7 @@ url: "SPECIES_FOLDER"
 weight: 1
 science_name: "SPECIES_NAME"
 lineage_data_path: "SPECIES_FOLDER/taxonomy"
+cover_image: "/img/species/SPECIES_FOLDER.webp"
 
 gbif_taxon_id: "GBIF_TAXON_ID"
 goat_webpage: "GOAT_WEBPAGE"

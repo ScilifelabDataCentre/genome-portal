@@ -7,26 +7,12 @@ Places to fill in will be marked with: "[EDIT]"
 """
 
 import argparse
-import shutil
 from pathlib import Path
 
-import requests
-from add_new_species.get_taxonomy import EbiRestException, get_taxonomy
-
-TEMPLATE_DIR = Path(__file__).parent / "templates"
-
-INDEX_FILE = "_index.md"
-ASSEMBLY_FILE = "assembly.md"
-DOWNLOAD_FILE = "download.md"
-CONTENT_FILES = (INDEX_FILE, ASSEMBLY_FILE, DOWNLOAD_FILE)
-
-STATS_FILE = "species_stats.yml"
-DATA_FILES = (STATS_FILE,)
-
-DATA_TRACKS_FILE = "data_tracks.json"
-
-
-GBIF_ENDPOINT = r"https://api.gbif.org/v1/species/match?name="
+from add_new_species.add_content_files import add_content_files
+from add_new_species.add_data_tracks_file import add_data_tracks_file
+from add_new_species.add_stats_file import add_stats_file
+from add_new_species.image_processer import process_species_image
 
 
 def run_argparse() -> argparse.Namespace:
@@ -45,6 +31,13 @@ def run_argparse() -> argparse.Namespace:
     )
 
     parser.add_argument(
+        "--species_image",
+        type=str,
+        metavar="[image file location]",
+        help="""Path to the species image to be added. The image must be 4:3 aspect ratio.""",
+    )
+
+    parser.add_argument(
         "--overwrite",
         action="store_true",
         help="""If the files for the species already exist, should they be overwritten?
@@ -54,131 +47,66 @@ def run_argparse() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def create_dirs(dir_name: str) -> tuple[Path, Path, Path]:
+def all_dir_paths(species_slug: str) -> dict[str, Path]:
     """
-    Create the content, data and assets directories for a species (inside Hugo).
-
-    Return each of their locations as pathlib objects.
+    make a dict of all the output folder paths for the species.
+    Makes sure that any folders that need to be created are created.
     """
-    content_dir_path = Path(__file__).parent / f"../hugo/content/species/{dir_name}"
-    content_dir_path.mkdir(parents=False, exist_ok=True)
+    content_dir_path = Path(__file__).parent / f"../hugo/content/species/{species_slug}"
+    data_dir_path = Path(__file__).parent / f"../hugo/data/{species_slug}"
+    assets_dir_path = Path(__file__).parent / f"../hugo/assets/{species_slug}"
+    image_dir_path = Path(__file__).parent / "../hugo/static/img/species"
 
-    data_dir_path = Path(__file__).parent / f"../hugo/data/{dir_name}"
-    data_dir_path.mkdir(parents=False, exist_ok=True)
+    for path in (content_dir_path, data_dir_path, assets_dir_path):
+        path.mkdir(parents=False, exist_ok=True)
 
-    assets_dir_path = Path(__file__).parent / f"../hugo/assets/{dir_name}"
-    assets_dir_path.mkdir(parents=False, exist_ok=True)
+    return {
+        "content_dir_path": content_dir_path,
+        "data_dir_path": data_dir_path,
+        "assets_dir_path": assets_dir_path,
+        "image_dir_path": image_dir_path,
+    }
 
-    return content_dir_path, data_dir_path, assets_dir_path
 
-
-def add_content_files(species_name: str, content_dir_path: Path, tax_id: str) -> None:
+def check_dirs_empty(all_dir_paths: dict[str, Path]) -> None:
     """
-    Add the species name to the template content files,
-    then write them to disk.
+    if overwrite mode not specificed, check that the folders are empty.
+    Raise error if not.
     """
-    dir_name = species_name.replace(" ", "_").lower()
-    for file_name in CONTENT_FILES:
-        with open(TEMPLATE_DIR / file_name, "r") as file_in:
-            template = file_in.read()
-
-        template = template.replace("SPECIES_NAME", species_name)
-        template = template.replace("SPECIES_FOLDER", dir_name)
-
-        if file_name == INDEX_FILE:
-            try:
-                gbif_taxon_key = get_gbif_taxon_key(species_name=species_name)
-                template = template.replace("GBIF_TAXON_ID", gbif_taxon_key)
-            except (requests.exceptions.HTTPError, KeyError):
-                print(
-                    f"""WARNING: Failed to get GBIF key for species: {args.species_name}.
-                    Not to worry,
-                    you can instead add it manually to the _index.md file in the species directory."""
-                )
-                template = template.replace("GBIF_TAXON_ID", "[EDIT]")
-
-            if tax_id:
-                goat_link = make_goat_weblink(species_name=species_name, tax_id=tax_id)
-                template = template.replace("GOAT_WEBPAGE", goat_link)
-            else:
-                template = template.replace("GOAT_WEBPAGE", "[EDIT]")
-
-        output_file_path = content_dir_path / file_name
-
-        with open(output_file_path, "w") as file_out:
-            file_out.write(template)
-        print(f"File created: {output_file_path.resolve()}")
-
-
-def add_stats_file(data_dir_path: Path) -> None:
-    """
-    Add the species name to the template data files,
-    then write them to disk.
-    """
-    for file_name in DATA_FILES:
-        template_file_path = TEMPLATE_DIR / file_name
-        output_file_path = data_dir_path / file_name
-        shutil.copy(template_file_path, output_file_path)
-        print(f"File created: {output_file_path.resolve()}")
-
-
-def add_data_tracks_json(assets_dir_path: Path) -> None:
-    """
-    The download page of each species contains an info table about each of the data tracks avaialble.
-    This function creates a template JSON file (to fill in) for this table.
-    This file is stored in the assets folder and at build time, a duplicate it placed in the static folder.
-    """
-    template_file_path = TEMPLATE_DIR / DATA_TRACKS_FILE
-    output_file_path = assets_dir_path / DATA_TRACKS_FILE
-    shutil.copy(template_file_path, output_file_path)
-    print(f"File created: {output_file_path.resolve()}")
-
-
-def get_gbif_taxon_key(species_name: str) -> str:
-    """
-    Get the GBIF "usageKey" / "taxonKey" given a species name.
-
-    The "usageKey" is a unique identifier for the species in the GBIF database.
-    """
-    species_name = species_name.replace(" ", "%20").lower()
-    url = f"{GBIF_ENDPOINT}{species_name}"
-    response = requests.get(url)
-    response.raise_for_status()
-    return str(response.json()["usageKey"])
-
-
-def make_goat_weblink(species_name: str, tax_id: str | int) -> str:
-    """
-    Return the webpage to the GOAT database for a specific species.
-    """
-    species_name = species_name.replace(" ", "%20").lower()
-    return rf"https://goat.genomehubs.org/record?recordId={str(tax_id)}&result=taxon&taxonomy=ncbi#{species_name}"
+    empty_dirs = [all_dir_paths["content_dir_path"], all_dir_paths["data_dir_path"], all_dir_paths["assets_dir_path"]]
+    for dir_path in empty_dirs:
+        if any(dir_path.iterdir()):
+            raise FileExistsError(
+                f"""
+                It appears that a species entry already exists for: "{args.species_name}",
+                If you are sure you want to overwrite these files, add the flag "--overwrite".
+                Exiting..."""
+            )
 
 
 if __name__ == "__main__":
     args = run_argparse()
 
-    dir_name = args.species_name.replace(" ", "_").lower()
-    content_dir_path, data_dir_path, assets_dir_path = create_dirs(dir_name)
+    species_slug = args.species_name.replace(" ", "_").lower()
+    output_dir_paths = all_dir_paths(species_slug)
 
-    if (not args.overwrite) and ((content_dir_path / INDEX_FILE).exists()):
-        raise FileExistsError(
-            f"""
-            It appears that a species entry already exists for: "{args.species_name}",
-            If you are sure you want to overwrite these files, add the flag "--overwrite".
-            Exiting..."""
-        )
+    if not args.overwrite:
+        check_dirs_empty(all_dir_paths=output_dir_paths)
 
-    print("Retriveing taxonomy information, this shouldn't take more than a minute...")
-    try:
-        tax_id = get_taxonomy(species_name=args.species_name, overwrite=args.overwrite)
-    except EbiRestException:
-        tax_id = None
-        print(
-            f"""WARNING: Failed to get taxonomy information for species: {args.species_name}
-            All other files will now be generated except this file"""
-        )
+    out_img_path = output_dir_paths["image_dir_path"] / f"{species_slug}.webp"
+    process_species_image(in_img_path=Path(args.species_image), out_img_path=out_img_path)
 
-    add_stats_file(data_dir_path=data_dir_path)
-    add_data_tracks_json(assets_dir_path=assets_dir_path)
-    add_content_files(species_name=args.species_name, content_dir_path=content_dir_path, tax_id=tax_id)
+    add_content_files(
+        species_name=args.species_name,
+        species_slug=species_slug,
+        content_dir_path=output_dir_paths["content_dir_path"],
+        data_dir_path=output_dir_paths["data_dir_path"],
+    )
+
+    add_stats_file(
+        data_dir_path=output_dir_paths["data_dir_path"],
+    )
+
+    add_data_tracks_file(
+        assets_dir_path=output_dir_paths["assets_dir_path"],
+    )

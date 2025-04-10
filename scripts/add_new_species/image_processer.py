@@ -30,7 +30,7 @@ def process_species_image(in_img_path: Path, out_img_path: Path):
 
     convert_save_webp(ori_image, out_img_path)
 
-    print(f"Species image saved to {out_img_path}")
+    print(f"Species image saved to {out_img_path.resolve()}")
 
 
 def image_4_by_3(size: tuple[int, int]) -> bool:
