@@ -15,7 +15,7 @@ def test_generate_data_tracks_json(example_excel_files: dict[str, Path], temp_ou
     output_json_file = temp_output_dir / OUTPUT_JSON_NAME
 
     # Call the function to generate the JSON file
-    generate_data_tracks_json(input_excel_file, sheet_name, output_json_file)
+    generate_data_tracks_json(input_excel_file, output_json_file, sheet_name)
 
     # Assert that the output file exists
     assert output_json_file.exists(), "Output file was not created"
@@ -29,5 +29,5 @@ def test_fails_with_comments_in_excel_file(example_excel_files: dict[str, Path],
     sheet_name = "Sheet1"
     output_json_file = temp_output_dir / OUTPUT_JSON_NAME
 
-    with pytest.raises(ValueError, match="Error reading Excel file:"):
-        generate_data_tracks_json(input_excel_file, sheet_name, output_json_file)
+    with pytest.raises(ValueError, match="Unable to read workbook"):
+        generate_data_tracks_json(input_excel_file, output_json_file, sheet_name)

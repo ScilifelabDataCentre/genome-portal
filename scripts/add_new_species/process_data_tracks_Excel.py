@@ -1,11 +1,8 @@
 """
 Submodule to read the data tracks Excel form (.xlsx) and populate the data_tracks.json.
 
-The Excel files cannot contain comments.
-
-Dependencies:
-pip install pandas
-pip install openpyxl
+NB! The Excel files cannot contain comments; if it does, pd.read_excel will fail with the error
+"This is most probably because the workbook source files contain some invalid XML."
 
 """
 
@@ -18,25 +15,16 @@ JSON_TEMPLATE_FILE_NAME = "data_tracks.json"
 TEMPLATE_FILE_PATH = Path(__file__).parent.parent / "templates" / JSON_TEMPLATE_FILE_NAME
 
 
-def read_excel_file(file_path: Path, sheet_name: str) -> pd.DataFrame:
-    """
-    Read the Excel file and return a DataFrame.
-    """
-    try:
-        df = pd.read_excel(file_path, sheet_name=sheet_name, engine="openpyxl")
-        return df
-    except ValueError as e:
-        raise ValueError(f"Error reading Excel file: {e}") from e
-
-
-def row_to_json(row: pd.Series, template_json: str) -> dict:
+def df_row_to_json(row: pd.Series, template_json: str) -> dict:
     """
     Convert a row of the DataFrame to a JSON object using the JSON template.
+    Handle missing values by checking if the value is None or NaN: if so,
+    use the default value from the template instead. Columns that are present
+    in the template but not in the row will be passed through as is.
     """
-    # Reinitialize the data_track dict for each row by parsing the JSON string for each row
+
     data_track = json.loads(template_json)
 
-    # Update the fields that are present in the row. Skip the ones that are not present or are NaN
     if "data_track_name" in row and pd.notna(row["data_track_name"]):
         data_track["dataTrackName"] = row["data_track_name"]
     if "data_track_description" in row and pd.notna(row["data_track_description"]):
@@ -59,27 +47,20 @@ def row_to_json(row: pd.Series, template_json: str) -> dict:
     return data_track
 
 
-def generate_data_tracks_json(file_path: str, sheet_name: str, output_json_path: Path) -> None:
+def generate_data_tracks_json(file_path: str, output_json_path: Path, sheet_name: str = "Sheet1") -> None:
     """
-    Generate a JSON file from the data tracks Excel file.
+    Generate a JSON file from the data tracks Excel file. Read the Excel file using Pandas
+    and populate the data according to the Genome Portral data_tracks.json template. The
+    output is written to a JSON file.
     """
-    try:
-        # Read the Excel file
-        df = read_excel_file(file_path, sheet_name)
 
-        # Load the JSON template as a string
-        with open(TEMPLATE_FILE_PATH, "r") as file:
-            template_json = json.dumps(json.load(file)[0])
+    df = pd.read_excel(file_path, sheet_name=sheet_name, engine="openpyxl")
 
-        # Generate a list of JSON objects from the DataFrame
-        data_tracks_list_of_dicts = [row_to_json(row, template_json) for _, row in df.iterrows()]
+    with open(TEMPLATE_FILE_PATH, "r") as file:
+        template_json = json.dumps(json.load(file)[0])
 
-        # Write the data to a JSON file
-        with open(output_json_path, "w") as json_file:
-            json.dump(data_tracks_list_of_dicts, json_file, indent=2)
+    data_tracks_list_of_dicts = [df_row_to_json(row, template_json) for _, row in df.iterrows()]
 
+    with open(output_json_path, "w") as json_file:
+        json.dump(data_tracks_list_of_dicts, json_file, indent=2)
         print(f"Data successfully written to {output_json_path}")
-
-    except Exception as e:
-        print(f"An unexpected error occurred: {e}")
-        raise
