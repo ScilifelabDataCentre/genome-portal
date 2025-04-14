@@ -16,7 +16,7 @@ on:
   workflow_dispatch:
     inputs:
       docker_tag:
-        description: 'Docker tag for the image, if left blank tag will be: dev-[commit hash]'
+        description: 'Docker image tag (default: full commit hash)'
         required: false
 
 jobs:
