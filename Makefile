@@ -50,14 +50,14 @@ ALIASES := $(addsuffix aliases.txt,$(sort $(dir $(FASTA))))
 
 # GFF files and indices
 GFF := $(addsuffix .bgz, $(filter %.gff,$(unzipped)))
-GFF_INDICES := $(addsuffix .tbi,$(GFF))
+GFF_INDICES := $(addsuffix .csi,$(GFF))
 
 # GTF files
 GTF := $(filter %.gtf,$(unzipped))
 
 # BED files
 BED := $(addsuffix .bgz,$(filter %.bed,$(unzipped)))
-BED_INDICES := $(addsuffix .tbi,$(BED))
+BED_INDICES := $(addsuffix .csi,$(BED))
 
 LOCAL_FILES := $(GFF) $(GFF_INDICES) \
 	$(FASTA) $(FASTA_INDICES) $(FASTA_GZINDICES) \
