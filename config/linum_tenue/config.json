@@ -327,8 +327,10 @@
           },
           "index": {
             "location": {
-              "uri": "Lten_pop06_TD.bed.bgz.tbi"
-            }
+              "uri": "Lten_pop06_TD.bed.bgz.csi",
+              "locationType": "UriLocation"
+            },
+            "indexType": "CSI"
           }
         },
         "displays": [
@@ -352,8 +354,10 @@
           },
           "index": {
             "location": {
-              "uri": "Lten_pop08_TD.bed.bgz.tbi"
-            }
+              "uri": "Lten_pop08_TD.bed.bgz.csi",
+              "locationType": "UriLocation"
+            },
+            "indexType": "CSI"
           }
         },
         "displays": [
@@ -377,8 +381,10 @@
           },
           "index": {
             "location": {
-              "uri": "Lten_pop17_TD.bed.bgz.tbi"
-            }
+              "uri": "Lten_pop17_TD.bed.bgz.csi",
+              "locationType": "UriLocation"
+            },
+            "indexType": "CSI"
           }
         },
         "displays": [
@@ -402,8 +408,10 @@
           },
           "index": {
             "location": {
-              "uri": "Lten_pop21_TD.bed.bgz.tbi"
-            }
+              "uri": "Lten_pop21_TD.bed.bgz.csi",
+              "locationType": "UriLocation"
+            },
+            "indexType": "CSI"
           }
         },
         "displays": [
@@ -427,8 +435,10 @@
           },
           "index": {
             "location": {
-              "uri": "Lten_pop23_TD.bed.bgz.tbi"
-            }
+              "uri": "Lten_pop23_TD.bed.bgz.csi",
+              "locationType": "UriLocation"
+            },
+            "indexType": "CSI"
           }
         },
         "displays": [
@@ -452,8 +462,10 @@
           },
           "index": {
             "location": {
-              "uri": "Lten_pop26_TD.bed.bgz.tbi"
-            }
+              "uri": "Lten_pop26_TD.bed.bgz.csi",
+              "locationType": "UriLocation"
+            },
+            "indexType": "CSI"
           }
         },
         "displays": [
@@ -477,8 +489,10 @@
           },
           "index": {
             "location": {
-              "uri": "Lten_pop32_TD.bed.bgz.tbi"
-            }
+              "uri": "Lten_pop32_TD.bed.bgz.csi",
+              "locationType": "UriLocation"
+            },
+            "indexType": "CSI"
           }
         },
         "displays": [
@@ -502,8 +516,10 @@
           },
           "index": {
             "location": {
-              "uri": "Lten_pop34_TD.bed.bgz.tbi"
-            }
+              "uri": "Lten_pop34_TD.bed.bgz.csi",
+              "locationType": "UriLocation"
+            },
+            "indexType": "CSI"
           }
         },
         "displays": [
@@ -527,8 +543,10 @@
           },
           "index": {
             "location": {
-              "uri": "Lten_pop06_Pi.bed.bgz.tbi"
-            }
+              "uri": "Lten_pop06_Pi.bed.bgz.csi",
+              "locationType": "UriLocation"
+            },
+            "indexType": "CSI"
           }
         },
         "displays": [
@@ -552,8 +570,10 @@
           },
           "index": {
             "location": {
-              "uri": "Lten_pop08_Pi.bed.bgz.tbi"
-            }
+              "uri": "Lten_pop08_Pi.bed.bgz.csi",
+              "locationType": "UriLocation"
+            },
+            "indexType": "CSI"
           }
         },
         "displays": [
@@ -577,8 +597,10 @@
           },
           "index": {
             "location": {
-              "uri": "Lten_pop17_Pi.bed.bgz.tbi"
-            }
+              "uri": "Lten_pop17_Pi.bed.bgz.csi",
+              "locationType": "UriLocation"
+            },
+            "indexType": "CSI"
           }
         },
         "displays": [
@@ -602,8 +624,10 @@
           },
           "index": {
             "location": {
-              "uri": "Lten_pop21_Pi.bed.bgz.tbi"
-            }
+              "uri": "Lten_pop21_Pi.bed.bgz.csi",
+              "locationType": "UriLocation"
+            },
+            "indexType": "CSI"
           }
         },
         "displays": [
@@ -627,8 +651,10 @@
           },
           "index": {
             "location": {
-              "uri": "Lten_pop23_Pi.bed.bgz.tbi"
-            }
+              "uri": "Lten_pop23_Pi.bed.bgz.csi",
+              "locationType": "UriLocation"
+            },
+            "indexType": "CSI"
           }
         },
         "displays": [
@@ -652,8 +678,10 @@
           },
           "index": {
             "location": {
-              "uri": "Lten_pop26_Pi.bed.bgz.tbi"
-            }
+              "uri": "Lten_pop26_Pi.bed.bgz.csi",
+              "locationType": "UriLocation"
+            },
+            "indexType": "CSI"
           }
         },
         "displays": [
@@ -677,8 +705,10 @@
           },
           "index": {
             "location": {
-              "uri": "Lten_pop32_Pi.bed.bgz.tbi"
-            }
+              "uri": "Lten_pop32_Pi.bed.bgz.csi",
+              "locationType": "UriLocation"
+            },
+            "indexType": "CSI"
           }
         },
         "displays": [
@@ -702,8 +732,10 @@
           },
           "index": {
             "location": {
-              "uri": "Lten_pop34_Pi.bed.bgz.tbi"
-            }
+              "uri": "Lten_pop34_Pi.bed.bgz.csi",
+              "locationType": "UriLocation"
+            },
+            "indexType": "CSI"
           }
         },
         "displays": [
