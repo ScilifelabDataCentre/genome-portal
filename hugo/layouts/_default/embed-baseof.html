@@ -1,0 +1,28 @@
+{{/* This is used instead of baseof.html for the embedded version of the genome browser.
+    located at: hugo/content/embed/_index.md and hugo/layouts/embed/list.html
+    Essentially a heavily stripped down version of baseof.html
+*/}}
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>{{ .Title }}</title>
+
+        {{/* JS needed for genome browser  */}}
+        {{ partial "add_jbrowse_js.html" . }}
+
+        {{/* Matomo tracking - Matomo recommends having it immediately before the closing </head> tag */}}
+        {{ $matomoJS := resources.Get "js/matomo.js" | fingerprint | minify }}
+        <script src="{{ $matomoJS.RelPermalink }}"></script>
+    </head>
+
+    <body class="d-flex flex-column min-vh-100">
+        <main>
+            <div class="container-fluid" id="content">
+                {{- block "main" . }}{{- end }}
+            </div>
+        </main>
+    </body>
+</html>
