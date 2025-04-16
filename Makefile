@@ -178,7 +178,7 @@ define make_index
 	@$(SHELL) scripts/index $<
 endef
 
-$(GFF_INDICES) $(BED_INDICES): %.tbi: %
+$(GFF_INDICES) $(BED_INDICES): %.csi: %
 	$(make_index)
 
 $(FASTA_INDICES): %.fai: %
