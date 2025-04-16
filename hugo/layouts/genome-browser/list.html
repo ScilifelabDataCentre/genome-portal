@@ -1,44 +1,7 @@
 {{ define "script_includes" }}
-
-<!-- Check if the config file exists - if not display error message -->
-{{ $configCheckJS := resources.Get "js/check_for_config.js" | fingerprint | minify }}
-<script src="{{ $configCheckJS.RelPermalink }}"></script>
-
-<script defer src="/browser/static/js/main.js"></script>
-
+{{ partial "add_jbrowse_js.html" . }}
 {{ end }}
-
 
 {{ define "main" }}
-
-<div class="container-fluid mt-3">
-    <div class="row">
-        <div class="col" id="root"></div>
-    </div>
-
-    <!-- Hidden div for no config file message -->
-    <div id="no-config" style="display: none;" class="row scilife-subsection">
-        <div class="alert text-center" role="alert" style="--bs-alert-bg: #E9F2D1; --bs-alert-color: black;">
-            <h2>
-                <i class="bi bi-exclamation-triangle-fill" aria-hidden="true"></i>
-                Error: JBrowse2 Configuration File Not Found
-            </h2>
-            <p style="font-size: 1.4rem;">
-                A configuration file is needed to use the genome browser.
-                If you think this is an error, please first try to refresh the page.
-                If that doesn't work, please contact us and let us know the webpage you were trying to access.
-            </p>
-            <a href="/contact" class="btn mt-2 me-3">Contact us</a>
-            <a href="/" class="btn mt-2 ms-3">Return to Homepage</a>
-        </div>
-    </div>
-</div>
-
-{{ if hugo.IsDevelopment }}
-    <script>
-        window.__jbrowseCacheBuster = true
-    </script>
-{{ end }}
-
-
+{{ partial "genome_browser.html" . }}
 {{ end }}
