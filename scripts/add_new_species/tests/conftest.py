@@ -40,3 +40,16 @@ def example_excel_files() -> dict[str, Path]:
         "excel_form_wo_comments": base_dir / "02-Data_Tracks_Form_v1.1.0_fix.xlsx",
     }
     return excel_files
+
+
+@pytest.fixture
+def assembly_metadata_dict():
+    return {
+        "name": "ASM1142v1",
+        "assembly_level": "Chromosome",
+        "genome_representation": "full",
+        "assembly_type": "haploid",
+        "accession": "GCA_000011425.1",
+        "species_name": "Aspergillus nidulans",
+        "species_name_abbrev": "A. nidulans",
+    }
