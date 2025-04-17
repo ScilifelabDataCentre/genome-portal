@@ -1,10 +1,10 @@
 ---
 key_info:
-  - "Assembly Name": "[EDIT]"
-  - "Assembly Type": "[EDIT]"
-  - "Assembly Level": "[EDIT]"
-  - "Genome Representation": "[EDIT]"
-  - "Accession": "[EDIT]"
+  - "Assembly Name": "ASSEMBLY_NAME"
+  - "Assembly Type": "ASSEMBLY_TYPE"
+  - "Assembly Level": "ASSEMBLY_LEVEL"
+  - "Genome Representation": "GENOME_REPRESENTATION"
+  - "Accession": "ASSEMBLY_ACCESSION"
 
 
 # The params below were auto-generated, you should not need to edit them...
@@ -18,12 +18,13 @@ stats_data_path: "SPECIES_FOLDER/species_stats"
 lineage_data_path: "SPECIES_FOLDER/taxonomy"
 ---
 
+Notes: Assembly statistics were calculated for the primary genome assembly ASSEMBLY_ACCESSION. Busco statistics were taken from [EDIT]. Annotation statistics were calculated using [EDIT].
 
-- [EDIT, Add information about provider and the research group that published the genome and data tracks]
+BUSCO notation: C: Complete; S: Single-copy; D: Duplicated; F: Fragmented; M: Missing; n: Total BUSCO genes included in the dataset (here: arthropoda_odb10). See also [the official BUSCO manual](https://busco.ezlab.org/busco_userguide.html#interpreting-the-results).
 
 ### Publication(s)
 
-The data for *[ADD SPECIES NAME]* displayed in the genome portal comes from:
+The data for *SPECIES_NAME* displayed in the genome portal comes from:
 
 ```{style=citation}
 [EDIT - Add the publication here using markdown formatting]
