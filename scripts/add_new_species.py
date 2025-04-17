@@ -9,6 +9,7 @@ Places to fill in will be marked with: "[EDIT]"
 import argparse
 from pathlib import Path
 
+from add_new_species.add_config_yml_file import add_config_yml_file
 from add_new_species.add_content_files import add_content_files
 from add_new_species.add_data_tracks_file import add_data_tracks_file
 from add_new_species.add_stats_file import add_stats_file
@@ -56,8 +57,9 @@ def all_dir_paths(species_slug: str) -> dict[str, Path]:
     data_dir_path = Path(__file__).parent / f"../hugo/data/{species_slug}"
     assets_dir_path = Path(__file__).parent / f"../hugo/assets/{species_slug}"
     image_dir_path = Path(__file__).parent / "../hugo/static/img/species"
+    config_dir_path = Path(__file__).parent / f"../config/{species_slug}"
 
-    for path in (content_dir_path, data_dir_path, assets_dir_path):
+    for path in (content_dir_path, data_dir_path, assets_dir_path, config_dir_path):
         path.mkdir(parents=False, exist_ok=True)
 
     return {
@@ -65,6 +67,7 @@ def all_dir_paths(species_slug: str) -> dict[str, Path]:
         "data_dir_path": data_dir_path,
         "assets_dir_path": assets_dir_path,
         "image_dir_path": image_dir_path,
+        "config_dir_path": config_dir_path,
     }
 
 
@@ -109,4 +112,8 @@ if __name__ == "__main__":
 
     add_data_tracks_file(
         assets_dir_path=output_dir_paths["assets_dir_path"],
+    )
+
+    add_config_yml_file(
+        config_dir_path=output_dir_paths["config_dir_path"],
     )
