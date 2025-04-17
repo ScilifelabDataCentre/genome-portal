@@ -75,5 +75,6 @@ def fetch_assembly_metadata(accession: str) -> dict:
     assembly_metadata_dict = {}
     assembly_metadata_dict = get_ena_assembly_metadata_xml(accession)
     assembly_metadata_dict["assembly_type"] = get_ncbi_assembly_metadata_json(accession)
+    assembly_metadata_dict["accession"] = accession
 
     return assembly_metadata_dict
