@@ -1,4 +1,6 @@
 ---
+# The params below were auto-generated, you should not need to edit them...
+# unless you were warned by the add-new-species.py script.
 key_info:
   - "Assembly Name": "ASSEMBLY_NAME"
   - "Assembly Type": "ASSEMBLY_TYPE"
@@ -6,16 +8,13 @@ key_info:
   - "Genome Representation": "GENOME_REPRESENTATION"
   - "Accession": "ASSEMBLY_ACCESSION"
 
-
-# The params below were auto-generated, you should not need to edit them...
-# unless you were warned by the add-new-species.py script.
 title: "Genome assembly"
 layout: "species_assembly"
-url: "SPECIES_FOLDER/assembly"
+url: "SPECIES_SLUG/assembly"
 weight: 2
 
-stats_data_path: "SPECIES_FOLDER/species_stats"
-lineage_data_path: "SPECIES_FOLDER/taxonomy"
+stats_data_path: "SPECIES_SLUG/species_stats"
+lineage_data_path: "SPECIES_SLUG/taxonomy"
 ---
 
 Notes: Assembly statistics were calculated for the primary genome assembly ASSEMBLY_ACCESSION. Busco statistics were taken from [EDIT]. Annotation statistics were calculated using [EDIT].
@@ -27,13 +26,12 @@ BUSCO notation: C: Complete; S: Single-copy; D: Duplicated; F: Fragmented; M: Mi
 The data for *SPECIES_NAME* displayed in the genome portal comes from:
 
 ```{style=citation}
-[EDIT - Add the publication here using markdown formatting]
+PUBLICATION
 ```
 
 ### Funding
 
 *The study in which the genome data was generated ([EDIT:publicaion_reference]) acknowledge funding by:*
 
-- [EDIT]
-- [EDIT]
+FUNDING
 

@@ -1,4 +1,5 @@
 import warnings
+from datetime import datetime
 from pathlib import Path
 
 import requests
@@ -13,44 +14,102 @@ TAXONOMY_FILE = "taxonomy.json"
 CONTENT_FILES = (INDEX_FILE, ASSEMBLY_FILE, DOWNLOAD_FILE)
 
 
-def add_content_files(species_name: str, species_slug: str, content_dir_path: Path, data_dir_path: Path) -> None:
+def add_index_md(
+    species_name: str,
+    species_slug: str,
+    common_name: str,
+    description: str,
+    references: str,
+    publication: str,
+    img_attrib_txt: str,
+    img_attrib_url: str,
+    content_dir_path: Path,
+    data_dir_path: Path,
+) -> None:
     """
-    Use the template files to create the content files for the species.
+    Use the template _index.md file to create the _index.md file for the species.
     Template files are modified with the species specific information.
     """
     content_dir_path.mkdir(parents=False, exist_ok=True)
+
+    with open(TEMPLATE_DIR / INDEX_FILE, "r") as file_in:
+        template = file_in.read()
+
+    try:
+        gbif_taxon_key = get_gbif_taxon_key(species_name=species_name)
+        template = template.replace("GBIF_TAXON_ID", gbif_taxon_key)
+    except (requests.exceptions.HTTPError, KeyError):
+        print(
+            f"""WARNING: Failed to get GBIF key for species: {species_name}.
+            Not to worry,
+            you can instead add it manually to the _index.md file in the species directory."""
+        )
+        template = template.replace("GBIF_TAXON_ID", "[EDIT]")
+
     tax_id = process_taxonomy(species_name, data_dir_path)
+    if tax_id:
+        goat_link = make_goat_weblink(species_name=species_name, tax_id=tax_id)
+        template = template.replace("GOAT_WEBPAGE", goat_link)
+    else:
+        template = template.replace("GOAT_WEBPAGE", "[EDIT]")
 
-    for file_name in CONTENT_FILES:
-        with open(TEMPLATE_DIR / file_name, "r") as file_in:
-            template = file_in.read()
+    template = template.replace("SPECIES_NAME", species_name)
+    template = template.replace("SPECIES_SLUG", species_slug)
+    template = template.replace("COMMON_NAME", common_name)
+    template = template.replace("DESCRIPTION", description)
+    template = template.replace("REFERENCES", references)
+    template = template.replace("PUBLICATION", publication)
+    template = template.replace("IMG_ATTRIB_TEXT", img_attrib_txt)
+    template = template.replace("IMG_ATTRIB_URL", img_attrib_url)
 
-        template = template.replace("SPECIES_NAME", species_name)
-        template = template.replace("SPECIES_FOLDER", species_slug)
+    date = datetime.now().strftime("%d/%m/%Y")
+    template = template.replace("TODAYS_DATE", date)
 
-        if file_name == INDEX_FILE:
-            try:
-                gbif_taxon_key = get_gbif_taxon_key(species_name=species_name)
-                template = template.replace("GBIF_TAXON_ID", gbif_taxon_key)
-            except (requests.exceptions.HTTPError, KeyError):
-                print(
-                    f"""WARNING: Failed to get GBIF key for species: {species_name}.
-                    Not to worry,
-                    you can instead add it manually to the _index.md file in the species directory."""
-                )
-                template = template.replace("GBIF_TAXON_ID", "[EDIT]")
+    output_file_path = content_dir_path / INDEX_FILE
 
-            if tax_id:
-                goat_link = make_goat_weblink(species_name=species_name, tax_id=tax_id)
-                template = template.replace("GOAT_WEBPAGE", goat_link)
-            else:
-                template = template.replace("GOAT_WEBPAGE", "[EDIT]")
+    with open(output_file_path, "w") as file_out:
+        file_out.write(template)
+    print(f"File created: {output_file_path.resolve()}")
 
-        output_file_path = content_dir_path / file_name
 
-        with open(output_file_path, "w") as file_out:
-            file_out.write(template)
-        print(f"File created: {output_file_path.resolve()}")
+def add_assembly_md(
+    species_name: str,
+    species_slug: str,
+    common_name: str,
+    description: str,
+    references: str,
+    publication: str,
+    img_attrib_txt: str,
+    img_attrib_url: str,
+    content_dir_path: Path,
+    data_dir_path: Path,
+) -> None:
+    """
+    Use the template assembly.md file to create the assembly.md file for the species.
+    Template files are modified with the species specific information.
+    """
+    # TODO
+
+
+def add_download_md(
+    content_dir_path: Path,
+) -> None:
+    """
+    Use the template download.md file to create the download.md file for the species.
+    Template files are modified with the species specific information.
+
+    # TODO - if nothing needs to be modified here, copy instead.
+    """
+    template_file_path = TEMPLATE_DIR / DOWNLOAD_FILE
+    output_file_path = content_dir_path / DOWNLOAD_FILE
+
+    with open(template_file_path, "r") as file_in:
+        template = file_in.read()
+
+    with open(output_file_path, "w") as file_out:
+        file_out.write(template)
+
+    print(f"File created: {output_file_path.resolve()}")
 
 
 def process_taxonomy(species_name: str, data_dir_path: Path) -> str | None:
