@@ -75,12 +75,12 @@ def add_index_md(
 def add_assembly_md(
     species_name: str,
     species_slug: str,
-    common_name: str,
-    description: str,
-    references: str,
-    publication: str,
-    img_attrib_txt: str,
-    img_attrib_url: str,
+    # common_name: str,
+    # description: str,
+    # references: str,
+    # publication: str,
+    # img_attrib_txt: str,
+    # img_attrib_url: str,
     content_dir_path: Path,
     data_dir_path: Path,
 ) -> None:
@@ -88,10 +88,24 @@ def add_assembly_md(
     Use the template assembly.md file to create the assembly.md file for the species.
     Template files are modified with the species specific information.
     """
-    # TODO
+    template_file_path = TEMPLATE_DIR / ASSEMBLY_FILE
+    output_file_path = content_dir_path / ASSEMBLY_FILE
+
+    with open(template_file_path, "r") as file_in:
+        template = file_in.read()
+
+    # TODO add more replacements here
+    template = template.replace("SPECIES_NAME", species_name)
+    template = template.replace("SPECIES_SLUG", species_slug)
+
+    with open(output_file_path, "w") as file_out:
+        file_out.write(template)
+
+    print(f"File created: {output_file_path.resolve()}")
 
 
 def add_download_md(
+    species_slug: str,
     content_dir_path: Path,
 ) -> None:
     """
@@ -105,6 +119,8 @@ def add_download_md(
 
     with open(template_file_path, "r") as file_in:
         template = file_in.read()
+
+    template = template.replace("SPECIES_SLUG", species_slug)
 
     with open(output_file_path, "w") as file_out:
         file_out.write(template)

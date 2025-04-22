@@ -58,7 +58,7 @@ the drop-down menu.
 # 2. Species information
 
   ------------------------ --
-  Scientific name:   Squirrelus maximus
+  Scientific name:   Homo sapiens
   English (common) name:  A common squirrel
   ------------------------ --
 

@@ -76,6 +76,7 @@ def check_dirs_empty(all_dir_paths: dict[str, Path]) -> None:
     if overwrite mode not specificed, check that the folders are empty.
     Raise error if not.
     """
+    # TODO - check with Daniel, should config dir be empty too?
     empty_dirs = [all_dir_paths["content_dir_path"], all_dir_paths["data_dir_path"], all_dir_paths["assets_dir_path"]]
     for dir_path in empty_dirs:
         if any(dir_path.iterdir()):
@@ -91,9 +92,7 @@ if __name__ == "__main__":
     args = run_argparse()
     user_form_data = parse_user_form(form_file_path=Path(args.user_form))
 
-    species_slug = args.species_name.replace(" ", "_").lower()
-    output_dir_paths = all_dir_paths(species_slug)
-
+    output_dir_paths = all_dir_paths(user_form_data.species_slug)
     if not args.overwrite:
         check_dirs_empty(all_dir_paths=output_dir_paths)
 
@@ -111,12 +110,15 @@ if __name__ == "__main__":
     )
 
     add_assembly_md(
+        species_name=user_form_data.species_name,
+        species_slug=user_form_data.species_slug,
         content_dir_path=output_dir_paths["content_dir_path"],
         data_dir_path=output_dir_paths["data_dir_path"],
     )
 
     add_download_md(
-        data_dir_path=output_dir_paths["data_dir_path"],
+        species_slug=user_form_data.species_slug,
+        content_dir_path=output_dir_paths["content_dir_path"],
     )
 
     add_stats_file(
@@ -131,5 +133,5 @@ if __name__ == "__main__":
         config_dir_path=output_dir_paths["config_dir_path"],
     )
 
-    out_img_path = output_dir_paths["image_dir_path"] / f"{species_slug}.webp"
+    out_img_path = output_dir_paths["image_dir_path"] / f"{user_form_data.species_slug}.webp"
     process_species_image(in_img_path=Path(args.species_image), out_img_path=out_img_path)
