@@ -10,9 +10,10 @@ import argparse
 from pathlib import Path
 
 from add_new_species.add_config_yml_file import add_config_yml_file
-from add_new_species.add_content_files import add_content_files
+from add_new_species.add_content_files import add_assembly_md, add_download_md, add_index_md  # noqa
 from add_new_species.add_data_tracks_file import add_data_tracks_file
 from add_new_species.add_stats_file import add_stats_file
+from add_new_species.form_parser import parse_user_form
 from add_new_species.image_processer import process_species_image
 
 
@@ -23,11 +24,10 @@ def run_argparse() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
 
     parser.add_argument(
-        "--species_name",
+        "--user_form",
         type=str,
-        metavar="[species name]",
-        help="""The scientific name of the species to be added.
-            Case sensitive. Wrap the name in quotes.""",
+        metavar="[user form location]",
+        help="""The path to the filled in user form, a word document.""",
         required=True,
     )
 
@@ -89,6 +89,7 @@ def check_dirs_empty(all_dir_paths: dict[str, Path]) -> None:
 
 if __name__ == "__main__":
     args = run_argparse()
+    user_form_data = parse_user_form(form_file_path=Path(args.user_form))
 
     species_slug = args.species_name.replace(" ", "_").lower()
     output_dir_paths = all_dir_paths(species_slug)
@@ -96,13 +97,25 @@ if __name__ == "__main__":
     if not args.overwrite:
         check_dirs_empty(all_dir_paths=output_dir_paths)
 
-    out_img_path = output_dir_paths["image_dir_path"] / f"{species_slug}.webp"
-    process_species_image(in_img_path=Path(args.species_image), out_img_path=out_img_path)
-
-    add_content_files(
-        species_name=args.species_name,
-        species_slug=species_slug,
+    add_index_md(
+        species_name=user_form_data.species_name,
+        species_slug=user_form_data.species_slug,
+        common_name=user_form_data.common_name,
+        description=user_form_data.description,
+        references=user_form_data.references,
+        publication=user_form_data.publication,
+        img_attrib_txt=user_form_data.img_attrib_txt,
+        img_attrib_url=user_form_data.img_attrib_url,
         content_dir_path=output_dir_paths["content_dir_path"],
+        data_dir_path=output_dir_paths["data_dir_path"],
+    )
+
+    add_assembly_md(
+        content_dir_path=output_dir_paths["content_dir_path"],
+        data_dir_path=output_dir_paths["data_dir_path"],
+    )
+
+    add_download_md(
         data_dir_path=output_dir_paths["data_dir_path"],
     )
 
@@ -117,3 +130,6 @@ if __name__ == "__main__":
     add_config_yml_file(
         config_dir_path=output_dir_paths["config_dir_path"],
     )
+
+    out_img_path = output_dir_paths["image_dir_path"] / f"{species_slug}.webp"
+    process_species_image(in_img_path=Path(args.species_image), out_img_path=out_img_path)
