@@ -75,12 +75,11 @@ def add_index_md(
 def add_assembly_md(
     species_name: str,
     species_slug: str,
+    funding: str,
+    publication: str,
     # common_name: str,
     # description: str,
     # references: str,
-    # publication: str,
-    # img_attrib_txt: str,
-    # img_attrib_url: str,
     content_dir_path: Path,
     data_dir_path: Path,
 ) -> None:
@@ -97,6 +96,8 @@ def add_assembly_md(
     # TODO add more replacements here
     template = template.replace("SPECIES_NAME", species_name)
     template = template.replace("SPECIES_SLUG", species_slug)
+    template = template.replace("FUNDING", funding)
+    template = template.replace("PUBLICATION", publication)
 
     with open(output_file_path, "w") as file_out:
         file_out.write(template)

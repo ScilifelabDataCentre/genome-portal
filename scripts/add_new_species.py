@@ -112,6 +112,8 @@ if __name__ == "__main__":
     add_assembly_md(
         species_name=user_form_data.species_name,
         species_slug=user_form_data.species_slug,
+        funding=user_form_data.funding,
+        publication=user_form_data.publication,
         content_dir_path=output_dir_paths["content_dir_path"],
         data_dir_path=output_dir_paths["data_dir_path"],
     )

@@ -141,16 +141,20 @@ def extract_funding(markdown_content) -> str:
     Extract the funding information from the markdown content.
     """
     funding_section = extract_block_of_markdown(
-        start_marker="sapiens",
-        end_marker="### Funding",
+        start_marker="### Funding",
+        end_marker="# 4. Data Tracks Form",
         markdown_content=markdown_content,
     )
 
+    print(f"{funding_section=}")
+
     raw_funding = extract_block_of_markdown(
-        start_marker="### Funding",
+        start_marker="applicable.",
         end_marker="# 4. Data Tracks Form",
         markdown_content=funding_section,
     )
+
+    print(f"{raw_funding=}")
 
     # Make text into a markdown list
     funding = []
