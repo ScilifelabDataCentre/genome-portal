@@ -25,7 +25,7 @@ def populate_config_yml_with_assembly_metadata(assembly_metadata_dict: dict, con
         config_data["organism"] = assembly_metadata_dict["species_name"]
         config_data["assembly"]["name"] = assembly_metadata_dict["name"]
         config_data["assembly"]["displayName"] = (
-            f"{assembly_metadata_dict["species_name_abbrev"]} genome assembly {assembly_metadata_dict["accession"]}"
+            f"{assembly_metadata_dict['species_name_abbrev']} genome assembly {assembly_metadata_dict['accession']}"
         )
         config_data["assembly"]["accession"] = assembly_metadata_dict["accession"]
 
