@@ -16,6 +16,7 @@ from add_new_species.add_stats_file import add_stats_file
 from add_new_species.form_parser import parse_user_form
 from add_new_species.image_processer import process_species_image
 from add_new_species.populate_assembly_metadata_fields import populate_assembly_metadata_fields
+from add_new_species.populate_config_yml_tracks import populate_config_yml_tracks
 from add_new_species.process_data_tracks_Excel import process_data_tracks_excel
 
 
@@ -156,7 +157,7 @@ if __name__ == "__main__":
     out_img_path = output_dir_paths["image_dir_path"] / f"{user_form_data.species_slug}.webp"
     process_species_image(in_img_path=Path(args.species_image), out_img_path=out_img_path)
 
-    genome_assembly_accession = process_data_tracks_excel(
+    genome_assembly_accession, data_tracks_list_of_dicts = process_data_tracks_excel(
         spreadsheet_file_path=Path(args.user_spreadsheet),
         assets_dir_path=output_dir_paths["assets_dir_path"],
         sheet_name=args.sheet_name,
@@ -167,4 +168,9 @@ if __name__ == "__main__":
         species_name=user_form_data.species_name,
         config_dir_path=output_dir_paths["config_dir_path"],
         content_dir_path=output_dir_paths["content_dir_path"],
+    )
+
+    populate_config_yml_tracks(
+        config_dir_path=output_dir_paths["config_dir_path"],
+        data_tracks_list_of_dicts=data_tracks_list_of_dicts,
     )

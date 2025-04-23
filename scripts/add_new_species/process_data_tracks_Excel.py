@@ -84,7 +84,6 @@ def extract_genome_accession(data_tracks_list_of_dicts: list[dict]) -> str:
 def process_data_tracks_excel(spreadsheet_file_path: str, assets_dir_path: Path, sheet_name: str) -> None:
     """
     Process the data tracks Excel file and generate a JSON file.
-    This function is a wrapper around generate_data_tracks_json.
     Default value for sheet_name from argparse is "Sheet1".
     """
     data_tracks_list_of_dicts = parse_excel_file(spreadsheet_file_path, sheet_name)
@@ -103,4 +102,4 @@ def process_data_tracks_excel(spreadsheet_file_path: str, assets_dir_path: Path,
             "does not look like a GenBank genome assembly accession. It must start with 'GCA'."
         )
 
-    return genome_assembly_accession
+    return genome_assembly_accession, data_tracks_list_of_dicts
