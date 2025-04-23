@@ -62,7 +62,7 @@ def populate_assembly_md_with_assembly_metadata(assembly_metadata_dict: dict, co
 
 
 def populate_assembly_metadata_fields(
-    accession: str, config_dir_path: Path, content_dir_path: Path, species_name: str
+    accession: str, species_name: str, config_dir_path: Path, content_dir_path: Path
 ) -> None:
     """
     Populate the config.yml and assembly.md files with assembly metadata. Assumes that add_content_files.py

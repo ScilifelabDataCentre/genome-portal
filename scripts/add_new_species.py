@@ -15,6 +15,8 @@ from add_new_species.add_data_tracks_file import add_data_tracks_file
 from add_new_species.add_stats_file import add_stats_file
 from add_new_species.form_parser import parse_user_form
 from add_new_species.image_processer import process_species_image
+from add_new_species.populate_assembly_metadata_fields import populate_assembly_metadata_fields
+from add_new_species.process_data_tracks_Excel import process_data_tracks_excel
 
 
 def run_argparse() -> argparse.Namespace:
@@ -31,6 +33,22 @@ def run_argparse() -> argparse.Namespace:
         required=True,
     )
 
+    parser.add_argument(
+        "--user_spreadsheet",
+        type=str,
+        metavar="[user spreadsheet location]",
+        help="""The path to the filled in user spreadsheet, an excel file.""",
+        required=True,
+    )
+
+    parser.add_argument(
+        "--sheet_name",
+        type=str,
+        metavar="[user spreadsheet sheet name]",
+        help="""The name of the sheet in the user spreadsheet to be processed.""",
+        default="Sheet1",
+        required=False,
+    )
     parser.add_argument(
         "--species_image",
         type=str,
@@ -137,3 +155,16 @@ if __name__ == "__main__":
 
     out_img_path = output_dir_paths["image_dir_path"] / f"{user_form_data.species_slug}.webp"
     process_species_image(in_img_path=Path(args.species_image), out_img_path=out_img_path)
+
+    genome_assembly_accession = process_data_tracks_excel(
+        spreadsheet_file_path=Path(args.user_spreadsheet),
+        assets_dir_path=output_dir_paths["assets_dir_path"],
+        sheet_name=args.sheet_name,
+    )
+
+    populate_assembly_metadata_fields(
+        accession=genome_assembly_accession,
+        species_name=user_form_data.species_name,
+        config_dir_path=output_dir_paths["config_dir_path"],
+        content_dir_path=output_dir_paths["content_dir_path"],
+    )
