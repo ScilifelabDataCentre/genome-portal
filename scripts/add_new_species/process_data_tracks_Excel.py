@@ -11,8 +11,8 @@ from pathlib import Path
 
 import pandas as pd
 
-JSON_TEMPLATE_FILE_NAME = "data_tracks.json"
-TEMPLATE_FILE_PATH = Path(__file__).parent.parent / "templates" / JSON_TEMPLATE_FILE_NAME
+JSON_FILE_NAME = "data_tracks.json"
+TEMPLATE_FILE_PATH = Path(__file__).parent.parent / "templates" / JSON_FILE_NAME
 
 
 def df_row_to_json(row: pd.Series, template_json: str) -> dict:
@@ -47,20 +47,60 @@ def df_row_to_json(row: pd.Series, template_json: str) -> dict:
     return data_track
 
 
-def generate_data_tracks_json(file_path: str, output_json_path: Path, sheet_name: str = "Sheet1") -> None:
+def parse_excel_file(spreadsheet_file_path: str, sheet_name) -> list[dict]:
     """
-    Generate a JSON file from the data tracks Excel file. Read the Excel file using Pandas
-    and populate the data according to the Genome Portral data_tracks.json template. The
-    output is written to a JSON file.
+    Parse the Excel file with Pandas and return a JSON-style structure (list of dicts).
     """
-
-    df = pd.read_excel(file_path, sheet_name=sheet_name, engine="openpyxl")
+    df = pd.read_excel(spreadsheet_file_path, sheet_name=sheet_name, engine="openpyxl")
 
     with open(TEMPLATE_FILE_PATH, "r") as file:
         template_json = json.dumps(json.load(file)[0])
 
     data_tracks_list_of_dicts = [df_row_to_json(row, template_json) for _, row in df.iterrows()]
 
+    return data_tracks_list_of_dicts
+
+
+def populate_data_tracks_json(data_tracks_list_of_dicts: list[dict], output_json_path: Path) -> None:
+    """
+    Write the list of dictionaries to a JSON file.
+    """
+
     with open(output_json_path, "w") as json_file:
         json.dump(data_tracks_list_of_dicts, json_file, indent=2)
         print(f"Data successfully written to {output_json_path}")
+
+
+def extract_genome_accession(data_tracks_list_of_dicts: list[dict]) -> str:
+    """
+    Extract the value of 'accessionOrDOI' for the top-level key 'Genome' from the list of dictionaries.
+    """
+    for data_track in data_tracks_list_of_dicts:
+        if data_track.get("dataTrackName") == "Genome":
+            return data_track.get("accessionOrDOI", None)
+    return None
+
+
+def process_data_tracks_excel(spreadsheet_file_path: str, assets_dir_path: Path, sheet_name: str) -> None:
+    """
+    Process the data tracks Excel file and generate a JSON file.
+    This function is a wrapper around generate_data_tracks_json.
+    Default value for sheet_name from argparse is "Sheet1".
+    """
+    data_tracks_list_of_dicts = parse_excel_file(spreadsheet_file_path, sheet_name)
+
+    output_json_path = assets_dir_path / JSON_FILE_NAME
+    populate_data_tracks_json(data_tracks_list_of_dicts, output_json_path)
+
+    genome_assembly_accession = extract_genome_accession(data_tracks_list_of_dicts)
+    if genome_assembly_accession is None:
+        raise ValueError(
+            "Genome assembly accession not found in the user spreadsheet. Please check the field is not empty."
+        )
+    if not genome_assembly_accession.startswith("GCA"):
+        raise ValueError(
+            f"The accession in the user spreadsheet, {genome_assembly_accession}, "
+            "does not look like a GenBank genome assembly accession. It must start with 'GCA'."
+        )
+
+    return genome_assembly_accession
