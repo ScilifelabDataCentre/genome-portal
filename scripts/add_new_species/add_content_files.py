@@ -6,6 +6,7 @@ import requests
 
 from add_new_species.constants import TEMPLATE_DIR
 from add_new_species.get_taxonomy import EbiRestException, get_taxonomy, save_taxonomy_file
+from add_new_species.template_handler import process_template_file
 
 INDEX_FILE = "_index.md"
 ASSEMBLY_FILE = "assembly.md"
@@ -21,8 +22,8 @@ def add_index_md(
     description: str,
     references: str,
     publication: str,
-    img_attrib_txt: str,
-    img_attrib_url: str,
+    img_attrib_text: str,
+    img_attrib_link: str,
     content_dir_path: Path,
     data_dir_path: Path,
 ) -> None:
@@ -30,46 +31,43 @@ def add_index_md(
     Use the template _index.md file to create the _index.md file for the species.
     Template files are modified with the species specific information.
     """
-    content_dir_path.mkdir(parents=False, exist_ok=True)
+    template_file_path = TEMPLATE_DIR / INDEX_FILE
+    output_file_path = content_dir_path / INDEX_FILE
 
-    with open(TEMPLATE_DIR / INDEX_FILE, "r") as file_in:
-        template = file_in.read()
+    todays_date = datetime.now().strftime("%d/%m/%Y")
 
     try:
-        gbif_taxon_key = get_gbif_taxon_key(species_name=species_name)
-        template = template.replace("GBIF_TAXON_ID", gbif_taxon_key)
+        gbif_taxon_id = get_gbif_taxon_key(species_name=species_name)
     except (requests.exceptions.HTTPError, KeyError):
+        gbif_taxon_id = None
         print(
             f"""WARNING: Failed to get GBIF key for species: {species_name}.
             Not to worry,
             you can instead add it manually to the _index.md file in the species directory."""
         )
-        template = template.replace("GBIF_TAXON_ID", "[EDIT]")
 
     tax_id = process_taxonomy(species_name, data_dir_path)
     if tax_id:
-        goat_link = make_goat_weblink(species_name=species_name, tax_id=tax_id)
-        template = template.replace("GOAT_WEBPAGE", goat_link)
+        goat_webpage = make_goat_weblink(species_name=species_name, tax_id=tax_id)
     else:
-        template = template.replace("GOAT_WEBPAGE", "[EDIT]")
+        goat_webpage = None
 
-    template = template.replace("SPECIES_NAME", species_name)
-    template = template.replace("SPECIES_SLUG", species_slug)
-    template = template.replace("COMMON_NAME", common_name)
-    template = template.replace("DESCRIPTION", description)
-    template = template.replace("REFERENCES", references)
-    template = template.replace("PUBLICATION", publication)
-    template = template.replace("IMG_ATTRIB_TEXT", img_attrib_txt)
-    template = template.replace("IMG_ATTRIB_URL", img_attrib_url)
-
-    date = datetime.now().strftime("%d/%m/%Y")
-    template = template.replace("TODAYS_DATE", date)
-
-    output_file_path = content_dir_path / INDEX_FILE
-
-    with open(output_file_path, "w") as file_out:
-        file_out.write(template)
-    print(f"File created: {output_file_path.resolve()}")
+    process_template_file(
+        template_file_path=template_file_path,
+        output_file_path=output_file_path,
+        required_replacements={
+            "species_name": species_name,
+            "species_slug": species_slug,
+            "common_name": common_name,
+            "description": description,
+            "references": references,
+            "publication": publication,
+            "img_attrib_text": img_attrib_text,
+            "img_attrib_link": img_attrib_link,
+            "todays_date": todays_date,
+        },
+        optional_replacements={"gbif_taxon_id": gbif_taxon_id, "goat_webpage": goat_webpage},
+    )
 
 
 def add_assembly_md(
@@ -77,9 +75,6 @@ def add_assembly_md(
     species_slug: str,
     funding: str,
     publication: str,
-    # common_name: str,
-    # description: str,
-    # references: str,
     content_dir_path: Path,
     data_dir_path: Path,
 ) -> None:
@@ -90,19 +85,16 @@ def add_assembly_md(
     template_file_path = TEMPLATE_DIR / ASSEMBLY_FILE
     output_file_path = content_dir_path / ASSEMBLY_FILE
 
-    with open(template_file_path, "r") as file_in:
-        template = file_in.read()
-
-    # TODO add more replacements here
-    template = template.replace("SPECIES_NAME", species_name)
-    template = template.replace("SPECIES_SLUG", species_slug)
-    template = template.replace("FUNDING", funding)
-    template = template.replace("PUBLICATION", publication)
-
-    with open(output_file_path, "w") as file_out:
-        file_out.write(template)
-
-    print(f"File created: {output_file_path.resolve()}")
+    process_template_file(
+        template_file_path=template_file_path,
+        output_file_path=output_file_path,
+        required_replacements={
+            "species_name": species_name,
+            "species_slug": species_slug,
+            "funding": funding,
+            "publication": publication,
+        },
+    )
 
 
 def add_download_md(
@@ -112,21 +104,17 @@ def add_download_md(
     """
     Use the template download.md file to create the download.md file for the species.
     Template files are modified with the species specific information.
-
-    # TODO - if nothing needs to be modified here, copy instead.
     """
     template_file_path = TEMPLATE_DIR / DOWNLOAD_FILE
     output_file_path = content_dir_path / DOWNLOAD_FILE
 
-    with open(template_file_path, "r") as file_in:
-        template = file_in.read()
-
-    template = template.replace("SPECIES_SLUG", species_slug)
-
-    with open(output_file_path, "w") as file_out:
-        file_out.write(template)
-
-    print(f"File created: {output_file_path.resolve()}")
+    process_template_file(
+        template_file_path=template_file_path,
+        output_file_path=output_file_path,
+        required_replacements={
+            "species_slug": species_slug,
+        },
+    )
 
 
 def process_taxonomy(species_name: str, data_dir_path: Path) -> str | None:

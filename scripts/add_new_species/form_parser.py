@@ -18,8 +18,8 @@ class UserFormData:
     references: str
     publication: str
     funding: str
-    img_attrib_txt: str
-    img_attrib_url: Optional[str] = None
+    img_attrib_text: str
+    img_attrib_link: Optional[str] = None
 
 
 def parse_user_form(form_file_path: Path) -> UserFormData:
@@ -43,8 +43,8 @@ def parse_user_form(form_file_path: Path) -> UserFormData:
         references=references,
         publication=publication,
         funding=funding,
-        img_attrib_txt="Image attribution text.",
-        img_attrib_url="https://example.com/image_attribution",
+        img_attrib_text="Image attribution text.",
+        img_attrib_link="https://example.com/image_attribution",
     )
 
 

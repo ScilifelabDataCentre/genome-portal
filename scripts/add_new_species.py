@@ -122,8 +122,8 @@ if __name__ == "__main__":
         description=user_form_data.description,
         references=user_form_data.references,
         publication=user_form_data.publication,
-        img_attrib_txt=user_form_data.img_attrib_txt,
-        img_attrib_url=user_form_data.img_attrib_url,
+        img_attrib_text=user_form_data.img_attrib_text,
+        img_attrib_link=user_form_data.img_attrib_link,
         content_dir_path=output_dir_paths["content_dir_path"],
         data_dir_path=output_dir_paths["data_dir_path"],
     )
