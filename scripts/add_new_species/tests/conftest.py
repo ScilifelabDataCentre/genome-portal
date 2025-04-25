@@ -4,6 +4,10 @@ from pathlib import Path
 
 import pytest
 
+FIXTURES_DIR = Path(__file__).parent / "fixtures"
+IMG_FIXTURES_DIR = FIXTURES_DIR / "example_images"
+FORM_FIXTURES_DIR = FIXTURES_DIR / "submission_form_example"
+
 
 @pytest.fixture
 def temp_output_dir():
@@ -20,11 +24,10 @@ def example_images() -> dict[str, Path]:
     """
     Paths to example image files for testing.
     """
-    base_dir = Path(__file__).parent / "fixtures" / "example_images"
     image_files = {
-        "image_4_3": base_dir / "image_4_3.png",
-        "image_close_to_4_3": base_dir / "image_close_to_4_3.jpg",
-        "image_not_4_3": base_dir / "image_not_4_3.png",
+        "image_4_3": IMG_FIXTURES_DIR / "image_4_3.png",
+        "image_close_to_4_3": IMG_FIXTURES_DIR / "image_close_to_4_3.jpg",
+        "image_not_4_3": IMG_FIXTURES_DIR / "image_not_4_3.png",
     }
     return image_files
 
@@ -34,16 +37,26 @@ def example_excel_files() -> dict[str, Path]:
     """
     Paths to example Excel files for testing.
     """
-    base_dir = Path(__file__).parent / "fixtures" / "submission_form_example"
     excel_files = {
-        "excel_form_with_comments": base_dir / "02-Data_Tracks_Form_v1.1.0.xlsx",
-        "excel_form_wo_comments": base_dir / "02-Data_Tracks_Form_v1.1.0_fix.xlsx",
+        "excel_form_with_comments": FORM_FIXTURES_DIR / "02-Data_Tracks_Form_v1.1.0.xlsx",
+        "excel_form_wo_comments": FORM_FIXTURES_DIR / "02-Data_Tracks_Form_v1.1.0_fix.xlsx",
     }
     return excel_files
 
 
 @pytest.fixture
-def assembly_metadata_dict():
+def example_user_forms() -> dict[str, Path]:
+    """
+    Paths to example user form files for testing.
+    """
+    excel_files = {
+        "markdown_form": FORM_FIXTURES_DIR / "converted_species_submit_form.md",
+    }
+    return excel_files
+
+
+@pytest.fixture
+def assembly_metadata_dict() -> dict[str, str]:
     return {
         "name": "ASM1142v1",
         "assembly_level": "Chromosome",
