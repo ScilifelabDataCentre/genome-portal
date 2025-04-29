@@ -15,9 +15,9 @@ main() {
     echo "Indexing $1" >&2
     case "${1##*/}" in
 	*.gff.bgz)
-	    cmd=(tabix -p gff);;
+	    cmd=(tabix -p gff --csi);;
 	*.bed.bgz)
-	    cmd=(tabix -p bed);;
+	    cmd=(tabix -p bed --csi);;
 	*.fna.bgz)
 	    cmd=(samtools faidx);;
 	*)
