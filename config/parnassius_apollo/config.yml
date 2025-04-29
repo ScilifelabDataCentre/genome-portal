@@ -1,0 +1,11 @@
+organism: Parnassius apollo
+assembly:
+  name: Parnassius_apollo
+  displayName: P. apollo genome assembly GCA_907164705.1
+  accession: GCA_907164705.1
+  url: https://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/caj/CAJQZP01.fasta.gz
+  fileName: CAJQZP01.fasta.gz
+tracks:
+- name: Protein-coding genes
+  url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/907/164/705/GCA_907164705.1_Parnassius_apollo/GCA_907164705.1_Parnassius_apollo_genomic.gff.gz
+  fileName: GCA_907164705.1_Parnassius_apollo_genomic.gff.gz

@@ -1,0 +1,42 @@
+[
+  {
+    "dataTrackName": "Genome",
+    "description": "Reference genome sequence",
+    "links": [
+      {
+        "Download": "https://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/caj/CAJQZP01.fasta.gz"
+      },
+      {
+        "Website": "https://www.ebi.ac.uk/ena/browser/view/GCA_907164705.1"
+      },
+      {
+        "Article": "https://doi.org/10.1093/gbe/evab122"
+      }
+    ],
+    "accessionOrDOI": "GCA_907164705.1",
+    "fileName": "CAJQZP01.fasta.gz",
+    "principalInvestigator": "Christopher Wheat",
+    "principalInvestigatorAffiliation": "Stockholm University",
+    "firstDateOnPortal": "[EDIT]"
+  },
+  {
+    "dataTrackName": "Protein-coding genes",
+    "description": "Functional annotation of protein-coding genes in the primary genome assembly",
+    "links": [
+      {
+        "Download": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/907/164/705/GCA_907164705.1_Parnassius_apollo/GCA_907164705.1_Parnassius_apollo_genomic.gff.gz"
+      },
+      {
+        "Website": "https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_907164705.1/"
+      },
+      {
+        "Article": "https://doi.org/10.1093/gbe/evab122"
+      }
+    ],
+    "accessionOrDOI": "GCA_907164705.1",
+    "fileName": "GCA_907164705.1_Parnassius_apollo_genomic.gff.gz",
+    "principalInvestigator": "Christopher Wheat",
+    "principalInvestigatorAffiliation": "Stockholm University",
+    "firstDateOnPortal": "[EDIT]"
+  }
+]
