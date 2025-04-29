@@ -3,11 +3,11 @@
 title: "*Bufotes viridis*"
 subtitle: "European green toad"
 
-last_updated: "16/04/2025"
+last_updated: "29/04/2025"
 
-cover_image: "/img/species/[EDIT]"
-img_attrib_text: "[EDIT]"
-img_attrib_link: "[EDIT] - if there is no hyperlink available for this file, then you should delete this line"
+cover_image: "/img/species/b_viridis_sune_holt_CCBYNC_4-3ratio_crop.webp"
+img_attrib_text: "Bufotes viridis by Sune Holt, CC BY-NC"
+img_attrib_link: "https://www.inaturalist.org/photos/51305507"
 
 
 # The params below were auto-generated, you should not need to edit them...
