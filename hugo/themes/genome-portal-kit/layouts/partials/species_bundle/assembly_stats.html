@@ -1,0 +1,32 @@
+{{ $fields := append (or (index .fields.extra .section) slice) (index .fields.default .section) }}
+{{ $values := index .values .section }}
+{{ with $fields }}
+    <div class="table-responsive">
+	<table id="assemblyTable" class="table table-hover table-bordered">
+
+	    <thead class="table-light">
+		<tr>
+		    <th scope="col">Statistic</th>
+		    <th scope="col">Value</th>
+		</tr>
+	    </thead>
+	    <tbody class="table-responsive">
+		{{ range $fields }}
+		    {{ $label := .key | default (replace .key "_" " " | title ) }}
+		    {{ with index $values .key | string }}
+			<tr>
+			    <td> {{ $label }} </td>
+			    <td> {{ . }} </td>
+			</tr>
+		    {{ else }}
+			{{ if not .optional }}
+			    {{ warnidf "missing-assembly-stat" "%s/assembly.yaml: %s undefined" $.path .key }}
+			{{ end}}
+		    {{ end }}
+		{{ end }}
+	    </tbody>
+	</table>
+    </div>
+{{ else }}
+    {{ warnf "No assembly fields declared for section: %s" .section }}
+{{ end }}
