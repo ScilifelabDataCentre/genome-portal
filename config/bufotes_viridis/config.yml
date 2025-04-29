@@ -3,7 +3,7 @@ assembly:
   name: Bufotes_viridis_n_2023_12
   displayName: "B. viridis genome assembly GCA_963931945.1"
   accession: GCA_963931945.1
-  url: "https://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/caw/CAWYQA01.fasta.gz"
+  url: "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/963/931/945/GCA_963931945.1_Bufotes_viridis_n_2023_12/GCA_963931945.1_Bufotes_viridis_n_2023_12_genomic.fna.gz"
 tracks:
   - name: "Protein-coding genes"
     url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/963/931/945/GCA_963931945.1_Bufotes_viridis_n_2023_12/GCA_963931945.1_Bufotes_viridis_n_2023_12_genomic.gff.gz
