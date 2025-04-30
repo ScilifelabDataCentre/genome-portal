@@ -25,10 +25,10 @@
         "type": "LinearGenomeView",
         "trackLabels": "offset",
         "offsetPx": 0,
-        "bpPerPx": 700,
+        "bpPerPx": 500,
         "displayedRegions": [
           {
-            "refName": "ENA|CAWYQA010000001|CAWYQA010000001.1",
+            "refName": "CAWYQA010000001.1",
             "start": 0,
             "end": 643651765,
             "reversed": false,

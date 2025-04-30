@@ -3,15 +3,15 @@
     "dataTrackName": "Genome",
     "description": "Reference genome sequence",
     "links": [
-      {"Download": "https://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/caw/CAWYQA01.fasta.gz"},
-      {"Website": "https://www.ebi.ac.uk/ena/browser/view/GCA_963931945.1"},
+      {"Download": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/963/931/945/GCA_963931945.1_Bufotes_viridis_n_2023_12/GCA_963931945.1_Bufotes_viridis_n_2023_12_genomic.fna.gz"},
+      {"Website": "https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_963931945.1/"},
       {"Article": "https://doi.org/10.1093/g3journal/jkaf002"}
     ],
     "accessionOrDOI": "GCA_963931945.1",
-    "fileName": "CAWYQA01.fasta.gz",
+    "fileName": "GCA_963931945.1_Bufotes_viridis_n_2023_12_genomic.fna.gz",
     "principalInvestigator": "Jacob Höglund",
     "principalInvestigatorAffiliation": "Uppsala University",
-    "firstDateOnPortal": "16 April 2025"
+    "firstDateOnPortal": "30 April 2025"
   },
   {
     "dataTrackName": "Protein-coding genes",
@@ -25,6 +25,6 @@
     "fileName": "GCA_963931945.1_Bufotes_viridis_n_2023_12_genomic.gff.gz",
     "principalInvestigator": "Jacob Höglund",
     "principalInvestigatorAffiliation": "Uppsala University",
-    "firstDateOnPortal": "16 April 2025"
+    "firstDateOnPortal": "30 April 2025"
   }
 ]
