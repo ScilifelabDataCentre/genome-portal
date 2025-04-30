@@ -45,7 +45,12 @@ ensure_local() {
     args_ref=(--load=inPlace)
     case "${local_file}" in
 	*.fna.bgz)
-	    args_ref+=(--type=bgzipFasta);;
+	  args_ref+=(--type=bgzipFasta);;
+        # Explicitly point to the index for bed/gff files
+        *.bed.bgz)
+          args_ref+=(--indexFile="${local_file}.csi");;
+        *.gff.bgz)
+          args_ref+=(--indexFile="${local_file}.csi");;
     esac
     args_ref+=("$local_file")
 }
