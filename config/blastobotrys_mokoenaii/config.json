@@ -1,0 +1,60 @@
+{
+  "defaultSession": {
+    "id": "bmok_default_session",
+    "name": "Blastobotrys mokoenaii",
+    "widgets": {
+      "hierarchicalTrackSelector": {
+        "id": "hierarchicalTrackSelector",
+        "type": "HierarchicalTrackSelectorWidget",
+        "view": "bmok_default_session_view_0",
+        "faceted": {
+          "showSparse": false,
+          "showFilters": true,
+          "showOptions": false,
+          "panelWidth": 400
+        }
+      }
+    },
+    "activeWidgets": {
+      "hierarchicalTrackSelector": "hierarchicalTrackSelector"
+    },
+    "views": [
+      {
+        "id": "bmok_default_session_view_0",
+        "minimized": false,
+        "type": "LinearGenomeView",
+        "trackLabels": "offset",
+        "offsetPx": 0,
+        "bpPerPx": 50,
+        "displayedRegions": [
+          {
+            "refName": "PPJM03000099.1",
+            "start": 0,
+            "end": 3251,
+            "reversed": false,
+            "assemblyName": "ASM370576v3"
+          }
+        ],
+        "tracks": [
+          {
+            "id": "bmok_default_protein_coding_genes_view_0",
+            "type": "FeatureTrack",
+            "configuration": "bmokoenaii_annotation.gff",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "bmok_default_protein_coding_genes_view_0_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 150,
+                "configuration": "bmokoenaii_annotation.gff-LinearBasicDisplay"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "configuration": {
+    "disableAnalytics": true
+  }
+}
