@@ -17,7 +17,7 @@ stats_data_path: "parnassius_apollo/species_stats"
 lineage_data_path: "parnassius_apollo/taxonomy"
 ---
 
-Notes: Assembly statistics were calculated for the primary genome assembly GCA_907164705.1. Busco statistics were taken from [EDIT]. Annotation statistics were calculated using [EDIT].
+Notes: Assembly statistics were calculated for the primary genome assembly GCA_907164705.1. Busco statistics were taken from Podsiadlowski et al. (2021). Annotation statistics were calculated using GCA_907164705.1_Parnassius_apollo_genomic.gff.gz.
 
 BUSCO notation: C: Complete; S: Single-copy; D: Duplicated; F: Fragmented; M: Missing; n: Total BUSCO genes included in the dataset (here: arthropoda_odb10). See also [the official BUSCO manual](https://busco.ezlab.org/busco_userguide.html#interpreting-the-results).
 
@@ -34,4 +34,4 @@ Podsiadlowski, L., Tunström, K., Espeland, M., & Wheat, C. W. (2021). The Genom
 *The study in which the genome data was generated (Podsiadlowski et al. 2021) acknowledge funding by:*
 
 - Swedish Environmental Protection Agency (Naturvårdsverket)
-- The Swedish Research Council (2017-04386)
+- The Swedish Research Council (Grant number [2017-04386](https://www.vr.se/english/swecris.html#/project/2017-04386_VR))

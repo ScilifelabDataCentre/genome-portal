@@ -14,25 +14,25 @@ science_name: "Parnassius apollo"
 lineage_data_path: "parnassius_apollo/taxonomy"
 
 cover_image: "/img/species/parnassius_apollo.webp"
-img_attrib_text: "Image attribution text."
-img_attrib_link: "https://example.com/image_attribution"
+img_attrib_text: "Apollo butterfly by Michael Schroeren, CC BY-SA 4.0"
+img_attrib_link: "https://commons.wikimedia.org/wiki/File:Altm%C3%BChltal_Apollofalter.jpg#/media/File:Altm%C3%BChltal_Apollofalter.jpg"
 
 gbif_taxon_id: "1938810"
 goat_webpage: "https://goat.genomehubs.org/record?recordId=110799&result=taxon&taxonomy=ncbi#parnassius%20apollo"
 
 # These 3 params define the initial view for the map
 # latitude and longitude are for the map center.
-latitude: 0
-longitude: 0
-initialZoom: 1
+latitude: 50
+longitude: 40
+initialZoom: 2
 
 # Optional params below,
 # comment them in if you want to include them.
-# iucn_category: "[EDIT]"
-# iucn_link: "[EDIT]"
+iucn_category: "Least concern"
+iucn_link: "https://www.iucnredlist.org/species/16249/122600528"
 
-# swe_red_list: "[EDIT]"
-# swe_red_list_link: "[EDIT]"
+swe_red_list: "Near Threatened "
+swe_red_list_link: "https://artfakta.se/taxa/101509/information"
 ---
 
 ### Description
@@ -52,8 +52,6 @@ If you have used the pages for this species in the Genome Portal, please refer t
 ```{style=citation}
 Swedish Reference Genome Portal (Retrieved DATE_ACCESSED), SciLifeLab Data Centre, version VERSION_NUMBER from <https://genomes.scilifelab.se>, [RRID:SCR_026008](https://rrid.site/data/record/nlx_144509-1/SCR_026008/resolver?q=rrid:scr_026008)
 ```
-
-#### References
 
 #### Changelog
 
