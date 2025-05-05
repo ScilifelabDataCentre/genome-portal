@@ -22,6 +22,7 @@ goat_webpage: "${goat_webpage}"
 
 # These 3 params define the initial view for the map
 # latitude and longitude are for the map center.
+# If you don't want to include an observation map, remove these params
 latitude: 0
 longitude: 0
 initialZoom: 1
