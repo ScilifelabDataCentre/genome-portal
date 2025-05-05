@@ -455,6 +455,42 @@ body {
   }
 }
 
+.scilife-intro-img-no-map {
+  width: auto;
+  height: 500px;
+}
+
+@media (max-width: 400px) {
+  .scilife-intro-img-no-map {
+    max-height: 300px;
+  }
+}
+
+@media (min-width: 401px) and (max-width: 576px) {
+  .scilife-intro-img-no-map {
+    max-height: 350px;
+  }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+  .scilife-intro-img-no-map {
+    max-height: 380px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+  .scilife-intro-img-no-map {
+    max-height: 500px;
+  }
+}
+
+@media (min-width: 993px) {
+  .scilife-intro-img-no-map {
+    height: 550px;
+  }
+}
+
+
 .map-error-message {
   position: absolute;
   top: 50%;

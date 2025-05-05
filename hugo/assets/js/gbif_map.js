@@ -47,8 +47,6 @@ function addBaseLayer(map) {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
         maxZoom: 15,
     }).addTo(map);
-
-    console.log('Base layer added');
 }
 
 
