@@ -37,7 +37,7 @@ initialZoom: 1
 
 ### Description
 
-_Blastobotrys malaysiensis_ belongs to a category of species that are referred to within yeast biotechnology as _non-conventional_ yeasts (Mukherjee et al., 2017). Here, _non-conventional_ implies that they might have other phenotypes compared to the industrial workhorse _Saccharomyces cerevisiae_, such as improved tolerance to process conditions, or different metabolic activities. Yeasts from the _Blastobotrys_ genus have been named to of interest for biotechnological applications due their oleaginous (lipid-accumulating) nature and their broad substrate range (Sanya et al., 2021).
+_Blastobotrys malaysiensis_ belongs to a category of species that are referred to within yeast biotechnology as _non-conventional_ yeasts (Mukherjee et al., 2017). Here, _non-conventional_ implies that they might have other phenotypes compared to the industrial workhorse _Saccharomyces cerevisiae_, such as improved tolerance to process conditions, or different metabolic activities. Yeasts from the _Blastobotrys_ genus have been named to of interest for biotechnological applications due their oleaginous (lipid-accumulating) nature and their broad substrate range (Sanya et al., 2021). By genomic analysis of 332 Ascomycete genomes, _B. illinoisensis_ NRRL YB-1343 (also known as CBS 10337), B. malaysiensis_, and four other species were discovered to have xylanolytic activity (Ravn et al., 2021).
 
 The _B. malaysiensis_ NRRL Y-6417 genome assembly that is displayed here on the Genome Portal was generated in the Y1000+ Project (Opulente et al. 2024, Shen et al., 2018). The annotation of protein-coding genes was generated in Sweden in a study by the Geijer research group at Chalmers University of Technology.
 
@@ -66,6 +66,8 @@ Swedish Reference Genome Portal (Retrieved DATE_ACCESSED), SciLifeLab Data Centr
 - Ferreira de Sá A.S., Leonardo-Silva L., Xavier-Santos S. (2022). Expanding the geographical distribution of _Blastobotrys malaysiensis_ (Saccharomycetales) beyond the Asian continent – a cave fungus first reported in the Americas. Biodiversity Data Journal 10: e80226. <https://doi.org/10.3897/BDJ.10.e80226>
 
 - Opulente, D. A., LaBella, A. L., Harrison, M.-C., Wolters, J. F., Liu, C., Li, Y., Kominek, J., Steenwyk, J. L., Stoneman, H. R., VanDenAvond, J., Miller, C. R., Langdon, Q. K., Silva, M., Gonçalves, C., Ubbelohde, E. J., Li, Y., Buh, K. V., Jarzyna, M., Haase, M. A. B., … Hittinger, C. T. (2024). Genomic factors shape carbon and nitrogen metabolic niche breadth across Saccharomycotina yeasts. Science, 384(6694), eadj4503. <https://doi.org/10.1126/science.adj4503>
+
+- - Ravn, J. L., Engqvist, M. K. M., Larsbrink, J., & Geijer, C. (2021). CAZyme prediction in ascomycetous yeast genomes guides discovery of novel xylanolytic species with diverse capacities for hemicellulose hydrolysis. Biotechnology for Biofuels, 14(1), 150. <https://doi.org/10.1186/s13068-021-01995-x>
 
 - Ravn, J. L., Sörensen Ristinmaa, A., Coleman, T., Larsbrink, J., & Geijer, C. (2023). Yeasts Have Evolved Divergent Enzyme Strategies To Deconstruct and Metabolize Xylan. Microbiology Spectrum, 11(3), e00245-23. <https://doi.org/10.1128/spectrum.00245-23>
 
