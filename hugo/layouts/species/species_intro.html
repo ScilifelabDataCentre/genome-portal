@@ -1,20 +1,31 @@
+{{- /*
+    Note: When checking to show the observation map and its dependencies,
+    do not also check for .Params.latitude or .Params.longitude as they can be set to 0 by default which is not truthy.
+    So if user wants map but keeps them as 0, the map will not show.
+*/ -}}
+
+
 {{ define "early_connections" }}
 
-<link rel="preconnect" href="https://unpkg.com">
+{{ if .Params.initialZoom }}
+    <link rel="preconnect" href="https://unpkg.com">
+{{ end }}
 
 {{ end }}
 
 
 {{ define "script_includes" }}
 
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+{{ if .Params.initialZoom }}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="" defer></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="" defer></script>
 
-{{ $gbifMap := resources.Get "js/gbif_map.js" | fingerprint | minify }}
-<script src="{{ $gbifMap.RelPermalink }}" defer></script>
+    {{ $gbifMap := resources.Get "js/gbif_map.js" | fingerprint | minify }}
+    <script src="{{ $gbifMap.RelPermalink }}" defer></script>
+{{ end }}
 
 {{ end }}
 
@@ -49,9 +60,11 @@ integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="" d
             </figure>
         </div>
 
+        {{ if .Params.initialZoom }}
         <div class="col-lg-6 col-md-12">
             {{ partial "distrib_map.html" . }}
         </div>
+        {{ end }}
     </div>
 
 
