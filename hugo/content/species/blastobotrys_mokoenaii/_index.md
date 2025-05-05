@@ -14,7 +14,7 @@ science_name: "Blastobotrys mokoenaii"
 lineage_data_path: "blastobotrys_mokoenaii/taxonomy"
 
 cover_image: "/img/species/blastobotrys_mokoenaii.webp"
-img_attrib_text: "Blastobotrys mokoenaii from Ravn et al. (2023), CC BY 4.0"
+img_attrib_text: "Blastobotrys mokoenaii NRRL Y-27120 from Ravn et al. (2023), CC BY 4.0"
 img_attrib_link: "https://doi.org/10.1128/spectrum.00245-23"
 
 gbif_taxon_id: "3480488"
