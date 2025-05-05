@@ -7,9 +7,15 @@
         data-longitude="{{ .Params.longitude | default 0 }}"
         data-initial-zoom="{{ .Params.initialZoom | default 1 }}"
         data-gbif-taxon-id="{{ .Params.gbif_taxon_id }}">
+
+        <!-- Message shown on error -->
+        <div id="map-error-message" class="map-error-message" style="display: none;">
+            <h1>The observation map failed to load correctly, please try again later.</h1>
+        </div>
+
     </div>
 
-    <div id="map"></div>
+
     <figcaption class="scilife-card-image-attrib">
         <a href="https://www.gbif.org/species/{{ .Params.gbif_taxon_id }}" target="_blank">
             Recorded observations of the species from the year 2000 onwards. Map generated using GBIF <i
