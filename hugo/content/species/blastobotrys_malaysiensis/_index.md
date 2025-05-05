@@ -37,6 +37,8 @@ initialZoom: 1
 
 ### Description
 
+_Blastobotrys malaysiensis_ belongs to a category of species that are referred to within yeast biotechnology as _non-conventional_ yeasts (Mukherjee et al., 2017). Here, _non-conventional_ implies that they might have other phenotypes compared to the industrial workhorse _Saccharomyces cerevisiae_, such as improved tolerance to process conditions, or different metabolic activities. Yeasts from the _Blastobotrys_ genus have been named to of interest for biotechnological applications due their oleaginous (lipid-accumulating) nature and their broad substrate range (Sanya et al., 2021).
+
 The _B. malaysiensis_ NRRL Y-6417 genome assembly that is displayed here on the Genome Portal was generated in the Y1000+ Project (Opulente et al. 2024, Shen et al., 2018). The annotation of protein-coding genes was generated in Sweden in a study by the Geijer research group at Chalmers University of Technology.
 
 #### How to cite
