@@ -1,0 +1,60 @@
+{
+  "defaultSession": {
+    "id": "bmal_default_session",
+    "name": "Blastobotrys malaysiensis",
+    "widgets": {
+      "hierarchicalTrackSelector": {
+        "id": "hierarchicalTrackSelector",
+        "type": "HierarchicalTrackSelectorWidget",
+        "view": "bmal_default_session_view_0",
+        "faceted": {
+          "showSparse": false,
+          "showFilters": true,
+          "showOptions": false,
+          "panelWidth": 400
+        }
+      }
+    },
+    "activeWidgets": {
+      "hierarchicalTrackSelector": "hierarchicalTrackSelector"
+    },
+    "views": [
+      {
+        "id": "bmal_default_session_view_0",
+        "minimized": false,
+        "type": "LinearGenomeView",
+        "trackLabels": "offset",
+        "offsetPx": 0,
+        "bpPerPx": 50,
+        "displayedRegions": [
+          {
+            "refName": "JAKTQL010000001.1",
+            "start": 0,
+            "end": 559,
+            "reversed": false,
+            "assemblyName": "ASM3055881v1"
+          }
+        ],
+        "tracks": [
+          {
+            "id": "bmal_default_protein_coding_genes_view_0",
+            "type": "FeatureTrack",
+            "configuration": "bmalaysiensis_annotation.gff",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "bmal_default_protein_coding_genes_view_0_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 150,
+                "configuration": "bmalaysiensis_annotation.gff-LinearBasicDisplay"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "configuration": {
+    "disableAnalytics": true
+  }
+}
