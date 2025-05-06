@@ -13,7 +13,7 @@ assembly:
   - "Scaffold N90 (Mbp)": "2.34"
   - "Scaffold L90": "4"
   - "Scaffolds >= 10 kb": "7"
-  - "BUSCO % [EDIT]": "[EDIT]"
+  - "BUSCO % (ascomycota_odb10.2024-01-08)": "C:95.3 [S:94.7, D:0.6], F:0.5, M:4.2%, n:1706"
 annotation:
   - "Gene #": "6177"
   - "Transcript #": "6326"

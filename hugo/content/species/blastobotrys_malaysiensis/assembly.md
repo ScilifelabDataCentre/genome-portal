@@ -23,7 +23,15 @@ BUSCO notation: C: Complete; S: Single-copy; D: Duplicated; F: Fragmented; M: Mi
 
 ### Publication(s)
 
-The annotation data for *Blastobotrys malaysiensis* NRRL Y-6417 displayed in the genome portal comes from:
+The data for *Blastobotrys mokoenaii* NRRL Y-27120 displayed in the genome portal comes from:
+
+- Genome assembly:
+
+```{style=citation}
+Shen, X.-X., Opulente, D. A., Kominek, J., Zhou, X., Steenwyk, J. L., Buh, K. V., Haase, M. A. B., Wisecaver, J. H., Wang, M., Doering, D. T., Boudouris, J. T., Schneider, R. M., Langdon, Q. K., Ohkuma, M., Endoh, R., Takashima, M., Manabe, R., Čadež, N., Libkind, D., … Rokas, A. (2018). Tempo and Mode of Genome Evolution in the Budding Yeast Subphylum. Cell, 175(6), 1533-1545.e20. https://doi.org/10.1016/j.cell.2018.10.023
+```
+
+- Annotation of protein-coding genes:
 
 ```{style=citation}
 Ravn, J.; Sörensen Ristinmaa, A.; Mazurkewich, ScotS.t; Borges Dias, G.; Larsbrink, J.; Geijer, C. (2025). Gene annotation of _Blastobotrys mokoenaii_, Blastobotrys illinoisensis, and Blastobotrys malaysiensis. Chalmers University of Technology. Dataset. https://doi.org/10.17044/scilifelab.28606814.v1
@@ -40,6 +48,6 @@ The tools used by the Genome Portal staff to calculate the statistics shown on t
 
 ### Funding
 
-*The study in which the genome data was generated ([EDIT:publication_reference]) acknowledge funding by:*
+*The annotation of protein-coding genes (Ravn et al., 2025) acknowledge funding by:*
 
 - Novo Nordisk Foundation (Grant number: [NNF22OC0079899](https://app.dimensions.ai/details/grant/grant.13909076))
