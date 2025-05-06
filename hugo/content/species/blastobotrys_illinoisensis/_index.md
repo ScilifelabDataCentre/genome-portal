@@ -20,12 +20,6 @@ img_attrib_link: "https://doi.org/10.4489/KJM.20220041"
 gbif_taxon_id: "3480486"
 goat_webpage: "https://goat.genomehubs.org/record?recordId=378048&result=taxon&taxonomy=ncbi#blastobotrys%20illinoisensis"
 
-# These 3 params define the initial view for the map
-# latitude and longitude are for the map center.
-latitude: 0
-longitude: 0
-initialZoom: 1
-
 # Optional params below,
 # comment them in if you want to include them.
 # iucn_category: "[EDIT]"

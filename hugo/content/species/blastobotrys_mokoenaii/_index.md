@@ -20,12 +20,6 @@ img_attrib_link: "https://doi.org/10.1128/spectrum.00245-23"
 gbif_taxon_id: "3480488"
 goat_webpage: "https://goat.genomehubs.org/record?recordId=267478&result=taxon&taxonomy=ncbi#blastobotrys%20mokoenaii"
 
-# These 3 params define the initial view for the map
-# latitude and longitude are for the map center.
-latitude: 0
-longitude: 0
-initialZoom: 1
-
 # Optional params below,
 # comment them in if you want to include them.
 # iucn_category: "[EDIT]"
