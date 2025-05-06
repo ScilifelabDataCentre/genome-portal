@@ -98,7 +98,7 @@ function addHelpButton(map) {
 
 
 /**
- * Setup the map on page load and add event listners to control the error message's state.
+ * Setup the map on page load and add event listners to determine if the the error message should be shown.
  * The error message is set to display: none by default in the HTML.
  */
 function main() {
@@ -111,12 +111,20 @@ function main() {
 
     addHelpButton(state.map);
     addBaseLayer(state.map);
-
-    // tileerror occurs if no observations are found (not caught by general error handler below)
     const obsverationLayer = addObservationLayer(state.map, state.gbifTaxonId);
-    obsverationLayer.on('tileerror', function (event) {
+
+
+    // If a user made several rapid requests, then any in progress requests (for a previous map state)
+    // would be cancelled and this would raise the tileerror.
+    // This is not an error, so we only check on initial load for a tileerror.
+    // This initial check instead guards against a bad taxon ID and/or the GBIF API being down.
+    // (see discussion in PR #98 for more details).
+    obsverationLayer.once('tileerror', function () {
         state.mapErrorMessage.style.display = 'block';
         console.warn('tileerror: No observations found for this taxon, check the taxon ID is correct');
+    });
+    obsverationLayer.once('load', function () {
+        obsverationLayer.off('tileerror');
     });
 
     // This includes errors triggered after initial load (e.g. user zooms in/out)
