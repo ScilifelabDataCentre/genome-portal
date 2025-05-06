@@ -83,7 +83,8 @@ def extract_species_names(markdown_content: str) -> dict[str, str]:
 
     for line in markdown_content.splitlines():
         if "Scientific name:" in line:
-            species_names["species_name"] = line.split(":")[1].strip()
+            # v1.1.0 of the docx template italicizes the species name, which is returned as *species_name* by pandoc
+            species_names["species_name"] = line.split(":")[1].replace("*", "").strip()
         if "English (common) name:" in line:
             species_names["common_name"] = line.split(":")[1].strip()
 
