@@ -26,12 +26,12 @@
 
 
 <!-- help pop-up for map -->
-<div class="toast position-fixed top-50 start-50 translate-middle z-3 scilife-subsection" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="toast-header">
+<div class="toast position-fixed top-50 start-50 translate-middle z-3 scilife-subsection scilife-toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header scilife-toast-header">
         <h4 class="me-auto">Help</h4>
         <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
-    <div class="toast-body">
+    <div class="toast-body scilife-toast-body">
         <p>
             This map shows observations of the species {{ .Params.title | markdownify }} from the year 2000 onwards.
             <br> <br>

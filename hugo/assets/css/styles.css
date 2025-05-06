@@ -925,6 +925,12 @@ p + .clipboard {
     background-color: var(--scilife-teal-025);
   }
 
+  .scilife-toast-body {
+    background-color: #FAF9F6;
+  }
+  .scilife-toast-header {
+    background-color: white;
+  }
 }
 
 /* Dark mode specific styles */
@@ -949,6 +955,12 @@ p + .clipboard {
     background-color: var(--scilife-teal);
   }
 
+  .scilife-toast-body {
+    background-color: #212121;
+  }
+  .scilife-toast-header {
+    background-color: #0e1111;
+  }
 
   .scilife-navbar-main li a,
   .scilife-navbar-sub li a,
