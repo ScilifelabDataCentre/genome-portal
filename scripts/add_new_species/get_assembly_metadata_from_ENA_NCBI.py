@@ -66,15 +66,44 @@ def get_ncbi_assembly_metadata_json(accession: str) -> dict:
     return assembly_type
 
 
-def fetch_assembly_metadata(accession: str) -> dict:
+def extract_genome_accession(data_tracks_list_of_dicts: list[dict]) -> str:
+    """
+    Extract the value of 'accessionOrDOI' for the top-level key 'Genome' from the list of dictionaries.
+    """
+
+    genome_assembly_accession = None
+    for data_track in data_tracks_list_of_dicts:
+        if data_track.get("dataTrackName") == "Genome":
+            genome_assembly_accession = data_track.get("accessionOrDOI", None)
+            break
+    if genome_assembly_accession is None:
+        raise ValueError(
+            "Genome assembly accession not found in the user spreadsheet. Please check the field is not empty."
+        )
+    if not genome_assembly_accession.startswith("GCA"):
+        raise ValueError(
+            f"The accession in the user spreadsheet, {genome_assembly_accession}, "
+            "does not look like a GenBank genome assembly accession. It must start with 'GCA'."
+        )
+
+    return genome_assembly_accession
+
+
+def fetch_assembly_metadata(data_tracks_list_of_dicts: dict, species_name: str) -> dict:
     """
     Fetch assembly metadata from ENA and NCBI for a given GenBank genome assembly
     accession number. Return a dictionary that will be used to populate the YAML
     front matter in assembly.md and a few fields in config.yml.
     """
+    accession = extract_genome_accession(data_tracks_list_of_dicts)
     assembly_metadata_dict = {}
     assembly_metadata_dict = get_ena_assembly_metadata_xml(accession)
     assembly_metadata_dict["assembly_type"] = get_ncbi_assembly_metadata_json(accession)
     assembly_metadata_dict["accession"] = accession
+
+    species_name_words = species_name.split()
+    species_name_abbrev = f"{species_name_words[0][0].upper()}. {species_name_words[1]}"
+    assembly_metadata_dict["species_name"] = species_name
+    assembly_metadata_dict["species_name_abbrev"] = species_name_abbrev
 
     return assembly_metadata_dict

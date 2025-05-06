@@ -71,26 +71,3 @@ def populate_data_tracks_json(data_tracks_list_of_dicts: list[dict], assets_dir_
     with open(output_json_path, "w") as json_file:
         json.dump(data_tracks_list_of_dicts, json_file, indent=2)
         print(f"Data successfully written to {output_json_path}")
-
-
-def extract_genome_accession(data_tracks_list_of_dicts: list[dict]) -> str:
-    """
-    Extract the value of 'accessionOrDOI' for the top-level key 'Genome' from the list of dictionaries.
-    """
-
-    genome_assembly_accession = None
-    for data_track in data_tracks_list_of_dicts:
-        if data_track.get("dataTrackName") == "Genome":
-            genome_assembly_accession = data_track.get("accessionOrDOI", None)
-            break
-    if genome_assembly_accession is None:
-        raise ValueError(
-            "Genome assembly accession not found in the user spreadsheet. Please check the field is not empty."
-        )
-    if not genome_assembly_accession.startswith("GCA"):
-        raise ValueError(
-            f"The accession in the user spreadsheet, {genome_assembly_accession}, "
-            "does not look like a GenBank genome assembly accession. It must start with 'GCA'."
-        )
-
-    return genome_assembly_accession

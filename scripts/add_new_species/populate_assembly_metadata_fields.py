@@ -6,8 +6,6 @@ from pathlib import Path
 
 import yaml
 
-from add_new_species.get_assembly_metadata_from_ENA_NCBI import fetch_assembly_metadata
-
 YML_FILE_NAME = "config.yml"
 TEMPLATE_FILE_PATH = Path(__file__).parent.parent / "templates" / YML_FILE_NAME
 
@@ -85,7 +83,7 @@ def populate_assembly_md_with_assembly_metadata(assembly_metadata_dict: dict, co
 
 
 def populate_assembly_metadata_fields(
-    accession: str, species_name: str, config_dir_path: Path, content_dir_path: Path, data_tracks_list_of_dicts: dict
+    config_dir_path: Path, content_dir_path: Path, data_tracks_list_of_dicts: dict, assembly_metadata_dict: dict
 ) -> None:
     """
     Populate the config.yml and assembly.md files with assembly metadata. Assumes that add_content_files.py
@@ -95,12 +93,6 @@ def populate_assembly_metadata_fields(
     NOTE! fetch_assembly_metadata requires a valid GenBank accession number for the genome assembly
     of the species. See fetch_assembly_metadata docstring for details.
     """
-    assembly_metadata_dict = fetch_assembly_metadata(accession)
-
-    species_name_words = species_name.split()
-    species_name_abbrev = f"{species_name_words[0][0].upper()}. {species_name_words[1]}"
-    assembly_metadata_dict["species_name"] = species_name
-    assembly_metadata_dict["species_name_abbrev"] = species_name_abbrev
 
     populate_config_yml(assembly_metadata_dict, config_dir_path, data_tracks_list_of_dicts)
 
