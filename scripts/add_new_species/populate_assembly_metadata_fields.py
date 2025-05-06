@@ -8,30 +8,53 @@ import yaml
 
 from add_new_species.get_assembly_metadata_from_ENA_NCBI import fetch_assembly_metadata
 
+YML_FILE_NAME = "config.yml"
+TEMPLATE_FILE_PATH = Path(__file__).parent.parent / "templates" / YML_FILE_NAME
 
-def populate_config_yml_with_assembly_metadata(assembly_metadata_dict: dict, config_dir_path: Path) -> None:
+
+def populate_config_yml(assembly_metadata_dict: dict, config_dir_path: Path, data_tracks_list_of_dicts: dict) -> None:
     """
-    Populate the following fields in the config.yml file:
+    1. Read the config.yml template file
+    2. Populate the following fields in the config.yml file:
     - organism
     - assembly.name
     - assembly.displayName
     - assembly.accession
     with the corresponding values from assembly_metadata_dict.
+    3. Populate the tracks field in the config.yml file with the data tracks values.
+    4. Write the updated config.yml file to the config_dir_path.
     """
-    config_file_path = config_dir_path / "config.yml"
-    with open(config_file_path, "r") as config_f:
+
+    with open(TEMPLATE_FILE_PATH, "r") as config_f:
         config_data = dict(yaml.safe_load(config_f))
 
-        config_data["organism"] = assembly_metadata_dict["species_name"]
-        config_data["assembly"]["name"] = assembly_metadata_dict["name"]
-        config_data["assembly"]["displayName"] = (
-            f"{assembly_metadata_dict['species_name_abbrev']} genome assembly {assembly_metadata_dict['accession']}"
-        )
-        config_data["assembly"]["accession"] = assembly_metadata_dict["accession"]
+    config_data["organism"] = assembly_metadata_dict["species_name"]
+    config_data["assembly"]["name"] = assembly_metadata_dict["name"]
+    config_data["assembly"]["displayName"] = (
+        f"{assembly_metadata_dict['species_name_abbrev']} genome assembly {assembly_metadata_dict['accession']}"
+    )
+    config_data["assembly"]["accession"] = assembly_metadata_dict["accession"]
+    config_data["tracks"] = []
+    for track in data_tracks_list_of_dicts:
+        file_name = track.get("fileName")
+        download_url = None
+        for link in track.get("links", []):
+            if "Download" in link:
+                download_url = link["Download"]
+                break
+        if track.get("dataTrackName") == "Genome":
+            config_data["assembly"]["url"] = download_url
+            config_data["assembly"]["fileName"] = file_name
+        else:
+            config_data["tracks"].append(
+                {"name": track.get("dataTrackName"), "url": download_url, "fileName": file_name}
+            )
+
+    config_file_path = config_dir_path / "config.yml"
 
     with open(config_file_path, "w") as config_w:
         yaml.safe_dump(config_data, config_w, sort_keys=False, default_flow_style=False)
-        print(f"File updated with genome assembly metadata from ENA and NCBI: {config_file_path.resolve()}")
+        print(f"File created: {config_file_path.resolve()}")
 
 
 def populate_assembly_md_with_assembly_metadata(assembly_metadata_dict: dict, content_dir_path: Path) -> None:
@@ -62,7 +85,7 @@ def populate_assembly_md_with_assembly_metadata(assembly_metadata_dict: dict, co
 
 
 def populate_assembly_metadata_fields(
-    accession: str, species_name: str, config_dir_path: Path, content_dir_path: Path
+    accession: str, species_name: str, config_dir_path: Path, content_dir_path: Path, data_tracks_list_of_dicts: dict
 ) -> None:
     """
     Populate the config.yml and assembly.md files with assembly metadata. Assumes that add_content_files.py
@@ -79,6 +102,6 @@ def populate_assembly_metadata_fields(
     assembly_metadata_dict["species_name"] = species_name
     assembly_metadata_dict["species_name_abbrev"] = species_name_abbrev
 
-    populate_config_yml_with_assembly_metadata(assembly_metadata_dict, config_dir_path)
+    populate_config_yml(assembly_metadata_dict, config_dir_path, data_tracks_list_of_dicts)
 
     populate_assembly_md_with_assembly_metadata(assembly_metadata_dict, content_dir_path)

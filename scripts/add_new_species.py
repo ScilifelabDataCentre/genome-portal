@@ -9,14 +9,11 @@ Places to fill in will be marked with: "[EDIT]"
 import argparse
 from pathlib import Path
 
-from add_new_species.add_config_yml_file import add_config_yml_file
 from add_new_species.add_content_files import add_assembly_md, add_download_md, add_index_md  # noqa
-from add_new_species.add_data_tracks_file import add_data_tracks_file
 from add_new_species.add_stats_file import add_stats_file
 from add_new_species.form_parser import parse_user_form
 from add_new_species.image_processer import process_species_image
 from add_new_species.populate_assembly_metadata_fields import populate_assembly_metadata_fields
-from add_new_species.populate_config_yml_tracks import populate_config_yml_tracks
 from add_new_species.process_data_tracks_Excel import process_data_tracks_excel
 
 
@@ -109,11 +106,19 @@ def check_dirs_empty(all_dir_paths: dict[str, Path]) -> None:
 
 if __name__ == "__main__":
     args = run_argparse()
+
     user_form_data = parse_user_form(form_file_path=Path(args.user_form))
 
     output_dir_paths = all_dir_paths(user_form_data.species_slug)
     if not args.overwrite:
         check_dirs_empty(all_dir_paths=output_dir_paths)
+
+    # WIP note: this function creates and popluates data_tracks.json
+    genome_assembly_accession, data_tracks_list_of_dicts = process_data_tracks_excel(
+        spreadsheet_file_path=Path(args.user_spreadsheet),
+        assets_dir_path=output_dir_paths["assets_dir_path"],
+        sheet_name=args.sheet_name,
+    )
 
     add_index_md(
         species_name=user_form_data.species_name,
@@ -146,31 +151,14 @@ if __name__ == "__main__":
         data_dir_path=output_dir_paths["data_dir_path"],
     )
 
-    add_data_tracks_file(
-        assets_dir_path=output_dir_paths["assets_dir_path"],
-    )
-
-    add_config_yml_file(
-        config_dir_path=output_dir_paths["config_dir_path"],
-    )
-
     out_img_path = output_dir_paths["image_dir_path"] / f"{user_form_data.species_slug}.webp"
     process_species_image(in_img_path=Path(args.species_image), out_img_path=out_img_path)
 
-    genome_assembly_accession, data_tracks_list_of_dicts = process_data_tracks_excel(
-        spreadsheet_file_path=Path(args.user_spreadsheet),
-        assets_dir_path=output_dir_paths["assets_dir_path"],
-        sheet_name=args.sheet_name,
-    )
-
+    # WIP note: this function creates and popluates config.yml
     populate_assembly_metadata_fields(
         accession=genome_assembly_accession,
         species_name=user_form_data.species_name,
         config_dir_path=output_dir_paths["config_dir_path"],
         content_dir_path=output_dir_paths["content_dir_path"],
-    )
-
-    populate_config_yml_tracks(
-        config_dir_path=output_dir_paths["config_dir_path"],
         data_tracks_list_of_dicts=data_tracks_list_of_dicts,
     )
