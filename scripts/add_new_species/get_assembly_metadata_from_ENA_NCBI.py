@@ -28,7 +28,7 @@ class AssemblyMetadata:
     assembly_name: str
     assembly_level: str
     genome_representation: str
-    accession: str
+    assembly_accession: str
     assembly_type: Optional[str] = None
     species_name: Optional[str] = None
     species_name_abbrev: Optional[str] = None
@@ -58,7 +58,7 @@ def get_ena_assembly_metadata_xml(accession: str) -> dict:
         assembly_name=name_element.text.strip(),
         assembly_level=assembly_level_element.text.strip(),
         genome_representation=genome_representation_element.text.strip(),
-        accession=accession,
+        assembly_accession=accession,
     )
 
 

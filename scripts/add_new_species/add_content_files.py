@@ -75,8 +75,12 @@ def add_assembly_md(
     species_slug: str,
     funding: str,
     publication: str,
+    assembly_name: str,
+    assembly_type: str,
+    assembly_level: str,
+    genome_representation: str,
+    assembly_accession: str,
     content_dir_path: Path,
-    data_dir_path: Path,
 ) -> None:
     """
     Use the template assembly.md file to create the assembly.md file for the species.
@@ -93,6 +97,11 @@ def add_assembly_md(
             "species_slug": species_slug,
             "funding": funding,
             "publication": publication,
+            "assembly_name": assembly_name,
+            "assembly_type": assembly_type,
+            "assembly_level": assembly_level,
+            "genome_representation": genome_representation,
+            "assembly_accession": assembly_accession,
         },
     )
 

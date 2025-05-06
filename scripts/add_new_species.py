@@ -9,15 +9,12 @@ Places to fill in will be marked with: "[EDIT]"
 import argparse
 from pathlib import Path
 
+from add_new_species.add_config_yml import populate_config_yml
 from add_new_species.add_content_files import add_assembly_md, add_download_md, add_index_md  # noqa
 from add_new_species.add_stats_file import add_stats_file
 from add_new_species.form_parser import parse_user_form
 from add_new_species.get_assembly_metadata_from_ENA_NCBI import fetch_assembly_metadata
 from add_new_species.image_processer import process_species_image
-from add_new_species.populate_assembly_metadata_fields import (
-    populate_assembly_md_with_assembly_metadata,
-    populate_config_yml,
-)
 from add_new_species.process_data_tracks_Excel import parse_excel_file, populate_data_tracks_json
 
 
@@ -126,7 +123,6 @@ if __name__ == "__main__":
         data_tracks_list_of_dicts,
         species_name=user_form_data.species_name,
     )
-    print(assembly_metadata)
 
     add_index_md(
         species_name=user_form_data.species_name,
@@ -146,12 +142,11 @@ if __name__ == "__main__":
         species_slug=user_form_data.species_slug,
         funding=user_form_data.funding,
         publication=user_form_data.publication,
-        content_dir_path=output_dir_paths["content_dir_path"],
-        data_dir_path=output_dir_paths["data_dir_path"],
-    )
-
-    populate_assembly_md_with_assembly_metadata(
-        assembly_metadata,
+        assembly_name=assembly_metadata.assembly_name,
+        assembly_type=assembly_metadata.assembly_type,
+        assembly_level=assembly_metadata.assembly_level,
+        genome_representation=assembly_metadata.genome_representation,
+        assembly_accession=assembly_metadata.assembly_accession,
         content_dir_path=output_dir_paths["content_dir_path"],
     )
 

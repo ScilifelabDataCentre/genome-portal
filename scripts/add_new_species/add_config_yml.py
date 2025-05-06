@@ -30,9 +30,9 @@ def populate_config_yml(assembly_metadata: dataclass, data_tracks_list_of_dicts:
     config_data["organism"] = assembly_metadata.species_name
     config_data["assembly"]["name"] = assembly_metadata.assembly_name
     config_data["assembly"]["displayName"] = (
-        f"{assembly_metadata.species_name_abbrev} genome assembly {assembly_metadata.accession}"
+        f"{assembly_metadata.species_name_abbrev} genome assembly {assembly_metadata.assembly_accession}"
     )
-    config_data["assembly"]["accession"] = assembly_metadata.accession
+    config_data["assembly"]["accession"] = assembly_metadata.assembly_accession
     config_data["tracks"] = []
     for track in data_tracks_list_of_dicts:
         file_name = track.get("fileName")
@@ -54,28 +54,3 @@ def populate_config_yml(assembly_metadata: dataclass, data_tracks_list_of_dicts:
     with open(config_file_path, "w") as config_w:
         yaml.safe_dump(config_data, config_w, sort_keys=False, default_flow_style=False)
         print(f"File created: {config_file_path.resolve()}")
-
-
-def populate_assembly_md_with_assembly_metadata(assembly_metadata: dataclass, content_dir_path: Path) -> None:
-    """
-    Populate the following fields in the species assembly.md file:
-    - ASSEMBLY_NAME
-    - ASSEMBLY_TYPE
-    - ASSEMBLY_LEVEL
-    - GENOME_REPRESENTATION
-    - ASSEMBLY_ACCESSION
-    with the corresponding values from assembly_metadata_dict.
-    """
-    assembly_md_file_path = content_dir_path / "assembly.md"
-
-    with open(assembly_md_file_path, "r") as assembly_f:
-        assembly_markdown = assembly_f.read()
-        assembly_markdown = assembly_markdown.replace("ASSEMBLY_NAME", assembly_metadata.assembly_name)
-        assembly_markdown = assembly_markdown.replace("ASSEMBLY_TYPE", assembly_metadata.assembly_type)
-        assembly_markdown = assembly_markdown.replace("ASSEMBLY_LEVEL", assembly_metadata.assembly_level)
-        assembly_markdown = assembly_markdown.replace("GENOME_REPRESENTATION", assembly_metadata.genome_representation)
-        assembly_markdown = assembly_markdown.replace("ASSEMBLY_ACCESSION", assembly_metadata.accession)
-
-    with open(assembly_md_file_path, "w") as assembly_w:
-        assembly_w.write(assembly_markdown)
-        print(f"File updated with genome assembly metadata from ENA and NCBI: {assembly_md_file_path.resolve()}")
