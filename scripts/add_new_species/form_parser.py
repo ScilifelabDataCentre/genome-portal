@@ -1,3 +1,4 @@
+import subprocess
 from pathlib import Path
 from typing import Optional
 
@@ -27,13 +28,14 @@ def parse_user_form(form_file_path: Path) -> UserFormData:
     Parses the word doc provided by the user form.
     Returning an object with all the attributes that need to be extracted
     """
-    markdown_content = create_markdown_content()
+    markdown_content = create_markdown_content(form_file_path)
 
     species_names = extract_species_names(markdown_content)
     description = extract_description(markdown_content)
     references = extract_references(markdown_content)
     publication = extract_publication(markdown_content)
     funding = extract_funding(markdown_content)
+    img_attrib = extract_img_attrib(markdown_content)
 
     return UserFormData(
         species_name=species_names["species_name"],
@@ -43,23 +45,30 @@ def parse_user_form(form_file_path: Path) -> UserFormData:
         references=references,
         publication=publication,
         funding=funding,
-        img_attrib_text="Image attribution text.",
-        img_attrib_link="https://example.com/image_attribution",
+        img_attrib_text=img_attrib[
+            "text"
+        ],  # TODO - not currently in docx,example text hardcoded in extract_img_attrib()
+        img_attrib_link=img_attrib[
+            "url"
+        ],  # TODO - not currently in docx,example text hardcoded in extract_img_attrib()
     )
 
 
-def create_markdown_content() -> str:
+def create_markdown_content(form_file_path: Path) -> str:
     """
     Convert the user form to markdown via pandoc,
-    Then read the markdown file into a string for parsing.
+    return as string via subprocess stdout.
     """
-    # TODO - would run pandoc here too and file path would be param.
-    file_path = Path("scripts/add_new_species/tests/fixtures/submission_form_example/converted_species_submit_form.md")
 
-    with open(file_path, "r") as file:
-        markdown_content = file.read()
+    pandoc_result = subprocess.run(
+        ["pandoc", "--from=docx", "--to=markdown", str(form_file_path)],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        check=True,
+    )
 
-    return markdown_content
+    return pandoc_result.stdout
 
 
 def extract_species_names(markdown_content: str) -> dict[str, str]:
@@ -146,15 +155,11 @@ def extract_funding(markdown_content) -> str:
         markdown_content=markdown_content,
     )
 
-    print(f"{funding_section=}")
-
     raw_funding = extract_block_of_markdown(
         start_marker="applicable.",
         end_marker="# 4. Data Tracks Form",
         markdown_content=funding_section,
     )
-
-    print(f"{raw_funding=}")
 
     # Make text into a markdown list
     funding = []

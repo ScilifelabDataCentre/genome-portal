@@ -49,10 +49,11 @@ def example_user_forms() -> dict[str, Path]:
     """
     Paths to example user form files for testing.
     """
-    excel_files = {
+    form_files = {
         "markdown_form": FORM_FIXTURES_DIR / "converted_species_submit_form.md",
+        "docx_form": FORM_FIXTURES_DIR / "01-species_submission_form_v1.1.0.docx",
     }
-    return excel_files
+    return form_files
 
 
 @pytest.fixture
