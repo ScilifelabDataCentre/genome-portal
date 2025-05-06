@@ -8,9 +8,6 @@
       },
       {
         "Website": "https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_003705765.3/"
-      },
-      {
-        "Article": "[EDIT]"
       }
     ],
     "accessionOrDOI": "GCA_003705765.3",
@@ -28,15 +25,12 @@
       },
       {
         "Website": "https://doi.org/10.17044/scilifelab.28606814.v1"
-      },
-      {
-        "Article": "[EDIT]"
       }
     ],
     "accessionOrDOI": "10.17044/scilifelab.28606814.v1",
     "fileName": "bmokoenaii_annotation.gff",
     "principalInvestigator": "Cecilia Geijer",
     "principalInvestigatorAffiliation": "Chalmers University of Technology",
-    "firstDateOnPortal": "[EDIT]"
+    "firstDateOnPortal": "05/05/2025"
   }
 ]
