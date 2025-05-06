@@ -1,5 +1,6 @@
 """
-Submodule to read the data tracks Excel form (.xlsx) and populate the data_tracks.json.
+Submodule to read the data tracks Excel form (.xlsx), extract genome assembly accession number,
+and populate the data_tracks.json.
 
 NB! The Excel files cannot contain comments; if it does, pd.read_excel will fail with the error
 "This is most probably because the workbook source files contain some invalid XML."
@@ -61,10 +62,11 @@ def parse_excel_file(spreadsheet_file_path: str, sheet_name) -> list[dict]:
     return data_tracks_list_of_dicts
 
 
-def populate_data_tracks_json(data_tracks_list_of_dicts: list[dict], output_json_path: Path) -> None:
+def populate_data_tracks_json(data_tracks_list_of_dicts: list[dict], assets_dir_path: Path) -> None:
     """
-    Write the list of dictionaries to a JSON file.
+    Write the data tracks list of dictionaries to a JSON file.
     """
+    output_json_path = assets_dir_path / JSON_FILE_NAME
 
     with open(output_json_path, "w") as json_file:
         json.dump(data_tracks_list_of_dicts, json_file, indent=2)
@@ -75,23 +77,12 @@ def extract_genome_accession(data_tracks_list_of_dicts: list[dict]) -> str:
     """
     Extract the value of 'accessionOrDOI' for the top-level key 'Genome' from the list of dictionaries.
     """
+
+    genome_assembly_accession = None
     for data_track in data_tracks_list_of_dicts:
         if data_track.get("dataTrackName") == "Genome":
-            return data_track.get("accessionOrDOI", None)
-    return None
-
-
-def process_data_tracks_excel(spreadsheet_file_path: str, assets_dir_path: Path, sheet_name: str) -> None:
-    """
-    Process the data tracks Excel file and generate a JSON file.
-    Default value for sheet_name from argparse is "Sheet1".
-    """
-    data_tracks_list_of_dicts = parse_excel_file(spreadsheet_file_path, sheet_name)
-
-    output_json_path = assets_dir_path / JSON_FILE_NAME
-    populate_data_tracks_json(data_tracks_list_of_dicts, output_json_path)
-
-    genome_assembly_accession = extract_genome_accession(data_tracks_list_of_dicts)
+            genome_assembly_accession = data_track.get("accessionOrDOI", None)
+            break
     if genome_assembly_accession is None:
         raise ValueError(
             "Genome assembly accession not found in the user spreadsheet. Please check the field is not empty."
@@ -102,4 +93,4 @@ def process_data_tracks_excel(spreadsheet_file_path: str, assets_dir_path: Path,
             "does not look like a GenBank genome assembly accession. It must start with 'GCA'."
         )
 
-    return genome_assembly_accession, data_tracks_list_of_dicts
+    return genome_assembly_accession

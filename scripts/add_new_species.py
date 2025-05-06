@@ -14,7 +14,11 @@ from add_new_species.add_stats_file import add_stats_file
 from add_new_species.form_parser import parse_user_form
 from add_new_species.image_processer import process_species_image
 from add_new_species.populate_assembly_metadata_fields import populate_assembly_metadata_fields
-from add_new_species.process_data_tracks_Excel import process_data_tracks_excel
+from add_new_species.process_data_tracks_Excel import (
+    extract_genome_accession,
+    parse_excel_file,
+    populate_data_tracks_json,
+)
 
 
 def run_argparse() -> argparse.Namespace:
@@ -113,10 +117,8 @@ if __name__ == "__main__":
     if not args.overwrite:
         check_dirs_empty(all_dir_paths=output_dir_paths)
 
-    # WIP note: this function creates and popluates data_tracks.json
-    genome_assembly_accession, data_tracks_list_of_dicts = process_data_tracks_excel(
+    data_tracks_list_of_dicts = parse_excel_file(
         spreadsheet_file_path=Path(args.user_spreadsheet),
-        assets_dir_path=output_dir_paths["assets_dir_path"],
         sheet_name=args.sheet_name,
     )
 
@@ -151,8 +153,12 @@ if __name__ == "__main__":
         data_dir_path=output_dir_paths["data_dir_path"],
     )
 
+    populate_data_tracks_json(data_tracks_list_of_dicts, assets_dir_path=output_dir_paths["assets_dir_path"])
+
     out_img_path = output_dir_paths["image_dir_path"] / f"{user_form_data.species_slug}.webp"
     process_species_image(in_img_path=Path(args.species_image), out_img_path=out_img_path)
+
+    genome_assembly_accession = extract_genome_accession(data_tracks_list_of_dicts)
 
     # WIP note: this function creates and popluates config.yml
     populate_assembly_metadata_fields(
