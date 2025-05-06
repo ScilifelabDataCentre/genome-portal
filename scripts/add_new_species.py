@@ -14,7 +14,10 @@ from add_new_species.add_stats_file import add_stats_file
 from add_new_species.form_parser import parse_user_form
 from add_new_species.get_assembly_metadata_from_ENA_NCBI import fetch_assembly_metadata
 from add_new_species.image_processer import process_species_image
-from add_new_species.populate_assembly_metadata_fields import populate_assembly_metadata_fields
+from add_new_species.populate_assembly_metadata_fields import (
+    populate_assembly_md_with_assembly_metadata,
+    populate_config_yml,
+)
 from add_new_species.process_data_tracks_Excel import parse_excel_file, populate_data_tracks_json
 
 
@@ -119,10 +122,11 @@ if __name__ == "__main__":
         sheet_name=args.sheet_name,
     )
 
-    assembly_metadata_dict = fetch_assembly_metadata(
+    assembly_metadata = fetch_assembly_metadata(
         data_tracks_list_of_dicts,
         species_name=user_form_data.species_name,
     )
+    print(assembly_metadata)
 
     add_index_md(
         species_name=user_form_data.species_name,
@@ -146,6 +150,11 @@ if __name__ == "__main__":
         data_dir_path=output_dir_paths["data_dir_path"],
     )
 
+    populate_assembly_md_with_assembly_metadata(
+        assembly_metadata,
+        content_dir_path=output_dir_paths["content_dir_path"],
+    )
+
     add_download_md(
         species_slug=user_form_data.species_slug,
         content_dir_path=output_dir_paths["content_dir_path"],
@@ -157,13 +166,11 @@ if __name__ == "__main__":
 
     populate_data_tracks_json(data_tracks_list_of_dicts, assets_dir_path=output_dir_paths["assets_dir_path"])
 
+    populate_config_yml(
+        assembly_metadata,
+        data_tracks_list_of_dicts,
+        config_dir_path=output_dir_paths["config_dir_path"],
+    )
+
     out_img_path = output_dir_paths["image_dir_path"] / f"{user_form_data.species_slug}.webp"
     process_species_image(in_img_path=Path(args.species_image), out_img_path=out_img_path)
-
-    # WIP note: this function creates and popluates config.yml
-    populate_assembly_metadata_fields(
-        config_dir_path=output_dir_paths["config_dir_path"],
-        content_dir_path=output_dir_paths["content_dir_path"],
-        data_tracks_list_of_dicts=data_tracks_list_of_dicts,
-        assembly_metadata_dict=assembly_metadata_dict,
-    )

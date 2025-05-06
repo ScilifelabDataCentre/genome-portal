@@ -8,12 +8,30 @@ Notably, the ENA metadata lacks one field (assembly_type) that is present in the
 Hence, this submodule queries both ENA and NCBI APIs to get the desired metadata fields.
 """
 
+from typing import Optional
 from xml.etree import ElementTree
 
 import requests
+from attr import dataclass
 
 ENA_API_XML_URL = r"https://www.ebi.ac.uk/ena/browser/api/xml"
 NCBI_API_JSON_URL = "https://api.ncbi.nlm.nih.gov/datasets/v2/genome/accession"
+
+
+@dataclass
+class AssemblyMetadata:
+    """
+    Class to hold the genome assembly metadata.
+    For use by the downstream functions.
+    """
+
+    assembly_name: str
+    assembly_level: str
+    genome_representation: str
+    accession: str
+    assembly_type: Optional[str] = None
+    species_name: Optional[str] = None
+    species_name_abbrev: Optional[str] = None
 
 
 def get_ena_assembly_metadata_xml(accession: str) -> dict:
@@ -36,11 +54,12 @@ def get_ena_assembly_metadata_xml(accession: str) -> dict:
     assembly_level_element = tree.find(".//ASSEMBLY_LEVEL")
     genome_representation_element = tree.find(".//GENOME_REPRESENTATION")
 
-    return {
-        "name": name_element.text.strip(),
-        "assembly_level": assembly_level_element.text.strip(),
-        "genome_representation": genome_representation_element.text.strip(),
-    }
+    return AssemblyMetadata(
+        assembly_name=name_element.text.strip(),
+        assembly_level=assembly_level_element.text.strip(),
+        genome_representation=genome_representation_element.text.strip(),
+        accession=accession,
+    )
 
 
 def get_ncbi_assembly_metadata_json(accession: str) -> dict:
@@ -96,14 +115,13 @@ def fetch_assembly_metadata(data_tracks_list_of_dicts: dict, species_name: str) 
     front matter in assembly.md and a few fields in config.yml.
     """
     accession = extract_genome_accession(data_tracks_list_of_dicts)
-    assembly_metadata_dict = {}
-    assembly_metadata_dict = get_ena_assembly_metadata_xml(accession)
-    assembly_metadata_dict["assembly_type"] = get_ncbi_assembly_metadata_json(accession)
-    assembly_metadata_dict["accession"] = accession
+
+    assembly_metadata = get_ena_assembly_metadata_xml(accession)
+    assembly_metadata.assembly_type = get_ncbi_assembly_metadata_json(accession)
 
     species_name_words = species_name.split()
     species_name_abbrev = f"{species_name_words[0][0].upper()}. {species_name_words[1]}"
-    assembly_metadata_dict["species_name"] = species_name
-    assembly_metadata_dict["species_name_abbrev"] = species_name_abbrev
+    assembly_metadata.species_name = species_name
+    assembly_metadata.species_name_abbrev = species_name_abbrev
 
-    return assembly_metadata_dict
+    return assembly_metadata
