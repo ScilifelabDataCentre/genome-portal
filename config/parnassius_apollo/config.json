@@ -1,0 +1,60 @@
+{
+  "defaultSession": {
+    "id": "papo_default_session",
+    "name": "Parnassius apollo",
+    "widgets": {
+      "hierarchicalTrackSelector": {
+        "id": "hierarchicalTrackSelector",
+        "type": "HierarchicalTrackSelectorWidget",
+        "view": "papo_default_session_view_0",
+        "faceted": {
+          "showSparse": false,
+          "showFilters": true,
+          "showOptions": false,
+          "panelWidth": 400
+        }
+      }
+    },
+    "activeWidgets": {
+      "hierarchicalTrackSelector": "hierarchicalTrackSelector"
+    },
+    "views": [
+      {
+        "id": "papo_default_session_view_0",
+        "minimized": false,
+        "type": "LinearGenomeView",
+        "trackLabels": "offset",
+        "offsetPx": 0,
+        "bpPerPx": 400,
+        "displayedRegions": [
+          {
+            "refName": "ENA|CAJQZP010000001|CAJQZP010000001.1",
+            "start": 0,
+            "end": 4228715,
+            "reversed": false,
+            "assemblyName": "Parnassius_apollo"
+          }
+        ],
+        "tracks": [
+          {
+            "id": "papo_default_protein_coding_genes_view_0",
+            "type": "FeatureTrack",
+            "configuration": "GCA_907164705.1_Parnassius_apollo_genomic.gff",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "papo_default_protein_coding_genes_view_0_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 250,
+                "configuration": "GCA_907164705.1_Parnassius_apollo_genomic.gff-LinearBasicDisplay"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "configuration": {
+    "disableAnalytics": true
+  }
+}
