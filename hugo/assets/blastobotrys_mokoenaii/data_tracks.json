@@ -14,7 +14,7 @@
     "fileName": "GCA_003705765.3_ASM370576v3_genomic.fna.gz",
     "principalInvestigator": "Cecilia Geijer",
     "principalInvestigatorAffiliation": "Chalmers University of Technology",
-    "firstDateOnPortal": "[EDIT]"
+    "firstDateOnPortal": "05 May 2025"
   },
   {
     "dataTrackName": "Protein-coding genes",
@@ -31,6 +31,6 @@
     "fileName": "bmokoenaii_annotation.gff",
     "principalInvestigator": "Cecilia Geijer",
     "principalInvestigatorAffiliation": "Chalmers University of Technology",
-    "firstDateOnPortal": "05/05/2025"
+    "firstDateOnPortal": "05 May 2025"
   }
 ]

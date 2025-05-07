@@ -28,7 +28,7 @@ There is currently no publication accociated with the genome assembly displayed 
 The annotation data for *Blastobotrys malaysiensis* NRRL Y-6417 displayed in the genome portal comes from:
 
 ```{style=citation}
-Ravn, J.; Sörensen Ristinmaa, A.; Mazurkewich, ScotS.t; Borges Dias, G.; Larsbrink, J.; Geijer, C. (2025). Gene annotation of _Blastobotrys mokoenaii_, Blastobotrys illinoisensis, and Blastobotrys malaysiensis. Chalmers University of Technology. Dataset. https://doi.org/10.17044/scilifelab.28606814.v1
+Ravn, J.; Sörensen Ristinmaa, A.; Mazurkewich, ScotS.t; Borges Dias, G.; Larsbrink, J.; Geijer, C. (2025). Gene annotation of _Blastobotrys mokoenaii_, _Blastobotrys illinoisensis_, and _Blastobotrys malaysiensis_. Chalmers University of Technology. Dataset. https://doi.org/10.17044/scilifelab.28606814.v1
 ```
 
 The tools used by the Genome Portal staff to calculate the statistics shown on top of this page are described in:

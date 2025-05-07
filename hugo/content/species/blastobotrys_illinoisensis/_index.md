@@ -37,7 +37,11 @@ The genome assembly and annotation of protein-coding genes of _Blastobotrys illi
 
 #### How to cite
 
-There is currently no publication accociated with the data; in the meantime, please cite the genome assembly using accession number GCA_965113335.1 and the annotation of protein-coding genes using [Ravn et al. (2025)](https://doi.org/10.17044/scilifelab.28606814.v1).
+There is currently no publication accociated with the data; in the meantime, please cite the genome assembly using accession number GCA_965113335.1. If you use the annotation of protein-coding genes, please cite:
+
+```{style=citation}
+Ravn, J.; Sörensen Ristinmaa, A.; Mazurkewich, ScotS.t; Borges Dias, G.; Larsbrink, J.; Geijer, C. (2025). Gene annotation of _Blastobotrys mokoenaii_, _Blastobotrys illinoisensis_, and _Blastobotrys malaysiensis_. Chalmers University of Technology. Dataset. https://doi.org/10.17044/scilifelab.28606814.v1
+```
 
 If you have used the pages for this species in the Genome Portal, please refer to it in-text as: "The _Blastobotrys illinoisensis_ entry in the Swedish Reference Genome Portal (Retrieved <span class="todays-date"></span>)." and use the following for the bibliography:
 
@@ -47,9 +51,13 @@ Swedish Reference Genome Portal (Retrieved DATE_ACCESSED), SciLifeLab Data Centr
 
 #### References
 
+- Mukherjee, V., Radecka, D., Aerts, G., Verstrepen, K. J., Lievens, B., & Thevelein, J. M. (2017). Phenotypic landscape of non-conventional yeast species for different stress tolerance traits desirable in bioethanol fermentation. Biotechnology for Biofuels, 10(1), 216. <https://doi.org/10.1186/s13068-017-0899-5>
+
 - Ravn, J. L., Engqvist, M. K. M., Larsbrink, J., & Geijer, C. (2021). CAZyme prediction in ascomycetous yeast genomes guides discovery of novel xylanolytic species with diverse capacities for hemicellulose hydrolysis. Biotechnology for Biofuels, 14(1), 150. <https://doi.org/10.1186/s13068-021-01995-x>
 
-- Ravn, J. L., Sörensen Ristinmaa, A., Coleman, T., Larsbrink, J., & Geijer, C. (2023). Yeasts Have Evolved Divergent Enzyme Strategies To Deconstruct and Metabolize Xylan. Microbiology Spectrum, 11(3), e00245-23. <https://doi.org/10.1128/spectrum.00245-23>
+- Ravn, J.; Sörensen Ristinmaa, A.; Mazurkewich, ScotS.t; Borges Dias, G.; Larsbrink, J.; Geijer, C. (2025). Gene annotation of _Blastobotrys mokoenaii_, _Blastobotrys illinoisensis_, and _Blastobotrys malaysiensis_. Chalmers University of Technology. Dataset. <https://doi.org/10.17044/scilifelab.28606814.v1>
+
+- Sanya, D. R. A., Onésime, D., Passoth, V., Maiti, M. K., Chattopadhyay, A., & Khot, M. B. (2021). Yeasts of the Blastobotrys genus are promising platform for lipid-based fuels and oleochemicals production. Applied Microbiology and Biotechnology, 105(12), 4879–4897. <https://doi.org/10.1007/s00253-021-11354-3>
 
 - Son, J. Y., & Kim, M. K. (2022). _Blastobotrys illinoisensis_, an Unrecorded Anamorphic Yeast Strain Isolated from the Gut of the Earthworm Eisenia fetida. The Korean Journal of Mycology, 50(4), 373–381. <https://doi.org/10.4489/KJM.20220041>
 

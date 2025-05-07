@@ -3,7 +3,7 @@
 # unless you were warned by the add-new-species.py script.
 title: "*Blastobotrys mokoenaii* NRRL Y-27120"
 subtitle: "An Ascomycota yeast species"
-last_updated: "30/04/2025" # format DD/MM/YYYY
+last_updated: "05/05/2025" # format DD/MM/YYYY
 
 layout: "species_intro"
 banner_title: "Species overview"
@@ -62,6 +62,8 @@ Swedish Reference Genome Portal (Retrieved DATE_ACCESSED), SciLifeLab Data Centr
 - Opulente, D. A., LaBella, A. L., Harrison, M.-C., Wolters, J. F., Liu, C., Li, Y., Kominek, J., Steenwyk, J. L., Stoneman, H. R., VanDenAvond, J., Miller, C. R., Langdon, Q. K., Silva, M., Gonçalves, C., Ubbelohde, E. J., Li, Y., Buh, K. V., Jarzyna, M., Haase, M. A. B., … Hittinger, C. T. (2024). Genomic factors shape carbon and nitrogen metabolic niche breadth across Saccharomycotina yeasts. Science, 384(6694), eadj4503. <https://doi.org/10.1126/science.adj4503>
 
 - Ravn, J. L., Sörensen Ristinmaa, A., Coleman, T., Larsbrink, J., & Geijer, C. (2023). Yeasts Have Evolved Divergent Enzyme Strategies To Deconstruct and Metabolize Xylan. Microbiology Spectrum, 11(3), e00245-23. <https://doi.org/10.1128/spectrum.00245-23>
+
+- Ravn, J.; Sörensen Ristinmaa, A.; Mazurkewich, ScotS.t; Borges Dias, G.; Larsbrink, J.; Geijer, C. (2025). Gene annotation of _Blastobotrys mokoenaii_, _Blastobotrys illinoisensis_, and _Blastobotrys malaysiensis_. Chalmers University of Technology. Dataset. <https://doi.org/10.17044/scilifelab.28606814.v1>
 
 - Sanya, D. R. A., Onésime, D., Passoth, V., Maiti, M. K., Chattopadhyay, A., & Khot, M. B. (2021). Yeasts of the Blastobotrys genus are promising platform for lipid-based fuels and oleochemicals production. Applied Microbiology and Biotechnology, 105(12), 4879–4897. <https://doi.org/10.1007/s00253-021-11354-3>
 
