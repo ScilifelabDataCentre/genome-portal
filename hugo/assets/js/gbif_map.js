@@ -113,15 +113,21 @@ function main() {
     addBaseLayer(state.map);
     const obsverationLayer = addObservationLayer(state.map, state.gbifTaxonId);
 
-
     // If a user made several rapid requests, then any in progress requests (for a previous map state)
     // would be cancelled and this would raise the tileerror.
     // This is not an error, so we only check on initial load for a tileerror.
-    // This initial check instead guards against a bad taxon ID and/or the GBIF API being down.
-    // (see discussion in PR #98 for more details).
-    obsverationLayer.once('tileerror', function () {
-        state.mapErrorMessage.style.display = 'block';
-        console.warn('tileerror: No observations found for this taxon, check the taxon ID is correct');
+    // This initial check instead guards against a badly formatted request and/or the GBIF API being down.
+    // 204 No Content errors are not necessarily errors, so we should not show the error message on that.
+    // Hence why if tileerror occurs, we check the header of the tiles url first to see if was 204 vs 400.
+    // if 400 or at least not 204, raise the error message.
+    obsverationLayer.once('tileerror', function (event) {
+        fetch(event.tile.src, { method: 'HEAD' })
+            .then(response => {
+                if (response.status !== 204) {
+                    state.mapErrorMessage.style.display = 'block';
+                    console.warn(`tileerror: HTTP ${response.status} - badly formatted request or GBIF API is down`);
+                }
+            })
     });
     obsverationLayer.once('load', function () {
         obsverationLayer.off('tileerror');
