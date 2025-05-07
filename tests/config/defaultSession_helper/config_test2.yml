@@ -1,0 +1,44 @@
+#This configuration tests the case: protein-codings in assembly 2 but not in 1; GWAS in assembly 1, but not in 2;
+# defaultSession flag set for all tracks in assembly 1 and assembly 2 despite some being protein-coding genes.
+organism: "Linum tenue"
+assembly:
+  name: Linum_tenue_thrum_v1
+  displayName: "L. tenue genome assembly GCA_946122785.1"
+  accession: GCA_946122785.1
+  # The following url points to the original ENA upload of the assembly. It will require an alias file to be able to load the protein coding genes track
+  url: "https://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/cam/CAMGYJ01.fasta.gz"
+  # Temp storage for alias file.
+  aliases: "https://raw.githubusercontent.com/ScilifelabDataCentre/genome-portal/refs/heads/main/scripts/data_stewardship/alias_files_temp_storage/CAMGYJ01.fna.alias"
+  defaultScaffold: "ENA|CAMGYJ010000002|CAMGYJ010000002.1"
+tracks:
+  - name: "Repeats"
+    url: "https://figshare.scilifelab.se/ndownloader/files/48879751"
+    fileName: "L_tenue_v1_rep.bed.gz"
+    defaultSession: true
+  - name: "Tajima's D, population 06"
+    url: "https://figshare.scilifelab.se/ndownloader/files/50073936"
+    fileName: "Lten_pop06_TD.bed.gz"
+    addTrack: false
+    defaultSession: true
+    GWAS: true
+    scoreColumnGWAS: "TajimaD"
+  - name: "Tajima's D, population 08"
+    url: "https://figshare.scilifelab.se/ndownloader/files/50073939"
+    fileName: "Lten_pop08_TD.bed.gz"
+    addTrack: false
+    defaultSession: true
+    GWAS: true
+    scoreColumnGWAS: "TajimaD"
+---
+#This second YAML document is a Frankenstein's monster, since it is a mix of two different species. This is only for testing purposes
+#The reason is that Linum has GWAS tracks, and Clouded Apollo has a organelle assembly and as such lacks a track named protein-coding genes.
+assembly:
+  name: "Mito_assembly"
+  displayName: "Pmne mito assembly"
+  url: "http://fixtures/mito_clouded_apollo/OZ075093.1.fasta.gz"
+  aliases: "https://raw.githubusercontent.com/ScilifelabDataCentre/genome-portal/refs/heads/main/scripts/data_stewardship/alias_files_temp_storage/GCA_964186615.fna.alias"
+tracks:
+  - name: "Protein-coding genes"
+    url: "https://figshare.scilifelab.se/ndownloader/files/47209654"
+    fileName: "pmne_mtdna.gff.gz"
+    defaultSession: true
