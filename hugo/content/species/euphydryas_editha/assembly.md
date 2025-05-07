@@ -6,7 +6,7 @@ key_info:
   - "Assembly Type": haploid
   - "Assembly Level": scaffold
   - "Genome Representation": full
-  - "Accession": GCA_933666425
+  - "Accession": GCA_933666425.1
 
 title: "Genome assembly"
 layout: "species_assembly"
@@ -17,7 +17,7 @@ stats_data_path: "euphydryas_editha/species_stats"
 lineage_data_path: "euphydryas_editha/taxonomy"
 ---
 
-Notes: Assembly statistics were calculated for the primary genome assembly GCA_933666425 (CAKOGL01.fna.gz) using Quast (v5.2.0; Mikheenko et al. 2018). Busco statistics (Manni et al., 2021) were taken from Tunstrom et al. (2022). Annotation statistics were calculated using CA_933666425.1_Euphydryas_editha_genomic.gff.gz using AGAT (v1.4.1; Dainat, 2024).
+Notes: Assembly statistics were calculated for the primary genome assembly GCA_933666425.1 (CAKOGL01.fna.gz) using Quast (v5.2.0; Mikheenko et al. 2018). Busco statistics (Manni et al., 2021) were taken from Tunstrom et al. (2022). Annotation statistics were calculated using CA_933666425.1_Euphydryas_editha_genomic.gff.gz using AGAT (v1.4.1; Dainat, 2024).
 
 BUSCO notation: C: Complete; S: Single-copy; D: Duplicated; F: Fragmented; M: Missing; n: Total BUSCO genes included in the dataset (here: arthropoda_odb10). See also [the official BUSCO manual](https://busco.ezlab.org/busco_userguide.html#interpreting-the-results).
 

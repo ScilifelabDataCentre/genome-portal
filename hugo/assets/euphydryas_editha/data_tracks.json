@@ -13,15 +13,15 @@
         "Article": "https://doi.org/10.1093/gbe/evac113"
       }
     ],
-    "accessionOrDOI": "GCA_933666425",
+    "accessionOrDOI": "GCA_933666425.1",
     "fileName": "CAKOGL01.fasta.gz",
     "principalInvestigator": "Christopher Wheat",
     "principalInvestigatorAffiliation": "Stockholm University",
-    "firstDateOnPortal": "[EDIT]"
+    "firstDateOnPortal": "07/05/2025"
   },
   {
     "dataTrackName": "Protein-coding genes",
-    "description": "Functional annotation of protein-coding genes in the primary genome assembly",
+    "description": "Structural annotation of protein-coding genes in the primary genome assembly",
     "links": [
       {
         "Download": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/933/666/425/GCA_933666425.1_Euphydryas_editha/GCA_933666425.1_Euphydryas_editha_genomic.gff.gz"
@@ -33,10 +33,10 @@
         "Article": "https://doi.org/10.1093/gbe/evac113"
       }
     ],
-    "accessionOrDOI": "GCA_933666425",
+    "accessionOrDOI": "GCA_933666425.1",
     "fileName": "GCA_933666425.1_Euphydryas_editha_genomic.gff.gz",
     "principalInvestigator": "Christopher Wheat",
     "principalInvestigatorAffiliation": "Stockholm University",
-    "firstDateOnPortal": "[EDIT]"
+    "firstDateOnPortal": "07/05/2025"
   }
 ]

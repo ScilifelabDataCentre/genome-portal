@@ -38,7 +38,7 @@ initialZoom: 1
 
 ### Description
 
-Edith's Checkerspot Butterfly (\_Euphydryas editha\_) is found in North
+Edith's Checkerspot Butterfly (_Euphydryas editha_) is found in North
 America, especially along the pacific coast of USA. It is not included
 on the IUCN Red List. The genome assembly and annotation displayed here
 on the Genome Portal was generated in a study by Tunstrom et al. (2022).
@@ -55,13 +55,11 @@ Environmental Changes. Genome Biology and Evolution, 14(8), evac113.
 https://doi.org/10.1093/gbe/evac11
 ```
 
-If you have used the pages for this species in the Genome Portal, please refer to it in-text as: "The *Euphydryas editha* entry in the Swedish Reference Genome Portal (Retrieved <span class="todays-date"></span>)." and use the following for the bibliography:
+If you have used the pages for this species in the Genome Portal, please refer to it in-text as: "The _Euphydryas editha_ entry in the Swedish Reference Genome Portal (Retrieved <span class="todays-date"></span>)." and use the following for the bibliography:
 
 ```{style=citation}
 Swedish Reference Genome Portal (Retrieved DATE_ACCESSED), SciLifeLab Data Centre, version VERSION_NUMBER from <https://genomes.scilifelab.se>, [RRID:SCR_026008](https://rrid.site/data/record/nlx_144509-1/SCR_026008/resolver?q=rrid:scr_026008)
 ```
-
-#### References
 
 #### Changelog
 

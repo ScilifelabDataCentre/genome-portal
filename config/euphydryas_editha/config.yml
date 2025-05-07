@@ -2,7 +2,7 @@ organism: Euphydryas editha
 assembly:
   name: Euphydryas_editha
   displayName: E. editha genome assembly GCA_933666425
-  accession: GCA_933666425
+  accession: GCA_933666425.1
   url: https://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/cak/CAKOGL01.fasta.gz
   fileName: CAKOGL01.fasta.gz
 tracks:
