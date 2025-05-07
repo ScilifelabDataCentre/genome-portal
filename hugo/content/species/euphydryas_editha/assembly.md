@@ -26,12 +26,7 @@ BUSCO notation: C: Complete; S: Single-copy; D: Duplicated; F: Fragmented; M: Mi
 The data for *Euphydryas editha* displayed in the genome portal comes from:
 
 ```{style=citation}
-Tunstrom, K., Wheat, C. W., Parmesan, C., Singer, M. C., & Mikheyev, A.
-S. (2022). A Genome for Edith's Checkerspot Butterfly: An Insect with
-Complex Host-Adaptive Suites and Rapid Evolutionary Responses to
-Environmental Changes. Genome Biology and Evolution, 14(8), evac113.
-https://doi.org/10.1093/gbe/evac11
-
+Tunstrom, K., Wheat, C. W., Parmesan, C., Singer, M. C., & Mikheyev, A. S. (2022). A Genome for Edith's Checkerspot Butterfly: An Insect with Complex Host-Adaptive Suites and Rapid Evolutionary Responses to Environmental Changes. Genome Biology and Evolution, 14(8), evac113. https://doi.org/10.1093/gbe/evac11
 ```
 
 The tools used by the Genome Portal staff to calculate the statistics shown on top of this page are described in:
