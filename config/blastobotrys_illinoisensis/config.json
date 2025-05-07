@@ -1,0 +1,60 @@
+{
+  "defaultSession": {
+    "id": "bill_default_session",
+    "name": "Blastobotrys illinoisensis",
+    "widgets": {
+      "hierarchicalTrackSelector": {
+        "id": "hierarchicalTrackSelector",
+        "type": "HierarchicalTrackSelectorWidget",
+        "view": "bill_default_session_view_0",
+        "faceted": {
+          "showSparse": false,
+          "showFilters": true,
+          "showOptions": false,
+          "panelWidth": 400
+        }
+      }
+    },
+    "activeWidgets": {
+      "hierarchicalTrackSelector": "hierarchicalTrackSelector"
+    },
+    "views": [
+      {
+        "id": "bill_default_session_view_0",
+        "minimized": false,
+        "type": "LinearGenomeView",
+        "trackLabels": "offset",
+        "offsetPx": 0,
+        "bpPerPx": 50,
+        "displayedRegions": [
+          {
+            "refName": "ENA|CBCOUN010000001|CBCOUN010000001.1",
+            "start": 0,
+            "end": 3252363,
+            "reversed": false,
+            "assemblyName": "BILLI_YB1343_PB"
+          }
+        ],
+        "tracks": [
+          {
+            "id": "bill_default_protein_coding_genes_view_0",
+            "type": "FeatureTrack",
+            "configuration": "billinoisensis_annotation.gff",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "bill_default_protein_coding_genes_view_0_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 150,
+                "configuration": "billinoisensis_annotation.gff-LinearBasicDisplay"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "configuration": {
+    "disableAnalytics": true
+  }
+}
