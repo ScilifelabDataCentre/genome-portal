@@ -14,8 +14,8 @@ science_name: "Euphydryas editha"
 lineage_data_path: "euphydryas_editha/taxonomy"
 
 cover_image: "/img/species/euphydryas_editha.webp"
-img_attrib_text: "Image attribution text."
-img_attrib_link: "https://example.com/image_attribution"
+img_attrib_text: "Edith's Checkerspot Butterfly by Ken-Ichi Ueda, CC-BY 4.0"
+img_attrib_link: "https://commons.wikimedia.org/wiki/Category:Euphydryas_editha#/media/File:Euphydryas_editha_3185.jpg"
 
 gbif_taxon_id: "4299315"
 goat_webpage: "https://goat.genomehubs.org/record?recordId=104508&result=taxon&taxonomy=ncbi#euphydryas%20editha"
@@ -23,9 +23,9 @@ goat_webpage: "https://goat.genomehubs.org/record?recordId=104508&result=taxon&t
 # These 3 params define the initial view for the map
 # latitude and longitude are for the map center.
 # If you don't want to include an observation map, remove these params
-latitude: 0
-longitude: 0
-initialZoom: 1
+latitude: 40
+longitude: -90
+initialZoom: 3
 
 # Optional params below,
 # comment them in if you want to include them.

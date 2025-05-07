@@ -49,10 +49,10 @@
         "display_order": 7
     },
     "Superkingdom": {
-        "science_name": "",
-        "tax_id": "",
-        "ena_link": "",
-        "ncbi_link": "",
+        "science_name": "Eukaryota",
+        "tax_id": "2759",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:2759",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=2759",
         "display_order": 8
     }
 }
