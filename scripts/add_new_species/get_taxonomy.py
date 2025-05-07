@@ -41,7 +41,7 @@ TAXONOMIC_RANKS = [
     "class",
     "phylum",
     "kingdom",
-    "superkingdom",
+    "domain",
 ]
 
 
