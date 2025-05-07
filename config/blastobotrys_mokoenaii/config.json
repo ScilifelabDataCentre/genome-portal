@@ -28,9 +28,9 @@
         "bpPerPx": 50,
         "displayedRegions": [
           {
-            "refName": "PPJM03000099.1",
+            "refName": "PPJM03000001.1",
             "start": 0,
-            "end": 3251,
+            "end": 970412,
             "reversed": false,
             "assemblyName": "ASM370576v3"
           }
@@ -45,7 +45,7 @@
               {
                 "id": "bmok_default_protein_coding_genes_view_0_display",
                 "type": "LinearBasicDisplay",
-                "heightPreConfig": 150,
+                "heightPreConfig": 250,
                 "configuration": "bmokoenaii_annotation.gff-LinearBasicDisplay"
               }
             ]

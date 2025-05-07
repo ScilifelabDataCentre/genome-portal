@@ -28,9 +28,9 @@
         "bpPerPx": 50,
         "displayedRegions": [
           {
-            "refName": "JAKTQL010000001.1",
+            "refName": "JAKTQL010002544.1",
             "start": 0,
-            "end": 559,
+            "end": 501258,
             "reversed": false,
             "assemblyName": "ASM3055881v1"
           }
@@ -45,7 +45,7 @@
               {
                 "id": "bmal_default_protein_coding_genes_view_0_display",
                 "type": "LinearBasicDisplay",
-                "heightPreConfig": 150,
+                "heightPreConfig": 250,
                 "configuration": "bmalaysiensis_annotation.gff-LinearBasicDisplay"
               }
             ]
