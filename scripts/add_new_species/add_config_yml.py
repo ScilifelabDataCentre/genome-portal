@@ -5,13 +5,16 @@ Submodule to populate fields in assembly.md and config.yml files
 from pathlib import Path
 
 import yaml
-from attr import dataclass
+
+from add_new_species.get_assembly_metadata_from_ENA_NCBI import AssemblyMetadata
 
 YML_FILE_NAME = "config.yml"
 TEMPLATE_FILE_PATH = Path(__file__).parent.parent / "templates" / YML_FILE_NAME
 
 
-def populate_config_yml(assembly_metadata: dataclass, data_tracks_list_of_dicts: dict, config_dir_path: Path) -> None:
+def populate_config_yml(
+    assembly_metadata: AssemblyMetadata, data_tracks_list_of_dicts: dict, config_dir_path: Path
+) -> None:
     """
     1. Read the config.yml template file
     2. Populate the following fields in the config.yml file:

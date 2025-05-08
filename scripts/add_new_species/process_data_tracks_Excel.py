@@ -70,4 +70,4 @@ def populate_data_tracks_json(data_tracks_list_of_dicts: list[dict], assets_dir_
 
     with open(output_json_path, "w") as json_file:
         json.dump(data_tracks_list_of_dicts, json_file, indent=2)
-        print(f"Data successfully written to {output_json_path}")
+        print(f"File created: {output_json_path.resolve()}")

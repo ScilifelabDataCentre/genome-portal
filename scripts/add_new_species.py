@@ -120,7 +120,7 @@ if __name__ == "__main__":
     )
 
     assembly_metadata = fetch_assembly_metadata(
-        data_tracks_list_of_dicts,
+        data_tracks_list_of_dicts=data_tracks_list_of_dicts,
         species_name=user_form_data.species_name,
     )
 
@@ -162,8 +162,8 @@ if __name__ == "__main__":
     populate_data_tracks_json(data_tracks_list_of_dicts, assets_dir_path=output_dir_paths["assets_dir_path"])
 
     populate_config_yml(
-        assembly_metadata,
-        data_tracks_list_of_dicts,
+        assembly_metadata=assembly_metadata,
+        data_tracks_list_of_dicts=data_tracks_list_of_dicts,
         config_dir_path=output_dir_paths["config_dir_path"],
     )
 
