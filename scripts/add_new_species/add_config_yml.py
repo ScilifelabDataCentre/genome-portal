@@ -19,7 +19,7 @@ def populate_config_yml(assembly_metadata: dataclass, data_tracks_list_of_dicts:
     - assembly.name
     - assembly.displayName
     - assembly.accession
-    with the corresponding values from assembly_metadata_dict.
+    with the corresponding values from the dataclass "assembly_metadata".
     3. Populate the tracks field in the config.yml file with the data tracks values.
     4. Write the updated config.yml file to the config_dir_path.
     """

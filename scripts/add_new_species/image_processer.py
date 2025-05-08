@@ -17,7 +17,7 @@ MAX_SIZE_KB = 500  # Maximum size in KB for the output image
 MIN_WEBP_QUALITY = 0  # Minimum quality score for webp conversion
 
 
-def process_species_image(in_img_path: Path, out_img_path: Path):
+def process_species_image(in_img_path: Path, out_img_path: Path) -> None:
     """
     Process image from start to finish:
     - Check image is 4:3

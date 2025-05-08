@@ -16,7 +16,7 @@ JSON_FILE_NAME = "data_tracks.json"
 TEMPLATE_FILE_PATH = Path(__file__).parent.parent / "templates" / JSON_FILE_NAME
 
 
-def df_row_to_json(row: pd.Series, template_json: str) -> dict:
+def df_row_to_json(row: pd.Series, template_json: str) -> dict[str, str]:
     """
     Convert a row of the DataFrame to a JSON object using the JSON template.
     Handle missing values by checking if the value is None or NaN: if so,
@@ -48,7 +48,7 @@ def df_row_to_json(row: pd.Series, template_json: str) -> dict:
     return data_track
 
 
-def parse_excel_file(spreadsheet_file_path: str, sheet_name) -> list[dict]:
+def parse_excel_file(spreadsheet_file_path: str, sheet_name: str) -> list[dict]:
     """
     Parse the Excel file with Pandas and return a JSON-style structure (list of dicts).
     """

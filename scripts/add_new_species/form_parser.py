@@ -169,7 +169,7 @@ def extract_funding(markdown_content) -> str:
     return "\n".join(funding)
 
 
-def extract_img_attrib(markdown_content: str) -> str:
+def extract_img_attrib(markdown_content: str) -> dict[str, str]:
     """
     TODO - not currently in word doc, so fake data for now...
     """
