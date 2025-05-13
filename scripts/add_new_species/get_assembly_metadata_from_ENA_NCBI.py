@@ -34,7 +34,7 @@ class AssemblyMetadata:
     species_name_abbrev: Optional[str] = None
 
 
-def get_ena_assembly_metadata_xml(accession: str) -> dict:
+def get_ena_assembly_metadata_xml(accession: str) -> AssemblyMetadata:
     """
     Get the metadata from ENA for a given genome assembly accession
     and extract the name, assembly level, and genome representation fields.
