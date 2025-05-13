@@ -1,0 +1,60 @@
+{
+  "defaultSession": {
+    "id": "apla_default_session",
+    "name": "Anthophora plagiata",
+    "widgets": {
+      "hierarchicalTrackSelector": {
+        "id": "hierarchicalTrackSelector",
+        "type": "HierarchicalTrackSelectorWidget",
+        "view": "apla_default_session_view_0",
+        "faceted": {
+          "showSparse": false,
+          "showFilters": true,
+          "showOptions": false,
+          "panelWidth": 400
+        }
+      }
+    },
+    "activeWidgets": {
+      "hierarchicalTrackSelector": "hierarchicalTrackSelector"
+    },
+    "views": [
+      {
+        "id": "apla_default_session_view_0",
+        "minimized": false,
+        "type": "LinearGenomeView",
+        "trackLabels": "offset",
+        "offsetPx": 0,
+        "bpPerPx": 50,
+        "displayedRegions": [
+          {
+            "refName": "ENA|CAXEFL010000001|CAXEFL010000001.1",
+            "start": 0,
+            "end": 359479,
+            "reversed": false,
+            "assemblyName": "iyAntPlag1"
+          }
+        ],
+        "tracks": [
+          {
+            "id": "apla_default_protein_coding_genes_view_0",
+            "type": "FeatureTrack",
+            "configuration": "GCA_963995485.1_iyAntPlag1_genomic.gff",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "apla_default_protein_coding_genes_view_0_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 150,
+                "configuration": "GCA_963995485.1_iyAntPlag1_genomic.gff-LinearBasicDisplay"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "configuration": {
+    "disableAnalytics": true
+  }
+}
