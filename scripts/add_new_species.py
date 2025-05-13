@@ -125,28 +125,14 @@ if __name__ == "__main__":
     )
 
     add_index_md(
-        species_name=user_form_data.species_name,
-        species_slug=user_form_data.species_slug,
-        common_name=user_form_data.common_name,
-        description=user_form_data.description,
-        references=user_form_data.references,
-        publication=user_form_data.publication,
-        img_attrib_text=user_form_data.img_attrib_text,
-        img_attrib_link=user_form_data.img_attrib_link,
+        user_form_data=user_form_data,
         content_dir_path=output_dir_paths["content_dir_path"],
         data_dir_path=output_dir_paths["data_dir_path"],
     )
 
     add_assembly_md(
-        species_name=user_form_data.species_name,
-        species_slug=user_form_data.species_slug,
-        funding=user_form_data.funding,
-        publication=user_form_data.publication,
-        assembly_name=assembly_metadata.assembly_name,
-        assembly_type=assembly_metadata.assembly_type,
-        assembly_level=assembly_metadata.assembly_level,
-        genome_representation=assembly_metadata.genome_representation,
-        assembly_accession=assembly_metadata.assembly_accession,
+        user_form_data=user_form_data,
+        assembly_metadata=assembly_metadata,
         content_dir_path=output_dir_paths["content_dir_path"],
     )
 

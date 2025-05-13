@@ -5,7 +5,9 @@ from pathlib import Path
 import requests
 
 from add_new_species.constants import TEMPLATE_DIR
-from add_new_species.get_taxonomy import EbiRestException, get_taxonomy, save_taxonomy_file
+from add_new_species.form_parser import UserFormData
+from add_new_species.get_assembly_metadata_from_ENA_NCBI import AssemblyMetadata
+from add_new_species.get_taxonomy import EbiRestException, get_taxonomy
 from add_new_species.template_handler import process_template_file
 
 INDEX_FILE = "_index.md"
@@ -16,14 +18,7 @@ CONTENT_FILES = (INDEX_FILE, ASSEMBLY_FILE, DOWNLOAD_FILE)
 
 
 def add_index_md(
-    species_name: str,
-    species_slug: str,
-    common_name: str,
-    description: str,
-    references: str,
-    publication: str,
-    img_attrib_text: str,
-    img_attrib_link: str,
+    user_form_data: UserFormData,
     content_dir_path: Path,
     data_dir_path: Path,
 ) -> None:
@@ -35,7 +30,7 @@ def add_index_md(
     output_file_path = content_dir_path / INDEX_FILE
 
     todays_date = datetime.now().strftime("%d/%m/%Y")
-
+    species_name = user_form_data.species_name
     try:
         gbif_taxon_id = get_gbif_taxon_key(species_name=species_name)
     except (requests.exceptions.HTTPError, KeyError):
@@ -57,31 +52,20 @@ def add_index_md(
         output_file_path=output_file_path,
         required_replacements={
             "species_name": species_name,
-            "species_slug": species_slug,
-            "common_name": common_name,
-            "description": description,
-            "references": references,
-            "publication": publication,
-            "img_attrib_text": img_attrib_text,
-            "img_attrib_link": img_attrib_link,
+            "species_slug": user_form_data.species_slug,
+            "common_name": user_form_data.common_name,
+            "description": user_form_data.description,
+            "references": user_form_data.references,
+            "publication": user_form_data.publication,
+            "img_attrib_text": user_form_data.img_attrib_text,
+            "img_attrib_link": user_form_data.img_attrib_link,
             "todays_date": todays_date,
         },
         optional_replacements={"gbif_taxon_id": gbif_taxon_id, "goat_webpage": goat_webpage},
     )
 
 
-def add_assembly_md(
-    species_name: str,
-    species_slug: str,
-    funding: str,
-    publication: str,
-    assembly_name: str,
-    assembly_type: str,
-    assembly_level: str,
-    genome_representation: str,
-    assembly_accession: str,
-    content_dir_path: Path,
-) -> None:
+def add_assembly_md(user_form_data: UserFormData, assembly_metadata: AssemblyMetadata, content_dir_path: Path) -> None:
     """
     Use the template assembly.md file to create the assembly.md file for the species.
     Template files are modified with the species specific information.
@@ -93,15 +77,15 @@ def add_assembly_md(
         template_file_path=template_file_path,
         output_file_path=output_file_path,
         required_replacements={
-            "species_name": species_name,
-            "species_slug": species_slug,
-            "funding": funding,
-            "publication": publication,
-            "assembly_name": assembly_name,
-            "assembly_type": assembly_type,
-            "assembly_level": assembly_level,
-            "genome_representation": genome_representation,
-            "assembly_accession": assembly_accession,
+            "species_name": user_form_data.species_name,
+            "species_slug": user_form_data.species_slug,
+            "funding": user_form_data.funding,
+            "publication": user_form_data.publication,
+            "assembly_name": assembly_metadata.assembly_name,
+            "assembly_type": assembly_metadata.assembly_type,
+            "assembly_level": assembly_metadata.assembly_level,
+            "genome_representation": assembly_metadata.genome_representation,
+            "assembly_accession": assembly_metadata.assembly_accession,
         },
     )
 
@@ -144,10 +128,10 @@ def process_taxonomy(species_name: str, data_dir_path: Path) -> str | None:
         )
         return None
 
-    save_taxonomy_file(
-        taxonomy_dict=taxonomy_dict,
-        output_file_path=data_dir_path / TAXONOMY_FILE,
-    )
+    # save_taxonomy_file(
+    #     taxonomy_dict=taxonomy_dict,
+    #     output_file_path=data_dir_path / TAXONOMY_FILE,
+    # )
     return taxonomy_dict["Species"]["tax_id"]
 
 
