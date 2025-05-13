@@ -25,12 +25,12 @@
         "type": "LinearGenomeView",
         "trackLabels": "offset",
         "offsetPx": 0,
-        "bpPerPx": 50,
+        "bpPerPx": 800,
         "displayedRegions": [
           {
-            "refName": "ENA|CAXEFL010000001|CAXEFL010000001.1",
+            "refName": "ENA|CAXEFL010000280|CAXEFL010000280.1",
             "start": 0,
-            "end": 359479,
+            "end": 37021982,
             "reversed": false,
             "assemblyName": "iyAntPlag1"
           }
@@ -39,14 +39,14 @@
           {
             "id": "apla_default_protein_coding_genes_view_0",
             "type": "FeatureTrack",
-            "configuration": "GCA_963995485.1_iyAntPlag1_genomic.gff",
+            "configuration": "GCA_963995485.1_iyAntPlag1_genomic.gff.renamed.gff",
             "minimized": false,
             "displays": [
               {
                 "id": "apla_default_protein_coding_genes_view_0_display",
                 "type": "LinearBasicDisplay",
-                "heightPreConfig": 150,
-                "configuration": "GCA_963995485.1_iyAntPlag1_genomic.gff-LinearBasicDisplay"
+                "heightPreConfig": 250,
+                "configuration": "GCA_963995485.1_iyAntPlag1_genomic.gff.renamed.gff-LinearBasicDisplay"
               }
             ]
           }
