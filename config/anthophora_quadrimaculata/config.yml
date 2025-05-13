@@ -1,0 +1,11 @@
+organism: Anthophora quadrimaculata
+assembly:
+  name: iyAntQuad1
+  displayName: A. quadrimaculata genome assembly GCA_963995475.1
+  accession: GCA_963995475.1
+  url: ftp://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/cax/CAXEFK01.fasta.gz
+  fileName: CAXEFK01.fasta.gz
+tracks:
+- name: Protein-coding genes
+  url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/963/995/475/GCA_963995475.1_iyAntQuad1/GCA_963995475.1_iyAntQuad1_genomic.gff.gz
+  fileName: GCA_963995475.1_iyAntQuad1_genomic.gff.gz

@@ -1,0 +1,24 @@
+---
+assembly:
+  - "Assembly length (Mbp)": "357.94"
+  - "GC %": "38.33"
+  - "Contig #": "39"
+  - "Contig N50 (Mbp)": "22.87"
+  - "Contig L50": "7"
+  - "Contig N90 (Mbp)": "10.52"
+  - "Contig L90": "14"
+  - "Scaffold #": "39"
+  - "Scaffold N50 (Mbp)": "22.87"
+  - "Scaffold L50": "7"
+  - "Scaffold N90 (Mbp)": "10.52"
+  - "Scaffold L90": "14"
+  - "Scaffolds >= 10 kb": "39"
+  - "BUSCO % [EDIT]": "[EDIT]"
+annotation:
+  - "Gene #": 10728
+  - "Transcript #": "13609"
+  - "Avg exons per transcript": "6.2"
+  - "Avg gene length (bp)": 10133
+  - "Avg transcript length (bp)": "9828"
+  - "Avg exon length (bp)": 286
+  - "Avg intron length (bp)": "1393"

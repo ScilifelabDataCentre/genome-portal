@@ -1,0 +1,60 @@
+{
+  "defaultSession": {
+    "id": "aqua_default_session",
+    "name": "Anthophora quadrimaculata",
+    "widgets": {
+      "hierarchicalTrackSelector": {
+        "id": "hierarchicalTrackSelector",
+        "type": "HierarchicalTrackSelectorWidget",
+        "view": "aqua_default_session_view_0",
+        "faceted": {
+          "showSparse": false,
+          "showFilters": true,
+          "showOptions": false,
+          "panelWidth": 400
+        }
+      }
+    },
+    "activeWidgets": {
+      "hierarchicalTrackSelector": "hierarchicalTrackSelector"
+    },
+    "views": [
+      {
+        "id": "aqua_default_session_view_0",
+        "minimized": false,
+        "type": "LinearGenomeView",
+        "trackLabels": "offset",
+        "offsetPx": 0,
+        "bpPerPx": 100,
+        "displayedRegions": [
+          {
+            "refName": "ENA|CAXEFK010000001|CAXEFK010000001.1",
+            "start": 0,
+            "end": 22872068,
+            "reversed": false,
+            "assemblyName": "iyAntQuad1"
+          }
+        ],
+        "tracks": [
+          {
+            "id": "aqua_default_protein_coding_genes_view_0",
+            "type": "FeatureTrack",
+            "configuration": "GCA_963995475.1_iyAntQuad1_genomic.gff",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "aqua_default_protein_coding_genes_view_0_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 350,
+                "configuration": "GCA_963995475.1_iyAntQuad1_genomic.gff-LinearBasicDisplay"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "configuration": {
+    "disableAnalytics": true
+  }
+}
