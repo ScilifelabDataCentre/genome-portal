@@ -8,7 +8,6 @@ Notably, the ENA metadata lacks one field (assembly_type) that is present in the
 Hence, this submodule queries both ENA and NCBI APIs to get the desired metadata fields.
 """
 
-from typing import Optional
 from xml.etree import ElementTree
 
 import requests
@@ -29,12 +28,12 @@ class AssemblyMetadata:
     assembly_level: str
     genome_representation: str
     assembly_accession: str
-    assembly_type: Optional[str] = None
-    species_name: Optional[str] = None
-    species_name_abbrev: Optional[str] = None
+    assembly_type: str
+    species_name: str
+    species_name_abbrev: str
 
 
-def get_ena_assembly_metadata_xml(accession: str) -> AssemblyMetadata:
+def get_ena_assembly_metadata_xml(accession: str) -> dict:
     """
     Get the metadata from ENA for a given genome assembly accession
     and extract the name, assembly level, and genome representation fields.
@@ -54,12 +53,11 @@ def get_ena_assembly_metadata_xml(accession: str) -> AssemblyMetadata:
     assembly_level_element = tree.find(".//ASSEMBLY_LEVEL")
     genome_representation_element = tree.find(".//GENOME_REPRESENTATION")
 
-    return AssemblyMetadata(
-        assembly_name=name_element.text.strip(),
-        assembly_level=assembly_level_element.text.strip(),
-        genome_representation=genome_representation_element.text.strip(),
-        assembly_accession=accession,
-    )
+    return {
+        "assembly_name": name_element.text.strip(),
+        "assembly_level": assembly_level_element.text.strip(),
+        "genome_representation": genome_representation_element.text.strip(),
+    }
 
 
 def get_ncbi_assembly_metadata_json(accession: str) -> dict:
@@ -108,7 +106,7 @@ def extract_genome_accession(data_tracks_list_of_dicts: list[dict]) -> str:
     return genome_assembly_accession
 
 
-def fetch_assembly_metadata(data_tracks_list_of_dicts: dict, species_name: str) -> dict:
+def fetch_assembly_metadata(data_tracks_list_of_dicts: dict, species_name: str) -> AssemblyMetadata:
     """
     Fetch assembly metadata from ENA and NCBI for a given GenBank genome assembly
     accession number. Return a dictionary that will be used to populate the YAML
@@ -116,12 +114,18 @@ def fetch_assembly_metadata(data_tracks_list_of_dicts: dict, species_name: str) 
     """
     accession = extract_genome_accession(data_tracks_list_of_dicts)
 
-    assembly_metadata = get_ena_assembly_metadata_xml(accession)
-    assembly_metadata.assembly_type = get_ncbi_assembly_metadata_json(accession)
+    partial_metadata_dict = get_ena_assembly_metadata_xml(accession)
+    assembly_type = get_ncbi_assembly_metadata_json(accession)
 
     species_name_words = species_name.split()
     species_name_abbrev = f"{species_name_words[0][0].upper()}. {species_name_words[1]}"
-    assembly_metadata.species_name = species_name
-    assembly_metadata.species_name_abbrev = species_name_abbrev
 
-    return assembly_metadata
+    return AssemblyMetadata(
+        assembly_name=partial_metadata_dict["assembly_name"],
+        assembly_level=partial_metadata_dict["assembly_level"],
+        genome_representation=partial_metadata_dict["genome_representation"],
+        assembly_accession=accession,
+        assembly_type=assembly_type,
+        species_name=species_name,
+        species_name_abbrev=species_name_abbrev,
+    )
