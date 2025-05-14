@@ -8,6 +8,7 @@ NB! The Excel files cannot contain comments; if it does, pd.read_excel will fail
 """
 
 import json
+from datetime import datetime
 from pathlib import Path
 
 import pandas as pd
@@ -46,6 +47,10 @@ def df_row_to_json(row: pd.Series, template_json: str) -> dict[str, str]:
         data_track["principalInvestigator"] = row["principal_investigator_name"]
     if "principal_investigator_affiliation" in row and pd.notna(row["principal_investigator_affiliation"]):
         data_track["principalInvestigatorAffiliation"] = row["principal_investigator_affiliation"]
+    if "firstDateOnPortal" in row and pd.notna(row["firstDateOnPortal"]):
+        data_track["firstDateOnPortal"] = row["firstDateOnPortal"]
+    else:
+        data_track["firstDateOnPortal"] = datetime.now().strftime("%d/%m/%Y")
 
     return data_track
 
