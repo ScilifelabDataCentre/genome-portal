@@ -2,6 +2,7 @@
 Submodule for handling the opening, substituring and saving of template files.
 """
 
+from collections import defaultdict
 from pathlib import Path
 from string import Template
 
@@ -24,18 +25,13 @@ def process_template_file(
         if value is None:
             raise ValueError(f"Template key '{key}' has a value of None.")
 
+    cleaned_replacements = defaultdict(lambda: "[EDIT]")
     if optional_replacements:
-        cleaned_replacements = {}
         for key, value in optional_replacements.items():
-            if value is None:
-                cleaned_replacements[key] = "[EDIT]"
-            else:
-                cleaned_replacements[key] = value
+            cleaned_replacements[key] = value
 
-        # pipe order so if duplicate keys, required_replacements takes precedence
-        replacements = cleaned_replacements | required_replacements
-    else:
-        replacements = required_replacements
+    # pipe order so if duplicate keys, required_replacements takes precedence
+    replacements = cleaned_replacements | required_replacements
 
     with open(template_file_path, "r") as file_in:
         template_txt = file_in.read()
