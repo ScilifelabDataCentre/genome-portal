@@ -23,7 +23,7 @@ BUSCO notation: C: Complete; S: Single-copy; D: Duplicated; F: Fragmented; M: Mi
 
 ### Publication(s)
 
-There is currently no publication accociated with the genome assembly displayed in the genome portal; in the meantime, please cite it using accession number GCA_965113335.1.
+There is currently no publication associated with the genome assembly displayed in the genome portal; in the meantime, please cite it using accession number GCA_965113335.1.
 
 The annotation data for *Blastobotrys malaysiensis* NRRL Y-6417 displayed in the genome portal comes from:
 
