@@ -12,8 +12,10 @@ from pathlib import Path
 
 import pandas as pd
 
+from add_new_species.add_content_files import TEMPLATE_DIR
+
 JSON_FILE_NAME = "data_tracks.json"
-TEMPLATE_FILE_PATH = Path(__file__).parent.parent / "templates" / JSON_FILE_NAME
+TEMPLATE_FILE_PATH = TEMPLATE_DIR / JSON_FILE_NAME
 
 
 def df_row_to_json(row: pd.Series, template_json: str) -> dict[str, str]:

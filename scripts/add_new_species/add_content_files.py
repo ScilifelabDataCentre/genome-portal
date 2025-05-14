@@ -4,12 +4,12 @@ from pathlib import Path
 
 import requests
 
-from add_new_species.constants import TEMPLATE_DIR
 from add_new_species.form_parser import UserFormData
 from add_new_species.get_assembly_metadata_from_ENA_NCBI import AssemblyMetadata
-from add_new_species.get_taxonomy import EbiRestException, get_taxonomy
+from add_new_species.get_taxonomy import EbiRestException, get_taxonomy, save_taxonomy_file
 from add_new_species.template_handler import process_template_file
 
+TEMPLATE_DIR = Path(__file__).parent.parent / "templates"
 INDEX_FILE = "_index.md"
 ASSEMBLY_FILE = "assembly.md"
 DOWNLOAD_FILE = "download.md"
@@ -35,11 +35,11 @@ def add_index_md(
         gbif_taxon_id = get_gbif_taxon_key(species_name=species_name)
     except (requests.exceptions.HTTPError, KeyError):
         gbif_taxon_id = None
-        print(
-            f"""WARNING: Failed to get GBIF key for species: {species_name}.
-            Not to worry,
-            you can instead add it manually to the _index.md file in the species directory."""
-        )
+    warnings.warn(
+        f"Failed to get GBIF key for species: {species_name}. "
+        "Not to worry, you can instead add it manually to the _index.md file in the species directory.",
+        stacklevel=2,
+    )
 
     tax_id = process_taxonomy(species_name, data_dir_path)
     if tax_id:
@@ -128,10 +128,10 @@ def process_taxonomy(species_name: str, data_dir_path: Path) -> str | None:
         )
         return None
 
-    # save_taxonomy_file(
-    #     taxonomy_dict=taxonomy_dict,
-    #     output_file_path=data_dir_path / TAXONOMY_FILE,
-    # )
+    save_taxonomy_file(
+        taxonomy_dict=taxonomy_dict,
+        output_file_path=data_dir_path / TAXONOMY_FILE,
+    )
     return taxonomy_dict["Species"]["tax_id"]
 
 

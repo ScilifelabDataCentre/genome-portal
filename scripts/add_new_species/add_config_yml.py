@@ -6,10 +6,11 @@ from pathlib import Path
 
 import yaml
 
+from add_new_species.add_content_files import TEMPLATE_DIR
 from add_new_species.get_assembly_metadata_from_ENA_NCBI import AssemblyMetadata
 
 YML_FILE_NAME = "config.yml"
-TEMPLATE_FILE_PATH = Path(__file__).parent.parent / "templates" / YML_FILE_NAME
+TEMPLATE_FILE_PATH = TEMPLATE_DIR / YML_FILE_NAME
 
 
 def populate_config_yml(
