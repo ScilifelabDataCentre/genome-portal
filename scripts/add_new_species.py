@@ -67,7 +67,7 @@ def run_argparse() -> argparse.Namespace:
 
 def all_dir_paths(species_slug: str) -> dict[str, Path]:
     """
-    make a dict of all the output folder paths for the species.
+    Make a dict of all the output folder paths for the species.
     Makes sure that any folders that need to be created are created.
     """
     content_dir_path = Path(__file__).parent / f"../hugo/content/species/{species_slug}"
@@ -88,18 +88,23 @@ def all_dir_paths(species_slug: str) -> dict[str, Path]:
     }
 
 
-def check_dirs_empty(all_dir_paths: dict[str, Path]) -> None:
+def check_dirs_empty(all_dir_paths: dict[str, Path], species_name: str) -> None:
     """
-    if overwrite mode not specificed, check that the folders are empty.
+    If overwrite mode not specificed in args, check that the folders are empty.
     Raise error if not.
     """
-    # TODO - check with Daniel, should config dir be empty too?
-    empty_dirs = [all_dir_paths["content_dir_path"], all_dir_paths["data_dir_path"], all_dir_paths["assets_dir_path"]]
+
+    empty_dirs = [
+        all_dir_paths["content_dir_path"],
+        all_dir_paths["data_dir_path"],
+        all_dir_paths["assets_dir_path"],
+        all_dir_paths["config_dir_path"],
+    ]
     for dir_path in empty_dirs:
         if any(dir_path.iterdir()):
             raise FileExistsError(
                 f"""
-                It appears that a species entry already exists for: "{args.species_name}",
+                It appears that a species entry already exists for: "{species_name}",
                 If you are sure you want to overwrite these files, add the flag "--overwrite".
                 Exiting..."""
             )
@@ -112,7 +117,7 @@ if __name__ == "__main__":
 
     output_dir_paths = all_dir_paths(user_form_data.species_slug)
     if not args.overwrite:
-        check_dirs_empty(all_dir_paths=output_dir_paths)
+        check_dirs_empty(all_dir_paths=output_dir_paths, species_name=user_form_data.species_name)
 
     data_tracks_list_of_dicts = parse_excel_file(
         spreadsheet_file_path=Path(args.user_spreadsheet),
