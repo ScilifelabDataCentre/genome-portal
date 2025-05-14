@@ -2,7 +2,6 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 from add_new_species.get_assembly_metadata_from_ENA_NCBI import (
-    AssemblyMetadata,
     get_ena_assembly_metadata_xml,
     get_ncbi_assembly_metadata_json,
 )
@@ -29,11 +28,10 @@ def test_get_ena_assembly_metadata_xml_mock_valid_accession(mock_get: MagicMock)
     result = get_ena_assembly_metadata_xml(VALID_ACCESSION)
 
     assert mock_get.return_value.status_code == 200
-    assert isinstance(result, AssemblyMetadata)
-    assert result.assembly_name == "ASM1142v1"
-    assert result.assembly_level == "Chromosome"
-    assert result.genome_representation == "full"
-    assert result.assembly_accession == VALID_ACCESSION
+    assert isinstance(result, dict)
+    assert result["assembly_name"] == "ASM1142v1"
+    assert result["assembly_level"] == "Chromosome"
+    assert result["genome_representation"] == "full"
 
 
 @patch("add_new_species.get_assembly_metadata_from_ENA_NCBI.requests.get")
@@ -64,5 +62,18 @@ def test_test_get_ncbi_assembly_metadata_json_mock_invalid_accession(mock_get: M
     """
     mock_get.return_value.json.return_value = {"reports": []}
 
-    with pytest.raises(Exception, match="No results found for accession"):
+    with pytest.raises(ValueError, match="No results found for accession"):
         get_ncbi_assembly_metadata_json(INVALID_ACCESSION)
+
+
+@patch("add_new_species.get_assembly_metadata_from_ENA_NCBI.requests.get")
+def test_get_ncbi_assembly_metadata_json_mock_missing_assembly_type(mock_get: MagicMock):
+    """
+    Test that fails if the response from the NCBI API request for some reason
+    does not have a value for 'Assembly type'.
+    """
+
+    mock_get.return_value.json.return_value = {"reports": [{"assembly_info": {}}]}
+
+    with pytest.raises(ValueError, match="Assembly type not found in the NCBI API response"):
+        get_ncbi_assembly_metadata_json(VALID_ACCESSION)
