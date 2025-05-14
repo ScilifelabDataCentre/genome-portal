@@ -95,7 +95,7 @@ def extract_genome_accession(data_tracks_list_of_dicts: list[dict]) -> str:
         if data_track.get("dataTrackName") == "Genome":
             genome_assembly_accession = data_track.get("accessionOrDOI", None)
             break
-    if genome_assembly_accession is None:
+    if not genome_assembly_accession or genome_assembly_accession == "[EDIT]":
         raise ValueError(
             "Genome assembly accession not found in the user spreadsheet. Please check the field is not empty."
         )
