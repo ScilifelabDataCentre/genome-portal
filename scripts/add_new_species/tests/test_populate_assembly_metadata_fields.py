@@ -1,3 +1,4 @@
+from datetime import datetime
 from pathlib import Path
 from unittest.mock import patch
 
@@ -57,28 +58,23 @@ def test_add_index_md(mock_process_taxonomy, mock_get_gbif_taxon_key, user_form_
 
     updated_index_md = output_file_path.read_text()
 
-    assert "${species_name}" not in updated_index_md
-    assert "${species_slug}" not in updated_index_md
-    assert "${common_name}" not in updated_index_md
-    assert "${description}" not in updated_index_md
-    assert "${references}" not in updated_index_md
-    assert "${publication}" not in updated_index_md
-    assert "${img_attrib_text}" not in updated_index_md
-    assert "${img_attrib_link}" not in updated_index_md
-    assert "${todays_date}" not in updated_index_md
-    assert "${gbif_taxon_id}" not in updated_index_md
-    assert "${goat_webpage}" not in updated_index_md
+    placeholders_and_replacements = {
+        "${species_name}": user_form_data.species_name,
+        "${species_slug}": user_form_data.species_slug,
+        "${common_name}": user_form_data.common_name,
+        "${description}": user_form_data.description,
+        "${references}": user_form_data.references,
+        "${publication}": user_form_data.publication,
+        "${img_attrib_text}": user_form_data.img_attrib_text,
+        "${img_attrib_link}": user_form_data.img_attrib_link,
+        "${todays_date}": datetime.now().strftime("%d/%m/%Y"),
+        "${gbif_taxon_id}": "123456",
+        "${goat_webpage}": "78910",
+    }
 
-    assert user_form_data.species_name in updated_index_md
-    assert user_form_data.species_slug in updated_index_md
-    assert user_form_data.common_name in updated_index_md
-    assert user_form_data.description in updated_index_md
-    assert user_form_data.references in updated_index_md
-    assert user_form_data.publication in updated_index_md
-    assert user_form_data.img_attrib_text in updated_index_md
-    assert user_form_data.img_attrib_link in updated_index_md
-    assert "123456" in updated_index_md
-    assert "78910" in updated_index_md
+    for placeholder, expected_value in placeholders_and_replacements.items():
+        assert placeholder not in updated_index_md, f"Placeholder {placeholder} was not replaced."
+        assert expected_value in updated_index_md, f"Expected value {expected_value} not found in the output."
 
     mock_get_gbif_taxon_key.assert_called_once_with(species_name=user_form_data.species_name)
     mock_process_taxonomy.assert_called_once_with(user_form_data.species_name, temp_output_dir)
@@ -103,22 +99,18 @@ def test_add_assembly_md(user_form_data: UserFormData, assembly_metadata: Assemb
 
     updated_assembly_md = output_file_path.read_text()
 
-    assert "${species_name}" not in updated_assembly_md
-    assert "${species_slug}" not in updated_assembly_md
-    assert "${funding}" not in updated_assembly_md
-    assert "${publication}" not in updated_assembly_md
-    assert "${assembly_name}" not in updated_assembly_md
-    assert "${assembly_type}" not in updated_assembly_md
-    assert "${assembly_level}" not in updated_assembly_md
-    assert "${genome_representation}" not in updated_assembly_md
-    assert "${assembly_accession}" not in updated_assembly_md
+    placeholders_and_replacements = {
+        "${species_name}": user_form_data.species_name,
+        "${species_slug}": user_form_data.species_slug,
+        "${funding}": user_form_data.funding,
+        "${publication}": user_form_data.publication,
+        "${assembly_name}": assembly_metadata.assembly_name,
+        "${assembly_type}": assembly_metadata.assembly_type,
+        "${assembly_level}": assembly_metadata.assembly_level,
+        "${genome_representation}": assembly_metadata.genome_representation,
+        "${assembly_accession}": assembly_metadata.assembly_accession,
+    }
 
-    assert user_form_data.species_name in updated_assembly_md
-    assert user_form_data.species_slug in updated_assembly_md
-    assert user_form_data.funding in updated_assembly_md
-    assert user_form_data.publication in updated_assembly_md
-    assert assembly_metadata.assembly_name in updated_assembly_md
-    assert assembly_metadata.assembly_type in updated_assembly_md
-    assert assembly_metadata.assembly_level in updated_assembly_md
-    assert assembly_metadata.genome_representation in updated_assembly_md
-    assert assembly_metadata.assembly_accession in updated_assembly_md
+    for placeholder, expected_value in placeholders_and_replacements.items():
+        assert placeholder not in updated_assembly_md, f"Placeholder {placeholder} was not replaced."
+        assert expected_value in updated_assembly_md, f"Expected value {expected_value} not found in the output."
