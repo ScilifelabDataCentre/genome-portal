@@ -35,11 +35,11 @@ def add_index_md(
         gbif_taxon_id = get_gbif_taxon_key(species_name=species_name)
     except (requests.exceptions.HTTPError, KeyError):
         gbif_taxon_id = None
-    warnings.warn(
-        f"Failed to get GBIF key for species: {species_name}. "
-        "Not to worry, you can instead add it manually to the _index.md file in the species directory.",
-        stacklevel=2,
-    )
+        warnings.warn(
+            f"Failed to get GBIF key for species: {species_name}. "
+            "Not to worry, you can instead add it manually to the _index.md file in the species directory.",
+            stacklevel=2,
+        )
 
     tax_id = process_taxonomy(species_name, data_dir_path)
     if tax_id:
