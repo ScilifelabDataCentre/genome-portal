@@ -322,6 +322,8 @@ def populate_values_from_optional_tracks(config, data, species_abbreviation, ass
             track_config = gwas_track_id
             display_config = f"{gwas_track_id}_display"
 
+        track_color = track.get("color", None)
+
         new_track = {
             "id": track_outer_id,
             "type": "FeatureTrack",
@@ -336,6 +338,10 @@ def populate_values_from_optional_tracks(config, data, species_abbreviation, ass
                 }
             ],
         }
+
+        if track_color:
+            new_track["displays"][0]["color"] = track_color
+
         data["defaultSession"]["views"][assembly_counter]["tracks"].append(new_track)
 
         return data
@@ -362,7 +368,10 @@ def populate_values_from_optional_tracks(config, data, species_abbreviation, ass
             bed_gz_location = track["fileName"]
             if bed_gz_location.endswith((".gz", ".zip")):
                 bed_gz_location = bed_gz_location.replace(".gz", ".bgz").replace(".zip", ".bgz")
-            index_location = f"{bed_gz_location}.tbi"
+            if bed_gz_location.endswith(".bed"):
+                # handles the case when the file stated in config.yml is an uncompressed .bed file
+                bed_gz_location += ".bgz"
+            index_location = f"{bed_gz_location}.csi"
 
         # The category value is hardcoded for now, but could be added to the config.yml in the future
         # The benefit of having definied a category is that it ensures that the GWAS tracks become sorted
@@ -377,7 +386,7 @@ def populate_values_from_optional_tracks(config, data, species_abbreviation, ass
                 "type": adapter_type,
                 "scoreColumn": adapter_scoreColumn,
                 "bedGzLocation": {"uri": bed_gz_location},
-                "index": {"location": {"uri": index_location}},
+                "index": {"location": {"uri": index_location}, "indexType": "CSI"},
             },
             "displays": [{"displayId": f"{gwas_track_id}_display", "type": "LinearManhattanDisplay"}],
         }
