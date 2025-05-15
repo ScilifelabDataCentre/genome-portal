@@ -19,7 +19,7 @@ lineage_data_path: "blastobotrys_malaysiensis/taxonomy"
 
 Notes: Assembly statistics were calculated for the primary genome assembly GCA_030558815.1 (GCA_030558815.1_ASM3055881v1_genomic.fna.gz) using Quast (v5.2.0; Mikheenko et al. 2018). Busco statistics were calculated for GCA_030558815.1_ASM3055881v1_genomic.fna.gz using Busco (v5.8.3; Manni et al., 2021). Annotation statistics were calculated for bmalaysiensis_annotation.gff using AGAT (v1.4.1; Dainat, 2024).
 
-BUSCO notation: C: Complete; S: Single-copy; D: Duplicated; F: Fragmented; M: Missing; n: Total BUSCO genes included in the dataset (here: arthropoda_odb10). See also [the official BUSCO manual](https://busco.ezlab.org/busco_userguide.html#interpreting-the-results).
+BUSCO notation: C: Complete; S: Single-copy; D: Duplicated; F: Fragmented; M: Missing; n: Total BUSCO genes included in the dataset (here: ascomycota_odb10). See also [the official BUSCO manual](https://busco.ezlab.org/busco_userguide.html#interpreting-the-results).
 
 ### Publication(s)
 
