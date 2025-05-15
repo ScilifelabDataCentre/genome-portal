@@ -15,7 +15,7 @@ lineage_data_path: "blastobotrys_illinoisensis/taxonomy"
 
 cover_image: "/img/species/blastobotrys_illinoisensis.webp"
 img_attrib_text: "Blastobotrys illinoisensis E4 from Son & Kim (2022), CC BY-NC 4.0"
-img_attrib_link: "https://doi.org/10.4489/KJM.20220041"
+img_attrib_link: "https://koreascience.kr/article/JAKO202218172424152.page"
 
 gbif_taxon_id: "3480486"
 goat_webpage: "https://goat.genomehubs.org/record?recordId=378048&result=taxon&taxonomy=ncbi#blastobotrys%20illinoisensis"
