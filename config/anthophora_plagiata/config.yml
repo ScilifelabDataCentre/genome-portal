@@ -5,6 +5,15 @@ assembly:
   accession: GCA_963995485.1
   url: ftp://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/cax/CAXEFL01.fasta.gz
   fileName: CAXEFL01.fasta.gz
+  defaultScaffold: "ENA|CAXEFL010000280|CAXEFL010000280.1"
 tracks:
 - name: Protein-coding genes
   url: https://nextcloud.dc.scilifelab.se/s/CcnntPSTKqXMzLk/download/GCA_963995485.1_iyAntPlag1_genomic.gff.renamed.gff.gz
+- name: "Nucleotide diversity (Pi), 5kb windows"
+  url: #URL OMITTED FOR NOW, TRACK IS NOT YET PUBLIC
+  fileName: "plag_5kb.windowed.bed"
+  addTrack: false
+  defaultSession: true
+  GWAS: true
+  scoreColumnGWAS: "PI"
+  color: "rgb(242, 142, 44)"

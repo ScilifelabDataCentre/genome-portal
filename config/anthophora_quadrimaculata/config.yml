@@ -9,3 +9,18 @@ tracks:
 - name: Protein-coding genes
   url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/963/995/475/GCA_963995475.1_iyAntQuad1/GCA_963995475.1_iyAntQuad1_genomic.gff.gz
   fileName: GCA_963995475.1_iyAntQuad1_genomic.gff.gz
+- name: "Nucleotide diversity (Pi), 5kb windows"
+  url: #URL OMITTED FOR NOW, TRACK IS NOT YET PUBLIC
+  fileName: "quad_5kb.windowed.bed"
+  addTrack: false
+  defaultSession: true
+  GWAS: true
+  scoreColumnGWAS: "PI"
+  color: "rgb(242, 142, 44)"
+- name: "Tajima's D, 5kb windows"
+  url: #URL OMITTED FOR NOW, TRACK IS NOT YET PUBLIC
+  fileName: "quadri.Tajima.D.end_column_added.bed"
+  addTrack: false
+  defaultSession: true
+  GWAS: true
+  scoreColumnGWAS: "TajimaD"

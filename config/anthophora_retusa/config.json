@@ -49,6 +49,35 @@
                 "configuration": "GCA_963995495.1_iyAntRet1_genomic.gff-LinearBasicDisplay"
               }
             ]
+          },
+          {
+            "id": "aret_default_Nucleotide_diversity_(Pi)_5kb_windows",
+            "type": "FeatureTrack",
+            "configuration": "aret_gwas_Nucleotide_diversity_(Pi)_5kb_windows",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "aret_default_Nucleotide_diversity_(Pi)_5kb_windows_display",
+                "type": "LinearManhattanDisplay",
+                "heightPreConfig": 150,
+                "configuration": "aret_gwas_Nucleotide_diversity_(Pi)_5kb_windows_display",
+                "color": "rgb(242, 142, 44)"
+              }
+            ]
+          },
+          {
+            "id": "aret_default_Tajimas_D_5kb_windows",
+            "type": "FeatureTrack",
+            "configuration": "aret_gwas_Tajimas_D_5kb_windows",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "aret_default_Tajimas_D_5kb_windows_display",
+                "type": "LinearManhattanDisplay",
+                "heightPreConfig": 150,
+                "configuration": "aret_gwas_Tajimas_D_5kb_windows_display"
+              }
+            ]
           }
         ]
       }
@@ -56,5 +85,73 @@
   },
   "configuration": {
     "disableAnalytics": true
-  }
+  },
+  "plugins": [
+    {
+      "name": "GWAS",
+      "url": "https://unpkg.com/jbrowse-plugin-gwas/dist/jbrowse-plugin-gwas.umd.production.min.js"
+    }
+  ],
+  "tracks": [
+    {
+      "type": "FeatureTrack",
+      "trackId": "aret_gwas_Nucleotide_diversity_(Pi)_5kb_windows",
+      "name": "Nucleotide diversity (Pi), 5kb windows",
+      "assemblyNames": [
+        "iyAntRet1"
+      ],
+      "category": [
+        "GWAS"
+      ],
+      "adapter": {
+        "type": "BedTabixAdapter",
+        "scoreColumn": "PI",
+        "bedGzLocation": {
+          "uri": "retusa_5kb.windowed.bed.bgz"
+        },
+        "index": {
+          "location": {
+            "uri": "retusa_5kb.windowed.bed.bgz.csi"
+          },
+          "indexType": "CSI"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "aret_gwas_Nucleotide_diversity_(Pi)_5kb_windows_display",
+          "type": "LinearManhattanDisplay"
+        }
+      ]
+    },
+    {
+      "type": "FeatureTrack",
+      "trackId": "aret_gwas_Tajimas_D_5kb_windows",
+      "name": "Tajima's D, 5kb windows",
+      "assemblyNames": [
+        "iyAntRet1"
+      ],
+      "category": [
+        "GWAS"
+      ],
+      "adapter": {
+        "type": "BedTabixAdapter",
+        "scoreColumn": "TajimaD",
+        "bedGzLocation": {
+          "uri": "retusa.Tajima.D.end_column_added.bed.bgz"
+        },
+        "index": {
+          "location": {
+            "uri": "retusa.Tajima.D.end_column_added.bed.bgz.csi"
+          },
+          "indexType": "CSI"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "aret_gwas_Tajimas_D_5kb_windows_display",
+          "type": "LinearManhattanDisplay"
+        }
+      ]
+    }
+  ]
 }
