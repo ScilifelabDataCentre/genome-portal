@@ -59,14 +59,21 @@ GTF := $(filter %.gtf,$(unzipped))
 BED := $(addsuffix .bgz,$(filter %.bed,$(unzipped)))
 BED_INDICES := $(addsuffix .csi,$(BED))
 
+# Custom JBrowse plugins
+JBROWSE_CUSTOM_PLUGINS_DIR := scripts/jbrowse_custom_plugins
+PLUGINS_SRC := scripts/jbrowse_custom_plugins/dbxref_plugin.js
+PLUGINS_DATA := $(DATA_DIR)/$(SPECIES)/dbxref_plugin.js
+
 LOCAL_FILES := $(GFF) $(GFF_INDICES) \
 	$(FASTA) $(FASTA_INDICES) $(FASTA_GZINDICES) \
 	$(GTF) \
 	$(BED) $(BED_INDICES) \
-	$(ALIASES)
+	$(ALIASES) \
+	$(PLUGINS_DATA) \
 
 # Files to install
-INSTALLED_FILES := $(patsubst $(DATA_DIR)/%,$(INSTALL_DIR)/%, $(LOCAL_FILES) $(JBROWSE_CONFIGS))
+INSTALLED_FILES := $(patsubst $(DATA_DIR)/%,$(INSTALL_DIR)/%, $(LOCAL_FILES) $(JBROWSE_CONFIGS) $(PLUGINS_DATA))
+# INSTALLED_PLUGIN_FILES := $(patsubst $(JBROWSE_CUSTOM_PLUGINS_DIR)/%,$(INSTALL_DIR)/$(SPECIES)/%, $(PLUGINS_DATA))
 
 # Formatting
 INFO := '\x1b[0;46m'
@@ -89,7 +96,7 @@ all: build install
 	$(greet)
 
 .PHONY: build
-build: download recompress index aliases jbrowse-config
+build: download recompress index aliases jbrowse-config jbrowse-custom-plugins
 
 .PHONY: debug
 debug:
@@ -116,6 +123,14 @@ jbrowse-config: $(JBROWSE_CONFIGS)
 	$(call log_info,'Generated JBrowse configuration in directories')
 	@printf "  - %s\n" $(JBROWSE_CONFIGS:/config.json=)
 
+.PHONY: jbrowse-custom-plugins
+jbrowse-custom-plugins: $(PLUGINS_DATA)
+	$(call log_info,'Installed JBrowse custom plugins')
+	@printf "  - %s\n" $(PLUGINS_DATA)
+
+$(PLUGINS_DATA): $(PLUGINS_SRC)
+	@mkdir -p $(@D)
+	@cp $< $@
 
 .PHONY: download
 download: $(DOWNLOAD_TARGETS)
