@@ -43,6 +43,7 @@ COPY Makefile .
 ARG SWG_UID=1000
 ARG SWG_GID=1000
 RUN groupmod -g ${SWG_GID} node && usermod -u ${SWG_UID} -g ${SWG_GID} node
+ENV SHELL=/bin/sh
 USER node
 
 CMD ["make", "debug"]
