@@ -158,7 +158,7 @@
           }
         },
         "formatDetails": {
-          "subfeatures": "jexl:{dbxref:linkout(feature)}"
+          "subfeatures": "jexl:{dbxref:dbxrefLinkout(feature), ontology_term:ontologyLinkout(feature),  uniprot_id:uniprotLinkout(feature)}"
         },
         "assemblyNames": [
           "Parnassius_mnemosyne_n_2023_11"

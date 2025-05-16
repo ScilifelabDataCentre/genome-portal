@@ -5,7 +5,7 @@ export default class DbxrefPlugin {
   install() {}
 
   configure(pluginManager) {
-    pluginManager.jexl.addFunction('linkout', feature => {
+    pluginManager.jexl.addFunction('dbxrefLinkout', feature => {
       if (!feature.dbxref) {
         return ''
       }
@@ -64,6 +64,31 @@ export default class DbxrefPlugin {
 
         // Default: return plaintext if no link is defined
         return dbxref
+      }).join('<br>')
+    })
+
+    pluginManager.jexl.addFunction('ontologyLinkout', feature => {
+      if (!feature.ontology_term) {
+        return ''
+      }
+
+      const goTerms = Array.isArray(feature.ontology_term) ? feature.ontology_term : [feature.ontology_term]
+
+      return goTerms.map(ontology_term => {
+        const ref = ontology_term.replace('GO:', '')
+        return `<a href="https://amigo.geneontology.org/amigo/term//GO:${ref}" target="_blank">${ontology_term}</a>`
+      }).join('<br>')
+    })
+
+    pluginManager.jexl.addFunction('uniprotLinkout', feature => {
+      if (!feature.uniprot_id) {
+        return ''
+      }
+
+      const goTerms = Array.isArray(feature.uniprot_id) ? feature.uniprot_id : [feature.uniprot_id]
+
+      return goTerms.map(uniprot_id => {
+        return `<a href="https://www.uniprot.org/uniprotkb/${uniprot_id}" target="_blank">${uniprot_id}</a>`
       }).join('<br>')
     })
   }
