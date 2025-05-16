@@ -45,7 +45,7 @@
               {
                 "id": "aret_default_protein_coding_genes_view_0_display",
                 "type": "LinearBasicDisplay",
-                "heightPreConfig": 350,
+                "heightPreConfig": 250,
                 "configuration": "GCA_963995495.1_iyAntRet1_genomic.gff-LinearBasicDisplay"
               }
             ]
@@ -66,16 +66,16 @@
             ]
           },
           {
-            "id": "aret_default_Tajimas_D_5kb_windows",
+            "id": "aret_default_Tajimas_D",
             "type": "FeatureTrack",
-            "configuration": "aret_gwas_Tajimas_D_5kb_windows",
+            "configuration": "aret_gwas_Tajimas_D",
             "minimized": false,
             "displays": [
               {
-                "id": "aret_default_Tajimas_D_5kb_windows_display",
+                "id": "aret_default_Tajimas_D_display",
                 "type": "LinearManhattanDisplay",
                 "heightPreConfig": 150,
-                "configuration": "aret_gwas_Tajimas_D_5kb_windows_display"
+                "configuration": "aret_gwas_Tajimas_D_display"
               }
             ]
           }
@@ -101,7 +101,7 @@
         "iyAntRet1"
       ],
       "category": [
-        "GWAS"
+        "Population genomics"
       ],
       "adapter": {
         "type": "BedTabixAdapter",
@@ -125,30 +125,27 @@
     },
     {
       "type": "FeatureTrack",
-      "trackId": "aret_gwas_Tajimas_D_5kb_windows",
-      "name": "Tajima's D, 5kb windows",
+      "trackId": "aret_gwas_Tajimas_D",
+      "name": "Tajima's D",
       "assemblyNames": [
         "iyAntRet1"
-      ],
-      "category": [
-        "GWAS"
       ],
       "adapter": {
         "type": "BedTabixAdapter",
         "scoreColumn": "TajimaD",
         "bedGzLocation": {
-          "uri": "retusa.Tajima.D.end_column_added.bed.bgz"
+          "uri": "retusa.Tajima.D.end_column_added.drop_nan.bed.bgz"
         },
         "index": {
           "location": {
-            "uri": "retusa.Tajima.D.end_column_added.bed.bgz.csi"
+            "uri": "retusa.Tajima.D.end_column_added.drop_nan.bed.bgz.csi"
           },
           "indexType": "CSI"
         }
       },
       "displays": [
         {
-          "displayId": "aret_gwas_Tajimas_D_5kb_windows_display",
+          "displayId": "aret_gwas_Tajimas_D_display",
           "type": "LinearManhattanDisplay"
         }
       ]

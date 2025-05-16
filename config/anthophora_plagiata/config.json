@@ -87,7 +87,7 @@
         "iyAntPlag1"
       ],
       "category": [
-        "GWAS"
+        "Population genomics"
       ],
       "adapter": {
         "type": "BedTabixAdapter",

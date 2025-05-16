@@ -17,7 +17,7 @@ tracks:
   GWAS: true
   scoreColumnGWAS: "PI"
   color: "rgb(242, 142, 44)"
-- name: "Tajima's D, 5kb windows"
+- name: "Tajima's D"
   url: #URL OMITTED FOR NOW, TRACK IS NOT YET PUBLIC
   fileName: "quadri.Tajima.D.end_column_added.bed"
   addTrack: false

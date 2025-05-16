@@ -45,8 +45,37 @@
               {
                 "id": "aqua_default_protein_coding_genes_view_0_display",
                 "type": "LinearBasicDisplay",
-                "heightPreConfig": 350,
+                "heightPreConfig": 250,
                 "configuration": "GCA_963995475.1_iyAntQuad1_genomic.gff-LinearBasicDisplay"
+              }
+            ]
+          },
+          {
+            "id": "aqua_default_Nucleotide_diversity_(Pi)_5kb_windows",
+            "type": "FeatureTrack",
+            "configuration": "aqua_gwas_Nucleotide_diversity_(Pi)_5kb_windows",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "aqua_default_Nucleotide_diversity_(Pi)_5kb_windows_display",
+                "type": "LinearManhattanDisplay",
+                "heightPreConfig": 150,
+                "configuration": "aqua_gwas_Nucleotide_diversity_(Pi)_5kb_windows_display",
+                "color": "rgb(242, 142, 44)"
+              }
+            ]
+          },
+          {
+            "id": "aqua_default_Tajimas_D",
+            "type": "FeatureTrack",
+            "configuration": "aqua_gwas_Tajimas_D",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "aqua_default_Tajimas_D_display",
+                "type": "LinearManhattanDisplay",
+                "heightPreConfig": 150,
+                "configuration": "aqua_gwas_Tajimas_D_display"
               }
             ]
           }
@@ -56,5 +85,73 @@
   },
   "configuration": {
     "disableAnalytics": true
-  }
+  },
+  "plugins": [
+    {
+      "name": "GWAS",
+      "url": "https://unpkg.com/jbrowse-plugin-gwas/dist/jbrowse-plugin-gwas.umd.production.min.js"
+    }
+  ],
+  "tracks": [
+    {
+      "type": "FeatureTrack",
+      "trackId": "aqua_gwas_Nucleotide_diversity_(Pi)_5kb_windows",
+      "name": "Nucleotide diversity (Pi), 5kb windows",
+      "assemblyNames": [
+        "iyAntQuad1"
+      ],
+      "category": [
+        "Population genomics"
+      ],
+      "adapter": {
+        "type": "BedTabixAdapter",
+        "scoreColumn": "PI",
+        "bedGzLocation": {
+          "uri": "quad_5kb.windowed.bed.bgz"
+        },
+        "index": {
+          "location": {
+            "uri": "quad_5kb.windowed.bed.bgz.csi"
+          },
+          "indexType": "CSI"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "aqua_gwas_Nucleotide_diversity_(Pi)_5kb_windows_display",
+          "type": "LinearManhattanDisplay"
+        }
+      ]
+    },
+    {
+      "type": "FeatureTrack",
+      "trackId": "aqua_gwas_Tajimas_D",
+      "name": "Tajima's D",
+      "assemblyNames": [
+        "iyAntQuad1"
+      ],
+      "category": [
+        "Population genomics"
+      ],
+      "adapter": {
+        "type": "BedTabixAdapter",
+        "scoreColumn": "TajimaD",
+        "bedGzLocation": {
+          "uri": "quadri.Tajima.D.end_column_added.bed.bgz"
+        },
+        "index": {
+          "location": {
+            "uri": "quadri.Tajima.D.end_column_added.bed.bgz.csi"
+          },
+          "indexType": "CSI"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "aqua_gwas_Tajimas_D_display",
+          "type": "LinearManhattanDisplay"
+        }
+      ]
+    }
+  ]
 }
