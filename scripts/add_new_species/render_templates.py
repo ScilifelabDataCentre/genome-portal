@@ -7,12 +7,11 @@ from pathlib import Path
 from string import Template
 
 
-def process_template_file(
-    template_file_path: Path,
-    output_file_path: Path,
+def render(
+    template_text: str,
     required_replacements: dict[str, str],
     optional_replacements: dict[str, str] = None,
-) -> None:
+) -> str:
     """
     Use Python's string.Template.substitute method to fill in placeholders in a given template file.
     Both required and optional replacements can be made.
@@ -33,12 +32,25 @@ def process_template_file(
     # pipe order so if duplicate keys, required_replacements takes precedence
     replacements = cleaned_replacements | required_replacements
 
-    with open(template_file_path, "r") as file_in:
-        template_txt = file_in.read()
-    template = Template(template_txt)
-
+    template = Template(template_text)
     content = template.substitute(replacements)
 
+    return content
+
+
+def read_text_file(file_path: Path) -> str:
+    """
+    Read a txt file and return its content as a string.
+    """
+    with open(file_path, "r") as file_in:
+        template_txt = file_in.read()
+    return template_txt
+
+
+def save_text_file(content: str, output_file_path: Path) -> None:
+    """
+    Save a string of text to a file.
+    """
     with open(output_file_path, "w") as file_out:
         file_out.write(content)
     print(f"File created: {output_file_path.resolve()}")

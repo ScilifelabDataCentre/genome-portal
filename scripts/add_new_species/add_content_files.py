@@ -6,7 +6,7 @@ import requests
 from form_parser import UserFormData
 from get_assembly_metadata_from_ENA_NCBI import AssemblyMetadata
 from get_taxonomy import EbiRestException, get_taxonomy, save_taxonomy_file
-from template_handler import process_template_file
+from render_templates import read_text_file, render, save_text_file
 
 TEMPLATE_DIR = Path(__file__).parent / "templates"
 INDEX_FILE = "_index.md"
@@ -45,9 +45,9 @@ def add_index_md(
     else:
         goat_webpage = None
 
-    process_template_file(
-        template_file_path=template_file_path,
-        output_file_path=output_file_path,
+    template_text = read_text_file(file_path=template_file_path)
+    content = render(
+        template_text=template_text,
         required_replacements={
             "species_name": species_name,
             "species_slug": user_form_data.species_slug,
@@ -61,6 +61,7 @@ def add_index_md(
         },
         optional_replacements={"gbif_taxon_id": gbif_taxon_id, "goat_webpage": goat_webpage},
     )
+    save_text_file(content=content, output_file_path=output_file_path)
 
 
 def add_assembly_md(user_form_data: UserFormData, assembly_metadata: AssemblyMetadata, content_dir_path: Path) -> None:
@@ -71,9 +72,10 @@ def add_assembly_md(user_form_data: UserFormData, assembly_metadata: AssemblyMet
     template_file_path = TEMPLATE_DIR / ASSEMBLY_FILE
     output_file_path = content_dir_path / ASSEMBLY_FILE
 
-    process_template_file(
-        template_file_path=template_file_path,
-        output_file_path=output_file_path,
+    template_text = read_text_file(file_path=template_file_path)
+
+    content = render(
+        template_text=template_text,
         required_replacements={
             "species_name": user_form_data.species_name,
             "species_slug": user_form_data.species_slug,
@@ -86,6 +88,7 @@ def add_assembly_md(user_form_data: UserFormData, assembly_metadata: AssemblyMet
             "assembly_accession": assembly_metadata.assembly_accession,
         },
     )
+    save_text_file(content=content, output_file_path=output_file_path)
 
 
 def add_download_md(
@@ -99,13 +102,14 @@ def add_download_md(
     template_file_path = TEMPLATE_DIR / DOWNLOAD_FILE
     output_file_path = content_dir_path / DOWNLOAD_FILE
 
-    process_template_file(
-        template_file_path=template_file_path,
-        output_file_path=output_file_path,
+    template_text = read_text_file(file_path=template_file_path)
+    content = render(
+        template_text=template_text,
         required_replacements={
             "species_slug": species_slug,
         },
     )
+    save_text_file(content=content, output_file_path=output_file_path)
 
 
 def process_taxonomy(species_name: str, data_dir_path: Path) -> str | None:

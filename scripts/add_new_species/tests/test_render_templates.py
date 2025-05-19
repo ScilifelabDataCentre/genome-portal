@@ -1,18 +1,15 @@
 from datetime import datetime
 from itertools import chain
-from pathlib import Path
 
+from add_content_files import TEMPLATE_DIR
 from add_new_species.form_parser import UserFormData
-from add_new_species.template_handler import process_template_file
-
-TEMPLATE_DIR = Path(__file__).parent.parent.parent / "templates"
+from add_new_species.render_templates import read_text_file, render
 
 
-def test_process_template_file_index_md_all_replacements(temp_output_dir: Path, user_form_data: UserFormData) -> None:
+def test_process_template_file_index_md_all_replacements(user_form_data: UserFormData) -> None:
     """
     Test that sucessfully calls process_template_file and substitutes required and optional replacements.
     """
-    output_file_path = temp_output_dir / "output.txt"
     template_file_path = TEMPLATE_DIR / "_index.md"
 
     required_replacements = {
@@ -32,28 +29,23 @@ def test_process_template_file_index_md_all_replacements(temp_output_dir: Path, 
         "goat_webpage": "www.example.com",
     }
 
-    process_template_file(
-        template_file_path=template_file_path,
-        output_file_path=output_file_path,
+    template_text = read_text_file(file_path=template_file_path)
+    rendered_content = render(
+        template_text=template_text,
         required_replacements=required_replacements,
         optional_replacements=optional_replacements,
     )
 
-    assert output_file_path.exists(), "The output file was not created."
-
-    updated_index_md = output_file_path.read_text()
-
     for key in chain(required_replacements.keys(), optional_replacements.keys()):
-        assert f"${{{key}}}" not in updated_index_md, f"Placeholder '${{{key}}}' was not replaced in the output file."
+        assert (
+            f"${{{key}}}" not in rendered_content
+        ), f"Placeholder '${{{key}}}' was not replaced in the rendered content."
 
 
-def test_process_template_file_index_md_missing_optional_replacements(
-    temp_output_dir: Path, user_form_data: UserFormData
-) -> None:
+def test_process_template_file_index_md_missing_optional_replacements(user_form_data: UserFormData) -> None:
     """
     Test that sucessfully ensures that optional replacements are replaced with "[EDIT]" if value is None.
     """
-    output_file_path = temp_output_dir / "output.txt"
     template_file_path = TEMPLATE_DIR / "_index.md"
 
     required_replacements = {
@@ -68,15 +60,11 @@ def test_process_template_file_index_md_missing_optional_replacements(
         "todays_date": datetime.now().strftime("%d/%m/%Y"),
     }
 
-    process_template_file(
-        template_file_path=template_file_path,
-        output_file_path=output_file_path,
+    template_text = read_text_file(file_path=template_file_path)
+    rendered_content = render(
+        template_text=template_text,
         required_replacements=required_replacements,
     )
 
-    assert output_file_path.exists(), "The output file was not created."
-
-    updated_index_md = output_file_path.read_text()
-
-    assert "${gbif_taxon_id}" not in updated_index_md
-    assert "${goat_webpage}" not in updated_index_md
+    assert "${gbif_taxon_id}" not in rendered_content
+    assert "${goat_webpage}" not in rendered_content
