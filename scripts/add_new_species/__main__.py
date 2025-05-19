@@ -26,7 +26,7 @@ def run_argparse() -> argparse.Namespace:
 
     parser.add_argument(
         "-f",
-        "--user-form",
+        "--species-submission-form",
         type=Path,
         metavar="[user form location]",
         help="The path to the filled in user form, a word document.",
@@ -34,8 +34,8 @@ def run_argparse() -> argparse.Namespace:
     )
 
     parser.add_argument(
-        "-s",
-        "--user-spreadsheet",
+        "-d",
+        "--data-tracks-sheet",
         type=Path,
         metavar="[user spreadsheet location]",
         help="The path to the filled in user spreadsheet, an excel file.",
@@ -44,7 +44,7 @@ def run_argparse() -> argparse.Namespace:
 
     parser.add_argument(
         "-n",
-        "--sheet-name",
+        "--data-tracks-sheet-name",
         type=str,
         metavar="[user spreadsheet sheet name]",
         help="The name of the sheet in the user spreadsheet to be processed.",
@@ -118,15 +118,15 @@ def check_dirs_empty(all_dir_paths: dict[str, Path], species_name: str) -> None:
 if __name__ == "__main__":
     args = run_argparse()
 
-    user_form_data = parse_user_form(form_file_path=Path(args.user_form))
+    user_form_data = parse_user_form(form_file_path=args.species_submission_form)
 
     output_dir_paths = all_dir_paths(user_form_data.species_slug)
     if not args.overwrite:
         check_dirs_empty(all_dir_paths=output_dir_paths, species_name=user_form_data.species_name)
 
     data_tracks_list_of_dicts = parse_excel_file(
-        spreadsheet_file_path=Path(args.user_spreadsheet),
-        sheet_name=args.sheet_name,
+        spreadsheet_file_path=args.data_tracks_sheet,
+        sheet_name=args.data_tracks_sheet_name,
     )
 
     assembly_metadata = fetch_assembly_metadata(
