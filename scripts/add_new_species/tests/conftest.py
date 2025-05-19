@@ -1,5 +1,3 @@
-import shutil
-import tempfile
 from pathlib import Path
 
 import pytest
@@ -9,16 +7,6 @@ from add_new_species.get_assembly_metadata_from_ENA_NCBI import AssemblyMetadata
 FIXTURES_DIR = Path(__file__).parent / "fixtures"
 IMG_FIXTURES_DIR = FIXTURES_DIR / "example_images"
 FORM_FIXTURES_DIR = FIXTURES_DIR / "submission_form_example"
-
-
-@pytest.fixture
-def temp_output_dir():
-    """
-    Create a temporary directory for output files during tests.
-    """
-    temp_dir = Path(tempfile.mkdtemp())
-    yield temp_dir
-    shutil.rmtree(temp_dir)
 
 
 @pytest.fixture

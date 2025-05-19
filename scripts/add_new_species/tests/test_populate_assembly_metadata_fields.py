@@ -10,7 +10,7 @@ from add_new_species.get_assembly_metadata_from_ENA_NCBI import AssemblyMetadata
 
 
 def test_populate_config_yml_with_assembly_metadata(
-    assembly_metadata: AssemblyMetadata, data_tracks_list_of_dicts: list[dict], temp_output_dir: Path
+    assembly_metadata: AssemblyMetadata, data_tracks_list_of_dicts: list[dict], tmp_path: Path
 ):
     """
     Test that writes the config.yml file based on assembly metadata and data tracks.
@@ -18,9 +18,9 @@ def test_populate_config_yml_with_assembly_metadata(
     and data_tracks_list_of_dicts by process_data_tracks_Excel().
     """
 
-    populate_config_yml(assembly_metadata, data_tracks_list_of_dicts, temp_output_dir)
+    populate_config_yml(assembly_metadata, data_tracks_list_of_dicts, tmp_path)
 
-    temp_config_path = temp_output_dir / "config.yml"
+    temp_config_path = tmp_path / "config.yml"
     with open(temp_config_path, "r") as f:
         updated_config = yaml.safe_load(f)
 
@@ -41,7 +41,7 @@ def test_populate_config_yml_with_assembly_metadata(
 
 @patch("add_new_species.add_content_files.get_gbif_taxon_key", return_value="123456")
 @patch("add_new_species.add_content_files.process_taxonomy", return_value="78910")
-def test_add_index_md(mock_process_taxonomy, mock_get_gbif_taxon_key, user_form_data, temp_output_dir):
+def test_add_index_md(mock_process_taxonomy, mock_get_gbif_taxon_key, user_form_data, tmp_path):
     """
     Test that the add_index_md function correctly processes the template _index.md file
     and replaces placeholders with species-specific information.
@@ -49,11 +49,11 @@ def test_add_index_md(mock_process_taxonomy, mock_get_gbif_taxon_key, user_form_
 
     add_index_md(
         user_form_data=user_form_data,
-        content_dir_path=temp_output_dir,
-        data_dir_path=temp_output_dir,
+        content_dir_path=tmp_path,
+        data_dir_path=tmp_path,
     )
 
-    output_file_path = temp_output_dir / "_index.md"
+    output_file_path = tmp_path / "_index.md"
     assert output_file_path.exists()
 
     updated_index_md = output_file_path.read_text()
@@ -77,10 +77,10 @@ def test_add_index_md(mock_process_taxonomy, mock_get_gbif_taxon_key, user_form_
         assert expected_value in updated_index_md, f"Expected value {expected_value} not found in the output."
 
     mock_get_gbif_taxon_key.assert_called_once_with(species_name=user_form_data.species_name)
-    mock_process_taxonomy.assert_called_once_with(user_form_data.species_name, temp_output_dir)
+    mock_process_taxonomy.assert_called_once_with(user_form_data.species_name, tmp_path)
 
 
-def test_add_assembly_md(user_form_data: UserFormData, assembly_metadata: AssemblyMetadata, temp_output_dir):
+def test_add_assembly_md(user_form_data: UserFormData, assembly_metadata: AssemblyMetadata, tmp_path):
     """
     Test that the add_assembly_md function correctly processes the template assembly.md file
     and replaces placeholders with species-specific information.
@@ -91,10 +91,10 @@ def test_add_assembly_md(user_form_data: UserFormData, assembly_metadata: Assemb
     add_assembly_md(
         user_form_data=user_form_data,
         assembly_metadata=assembly_metadata,
-        content_dir_path=temp_output_dir,
+        content_dir_path=tmp_path,
     )
 
-    output_file_path = temp_output_dir / "assembly.md"
+    output_file_path = tmp_path / "assembly.md"
     assert output_file_path.exists()
 
     updated_assembly_md = output_file_path.read_text()

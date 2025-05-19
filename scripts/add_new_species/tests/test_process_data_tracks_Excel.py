@@ -71,14 +71,14 @@ def test_extract_genome_accession_blank_accession(
         extract_genome_accession(data_tracks_list_of_dicts)
 
 
-def test_populate_data_tracks_json(data_tracks_list_of_dicts: list[dict], temp_output_dir: Path) -> None:
+def test_populate_data_tracks_json(data_tracks_list_of_dicts: list[dict], tmp_path: Path) -> None:
     """
     Test that sucessfully creates a JSON file from the list of dictionaries
     """
 
-    populate_data_tracks_json(data_tracks_list_of_dicts, temp_output_dir)
+    populate_data_tracks_json(data_tracks_list_of_dicts, tmp_path)
 
-    temp_json_file_path = temp_output_dir / "data_tracks.json"
+    temp_json_file_path = tmp_path / "data_tracks.json"
 
     assert temp_json_file_path.exists(), "Output file was not created"
 
