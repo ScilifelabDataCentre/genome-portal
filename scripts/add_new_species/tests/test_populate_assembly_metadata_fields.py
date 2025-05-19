@@ -3,10 +3,10 @@ from pathlib import Path
 from unittest.mock import patch
 
 import yaml
-from add_new_species.add_config_yml import populate_config_yml
-from add_new_species.add_content_files import add_assembly_md, add_index_md
-from add_new_species.form_parser import UserFormData
-from add_new_species.get_assembly_metadata_from_ENA_NCBI import AssemblyMetadata
+from add_config_yml import populate_config_yml
+from add_content_files import add_assembly_md, add_index_md
+from form_parser import UserFormData
+from get_assembly_metadata_from_ENA_NCBI import AssemblyMetadata
 
 
 def test_populate_config_yml_with_assembly_metadata(
@@ -39,8 +39,8 @@ def test_populate_config_yml_with_assembly_metadata(
     assert updated_config["tracks"][1]["fileName"] == "track2.gff"
 
 
-@patch("add_new_species.add_content_files.get_gbif_taxon_key", return_value="123456")
-@patch("add_new_species.add_content_files.process_taxonomy", return_value="78910")
+@patch("add_content_files.get_gbif_taxon_key", return_value="123456")
+@patch("add_content_files.process_taxonomy", return_value="78910")
 def test_add_index_md(mock_process_taxonomy, mock_get_gbif_taxon_key, user_form_data, tmp_path):
     """
     Test that the add_index_md function correctly processes the template _index.md file

@@ -1,7 +1,7 @@
 from unittest.mock import MagicMock, patch
 
 import pytest
-from add_new_species.get_assembly_metadata_from_ENA_NCBI import (
+from get_assembly_metadata_from_ENA_NCBI import (
     get_ena_assembly_metadata_xml,
     get_ncbi_assembly_metadata_json,
 )
@@ -10,7 +10,7 @@ VALID_ACCESSION = "GCA_000011425.1"
 INVALID_ACCESSION = "GCA_000011425.9"
 
 
-@patch("add_new_species.get_assembly_metadata_from_ENA_NCBI.requests.get")
+@patch("get_assembly_metadata_from_ENA_NCBI.requests.get")
 def test_get_ena_assembly_metadata_xml_mock_valid_accession(mock_get: MagicMock):
     """
     Test sucessfully calls get_ena_assembly_metadata_xml with a valid accession.
@@ -34,7 +34,7 @@ def test_get_ena_assembly_metadata_xml_mock_valid_accession(mock_get: MagicMock)
     assert result["genome_representation"] == "full"
 
 
-@patch("add_new_species.get_assembly_metadata_from_ENA_NCBI.requests.get")
+@patch("get_assembly_metadata_from_ENA_NCBI.requests.get")
 def test_get_ena_assembly_metadata_xml_mock_invalid_accession(mock_get: MagicMock):
     """
     Test that fails get_ena_assembly_metadata_xml with an invalid accession.
@@ -45,7 +45,7 @@ def test_get_ena_assembly_metadata_xml_mock_invalid_accession(mock_get: MagicMoc
         get_ena_assembly_metadata_xml(INVALID_ACCESSION)
 
 
-@patch("add_new_species.get_assembly_metadata_from_ENA_NCBI.requests.get")
+@patch("get_assembly_metadata_from_ENA_NCBI.requests.get")
 def test_get_ncbi_assembly_metadata_json_mock_valid_accession(mock_get: MagicMock):
     """
     Test sucessfully calls get_ncbi_assembly_metadata_json with a valid accession.
@@ -55,7 +55,7 @@ def test_get_ncbi_assembly_metadata_json_mock_valid_accession(mock_get: MagicMoc
     assert result
 
 
-@patch("add_new_species.get_assembly_metadata_from_ENA_NCBI.requests.get")
+@patch("get_assembly_metadata_from_ENA_NCBI.requests.get")
 def test_test_get_ncbi_assembly_metadata_json_mock_invalid_accession(mock_get: MagicMock):
     """
     Test that fails get_ncbi_assembly_metadata_json with an invalid accession.
@@ -66,7 +66,7 @@ def test_test_get_ncbi_assembly_metadata_json_mock_invalid_accession(mock_get: M
         get_ncbi_assembly_metadata_json(INVALID_ACCESSION)
 
 
-@patch("add_new_species.get_assembly_metadata_from_ENA_NCBI.requests.get")
+@patch("get_assembly_metadata_from_ENA_NCBI.requests.get")
 def test_get_ncbi_assembly_metadata_json_mock_missing_assembly_type(mock_get: MagicMock):
     """
     Test that fails if the response from the NCBI API request for some reason

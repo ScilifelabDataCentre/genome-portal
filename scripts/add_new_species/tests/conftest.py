@@ -1,8 +1,8 @@
 from pathlib import Path
 
 import pytest
-from add_new_species.form_parser import UserFormData
-from add_new_species.get_assembly_metadata_from_ENA_NCBI import AssemblyMetadata
+from form_parser import UserFormData
+from get_assembly_metadata_from_ENA_NCBI import AssemblyMetadata
 
 FIXTURES_DIR = Path(__file__).parent / "fixtures"
 IMG_FIXTURES_DIR = FIXTURES_DIR / "example_images"

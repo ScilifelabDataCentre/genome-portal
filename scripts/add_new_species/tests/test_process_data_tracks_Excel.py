@@ -2,8 +2,8 @@ import json
 from pathlib import Path
 
 import pytest
-from add_new_species.get_assembly_metadata_from_ENA_NCBI import extract_genome_accession
-from add_new_species.process_data_tracks_Excel import parse_excel_file, populate_data_tracks_json
+from get_assembly_metadata_from_ENA_NCBI import extract_genome_accession
+from process_data_tracks_Excel import parse_excel_file, populate_data_tracks_json
 
 
 def test_parse_excel_file_with_comments(example_excel_files: dict[str, Path]) -> None:

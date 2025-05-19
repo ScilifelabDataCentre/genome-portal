@@ -1,7 +1,7 @@
 from pathlib import Path
 
 import pytest
-from add_new_species.image_processer import process_species_image
+from image_processer import process_species_image
 
 OUTPUT_IMAGE_NAME = "output_image.webp"
 

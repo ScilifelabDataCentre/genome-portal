@@ -2,7 +2,7 @@ import subprocess
 from pathlib import Path
 
 import pytest
-from add_new_species.form_parser import create_markdown_content, parse_user_form
+from form_parser import create_markdown_content, parse_user_form
 
 
 def test_create_markdown_content_docx_success(example_user_forms: dict[str, Path]) -> None:

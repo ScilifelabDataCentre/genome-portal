@@ -2,8 +2,8 @@ from datetime import datetime
 from itertools import chain
 
 from add_content_files import TEMPLATE_DIR
-from add_new_species.form_parser import UserFormData
-from add_new_species.render_templates import read_text_file, render
+from form_parser import UserFormData
+from render_templates import read_text_file, render
 
 
 def test_process_template_file_index_md_all_replacements(user_form_data: UserFormData) -> None:
