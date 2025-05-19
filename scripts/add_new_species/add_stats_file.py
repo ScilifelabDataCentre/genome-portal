@@ -1,7 +1,7 @@
 import shutil
 from pathlib import Path
 
-from add_new_species.add_content_files import TEMPLATE_DIR
+from add_content_files import TEMPLATE_DIR
 
 STATS_FILE = "species_stats.yml"
 

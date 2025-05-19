@@ -8,10 +8,10 @@ Notably, the ENA metadata lacks one field (assembly_type) that is present in the
 Hence, this submodule queries both ENA and NCBI APIs to get the desired metadata fields.
 """
 
+from dataclasses import dataclass
 from xml.etree import ElementTree
 
 import requests
-from attr import dataclass
 
 ENA_API_XML_URL = r"https://www.ebi.ac.uk/ena/browser/api/xml"
 NCBI_API_JSON_URL = "https://api.ncbi.nlm.nih.gov/datasets/v2/genome/accession"

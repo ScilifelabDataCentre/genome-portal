@@ -1,8 +1,7 @@
 import subprocess
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Optional
-
-from attr import dataclass
 
 
 @dataclass

@@ -1,7 +1,7 @@
 """
 This module is used to get the taxonomy information for a species and store it as a dictionary.
 
-There are two primary functions in this module that are used by add_new_species.py
+There are two primary functions in this module that are used by add_new_species.
 - get_taxonomy - get the taxonomy information for a species and store it as a dictionary.
 - save_taxonomy_file - save the taxonomy information to a JSON file.
 

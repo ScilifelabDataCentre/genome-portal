@@ -3,18 +3,16 @@ from datetime import datetime
 from pathlib import Path
 
 import requests
+from form_parser import UserFormData
+from get_assembly_metadata_from_ENA_NCBI import AssemblyMetadata
+from get_taxonomy import EbiRestException, get_taxonomy, save_taxonomy_file
+from template_handler import process_template_file
 
-from add_new_species.form_parser import UserFormData
-from add_new_species.get_assembly_metadata_from_ENA_NCBI import AssemblyMetadata
-from add_new_species.get_taxonomy import EbiRestException, get_taxonomy, save_taxonomy_file
-from add_new_species.template_handler import process_template_file
-
-TEMPLATE_DIR = Path(__file__).parent.parent / "templates"
+TEMPLATE_DIR = Path(__file__).parent / "templates"
 INDEX_FILE = "_index.md"
 ASSEMBLY_FILE = "assembly.md"
 DOWNLOAD_FILE = "download.md"
 TAXONOMY_FILE = "taxonomy.json"
-CONTENT_FILES = (INDEX_FILE, ASSEMBLY_FILE, DOWNLOAD_FILE)
 
 
 def add_index_md(

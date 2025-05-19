@@ -12,8 +12,7 @@ from datetime import datetime
 from pathlib import Path
 
 import pandas as pd
-
-from add_new_species.add_content_files import TEMPLATE_DIR
+from add_content_files import TEMPLATE_DIR
 
 JSON_FILE_NAME = "data_tracks.json"
 TEMPLATE_FILE_PATH = TEMPLATE_DIR / JSON_FILE_NAME

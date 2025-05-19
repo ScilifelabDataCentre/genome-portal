@@ -5,9 +5,8 @@ Submodule to populate fields in assembly.md and config.yml files
 from pathlib import Path
 
 import yaml
-
-from add_new_species.add_content_files import TEMPLATE_DIR
-from add_new_species.get_assembly_metadata_from_ENA_NCBI import AssemblyMetadata
+from add_content_files import TEMPLATE_DIR
+from get_assembly_metadata_from_ENA_NCBI import AssemblyMetadata
 
 YML_FILE_NAME = "config.yml"
 TEMPLATE_FILE_PATH = TEMPLATE_DIR / YML_FILE_NAME
