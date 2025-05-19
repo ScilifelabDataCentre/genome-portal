@@ -157,7 +157,6 @@ def extract_funding(markdown_content) -> str:
 
     raw_funding = extract_block_of_markdown(
         start_marker="applicable.",
-        end_marker="# 4. Data Tracks Form",
         markdown_content=funding_section,
     )
 
@@ -179,11 +178,11 @@ def extract_img_attrib(markdown_content: str) -> dict[str, str]:
     return img_attrib
 
 
-def extract_block_of_markdown(start_marker: str, end_marker: str, markdown_content: str) -> str:
+def extract_block_of_markdown(markdown_content: str, start_marker: str, end_marker: str = None) -> str:
     """
     Extract a block of markdown content between two markers.
     """
-    block = ""
+    blocks = []
     in_block = False
 
     for line in markdown_content.splitlines(keepends=True):
@@ -191,11 +190,10 @@ def extract_block_of_markdown(start_marker: str, end_marker: str, markdown_conte
             in_block = True
             continue
 
-        if end_marker in line:
-            in_block = False
+        if end_marker and end_marker in line:
             break
 
         if in_block:
-            block += line
+            blocks.append(line)
 
-    return block
+    return "".join(blocks).strip()
