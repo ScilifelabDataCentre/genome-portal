@@ -23,6 +23,7 @@
           "id": "[SPECIES_ABBREVIATION]_default_session_view",
           "minimized": false,
           "type": "LinearGenomeView",
+          "trackLabels": "offset",
           "offsetPx": 0,
           "bpPerPx": 50,
           "displayedRegions": [
@@ -49,8 +50,7 @@
                 }
               ]
             }
-          ],
-          "trackLabels": "offset"
+          ]
         }
       ]
     }

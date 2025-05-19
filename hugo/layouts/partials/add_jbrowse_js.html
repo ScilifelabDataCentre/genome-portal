@@ -1,0 +1,6 @@
+{{/* JS dependencies for genome browser pages, both for regular and embedded version
+    check_for_config.js is custom script to display error if config file does not exist
+*/}}
+{{ $configCheckJS := resources.Get "js/check_for_config.js" | fingerprint | minify }}
+<script src="{{ $configCheckJS.RelPermalink }}"></script>
+<script defer src="/browser/static/js/main.js"></script>
