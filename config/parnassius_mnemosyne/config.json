@@ -135,7 +135,7 @@
     "plugins": [
       {
         "name": "DbxrefPlugin",
-        "esmLoc": { "uri": "dbxref_plugin.js" }
+        "esmUrl": "../../custom_jbrowse_plugins/dbxref_plugin.js"
       }
     ],
     "tracks": [
