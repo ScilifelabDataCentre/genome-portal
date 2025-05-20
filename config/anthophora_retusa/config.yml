@@ -7,8 +7,7 @@ assembly:
   fileName: CAXEFM01.fasta.gz
 tracks:
 - name: Protein-coding genes
-  url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/963/995/495/GCA_963995495.1_iyAntRet1/GCA_963995495.1_iyAntRet1_genomic.gff.gz
-  fileName: GCA_963995495.1_iyAntRet1_genomic.gff.gz
+  url: https://nextcloud.dc.scilifelab.se/s/TY44yaXZnGZBDry/download/GCA_963995495.1_iyAntRet1_genomic.gff.renamed.gff.gz
 - name: Repeats
   url: #URL OMITTED FOR NOW, TRACK IS NOT YET PUBLIC
   fileName: "Anthophora_retusa_repeats.gff"
