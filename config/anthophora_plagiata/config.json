@@ -25,7 +25,7 @@
         "type": "LinearGenomeView",
         "trackLabels": "offset",
         "offsetPx": 0,
-        "bpPerPx": 800,
+        "bpPerPx": 200,
         "displayedRegions": [
           {
             "refName": "ENA|CAXEFL010000280|CAXEFL010000280.1",
@@ -45,8 +45,36 @@
               {
                 "id": "apla_default_protein_coding_genes_view_0_display",
                 "type": "LinearBasicDisplay",
-                "heightPreConfig": 250,
+                "heightPreConfig": 200,
                 "configuration": "GCA_963995485.1_iyAntPlag1_genomic.gff.renamed.gff-LinearBasicDisplay"
+              }
+            ]
+          },
+          {
+            "id": "apla_default_Repeats",
+            "type": "FeatureTrack",
+            "configuration": "Anthophora_plagiata_repeats.gff",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "apla_default_Repeats_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 150,
+                "configuration": "Anthophora_plagiata_repeats.gff-LinearBasicDisplay"
+              }
+            ]
+          },
+          {
+            "id": "apla_default_Transcripts_(Isoseq)",
+            "type": "FeatureTrack",
+            "configuration": "Anthophora_plagiata_isoseq.gff",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "apla_default_Transcripts_(Isoseq)_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 150,
+                "configuration": "Anthophora_plagiata_isoseq.gff-LinearBasicDisplay"
               }
             ]
           },
@@ -87,7 +115,7 @@
         "iyAntPlag1"
       ],
       "category": [
-        "Population genomics"
+        "GWAS"
       ],
       "adapter": {
         "type": "BedTabixAdapter",

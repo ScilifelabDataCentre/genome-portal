@@ -25,7 +25,7 @@
         "type": "LinearGenomeView",
         "trackLabels": "offset",
         "offsetPx": 0,
-        "bpPerPx": 100,
+        "bpPerPx": 50,
         "displayedRegions": [
           {
             "refName": "ENA|CAXEFK010000001|CAXEFK010000001.1",
@@ -45,8 +45,36 @@
               {
                 "id": "aqua_default_protein_coding_genes_view_0_display",
                 "type": "LinearBasicDisplay",
-                "heightPreConfig": 250,
+                "heightPreConfig": 200,
                 "configuration": "GCA_963995475.1_iyAntQuad1_genomic.gff-LinearBasicDisplay"
+              }
+            ]
+          },
+          {
+            "id": "aqua_default_Repeats",
+            "type": "FeatureTrack",
+            "configuration": "Anthophora_quadrimaculata_repeats.gff",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "aqua_default_Repeats_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 150,
+                "configuration": "Anthophora_quadrimaculata_repeats.gff-LinearBasicDisplay"
+              }
+            ]
+          },
+          {
+            "id": "aqua_default_Transcripts_(Isoseq)",
+            "type": "FeatureTrack",
+            "configuration": "Anthophora_quadrimaculata_isoseq.gff",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "aqua_default_Transcripts_(Isoseq)_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 150,
+                "configuration": "Anthophora_quadrimaculata_isoseq.gff-LinearBasicDisplay"
               }
             ]
           },
@@ -101,7 +129,7 @@
         "iyAntQuad1"
       ],
       "category": [
-        "Population genomics"
+        "GWAS"
       ],
       "adapter": {
         "type": "BedTabixAdapter",
@@ -131,7 +159,7 @@
         "iyAntQuad1"
       ],
       "category": [
-        "Population genomics"
+        "GWAS"
       ],
       "adapter": {
         "type": "BedTabixAdapter",

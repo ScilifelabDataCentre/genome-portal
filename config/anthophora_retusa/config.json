@@ -45,8 +45,36 @@
               {
                 "id": "aret_default_protein_coding_genes_view_0_display",
                 "type": "LinearBasicDisplay",
-                "heightPreConfig": 250,
+                "heightPreConfig": 350,
                 "configuration": "GCA_963995495.1_iyAntRet1_genomic.gff-LinearBasicDisplay"
+              }
+            ]
+          },
+          {
+            "id": "aret_default_Repeats",
+            "type": "FeatureTrack",
+            "configuration": "Anthophora_retusa_repeats.gff",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "aret_default_Repeats_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 150,
+                "configuration": "Anthophora_retusa_repeats.gff-LinearBasicDisplay"
+              }
+            ]
+          },
+          {
+            "id": "aret_default_Transcripts_(Isoseq)",
+            "type": "FeatureTrack",
+            "configuration": "Anthophora_retusa_isoseq.gff",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "aret_default_Transcripts_(Isoseq)_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 150,
+                "configuration": "Anthophora_retusa_isoseq.gff-LinearBasicDisplay"
               }
             ]
           },
@@ -101,7 +129,7 @@
         "iyAntRet1"
       ],
       "category": [
-        "Population genomics"
+        "GWAS"
       ],
       "adapter": {
         "type": "BedTabixAdapter",
@@ -129,6 +157,9 @@
       "name": "Tajima's D",
       "assemblyNames": [
         "iyAntRet1"
+      ],
+      "category": [
+        "GWAS"
       ],
       "adapter": {
         "type": "BedTabixAdapter",

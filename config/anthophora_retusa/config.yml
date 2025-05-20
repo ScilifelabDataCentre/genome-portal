@@ -9,6 +9,14 @@ tracks:
 - name: Protein-coding genes
   url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/963/995/495/GCA_963995495.1_iyAntRet1/GCA_963995495.1_iyAntRet1_genomic.gff.gz
   fileName: GCA_963995495.1_iyAntRet1_genomic.gff.gz
+- name: Repeats
+  url: #URL OMITTED FOR NOW, TRACK IS NOT YET PUBLIC
+  fileName: "Anthophora_retusa_repeats.gff"
+  defaultSession: true 
+- name: Transcripts (Isoseq)
+  url: #URL OMITTED FOR NOW, TRACK IS NOT YET PUBLIC
+  fileName: "Anthophora_retusa_isoseq.gff"
+  defaultSession: true
 - name: "Nucleotide diversity (Pi), 5kb windows"
   url: #URL OMITTED FOR NOW, TRACK IS NOT YET PUBLIC
   fileName: "retusa_5kb.windowed.bed"
