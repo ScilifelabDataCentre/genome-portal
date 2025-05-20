@@ -13,7 +13,7 @@ assembly:
   - "Scaffold N90 (Mbp)": "10.52"
   - "Scaffold L90": "14"
   - "Scaffolds >= 10 kb": "39"
-  - "BUSCO % [EDIT]": "[EDIT]"
+  - "BUSCO % (hymenoptera_odb10)": "C:89.6 [S:74.5, D:15.1], F:1.0, M:9.4, n:5991"
 annotation:
   - "Gene #": 10728
   - "Transcript #": "13609"
