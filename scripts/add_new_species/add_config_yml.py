@@ -25,10 +25,11 @@ def populate_config_yml(assembly_metadata: AssemblyMetadata, user_data_tracks: d
     4. Write the updated config.yml file to the config_dir_path.
     """
 
-    with open(TEMPLATE_FILE_PATH, "r") as config_f:
-        config_data = dict(yaml.safe_load(config_f))
-
+    # with open(TEMPLATE_FILE_PATH, "r") as config_f:
+    #     config_data = dict(yaml.safe_load(config_f))
+    config_data = {}
     config_data["organism"] = assembly_metadata.species_name
+    config_data["assembly"] = {}
     config_data["assembly"]["name"] = assembly_metadata.assembly_name
     config_data["assembly"]["displayName"] = (
         f"{assembly_metadata.species_name_abbrev} genome assembly {assembly_metadata.assembly_accession}"
