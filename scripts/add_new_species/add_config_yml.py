@@ -12,9 +12,7 @@ YML_FILE_NAME = "config.yml"
 TEMPLATE_FILE_PATH = TEMPLATE_DIR / YML_FILE_NAME
 
 
-def populate_config_yml(
-    assembly_metadata: AssemblyMetadata, data_tracks_list_of_dicts: dict, config_dir_path: Path
-) -> None:
+def populate_config_yml(assembly_metadata: AssemblyMetadata, user_data_tracks: dict, config_dir_path: Path) -> None:
     """
     1. Read the config.yml template file
     2. Populate the following fields in the config.yml file:
@@ -37,7 +35,7 @@ def populate_config_yml(
     )
     config_data["assembly"]["accession"] = assembly_metadata.assembly_accession
     config_data["tracks"] = []
-    for track in data_tracks_list_of_dicts:
+    for track in user_data_tracks:
         file_name = track.get("fileName")
         download_url = None
         for link in track.get("links", []):

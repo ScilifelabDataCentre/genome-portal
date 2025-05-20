@@ -81,7 +81,7 @@ def assembly_metadata() -> AssemblyMetadata:
 
 
 @pytest.fixture
-def data_tracks_list_of_dicts() -> list[dict]:
+def user_data_tracks() -> list[dict]:
     """
     Fixture that provides a list of dictionaries representing the data tracks from the user spreadsheet.
     """

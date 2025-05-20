@@ -124,13 +124,13 @@ if __name__ == "__main__":
     if not args.overwrite:
         check_dirs_empty(all_dir_paths=output_dir_paths, species_name=user_form_data.species_name)
 
-    data_tracks_list_of_dicts = parse_excel_file(
+    user_data_tracks = parse_excel_file(
         spreadsheet_file_path=args.data_tracks_sheet,
         sheet_name=args.data_tracks_sheet_name,
     )
 
     assembly_metadata = fetch_assembly_metadata(
-        data_tracks_list_of_dicts=data_tracks_list_of_dicts,
+        user_data_tracks=user_data_tracks,
         species_name=user_form_data.species_name,
     )
 
@@ -155,11 +155,11 @@ if __name__ == "__main__":
         data_dir_path=output_dir_paths["data_dir_path"],
     )
 
-    populate_data_tracks_json(data_tracks_list_of_dicts, assets_dir_path=output_dir_paths["assets_dir_path"])
+    populate_data_tracks_json(user_data_tracks, assets_dir_path=output_dir_paths["assets_dir_path"])
 
     populate_config_yml(
         assembly_metadata=assembly_metadata,
-        data_tracks_list_of_dicts=data_tracks_list_of_dicts,
+        user_data_tracks=user_data_tracks,
         config_dir_path=output_dir_paths["config_dir_path"],
     )
 

@@ -63,17 +63,17 @@ def parse_excel_file(spreadsheet_file_path: str, sheet_name: str) -> list[dict]:
     with open(TEMPLATE_FILE_PATH, "r") as file:
         template_json = json.dumps(json.load(file)[0])
 
-    data_tracks_list_of_dicts = [df_row_to_json(row, template_json) for _, row in df.iterrows()]
+    user_data_tracks = [df_row_to_json(row, template_json) for _, row in df.iterrows()]
 
-    return data_tracks_list_of_dicts
+    return user_data_tracks
 
 
-def populate_data_tracks_json(data_tracks_list_of_dicts: list[dict], assets_dir_path: Path) -> None:
+def populate_data_tracks_json(user_data_tracks: list[dict], assets_dir_path: Path) -> None:
     """
     Write the data tracks list of dictionaries to a JSON file.
     """
     output_json_path = assets_dir_path / JSON_FILE_NAME
 
     with open(output_json_path, "w") as json_file:
-        json.dump(data_tracks_list_of_dicts, json_file, indent=2)
+        json.dump(user_data_tracks, json_file, indent=2)
         print(f"File created: {output_json_path.resolve()}")

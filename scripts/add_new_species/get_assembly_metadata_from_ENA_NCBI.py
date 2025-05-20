@@ -89,13 +89,13 @@ def get_ncbi_assembly_metadata_json(accession: str) -> dict:
     return assembly_type
 
 
-def extract_genome_accession(data_tracks_list_of_dicts: list[dict]) -> str:
+def extract_genome_accession(user_data_tracks: list[dict]) -> str:
     """
     Extract the value of 'accessionOrDOI' for the top-level key 'Genome' from the list of dictionaries.
     """
 
     genome_assembly_accession = None
-    for data_track in data_tracks_list_of_dicts:
+    for data_track in user_data_tracks:
         if data_track.get("dataTrackName") == "Genome":
             genome_assembly_accession = data_track.get("accessionOrDOI", None)
             break
@@ -112,13 +112,13 @@ def extract_genome_accession(data_tracks_list_of_dicts: list[dict]) -> str:
     return genome_assembly_accession
 
 
-def fetch_assembly_metadata(data_tracks_list_of_dicts: dict, species_name: str) -> AssemblyMetadata:
+def fetch_assembly_metadata(user_data_tracks: dict, species_name: str) -> AssemblyMetadata:
     """
     Fetch assembly metadata from ENA and NCBI for a given GenBank genome assembly
     accession number. Return a dictionary that will be used to populate the YAML
     front matter in assembly.md and a few fields in config.yml.
     """
-    accession = extract_genome_accession(data_tracks_list_of_dicts)
+    accession = extract_genome_accession(user_data_tracks)
 
     partial_metadata_dict = get_ena_assembly_metadata_xml(accession)
     assembly_type = get_ncbi_assembly_metadata_json(accession)
