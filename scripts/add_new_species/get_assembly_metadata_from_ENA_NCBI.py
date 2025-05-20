@@ -79,13 +79,9 @@ def get_ncbi_assembly_metadata_json(accession: str) -> dict:
     if not ncbi_json.get("reports"):
         raise ValueError(f"No results found for accession {accession}. The accession may be invalid.")
 
-    assembly_type = ncbi_json.get("reports", [{}])[0].get("assembly_info", {}).get("assembly_type")
+    reports = ncbi_json["reports"]
+    assembly_type = reports[0]["assembly_info"]["assembly_type"]
 
-    if not assembly_type:
-        raise ValueError(
-            f"Assembly type not found in the NCBI API response for accession {accession}. "
-            "The assembly type may be missing or the API response format may have changed."
-        )
     return assembly_type
 
 
