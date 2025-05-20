@@ -9,6 +9,7 @@ tracks:
     #trackDescription: "Annotation of protein-coding genes, original version that was submitted to ENA"
     url: "https://figshare.scilifelab.se/ndownloader/files/47209624"
     fileName: "pmne_functional_edit1.gff.gz"
+    addTrack: false  
   - name: "Illumina RNAseq transcript assembly (thorax muscle tissue)"
     url: "https://figshare.scilifelab.se/ndownloader/files/47209648"
     fileName: "pmne_Illumina_RNAseq_StringTie_sorted-transcripts_match.gff.gz"
