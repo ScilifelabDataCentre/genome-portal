@@ -1,9 +1,38 @@
 """
-Use this script to create a new species entry for the website.
+This package automates the initial steps for creation of a new species entry for the Swedish Reference Genome Portal.
 
-This script will create new folders in the Hugo content, data and assets directories.
-Then template files for these directories will be added which can be filled in.
-Places to fill in will be marked with: "[EDIT]"
+Given a user-provided species submission form, data tracks spreadsheet, and species image, the package will:
+- Create new folders in the Hugo content, data, assets, and config directories for the specified species.
+- Process user-provided forms and spreadsheets to extract data for the species, research study, and data tracks.
+- Fetch additional metadata from external sources (e.g., ENA, NCBI, GBIF).
+- Generate a first draft for the Hugo pages and config.yml with the user input and the fetched metadata.
+- Check if the image has a 4:3 aspect ratio and, if so, converts it to webp format.
+- Writes all relevant files for the new species to the appropriate directories.
+
+Note that the package is designed to asisst in the initial steps of creating a new species entry, but it does not complete
+the entire process. After the package has been sucessfully run, the following steps are intended:
+- Run the data build process on the config.yml created for the species (dockerbuild, dockermake).
+    Create a defaultSession config.json in the species config directory (run dockermake again to install the defaultSession).
+    Calculate the statistics for the genome assembly and the annotation track for the protein-coding genes.
+- Inspect the created pages to make sure they are correct (e.g. by running dockerserve).
+    - Check the Hugo pages. There may be some fields that need to be filled in manually,
+        many of which are marked with an "[EDIT]" placeholder.
+    - Inspect the JBrowse instance for the species. Make sure that the tracks load correctly and that any settings introduced
+        in the defaultSession config.json display as intended.
+
+Usage:
+    Run this script as a module or standalone script, providing the required arguments for the species submission form,
+    data tracks spreadsheet, and species image. Use the --overwrite flag to allow overwriting existing species entries.
+
+Example:
+    python -m add_new_species -f path/to/species_form.docx -d path/to/data_tracks.xlsx -i path/to/image.png
+
+    # Example using provided test files:
+    python scripts/add_new_species \\
+    --species-submission-form="scripts/add_new_species/tests/fixtures/submission_form_example/01-species_submission_form_v1.1.0.docx" \\
+    --data-tracks-sheet="scripts/add_new_species/tests/fixtures/submission_form_example/02-Data_Tracks_Form_v1.1.0_fix.xlsx" \\
+    --species-image="scripts/add_new_species/tests/fixtures/example_images/image_4_3.png" \\
+    --overwrite
 """
 
 import argparse
