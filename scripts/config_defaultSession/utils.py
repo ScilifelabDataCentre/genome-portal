@@ -2,6 +2,7 @@ import gzip
 import json
 import os
 from pathlib import Path
+from typing import Any
 
 
 def check_config_json_exists(output_json_path: Path) -> None:
@@ -10,7 +11,7 @@ def check_config_json_exists(output_json_path: Path) -> None:
     Raise error if not.
     """
 
-    if output_json_path:
+    if output_json_path.exists():
         raise FileExistsError(
             f"""
             It appears that a defaultSession JSON file already exists at {output_json_path}.",
@@ -31,55 +32,65 @@ def get_species_abbreviation(organism):
     return (organism[:4]).lower()
 
 
-def get_fasta_header_and_sequence_length(file_path, default_scaffold=None):
+def parse_fasta_file(file, default_scaffold):
+    """
+    Subsubfunction for get_fasta_header_and_scaffold_length().
+    """
+    first_fasta_header = None
+    scaffold_length = 0
+    parser_is_in_sequence = False
+    header_found = False
+
+    for line in file:
+        if line.startswith(">"):
+            current_header = line[1:].strip().split()[0]
+            if default_scaffold:
+                if current_header == default_scaffold:
+                    header_found = True
+                    parser_is_in_sequence = True
+                elif parser_is_in_sequence:
+                    break
+            else:
+                if parser_is_in_sequence:
+                    break
+                first_fasta_header = current_header
+                parser_is_in_sequence = True
+        elif parser_is_in_sequence:
+            scaffold_length += len(line.strip())
+
+    return first_fasta_header, scaffold_length, header_found
+
+
+def get_fasta_header_and_scaffold_length(config: dict[str, Any], species_slug: str) -> tuple[str | Any, int]:
     """
     Subfunction that reads an assembly FASTA file and returns the header of the first scaffold and its sequence length.
     Alternatively, if the user has defined a default scaffold in the config.yml with the defaultScaffold key,
     the function will return the header of that scaffold instead of the first scaffold. The header and length are used to
     populate the defaultSession JSON object to control which scaffold is display upon loading a new session and its zoom level.
     """
+    assembly_file_name = get_track_file_name(config["assembly"]).replace("fasta", "fna")
+    if not assembly_file_name.endswith(".gz"):
+        assembly_file_name += ".gz"
+    file_path = Path(__file__).parent.parent.parent / "data" / species_slug / assembly_file_name
 
-    def parse_fasta_file(file, default_scaffold):
-        first_fasta_header = None
-        sequence_length = 0
-        parser_is_in_sequence = False
-        header_found = False
+    if "assembly" in config and "defaultScaffold" in config["assembly"]:
+        default_scaffold = config["assembly"]["defaultScaffold"]
+    else:
+        default_scaffold = None
 
-        for line in file:
-            if line.startswith(">"):
-                current_header = line[1:].strip().split()[0]
-                if default_scaffold:
-                    if current_header == default_scaffold:
-                        header_found = True
-                        parser_is_in_sequence = True
-                    elif parser_is_in_sequence:
-                        break
-                else:
-                    if parser_is_in_sequence:
-                        break
-                    first_fasta_header = current_header
-                    parser_is_in_sequence = True
-            elif parser_is_in_sequence:
-                sequence_length += len(line.strip())
-
-        return first_fasta_header, sequence_length, header_found
-
-    try:
-        if file_path.name.endswith(".gz"):
-            with gzip.open(file_path, "rt") as file:
-                first_fasta_header, sequence_length, header_found = parse_fasta_file(file, default_scaffold)
-        else:
-            with open(file_path, "r") as file:
-                first_fasta_header, sequence_length, header_found = parse_fasta_file(file, default_scaffold)
-    except IOError as e:
-        raise IOError(f"Error: Failed to open the assembly file from the given path at {file_path}. Error: {e}") from e
+    if file_path.name.endswith(".gz"):
+        with gzip.open(file_path, "rt") as file:
+            first_fasta_header, scaffold_length, header_found = parse_fasta_file(file, default_scaffold)
+    else:
+        with open(file_path, "r") as file:
+            first_fasta_header, scaffold_length, header_found = parse_fasta_file(file, default_scaffold)
 
     if default_scaffold and not header_found:
-        raise ValueError(
-            f"Error: No FASTA header named '{default_scaffold}' was found in the file. Please check the defaultScaffold value in the config.yml."
+        raise KeyError(
+            f"No FASTA header named '{default_scaffold}' was found in the file. Please check the defaultScaffold value in the config.yml."
         )
 
-    return (default_scaffold if default_scaffold else first_fasta_header), sequence_length
+    return (default_scaffold if default_scaffold else first_fasta_header), scaffold_length
 
 
 def get_track_file_name(track):
@@ -104,6 +115,10 @@ def get_track_file_name(track):
 
 
 def get_base_extension(file_name: str) -> str:
+    """
+    Subfunction that extracts the base file extension from a file name.
+    E.g. 'track.bed.gz' -> 'bed', 'track2.gff' -> 'gff'.
+    """
     file_path = Path(file_name)
     if file_path.suffix in [".gz", ".zip", ".bgz"]:
         return file_path.with_suffix("").suffix.lstrip(".")

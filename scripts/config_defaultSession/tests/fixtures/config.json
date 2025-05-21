@@ -141,7 +141,7 @@
         "FIRST_ASSEMBLY_ASM1142v1"
       ],
       "category": [
-        "GWAS"
+        "Population genomics"
       ],
       "adapter": {
         "type": "BedTabixAdapter",
