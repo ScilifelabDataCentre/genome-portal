@@ -1,7 +1,37 @@
 import os
+from dataclasses import dataclass
 from pathlib import Path
 
 from utils import get_fasta_header_and_sequence_length, get_track_file_name
+
+
+@dataclass
+class DefaultSession:
+    """
+    Class used to create a defaultSession JSON object based on a config.yml.
+    """
+
+    species_name: str
+    species_abbreviation: str
+    species_slug: str
+
+    def make_init_dict(self, assembly_counter: int) -> dict[str, any]:
+        return {
+            "defaultSession": {
+                "id": f"{self.species_abbreviation}_default_session",
+                "name": self.species_name,
+                "widgets": {
+                    "hierarchicalTrackSelector": {
+                        "id": "hierarchicalTrackSelector",
+                        "type": "HierarchicalTrackSelectorWidget",
+                        "view": f"{self.species_abbreviation}_default_session_view_{assembly_counter}",
+                        "faceted": {"showSparse": False, "showFilters": True, "showOptions": False, "panelWidth": 400},
+                    }
+                },
+                "activeWidgets": {"hierarchicalTrackSelector": "hierarchicalTrackSelector"},
+            },
+            "configuration": {"disableAnalytics": True},
+        }
 
 
 def initiate_defaultSession(species_name_variants, assembly_counter):
@@ -9,21 +39,12 @@ def initiate_defaultSession(species_name_variants, assembly_counter):
     Subfunction that populates the outer parts of the defaultSession JSON object with the species name and abbreviation.
     Also adds disableAnalytics to the dictionary to prevent Google Analytics from being loaded when running JBrowse.
     """
-    data = {}
-    data["defaultSession"] = {
-        "id": f"{species_name_variants["species_abbreviation"]}_default_session",
-        "name": species_name_variants["species_name"],
-        "widgets": {
-            "hierarchicalTrackSelector": {
-                "id": "hierarchicalTrackSelector",
-                "type": "HierarchicalTrackSelectorWidget",
-                "view": f"{species_name_variants["species_abbreviation"]}_default_session_view_{assembly_counter}",
-                "faceted": {"showSparse": False, "showFilters": True, "showOptions": False, "panelWidth": 400},
-            }
-        },
-        "activeWidgets": {"hierarchicalTrackSelector": "hierarchicalTrackSelector"},
-    }
-    data["configuration"] = {"disableAnalytics": True}
+    session = DefaultSession(
+        species_name=species_name_variants["species_name"],
+        species_abbreviation=species_name_variants["species_abbreviation"],
+        species_slug=species_name_variants["species_slug"],
+    )
+    data = session.make_init_dict(assembly_counter)
     return data
 
 
