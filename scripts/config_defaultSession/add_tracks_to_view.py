@@ -81,8 +81,31 @@ class DefaultSession:
             ]
             self.views[assembly_counter]["tracks"].extend(protein_coding_genes_track)
 
+    def add_optional_track(self, assembly_counter: int, track_params: dict[str, Any]) -> None:
+        """
+        Optional tracks are those that are set to defaultSession: true in the config.yml.
+        They are called 'optional' since the only mandatory track in the Genome Portal is the protein-coding genes track (in the first assembly, if multiple).
+        """
+        new_track = [
+            {
+                "id": track_params["track_outer_id"],
+                "type": "FeatureTrack",
+                "configuration": track_params["track_config"],
+                "minimized": False,
+                "displays": [
+                    {
+                        "id": f"{track_params["track_outer_id"]}_display",
+                        "type": track_params["track_type"],
+                        "heightPreConfig": 150,
+                        "configuration": track_params["display_config"],
+                    }
+                ],
+            }
+        ]
+        self.views[assembly_counter]["tracks"].extend(new_track)
 
-def get_protein_coding_gene_file_name(config: dict[str, Any], assembly_counter: int) -> str:
+
+def get_protein_coding_gene_file_name(assembly_counter: int, config: dict[str, Any]) -> str:
     """
     Check if there is a protein-coding genes track configured for the current assembly
     """
@@ -99,6 +122,38 @@ def get_protein_coding_gene_file_name(config: dict[str, Any], assembly_counter: 
         )
 
     return protein_coding_gene_file_name
+
+
+def get_optional_tracks(default_session: DefaultSession, config: dict[str, Any], assembly_counter: int) -> None:
+    """
+    Will treat the track as a LinearBasicDisplay track.
+
+    Notes:
+    If the user has set protein-coding genes track(s) to be treated as defaultSession: true in the config.yml,
+    the script will not add them to the defaultSession object again.
+    GWAS tracks that are set to `defaultSession: True` are handled downstream in the package.
+    """
+    for track in config.get("tracks", []):
+        if "defaultSession" in track and track["defaultSession"]:
+            if "GWAS" in track and track["GWAS"]:
+                continue
+            if "name" in track and track["name"].lower() in ["protein coding genes", "protein-coding genes"]:
+                continue
+            track_outer_id = f"{default_session.species_abbreviation}_default_{track['name'].replace(' ', '_').replace('\'', '').replace(',', '')}"
+            track_file_name = get_track_file_name(track)
+            track_type = "LinearBasicDisplay"
+            track_config = track_file_name
+            display_config = f"{track_file_name}-LinearBasicDisplay"
+
+            track_params = {
+                "track_outer_id": track_outer_id,
+                "track_type": track_type,
+                "track_config": track_config,
+                "display_config": display_config,
+            }
+            default_session.add_optional_track(assembly_counter, track_params)
+
+    return default_session
 
 
 # TODO: implement into dataclass instead

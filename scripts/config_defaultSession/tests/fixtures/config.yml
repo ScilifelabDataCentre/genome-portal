@@ -9,6 +9,26 @@ tracks:
 - name: Protein-coding genes
   url: "www.example.com/track.gff.gz"
   fileName: track.gff.gz
+  defaultSession: true
+- name: "Repeats"
+  url: "www.example.com/track2.gff.gz"
+  fileName: "track2.gff.gz"
+  defaultSession: true
+- name: "Transcripts"
+  url: "www.example.com/track3.gff.gz"
+  fileName: "track3.gff.gz"
+  defaultSession: true
+- name: "ncRNA"
+  url: "www.example.com/track4.bed.gz"
+  fileName: "track4.bed.gz"
+  defaultSession: false
+- name: "Tajima's D"
+  url: "www.example.com/track5.bed.gz"
+  fileName: "track5.bed.gz"
+  addTrack: false
+  defaultSession: true
+  GWAS: true
+  scoreColumnGWAS: "TajimaD"
 ---
 assembly:
   name: "SECOND_ASSEMBLY_mito"
@@ -19,3 +39,4 @@ tracks:
   - name: "Mitochondrial genes"
     url: "www.example.com/mito_track.gff.gz"
     fileName: "mito_track.gff.gz"
+    defaultSession: True

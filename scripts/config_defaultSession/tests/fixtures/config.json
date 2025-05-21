@@ -1,0 +1,121 @@
+{
+  "defaultSession": {
+    "id": "anid_default_session",
+    "name": "Aspergillus nidulans",
+    "widgets": {
+      "hierarchicalTrackSelector": {
+        "id": "hierarchicalTrackSelector",
+        "type": "HierarchicalTrackSelectorWidget",
+        "view": "anid_default_session_view_0",
+        "faceted": {
+          "showSparse": false,
+          "showFilters": true,
+          "showOptions": false,
+          "panelWidth": 400
+        }
+      }
+    },
+    "activeWidgets": {
+      "hierarchicalTrackSelector": "hierarchicalTrackSelector"
+    },
+    "views": [
+      {
+        "id": "anid_default_session_view_0",
+        "minimized": false,
+        "type": "LinearGenomeView",
+        "trackLabels": "offset",
+        "offsetPx": 0,
+        "bpPerPx": 50,
+        "displayedRegions": [
+          {
+            "refName": "[SCAFFOLD_HEADER]",
+            "start": 0,
+            "end": 100000,
+            "reversed": false,
+            "assemblyName": "FIRST_ASSEMBLY_ASM1142v1"
+          }
+        ],
+        "tracks": [
+          {
+            "id": "anid_default_protein_coding_genes_view_0",
+            "type": "FeatureTrack",
+            "configuration": "track.gff",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "anid_default_protein_coding_genes_view_0_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 150,
+                "configuration": "track.gff-LinearBasicDisplay"
+              }
+            ]
+          },
+          {
+            "id": "anid_default_Repeats",
+            "type": "FeatureTrack",
+            "configuration": "track2.gff",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "anid_default_Repeats_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 150,
+                "configuration": "track2.gff-LinearBasicDisplay"
+              }
+            ]
+          },
+          {
+            "id": "anid_default_Transcripts",
+            "type": "FeatureTrack",
+            "configuration": "track3.gff",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "anid_default_Transcripts_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 150,
+                "configuration": "track3.gff-LinearBasicDisplay"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "anid_default_session_view_1",
+        "minimized": false,
+        "type": "LinearGenomeView",
+        "trackLabels": "offset",
+        "offsetPx": 0,
+        "bpPerPx": 50,
+        "displayedRegions": [
+          {
+            "refName": "[SCAFFOLD_HEADER]",
+            "start": 0,
+            "end": 100000,
+            "reversed": false,
+            "assemblyName": "SECOND_ASSEMBLY_mito"
+          }
+        ],
+        "tracks": [
+          {
+            "id": "anid_default_Mitochondrial_genes",
+            "type": "FeatureTrack",
+            "configuration": "mito_track.gff",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "anid_default_Mitochondrial_genes_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 150,
+                "configuration": "mito_track.gff-LinearBasicDisplay"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "configuration": {
+    "disableAnalytics": true
+  }
+}

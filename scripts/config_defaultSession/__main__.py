@@ -11,7 +11,7 @@ import argparse
 from pathlib import Path
 
 import yaml
-from add_tracks_to_view import DefaultSession, get_protein_coding_gene_file_name
+from add_tracks_to_view import DefaultSession, get_optional_tracks, get_protein_coding_gene_file_name
 from utils import check_config_json_exists, get_species_abbreviation, save_json
 
 
@@ -87,8 +87,8 @@ if __name__ == "__main__":
         )
 
         protein_coding_gene_file_name = get_protein_coding_gene_file_name(
-            config=config,
             assembly_counter=assembly_counter,
+            config=config,
         )
 
         default_session.add_protein_coding_genes(
@@ -96,8 +96,18 @@ if __name__ == "__main__":
             protein_coding_gene_file_name=protein_coding_gene_file_name,
         )
 
+        default_session = get_optional_tracks(
+            default_session=default_session,
+            config=config,
+            assembly_counter=assembly_counter,
+        )  # TODO this adds LinearBasicDisaply tracks. improve the logic to that
+        # tracks that should not be set as LinearBasicDisaply are skipped over and handled
+        # by another downstream function.
+
         # TODO if protein_coding_gene_file_name is None and assembly_counter !=0,
         # there has to be at least one other track for that assembly!
+
+        # TODO handle GWAS tracks that have `defaultSession: true` in the config.yml
 
     data = default_session.make_defaultSession_dict()
     save_json(data, output_json_path, config_yml_path)
