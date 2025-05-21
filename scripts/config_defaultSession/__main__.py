@@ -11,11 +11,7 @@ import argparse
 from pathlib import Path
 
 import yaml
-from add_tracks_to_view import (
-    initiate_defaultSession,
-    initiate_views_and_populate_mandatory_tracks,
-    populate_values_from_optional_tracks,
-)
+from add_tracks_to_view import DefaultSession, get_protein_coding_gene_file_name
 from utils import check_config_json_exists, get_species_abbreviation, save_json
 
 
@@ -72,26 +68,36 @@ if __name__ == "__main__":
         "species_abbreviation": get_species_abbreviation(first_config["organism"]),
     }
 
+    default_session = DefaultSession(
+        species_name=species_name_variants["species_name"],
+        species_abbreviation=species_name_variants["species_abbreviation"],
+        species_slug=species_name_variants["species_slug"],
+    )
+
     for assembly_counter, config in enumerate(configs):
         if not config:
             raise ValueError(
                 f"Document {assembly_counter+1} in the config.yml is empty. Each document must contain data. Exiting."
             )
-        data = initiate_defaultSession(
-            species_name_variants=species_name_variants,
+        default_session.add_view(
             assembly_counter=assembly_counter,
-        )
-        data = initiate_views_and_populate_mandatory_tracks(
-            data=data,
-            species_name_variants=species_name_variants,
             config=config,
-            assembly_counter=assembly_counter,
+            default_scaffold=None,  # TODO add module to calcualte this from the fasta file
+            sequence_length=None,  # TODO add module to calcualte this from the fasta file
         )
-        data = populate_values_from_optional_tracks(
+
+        protein_coding_gene_file_name = get_protein_coding_gene_file_name(
             config=config,
-            data=data,
-            species_abbreviation=species_name_variants["species_abbreviation"],
             assembly_counter=assembly_counter,
         )
 
+        default_session.add_protein_coding_genes(
+            assembly_counter=assembly_counter,
+            protein_coding_gene_file_name=protein_coding_gene_file_name,
+        )
+
+        # TODO if protein_coding_gene_file_name is None and assembly_counter !=0,
+        # there has to be at least one other track for that assembly!
+
+    data = default_session.make_defaultSession_dict()
     save_json(data, output_json_path, config_yml_path)

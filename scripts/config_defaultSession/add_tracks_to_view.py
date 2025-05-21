@@ -1,8 +1,8 @@
 import os
-from dataclasses import dataclass
-from pathlib import Path
+from dataclasses import dataclass, field
+from typing import Any
 
-from utils import get_fasta_header_and_sequence_length, get_track_file_name
+from utils import get_track_file_name
 
 
 @dataclass
@@ -14,8 +14,9 @@ class DefaultSession:
     species_name: str
     species_abbreviation: str
     species_slug: str
+    views: list[dict[str, Any]] = field(default_factory=list)
 
-    def make_init_dict(self, assembly_counter: int) -> dict[str, any]:
+    def make_defaultSession_dict(self) -> dict[str, any]:
         return {
             "defaultSession": {
                 "id": f"{self.species_abbreviation}_default_session",
@@ -24,77 +25,21 @@ class DefaultSession:
                     "hierarchicalTrackSelector": {
                         "id": "hierarchicalTrackSelector",
                         "type": "HierarchicalTrackSelectorWidget",
-                        "view": f"{self.species_abbreviation}_default_session_view_{assembly_counter}",
+                        "view": f"{self.species_abbreviation}_default_session_view_0",
                         "faceted": {"showSparse": False, "showFilters": True, "showOptions": False, "panelWidth": 400},
                     }
                 },
                 "activeWidgets": {"hierarchicalTrackSelector": "hierarchicalTrackSelector"},
+                "views": self.views,
             },
             "configuration": {"disableAnalytics": True},
         }
 
-
-def initiate_defaultSession(species_name_variants, assembly_counter):
-    """
-    Subfunction that populates the outer parts of the defaultSession JSON object with the species name and abbreviation.
-    Also adds disableAnalytics to the dictionary to prevent Google Analytics from being loaded when running JBrowse.
-    """
-    session = DefaultSession(
-        species_name=species_name_variants["species_name"],
-        species_abbreviation=species_name_variants["species_abbreviation"],
-        species_slug=species_name_variants["species_slug"],
-    )
-    data = session.make_init_dict(assembly_counter)
-    return data
-
-
-def initiate_views_and_populate_mandatory_tracks(data, species_name_variants, config, assembly_counter):
-    """
-    Subfunction that adds a JBrowse view to the defaultSession JSON object. The funcion is iterated upon by main()
-    so that a new view is added for each assembly in the config.yml. It then checks if the primary assembly has a
-    protein-coding genes track, and if not, raises an error. For the secondary assemblies, there is no requirement to
-    have a protein-coding genes track, but at least one track is required. (The populate_values_from_optional_tracks()
-    is later called by main() to also ensure that the secondary assemblies have at least one track set to defaultSession: true.)
-    """
-
-    # Check if there is a protein-coding genes track configured for the current assembly
-    protein_coding_gene_file_name = None
-    for track in config.get("tracks", []):
-        if "name" in track and track["name"].lower() in ["protein coding genes", "protein-coding genes"]:
-            protein_coding_gene_file_name = get_track_file_name(track)
-            break
-
-    if not protein_coding_gene_file_name:
-        # Primary assemblies are required to have a protein-coding genes track; it is optional for secondary assemblies.
-        if assembly_counter == 0:
-            raise ValueError(
-                f"Error: The primary assembly (assembly number {assembly_counter+1}) is required to have a track named 'Protein coding genes'. Exiting."
-            )
-        # Secondary assemblies do not need to have a track name "Protein coding genes", but need to have at least one track.
-        elif not ("tracks" in config and isinstance(config["tracks"], list) and len(config["tracks"]) > 0):
-            raise ValueError(
-                f"Error: There seem to be no tracks configured for assembly number {assembly_counter+1} in the config.yml. "
-                "In order to configure a defaultSession, there need to be at least one track. Exiting."
-            )
-
-    species_abbreviation = species_name_variants["species_abbreviation"]
-    species_slug = species_name_variants["species_slug"]
-    assembly_file_name = Path(config["assembly"]["url"]).name
-    assembly_file_path = (
-        Path(__file__).parent.parent.parent / "data" / species_slug / assembly_file_name.replace(".fasta", ".fna")
-    )
-
-    if os.path.exists(assembly_file_path):
-        # The "get" method returns None if the key is not found
-        default_scaffold = config["assembly"].get("defaultScaffold")
-        default_scaffold, sequence_length = get_fasta_header_and_sequence_length(assembly_file_path, default_scaffold)
-    else:
-        print(
-            f"Assembly file {assembly_file_path} does not exist in ./data/{species_slug}/. If the assembly url has been configured, it can be downloaded by running the makefile."
-        )
-    views = [
-        {
-            "id": f"{species_abbreviation}_default_session_view_{assembly_counter}",
+    def add_view(
+        self, assembly_counter: int, config: dict[str, Any], default_scaffold: str = None, sequence_length: int = None
+    ) -> None:
+        view = {
+            "id": f"{self.species_abbreviation}_default_session_view_{assembly_counter}",
             "minimized": False,
             "type": "LinearGenomeView",
             "trackLabels": "offset",
@@ -111,35 +56,52 @@ def initiate_views_and_populate_mandatory_tracks(data, species_name_variants, co
             ],
             "tracks": [],
         }
-    ]
+        self.views.append(view)
 
-    if "views" in data["defaultSession"]:
-        data["defaultSession"]["views"].extend(views)
-    else:
-        data["defaultSession"]["views"] = views
-
-    if protein_coding_gene_file_name:
-        protein_coding_genes_track = [
-            {
-                "id": f"{species_abbreviation}_default_protein_coding_genes_view_{assembly_counter}",
-                "type": "FeatureTrack",
-                "configuration": protein_coding_gene_file_name,
-                "minimized": False,
-                "displays": [
-                    {
-                        "id": f"{species_abbreviation}_default_protein_coding_genes_view_{assembly_counter}_display",
-                        "type": "LinearBasicDisplay",
-                        "heightPreConfig": 150,
-                        "configuration": f"{protein_coding_gene_file_name}-LinearBasicDisplay",
-                    }
-                ],
-            }
-        ]
-        data["defaultSession"]["views"][assembly_counter]["tracks"].extend(protein_coding_genes_track)
-
-    return data
+    def add_protein_coding_genes(self, assembly_counter: int, protein_coding_gene_file_name: str) -> None:
+        """
+        For multi-assembly config.yml files, it is possible that the protein-coding genes track is not set for assemblies other than the first. Thus this function checks for None.
+        """
+        if protein_coding_gene_file_name is not None:
+            protein_coding_genes_track = [
+                {
+                    "id": f"{self.species_abbreviation}_default_protein_coding_genes_view_{assembly_counter}",
+                    "type": "FeatureTrack",
+                    "configuration": protein_coding_gene_file_name,
+                    "minimized": False,
+                    "displays": [
+                        {
+                            "id": f"{self.species_abbreviation}_default_protein_coding_genes_view_{assembly_counter}_display",
+                            "type": "LinearBasicDisplay",
+                            "heightPreConfig": 150,
+                            "configuration": f"{protein_coding_gene_file_name}-LinearBasicDisplay",
+                        }
+                    ],
+                }
+            ]
+            self.views[assembly_counter]["tracks"].extend(protein_coding_genes_track)
 
 
+def get_protein_coding_gene_file_name(config: dict[str, Any], assembly_counter: int) -> str:
+    """
+    Check if there is a protein-coding genes track configured for the current assembly
+    """
+
+    protein_coding_gene_file_name = None
+    for track in config.get("tracks", []):
+        if "name" in track and track["name"].lower() in ["protein coding genes", "protein-coding genes"]:
+            protein_coding_gene_file_name = get_track_file_name(track)
+            break
+
+    if protein_coding_gene_file_name is None and assembly_counter == 0:
+        raise ValueError(
+            f"The primary assembly (assembly number {assembly_counter+1}) is required to have a track named 'Protein coding genes'. Exiting."
+        )
+
+    return protein_coding_gene_file_name
+
+
+# TODO: implement into dataclass instead
 def populate_values_from_optional_tracks(config, data, species_abbreviation, assembly_counter):
     """
     Subfunction that handles the defaultSession JSON object with tracks that have the defaultSession flag set to true. It does this by
