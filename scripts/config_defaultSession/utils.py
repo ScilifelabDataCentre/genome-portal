@@ -103,6 +103,14 @@ def get_track_file_name(track):
     return file_name.rsplit(".", 1)[0] if file_name.endswith((".gz", ".bgz", ".zip")) else file_name
 
 
+def get_base_extension(file_name: str) -> str:
+    file_path = Path(file_name)
+    if file_path.suffix in [".gz", ".zip", ".bgz"]:
+        return file_path.with_suffix("").suffix.lstrip(".")
+    else:
+        return file_path.suffix.lstrip(".")
+
+
 def save_json(data, output_json_path, config_path):
     """
     Subfunction that writes a dictionary (data) as a JSON file at the specified output path.

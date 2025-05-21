@@ -77,6 +77,20 @@
                 "configuration": "track3.gff-LinearBasicDisplay"
               }
             ]
+          },
+          {
+            "id": "anid_default_Tajimas_D",
+            "type": "FeatureTrack",
+            "configuration": "anid_gwas_Tajimas_D",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "anid_default_Tajimas_D_display",
+                "type": "LinearManhattanDisplay",
+                "heightPreConfig": 150,
+                "configuration": "anid_gwas_Tajimas_D_display"
+              }
+            ]
           }
         ]
       },
@@ -117,5 +131,43 @@
   },
   "configuration": {
     "disableAnalytics": true
-  }
+  },
+  "tracks": [
+    {
+      "type": "FeatureTrack",
+      "trackId": "anid_gwas_Tajimas_D",
+      "name": "Tajima's D",
+      "assemblyNames": [
+        "FIRST_ASSEMBLY_ASM1142v1"
+      ],
+      "category": [
+        "GWAS"
+      ],
+      "adapter": {
+        "type": "BedTabixAdapter",
+        "scoreColumn": "TajimaD",
+        "bedGzLocation": {
+          "uri": "track5.bed.bgz"
+        },
+        "index": {
+          "location": {
+            "uri": "track5.bed.bgz.csi"
+          },
+          "indexType": "CSI"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "anid_gwas_Tajimas_D_display",
+          "type": "LinearManhattanDisplay"
+        }
+      ]
+    }
+  ],
+  "plugins": [
+    {
+      "name": "GWAS",
+      "url": "https://unpkg.com/jbrowse-plugin-gwas/dist/jbrowse-plugin-gwas.umd.production.min.js"
+    }
+  ]
 }

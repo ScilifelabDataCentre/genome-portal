@@ -11,7 +11,7 @@ import argparse
 from pathlib import Path
 
 import yaml
-from add_tracks_to_view import DefaultSession, get_optional_tracks, get_protein_coding_gene_file_name
+from add_tracks_to_view import DefaultSession, get_GWAS_tracks, get_optional_tracks, get_protein_coding_gene_file_name
 from utils import check_config_json_exists, get_species_abbreviation, save_json
 
 
@@ -49,7 +49,8 @@ if __name__ == "__main__":
 
     if not args.overwrite:
         check_config_json_exists(output_json_path=output_json_path)
-
+        # TODO it seems that the error catcher here is also triggered if an incorrect .config.yml is entered
+        # it seems to happen if the -o flag is not set
     with open(config_yml_path, "r") as file:
         configs = list(yaml.safe_load_all(file))
 
@@ -103,6 +104,15 @@ if __name__ == "__main__":
         )  # TODO this adds LinearBasicDisaply tracks. improve the logic to that
         # tracks that should not be set as LinearBasicDisaply are skipped over and handled
         # by another downstream function.
+
+        default_session = get_GWAS_tracks(
+            default_session=default_session,
+            config=config,
+            assembly_counter=assembly_counter,
+        )  # clean up the logic for trackID and make it more DRY
+
+        # TODO consider if it would be better to loop tracks once in get_optional_tracks
+        # and send them out to subfunctions that handle the different types of tracks?
 
         # TODO if protein_coding_gene_file_name is None and assembly_counter !=0,
         # there has to be at least one other track for that assembly!

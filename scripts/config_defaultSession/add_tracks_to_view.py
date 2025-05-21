@@ -2,7 +2,7 @@ import os
 from dataclasses import dataclass, field
 from typing import Any
 
-from utils import get_track_file_name
+from utils import get_base_extension, get_track_file_name
 
 
 @dataclass
@@ -15,9 +15,11 @@ class DefaultSession:
     species_abbreviation: str
     species_slug: str
     views: list[dict[str, Any]] = field(default_factory=list)
+    tracks: list[dict[str, Any]] = field(default_factory=list)
+    plugins: list[dict[str, Any]] = field(default_factory=list)
 
     def make_defaultSession_dict(self) -> dict[str, any]:
-        return {
+        data = {
             "defaultSession": {
                 "id": f"{self.species_abbreviation}_default_session",
                 "name": self.species_name,
@@ -34,6 +36,11 @@ class DefaultSession:
             },
             "configuration": {"disableAnalytics": True},
         }
+        if self.tracks:
+            data["tracks"] = self.tracks
+        if self.plugins:
+            data["plugins"] = self.plugins
+        return data
 
     def add_view(
         self, assembly_counter: int, config: dict[str, Any], default_scaffold: str = None, sequence_length: int = None
@@ -104,6 +111,58 @@ class DefaultSession:
         ]
         self.views[assembly_counter]["tracks"].extend(new_track)
 
+    def add_gwas_track_to_top_level_tracks(
+        self,
+        track: dict,
+        assembly_name: str,
+        gwas_track_id: str,
+    ) -> None:
+        """
+        Add a GWAS track to the global tracks list.
+
+        NOTE! Only support bed-like GWAS tracks at the moment.
+        """
+        if "scoreColumnGWAS" not in track:
+            raise ValueError(
+                f"Error: Track '{track['name']}' is configured to be treated as a GWAS track but is missing 'scoreColumnGWAS' in the config.yml. "
+                "Please update this and re-run the script."
+            )
+        adapter_scoreColumn = track["scoreColumnGWAS"]
+
+        base_extension = get_base_extension(file_name=track["fileName"])
+
+        if base_extension == "bed":
+            adapter_type = "BedTabixAdapter"
+            bed_gz_location = track["fileName"]
+            if bed_gz_location.endswith((".gz", ".zip")):
+                bed_gz_location = bed_gz_location.replace(".gz", ".bgz").replace(".zip", ".bgz")
+            if bed_gz_location.endswith(".bed"):
+                bed_gz_location += ".bgz"
+            index_location = f"{bed_gz_location}.csi"
+        else:
+            raise ValueError("Unsupported GWAS track file type.")
+
+        new_GWAS_track = {
+            "type": "FeatureTrack",
+            "trackId": gwas_track_id,
+            "name": track["name"],
+            "assemblyNames": [assembly_name],
+            "category": ["GWAS"],
+            "adapter": {
+                "type": adapter_type,
+                "scoreColumn": adapter_scoreColumn,
+                "bedGzLocation": {"uri": bed_gz_location},
+                "index": {"location": {"uri": index_location}, "indexType": "CSI"},
+            },
+            "displays": [{"displayId": f"{gwas_track_id}_display", "type": "LinearManhattanDisplay"}],
+        }
+
+        self.tracks.append(new_GWAS_track)
+
+    def add_plugin(self, plugin_call: dict[str, str]) -> None:
+        if plugin_call not in self.plugins:
+            self.plugins.append(plugin_call)
+
 
 def get_protein_coding_gene_file_name(assembly_counter: int, config: dict[str, Any]) -> str:
     """
@@ -152,6 +211,42 @@ def get_optional_tracks(default_session: DefaultSession, config: dict[str, Any],
                 "display_config": display_config,
             }
             default_session.add_optional_track(assembly_counter, track_params)
+
+    return default_session
+
+
+def get_GWAS_tracks(default_session: DefaultSession, config: dict[str, Any], assembly_counter: int) -> None:
+    """
+    GWAS tracks are more complex to setup since they require tracks and views to be added to the config.json file, and addTrack: False in config.yml.
+
+    They also need a plugin calls to be added to the defaultSession JSON object.
+    """
+
+    assembly_name = config["assembly"]["name"]
+    plugin_call = {
+        "name": "GWAS",
+        "url": "https://unpkg.com/jbrowse-plugin-gwas/dist/jbrowse-plugin-gwas.umd.production.min.js",
+    }
+
+    for track in config.get("tracks", []):
+        if "GWAS" in track and track["GWAS"]:
+            gwas_track_id = f"{default_session.species_abbreviation}_gwas_{track['name'].replace(' ', '_').replace('\'', '').replace(',', '')}"
+            default_session.add_gwas_track_to_top_level_tracks(
+                track,
+                assembly_name,
+                gwas_track_id,
+            )
+            default_session.add_plugin(plugin_call)
+
+            if "defaultSession" in track and track["defaultSession"]:
+                track_outer_id = f"{default_session.species_abbreviation}_default_{track['name'].replace(' ', '_').replace('\'', '').replace(',', '')}"
+                track_params = {
+                    "track_outer_id": track_outer_id,
+                    "track_type": "LinearManhattanDisplay",
+                    "track_config": gwas_track_id,
+                    "display_config": f"{gwas_track_id}_display",
+                }
+                default_session.add_optional_track(assembly_counter, track_params)
 
     return default_session
 
