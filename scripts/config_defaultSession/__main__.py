@@ -140,10 +140,6 @@ if __name__ == "__main__":
             assembly_counter=assembly_counter,
         )
 
-        # TODO refactor the GWAS top-level track function to be a general way to add tracks
-
-        # TODO consider if track_outer_id can be made once and used to generate gwas_track_id
-
         # TODO consider the track_color key in the config.yml
 
         # TODO if protein_coding_gene_file_name is None and assembly_counter !=0,
