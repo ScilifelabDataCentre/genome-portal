@@ -58,7 +58,7 @@ class DefaultSession:
             "bpPerPx": bpPerPx,
             "displayedRegions": [
                 {
-                    "refName": default_scaffold if default_scaffold else "[SCAFFOLD_HEADER]",
+                    "refName": default_scaffold if default_scaffold else "[EDIT: SCAFFOLD_HEADER]",
                     "start": 0,
                     "end": scaffold_length if scaffold_length else 100000,
                     "reversed": False,
@@ -69,30 +69,7 @@ class DefaultSession:
         }
         self.views.append(view)
 
-    def add_protein_coding_genes(self, assembly_counter: int, protein_coding_gene_file_name: str) -> None:
-        """
-        For multi-assembly config.yml files, it is possible that the protein-coding genes track is not set for assemblies other than the first. Thus this function checks for None.
-        """
-        if protein_coding_gene_file_name is not None:
-            protein_coding_genes_track = [
-                {
-                    "id": f"{self.species_abbreviation}_default_protein_coding_genes_view_{assembly_counter}",
-                    "type": "FeatureTrack",
-                    "configuration": protein_coding_gene_file_name,
-                    "minimized": False,
-                    "displays": [
-                        {
-                            "id": f"{self.species_abbreviation}_default_protein_coding_genes_view_{assembly_counter}_display",
-                            "type": "LinearBasicDisplay",
-                            "heightPreConfig": 150,
-                            "configuration": f"{protein_coding_gene_file_name}-LinearBasicDisplay",
-                        }
-                    ],
-                }
-            ]
-            self.views[assembly_counter]["tracks"].extend(protein_coding_genes_track)
-
-    def add_optional_track(self, assembly_counter: int, track_params: dict[str, Any]) -> None:
+    def add_track_to_view(self, assembly_counter: int, track_params: dict[str, Any]) -> None:
         """
         Optional tracks are those that are set to defaultSession: true in the config.yml.
         They are called 'optional' since the only mandatory track in the Genome Portal is the protein-coding genes track (in the first assembly, if multiple).
@@ -161,25 +138,6 @@ class DefaultSession:
             self.plugins.append(plugin_call)
 
 
-def get_protein_coding_gene_file_name(assembly_counter: int, config: dict[str, Any]) -> str:
-    """
-    Check if there is a protein-coding genes track configured for the current assembly
-    """
-
-    protein_coding_gene_file_name = None
-    for track in config.get("tracks", []):
-        if "name" in track and track["name"].lower() in ["protein coding genes", "protein-coding genes"]:
-            protein_coding_gene_file_name = get_track_file_name(track)
-            break
-
-    if protein_coding_gene_file_name is None and assembly_counter == 0:
-        raise ValueError(
-            f"The primary assembly (assembly number {assembly_counter+1}) is required to have a track named 'Protein coding genes'. Exiting."
-        )
-
-    return protein_coding_gene_file_name
-
-
 def check_if_plugin_needed(track_params: dict[str, Any]) -> dict[str, str] | None:
     """
     Check if a plugin is needed for the track based on known requirements.
@@ -214,7 +172,6 @@ def make_track_params(track: dict[str, Any], species_abbreviation: str) -> dict[
     """
     Make track parameters for the track.
     """
-
     track_view_id = (
         f"{species_abbreviation}_default_{track['name'].replace(' ', '_').replace('\'', '').replace(',', '')}"
     )
@@ -234,25 +191,37 @@ def make_track_params(track: dict[str, Any], species_abbreviation: str) -> dict[
     }
 
 
-def add_optional_tracks(default_session: DefaultSession, config: dict[str, Any], assembly_counter: int) -> None:
+def process_tracks(default_session: DefaultSession, config: dict[str, Any], assembly_counter: int) -> None:
     """
     Most tracks will be added by the makefile (calling the JBrowse CLI), but for non-standard tracks,
-    they need to be added to the defaultSession JSON object. This is done with the add_track_to_top_level_tracks() function
-    which is toggled in the config.yml file with addTrack.
+    they need to be added to the defaultSession JSON object. This is done with the add_track_to_top_level_tracks()
+    function which is toggled in the config.yml file with addTrack.
 
-    NOTE: this function does not handle protein-coding genes tracks.
+    Protein-coding genes are mandatory in the first assembly, and will always be added to the view regardless
+    of the defaultSession key.
     """
     species_abbreviation = default_session.species_abbreviation
+
+    has_protein_coding_genes = any(
+        "name" in track and track["name"].lower() in ["protein coding genes", "protein-coding genes"]
+        for track in config.get("tracks", [])
+    )
+    if not has_protein_coding_genes and assembly_counter == 0:
+        raise ValueError(
+            f"The primary assembly (assembly number {assembly_counter+1}) is required to have a track named 'Protein coding genes'. Exiting."
+        )
+
     for track in config.get("tracks", []):
-        if "name" in track and track["name"].lower() in ["protein coding genes", "protein-coding genes"]:
-            continue
         track_params = make_track_params(track, species_abbreviation)
         track_params["assemblyNames"] = [config["assembly"]["name"]]
 
         if "addTrack" in track and not track["addTrack"]:
             default_session.add_track_to_top_level_tracks(track_params=track_params)
-        if "defaultSession" in track and track["defaultSession"]:
-            default_session.add_optional_track(assembly_counter=assembly_counter, track_params=track_params)
+
+        if ("defaultSession" in track and track["defaultSession"]) or (
+            track.get("name", "").lower() in ["protein coding genes", "protein-coding genes"]
+        ):
+            default_session.add_track_to_view(assembly_counter=assembly_counter, track_params=track_params)
 
         plugin_call = check_if_plugin_needed(track_params=track_params)
         if plugin_call:

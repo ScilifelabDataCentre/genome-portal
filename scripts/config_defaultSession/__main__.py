@@ -8,14 +8,12 @@ Assumes that the dockermake has been run once to download the files.
 Handles multi-assembly config.yml (YAML document) files by assembly_counter
 
 
-
-
-
 config.yml keys that are recognised by this script:
-assembly.defaultSession
-assembly.bpPerPx
-track.trackType
-track.scoreColumn
+assembly.defaultScaffold: str   (name of the scaffold to display in the defaultSession when the JBrowse instance is initialized)
+assembly.bpPerPx: int = 50      (this is the "zoom level" in the JBrowse view. Longer scaffolds tend to need a larger value)
+track.defaultSession: Bool      (ignored by protein-coding gene tracks since they are mandatory)
+track.trackType: str            (one of ["linear", "arc", "gwas"])
+track.scoreColumn: str:         (name of the score column in the track file)
 
 old keys that are deprecated and should not be used:
 track.GWAS
@@ -33,8 +31,7 @@ from pathlib import Path
 import yaml
 from add_tracks_to_view import (
     DefaultSession,
-    add_optional_tracks,
-    get_protein_coding_gene_file_name,
+    process_tracks,
 )
 from utils import check_config_json_exists, get_fasta_header_and_scaffold_length, get_species_abbreviation, save_json
 
@@ -127,29 +124,20 @@ if __name__ == "__main__":
             bpPerPx=config["assembly"].get("bpPerPx", 50),
         )
 
-        protein_coding_gene_file_name = get_protein_coding_gene_file_name(
-            assembly_counter=assembly_counter,
-            config=config,
-        )
-
-        default_session.add_protein_coding_genes(
-            assembly_counter=assembly_counter,
-            protein_coding_gene_file_name=protein_coding_gene_file_name,
-        )
-
-        default_session = add_optional_tracks(
+        default_session = process_tracks(
             default_session=default_session,
             config=config,
             assembly_counter=assembly_counter,
         )
 
-        # TODO refactor adding protein-coding genes and optional tracks to a single method in the DefaultSession class
-        # and rename the method to add_track_to_view
-
         # TODO consider the track_color key in the config.yml
 
         # TODO if protein_coding_gene_file_name is None and assembly_counter !=0,
         # there has to be at least one other track for that assembly!
+
+        # TODO order of the tracks in the config.yml is not preserved in the final config.json made by the makefile.
+        # see if that could be fixed in the makefile? The other option is to use categories in the defaultSession
+        # config.json like we have done for linum in the past
 
     data = default_session.make_defaultSession_dict()
     save_json(data, output_json_path, config_yml_path)
