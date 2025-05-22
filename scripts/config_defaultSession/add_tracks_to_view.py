@@ -195,6 +195,8 @@ def process_optional_LinearBasicDisplay_tracks(
         if "defaultSession" in track and track["defaultSession"]:
             if "GWAS" in track and track["GWAS"]:
                 continue
+            if "ArcDisplay" in track and track["ArcDisplay"]:
+                continue
             if "name" in track and track["name"].lower() in ["protein coding genes", "protein-coding genes"]:
                 continue
             track_view_id = f"{default_session.species_abbreviation}_default_{track['name'].replace(' ', '_').replace('\'', '').replace(',', '')}"
@@ -256,6 +258,34 @@ def process_GWAS_tracks(default_session: DefaultSession, config: dict[str, Any],
             default_session.add_track_to_top_level_tracks(track_params=track_params)
 
             default_session.add_plugin(plugin_call)
+
+            if "defaultSession" in track and track["defaultSession"]:
+                default_session.add_optional_track(assembly_counter, track_params)
+
+    return default_session
+
+
+def process_ArcDisplay_tracks(default_session: DefaultSession, config: dict[str, Any], assembly_counter: int) -> None:
+    for track in config.get("tracks", []):
+        if "ArcDisplay" in track and track["ArcDisplay"]:
+            track_view_id = f"{default_session.species_abbreviation}_default_{track['name'].replace(' ', '_').replace('\'', '').replace(',', '')}"
+            track_top_id = track_view_id.replace("_default_", "_track_")
+            track_file_name = get_track_file_name(track)
+            track_type = "LinearArcDisplay"
+            display_config = f"{track_top_id}-{track_type}"
+
+            track_params = {
+                "track_view_id": track_view_id,
+                "track_top_id": track_top_id,
+                "track_file_name": track_file_name,
+                "track_name": track["name"],
+                "track_type": track_type,
+                "track_config": track_top_id,
+                "display_config": display_config,
+                "assemblyNames": [config["assembly"]["name"]],
+            }
+
+            default_session.add_track_to_top_level_tracks(track_params=track_params)
 
             if "defaultSession" in track and track["defaultSession"]:
                 default_session.add_optional_track(assembly_counter, track_params)

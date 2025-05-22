@@ -22,6 +22,7 @@ import yaml
 from add_tracks_to_view import (
     DefaultSession,
     get_protein_coding_gene_file_name,
+    process_ArcDisplay_tracks,
     process_GWAS_tracks,
     process_optional_LinearBasicDisplay_tracks,
 )
@@ -140,6 +141,11 @@ if __name__ == "__main__":
             assembly_counter=assembly_counter,
         )
 
+        default_session = process_ArcDisplay_tracks(
+            default_session,
+            config,
+            assembly_counter,
+        )
         # TODO consider the track_color key in the config.yml
 
         # TODO if protein_coding_gene_file_name is None and assembly_counter !=0,

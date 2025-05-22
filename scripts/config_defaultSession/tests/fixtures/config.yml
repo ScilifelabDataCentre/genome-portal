@@ -31,6 +31,12 @@ tracks:
   defaultSession: true
   GWAS: true
   scoreColumnGWAS: "TajimaD"
+- name: "Arc track"
+  url: "www.example.com/track6.bed.gz"
+  fileName: "track6.bed.gz"
+  addTrack: false
+  defaultSession: true
+  ArcDisplay: true
 # ---
 # assembly:
 #   name: "SECOND_ASSEMBLY_mito"
