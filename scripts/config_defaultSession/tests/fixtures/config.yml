@@ -29,14 +29,14 @@ tracks:
   fileName: "track5.bed.gz"
   addTrack: false
   defaultSession: true
-  GWAS: true
-  scoreColumnGWAS: "TajimaD"
+  trackType: "gwas"
+  scoreColumn: "TajimaD"
 - name: "Arc track"
   url: "www.example.com/track6.bed.gz"
   fileName: "track6.bed.gz"
   addTrack: false
   defaultSession: true
-  ArcDisplay: true
+  trackType: "arc"
 # ---
 # assembly:
 #   name: "SECOND_ASSEMBLY_mito"

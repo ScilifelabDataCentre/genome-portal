@@ -7,11 +7,23 @@ Assumes that the dockermake has been run once to download the files.
 
 Handles multi-assembly config.yml (YAML document) files by assembly_counter
 
+
+
+
+
 config.yml keys that are recognised by this script:
 assembly.defaultSession
 assembly.bpPerPx
+track.trackType
+track.scoreColumn
+
+old keys that are deprecated and should not be used:
 track.GWAS
 track.scoreColumnGWAS
+
+#expanding the code
+to add a new display type to the code, define a new key value for trackType and add the corresponding logic to get_track_display_type()
+if a track needs a plugin, the logic can be added to check_if_plugin_needed
 
 """
 
@@ -21,10 +33,8 @@ from pathlib import Path
 import yaml
 from add_tracks_to_view import (
     DefaultSession,
+    add_optional_tracks,
     get_protein_coding_gene_file_name,
-    process_ArcDisplay_tracks,
-    process_GWAS_tracks,
-    process_optional_LinearBasicDisplay_tracks,
 )
 from utils import check_config_json_exists, get_fasta_header_and_scaffold_length, get_species_abbreviation, save_json
 
@@ -127,25 +137,15 @@ if __name__ == "__main__":
             protein_coding_gene_file_name=protein_coding_gene_file_name,
         )
 
-        default_session = process_optional_LinearBasicDisplay_tracks(
-            default_session=default_session,
-            config=config,
-            assembly_counter=assembly_counter,
-        )  # TODO this adds LinearBasicDisaply tracks. improve the logic to that
-        # tracks that should not be set as LinearBasicDisaply are skipped over and handled
-        # by another downstream function.
-
-        default_session = process_GWAS_tracks(
+        default_session = add_optional_tracks(
             default_session=default_session,
             config=config,
             assembly_counter=assembly_counter,
         )
 
-        default_session = process_ArcDisplay_tracks(
-            default_session,
-            config,
-            assembly_counter,
-        )
+        # TODO refactor adding protein-coding genes and optional tracks to a single method in the DefaultSession class
+        # and rename the method to add_track_to_view
+
         # TODO consider the track_color key in the config.yml
 
         # TODO if protein_coding_gene_file_name is None and assembly_counter !=0,

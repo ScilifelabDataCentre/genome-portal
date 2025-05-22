@@ -180,114 +180,82 @@ def get_protein_coding_gene_file_name(assembly_counter: int, config: dict[str, A
     return protein_coding_gene_file_name
 
 
-def process_optional_LinearBasicDisplay_tracks(
-    default_session: DefaultSession, config: dict[str, Any], assembly_counter: int
-) -> None:
+def check_if_plugin_needed(track_params: dict[str, Any]) -> dict[str, str] | None:
     """
-    Will treat the track as a LinearBasicDisplay track.
-
-    Notes:
-    If the user has set protein-coding genes track(s) to be treated as defaultSession: true in the config.yml,
-    the script will not add them to the defaultSession object again.
-    GWAS tracks that are set to `defaultSession: True` are handled downstream in the package.
+    Check if a plugin is needed for the track based on known requirements.
     """
-    for track in config.get("tracks", []):
-        if "defaultSession" in track and track["defaultSession"]:
-            if "GWAS" in track and track["GWAS"]:
-                continue
-            if "ArcDisplay" in track and track["ArcDisplay"]:
-                continue
-            if "name" in track and track["name"].lower() in ["protein coding genes", "protein-coding genes"]:
-                continue
-            track_view_id = f"{default_session.species_abbreviation}_default_{track['name'].replace(' ', '_').replace('\'', '').replace(',', '')}"
-            track_file_name = get_track_file_name(track)
-            track_type = "LinearBasicDisplay"
-            track_config = track_file_name
-            display_config = f"{track_file_name}-{track_type}"
+    if track_params.get("track_type") == "LinearManhattanDisplay":
+        plugin_call = {
+            "name": "GWAS",
+            "url": "https://unpkg.com/jbrowse-plugin-gwas/dist/jbrowse-plugin-gwas.umd.production.min.js",
+        }
+    else:
+        plugin_call = None
 
-            track_params = {
-                "track_view_id": track_view_id,
-                "track_type": track_type,
-                "track_config": track_config,
-                "display_config": display_config,
-            }
-            default_session.add_optional_track(assembly_counter, track_params)
-
-    return default_session
+    return plugin_call
 
 
-def process_GWAS_tracks(default_session: DefaultSession, config: dict[str, Any], assembly_counter: int) -> None:
+def get_track_display_type(track: dict[str, Any]) -> str:
     """
-    GWAS tracks are more complex to setup since they require tracks and views to be added to the config.json file, and addTrack: False in config.yml.
+    Get the optional key track_type from the track.
+    """
+    track_type = track.get("trackType")
+    track_type = track_type.lower() if track_type is not None else None
+    if track_type is None or track_type == "linear":
+        track_type = "LinearBasicDisplay"
+    elif track_type == "arc":
+        track_type = "LinearArcDisplay"
+    elif track_type == "gwas":
+        track_type = "LinearManhattanDisplay"
+    return track_type
 
-    They also need a plugin calls to be added to the defaultSession JSON object.
+
+def make_track_params(track: dict[str, Any], species_abbreviation: str) -> dict[str, Any]:
+    """
+    Make track parameters for the track.
     """
 
-    plugin_call = {
-        "name": "GWAS",
-        "url": "https://unpkg.com/jbrowse-plugin-gwas/dist/jbrowse-plugin-gwas.umd.production.min.js",
+    track_view_id = (
+        f"{species_abbreviation}_default_{track['name'].replace(' ', '_').replace('\'', '').replace(',', '')}"
+    )
+    track_file_name = get_track_file_name(track)
+    track_type = get_track_display_type(track)
+    display_config = f"{track_file_name}-{track_type}"
+    score_column = track.get("scoreColumn")
+    return {
+        "track_view_id": track_view_id,
+        "track_top_id": track_file_name,
+        "track_file_name": track_file_name,
+        "track_name": track["name"],
+        "track_type": track_type,
+        "track_config": track_file_name,
+        "display_config": display_config,
+        "score_column": score_column,
     }
 
+
+def add_optional_tracks(default_session: DefaultSession, config: dict[str, Any], assembly_counter: int) -> None:
+    """
+    Most tracks will be added by the makefile (calling the JBrowse CLI), but for non-standard tracks,
+    they need to be added to the defaultSession JSON object. This is done with the add_track_to_top_level_tracks() function
+    which is toggled in the config.yml file with addTrack.
+
+    NOTE: this function does not handle protein-coding genes tracks.
+    """
+    species_abbreviation = default_session.species_abbreviation
     for track in config.get("tracks", []):
-        if "GWAS" in track and track["GWAS"]:
-            track_view_id = f"{default_session.species_abbreviation}_default_{track['name'].replace(' ', '_').replace('\'', '').replace(',', '')}"
-            track_top_id = track_view_id.replace("_default_", "_track_")
-            track_file_name = get_track_file_name(track)
-            track_type = "LinearManhattanDisplay"
-            display_config = f"{track_top_id}-{track_type}"
-            score_column = track.get("scoreColumnGWAS", None)
+        if "name" in track and track["name"].lower() in ["protein coding genes", "protein-coding genes"]:
+            continue
+        track_params = make_track_params(track, species_abbreviation)
+        track_params["assemblyNames"] = [config["assembly"]["name"]]
 
-            if not score_column:
-                raise ValueError(
-                    f"Error: Track '{track['name']}' is configured to be treated as a GWAS track but is missing 'scoreColumnGWAS' in the config.yml. "
-                    "Please update this and re-run the script."
-                )
-
-            track_params = {
-                "track_view_id": track_view_id,
-                "track_top_id": track_top_id,
-                "track_file_name": track_file_name,
-                "track_name": track["name"],
-                "track_type": track_type,
-                "track_config": track_top_id,
-                "display_config": display_config,
-                "score_column": score_column,
-                "assemblyNames": [config["assembly"]["name"]],
-            }
-
+        if "addTrack" in track and not track["addTrack"]:
             default_session.add_track_to_top_level_tracks(track_params=track_params)
+        if "defaultSession" in track and track["defaultSession"]:
+            default_session.add_optional_track(assembly_counter=assembly_counter, track_params=track_params)
 
-            default_session.add_plugin(plugin_call)
-
-            if "defaultSession" in track and track["defaultSession"]:
-                default_session.add_optional_track(assembly_counter, track_params)
-
-    return default_session
-
-
-def process_ArcDisplay_tracks(default_session: DefaultSession, config: dict[str, Any], assembly_counter: int) -> None:
-    for track in config.get("tracks", []):
-        if "ArcDisplay" in track and track["ArcDisplay"]:
-            track_view_id = f"{default_session.species_abbreviation}_default_{track['name'].replace(' ', '_').replace('\'', '').replace(',', '')}"
-            track_top_id = track_view_id.replace("_default_", "_track_")
-            track_file_name = get_track_file_name(track)
-            track_type = "LinearArcDisplay"
-            display_config = f"{track_top_id}-{track_type}"
-
-            track_params = {
-                "track_view_id": track_view_id,
-                "track_top_id": track_top_id,
-                "track_file_name": track_file_name,
-                "track_name": track["name"],
-                "track_type": track_type,
-                "track_config": track_top_id,
-                "display_config": display_config,
-                "assemblyNames": [config["assembly"]["name"]],
-            }
-
-            default_session.add_track_to_top_level_tracks(track_params=track_params)
-
-            if "defaultSession" in track and track["defaultSession"]:
-                default_session.add_optional_track(assembly_counter, track_params)
+        plugin_call = check_if_plugin_needed(track_params=track_params)
+        if plugin_call:
+            default_session.add_plugin(plugin_call=plugin_call)
 
     return default_session
