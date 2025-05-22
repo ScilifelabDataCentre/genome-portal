@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 from typing import Any
 
-from utils import get_base_extension, get_track_file_name
+from utils import get_base_extension, get_fasta_header_and_scaffold_length, get_track_file_name
 
 
 @dataclass
@@ -138,6 +138,28 @@ class DefaultSession:
             self.plugins.append(plugin_call)
 
 
+def create_view(
+    default_session: DefaultSession, config: dict[str, Any], assembly_counter: int, skip_reading_fasta: bool
+) -> DefaultSession:
+    if skip_reading_fasta:
+        default_scaffold = None
+        scaffold_length = None
+    else:
+        default_scaffold, scaffold_length = get_fasta_header_and_scaffold_length(
+            config=config, species_slug=default_session.species_slug
+        )
+    bpPerPx = config["assembly"].get("bpPerPx", 50)
+
+    default_session.add_view(
+        assembly_counter=assembly_counter,
+        config=config,
+        default_scaffold=default_scaffold,
+        scaffold_length=scaffold_length,
+        bpPerPx=bpPerPx,
+    )
+    return default_session
+
+
 def check_if_plugin_needed(track_params: dict[str, Any]) -> dict[str, str] | None:
     """
     Check if a plugin is needed for the track based on known requirements.
@@ -191,7 +213,7 @@ def make_track_params(track: dict[str, Any], species_abbreviation: str) -> dict[
     }
 
 
-def process_tracks(default_session: DefaultSession, config: dict[str, Any], assembly_counter: int) -> None:
+def process_tracks(default_session: DefaultSession, config: dict[str, Any], assembly_counter: int) -> DefaultSession:
     """
     Most tracks will be added by the makefile (calling the JBrowse CLI), but for non-standard tracks,
     they need to be added to the defaultSession JSON object. This is done with the add_track_to_top_level_tracks()

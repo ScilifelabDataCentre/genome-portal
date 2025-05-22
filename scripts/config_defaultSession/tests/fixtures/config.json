@@ -1,12 +1,12 @@
 {
   "defaultSession": {
-    "id": "anid_default_session",
-    "name": "Aspergillus nidulans",
+    "id": "ther_default_session",
+    "name": "Tiny herb",
     "widgets": {
       "hierarchicalTrackSelector": {
         "id": "hierarchicalTrackSelector",
         "type": "HierarchicalTrackSelectorWidget",
-        "view": "anid_default_session_view_0",
+        "view": "ther_default_session_view_0",
         "faceted": {
           "showSparse": false,
           "showFilters": true,
@@ -20,7 +20,82 @@
     },
     "views": [
       {
-        "id": "anid_default_session_view_0",
+        "id": "ther_default_session_view_0",
+        "minimized": false,
+        "type": "LinearGenomeView",
+        "trackLabels": "offset",
+        "offsetPx": 0,
+        "bpPerPx": 200,
+        "displayedRegions": [
+          {
+            "refName": "ENA|CAMGYJ010000002|CAMGYJ010000002.1",
+            "start": 0,
+            "end": 72476498,
+            "reversed": false,
+            "assemblyName": "Linum_tenue_thrum_v1"
+          }
+        ],
+        "tracks": [
+          {
+            "id": "ther_default_Protein-coding_genes",
+            "type": "FeatureTrack",
+            "configuration": "ltenue_v1_genes.gff",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "ther_default_Protein-coding_genes_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 150,
+                "configuration": "ltenue_v1_genes.gff-LinearBasicDisplay"
+              }
+            ]
+          },
+          {
+            "id": "ther_default_Repeats",
+            "type": "FeatureTrack",
+            "configuration": "L_tenue_v1_rep.bed",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "ther_default_Repeats_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 150,
+                "configuration": "L_tenue_v1_rep.bed-LinearBasicDisplay"
+              }
+            ]
+          },
+          {
+            "id": "ther_default_Tajimas_D_population_06",
+            "type": "FeatureTrack",
+            "configuration": "Lten_pop06_TD.bed",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "ther_default_Tajimas_D_population_06_display",
+                "type": "LinearManhattanDisplay",
+                "heightPreConfig": 150,
+                "configuration": "Lten_pop06_TD.bed-LinearManhattanDisplay"
+              }
+            ]
+          },
+          {
+            "id": "ther_default_Test_of_Arc_track",
+            "type": "FeatureTrack",
+            "configuration": "Lten_pop08_TD.bed",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "ther_default_Test_of_Arc_track_display",
+                "type": "LinearArcDisplay",
+                "heightPreConfig": 150,
+                "configuration": "Lten_pop08_TD.bed-LinearArcDisplay"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "ther_default_session_view_1",
         "minimized": false,
         "type": "LinearGenomeView",
         "trackLabels": "offset",
@@ -28,67 +103,25 @@
         "bpPerPx": 50,
         "displayedRegions": [
           {
-            "refName": "NC_066258.1",
+            "refName": "ENA|OZ075093|OZ075093.1",
             "start": 0,
-            "end": 4011161,
+            "end": 15425,
             "reversed": false,
-            "assemblyName": "FIRST_ASSEMBLY_ASM1142v1"
+            "assemblyName": "Mito_assembly"
           }
         ],
         "tracks": [
           {
-            "id": "anid_default_protein_coding_genes_view_0",
+            "id": "ther_default_Mitochondrial_genes",
             "type": "FeatureTrack",
-            "configuration": "track.gff",
+            "configuration": "pmne_mtdna.gff",
             "minimized": false,
             "displays": [
               {
-                "id": "anid_default_protein_coding_genes_view_0_display",
+                "id": "ther_default_Mitochondrial_genes_display",
                 "type": "LinearBasicDisplay",
                 "heightPreConfig": 150,
-                "configuration": "track.gff-LinearBasicDisplay"
-              }
-            ]
-          },
-          {
-            "id": "anid_default_Repeats",
-            "type": "FeatureTrack",
-            "configuration": "track2.gff",
-            "minimized": false,
-            "displays": [
-              {
-                "id": "anid_default_Repeats_display",
-                "type": "LinearBasicDisplay",
-                "heightPreConfig": 150,
-                "configuration": "track2.gff-LinearBasicDisplay"
-              }
-            ]
-          },
-          {
-            "id": "anid_default_Transcripts",
-            "type": "FeatureTrack",
-            "configuration": "track3.gff",
-            "minimized": false,
-            "displays": [
-              {
-                "id": "anid_default_Transcripts_display",
-                "type": "LinearBasicDisplay",
-                "heightPreConfig": 150,
-                "configuration": "track3.gff-LinearBasicDisplay"
-              }
-            ]
-          },
-          {
-            "id": "anid_default_Tajimas_D",
-            "type": "FeatureTrack",
-            "configuration": "anid_gwas_Tajimas_D",
-            "minimized": false,
-            "displays": [
-              {
-                "id": "anid_default_Tajimas_D_display",
-                "type": "LinearManhattanDisplay",
-                "heightPreConfig": 150,
-                "configuration": "anid_gwas_Tajimas_D_display"
+                "configuration": "pmne_mtdna.gff-LinearBasicDisplay"
               }
             ]
           }
@@ -102,31 +135,54 @@
   "tracks": [
     {
       "type": "FeatureTrack",
-      "trackId": "anid_gwas_Tajimas_D",
-      "name": "Tajima's D",
+      "trackId": "Lten_pop06_TD.bed",
+      "name": "Tajima's D, population 06",
       "assemblyNames": [
-        "FIRST_ASSEMBLY_ASM1142v1"
-      ],
-      "category": [
-        "Population genomics"
+        "Linum_tenue_thrum_v1"
       ],
       "adapter": {
         "type": "BedTabixAdapter",
-        "scoreColumn": "TajimaD",
         "bedGzLocation": {
-          "uri": "track5.bed.bgz"
+          "uri": "Lten_pop06_TD.bed.bgz"
         },
         "index": {
           "location": {
-            "uri": "track5.bed.bgz.csi"
+            "uri": "Lten_pop06_TD.bed.bgz.csi"
+          },
+          "indexType": "CSI"
+        },
+        "scoreColumn": "TajimaD"
+      },
+      "displays": [
+        {
+          "type": "LinearManhattanDisplay",
+          "displayId": "Lten_pop06_TD.bed-LinearManhattanDisplay"
+        }
+      ]
+    },
+    {
+      "type": "FeatureTrack",
+      "trackId": "Lten_pop08_TD.bed",
+      "name": "Test of Arc track",
+      "assemblyNames": [
+        "Linum_tenue_thrum_v1"
+      ],
+      "adapter": {
+        "type": "BedTabixAdapter",
+        "bedGzLocation": {
+          "uri": "Lten_pop08_TD.bed.bgz"
+        },
+        "index": {
+          "location": {
+            "uri": "Lten_pop08_TD.bed.bgz.csi"
           },
           "indexType": "CSI"
         }
       },
       "displays": [
         {
-          "displayId": "anid_gwas_Tajimas_D_display",
-          "type": "LinearManhattanDisplay"
+          "type": "LinearArcDisplay",
+          "displayId": "Lten_pop08_TD.bed-LinearArcDisplay"
         }
       ]
     }

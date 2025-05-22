@@ -1,50 +1,49 @@
-organism: Aspergillus nidulans
+#This configuration tests the case: protein-codings in assembly 1, but not in 2; GWAS in assembly 1, but not in 2;
+# defaultSession flag set for all tracks in assembly 1 and assembly 2.
+organism: "Tiny herb"
 assembly:
-  name: FIRST_ASSEMBLY_ASM1142v1
-  displayName: A. nidulans genome assembly GCA_000011425.1
-  accession: GCA_000011425.1
-  url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/011/425/GCF_000011425.1_ASM1142v1/GCF_000011425.1_ASM1142v1_genomic.fna.gz
-  fileName: GCF_000011425.1_ASM1142v1_genomic.fna.gz
-  defaultScaffold: "NC_066258.1"
-  bpPerPx: 250
+  name: Linum_tenue_thrum_v1
+  displayName: "L. tenue genome assembly GCA_946122785.1"
+  accession: GCA_946122785.1
+  # The following url points to the original ENA upload of the assembly. It will require an alias file to be able to load the protein coding genes track
+  url: "https://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/cam/CAMGYJ01.fasta.gz"
+  # Temp storage for alias file.
+  aliases: "https://raw.githubusercontent.com/ScilifelabDataCentre/genome-portal/refs/heads/main/scripts/data_stewardship/alias_files_temp_storage/CAMGYJ01.fna.alias"
+  defaultScaffold: "ENA|CAMGYJ010000002|CAMGYJ010000002.1"
+  bpPerPx: 200
 tracks:
-- name: Protein-coding genes
-  url: "www.example.com/track.gff.gz"
-  fileName: track.gff.gz
-  defaultSession: true
-- name: "Repeats"
-  url: "www.example.com/track2.gff.gz"
-  fileName: "track2.gff.gz"
-  defaultSession: true
-- name: "Transcripts"
-  url: "www.example.com/track3.gff.gz"
-  fileName: "track3.gff.gz"
-  defaultSession: true
-- name: "ncRNA"
-  url: "www.example.com/track4.bed.gz"
-  fileName: "track4.bed.gz"
-  defaultSession: false
-- name: "Tajima's D"
-  url: "www.example.com/track5.bed.gz"
-  fileName: "track5.bed.gz"
-  addTrack: false
-  defaultSession: true
-  trackType: "gwas"
-  scoreColumn: "TajimaD"
-- name: "Arc track"
-  url: "www.example.com/track6.bed.gz"
-  fileName: "track6.bed.gz"
-  addTrack: false
-  defaultSession: true
-  trackType: "arc"
-# ---
-# assembly:
-#   name: "SECOND_ASSEMBLY_mito"
-#   displayName: "Mitochondria"
-#   url: "www.example.com/mito.fasta.gz"
-#   fileName: "mito.fasta.gz"
-# tracks:
-#   - name: "Mitochondrial genes"
-#     url: "www.example.com/mito_track.gff.gz"
-#     fileName: "mito_track.gff.gz"
-#     defaultSession: True
+  - name: "Protein-coding genes"
+    url: "https://figshare.scilifelab.se/ndownloader/files/45076090"
+    fileName: "ltenue_v1_genes.gff.zip"
+    # the below flag is an unintended use for this track (it is mandatory), but set here to be implement a catch that ignores it in the script
+  - name: "Repeats"
+    url: "https://figshare.scilifelab.se/ndownloader/files/48879751"
+    fileName: "L_tenue_v1_rep.bed.gz"
+    defaultSession: true
+  - name: "Tajima's D, population 06"
+    url: "https://figshare.scilifelab.se/ndownloader/files/50073936"
+    fileName: "Lten_pop06_TD.bed.gz"
+    addTrack: false
+    defaultSession: true
+    trackType: "gwas"
+    scoreColumn: "TajimaD"
+  - name: "Test of Arc track"
+    url: "https://figshare.scilifelab.se/ndownloader/files/50073939"
+    fileName: "Lten_pop08_TD.bed.gz"
+    addTrack: false
+    defaultSession: true
+    trackType: "arc"
+---
+#This second YAML document is a Frankenstein's monster, since it is a mix of two different species. This is only for testing purposes
+#The reason is that Linum has GWAS tracks, and Clouded Apollo has a organelle assembly and as such lacks a track named protein-coding genes.
+assembly:
+  name: "Mito_assembly"
+  displayName: "Pmne mito assembly"
+  url: "https://www.ebi.ac.uk/ena/browser/api/fasta/GCA_964186615?download=true&lineLimit=0&gzip=true"
+  fileName: "GCA_964186615.fasta.gz"
+  aliases: "https://raw.githubusercontent.com/ScilifelabDataCentre/genome-portal/refs/heads/main/scripts/data_stewardship/alias_files_temp_storage/GCA_964186615.fna.alias"
+tracks:
+  - name: "Mitochondrial genes"
+    url: "https://figshare.scilifelab.se/ndownloader/files/47209654"
+    fileName: "pmne_mtdna.gff.gz"
+    defaultSession: true

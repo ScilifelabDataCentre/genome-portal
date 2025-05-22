@@ -23,6 +23,10 @@ track.scoreColumnGWAS
 to add a new display type to the code, define a new key value for trackType and add the corresponding logic to get_track_display_type()
 if a track needs a plugin, the logic can be added to check_if_plugin_needed
 
+
+Example usage:
+
+python scripts/config_defaultSession -y scripts/config_defaultSession/tests/fixtures/config.yml -o
 """
 
 import argparse
@@ -31,9 +35,10 @@ from pathlib import Path
 import yaml
 from add_tracks_to_view import (
     DefaultSession,
+    create_view,
     process_tracks,
 )
-from utils import check_config_json_exists, get_fasta_header_and_scaffold_length, get_species_abbreviation, save_json
+from utils import check_config_json_exists, get_species_abbreviation, save_json
 
 
 def run_argparse() -> argparse.Namespace:
@@ -81,47 +86,28 @@ if __name__ == "__main__":
     with open(config_yml_path, "r") as file:
         configs = list(yaml.safe_load_all(file))
 
-    if not configs or not configs[0]:
-        raise ValueError("The first document in the config.yml is empty. Exiting.")
-
-    first_config = configs[0]
-    if "organism" not in first_config or not first_config["organism"]:
+    if "organism" not in configs[0] or not configs[0]["organism"]:
         raise KeyError(
             "The primary assembly (assembly number 1 in config.yml) is required to have a non-empty 'organism' key. Exiting."
         )
 
-    species_name_variants = {
-        "species_name": first_config["organism"],
-        "species_slug": first_config["organism"].replace(" ", "_").lower(),
-        "species_abbreviation": get_species_abbreviation(first_config["organism"]),
-    }
-
     default_session = DefaultSession(
-        species_name=species_name_variants["species_name"],
-        species_abbreviation=species_name_variants["species_abbreviation"],
-        species_slug=species_name_variants["species_slug"],
+        species_name=configs[0]["organism"],
+        species_abbreviation=get_species_abbreviation(configs[0]["organism"]),
+        species_slug=configs[0]["organism"].replace(" ", "_").lower(),
     )
 
     for assembly_counter, config in enumerate(configs):
         if not config:
             raise ValueError(
-                f"Document {assembly_counter+1} in the config.yml is empty. Each document must contain data. Exiting."
+                f"Document number {assembly_counter+1} in the config.yml is empty. Each document must contain data. Exiting."
             )
 
-        if args.skip_reading_fasta:
-            default_scaffold = None
-            scaffold_length = None
-        else:
-            default_scaffold, scaffold_length = get_fasta_header_and_scaffold_length(
-                config=config, species_slug=default_session.species_slug
-            )
-
-        default_session.add_view(
-            assembly_counter=assembly_counter,
+        default_session = create_view(
+            default_session=default_session,
             config=config,
-            default_scaffold=default_scaffold,
-            scaffold_length=scaffold_length,
-            bpPerPx=config["assembly"].get("bpPerPx", 50),
+            assembly_counter=assembly_counter,
+            skip_reading_fasta=args.skip_reading_fasta,
         )
 
         default_session = process_tracks(
@@ -130,14 +116,19 @@ if __name__ == "__main__":
             assembly_counter=assembly_counter,
         )
 
-        # TODO consider the track_color key in the config.yml
+        # TODO add support for bedgraph tracks ("histogram" display)
 
-        # TODO if protein_coding_gene_file_name is None and assembly_counter !=0,
-        # there has to be at least one other track for that assembly!
+        # TODO consider the track_color key in the config.yml
 
         # TODO order of the tracks in the config.yml is not preserved in the final config.json made by the makefile.
         # see if that could be fixed in the makefile? The other option is to use categories in the defaultSession
         # config.json like we have done for linum in the past
+
+        # TODO write the docstring for the module, and ensure that all functions have docstrings
+
+        # TODO clean up the code
+
+        # TODO write tests for the code
 
     data = default_session.make_defaultSession_dict()
     save_json(data, output_json_path, config_yml_path)
