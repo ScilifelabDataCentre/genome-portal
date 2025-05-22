@@ -5,6 +5,8 @@ assembly:
   accession: GCA_000011425.1
   url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/011/425/GCF_000011425.1_ASM1142v1/GCF_000011425.1_ASM1142v1_genomic.fna.gz
   fileName: GCF_000011425.1_ASM1142v1_genomic.fna.gz
+  defaultScaffold: "NC_066258.1"
+  bpPerPx: 250
 tracks:
 - name: Protein-coding genes
   url: "www.example.com/track.gff.gz"
@@ -29,14 +31,14 @@ tracks:
   defaultSession: true
   GWAS: true
   scoreColumnGWAS: "TajimaD"
----
-assembly:
-  name: "SECOND_ASSEMBLY_mito"
-  displayName: "Mitochondria"
-  url: "www.example.com/mito.fasta.gz"
-  fileName: "mito.fasta.gz"
-tracks:
-  - name: "Mitochondrial genes"
-    url: "www.example.com/mito_track.gff.gz"
-    fileName: "mito_track.gff.gz"
-    defaultSession: True
+# ---
+# assembly:
+#   name: "SECOND_ASSEMBLY_mito"
+#   displayName: "Mitochondria"
+#   url: "www.example.com/mito.fasta.gz"
+#   fileName: "mito.fasta.gz"
+# tracks:
+#   - name: "Mitochondrial genes"
+#     url: "www.example.com/mito_track.gff.gz"
+#     fileName: "mito_track.gff.gz"
+#     defaultSession: True

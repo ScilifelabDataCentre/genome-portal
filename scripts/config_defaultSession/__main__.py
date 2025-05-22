@@ -6,6 +6,13 @@ Assumes that the dockermake has been run once to download the files.
 (The intention is that add_new_species has been run once first, but as long as there is a config.yml, this package will work)
 
 Handles multi-assembly config.yml (YAML document) files by assembly_counter
+
+config.yml keys that are recognised by this script:
+assembly.defaultSession
+assembly.bpPerPx
+track.GWAS
+track.scoreColumnGWAS
+
 """
 
 import argparse
@@ -106,6 +113,7 @@ if __name__ == "__main__":
             config=config,
             default_scaffold=default_scaffold,
             scaffold_length=scaffold_length,
+            bpPerPx=config["assembly"].get("bpPerPx", 50),
         )
 
         protein_coding_gene_file_name = get_protein_coding_gene_file_name(

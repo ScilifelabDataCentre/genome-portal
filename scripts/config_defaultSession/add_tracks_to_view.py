@@ -42,7 +42,12 @@ class DefaultSession:
         return data
 
     def add_view(
-        self, assembly_counter: int, config: dict[str, Any], default_scaffold: str = None, scaffold_length: int = None
+        self,
+        assembly_counter: int,
+        config: dict[str, Any],
+        default_scaffold: str = None,
+        scaffold_length: int = None,
+        bpPerPx: int = 50,
     ) -> None:
         view = {
             "id": f"{self.species_abbreviation}_default_session_view_{assembly_counter}",
@@ -50,7 +55,7 @@ class DefaultSession:
             "type": "LinearGenomeView",
             "trackLabels": "offset",
             "offsetPx": 0,
-            "bpPerPx": 50,
+            "bpPerPx": bpPerPx,
             "displayedRegions": [
                 {
                     "refName": default_scaffold if default_scaffold else "[SCAFFOLD_HEADER]",
