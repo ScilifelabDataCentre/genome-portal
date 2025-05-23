@@ -11,6 +11,10 @@ The interaction between defaultSession and the makefile is based on track filena
 so the filenames has to be unique across a config.yml file. If the same file needs to be used, the
 fileName key can be used to specify the name that the makefile will give it upon download of the url.
 
+Unless otherwise specified with the defaultScaffold key, the package will use the first scaffold in the FASTA for the defaultSession.
+
+bgPerPx often needs manual adjustment based on the length of the scaffold and gene annotation density.
+
 # Overview of config.yml keys that this script recognises:
 - Supported keys:
 assembly.defaultScaffold: str   (name of the scaffold to display in the defaultSession when the JBrowse instance is initialized)
@@ -27,10 +31,12 @@ track.scoreColumnGWAS
 # Maintenance of the code:
 this script is indended to be updated and expanded as new track types are added to the Genome Portal
 
-- to add a new display type to the code, define a new key value for displayType and add the corresponding logic to get_track_display_type()
-if a track needs a plugin, the logic can be added to check_if_plugin_needed
+- to add a new display type to the code, define a new key value for displayType and add the corresponding logic to
+default_session_builder.get_track_display_type
 
-- to add a new file format adapter, modify get_track_adapter_config
+- if a track needs a plugin, the logic can be added to default_session_builder.check_if_plugin_needed
+
+- to add a new file format adapter, modify utils.get_track_adapter_config
 
 
 # Example usage:
@@ -42,11 +48,7 @@ import argparse
 from pathlib import Path
 
 import yaml
-from default_session_builder import (
-    DefaultSession,
-    create_view,
-    process_tracks,
-)
+from default_session_builder import DefaultSession, create_view, process_tracks
 from utils import check_config_json_exists, get_species_abbreviation, save_json
 
 
@@ -128,7 +130,10 @@ if __name__ == "__main__":
 
         # TODO generalize the support for more adapter types
 
-        # TODO improve the logic for featuretrack quantive track
+        # TODO improve the logic for setting featuretrack and quantive track
+
+        # TODO add a key called plugin that can control optionall plugins
+        # (GWAS track logic can remain since the plugin in mandatory)
 
         # TODO consider the track_color key in the config.yml
 
@@ -140,10 +145,12 @@ if __name__ == "__main__":
         # TODO write the docstring for the module, and ensure that all functions have docstrings
 
         # TODO clean up the code
-
+        # TODO the assemblyNames assignment in process_tracks() could be neater
+        # TODO update get_track_file_name to use pathlib instead of os.path
         # TODO clean up the code for get_fasta_header_and_scaffold_length and default_scaffold
+        # TODO clean up the error handling in utils.py
 
-        # TODO write tests for the code
+        # TODO write tests that reflects fail cases
 
     data = default_session.make_defaultSession_dict()
     save_json(data=data, output_json_path=output_json_path)

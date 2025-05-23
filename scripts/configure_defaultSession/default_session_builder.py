@@ -83,7 +83,7 @@ class DefaultSession:
                 "displays": [
                     {
                         "id": f"{track_params["track_view_id"]}_display",
-                        "type": track_params["track_type"],
+                        "type": track_params["display_type"],
                         "heightPreConfig": 150,
                         "configuration": track_params["display_config"],
                     }
@@ -112,8 +112,8 @@ class DefaultSession:
             },
             "displays": [
                 {
-                    "type": track_params["track_type"],
-                    "displayId": f"{track_params["track_top_id"]}-{track_params["track_type"]}",
+                    "type": track_params["display_type"],
+                    "displayId": f"{track_params["track_top_id"]}-{track_params["display_type"]}",
                 }
             ],
         }
@@ -128,7 +128,7 @@ class DefaultSession:
 
 
 def create_view(
-    default_session: DefaultSession, config: dict[str, Any], assembly_counter: int, skip_reading_fasta: bool
+    default_session: DefaultSession, config: dict[str, Any], assembly_counter: int, skip_reading_fasta: bool = False
 ) -> DefaultSession:
     if skip_reading_fasta:
         default_scaffold = None
@@ -154,7 +154,7 @@ def check_if_plugin_needed(track_params: dict[str, Any]) -> dict[str, str] | Non
     """
     Check if a plugin is needed for the track based on known requirements.
     """
-    if track_params.get("track_type") == "LinearManhattanDisplay":
+    if track_params.get("display_type") == "LinearManhattanDisplay":
         plugin_call = {
             "name": "GWAS",
             "url": "https://unpkg.com/jbrowse-plugin-gwas/dist/jbrowse-plugin-gwas.umd.production.min.js",
@@ -165,21 +165,21 @@ def check_if_plugin_needed(track_params: dict[str, Any]) -> dict[str, str] | Non
     return plugin_call
 
 
-def get_track_display_type(track: dict[str, Any]) -> str:
+def get_track_display_type(track: dict[str, Any]) -> tuple[str | None, str]:
     """
-    Get the optional key track_type from the track.
+    Get the optional key display_type from the track.
     """
-    track_type = track.get("displayType")
-    track_type = track_type.lower() if track_type is not None else None
-    if track_type is None or track_type == "linear":
-        track_type = "LinearBasicDisplay"
-    elif track_type == "arc":
-        track_type = "LinearArcDisplay"
-    elif track_type == "gwas":
-        track_type = "LinearManhattanDisplay"
-    elif track_type == "wiggle":
-        track_type = "LinearWiggleDisplay"
-    return track_type
+    display_type_key = track.get("displayType")
+    display_type_key = display_type_key.lower() if display_type_key is not None else None
+    if display_type_key is None or display_type_key == "linear":
+        display_type = "LinearBasicDisplay"
+    elif display_type_key == "arc":
+        display_type = "LinearArcDisplay"
+    elif display_type_key == "gwas":
+        display_type = "LinearManhattanDisplay"
+    elif display_type_key == "wiggle":
+        display_type = "LinearWiggleDisplay"
+    return display_type_key, display_type
 
 
 def make_track_params(track: dict[str, Any], species_abbreviation: str) -> dict[str, Any]:
@@ -190,17 +190,18 @@ def make_track_params(track: dict[str, Any], species_abbreviation: str) -> dict[
         f"{species_abbreviation}_default_{track['name'].replace(' ', '_').replace('\'', '').replace(',', '')}"
     )
     track_file_name = get_track_file_name(track)
-    track_type = get_track_display_type(track)
-    display_config = f"{track_file_name}-{track_type}"
+    display_type_key, display_type = get_track_display_type(track)
+    display_config = f"{track_file_name}-{display_type}"
     score_column = track.get("scoreColumn")
-    is_quantiative_track = "LinearWiggleDisplay" in track_type
+    is_quantiative_track = "LinearWiggleDisplay" in display_type
 
     return {
         "track_view_id": track_view_id,
         "track_top_id": track_file_name,
         "track_file_name": track_file_name,
         "track_name": track["name"],
-        "track_type": track_type,
+        "display_type_key": display_type_key,
+        "display_type": display_type,
         "track_config": track_file_name,
         "display_config": display_config,
         "score_column": score_column,

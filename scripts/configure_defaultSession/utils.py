@@ -145,7 +145,7 @@ def get_track_adapter_config(track_params: dict[str, Any]) -> str:
         location_key = "gffGzLocation"
 
     if base_extension == "bed":
-        if track_params["track_type"] == "LinearWiggleDisplay":
+        if track_params["display_type"] == "LinearWiggleDisplay":
             adapter_type = "BedGraphAdapter"
             location_key = "bedGraphLocation"
         else:
@@ -172,19 +172,6 @@ def save_json(data: dict[str, Any], output_json_path: Path):
     """
     Subfunction that writes a dictionary (data) as a JSON file at the specified output path.
     """
-    try:
-        with open(output_json_path, "w") as file:
-            json.dump(data, file, indent=2)
-            print(f"\nSaved the populated defaultSession JSON to: {output_json_path}.")
-            print(f"To test the file, copy it to: {output_json_path} and run the makefile (make all).")
-            print(
-                "\nNote! The settings for which scaffold to display as default were set based on the first scaffold in the FASTA."
-            )
-            print(
-                "bgPerPx often needs manual adjustment based on the length of the scaffold and gene annotation density."
-            )
-            print(
-                "If the first scaffold is not the one you want to display by default, this need to be adjusted manually."
-            )
-    except IOError as e:
-        print(f"Error: Failed to save JSON file. Error: {e}")
+    with open(output_json_path, "w") as file:
+        json.dump(data, file, indent=2)
+        print(f"File created: {output_json_path}.")
