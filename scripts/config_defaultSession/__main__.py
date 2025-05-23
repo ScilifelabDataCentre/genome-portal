@@ -11,8 +11,8 @@ The interaction between defaultSession and the makefile is based on track filena
 so the filenames has to be unique across a config.yml file. If the same file needs to be used, the
 fileName key can be used to specify the name that the makefile will give it upon download of the url.
 
-
-config.yml keys that are recognised by this script:
+# Overview of config.yml keys that this script recognises:
+- Supported keys:
 assembly.defaultScaffold: str   (name of the scaffold to display in the defaultSession when the JBrowse instance is initialized)
 assembly.bpPerPx: int = 50      (this is the "zoom level" in the JBrowse view. Longer scaffolds tend to need a larger value)
 {assembly,track}.fileName: str  (if not specified, the package will try to deduce the name from the url, but this key takes precedence if specified)
@@ -20,16 +20,20 @@ track.defaultSession: Bool      (ignored by protein-coding gene tracks since the
 track.displayType: str          (one of ["linear", "arc", "gwas"])
 track.scoreColumn: str:         (name of the score column in the track file)
 
-old keys that are deprecated and should not be used:
+- Depreciated keys that was once used for the Geneom Portal build process, but is not longer in use:
 track.GWAS
 track.scoreColumnGWAS
 
-#expanding the code
-to add a new display type to the code, define a new key value for displayType and add the corresponding logic to get_track_display_type()
+# Maintenance of the code:
+this script is indended to be updated and expanded as new track types are added to the Genome Portal
+
+- to add a new display type to the code, define a new key value for displayType and add the corresponding logic to get_track_display_type()
 if a track needs a plugin, the logic can be added to check_if_plugin_needed
 
+- to add a new file format adapter, modify get_track_adapter_config
 
-Example usage:
+
+# Example usage:
 
 python scripts/config_defaultSession -y scripts/config_defaultSession/tests/fixtures/config.yml -o
 """
@@ -96,10 +100,11 @@ if __name__ == "__main__":
             "The primary assembly (assembly number 1 in config.yml) is required to have a non-empty 'organism' key. Exiting."
         )
 
+    species_name = configs[0]["organism"]
     default_session = DefaultSession(
-        species_name=configs[0]["organism"],
-        species_abbreviation=get_species_abbreviation(configs[0]["organism"]),
-        species_slug=configs[0]["organism"].replace(" ", "_").lower(),
+        species_name=species_name,
+        species_abbreviation=get_species_abbreviation(species_name=species_name),
+        species_slug=species_name.replace(" ", "_").lower(),
     )
 
     for assembly_counter, config in enumerate(configs):
@@ -136,7 +141,9 @@ if __name__ == "__main__":
 
         # TODO clean up the code
 
+        # TODO clean up the code for get_fasta_header_and_scaffold_length and default_scaffold
+
         # TODO write tests for the code
 
     data = default_session.make_defaultSession_dict()
-    save_json(data, output_json_path, config_yml_path)
+    save_json(data=data, output_json_path=output_json_path)

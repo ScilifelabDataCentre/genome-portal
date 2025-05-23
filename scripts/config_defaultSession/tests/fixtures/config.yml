@@ -20,25 +20,30 @@ tracks:
     url: "https://figshare.scilifelab.se/ndownloader/files/48879751"
     fileName: "L_tenue_v1_rep.bed.gz"
     defaultSession: true
-  - name: "Tajima's D, population 06"
+  - name: "Tajima's D, population 06" # tests GWAS display and adding of top-level BEDs using addTrack:false
     url: "https://figshare.scilifelab.se/ndownloader/files/50073936"
     fileName: "Lten_pop06_TD.bed.gz"
     addTrack: false
     defaultSession: true
     displayType: "gwas"
     scoreColumn: "TajimaD"
-  - name: "Test of Arc track"
+  - name: "Test of Arc track" #display a Tajima's D track as an arc for testing purposes
     url: "https://figshare.scilifelab.se/ndownloader/files/50073939"
     fileName: "Lten_pop08_TD.bed.gz"
     addTrack: false
     defaultSession: true
     displayType: "arc"
-  - name: "Test of bedGraph track"
+  - name: "Test of bedGraph track" #download the same track as previous and rename it; use it to test the wiggle display type
     url: "https://figshare.scilifelab.se/ndownloader/files/50073939"
     fileName: "Lten_pop08_TD_for_wiggle.bed.gz"
     addTrack: false
     defaultSession: true
     displayType: "wiggle"
+  - name: "Test of GFF addTrack:false" #download the protein-coding genes track and rename it; use it to test adding top-level GFFs using addTrack:false
+    url: "https://figshare.scilifelab.se/ndownloader/files/45076090"
+    fileName: "test_gene_track.gff.zip"
+    addTrack: false
+    defaultSession: true
 
 ---
 #This second YAML document is a Frankenstein's monster, since it is a mix of two different species. This is only for testing purposes

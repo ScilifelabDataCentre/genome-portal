@@ -2,7 +2,7 @@ import gzip
 import json
 import os
 from pathlib import Path
-from typing import Any
+from typing import Any, TextIO
 
 
 def check_config_json_exists(output_json_path: Path) -> None:
@@ -20,19 +20,19 @@ def check_config_json_exists(output_json_path: Path) -> None:
         )
 
 
-def get_species_abbreviation(organism):
+def get_species_abbreviation(species_name: str) -> str:
     """
     Subfunction that takes the scientific (binomial) species name and returns an abbreviation that will be used as a track id suffix.
     Example: "Linum tenue" -> "lten". In order for this to work, the organism name need to be a non-empty string; this is checked in the main() function.
     """
-    words = organism.split()
+    words = species_name.split()
     if len(words) >= 2:
         return (words[0][0] + words[1][:3]).lower()
-    # Fallback if the organism name is not formatted with white space delimiter:
-    return (organism[:4]).lower()
+    # Fallback if the  name is not formatted with white space delimiter:
+    return (species_name[:4]).lower()
 
 
-def parse_fasta_file(file, default_scaffold):
+def parse_fasta_file(file: TextIO, default_scaffold: str | None) -> tuple[str | None, int, bool]:
     """
     Subsubfunction for get_fasta_header_and_scaffold_length().
     """
@@ -80,10 +80,14 @@ def get_fasta_header_and_scaffold_length(config: dict[str, Any], species_slug: s
 
     if file_path.name.endswith(".gz"):
         with gzip.open(file_path, "rt") as file:
-            first_fasta_header, scaffold_length, header_found = parse_fasta_file(file, default_scaffold)
+            first_fasta_header, scaffold_length, header_found = parse_fasta_file(
+                file=file, default_scaffold=default_scaffold
+            )
     else:
         with open(file_path, "r") as file:
-            first_fasta_header, scaffold_length, header_found = parse_fasta_file(file, default_scaffold)
+            first_fasta_header, scaffold_length, header_found = parse_fasta_file(
+                file=file, default_scaffold=default_scaffold
+            )
 
     if default_scaffold and not header_found:
         raise KeyError(
@@ -93,7 +97,7 @@ def get_fasta_header_and_scaffold_length(config: dict[str, Any], species_slug: s
     return (default_scaffold if default_scaffold else first_fasta_header), scaffold_length
 
 
-def get_track_file_name(track):
+def get_track_file_name(track: dict[str, Any]) -> str:
     """
     Subfunction that extracts the base file name from a config.yml dictionary. The base file name is used as a
     non-arbirtary value in the JBrowse config.json, and it cannot contain file extensions such as .gz, .zip,
@@ -126,7 +130,45 @@ def get_base_extension(file_name: str) -> str:
         return file_path.suffix.lstrip(".")
 
 
-def save_json(data, output_json_path, config_path):
+def get_track_adapter_config(track_params: dict[str, Any]) -> str:
+    """
+    Subfunction that determines the adapter type based on the track parameters.
+
+    The makefile will tabix index and bgzip files with .gff and .bed extension, resulting
+    in *.bgz and .bgz.csi files for these two file types. Consequencly, this function
+    uses the *TabixAdapter and *GzLocation settings as the default setting.
+    """
+    base_extension = get_base_extension(file_name=track_params["track_file_name"])
+
+    if base_extension == "gff":
+        adapter_type = "Gff3TabixAdapter"
+        location_key = "gffGzLocation"
+
+    if base_extension == "bed":
+        if track_params["track_type"] == "LinearWiggleDisplay":
+            adapter_type = "BedGraphAdapter"
+            location_key = "bedGraphLocation"
+        else:
+            adapter_type = "BedTabixAdapter"
+            location_key = "bedGzLocation"
+
+    adapter_location = track_params["track_file_name"]
+    if adapter_location.endswith((".gz", ".zip")):
+        adapter_location = adapter_location.rsplit(".", 1)[0] + ".bgz"
+    elif adapter_location.endswith((".gff", ".bed")):
+        adapter_location += ".bgz"
+
+    index_location = f"{adapter_location}.csi"
+
+    return {
+        "adapter_location": adapter_location,
+        "adapter_type": adapter_type,
+        "index_location": index_location,
+        "location_key": location_key,
+    }
+
+
+def save_json(data: dict[str, Any], output_json_path: Path):
     """
     Subfunction that writes a dictionary (data) as a JSON file at the specified output path.
     """

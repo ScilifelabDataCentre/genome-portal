@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 from typing import Any
 
-from utils import get_base_extension, get_fasta_header_and_scaffold_length, get_track_file_name
+from utils import get_fasta_header_and_scaffold_length, get_track_adapter_config, get_track_file_name
 
 
 @dataclass
@@ -94,28 +94,11 @@ class DefaultSession:
 
     def add_track_to_top_level_tracks(self, track_params: dict[str, Any]) -> None:
         """
-        TODO: Need to handle different adapter types
+        This function is used for tracks that are configured in config.yml with addTrack: false,
+        which means that the makefile skips the step of adding them to the final config.json with
+        JBrowse CLI. This is useful for tracks that need more complex defaultSession settings.
         """
-
-        base_extension = get_base_extension(file_name=track_params["track_file_name"])
-
-        # TODO make this into a function that can handle different adapter types
-        if base_extension == "bed":
-            adapter_type = "BedTabixAdapter"
-            if track_params["track_type"] == "LinearWiggleDisplay":
-                adapter_type = "BedGraphAdapter"
-            if adapter_type == "BedTabixAdapter":
-                location_key = "bedGzLocation"
-            elif adapter_type == "BedGraphAdapter":
-                location_key = "bedGraphLocation"
-            adapter_location = track_params["track_file_name"]
-            if adapter_location.endswith((".gz", ".zip")):
-                adapter_location = adapter_location.replace(".gz", ".bgz").replace(".zip", ".bgz")
-            if adapter_location.endswith(".bed"):
-                adapter_location += ".bgz"
-            index_location = f"{adapter_location}.csi"
-        else:
-            raise ValueError("Unsupported track file type.")
+        adapter_config = get_track_adapter_config(track_params=track_params)
 
         new_top_level_track = {
             "type": "FeatureTrack" if not track_params["is_quantiative_track"] else "QuantitativeTrack",
@@ -123,9 +106,9 @@ class DefaultSession:
             "name": track_params["track_name"],
             "assemblyNames": track_params["assemblyNames"],
             "adapter": {
-                "type": adapter_type,
-                location_key: {"uri": adapter_location},
-                "index": {"location": {"uri": index_location}, "indexType": "CSI"},
+                "type": adapter_config["adapter_type"],
+                adapter_config["location_key"]: {"uri": adapter_config["adapter_location"]},
+                "index": {"location": {"uri": adapter_config["index_location"]}, "indexType": "CSI"},
             },
             "displays": [
                 {
@@ -152,7 +135,8 @@ def create_view(
         scaffold_length = None
     else:
         default_scaffold, scaffold_length = get_fasta_header_and_scaffold_length(
-            config=config, species_slug=default_session.species_slug
+            config=config,
+            species_slug=default_session.species_slug,
         )
     bpPerPx = config["assembly"].get("bpPerPx", 50)
 
