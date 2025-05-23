@@ -42,7 +42,7 @@ import argparse
 from pathlib import Path
 
 import yaml
-from add_tracks_to_view import (
+from default_session_builder import (
     DefaultSession,
     create_view,
     process_tracks,

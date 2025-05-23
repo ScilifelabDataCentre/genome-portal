@@ -1,5 +1,5 @@
 import pytest
-from add_tracks_to_view import (
+from default_session_builder import (
     get_protein_coding_gene_file_name,
 )
 
