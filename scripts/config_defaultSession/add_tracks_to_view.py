@@ -185,7 +185,7 @@ def get_track_display_type(track: dict[str, Any]) -> str:
     """
     Get the optional key track_type from the track.
     """
-    track_type = track.get("trackType")
+    track_type = track.get("displayType")
     track_type = track_type.lower() if track_type is not None else None
     if track_type is None or track_type == "linear":
         track_type = "LinearBasicDisplay"

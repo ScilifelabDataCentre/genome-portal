@@ -17,7 +17,7 @@ assembly.defaultScaffold: str   (name of the scaffold to display in the defaultS
 assembly.bpPerPx: int = 50      (this is the "zoom level" in the JBrowse view. Longer scaffolds tend to need a larger value)
 {assembly,track}.fileName: str  (if not specified, the package will try to deduce the name from the url, but this key takes precedence if specified)
 track.defaultSession: Bool      (ignored by protein-coding gene tracks since they are mandatory)
-track.trackType: str            (one of ["linear", "arc", "gwas"])
+track.displayType: str          (one of ["linear", "arc", "gwas"])
 track.scoreColumn: str:         (name of the score column in the track file)
 
 old keys that are deprecated and should not be used:
@@ -25,7 +25,7 @@ track.GWAS
 track.scoreColumnGWAS
 
 #expanding the code
-to add a new display type to the code, define a new key value for trackType and add the corresponding logic to get_track_display_type()
+to add a new display type to the code, define a new key value for displayType and add the corresponding logic to get_track_display_type()
 if a track needs a plugin, the logic can be added to check_if_plugin_needed
 
 
@@ -121,8 +121,6 @@ if __name__ == "__main__":
             assembly_counter=assembly_counter,
         )
 
-        # TODO change the key trackType since it might be misleading
-
         # TODO generalize the support for more adapter types
 
         # TODO improve the logic for featuretrack quantive track
@@ -132,6 +130,7 @@ if __name__ == "__main__":
         # TODO order of the tracks in the config.yml is not preserved in the final config.json made by the makefile.
         # see if that could be fixed in the makefile? The other option is to use categories in the defaultSession
         # config.json like we have done for linum in the past
+        # anotehr way is to set standard tracks with "category": ["Annotation"],
 
         # TODO write the docstring for the module, and ensure that all functions have docstrings
 
