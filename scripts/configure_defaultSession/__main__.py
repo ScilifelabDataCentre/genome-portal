@@ -49,7 +49,7 @@ from pathlib import Path
 
 import yaml
 from default_session_builder import DefaultSession, create_view, process_tracks
-from default_session_utils import check_config_json_exists, get_species_abbreviation, save_json
+from default_session_utils import check_config_json_exists, save_json
 
 
 def run_argparse() -> argparse.Namespace:
@@ -102,12 +102,7 @@ if __name__ == "__main__":
             "The primary assembly (assembly number 1 in config.yml) is required to have a non-empty 'organism' key. Exiting."
         )
 
-    species_name = configs[0]["organism"]
-    default_session = DefaultSession(
-        species_name=species_name,
-        species_abbreviation=get_species_abbreviation(species_name=species_name),
-        species_slug=species_name.replace(" ", "_").lower(),
-    )
+    default_session = DefaultSession.from_config(configs[0])
 
     for assembly_counter, config in enumerate(configs):
         if not config:

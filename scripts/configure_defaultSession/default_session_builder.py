@@ -1,7 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Any, Optional
 
-from default_session_utils import get_base_extension, get_fasta_header_and_scaffold_length, get_track_file_name
+from default_session_utils import (
+    get_base_extension,
+    get_fasta_header_and_scaffold_length,
+    get_species_abbreviation,
+    get_track_file_name,
+)
 
 
 @dataclass
@@ -129,6 +134,15 @@ class DefaultSession:
     views: list[dict[str, Any]] = field(default_factory=list)
     top_level_tracks: list[dict[str, Any]] = field(default_factory=list)
     plugins: list[dict[str, Any]] = field(default_factory=list)
+
+    @classmethod
+    def from_config(cls, config: dict[str, Any]) -> "DefaultSession":
+        species_name = config["organism"]
+        return cls(
+            species_name=species_name,
+            species_abbreviation=get_species_abbreviation(species_name=species_name),
+            species_slug=species_name.replace(" ", "_").lower(),
+        )
 
     def make_defaultSession_dict(self) -> dict[str, any]:
         data = {
