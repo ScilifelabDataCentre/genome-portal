@@ -7,10 +7,15 @@ Assumes that the dockermake has been run once to download the files.
 
 Handles multi-assembly config.yml (YAML document) files by assembly_counter
 
+The interaction between defaultSession and the makefile is based on track filenames,
+so the filenames has to be unique across a config.yml file. If the same file needs to be used, the
+fileName key can be used to specify the name that the makefile will give it upon download of the url.
+
 
 config.yml keys that are recognised by this script:
 assembly.defaultScaffold: str   (name of the scaffold to display in the defaultSession when the JBrowse instance is initialized)
 assembly.bpPerPx: int = 50      (this is the "zoom level" in the JBrowse view. Longer scaffolds tend to need a larger value)
+{assembly,track}.fileName: str  (if not specified, the package will try to deduce the name from the url, but this key takes precedence if specified)
 track.defaultSession: Bool      (ignored by protein-coding gene tracks since they are mandatory)
 track.trackType: str            (one of ["linear", "arc", "gwas"])
 track.scoreColumn: str:         (name of the score column in the track file)
@@ -116,7 +121,11 @@ if __name__ == "__main__":
             assembly_counter=assembly_counter,
         )
 
-        # TODO add support for bedgraph tracks ("histogram" display)
+        # TODO change the key trackType since it might be misleading
+
+        # TODO generalize the support for more adapter types
+
+        # TODO improve the logic for featuretrack quantive track
 
         # TODO consider the track_color key in the config.yml
 

@@ -33,6 +33,13 @@ tracks:
     addTrack: false
     defaultSession: true
     trackType: "arc"
+  - name: "Test of bedGraph track"
+    url: "https://figshare.scilifelab.se/ndownloader/files/50073939"
+    fileName: "Lten_pop08_TD_for_wiggle.bed.gz"
+    addTrack: false
+    defaultSession: true
+    trackType: "wiggle"
+
 ---
 #This second YAML document is a Frankenstein's monster, since it is a mix of two different species. This is only for testing purposes
 #The reason is that Linum has GWAS tracks, and Clouded Apollo has a organelle assembly and as such lacks a track named protein-coding genes.

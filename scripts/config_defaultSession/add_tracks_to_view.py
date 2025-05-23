@@ -77,7 +77,7 @@ class DefaultSession:
         new_track = [
             {
                 "id": track_params["track_view_id"],
-                "type": "FeatureTrack",
+                "type": "FeatureTrack" if not track_params["is_quantiative_track"] else "QuantitativeTrack",
                 "configuration": track_params["track_config"],
                 "minimized": False,
                 "displays": [
@@ -102,23 +102,29 @@ class DefaultSession:
         # TODO make this into a function that can handle different adapter types
         if base_extension == "bed":
             adapter_type = "BedTabixAdapter"
-            bed_gz_location = track_params["track_file_name"]
-            if bed_gz_location.endswith((".gz", ".zip")):
-                bed_gz_location = bed_gz_location.replace(".gz", ".bgz").replace(".zip", ".bgz")
-            if bed_gz_location.endswith(".bed"):
-                bed_gz_location += ".bgz"
-            index_location = f"{bed_gz_location}.csi"
+            if track_params["track_type"] == "LinearWiggleDisplay":
+                adapter_type = "BedGraphAdapter"
+            if adapter_type == "BedTabixAdapter":
+                location_key = "bedGzLocation"
+            elif adapter_type == "BedGraphAdapter":
+                location_key = "bedGraphLocation"
+            adapter_location = track_params["track_file_name"]
+            if adapter_location.endswith((".gz", ".zip")):
+                adapter_location = adapter_location.replace(".gz", ".bgz").replace(".zip", ".bgz")
+            if adapter_location.endswith(".bed"):
+                adapter_location += ".bgz"
+            index_location = f"{adapter_location}.csi"
         else:
             raise ValueError("Unsupported track file type.")
 
         new_top_level_track = {
-            "type": "FeatureTrack",
+            "type": "FeatureTrack" if not track_params["is_quantiative_track"] else "QuantitativeTrack",
             "trackId": track_params["track_top_id"],
             "name": track_params["track_name"],
             "assemblyNames": track_params["assemblyNames"],
             "adapter": {
                 "type": adapter_type,
-                "bedGzLocation": {"uri": bed_gz_location},
+                location_key: {"uri": adapter_location},
                 "index": {"location": {"uri": index_location}, "indexType": "CSI"},
             },
             "displays": [
@@ -187,6 +193,8 @@ def get_track_display_type(track: dict[str, Any]) -> str:
         track_type = "LinearArcDisplay"
     elif track_type == "gwas":
         track_type = "LinearManhattanDisplay"
+    elif track_type == "wiggle":
+        track_type = "LinearWiggleDisplay"
     return track_type
 
 
@@ -201,6 +209,8 @@ def make_track_params(track: dict[str, Any], species_abbreviation: str) -> dict[
     track_type = get_track_display_type(track)
     display_config = f"{track_file_name}-{track_type}"
     score_column = track.get("scoreColumn")
+    is_quantiative_track = "LinearWiggleDisplay" in track_type
+
     return {
         "track_view_id": track_view_id,
         "track_top_id": track_file_name,
@@ -210,6 +220,7 @@ def make_track_params(track: dict[str, Any], species_abbreviation: str) -> dict[
         "track_config": track_file_name,
         "display_config": display_config,
         "score_column": score_column,
+        "is_quantiative_track": is_quantiative_track,
     }
 
 
