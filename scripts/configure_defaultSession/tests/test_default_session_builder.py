@@ -3,10 +3,11 @@ from typing import Any
 
 from default_session_builder import (
     DefaultSession,
-    check_if_plugin_needed,
+    TrackParams,
     create_view,
     process_tracks,
 )
+from default_session_utils import get_base_extension
 
 
 def test_create_views_from_fixture(example_configs: list[Any], example_init_default_session: DefaultSession) -> None:
@@ -16,7 +17,6 @@ def test_create_views_from_fixture(example_configs: list[Any], example_init_defa
     """
     configs = example_configs
     default_session = example_init_default_session
-    assembly_counter = 0
     for assembly_counter, config in enumerate(configs):
         default_session = create_view(
             default_session=default_session,
@@ -27,10 +27,10 @@ def test_create_views_from_fixture(example_configs: list[Any], example_init_defa
 
 
 def test_add_track_to_view(
-    example_default_session_with_view: DefaultSession, example_track_params: dict[str, Any]
+    example_default_session_with_view: DefaultSession, example_track_params: dict[str, TrackParams]
 ) -> None:
     """
-    Test that successfully adds tracks an initiated view in the DefaultSession object.
+    Test that successfully adds tracks to an initiated view in the DefaultSession object.
     Since the example_default_session_with_view fixture only has one view, set assembly_counter = 0.
     """
     default_session = example_default_session_with_view
@@ -45,20 +45,16 @@ def test_add_track_to_view(
         assert default_session.views[assembly_counter]["tracks"], "No tracks were added to the view"
 
         added_track = default_session.views[assembly_counter]["tracks"][-1]
-        for param_key, param_value in param.items():
-            if param_key in added_track:  # not all track_params are used in the tested function
-                assert (
-                    added_track[param_key] == param_value
-                ), f"{param_key} does not match: {added_track[param_key]} != {param_value}"
+        assert added_track["configuration"] == param.track_file_name
+        assert added_track["type"] == ("QuantitativeTrack" if param.is_quantiative_track else "FeatureTrack")
 
 
 def test_add_track_to_top_level_tracks(
-    example_init_default_session: DefaultSession, example_track_params: dict[str, dict[str, Any]]
+    example_init_default_session: DefaultSession, example_track_params: dict[str, TrackParams]
 ) -> None:
     """
     Test that successfully adds tracks to the top level tracks in the DefaultSession object.
     """
-
     default_session = example_init_default_session
     track_params = example_track_params
     for param in track_params.values():
@@ -67,31 +63,9 @@ def test_add_track_to_top_level_tracks(
         assert default_session.top_level_tracks, "No tracks were added to the DefaultSession object"
 
         added_track = default_session.top_level_tracks[-1]
-        for param_key, param_value in param.items():
-            if param_key in added_track:  # not all track_params are used in the tested function
-                assert (
-                    added_track[param_key] == param_value
-                ), f"{param_key} does not match: {added_track[param_key]} != {param_value}"
-                if param.get("display_type") == "LinearWiggleDisplay":
-                    assert added_track["type"] == "QuantitativeTrack"
-                else:
-                    assert added_track["type"] == "FeatureTrack"
-
-
-def test_add_plugin(
-    example_init_default_session: DefaultSession, example_track_params: dict[str, dict[str, Any]]
-) -> None:
-    """
-    Test that successfully adds a plugin call to the DefaultSession object.
-    """
-
-    default_session = example_init_default_session
-    track_params = example_track_params
-    for param in track_params.values():
-        plugin_call = check_if_plugin_needed(track_params=param)
-        if plugin_call:
-            default_session.add_plugin(plugin_call=plugin_call)
-            assert default_session.plugins, "No plugins were added to the DefaultSession object"
+        assert added_track["trackId"] == param.track_file_name
+        assert added_track["name"] == param.track_name
+        assert added_track["type"] == ("QuantitativeTrack" if param.is_quantiative_track else "FeatureTrack")
 
 
 def test_view_and_tracks_from_config_fixture(
@@ -128,3 +102,23 @@ def test_view_and_tracks_from_config_fixture(
             assert file_name_cleaned in [
                 v_track.get("configuration") for v_track in view_tracks
             ], f"Track {track.get('fileName')} not found in view[{assembly_counter}] tracks"
+
+
+def test_get_track_adapter_config(example_track_params: dict[str, TrackParams]) -> None:
+    """
+    Test that successfully gets the adapter config for each track type.
+    """
+    track_params = example_track_params
+    for param in track_params.values():
+        adapter_config = TrackParams.get_track_adapter_config(track_params=param)
+        base_extension = get_base_extension(param.track_file_name)
+        if base_extension == "gff":
+            assert adapter_config["adapter_type"] == "Gff3TabixAdapter"
+            assert adapter_config["location_key"] == "gffGzLocation"
+        elif base_extension == "bed":
+            if param.display_type == "LinearWiggleDisplay":
+                assert adapter_config["adapter_type"] == "BedGraphAdapter"
+                assert adapter_config["location_key"] == "bedGraphLocation"
+            else:
+                assert adapter_config["adapter_type"] == "BedTabixAdapter"
+                assert adapter_config["location_key"] == "bedGzLocation"

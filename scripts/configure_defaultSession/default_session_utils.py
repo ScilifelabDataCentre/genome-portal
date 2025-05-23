@@ -20,6 +20,18 @@ def check_config_json_exists(output_json_path: Path) -> None:
         )
 
 
+def get_base_extension(file_name: str) -> str:
+    """
+    Subfunction that extracts the base file extension from a file name.
+    E.g. 'track.bed.gz' -> 'bed', 'track2.gff' -> 'gff'.
+    """
+    file_path = Path(file_name)
+    if file_path.suffix in [".gz", ".zip", ".bgz"]:
+        return file_path.with_suffix("").suffix.lstrip(".")
+    else:
+        return file_path.suffix.lstrip(".")
+
+
 def get_species_abbreviation(species_name: str) -> str:
     """
     Subfunction that takes the scientific (binomial) species name and returns an abbreviation that will be used as a track id suffix.
@@ -116,56 +128,6 @@ def get_track_file_name(track: dict[str, Any]) -> str:
             "Error: Was not able to obtain the track filenames from the URLs or the fileName keys. Exiting."
         )
     return file_name.rsplit(".", 1)[0] if file_name.endswith((".gz", ".bgz", ".zip")) else file_name
-
-
-def get_base_extension(file_name: str) -> str:
-    """
-    Subfunction that extracts the base file extension from a file name.
-    E.g. 'track.bed.gz' -> 'bed', 'track2.gff' -> 'gff'.
-    """
-    file_path = Path(file_name)
-    if file_path.suffix in [".gz", ".zip", ".bgz"]:
-        return file_path.with_suffix("").suffix.lstrip(".")
-    else:
-        return file_path.suffix.lstrip(".")
-
-
-def get_track_adapter_config(track_params: dict[str, Any]) -> str:
-    """
-    Subfunction that determines the adapter type based on the track parameters.
-
-    The makefile will tabix index and bgzip files with .gff and .bed extension, resulting
-    in *.bgz and .bgz.csi files for these two file types. Consequencly, this function
-    uses the *TabixAdapter and *GzLocation settings as the default setting.
-    """
-    base_extension = get_base_extension(file_name=track_params["track_file_name"])
-
-    if base_extension == "gff":
-        adapter_type = "Gff3TabixAdapter"
-        location_key = "gffGzLocation"
-
-    if base_extension == "bed":
-        if track_params["display_type"] == "LinearWiggleDisplay":
-            adapter_type = "BedGraphAdapter"
-            location_key = "bedGraphLocation"
-        else:
-            adapter_type = "BedTabixAdapter"
-            location_key = "bedGzLocation"
-
-    adapter_location = track_params["track_file_name"]
-    if adapter_location.endswith((".gz", ".zip")):
-        adapter_location = adapter_location.rsplit(".", 1)[0] + ".bgz"
-    elif adapter_location.endswith((".gff", ".bed")):
-        adapter_location += ".bgz"
-
-    index_location = f"{adapter_location}.csi"
-
-    return {
-        "adapter_location": adapter_location,
-        "adapter_type": adapter_type,
-        "index_location": index_location,
-        "location_key": location_key,
-    }
 
 
 def save_json(data: dict[str, Any], output_json_path: Path):

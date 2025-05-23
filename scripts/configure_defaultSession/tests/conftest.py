@@ -3,8 +3,8 @@ from typing import Any
 
 import pytest
 import yaml
-from default_session_builder import DefaultSession
-from utils import get_species_abbreviation
+from default_session_builder import DefaultSession, TrackParams
+from default_session_utils import get_species_abbreviation
 
 FIXTURES_DIR = Path(__file__).parent / "fixtures"
 
@@ -60,44 +60,40 @@ def example_default_session_with_view(example_init_default_session: DefaultSessi
 
 
 @pytest.fixture
-def example_track_params() -> dict[str, dict[str, Any]]:
+def example_track_params() -> dict[str, TrackParams]:
     track_params = {
-        "protein_coding_genes_gff_track": {
-            "track_view_id": "ther_default_Protein-coding_genes",
-            "track_top_id": "ltenue_v1_genes.gff",
-            "track_file_name": "ltenue_v1_genes.gff",
-            "track_name": "Protein-coding genes",
-            "display_type": "LinearBasicDisplay",
-            "track_config": "ltenue_v1_genes.gff",
-            "display_config": "ltenue_v1_genes.gff-LinearBasicDisplay",
-            "score_column": None,
-            "is_quantiative_track": False,
-            "assemblyNames": "Linum_tenue_thrum_v1",
-        },
-        "bed_gwas_track": {
-            "track_view_id": "ther_default_Tajimas_D_population_06",
-            "track_top_id": "Lten_pop06_TD.bed",
-            "track_file_name": "Lten_pop06_TD.bed",
-            "track_name": "Tajima's D, population 06",
-            "display_type_key": "gwas",
-            "display_type": "LinearManhattanDisplay",
-            "track_config": "Lten_pop06_TD.bed",
-            "display_config": "Lten_pop06_TD.bed-LinearManhattanDisplay",
-            "score_column": "TajimaD",
-            "is_quantiative_track": False,
-            "assemblyNames": "Linum_tenue_thrum_v1",
-        },
-        "bedGraph_like_track": {
-            "track_view_id": "ther_default_Test_of_bedGraph_track",
-            "track_top_id": "Lten_pop08_TD_for_wiggle.bed",
-            "track_file_name": "Lten_pop08_TD_for_wiggle.bed",
-            "track_name": "Test of bedGraph track",
-            "display_type_key": "wiggle",
-            "display_type": "LinearWiggleDisplay",
-            "track_config": "Lten_pop08_TD_for_wiggle.bed",
-            "display_config": "Lten_pop08_TD_for_wiggle.bed-LinearWiggleDisplay",
-            "is_quantiative_track": True,
-            "assemblyNames": "Linum_tenue_thrum_v1",
-        },
+        "protein_coding_genes_gff_track": TrackParams(
+            track_view_id="ther_default_Protein-coding_genes",
+            track_file_name="ltenue_v1_genes.gff",
+            track_name="Protein-coding genes",
+            display_type_key=None,
+            display_type="LinearBasicDisplay",
+            display_config="ltenue_v1_genes.gff-LinearBasicDisplay",
+            score_column=None,
+            is_quantiative_track=False,
+            assembly_names=["Linum_tenue_thrum_v1"],
+        ),
+        "bed_gwas_track": TrackParams(
+            track_view_id="ther_default_Tajimas_D_population_06",
+            track_file_name="Lten_pop06_TD.bed",
+            track_name="Tajima's D, population 06",
+            display_type_key="gwas",
+            display_type="LinearManhattanDisplay",
+            display_config="Lten_pop06_TD.bed-LinearManhattanDisplay",
+            score_column="TajimaD",
+            is_quantiative_track=False,
+            assembly_names=["Linum_tenue_thrum_v1"],
+        ),
+        "bedGraph_like_track": TrackParams(
+            track_view_id="ther_default_Test_of_bedGraph_track",
+            track_file_name="Lten_pop08_TD_for_wiggle.bed",
+            track_name="Test of bedGraph track",
+            display_type_key="wiggle",
+            display_type="LinearWiggleDisplay",
+            display_config="Lten_pop08_TD_for_wiggle.bed-LinearWiggleDisplay",
+            score_column=None,
+            is_quantiative_track=True,
+            assembly_names=["Linum_tenue_thrum_v1"],
+        ),
     }
     return track_params

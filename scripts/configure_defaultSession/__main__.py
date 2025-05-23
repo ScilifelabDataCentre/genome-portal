@@ -32,11 +32,11 @@ track.scoreColumnGWAS
 this script is indended to be updated and expanded as new track types are added to the Genome Portal
 
 - to add a new display type to the code, define a new key value for displayType and add the corresponding logic to
-default_session_builder.get_track_display_type
+TrackParams.get_display_type
 
-- if a track needs a plugin, the logic can be added to default_session_builder.check_if_plugin_needed
+- if a track needs a plugin, the logic can be added to TrackParams.check_if_plugin_needed
 
-- to add a new file format adapter, modify utils.get_track_adapter_config
+- to add a new file format adapter, modify TrackParams.get_track_adapter_config
 
 
 # Example usage:
@@ -49,7 +49,7 @@ from pathlib import Path
 
 import yaml
 from default_session_builder import DefaultSession, create_view, process_tracks
-from utils import check_config_json_exists, get_species_abbreviation, save_json
+from default_session_utils import check_config_json_exists, get_species_abbreviation, save_json
 
 
 def run_argparse() -> argparse.Namespace:
@@ -127,8 +127,6 @@ if __name__ == "__main__":
             config=config,
             assembly_counter=assembly_counter,
         )
-
-        # TODO generalize the support for more adapter types
 
         # TODO improve the logic for setting featuretrack and quantive track
 
