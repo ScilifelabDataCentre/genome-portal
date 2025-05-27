@@ -1,0 +1,58 @@
+{
+    "Species": {
+        "science_name": "Anthophora retusa",
+        "tax_id": "597843",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:597843",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=597843",
+        "display_order": 1
+    },
+    "Genus": {
+        "science_name": "Anthophora",
+        "tax_id": "60896",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:60896",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=60896",
+        "display_order": 2
+    },
+    "Family": {
+        "science_name": "Apidae",
+        "tax_id": "7458",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:7458",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=7458",
+        "display_order": 3
+    },
+    "Order": {
+        "science_name": "Hymenoptera",
+        "tax_id": "7399",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:7399",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=7399",
+        "display_order": 4
+    },
+    "Class": {
+        "science_name": "Insecta",
+        "tax_id": "50557",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:50557",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=50557",
+        "display_order": 5
+    },
+    "Phylum": {
+        "science_name": "Arthropoda",
+        "tax_id": "6656",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:6656",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=6656",
+        "display_order": 6
+    },
+    "Kingdom": {
+        "science_name": "Metazoa",
+        "tax_id": "33208",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:33208",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=33208",
+        "display_order": 7
+    },
+    "Domain": {
+        "science_name": "Eukaryota",
+        "tax_id": "2759",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:2759",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=2759",
+        "display_order": 8
+    }
+}

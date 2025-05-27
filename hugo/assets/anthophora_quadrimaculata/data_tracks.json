@@ -1,0 +1,36 @@
+[
+  {
+    "dataTrackName": "Genome",
+    "description": "Reference genome sequence",
+    "links": [
+      {
+        "Download": "ftp://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/cax/CAXEFK01.fasta.gz"
+      },
+      {
+        "Website": "https://www.ebi.ac.uk/ena/browser/view/GCA_963995475.1"
+      }
+    ],
+    "accessionOrDOI": "GCA_963995475.1",
+    "fileName": "CAXEFK01.fasta.gz",
+    "principalInvestigator": "Matthew Webster",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "27/05/2025"
+  },
+  {
+    "dataTrackName": "Protein-coding genes",
+    "description": "Functional annotation of protein-coding genes in the primary genome assembly",
+    "links": [
+      {
+        "Download": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/963/995/475/GCA_963995475.1_iyAntQuad1/GCA_963995475.1_iyAntQuad1_genomic.gff.gz"
+      },
+      {
+        "Website": "https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_963995475.1/"
+      }
+    ],
+    "accessionOrDOI": "GCA_963995475.1",
+    "fileName": "GCA_963995475.1_iyAntQuad1_genomic.gff.gz",
+    "principalInvestigator": "Matthew Webster",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "27/05/2025"
+  }
+]
