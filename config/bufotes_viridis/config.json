@@ -1,0 +1,60 @@
+{
+  "defaultSession": {
+    "id": "bvir_default_session",
+    "name": "Bufotes viridis",
+    "widgets": {
+      "hierarchicalTrackSelector": {
+        "id": "hierarchicalTrackSelector",
+        "type": "HierarchicalTrackSelectorWidget",
+        "view": "bvir_default_session_view_0",
+        "faceted": {
+          "showSparse": false,
+          "showFilters": true,
+          "showOptions": false,
+          "panelWidth": 400
+        }
+      }
+    },
+    "activeWidgets": {
+      "hierarchicalTrackSelector": "hierarchicalTrackSelector"
+    },
+    "views": [
+      {
+        "id": "bvir_default_session_view_0",
+        "minimized": false,
+        "type": "LinearGenomeView",
+        "trackLabels": "offset",
+        "offsetPx": 0,
+        "bpPerPx": 500,
+        "displayedRegions": [
+          {
+            "refName": "CAWYQA010000001.1",
+            "start": 0,
+            "end": 643651765,
+            "reversed": false,
+            "assemblyName": "Bufotes_viridis_n_2023_12"
+          }
+        ],
+        "tracks": [
+          {
+            "id": "bvir_default_protein_coding_genes_view_0",
+            "type": "FeatureTrack",
+            "configuration": "GCA_963931945.1_Bufotes_viridis_n_2023_12_genomic.gff",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "bvir_default_protein_coding_genes_view_0_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 500,
+                "configuration": "GCA_963931945.1_Bufotes_viridis_n_2023_12_genomic.gff-LinearBasicDisplay"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "configuration": {
+    "disableAnalytics": true
+  }
+}
