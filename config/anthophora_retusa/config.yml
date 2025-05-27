@@ -9,15 +9,15 @@ tracks:
 - name: Protein-coding genes
   url: https://nextcloud.dc.scilifelab.se/s/TY44yaXZnGZBDry/download/GCA_963995495.1_iyAntRet1_genomic.gff.renamed.gff.gz
 - name: Repeats
-  url: #URL OMITTED FOR NOW, TRACK IS NOT YET PUBLIC
+  url: "https://nextcloud.dc.scilifelab.se/s/CskpqGoMdfmWP3L/download/Anthophora_retusa_repeats.gff" #temp storage for the track
   fileName: "Anthophora_retusa_repeats.gff"
   defaultSession: true 
 - name: Transcripts (Isoseq)
-  url: #URL OMITTED FOR NOW, TRACK IS NOT YET PUBLIC
+  url: "https://nextcloud.dc.scilifelab.se/s/8bozjcBn9Q2abTG/download/Anthophora_retusa_isoseq.gff"
   fileName: "Anthophora_retusa_isoseq.gff"
   defaultSession: true
 - name: "Nucleotide diversity (Pi), 5kb windows"
-  url: #URL OMITTED FOR NOW, TRACK IS NOT YET PUBLIC
+  url: "https://nextcloud.dc.scilifelab.se/s/jMoCFpNgEJDYxF4/download/retusa_5kb.windowed.pi" #temp storage for the track
   fileName: "retusa_5kb.windowed.bed"
   addTrack: false
   defaultSession: true
@@ -25,7 +25,7 @@ tracks:
   scoreColumnGWAS: "PI"
   color: "rgb(242, 142, 44)"
 - name: "Tajima's D"
-  url: #URL OMITTED FOR NOW, TRACK IS NOT YET PUBLIC
+  url: "https://nextcloud.dc.scilifelab.se/s/K58H5LDxzp38zXJ/download/retusa.Tajima.D.end_column_added.drop_nan.bed" #temp storage for the track
   fileName: "retusa.Tajima.D.end_column_added.drop_nan.bed"
   addTrack: false
   defaultSession: true
