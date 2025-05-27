@@ -44,12 +44,6 @@ The Four-banded Flower Bee (_Anthophora quadrimaculata_) is a species of bee fou
 
 There is currently no publication accociated with this genome of _Anthophora quadrimaculata_. In the meantime, please cite the genome assembly submission: GCA_963995475.1.
 
-If you use the data presented in the genome portal from this species in your research, please cite the original publication:
-
-```{style=citation}
-Click or tap here to enter text.
-```
-
 If you have used the pages for this species in the Genome Portal, please refer to it in-text as: "The _Anthophora quadrimaculata_ entry in the Swedish Reference Genome Portal (Retrieved <span class="todays-date"></span>)." and use the following for the bibliography:
 
 ```{style=citation}
