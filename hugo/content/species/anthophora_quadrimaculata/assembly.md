@@ -17,20 +17,19 @@ stats_data_path: "anthophora_quadrimaculata/species_stats"
 lineage_data_path: "anthophora_quadrimaculata/taxonomy"
 ---
 
-Notes: Assembly statistics were calculated for the primary genome assembly GCA_963995475.1. Busco statistics were taken from [EDIT]. Annotation statistics were calculated using [EDIT].
+Notes: Assembly statistics were calculated for the primary genome assembly GCA_963995475.1 (CAXEFK01.fasta) using Quast (v5.2.0; Mikheenko et al. 2018). Busco statistics (Manni et al., 2021) were recieved by communication with the authors. Annotation statistics were calculated for GCA_963995475.1_iyAntQuad1_genomic.gff using AGAT (v1.4.1; Dainat, 2024).
 
 BUSCO notation: C: Complete; S: Single-copy; D: Duplicated; F: Fragmented; M: Missing; n: Total BUSCO genes included in the dataset (here: arthropoda_odb10). See also [the official BUSCO manual](https://busco.ezlab.org/busco_userguide.html#interpreting-the-results).
 
 ### Publication(s)
 
-The data for *Anthophora quadrimaculata* displayed in the genome portal comes from:
+There is currently no publication accociated with this genome of _Anthophora quadrimaculata_. In the meantime, please cite the genome assembly submission: GCA_963995475.1.
 
-```{style=citation}
-Click or tap here to enter text.
-```
+The tools used by to calculate the statistics shown on top of this page are described in:
 
-### Funding
+- Dainat J. (2024). AGAT: Another Gff Analysis Toolkit to handle annotations in any GTF/GFF format.
+(Version v1.4.1). Zenodo. <https://www.doi.org/10.5281/zenodo.3552717>
 
-*The study in which the genome data was generated ([EDIT:publication_reference]) acknowledge funding by:*
+- Manni, M., Berkeley, M. R., Seppey, M., Simão, F. A., & Zdobnov, E. M. (2021). BUSCO Update: Novel and Streamlined Workflows along with Broader and Deeper Phylogenetic Coverage for Scoring of Eukaryotic, Prokaryotic, and Viral Genomes. Molecular Biology and Evolution, 38(10), 4647–4654. <https://doi.org/10.1093/molbev/msab199>
 
-- Click or tap here to enter text.
+- Mikheenko, A., Prjibelski, A., Saveliev, V., Antipov, D., & Gurevich, A. (2018). Versatile genome assembly evaluation with QUAST-LG. Bioinformatics, 34(13), i142–i150. <https://doi.org/10.1093/bioinformatics/bty266>
