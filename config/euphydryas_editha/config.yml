@@ -1,0 +1,11 @@
+organism: Euphydryas editha
+assembly:
+  name: Euphydryas_editha
+  displayName: E. editha genome assembly GCA_933666425
+  accession: GCA_933666425.1
+  url: https://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/cak/CAKOGL01.fasta.gz
+  fileName: CAKOGL01.fasta.gz
+tracks:
+- name: Protein-coding genes
+  url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/933/666/425/GCA_933666425.1_Euphydryas_editha/GCA_933666425.1_Euphydryas_editha_genomic.gff.gz
+  fileName: GCA_933666425.1_Euphydryas_editha_genomic.gff.gz
