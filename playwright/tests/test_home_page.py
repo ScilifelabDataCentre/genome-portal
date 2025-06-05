@@ -6,7 +6,7 @@ import re
 import time
 
 import pytest
-from utils import validate_date_format
+from utils import INTRO_PAGE_PATHS, validate_date_format
 
 from playwright.sync_api import Locator, Page, expect
 
@@ -61,6 +61,17 @@ def pagination_btns(home_page: Page) -> dict[str, Locator]:
     for i in range(1, get_numb_pages(home_page) + 1):
         buttons[str(i)] = get_page_button_link(home_page, str(i))
     return buttons
+
+
+@pytest.fixture
+def show_all_species_btn(home_page: Page) -> Locator:
+    """Helper function to return the show all species button."""
+    return home_page.locator("#showAllSpeciesBtn")
+
+
+@pytest.fixture
+def total_numb_species() -> int:
+    return len(INTRO_PAGE_PATHS)
 
 
 def test_has_title(home_page: Page) -> None:
@@ -158,6 +169,38 @@ def test_pagination_nav_buttons(home_page: Page, pagination_btns: dict[str, Loca
         pagination_btns["prev"].click()
     expect(pagination_btns["prev"].locator("..")).to_have_class(re.compile("disabled"))
     expect(first_page_link.locator("..")).to_have_class(re.compile("active"))
+
+
+def test_show_all_species_btn(home_page: Page, show_all_species_btn: Locator, total_numb_species: int) -> None:
+    """
+    Test clicking the "Show all species" button loads all species cards and hides the pagination.
+    """
+    if not pagination_exists(home_page):
+        return
+
+    expect(show_all_species_btn).to_be_visible()
+    expect(home_page.locator(".pagination")).to_be_visible()
+
+    show_all_species_btn.click()
+
+    expect(home_page.locator(".pagination")).not_to_be_visible()
+    expect(show_all_species_btn).not_to_be_visible()
+
+    species_cards = home_page.locator(".scilife-species-card").all()
+    numb_visible_cards = count_visible_cards(species_cards)
+
+    assert numb_visible_cards == total_numb_species, (
+        f"Expected '{total_numb_species}' species cards to be visible, after clicking 'Show all species', "
+        f"but found '{numb_visible_cards}' visible cards."
+    )
+
+
+def test_show_all_species_btn_has_correct_numb_species(
+    home_page: Page, show_all_species_btn: Locator, total_numb_species: int
+) -> None:
+    if not pagination_exists(home_page):
+        return
+    expect(show_all_species_btn).to_have_text(re.compile(f"{total_numb_species} species"))
 
 
 def count_visible_cards(species_cards: list[Locator]) -> int:
