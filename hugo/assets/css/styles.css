@@ -425,6 +425,19 @@ body {
   border-color: #dee2e6;
 }
 
+.scilife-show-all-btn {
+  color: var(--scilife-teal);
+  background-color: #fff;
+  border-color: var(--scilife-teal);
+}
+
+.scilife-show-all-btn:hover,
+.scilife-show-all-btn:active  {
+  color: #fff;
+  background-color: var(--scilife-teal);
+}
+
+
 
 .scilife-intro-map-img {
   width: auto;

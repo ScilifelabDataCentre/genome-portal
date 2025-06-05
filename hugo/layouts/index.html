@@ -80,12 +80,14 @@
 </div>
 
 
-<!-- Add pagination if numb of species cards is > than number of species per page
-     numb species per page set in main config.yaml file -->
+<!--
+Adds pagination if numb of species cards is > than number of species per page
+numb species per page set in main config.yaml file.
+Also adds a show all button to show all species cards
+-->
 {{if gt $numbSpecies $numbSpeciesCards }}
 {{ partial "pagination.html" (dict "numbSpecies" $numbSpecies "numbSpeciesCards" $numbSpeciesCards) }}
 {{end}}
-
 
 
 
