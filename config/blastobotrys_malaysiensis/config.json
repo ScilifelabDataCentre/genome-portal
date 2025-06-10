@@ -37,13 +37,13 @@
         ],
         "tracks": [
           {
-            "id": "bmal_default_protein_coding_genes_view_0",
+            "id": "bmal_default_genes_view_0",
             "type": "FeatureTrack",
             "configuration": "bmalaysiensis_annotation.gff",
             "minimized": false,
             "displays": [
               {
-                "id": "bmal_default_protein_coding_genes_view_0_display",
+                "id": "bmal_default_genes_view_0_display",
                 "type": "LinearBasicDisplay",
                 "heightPreConfig": 250,
                 "configuration": "bmalaysiensis_annotation.gff-LinearBasicDisplay"

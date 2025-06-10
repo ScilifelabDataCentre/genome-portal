@@ -75,4 +75,5 @@ Swedish Reference Genome Portal (Retrieved DATE_ACCESSED), SciLifeLab Data Centr
 
 #### Changelog
 
+- 10/06/2025 - Update track name from _Protein-coding genes_ to _Genes_ to reflect that the annotation also contains ncRNA genes
 - 05/05/2025 - Species first published on the Portal

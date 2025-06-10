@@ -6,6 +6,6 @@ assembly:
   url: https://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/cbc/CBCOUN01.fasta.gz
   fileName: CBCOUN01.fasta.gz
 tracks:
-- name: Protein-coding genes
+- name: Genes
   url: https://figshare.scilifelab.se/ndownloader/files/53044784
   fileName: billinoisensis_annotation.gff

@@ -37,13 +37,13 @@
         ],
         "tracks": [
           {
-            "id": "bill_default_protein_coding_genes_view_0",
+            "id": "bill_default_genes_view_0",
             "type": "FeatureTrack",
             "configuration": "billinoisensis_annotation.gff",
             "minimized": false,
             "displays": [
               {
-                "id": "bill_default_protein_coding_genes_view_0_display",
+                "id": "bill_default_genes_view_0_display",
                 "type": "LinearBasicDisplay",
                 "heightPreConfig": 150,
                 "configuration": "billinoisensis_annotation.gff-LinearBasicDisplay"

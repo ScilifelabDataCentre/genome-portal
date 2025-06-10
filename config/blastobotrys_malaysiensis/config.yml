@@ -6,6 +6,6 @@ assembly:
   url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/030/558/815/GCA_030558815.1_ASM3055881v1/GCA_030558815.1_ASM3055881v1_genomic.fna.gz
   fileName: GCA_030558815.1_ASM3055881v1_genomic.fna.gz
 tracks:
-- name: Protein-coding genes
+- name: Genes
   url: https://figshare.scilifelab.se/ndownloader/files/53044787
   fileName: bmalaysiensis_annotation.gff

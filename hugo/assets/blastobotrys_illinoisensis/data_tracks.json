@@ -17,8 +17,8 @@
     "firstDateOnPortal": "05 May 2025"
   },
   {
-    "dataTrackName": "Protein-coding genes",
-    "description": "Functional annotation of protein-coding genes in the primary genome assembly",
+    "dataTrackName": "Genes",
+    "description": "Functional annotation of genes in the primary genome assembly",
     "links": [
       {
         "Download": "https://figshare.scilifelab.se/ndownloader/files/53044784"
