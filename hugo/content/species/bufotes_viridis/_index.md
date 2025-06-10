@@ -75,4 +75,4 @@ Nordens Ark. (2025). Green toad conservation. <https://en.nordensark.se/conserva
 
 #### Changelog
 
-- 29/04/2025 - Species first published on the Portal
+- 10/06/2025 - Species first published on the Portal

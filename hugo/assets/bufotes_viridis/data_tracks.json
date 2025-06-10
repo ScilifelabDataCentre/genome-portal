@@ -11,7 +11,7 @@
     "fileName": "GCA_963931945.1_Bufotes_viridis_n_2023_12_genomic.fna.gz",
     "principalInvestigator": "Jacob Höglund",
     "principalInvestigatorAffiliation": "Uppsala University",
-    "firstDateOnPortal": "30 April 2025"
+    "firstDateOnPortal": "10 June 2025"
   },
   {
     "dataTrackName": "Protein-coding genes",
@@ -25,6 +25,6 @@
     "fileName": "GCA_963931945.1_Bufotes_viridis_n_2023_12_genomic.gff.gz",
     "principalInvestigator": "Jacob Höglund",
     "principalInvestigatorAffiliation": "Uppsala University",
-    "firstDateOnPortal": "30 April 2025"
+    "firstDateOnPortal": "10 June 2025"
   }
 ]
