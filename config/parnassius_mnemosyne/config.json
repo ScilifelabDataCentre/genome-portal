@@ -131,6 +131,39 @@
     },
     "configuration": {
       "disableAnalytics": true
-    }
+    },
+    "plugins": [
+      {
+        "name": "DbxrefPlugin",
+        "esmUrl": "../../custom_jbrowse_plugins/dbxref_plugin.js"
+      }
+    ],
+    "tracks": [
+      {
+        "type": "FeatureTrack",
+        "trackId": "pmne_functional_edit1.gff",
+        "name": "Protein-coding genes",
+        "adapter": {
+          "type": "Gff3TabixAdapter",
+          "gffGzLocation": {
+            "uri": "pmne_functional_edit1.gff.bgz",
+            "locationType": "UriLocation"
+          },
+          "index": {
+            "location": {
+              "uri": "pmne_functional_edit1.gff.bgz.csi",
+              "locationType": "UriLocation"
+            },
+            "indexType": "CSI"
+          }
+        },
+        "formatDetails": {
+          "subfeatures": "jexl:{dbxref:dbxrefLinkout(feature), ontology_term:ontologyLinkout(feature),  uniprot_id:uniprotLinkout(feature)}"
+        },
+        "assemblyNames": [
+          "Parnassius_mnemosyne_n_2023_11"
+        ]
+      }
+    ]
 }
   
