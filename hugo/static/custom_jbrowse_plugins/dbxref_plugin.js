@@ -5,6 +5,20 @@ export default class DbxrefPlugin {
   install() {}
 
   configure(pluginManager) {
+    /**
+    * Generates clickable links in the feature detailspanel for a given FeatureTrack that is annotated with dbxref annotation.
+    * Implementation is based on the example provided in the JBrowse 2 docs: 
+    * https://jbrowse.org/jb2/docs/config_guides/customizing_feature_details/
+    * 
+    * It takes a feature object from a FeatureTrack as input 
+    * and returns a string with HTML links for dbxrefs, ontology terms, and UniProt IDs.
+    * This is rendered as a hyperlink in the feature details panel of the track.
+    * 
+    * To apply to a track, add the following to a track in a species config.json: 
+    * {"tracks": [{ [...] "formatDetails": {"subfeatures": "jexl:{dbxref:dbxrefLinkout(feature), ontology_term:ontologyLinkout(feature), uniprot_id:uniprotLinkout(feature)}"}}]}
+    * 
+    * See also PR101 at https://github.com/ScilifelabDataCentre/genome-portal/pull/101 for a use-case example.
+    */
     pluginManager.jexl.addFunction('dbxrefLinkout', feature => {
       if (!feature.dbxref) {
         return ''
