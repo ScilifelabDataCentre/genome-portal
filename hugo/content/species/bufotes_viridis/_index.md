@@ -40,9 +40,9 @@ initialZoom: 3
 
 ### Description
 
-The European green toad (_Bufotes viridis_) is found in a geographical span from Western Europe to the Ural mountains (IUCN SSC Amphibian Specialist Group, 2023). The _Bufotes_ genus includes 15 lineages of diploid and allopolyploid taxa, with _B. viridis_ being among the diploid species (Dufresnes et al., 2019). Amphibians, such as toads and frogs, are considered to be the most threatened class of vertebrates (Luedtke et al., 2023). Globally,  _B. viridis_ is assessed as Least Concern but decreasing on the IUCN Red List (IUCN SSC Amphibian Specialist Group, 2023). In Sweden, it is among the most vunerable amphibians in the country and is limited to isolated populations along the southern coast (Höglund et al., 2022; SLU Artdatabanken, 2025).
+The European green toad (_Bufotes viridis_) is found across a geographical range spanning from Western Europe to the Ural Mountains (IUCN SSC Amphibian Specialist Group, 2023). The _Bufotes_ genus includes 15 lineages of diploid and allopolyploid taxa, with _B. viridis_ being among the diploid species (Dufresnes et al., 2019). Amphibians, such as toads and frogs, are considered the most threatened class of vertebrates (Luedtke et al., 2023). Globally, _B. viridis_ is assessed as Least Concern but Decreasing on the IUCN Red List (IUCN SSC Amphibian Specialist Group, 2023). In Sweden, it is among the most vulnerable amphibians in the country and is limited to isolated populations along the southern coast (Höglund et al., 2022; SLU Artdatabanken, 2025).
 
-The genome assembly on display in the Swedish Reference Genome Portal was generated in a study by Rödin-Mörch et al. (2025) as a pilot project of the European Reference Genome Atlas (ERGA). The samples used in the study came from a captive population that was founded as part of a conservation effort by Nordens Ark (Nordens Ark, 2025; Rödin-Mörch et al., 2025).
+The genome assembly featured in the Swedish Reference Genome Portal was generated in a study by Rödin-Mörch et al. (2025) that was a pilot project of the European Reference Genome Atlas (ERGA). The samples used in the study came from a captive population established as part of a conservation effort by Nordens Ark (Nordens Ark, 2025; Rödin-Mörch et al., 2025).
 
 #### How to cite
 
