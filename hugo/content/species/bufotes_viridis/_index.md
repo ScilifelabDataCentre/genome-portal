@@ -3,7 +3,7 @@
 title: "*Bufotes viridis*"
 subtitle: "European green toad"
 
-last_updated: "30/04/2025"
+last_updated: "10/06/2025"
 
 cover_image: "/img/species/b_viridis_sune_holt_CCBYNC_4-3ratio_crop.webp"
 img_attrib_text: "Bufotes viridis by Sune Holt, CC BY-NC"
