@@ -1,0 +1,25 @@
+---
+assembly:
+  - "Assembly length (Mbp)": "3879.46"
+  - "GC %": "43.68"
+  - "Contig #": "3599"
+  - "Contig N50 (Mbp)": "6.73"
+  - "Contig L50": "169"
+  - "Contig N90 (Mbp)": "0.81"
+  - "Contig L90": "761"
+  - "Scaffold #": "2107"
+  - "Scaffold N50 (Mbp)": "478.30"
+  - "Scaffold L50": "4"
+  - "Scaffold N90 (Mbp)": "162.75"
+  - "Scaffold L90": "9"
+  - "Scaffolds >= 10 kb": "2092"
+  - "BUSCO % (tetrapoda_odb10)": "C:91.3 [S:09.4, D:0.9], F:2.4, M:6.3, n:5310"
+
+annotation:
+  - "Gene #": "31608"
+  - "Transcript #": "69426"
+  - "Avg exons per transcript": "7.9"
+  - "Avg gene length (bp)": "34945"
+  - "Avg transcript length (bp)": "38456"
+  - "Avg exon length (bp)": "310"
+  - "Avg intron length (bp)": "5010"
