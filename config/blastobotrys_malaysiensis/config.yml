@@ -9,3 +9,4 @@ tracks:
 - name: Genes
   url: https://figshare.scilifelab.se/ndownloader/files/53044787
   fileName: bmalaysiensis_annotation.gff
+  addTrack: false 

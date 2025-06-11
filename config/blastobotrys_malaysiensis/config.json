@@ -56,5 +56,38 @@
   },
   "configuration": {
     "disableAnalytics": true
+  },
+  "plugins": [
+  {
+    "name": "DbxrefPlugin",
+    "esmUrl": "../../custom_jbrowse_plugins/dbxref_plugin.js"
   }
+],
+"tracks": [
+    {
+      "type": "FeatureTrack",
+      "trackId": "bmalaysiensis_annotation.gff",
+      "name": "Genes",
+      "adapter": {
+        "type": "Gff3TabixAdapter",
+        "gffGzLocation": {
+          "uri": "bmalaysiensis_annotation.gff.bgz",
+          "locationType": "UriLocation"
+        },
+        "index": {
+          "location": {
+            "uri": "bmalaysiensis_annotation.gff.bgz.csi",
+            "locationType": "UriLocation"
+          },
+          "indexType": "CSI"
+        }
+      },
+      "formatDetails": {
+          "subfeatures": "jexl:{dbxref:dbxrefLinkout(feature), ontology_term:ontologyLinkout(feature),  uniprot_id:uniprotLinkout(feature)}"
+        },
+      "assemblyNames": [
+        "ASM3055881v1"
+      ]
+    }
+  ]
 }

@@ -9,6 +9,7 @@ tracks:
   - name: "Protein-coding genes"
     url: "https://figshare.scilifelab.se/ndownloader/files/45076090"
     fileName: "ltenue_v1_genes.gff.zip"
+    addTrack: false 
   - name: "Repeats"
     url: "https://figshare.scilifelab.se/ndownloader/files/48879751"
     fileName: "L_tenue_v1_rep.bed.gz"
