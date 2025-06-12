@@ -79,7 +79,7 @@ export default class DbxrefPlugin {
         } else {
           return dbxref;
         }
-      }
+      }).join('<br>')
     })
 
     pluginManager.jexl.addFunction('ontologyLinkout', feature => {
