@@ -49,6 +49,9 @@ export default class DbxrefPlugin {
         'SMART:': ref => `https://www.ebi.ac.uk/interpro/entry/smart/${ref}`,
         'SUPERFAMILY:': ref => `https://www.ebi.ac.uk/interpro/entry/ssf/${ref}`,
         'TIGRFAM:': ref => `https://tigrfams.jcvi.org/cgi-bin/HmmReportPage.cgi?acc=${ref}`,
+        'Reactome:': ref => `https://reactome.org/content/detail/${ref}`,
+        'AntiFam:': ref => `https://www.ebi.ac.uk/interpro/entry/antifam/${ref}`,
+        'MetaCyc:': ref => `https://metacyc.org/pathway?orgid=META&id=${ref}`,
       }
 
 
@@ -62,6 +65,12 @@ export default class DbxrefPlugin {
             const funfam = String(Number(parts[4]));
             url = `https://www.cathdb.info/version/v4_4_0/superfamily/${superfamily}/funfam/${funfam}`;
           }
+        }
+
+        if (!url && dbxref.startsWith('KEGG:')) {
+          const keggRef = dbxref.replace('KEGG:', '');
+          const pathwayId = keggRef.split('+')[0];
+          url = `https://www.genome.jp/entry/map${pathwayId}`;
         }
 
         if (!url) {
