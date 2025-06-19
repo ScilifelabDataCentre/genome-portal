@@ -357,10 +357,10 @@ body {
 }
 .scilife-species-card h2 {
   color: #222;
-  font-size: 1.25rem;
   font-weight: 700;
   letter-spacing: 0.0625rem;
-  margin-top: auto;
+  margin-bottom: auto;
+  font-size: 1.25rem;
 }
 .scilife-species-card h3 {
   color: var(--scilife-dark-grey);
@@ -383,8 +383,9 @@ body {
 
 .scilife-card-image-attrib {
   font-style: italic;
-  font-size: 0.875rem;
   color: var(--scilife-teal);
+  font-size: 0.875rem;
+  height: calc(0.875rem * 3 + 0.5rem); /* this is to get things below to align */
 }
 
 .scilife-species-button {
