@@ -1,0 +1,41 @@
+name: Pa11y CI web accessibitly check
+on:
+  pull_request:
+    branches: 
+      - main
+    paths:
+      - "hugo/**"
+      - "docker/hugo.dockerfile"
+      - ".github/workflows/pa11y-ci.yml"
+
+jobs:
+  Pa11y:
+    timeout-minutes: 20
+    name: Pa11y CI run
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 22.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+
+      - name: Install Pa11y CI
+        run: npm install -g pa11y-ci
+
+      - name: Build and run the Hugo docker image
+        run: | 
+          docker build -f docker/hugo.dockerfile -t website .
+          docker run -d -p 8080:8080 --name hugo-container website  
+
+      - name: Run Pa11y CI
+      # (sitemap find/replace below because sitemap contains prod URLs)
+        run: |
+          pa11y-ci \
+            --config ${GITHUB_WORKSPACE}/.github/pa11y.config \
+            --sitemap http://localhost:8080/sitemap.xml \
+            --sitemap-find https://genomes.scilifelab.se \
+            --sitemap-replace http://localhost:8080 \
+            --sitemap-exclude 'pdf$'

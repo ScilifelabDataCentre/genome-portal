@@ -28,11 +28,12 @@ The **navigation bar** includes links to various pages:
 - **Contact**: How to get in touch with the staff behing the Genome Portal.
 - **Cite us**: Guidelines on recommended citations for the Genome Portal website, species pages, data files, and genome browser.
 
-<p align=center><img src="/img/user-guide/Fig01_Home_page.webp"
-    alt="Figure 1. Home page of the Genome Portal"
-    style="width: 80%;"></p>
-
-<p align=center><b>Figure 1</b>. Home page of the Genome Portal.</p>
+<figure class="text-center">
+  <img src="/img/user-guide/Fig01_Home_page.webp"
+       alt="Figure 1. Home page of the Genome Portal"
+       style="width: 80%; margin: 0 auto;">
+  <figcaption><strong>Figure 1</strong>. Home page of the Genome Portal.</figcaption>
+</figure>
 
 The **search bar** allows you to find or filter species displayed on the Genome Portal. Simply type the scientific or common name of a species of interest into the search bar, or use the sorting menu (to the left of the search bar) to arrange the species cards (below) in alphabetical order.
 
@@ -59,11 +60,12 @@ This tab presents general information about the species (Figure 2), including:
 - Vulnerability status, retrieved from the International Union for Conservation of Nature, IUCN, and Artdatabanken, SLU Swedish Species Information Centre (if available)
 - Links to external resources such as the Swedish Biodiversity Data Infrastructure (SBDI), GBIF, and Genomes on a Tree (GoaT).
 
-<p align=center><img src="/img/user-guide/Fig02_Species_page_Description_tab.webp"
-    alt="Figure 2. Description tab of a Species page on the Genome Portal"
-    style="width: 80%;"></p>
-
-<p align=center><b>Figure 2</b>. Description tab of a Species page on the Genome Portal.</p>
+<figure class="text-center">
+  <img src="/img/user-guide/Fig02_Species_page_Description_tab.webp"
+       alt="Figure 2. Description tab of a Species page on the Genome Portal"
+       style="width: 80%; margin: 0 auto;">
+  <figcaption><strong>Figure 2</strong>. Description tab of a Species page on the Genome Portal.</figcaption>
+</figure>
 
 ##### Programmatic information retrieval
 
@@ -85,11 +87,12 @@ This tab provides information about the genome assembly (Figure 3), including:
 - Acknowledgements.
 - Link to the genome browser displaying the genomic data (open sin a new window).
 
-<p align=center><img src="/img/user-guide/Fig03_Species_page_Genome_assembly_tab.webp"
-    alt="Figure 3. Genome assembly tab of a Species page on the Genome Portal."
-    style="width: 80%;"></p>
-
-<p align=center><b>Figure 3</b>. Genome assembly tab of a Species page on the Genome Portal.</p>
+<figure class="text-center">
+  <img src="/img/user-guide/Fig03_Species_page_Genome_assembly_tab.webp"
+       alt="Figure 3. Genome assembly tab of a Species page on the Genome Portal."
+       style="width: 80%; margin: 0 auto;">
+  <figcaption><strong>Figure 3</strong>. Genome assembly tab of a Species page on the Genome Portal.</figcaption>
+</figure>
 
 #### Download tab
 
@@ -111,11 +114,12 @@ The 'Links' column provides buttons to download the original data file, visit th
 
 Below the table, you will find links to download the table as a JSON file, open the `refNameAlias` text file in a new window (used in JBrowse to set aliases for differing sequence header names, e.g., to define that “chr1” is an alias for “1”), and open the <a href="/glossary">Glossary</a> page in a new window.
 
-<p align=center><img src="/img/user-guide/Fig04_Species_page_Download_tab.webp"
-    alt="Figure 4. Download tab of a Species page on the Genome Portal."
-    style="width: 80%;"></p>
-
-<p align=center><b>Figure 4</b>. Download tab of a Species page on the Genome Portal.</p>
+<figure class="text-center">
+  <img src="/img/user-guide/Fig04_Species_page_Download_tab.webp"
+       alt="Figure 4. Download tab of a Species page on the Genome Portal."
+       style="width: 80%; margin: 0 auto;">
+  <figcaption><strong>Figure 4</strong>. Download tab of a Species page on the Genome Portal.</figcaption>
+</figure>
 
 #### Genome browser
 
@@ -125,11 +129,12 @@ For a definition of what a genome browser is and its utility, visit the <a href=
 
 Below, you will find a brief description of basic functionalities of the JBrowse 2 genome browser, adapted from the <a href="https://jbrowse.org/jb2/docs/" target="_blank">JBrowse 2 documentation</a> and <a href="https://doi.org/10.1186/s13059-023-02914-z" target="_blank">publication</a>.
 
-<p align=center><img src="/img/user-guide/Fig05_Species_page_Genome_browser.webp"
-    alt="Figure 5. Linear genome view in the embedded JBrowse genome browser in the Genome Portal."
-    style="width: 100%;"></p>
-
-<p align=center><b>Figure 5</b>. Linear genome view in the JBrowse 2 genome browser embedded within the Genome Portal. (A) FILE menu; (B) ADD menu; (C) TOOLS menu; (D) HELP menu; (E) SHARE link; (F) VIEW menu; (G) Reference sequence name; (H) Pan buttons; (I) View name; (J) Location and search box; (K) View size; (L) Zoom buttons or slider; (M) Track handle; (N) Track name; (O) Track menu; (P) Data tracks; (Q) Widget side panel; (R) Track selector menu; (S) Track selector filter; (T) Track selector box; (U) Track selector area; (V) Add track/connection button </p>
+<figure class="text-center">
+  <img src="/img/user-guide/Fig05_Species_page_Genome_browser.webp"
+       alt="Figure 5. Linear genome view in the embedded JBrowse genome browser in the Genome Portal."
+       style="width: 100%; margin: 0 auto;">
+  <figcaption><strong>Figure 5</strong>. Linear genome view in the JBrowse 2 genome browser embedded within the Genome Portal. (A) FILE menu; (B) ADD menu; (C) TOOLS menu; (D) HELP menu; (E) SHARE link; (F) VIEW menu; (G) Reference sequence name; (H) Pan buttons; (I) View name; (J) Location and search box; (K) View size; (L) Zoom buttons or slider; (M) Track handle; (N) Track name; (O) Track menu; (P) Data tracks; (Q) Widget side panel; (R) Track selector menu; (S) Track selector filter; (T) Track selector box; (U) Track selector area; (V) Add track/connection button.</figcaption>
+</figure>
 
 To navigate along the genome (scroll left to right), use the pan buttons in the top-left corner of the window (Figure 5H).
 
