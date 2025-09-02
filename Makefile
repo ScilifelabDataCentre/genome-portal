@@ -95,11 +95,11 @@ define log_list
 @printf "  - %s\n" $(sort $(2))
 endef
 .PHONY: all
-all: build text-index install
+all: build install
 	$(greet)
 
 .PHONY: build
-build: download recompress index aliases jbrowse-config
+build: download recompress index aliases jbrowse-config text-index
 
 .PHONY: debug
 debug:
