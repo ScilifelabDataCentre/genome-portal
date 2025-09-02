@@ -1,0 +1,141 @@
+{
+  "defaultSession": {
+    "id": "apla_default_session",
+    "name": "Anthophora plagiata",
+    "widgets": {
+      "hierarchicalTrackSelector": {
+        "id": "hierarchicalTrackSelector",
+        "type": "HierarchicalTrackSelectorWidget",
+        "view": "apla_default_session_view_0",
+        "faceted": {
+          "showSparse": false,
+          "showFilters": true,
+          "showOptions": false,
+          "panelWidth": 400
+        }
+      }
+    },
+    "activeWidgets": {
+      "hierarchicalTrackSelector": "hierarchicalTrackSelector"
+    },
+    "views": [
+      {
+        "id": "apla_default_session_view_0",
+        "minimized": false,
+        "type": "LinearGenomeView",
+        "trackLabels": "offset",
+        "offsetPx": 0,
+        "bpPerPx": 200,
+        "displayedRegions": [
+          {
+            "refName": "ENA|CAXEFL010000280|CAXEFL010000280.1",
+            "start": 0,
+            "end": 37021982,
+            "reversed": false,
+            "assemblyName": "iyAntPlag1"
+          }
+        ],
+        "tracks": [
+          {
+            "id": "apla_default_protein_coding_genes_view_0",
+            "type": "FeatureTrack",
+            "configuration": "GCA_963995485.1_iyAntPlag1_genomic.gff.renamed.gff",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "apla_default_protein_coding_genes_view_0_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 200,
+                "configuration": "GCA_963995485.1_iyAntPlag1_genomic.gff.renamed.gff-LinearBasicDisplay"
+              }
+            ]
+          },
+          {
+            "id": "apla_default_Repeats",
+            "type": "FeatureTrack",
+            "configuration": "Anthophora_plagiata_repeats.gff",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "apla_default_Repeats_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 150,
+                "configuration": "Anthophora_plagiata_repeats.gff-LinearBasicDisplay"
+              }
+            ]
+          },
+          {
+            "id": "apla_default_Transcripts_(Isoseq)",
+            "type": "FeatureTrack",
+            "configuration": "Anthophora_plagiata_isoseq.gff",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "apla_default_Transcripts_(Isoseq)_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 150,
+                "configuration": "Anthophora_plagiata_isoseq.gff-LinearBasicDisplay"
+              }
+            ]
+          },
+          {
+            "id": "apla_default_Nucleotide_diversity_(Pi)_5kb_windows",
+            "type": "FeatureTrack",
+            "configuration": "apla_gwas_Nucleotide_diversity_(Pi)_5kb_windows",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "apla_default_Nucleotide_diversity_(Pi)_5kb_windows_display",
+                "type": "LinearManhattanDisplay",
+                "heightPreConfig": 150,
+                "configuration": "apla_gwas_Nucleotide_diversity_(Pi)_5kb_windows_display",
+                "color": "rgb(242, 142, 44)"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "configuration": {
+    "disableAnalytics": true
+  },
+  "plugins": [
+    {
+      "name": "GWAS",
+      "url": "https://unpkg.com/jbrowse-plugin-gwas/dist/jbrowse-plugin-gwas.umd.production.min.js"
+    }
+  ],
+  "tracks": [
+    {
+      "type": "FeatureTrack",
+      "trackId": "apla_gwas_Nucleotide_diversity_(Pi)_5kb_windows",
+      "name": "Nucleotide diversity (Pi), 5kb windows",
+      "assemblyNames": [
+        "iyAntPlag1"
+      ],
+      "category": [
+        "GWAS"
+      ],
+      "adapter": {
+        "type": "BedTabixAdapter",
+        "scoreColumn": "PI",
+        "bedGzLocation": {
+          "uri": "plag_5kb.windowed.bed.bgz"
+        },
+        "index": {
+          "location": {
+            "uri": "plag_5kb.windowed.bed.bgz.csi"
+          },
+          "indexType": "CSI"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "apla_gwas_Nucleotide_diversity_(Pi)_5kb_windows_display",
+          "type": "LinearManhattanDisplay"
+        }
+      ]
+    }
+  ]
+}
