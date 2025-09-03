@@ -111,6 +111,7 @@ debug:
 	$(call log_list, "FASTA indices:", $(FASTA_INDICES) $(FASTA_GZINDICES))
 	$(call log_list, "GFF indices:", $(GFF_INDICES))
 	$(call log_list, "BED indices:", $(BED_INDICES))
+	$(call log_list, "Trix indices:", $(TRIX_FILES))
 	$(call log_list, "Files to install:", $(INSTALLED_FILES))
 
 .PHONY:
