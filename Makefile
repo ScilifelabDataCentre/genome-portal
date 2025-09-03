@@ -65,8 +65,7 @@ BED := $(addsuffix .bgz,$(filter %.bed,$(unzipped)))
 BED_INDICES := $(addsuffix .csi,$(BED))
 
 # trix files and subdirectories
-TRIX_FILES := $(foreach dir,$(TRIX_DATA_DIRS),$(wildcard $(dir)/trix/*))
-TRIX_DIRS := $(foreach dir,$(TRIX_DATA_DIRS),$(wildcard $(dir)/trix))
+TRIX_FILES := $(foreach dir,$(TRIX_DATA_DIRS),$(wildcard $(dir)/trix/*.ix*) $(wildcard $(dir)/trix/*_meta.json))
 
 LOCAL_FILES := $(GFF) $(GFF_INDICES) \
 	$(FASTA) $(FASTA_INDICES) $(FASTA_GZINDICES) \
@@ -240,8 +239,7 @@ $(ALIASES): %/aliases.txt: $$(filter $$*$$(_pattern),$$(FASTA))
 text-index:
 	@for dir in $(TRIX_DATA_DIRS); do \
 		if [ -d "$$dir" ] && [ -f "$$dir/config.json" ]; then \
-			mkdir -p "$$dir/trix"; \
-			jbrowse text-index --target "$$dir/config.json" --out "$$dir/trix"; \
+			jbrowse text-index --target "$$dir"; \
 			printf '\x1b[0;46mGenerated trix index for the assembly\x1b[0m\n'; \
 		fi; \
 	done
@@ -250,11 +248,12 @@ text-index:
 # This recipe ensures that the trix files are installed in a ´trix´ subdir in the species dir.
 .PHONY: install-trix
 install-trix:
-	@for src in $(TRIX_DIRS); do \
-		dst=$(patsubst $(DATA_DIR)/%,$(INSTALL_DIR)/%,$$src); \
-		if [ "$$src" != "$$dst" ]; then \
-			echo "Installing $$src to $$dst"; \
-			mkdir -p "$$dst"; \
-			cp -r "$$src/." "$$dst/"; \
+	@for dir in $(TRIX_DATA_DIRS); do \
+		src_trix="$$dir/trix"; \
+		dst_trix="$(INSTALL_DIR)/$$(basename $$dir)/trix"; \
+		if [ -d "$$src_trix" ]; then \
+			echo "Copying all files from $$src_trix to $$dst_trix"; \
+			mkdir -p "$$dst_trix"; \
+			cp -a "$$src_trix/." "$$dst_trix/"; \
 		fi; \
 	done
