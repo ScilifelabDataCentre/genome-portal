@@ -122,6 +122,12 @@ aliases: $(ALIASES)
 clean-aliases:
 	@rm -f $(ALIASES)
 
+# Trix writes to files in <SPECIES_NAME>/trix and to config.json. 
+# Thus, all those files needs to be removed in the cleanup
+.PHONY: clean-trix
+clean-trix: clean-config
+	@rm -f $(TRIX_FILES)
+
 .PHONY: jbrowse-config
 jbrowse-config: $(JBROWSE_CONFIGS)
 	$(call log_info,'Generated JBrowse configuration in directories')
@@ -151,7 +157,7 @@ clean-local:
 
 # Remove all artifacts
 .PHONY: clean
-clean: clean-upstream clean-local clean-config
+clean: clean-upstream clean-local clean-config clean-trix
 
 .PHONY: recompress
 recompress: $(GFF) $(FASTA) $(GTF) $(BED);
