@@ -200,7 +200,13 @@ $(CONFIG_DIR)/%/config.json:
 $(DOWNLOAD_TARGETS): $(DATA_DIR)/%:| $(DATA_DIR)/.downloads/%
 	@echo "Downloading $@ ..."; \
 	mkdir -p --mode=0755 $(@D) && \
-	curl -# -f -L --output $@ "$$(< $|)"
+	url="$$(< $|)"; \
+	case "$$url" in \
+		https://figshare.scilifelab.se/*) \
+			curl -# -f -L -A "Mozilla/5.0" --output $@ "$$url" ;; \
+		*) \
+			curl -# -f -L --output $@ "$$url" ;; \
+	esac
 
 # Recompress downloaded files using bgzip(1).
 #
