@@ -25,6 +25,7 @@ SPECIES_DIRS := $(addprefix $(CONFIG_DIR)/, $(sort $(subst $(comma), ,$(SPECIES)
 else
 SPECIES_DIRS := $(CONFIG_DIR)
 endif
+# Determine TRIX data directories
 ifeq ($(SPECIES_DIRS),$(CONFIG_DIR))
 TRIX_DATA_DIRS := $(wildcard $(DATA_DIR)/*)
 else
@@ -114,7 +115,7 @@ debug:
 
 .PHONY:
 aliases: $(ALIASES)
-	$(call log_list, "Generated aliases: ", $(ALIASES))
+	$(call log_info, "Generated aliases ", $(ALIASES))
 
 .PHONY: clean-aliases
 clean-aliases:
@@ -240,9 +241,10 @@ text-index:
 	@for dir in $(TRIX_DATA_DIRS); do \
 		if [ -d "$$dir" ] && [ -f "$$dir/config.json" ]; then \
 			jbrowse text-index --target "$$dir"; \
-			printf '\x1b[0;46mGenerated trix index for the assembly\x1b[0m\n'; \
 		fi; \
 	done
+	$(call log_info,'Generated trix index files')
+	@printf '  - %s\n' $(TRIX_FILES)
 
 # To keep the trix files separated for the data files, install them in a separate directory
 # This recipe ensures that the trix files are installed in a ´trix´ subdir in the species dir.
@@ -252,7 +254,6 @@ install-trix:
 		src_trix="$$dir/trix"; \
 		dst_trix="$(INSTALL_DIR)/$$(basename $$dir)/trix"; \
 		if [ -d "$$src_trix" ]; then \
-			echo "Copying all files from $$src_trix to $$dst_trix"; \
 			mkdir -p "$$dst_trix"; \
 			cp -a "$$src_trix/." "$$dst_trix/"; \
 		fi; \
