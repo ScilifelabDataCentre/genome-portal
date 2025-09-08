@@ -3,7 +3,7 @@
 # unless you were warned by the add-new-species.py script.
 title: "*Euphydryas editha*"
 subtitle: "Edith's Checkerspot Butterfly"
-last_updated: "07/05/2025" # format DD/MM/YYYY
+last_updated: "08/09/2025" # format DD/MM/YYYY
 
 layout: "species_intro"
 banner_title: "Species overview"
