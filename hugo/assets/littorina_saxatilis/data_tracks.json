@@ -15,7 +15,7 @@
     },
     {
       "dataTrackName": "Protein-coding genes",
-      "description": "Functional annotation of protein-coding genes",
+      "description": "Structural annotation of protein-coding genes",
       "links": [
         {"Download": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/037/325/665/GCA_037325665.1_US_GU_Lsax_2.0/GCA_037325665.1_US_GU_Lsax_2.0_genomic.gff.gz"},
         {"Website": "https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_037325665.1"},

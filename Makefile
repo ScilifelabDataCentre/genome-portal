@@ -50,19 +50,20 @@ ALIASES := $(addsuffix aliases.txt,$(sort $(dir $(FASTA))))
 
 # GFF files and indices
 GFF := $(addsuffix .bgz, $(filter %.gff,$(unzipped)))
-GFF_INDICES := $(addsuffix .tbi,$(GFF))
+GFF_INDICES := $(addsuffix .csi,$(GFF))
 
 # GTF files
 GTF := $(filter %.gtf,$(unzipped))
 
 # BED files
 BED := $(addsuffix .bgz,$(filter %.bed,$(unzipped)))
-BED_INDICES := $(addsuffix .tbi,$(BED))
+BED_INDICES := $(addsuffix .csi,$(BED))
 
 LOCAL_FILES := $(GFF) $(GFF_INDICES) \
 	$(FASTA) $(FASTA_INDICES) $(FASTA_GZINDICES) \
 	$(GTF) \
-	$(BED) $(BED_INDICES)
+	$(BED) $(BED_INDICES) \
+	$(ALIASES)
 
 # Files to install
 INSTALLED_FILES := $(patsubst $(DATA_DIR)/%,$(INSTALL_DIR)/%, $(LOCAL_FILES) $(JBROWSE_CONFIGS))
@@ -177,7 +178,7 @@ define make_index
 	@$(SHELL) scripts/index $<
 endef
 
-$(GFF_INDICES) $(BED_INDICES): %.tbi: %
+$(GFF_INDICES) $(BED_INDICES): %.csi: %
 	$(make_index)
 
 $(FASTA_INDICES): %.fai: %
@@ -199,7 +200,13 @@ $(CONFIG_DIR)/%/config.json:
 $(DOWNLOAD_TARGETS): $(DATA_DIR)/%:| $(DATA_DIR)/.downloads/%
 	@echo "Downloading $@ ..."; \
 	mkdir -p --mode=0755 $(@D) && \
-	curl -# -f -L --output $@ "$$(< $|)"
+	url="$$(< $|)"; \
+	case "$$url" in \
+		https://figshare.scilifelab.se/*) \
+			curl -# -f -L -A "Mozilla/5.0" --output $@ "$$url" ;; \
+		*) \
+			curl -# -f -L --output $@ "$$url" ;; \
+	esac
 
 # Recompress downloaded files using bgzip(1).
 #

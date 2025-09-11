@@ -3,6 +3,11 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!--Runs immediately to assign correct theme (aka dark or light mode) -->
+        {{ $determineThemeJS := resources.Get "js/determine_theme.js" | fingerprint | minify }}
+        <script src="{{ $determineThemeJS.RelPermalink }}"></script>
+
         <!-- Site meta -->
         <title>{{ printf "%s | %s" (or .Params.banner_title .Title) .Site.Title }}</title>
 
@@ -11,6 +16,7 @@
 
         <meta http-equiv="content-language" content="en">
         <meta name="theme-color" content="#a7c947">
+        <meta name="color-scheme" content="light dark">
 
         <!-- Favicons -->
         <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
@@ -49,6 +55,10 @@
             crossorigin="anonymous">
         </script>
 
+        <!-- Clickable option to swap between dark and light mode/theme -->
+        {{ $changeThemeJS := resources.Get "js/change_theme.js" | fingerprint | minify }}
+        <script src="{{ $changeThemeJS.RelPermalink }}"></script>
+
         <!-- Any page specific scripts included here. -->
         {{ block "script_includes" . }} {{ end }}
 
@@ -84,7 +94,7 @@
                 {{ if .Params.toc }}
                     <div class="row">
                         <div class="col-lg-3 order-md-first toc small">{{- partial "toc.html" . -}}</div>
-                        <div class="col-lg-9 order-md-last content" id="content">{{- block "main" . }}{{- end }}</div>
+                        <div class="col-lg-9 order-md-last content" id="mainContent">{{- block "main" . }}{{- end }}</div>
                     </div>
                 {{ else }}
                     {{- block "main" . }}{{- end }}

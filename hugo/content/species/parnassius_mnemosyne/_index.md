@@ -28,8 +28,8 @@ goat_webpage: "https://goat.genomehubs.org/record?recordId=213953&result=taxon&t
 iucn_category: "Least concern"
 iucn_link: "https://www.iucnredlist.org/species/174210/122602056"
 
-swe_red_list: "Near threatened"
-swe_red_list_link: "https://artfakta.se/taxa/parnassius-apollo-101509"
+swe_red_list: "Endangered"
+swe_red_list_link: "https://artfakta.se/taxa/101510/information"
 
 # These 3 params define the initial view for the map
 # latitude and longitude are for the map center.
@@ -64,9 +64,9 @@ Swedish Reference Genome Portal (Retrieved DATE_ACCESSED), SciLifeLab Data Centr
 
 - Nadler, J., Benyamini, D., Bonelli, S., Comay, O., Dapporto, L., Karaçetin, E., Lukhtanov, V., López Munguira, M., Micevski, N., Settele, J., Tzortzakaki, O., Verovnik, R., Warren, M., Wiemers, M., Wynhoff, I., & van Swaay, C. (2021). *Parnassius mnemosyne*. The IUCN Red List of Threatened Species. <https://dx.doi.org/10.2305/IUCN.UK.2021-1.RLTS.T174210A122602056.en>
 
-- Nordens Ark. (2024). Clouded Apollo conservation. <https://en.nordensark.se/conservation/conservation-sweden/clouded-apollo/>
+- Nordens Ark. (2024). Clouded Apollo conservation. <https://en.nordensark.se/conservation/clouded-apollo/>
 
-- SLU Artdatabanken. (2024). Artfakta: *Parnassius mnemosyne*. <https://artfakta.se/taxa/parnassius-mnemosyne-101510>
+- SLU Artdatabanken. (2024). Artfakta: *Parnassius mnemosyne*. <https://artfakta.se/taxa/101510/information>
 
 - Talla, V., Mrazek, V., Höglund, J., & Backström, N. (2023). Whole genome re-sequencing uncovers significant population structure and low genetic diversity in the endangered clouded apollo (*Parnasssius mnemosyne*) in Sweden. Conservation Genetics, 24(3), 305–314. <https://doi.org/10.1007/s10592-023-01502-9>
 
@@ -74,5 +74,6 @@ Swedish Reference Genome Portal (Retrieved DATE_ACCESSED), SciLifeLab Data Centr
 
 #### Changelog
 
+- 10/04/2025 - Update links to Artfakta and Nordens Ark
 - 04/12/2024 - Mitochondrial assembly and annotation track added to genome browser
 - 15/10/2024 - Species first published on the Portal

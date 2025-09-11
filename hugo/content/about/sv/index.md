@@ -44,4 +44,4 @@ Denna tjänst är finansierat av [SciLifeLab](https://www.scilifelab.se) och [Kn
 
 ### Be om hjälp
 
-För frågor, kommentarer eller problem relaterade till genomportalen, vänligen kontakta oss per e-post på [dsn-eb@scilifelab.se](mailto:dsn-eb@scilifelab.se eller använd vårt <a href="/contact">kontaktformulär</a> (på engelska).
+För frågor, kommentarer eller problem relaterade till genomportalen, vänligen kontakta oss per e-post på [dsn-eb@scilifelab.se](mailto:dsn-eb@scilifelab.se).

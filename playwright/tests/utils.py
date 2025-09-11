@@ -66,3 +66,14 @@ def validate_date_format(date: str, date_format: str) -> None:
         datetime.strptime(date, date_format)
     except ValueError as exc:
         raise AssertionError("Date format is incorrect") from exc
+
+
+def hex_to_rgb(hex_color: str) -> str:
+    """
+    Convert a hex color to an RGB color in format Playwright can use.
+    """
+    hex_color = hex_color.lstrip("#")
+    r = int(hex_color[0:2], 16)
+    g = int(hex_color[2:4], 16)
+    b = int(hex_color[4:6], 16)
+    return f"rgb({r}, {g}, {b})"

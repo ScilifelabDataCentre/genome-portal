@@ -1,0 +1,58 @@
+{
+    "Species": {
+        "science_name": "",
+        "tax_id": "",
+        "ena_link": "",
+        "ncbi_link": "",
+        "display_order": 1
+    },
+    "Genus": {
+        "science_name": "",
+        "tax_id": "",
+        "ena_link": "",
+        "ncbi_link": "",
+        "display_order": 2
+    },
+    "Family": {
+        "science_name": "",
+        "tax_id": "",
+        "ena_link": "",
+        "ncbi_link": "",
+        "display_order": 3
+    },
+    "Order": {
+        "science_name": "",
+        "tax_id": "",
+        "ena_link": "",
+        "ncbi_link": "",
+        "display_order": 4
+    },
+    "Class": {
+        "science_name": "",
+        "tax_id": "",
+        "ena_link": "",
+        "ncbi_link": "",
+        "display_order": 5
+    },
+    "Phylum": {
+        "science_name": "",
+        "tax_id": "",
+        "ena_link": "",
+        "ncbi_link": "",
+        "display_order": 6
+    },
+    "Kingdom": {
+        "science_name": "",
+        "tax_id": "",
+        "ena_link": "",
+        "ncbi_link": "",
+        "display_order": 7
+    },
+    "Domain": {
+        "science_name": "",
+        "tax_id": "",
+        "ena_link": "",
+        "ncbi_link": "",
+        "display_order": 8
+    }
+}

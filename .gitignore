@@ -19,6 +19,9 @@ scripts/data_stewardship/temp/**
 scripts/data_stewardship/logs/**
 scripts/data_stewardship/*.agat.log
 
+# MS Office temp files
+scripts/add_new_species/tests/fixtures/submission_form_example/~*
+
 # OSX
 *.DS_Store
 

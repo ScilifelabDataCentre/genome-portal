@@ -1,6 +1,10 @@
 pre-commit==3.7.0
-requests==2.32.2
+requests==2.32.4
 playwright==1.47.0
 pytest-playwright==0.5.2
 pytest==8.3.3
 pytest-xdist==3.6.1
+Pillow==10.3.0
+pandas==2.2.3
+openpyxl==3.1.5
+pyyaml==6.0.2
