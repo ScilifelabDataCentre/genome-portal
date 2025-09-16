@@ -17,7 +17,7 @@ stats_data_path: "${species_slug}/species_stats"
 lineage_data_path: "${species_slug}/taxonomy"
 ---
 
-Notes: Assembly statistics were calculated for the primary genome assembly ${assembly_accession}. ([EDIT:genome_assembly_filename]) using Quast (v5.2.0; Mikheenko et al. 2018). Busco statistics (Manni et al., 2021) were taken from [EDIT:publication_reference]. Annotation statistics were calculated for [EDIT:annotation_file_name] using AGAT (v1.4.1; Dainat, 2024).
+Notes: Assembly statistics were calculated for the primary genome assembly ${assembly_accession} ([EDIT:genome_assembly_filename]) using Quast (v5.2.0; Mikheenko et al. 2018). Busco statistics (Manni et al., 2021) were taken from [EDIT:publication_reference]. Annotation statistics were calculated for [EDIT:annotation_file_name] using AGAT (v1.4.1; Dainat, 2024).
 
 BUSCO notation: C: Complete; S: Single-copy; D: Duplicated; F: Fragmented; M: Missing; n: Total BUSCO genes included in the dataset (here: [EDIT:ODB_database]). See also [the official BUSCO manual](https://busco.ezlab.org/busco_userguide.html#interpreting-the-results).
 

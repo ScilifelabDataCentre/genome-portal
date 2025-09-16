@@ -310,9 +310,38 @@
       {
         "name": "GWAS",
         "url": "https://unpkg.com/jbrowse-plugin-gwas/dist/jbrowse-plugin-gwas.umd.production.min.js"
+      },
+      {
+        "name": "DbxrefPlugin",
+        "esmUrl": "../../custom_jbrowse_plugins/dbxref_plugin.js"
       }
     ],
     "tracks": [
+      {
+        "type": "FeatureTrack",
+        "trackId": "ltenue_v1_genes.gff",
+        "name": "Protein-coding genes",
+        "adapter": {
+          "type": "Gff3TabixAdapter",
+          "gffGzLocation": {
+            "uri": "ltenue_v1_genes.gff.bgz",
+            "locationType": "UriLocation"
+          },
+          "index": {
+            "location": {
+              "uri": "ltenue_v1_genes.gff.bgz.csi",
+              "locationType": "UriLocation"
+            },
+            "indexType": "CSI"
+          }
+        },
+        "formatDetails": {
+          "subfeatures": "jexl:{dbxref:dbxrefLinkout(feature), ontology_term:ontologyLinkout(feature),  uniprot_id:uniprotLinkout(feature)}"
+        },
+        "assemblyNames": [
+          "Linum_tenue_thrum_v1"
+        ]
+      },
       {
         "type": "FeatureTrack",
         "trackId": "Lten_pop06_TD_init_config",

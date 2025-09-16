@@ -37,13 +37,13 @@
         ],
         "tracks": [
           {
-            "id": "bill_default_protein_coding_genes_view_0",
+            "id": "bill_default_genes_view_0",
             "type": "FeatureTrack",
             "configuration": "billinoisensis_annotation.gff",
             "minimized": false,
             "displays": [
               {
-                "id": "bill_default_protein_coding_genes_view_0_display",
+                "id": "bill_default_genes_view_0_display",
                 "type": "LinearBasicDisplay",
                 "heightPreConfig": 150,
                 "configuration": "billinoisensis_annotation.gff-LinearBasicDisplay"
@@ -56,5 +56,38 @@
   },
   "configuration": {
     "disableAnalytics": true
+  },
+  "plugins": [
+  {
+    "name": "DbxrefPlugin",
+    "esmUrl": "../../custom_jbrowse_plugins/dbxref_plugin.js"
   }
+],
+"tracks": [
+    {
+      "type": "FeatureTrack",
+      "trackId": "billinoisensis_annotation.gff",
+      "name": "Genes",
+      "adapter": {
+        "type": "Gff3TabixAdapter",
+        "gffGzLocation": {
+          "uri": "billinoisensis_annotation.gff.bgz",
+          "locationType": "UriLocation"
+        },
+        "index": {
+          "location": {
+            "uri": "billinoisensis_annotation.gff.bgz.csi",
+            "locationType": "UriLocation"
+          },
+          "indexType": "CSI"
+        }
+      },
+      "formatDetails": {
+        "subfeatures": "jexl:{dbxref:dbxrefLinkout(feature), ontology_term:ontologyLinkout(feature),  uniprot_id:uniprotLinkout(feature)}"
+      },
+      "assemblyNames": [
+        "BILLI_YB1343_PB"
+      ]
+    }
+  ]
 }

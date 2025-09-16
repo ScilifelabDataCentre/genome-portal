@@ -4,7 +4,7 @@
 {{ $numbPages := div $numbSpecies $numbSpeciesPerPage | math.Max 2 }}
 
 
-<nav aria-label="Species cards navigation">
+<nav aria-label="Species cards navigation" id="speciesPagination">
     <ul class="pagination pagination-lg justify-content-center mt-3 scilife-pagination">
         <li class="page-item"><a class="page-link" href="#" data-page="prev">Previous</a></li>
 
@@ -17,4 +17,12 @@
 
         <li class="page-item"><a class="page-link" href="#" data-page="next">Next</a></li>
     </ul>
+
+    <!-- show all option, to swap to showing all species -->
+    <div class="text-center">
+        <button class="btn btn-lg scilife-show-all-btn" id="showAllSpeciesBtn">
+            Show all ({{ $numbSpecies }} species)
+        </button>
+    </div>
+
 </nav>
