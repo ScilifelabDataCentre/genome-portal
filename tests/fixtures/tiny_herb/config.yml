@@ -38,7 +38,7 @@ tracks:
     displayType: "arc"
     defaultSession: true
   - name: "Repeats displayed as wiggle just to test out arcs"
-    url: "https://nextcloud.dc.scilifelab.se/s/G8kWgK8zZa7sxBB/download/test_bedgraph_track.tsv"
+    url: "https://raw.githubusercontent.com/ScilifelabDataCentre/genome-portal/4a6483aeff1d1b0790c88353a483fe9edf9d0d2c/tests/fixtures/tiny_herb/test_bedgraph_track.tsv"
     fileName: "test_bedgraph_track.bed"
     addTrack: false
     displayType: "wiggle"
