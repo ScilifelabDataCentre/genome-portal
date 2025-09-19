@@ -123,27 +123,5 @@ if __name__ == "__main__":
             assembly_counter=assembly_counter,
         )
 
-        # TODO improve the logic for setting featuretrack and quantive track
-
-        # TODO add a key called plugin that can control optionall plugins
-        # (GWAS track logic can remain since the plugin in mandatory)
-
-        # TODO consider the track_color key in the config.yml
-
-        # TODO order of the tracks in the config.yml is not preserved in the final config.json made by the makefile.
-        # see if that could be fixed in the makefile? The other option is to use categories in the defaultSession
-        # config.json like we have done for linum in the past
-        # anotehr way is to set standard tracks with "category": ["Annotation"],
-
-        # TODO write the docstring for the module, and ensure that all functions have docstrings
-
-        # TODO clean up the code
-        # TODO the assemblyNames assignment in process_tracks() could be neater
-        # TODO update get_track_file_name to use pathlib instead of os.path
-        # TODO clean up the code for get_fasta_header_and_scaffold_length and default_scaffold
-        # TODO clean up the error handling in utils.py
-
-        # TODO write tests that reflects fail cases
-
     data = default_session.make_defaultSession_dict()
     save_json(data=data, output_json_path=output_json_path)

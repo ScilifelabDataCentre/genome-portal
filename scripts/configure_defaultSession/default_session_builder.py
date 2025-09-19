@@ -107,7 +107,7 @@ class TrackParams:
         display_type_key, display_type = cls.get_display_type(track)
         display_config = f"{track_file_name}-{display_type}"
         score_column = track.get("scoreColumn")
-        is_quantiative_track = "LinearWiggleDisplay" in display_type  # TODO: Expand for more quantitative track types
+        is_quantiative_track = "LinearWiggleDisplay" in display_type
 
         return cls(
             track_view_id=track_view_id,
