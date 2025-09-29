@@ -1,0 +1,60 @@
+{
+  "defaultSession": {
+    "id": "eedi_default_session",
+    "name": "Euphydryas editha",
+    "widgets": {
+      "hierarchicalTrackSelector": {
+        "id": "hierarchicalTrackSelector",
+        "type": "HierarchicalTrackSelectorWidget",
+        "view": "eedi_default_session_view_0",
+        "faceted": {
+          "showSparse": false,
+          "showFilters": true,
+          "showOptions": false,
+          "panelWidth": 400
+        }
+      }
+    },
+    "activeWidgets": {
+      "hierarchicalTrackSelector": "hierarchicalTrackSelector"
+    },
+    "views": [
+      {
+        "id": "eedi_default_session_view_0",
+        "minimized": false,
+        "type": "LinearGenomeView",
+        "trackLabels": "offset",
+        "offsetPx": 0,
+        "bpPerPx": 300,
+        "displayedRegions": [
+          {
+            "refName": "ENA|CAKOGL010000001|CAKOGL010000001.1",
+            "start": 0,
+            "end": 10674773,
+            "reversed": false,
+            "assemblyName": "Euphydryas_editha"
+          }
+        ],
+        "tracks": [
+          {
+            "id": "eedi_default_protein_coding_genes_view_0",
+            "type": "FeatureTrack",
+            "configuration": "GCA_933666425.1_Euphydryas_editha_genomic.gff",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "eedi_default_protein_coding_genes_view_0_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 350,
+                "configuration": "GCA_933666425.1_Euphydryas_editha_genomic.gff-LinearBasicDisplay"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "configuration": {
+    "disableAnalytics": true
+  }
+}
