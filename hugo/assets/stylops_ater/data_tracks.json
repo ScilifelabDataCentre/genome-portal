@@ -1,0 +1,115 @@
+[
+    {
+      "dataTrackName": "Protein-coding genes",
+      "description": "Functional annotation of protein-coding genes",
+      "links": [
+        {"Download": "https://www.example.com"},
+        {"Website": "https://www.example.com"}
+      ],
+      "accessionOrDOI": "GCA_XXXXXXXXXX",
+      "fileName": "GCA_XXXXXXXXXX.test.gff.gz",
+      "principalInvestigator": "Johannes Bergsten",
+      "principalInvestigatorAffiliation": "Swedish Museum of Natural History",
+      "firstDateOnPortal": "19 November 2025"
+    },
+    {
+      "dataTrackName": "tRNA",
+      "description": "Annotation of transfer RNA genes",
+      "links": [
+        {"Website": "https://doi.org/10.17044/scilifelab.30604043.v1"}
+      ],
+      "accessionOrDOI": "https://doi.org/10.17044/scilifelab.30604043.v1",
+      "fileName": "trna.gff",
+      "principalInvestigator": "Johannes Bergsten",
+      "principalInvestigatorAffiliation": "Swedish Museum of Natural History",
+      "firstDateOnPortal": "19 November 2025"
+    },
+    {
+      "dataTrackName": "ncRNA",
+      "description": "Annotation of non-coding RNA genes",
+      "links": [
+        {"Website": "https://doi.org/10.17044/scilifelab.30604043.v1"}
+      ],
+      "accessionOrDOI": "https://doi.org/10.17044/scilifelab.30604043.v1",
+      "fileName": "rfam.gff",
+      "principalInvestigator": "Johannes Bergsten",
+      "principalInvestigatorAffiliation": "Swedish Museum of Natural History",
+      "firstDateOnPortal": "19 November 2025"
+    },
+    {
+      "dataTrackName": "Transcriptome assembly of Illumina RNA-seq library ST_1",
+      "description": "Transcriptome assembly of Illumina RNA-seq library ST_1 (ENA: SAMEA12922144, ERX11689259)",
+      "links": [
+        {"Website": "https://doi.org/10.17044/scilifelab.30604043.v1"}
+      ],
+      "accessionOrDOI": "https://doi.org/10.17044/scilifelab.30604043.v1",
+      "fileName": "ST_1.gff3",
+      "principalInvestigator": "Johannes Bergsten",
+      "principalInvestigatorAffiliation": "Swedish Museum of Natural History",
+      "firstDateOnPortal": "19 November 2025"
+    },
+    {
+      "dataTrackName": "Transcriptome assembly of Illumina RNA-seq library ST_2",
+      "description": "Transcriptome assembly of Illumina RNA-seq library ST_2 (ENA: SAMEA12922144, ERX11689261)",
+      "links": [
+        {"Website": "https://doi.org/10.17044/scilifelab.30604043.v1"}
+      ],
+      "accessionOrDOI": "https://doi.org/10.17044/scilifelab.30604043.v1",
+      "fileName": "ST_2.gff3",
+      "principalInvestigator": "Johannes Bergsten",
+      "principalInvestigatorAffiliation": "Swedish Museum of Natural History",
+      "firstDateOnPortal": "19 November 2025"
+    },
+    {
+      "dataTrackName": "Repeats (RepeatModeler2-RepeatMasker)",
+      "description": "A repeat library modelled with RepeatModeler2. As repeats can be part of actual protein-coding genes, the candidate repeats modelled by RepeatModeler were vetted against our protein set (minus transposons) to exclude any nucleotide motif stemming from low-complexity coding sequences. From the repeat library, identification of repeat sequences present in the genome was performed using RepeatMasker.",
+      "links": [
+        {"Website": "https://doi.org/10.17044/scilifelab.30604043.v1"}
+      ],
+      "accessionOrDOI": "https://doi.org/10.17044/scilifelab.30604043.v1",
+      "fileName": "repeatmasker.gff",
+      "principalInvestigator": "Johannes Bergsten",
+      "principalInvestigatorAffiliation": "Swedish Museum of Natural History",
+      "firstDateOnPortal": "19 November 2025"
+    },
+    {
+      "dataTrackName": "Repeats (RepeatRunner)",
+      "description": "A repeat library generated with RepeatRunner, analysing highly divergent repeats and divergent portions of repeats and identifying divergent protein coding portions of retro-elements and retroviruses not detected by RepeatMasker.",
+      "links": [
+        {"Website": "https://doi.org/10.17044/scilifelab.30604043.v1"}
+      ],
+      "accessionOrDOI": "https://doi.org/10.17044/scilifelab.30604043.v1",
+      "fileName": "repeatrunner.gff",
+      "principalInvestigator": "Johannes Bergsten",
+      "principalInvestigatorAffiliation": "Swedish Museum of Natural History",
+      "firstDateOnPortal": "19 November 2025"
+    },
+    {
+      "dataTrackName": "Gene models (Augustus)",
+      "description": "Genemodels created from second MAKER run (rc2), combining evidence (from run 1 or rc1) and ab initio predictors. Specifically, AUGUSTUS was used for the rc2_evidence_abinitio.gff.",
+      "links": [
+        {"Website": "https://doi.org/10.17044/scilifelab.30604043.v1"}
+      ],
+      "accessionOrDOI": "https://doi.org/10.17044/scilifelab.30604043.v1",
+      "fileName": "rc2_evidence_abinitio.gff",
+      "principalInvestigator": "Johannes Bergsten",
+      "principalInvestigatorAffiliation": "Swedish Museum of Natural History",
+      "firstDateOnPortal": "19 November 2025"
+    },
+    {
+      "dataTrackName": "Gene models (GeneMark)",
+      "description": "Gene models created from second MAKER run (rc2), combining evidence (from run 1 or rc1) and ab initio predictors. Specifically, GeneMark was used for the rc2_evidence_genemark.gff.",
+      "links": [
+        {"Website": "https://doi.org/10.17044/scilifelab.30604043.v1"}
+      ],
+      "accessionOrDOI": "https://doi.org/10.17044/scilifelab.30604043.v1",
+      "fileName": "rc2_evidence_genemark.gff",
+      "principalInvestigator": "Johannes Bergsten",
+      "principalInvestigatorAffiliation": "Swedish Museum of Natural History",
+      "firstDateOnPortal": "19 November 2025"
+    }
+
+
+
+
+]
