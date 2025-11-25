@@ -4,7 +4,7 @@
 main() {
     if [[ "$1" == "--build" ]]; then
 	1>&2 echo "Building browser image jb2:latest"
-	docker build -t jb2 docker/jbrowse.dockerfile .
+	docker build -t jb2 -f docker/jbrowse.dockerfile .
     else
 	data_dir="$(realpath $1)"
 	name=jb2-"${data_dir##*/}"
