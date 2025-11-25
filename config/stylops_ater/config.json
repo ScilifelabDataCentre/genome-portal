@@ -1,0 +1,205 @@
+{
+  "defaultSession": {
+    "id": "sate_default_session",
+    "name": "Stylops ater",
+    "widgets": {
+      "hierarchicalTrackSelector": {
+        "id": "hierarchicalTrackSelector",
+        "type": "HierarchicalTrackSelectorWidget",
+        "view": "sate_default_session_view_0",
+        "faceted": {
+          "showSparse": false,
+          "showFilters": true,
+          "showOptions": false,
+          "panelWidth": 400
+        }
+      }
+    },
+    "activeWidgets": {
+      "hierarchicalTrackSelector": "hierarchicalTrackSelector"
+    },
+    "views": [
+      {
+        "id": "sate_default_session_view_0",
+        "minimized": false,
+        "type": "LinearGenomeView",
+        "trackLabels": "offset",
+        "offsetPx": 0,
+        "bpPerPx": 110,
+        "displayedRegions": [
+          {
+            "refName": "ptg000008l_1",
+            "start": 0,
+            "end": 11705146,
+            "reversed": false,
+            "assemblyName": "PRJEB71963"
+          }
+        ],
+        "tracks": [
+          {
+            "id": "sate_default_Protein-coding_genes",
+            "type": "FeatureTrack",
+            "configuration": "rc3_functional_ENA_compliant.gff",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "sate_default_Protein-coding_genes_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 150,
+                "configuration": "rc3_functional_ENA_compliant.gff-LinearBasicDisplay"
+              }
+            ]
+          },
+          {
+            "id": "sate_default_Repeats_(RepeatModeler-RepeatMasker)",
+            "type": "FeatureTrack",
+            "configuration": "repeatmasker.gff",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "sate_default_Repeats_(RepeatModeler-RepeatMasker)_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 150,
+                "configuration": "repeatmasker.gff-LinearBasicDisplay"
+              }
+            ]
+          },
+          {
+            "id": "sate_default_Repeats_(RepeatRunner)",
+            "type": "FeatureTrack",
+            "configuration": "repeatrunner.gff",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "sate_default_Repeats_(RepeatRunner)_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 80,
+                "configuration": "repeatrunner.gff-LinearBasicDisplay"
+              }
+            ]
+          },
+          {
+            "id": "sate_default_tRNA",
+            "type": "FeatureTrack",
+            "configuration": "trna.gff",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "sate_default_tRNA_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 80,
+                "configuration": "trna.gff-LinearBasicDisplay"
+              }
+            ]
+          },
+          {
+            "id": "sate_default_ncRNA",
+            "type": "FeatureTrack",
+            "configuration": "rfam.gff",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "sate_default_ncRNA_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 80,
+                "configuration": "rfam.gff-LinearBasicDisplay"
+              }
+            ]
+          },
+          {
+            "id": "sate_default_Transcriptome_assembly_of_Illumina_RNA-seq_library_ST_1",
+            "type": "FeatureTrack",
+            "configuration": "ST_1.gff",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "sate_default_Transcriptome_assembly_of_Illumina_RNA-seq_library_ST_1_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 150,
+                "configuration": "ST_1.gff-LinearBasicDisplay"
+              }
+            ]
+          },
+          {
+            "id": "sate_default_Transcriptome_assembly_of_Illumina_RNA-seq_library_ST_2",
+            "type": "FeatureTrack",
+            "configuration": "ST_2.gff",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "sate_default_Transcriptome_assembly_of_Illumina_RNA-seq_library_ST_2_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 150,
+                "configuration": "ST_2.gff-LinearBasicDisplay"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "sate_default_session_view_1",
+        "minimized": false,
+        "type": "LinearGenomeView",
+        "trackLabels": "offset",
+        "offsetPx": 0,
+        "bpPerPx": 10,
+        "displayedRegions": [
+          {
+            "refName": "ptg000001c_trnM",
+            "start": 0,
+            "end": 23729,
+            "reversed": false,
+            "assemblyName": "Stylops ater mitochondrial assembly"
+          }
+        ],
+        "tracks": [
+          {
+            "id": "sate_default_Mitochondrial_genes",
+            "type": "FeatureTrack",
+            "configuration": "Mt_genome_S_ater_ptg000001c.mod_drop_exons_anticodons.gff",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "sate_default_Mitochondrial_genes_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 150,
+                "configuration": "Mt_genome_S_ater_ptg000001c.mod_drop_exons_anticodons.gff-LinearBasicDisplay"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "configuration": {
+    "disableAnalytics": true
+  },
+  "tracks": [
+    {
+      "type": "FeatureTrack",
+      "trackId": "Mt_genome_S_ater_ptg000001c.mod_drop_exons_anticodons.gff",
+      "name": "Mitochondrial genes",
+      "assemblyNames": [
+        "Stylops ater mitochondrial assembly"
+      ],
+      "adapter": {
+        "type": "Gff3TabixAdapter",
+        "gffGzLocation": {
+          "uri": "Mt_genome_S_ater_ptg000001c.mod_drop_exons_anticodons.gff.bgz"
+        },
+        "index": {
+          "location": {
+            "uri": "Mt_genome_S_ater_ptg000001c.mod_drop_exons_anticodons.gff.bgz.csi"
+          },
+          "indexType": "CSI"
+        }
+      },
+      "displays": [
+        {
+          "type": "LinearBasicDisplay",
+          "displayId": "Mt_genome_S_ater_ptg000001c.mod_drop_exons_anticodons.gff-LinearBasicDisplay"
+        }
+      ]
+    }
+  ]
+}
