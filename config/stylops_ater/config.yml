@@ -37,7 +37,7 @@ tracks:
   defaultSession: true
 ---
 assembly:
-  name: "Stylops ater mitochondrial assembly"
+  name: "Stylops_ater_mitochondrial_assembly"
   displayName: "S. ater mitochondrial assembly bioproject PRJEB71963"
   url: #TODO add url when data file is public
   fileName: ivStyAter.mito.030124.fa
