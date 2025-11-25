@@ -80,17 +80,31 @@ def get_fasta_header_and_scaffold_length(config: dict[str, Any], species_slug: s
     the function will return the header of that scaffold instead of the first scaffold. The header and length are used to
     populate the defaultSession JSON object to control which scaffold is display upon loading a new session and its zoom level.
     """
-    assembly_file_name = get_track_file_name(config["assembly"]).replace("fasta", "fna")
-    if not assembly_file_name.endswith(".gz"):
-        assembly_file_name += ".gz"
-    file_path = Path(__file__).parent.parent.parent / "data" / species_slug / assembly_file_name
+    assembly_file_name = get_track_file_name(config["assembly"]).replace("fasta", "fna").replace("fa", "fna")
+
+    data_dir = Path(__file__).parent.parent.parent / "data" / species_slug
+
+    possible_extensions = [".gz", ".bgz"]
+    file_path = None
+
+    for ext in possible_extensions:
+        test_path = data_dir / f"{assembly_file_name}{ext}"
+        if test_path.exists():
+            file_path = test_path
+            break
+
+    if not file_path or not file_path.exists():
+        raise FileNotFoundError(
+            f"Assembly file not found. Tried: {assembly_file_name} with extensions {possible_extensions} "
+            f"in directory {data_dir}"
+        )
 
     if "assembly" in config and "defaultScaffold" in config["assembly"]:
         default_scaffold = config["assembly"]["defaultScaffold"]
     else:
         default_scaffold = None
 
-    if file_path.name.endswith(".gz"):
+    if file_path.name.endswith((".gz", ".bgz")):
         with gzip.open(file_path, "rt") as file:
             first_fasta_header, scaffold_length, header_found = parse_fasta_file(
                 file=file, default_scaffold=default_scaffold
