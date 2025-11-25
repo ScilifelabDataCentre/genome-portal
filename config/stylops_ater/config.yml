@@ -1,0 +1,50 @@
+organism: Stylops ater
+assembly:
+  name: PRJEB71963
+  displayName: S. ater genome assembly bioproject PRJEB71963
+  accession: GCA_XXXXXXXX.X
+  url: #TODO add url when data file is public
+  fileName: genome.fa
+  bpPerPx: 110
+tracks:
+- name: Protein-coding genes
+  url: #TODO add url when data file is public
+  fileName: rc3_functional_ENA_compliant.gff
+  defaultSession: true
+- name: Repeats (RepeatModeler-RepeatMasker)
+  url: #TODO add url when data file is public
+  fileName: repeatmasker.gff.gz
+  defaultSession: true
+- name: Repeats (RepeatRunner)
+  url: #TODO add url when data file is public
+  fileName: repeatrunner.gff.gz
+  defaultSession: true
+- name: tRNA
+  url: #TODO add url when data file is public
+  fileName: trna.gff
+  defaultSession: true
+- name: ncRNA
+  url: #TODO add url when data file is public
+  fileName: rfam.gff
+  defaultSession: true
+- name: Transcriptome assembly of Illumina RNA-seq library ST_1 
+  url: #TODO add url when data file is public
+  fileName: ST_1.gff
+  defaultSession: true
+- name: Transcriptome assembly of Illumina RNA-seq library ST_2
+  url: #TODO add url when data file is public
+  fileName: ST_2.gff
+  defaultSession: true
+---
+assembly:
+  name: "Stylops ater mitochondrial assembly"
+  displayName: "S. ater mitochondrial assembly bioproject PRJEB71963"
+  url: #TODO add url when data file is public
+  fileName: ivStyAter.mito.030124.fa
+  bpPerPx: 10
+tracks:
+  - name: "Mitochondrial genes"
+    url: #TODO add url when data file is public
+    fileName: Mt_genome_S_ater_ptg000001c.mod_drop_exons_anticodons.gff
+    addTrack: false
+    defaultSession: true
