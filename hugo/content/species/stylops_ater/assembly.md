@@ -2,11 +2,11 @@
 # The params below were auto-generated, you should not need to edit them...
 # unless you were warned by the add_new_species.py script.
 key_info:
-  - "Assembly Name": TODOassembly_name
-  - "Assembly Type": TODOassembly_type
-  - "Assembly Level": TODOassembly_level
-  - "Genome Representation": TODOgenome_representation
-  - "Accession": TODOassembly_accession
+  - "Assembly Name": "StyAte-assembly EDIT:TO-BE-UPDATED-ONCE-DATA-IS-PUBLIC"
+  - "Assembly Type": "Haploid EDIT:TO-BE-UPDATED-ONCE-DATA-IS-PUBLIC"
+  - "Assembly Level":"Contig EDIT:TO-BE-UPDATED-ONCE-DATA-IS-PUBLIC"
+  - "Genome Representation":"Full EDIT:TO-BE-UPDATED-ONCE-DATA-IS-PUBLIC"
+  - "Accession": "EDIT:TO-BE-UPDATED-ONCE-DATA-IS-PUBLIC"
 
 title: "Genome assembly"
 layout: "species_assembly"
@@ -17,9 +17,9 @@ stats_data_path: "stylops_ater/species_stats"
 lineage_data_path: "stylops_ater/taxonomy"
 ---
 
-Notes: Assembly statistics were calculated for the primary genome assembly TODOassembly_accession ([EDIT:genome_assembly_filename]) using Quast (v5.2.0; Mikheenko et al. 2018). Busco statistics (Manni et al., 2021) were taken from [EDIT:publication_reference]. Annotation statistics were calculated for [EDIT:annotation_file_name] using AGAT (v1.4.1; Dainat, 2024).
+Notes: Assembly statistics were calculated for the primary genome assembly EDIT:TO-BE-UPDATED-ONCE-DATA-IS-PUBLIC ([EDIT:genome_assembly_filename]) using Quast (v5.2.0; Mikheenko et al. 2018). Busco statistics (Manni et al., 2021) comes from communication with authors. Annotation statistics were calculated for [EDIT:annotation_file_name] using AGAT (v1.4.1; Dainat, 2024).
 
-BUSCO notation: C: Complete; S: Single-copy; D: Duplicated; F: Fragmented; M: Missing; n: Total BUSCO genes included in the dataset (here: [EDIT:ODB_database]). See also [the official BUSCO manual](https://busco.ezlab.org/busco_userguide.html#interpreting-the-results).
+BUSCO notation: C: Complete; S: Single-copy; D: Duplicated; F: Fragmented; M: Missing; n: Total BUSCO genes included in the dataset (here: endopterygota_odb10). See also [the official BUSCO manual](https://busco.ezlab.org/busco_userguide.html#interpreting-the-results).
 
 ### Publication(s)
 

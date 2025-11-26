@@ -57,7 +57,7 @@ Swedish Reference Genome Portal (Retrieved DATE_ACCESSED), SciLifeLab Data Centr
 
 - Cvačka, J., Jiroš, P., Kalinová, B., Straka, J., Černá, K., Šebesta, P., Tomčala, A., Vašíčková, S., Jahn, U., & Šobotník, J. (2012). Stylopsal: The first identified female-produced sex pheromone of Strepsiptera. Journal of Chemical Ecology, 38(12), 1483–1491. <https://doi.org/10.1007/s10886-012-0211-4>
 
-- Hoffmann, M., Gardein, H., Greil, H., & Erler, S. (2023). Anatomical, phenological and genetic aspects of the host–parasite relationship between Andrena vaga (Hymenoptera) and Stylops ater (Strepsiptera). Parasitology, 150(8), 744–753. <https://doi.org/10.1017/S0031182023000483>
+- Hoffmann, M., Gardein, H., Greil, H., & Erler, S. (2023). Anatomical, phenological and genetic aspects of the host–parasite relationship between *Andrena vaga* (Hymenoptera) and *Stylops ater* (Strepsiptera). Parasitology, 150(8), 744–753. <https://doi.org/10.1017/S0031182023000483>
 
 - Peinert, M., Wipfler, B., Jetschke, G., Kleinteich, T., Gorb, S. N., Beutel, R. G., & Pohl, H. (2016). Traumatic insemination and female counter-adaptation in Strepsiptera (Insecta). Scientific Reports, 6, 25052. <https://doi.org/10.1038/srep25052>
 
