@@ -14,16 +14,29 @@ main() {
     local -a cmd
     echo "Indexing $1" >&2
     case "${1##*/}" in
-	*.gff.bgz)
-	    cmd=(tabix -p gff --csi);;
-	*.bed.bgz)
-	    cmd=(tabix -p bed --csi);;
-	*.fna.bgz)
-	    cmd=(samtools faidx);;
-	*)
-	    echo "Unable to index $1 : unrecognized file type"
-	    return 1
+        *.gff.bgz)
+            cmd=(tabix -p gff --csi)
+			index="${1}.csi"
+            ;;
+        *.bed.bgz)
+            cmd=(tabix -p bed --csi)
+            index="${1}.csi"
+            ;;
+        *.fna.bgz)
+            cmd=(samtools faidx)
+            index="${1}.fai"
+            ;;
+        *)
+            echo "Unable to index $1 : unrecognized file type"
+            return 1
     esac
+
+    # To avoid unnessesary reindexing, only run index operation if index file does not exist or is older than data file
+    if [[ -e "$index" && "$index" -nt "$1" ]]; then
+        echo "Index $index is up to date, skipping."
+        return 0
+    fi
+
     if ! "${cmd[@]}" "$1"; then
 	echo "Error indexing file $1"
 	return 1
