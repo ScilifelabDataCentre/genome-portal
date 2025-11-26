@@ -4,8 +4,8 @@
 key_info:
   - "Assembly Name": "StyAte-assembly EDIT:TO-BE-UPDATED-ONCE-DATA-IS-PUBLIC"
   - "Assembly Type": "Haploid EDIT:TO-BE-UPDATED-ONCE-DATA-IS-PUBLIC"
-  - "Assembly Level":"Contig EDIT:TO-BE-UPDATED-ONCE-DATA-IS-PUBLIC"
-  - "Genome Representation":"Full EDIT:TO-BE-UPDATED-ONCE-DATA-IS-PUBLIC"
+  - "Assembly Level": "Contig EDIT:TO-BE-UPDATED-ONCE-DATA-IS-PUBLIC"
+  - "Genome Representation": "Full EDIT:TO-BE-UPDATED-ONCE-DATA-IS-PUBLIC"
   - "Accession": "EDIT:TO-BE-UPDATED-ONCE-DATA-IS-PUBLIC"
 
 title: "Genome assembly"
