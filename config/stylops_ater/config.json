@@ -149,7 +149,7 @@
             "start": 0,
             "end": 23729,
             "reversed": false,
-            "assemblyName": "Stylops ater mitochondrial assembly"
+            "assemblyName": "Stylops_ater_mitochondrial_assembly"
           }
         ],
         "tracks": [
@@ -180,7 +180,7 @@
       "trackId": "Mt_genome_S_ater_ptg000001c.mod_drop_exons_anticodons.gff",
       "name": "Mitochondrial genes",
       "assemblyNames": [
-        "Stylops ater mitochondrial assembly"
+        "Stylops_ater_mitochondrial_assembly"
       ],
       "adapter": {
         "type": "Gff3TabixAdapter",
