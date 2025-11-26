@@ -2,8 +2,8 @@
 # The params below were auto-generated, you should not need to edit them...
 # unless you were warned by the add-new-species.py script.
 title: "*Stylops ater*"
-subtitle: ""
-last_updated: "19/11/2025" # format DD/MM/YYYY
+subtitle: "An endoparasite of the bee *Andrena vaga*"
+last_updated: "27/11/2025" # format DD/MM/YYYY
 
 layout: "species_intro"
 banner_title: "Species overview"
@@ -63,4 +63,4 @@ Swedish Reference Genome Portal (Retrieved DATE_ACCESSED), SciLifeLab Data Centr
 
 #### Changelog
 
-- 19/11/2025 - Species first published on the Portal
+- EDIT:XX/XX/XXXX - Species first published on the Portal
