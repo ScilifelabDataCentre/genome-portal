@@ -25,6 +25,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libdeflate0 \
     libcurl4 \
     libncursesw6 \
+    jq \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
