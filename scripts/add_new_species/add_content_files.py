@@ -31,10 +31,17 @@ def add_index_md(
     species_name = user_form_data.species_name
     try:
         gbif_taxon_id = get_gbif_taxon_key(species_name=species_name)
-    except (requests.exceptions.HTTPError, KeyError):
+    except (
+        requests.exceptions.HTTPError,
+        requests.exceptions.ConnectionError,
+        requests.exceptions.Timeout,
+        requests.exceptions.SSLError,
+        KeyError,
+    ) as e:
         gbif_taxon_id = None
         warnings.warn(
-            f"Failed to get GBIF key for species: {species_name}. "
+            f"Failed to get GBIF key for species: {species_name}.\n"
+            f"Reason: {e}\n"
             "Not to worry, you can instead add it manually to the _index.md file in the species directory.",
             stacklevel=2,
         )
