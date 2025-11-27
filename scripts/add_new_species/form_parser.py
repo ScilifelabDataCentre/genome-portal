@@ -1,3 +1,4 @@
+import re
 import subprocess
 from dataclasses import dataclass
 from pathlib import Path
@@ -44,12 +45,8 @@ def parse_user_form(form_file_path: Path) -> UserFormData:
         references=references,
         publication=publication,
         funding=funding,
-        img_attrib_text=img_attrib[
-            "text"
-        ],  # TODO - not currently in docx,example text hardcoded in extract_img_attrib()
-        img_attrib_link=img_attrib[
-            "url"
-        ],  # TODO - not currently in docx,example text hardcoded in extract_img_attrib()
+        img_attrib_text=img_attrib["text"],
+        img_attrib_link=img_attrib["url"],
     )
 
 
@@ -80,12 +77,15 @@ def extract_species_names(markdown_content: str) -> dict[str, str]:
         "common_name": "",
     }
 
-    for line in markdown_content.splitlines():
-        if "Scientific name:" in line:
-            # v1.1.0 of the docx template italicizes the species name, which is returned as *species_name* by pandoc
-            species_names["species_name"] = line.split(":")[1].replace("*", "").strip()
-        if "English (common) name:" in line:
-            species_names["common_name"] = line.split(":")[1].strip()
+    species_name_section = extract_block_of_markdown(
+        start_marker="| > fungus",
+        end_marker="| Species description",
+        markdown_content=markdown_content,
+    )
+
+    species_name_cells = extract_table_cells(species_name_section)
+    species_names["species_name"] = species_name_cells.get("Scientific name:", "")
+    species_names["common_name"] = species_name_cells.get("English (common) name:", "")
 
     species_names["species_slug"] = species_names["species_name"].replace(" ", "_").lower()
     return species_names
@@ -95,11 +95,12 @@ def extract_description(markdown_content: str) -> str:
     """
     Extract the description from the markdown content.
     """
-    return extract_block_of_markdown(
-        start_marker="we will get back to you",
-        end_marker="#### References",
+    block_of_markdown_table = extract_block_of_markdown(
+        start_marker="the designated text box below.",
+        end_marker="| References",
         markdown_content=markdown_content,
     )
+    return strip_table_borders(block_of_markdown_table)
 
 
 def extract_references(markdown_content: str) -> str:
@@ -108,41 +109,41 @@ def extract_references(markdown_content: str) -> str:
     Have to first get the section with references in order to get right block.
     """
     refs_section = extract_block_of_markdown(
-        start_marker="#### References",
-        end_marker="Genome assembly information",
+        start_marker="on a separate line.",
+        end_marker="Scientific article (Optional)",
         markdown_content=markdown_content,
     )
 
-    raw_refs = extract_block_of_markdown(
-        start_marker="sapiens",
-        end_marker="Genome assembly information",
-        markdown_content=refs_section,
-    )
+    refs_section_borderless = strip_table_borders(refs_section)
 
     # Make text into a markdown list
+    refs_raw = re.split(r"\\|\n", refs_section_borderless)
     refs = []
-    for line in raw_refs.strip().splitlines():
-        refs.append(f"- {line}")
+    for ref in refs_raw:
+        ref = ref.strip()
+        if ref:
+            refs.append(f"- {ref}")
     return "\n".join(refs)
 
 
 def extract_publication(markdown_content: str) -> str:
     """
     Extract the publications from the markdown content.
+
+    Assumes that there is only one reference for the study.
+    In the rare case of more than one publication, the captured text
+    will currently need to be manually edited.
     """
+
     pubs_section = extract_block_of_markdown(
-        start_marker="### Publication",
-        end_marker="### Funding",
+        start_marker="| > in [APA 7](https://apastyle.apa.org/).",
+        end_marker="Funding",
         markdown_content=markdown_content,
     )
 
-    pubs = extract_block_of_markdown(
-        start_marker="sapiens",
-        end_marker="### Funding",
-        markdown_content=pubs_section,
-    )
+    pubs_section_borderless = strip_table_borders(pubs_section)
 
-    return pubs.strip()
+    return pubs_section_borderless.strip()
 
 
 def extract_funding(markdown_content) -> str:
@@ -150,32 +151,40 @@ def extract_funding(markdown_content) -> str:
     Extract the funding information from the markdown content.
     """
     funding_section = extract_block_of_markdown(
-        start_marker="### Funding",
-        end_marker="# 4. Data Tracks Form",
+        start_marker="include grant numbers when applicable.",
+        end_marker="| Species image",
         markdown_content=markdown_content,
     )
 
-    raw_funding = extract_block_of_markdown(
-        start_marker="applicable.",
-        markdown_content=funding_section,
-    )
+    funding_section_borderless = strip_table_borders(funding_section)
 
     # Make text into a markdown list
-    funding = []
-    for line in raw_funding.strip().splitlines():
-        funding.append(f"- {line}")
-    return "\n".join(funding)
+    refs_raw = re.split(r"\\|\n", funding_section_borderless)
+    refs = []
+    for ref in refs_raw:
+        ref = ref.strip()
+        if ref:
+            refs.append(f"- {ref}")
+    return "\n".join(refs)
 
 
 def extract_img_attrib(markdown_content: str) -> dict[str, str]:
     """
     TODO - not currently in word doc, so fake data for now...
     """
-    img_attrib = {
-        "text": "Image attribution text.",
-        "url": "https://example.com/image_attribution",
-    }
-    return img_attrib
+    image_section = extract_block_of_markdown(
+        start_marker="| > permission**. ",
+        end_marker="**Submission date",
+        markdown_content=markdown_content,
+    )
+
+    image_cells = extract_table_cells(image_section)
+    img_text = image_cells.get("Image attribution:", "")
+    img_url = image_cells.get("Image URL (optional):", "")
+    if img_url == "Click or tap here to enter text.":
+        img_url = None
+
+    return {"text": img_text, "url": img_url}
 
 
 def extract_block_of_markdown(markdown_content: str, start_marker: str, end_marker: str = None) -> str:
@@ -197,3 +206,58 @@ def extract_block_of_markdown(markdown_content: str, start_marker: str, end_mark
             blocks.append(line)
 
     return "".join(blocks).strip()
+
+
+def strip_table_borders(table_block: str) -> str:
+    """
+    Removes leading/trailing vertical bars and whitespace from each line in a markdown table block.
+    Removes table border lines like +-----+ or -----+ of any length, even if appended to the captured markdown.
+    Joins the lines into a single string.
+    """
+    lines = []
+    for line in table_block.splitlines():
+        # Remove lines that are only borders
+        if re.match(r"^\s*[\+\-]+\s*$", line):
+            continue
+        line = re.sub(r"[\+\-]+$", "", line)  # Remove trailing border
+        line = re.sub(r"^[\+\-]+", "", line)  # Remove leading border
+        line = line.strip("|").strip()
+        if line:
+            lines.append(line)
+    return " ".join(lines)
+
+
+def extract_table_cells(table_block: str) -> dict[str, str]:
+    """
+    Extracts cell values from a markdown table block with borders.
+    Used for tables that have multiple entries, such as the species name table.
+    Handles multiline fields (e.g. 'English (common) name:') and values.
+    """
+    cells = {}
+    current_field = None
+    current_value_lines = []
+
+    for line in table_block.splitlines():
+        match = re.match(r"^\|\s*(.*?)\s*\|\s*(.*?)\s*\|$", line)
+        if match:
+            field = match.group(1).strip()
+            value = match.group(2).strip()
+
+            # Handle multi-line field
+            if current_field and field.endswith(":") and not field.startswith(">"):
+                current_field = current_field + " " + field
+                if value:
+                    current_value_lines.append(value)
+            # Handle start of field
+            elif field:
+                if current_field is not None:
+                    cells[current_field] = " ".join(current_value_lines).strip()
+                current_field = field
+                current_value_lines = [value] if value else []
+            # Handle multi-line case where there is no field name on the line but is a value
+            elif value and not field:
+                current_value_lines.append(value)
+
+    if current_field and current_value_lines:
+        cells[current_field] = " ".join(current_value_lines).strip()
+    return cells
