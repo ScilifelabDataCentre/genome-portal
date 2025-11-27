@@ -182,7 +182,7 @@ def extract_img_attrib(markdown_content: str) -> dict[str, str]:
     img_text = image_cells.get("Image attribution:", "")
     img_url = image_cells.get("Image URL (optional):", "")
     if img_url == "Click or tap here to enter text.":
-        img_url = None
+        img_url = ""
 
     return {"text": img_text, "url": img_url}
 
