@@ -18,7 +18,7 @@ hugo/.hugo_build.lock
 #data stewardship
 scripts/data_stewardship/temp/**
 scripts/data_stewardship/logs/**
-scripts/data_stewardship/*.agat.log
+*.agat.log
 
 # MS Office temp files
 scripts/add_new_species/tests/fixtures/submission_form_example/~*
