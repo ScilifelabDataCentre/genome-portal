@@ -1,0 +1,36 @@
+[
+  {
+    "dataTrackName": "Genome",
+    "description": "Reference genome sequence",
+    "links": [
+      {
+        "Download": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/030/558/815/GCA_030558815.1_ASM3055881v1/GCA_030558815.1_ASM3055881v1_genomic.fna.gz"
+      },
+      {
+        "Website": "https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_030558815.1/"
+      }
+    ],
+    "accessionOrDOI": "GCA_030558815.1",
+    "fileName": "GCA_030558815.1_ASM3055881v1_genomic.fna.gz",
+    "principalInvestigator": "Cecilia Geijer",
+    "principalInvestigatorAffiliation": "Chalmers University of Technology",
+    "firstDateOnPortal": "05 May 2025"
+  },
+  {
+    "dataTrackName": "Genes",
+    "description": "Functional annotation of genes in the primary genome assembly",
+    "links": [
+      {
+        "Download": "https://figshare.scilifelab.se/ndownloader/files/53044787"
+      },
+      {
+        "Website": "https://doi.org/10.17044/scilifelab.28606814.v1"
+      }
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.28606814.v1",
+    "fileName": "bmalaysiensis_annotation.gff",
+    "principalInvestigator": "Cecilia Geijer",
+    "principalInvestigatorAffiliation": "Chalmers University of Technology",
+    "firstDateOnPortal": "05 May 2025"
+  }
+]

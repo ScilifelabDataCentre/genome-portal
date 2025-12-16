@@ -159,7 +159,7 @@ docker pull ghcr.io/scilifelabdatacentre/swg-hugo-site:dev
 #### Using a local build
 
 ```bash
-./scripts/dockerbuild -t local hugo
+./scripts/dockerbuild -t local -k hugo
 ./scripts/dockerserve -t local
 ```
 

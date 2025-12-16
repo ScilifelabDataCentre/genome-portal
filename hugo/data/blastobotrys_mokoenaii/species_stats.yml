@@ -1,0 +1,24 @@
+---
+assembly:
+  - "Assembly length (Mbp)": "13.69"
+  - "GC %": "48.92"
+  - "Contig #": "333"
+  - "Contig N50 (Mbp)": "0.25"
+  - "Contig L50": "15"
+  - "Contig N90 (Mbp)": "0.07"
+  - "Contig L90": "52"
+  - "Scaffold #": "333"
+  - "Scaffold N50 (Mbp)": "0.25"
+  - "Scaffold L50": "15"
+  - "Scaffold N90 (Mbp)": "0.07"
+  - "Scaffold L90": "52"
+  - "Scaffolds >= 10 kb": "79"
+  - "BUSCO % (ascomycota_odb10.2024-01-08)": "C:95.3 [S:94.5 ,D:0.8], F:0.2, M:4.5, n:1706"
+annotation:
+  - "Gene #": 6069
+  - "Transcript #": "6142"
+  - "Avg exons per transcript": "1.4"
+  - "Avg gene length (bp)": 1445
+  - "Avg transcript length (bp)": "1440"
+  - "Avg exon length (bp)": 1018
+  - "Avg intron length (bp)": "98"
