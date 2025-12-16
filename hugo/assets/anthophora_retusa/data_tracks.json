@@ -32,5 +32,57 @@
     "principalInvestigator": "Matthew Webster",
     "principalInvestigatorAffiliation": "Uppsala University",
     "firstDateOnPortal": "27/05/2025"
+  },
+    {
+    "dataTrackName": "Repeats",
+    "description": "Nucleotide sequences of the predicted repetitive elements in GFF format.",
+    "links": [
+      {"Website": "https://doi.org/10.17044/scilifelab.30884846"},
+      {"Article": "https://doi.org/10.1111/mec.70204"}
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.30884846",
+    "fileName": "Anthophora_retusa_repeats.gff",
+    "principalInvestigator": "Matthew Webster",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "16/12/2025"
+  },
+  {
+    "dataTrackName": "Transcripts (Isoseq)",
+    "description": "PacBio IsoSeq transcripts aligned to the primary genome assembly using miniprot v.0.10-r226.",
+    "links": [
+      {"Website": "https://doi.org/10.17044/scilifelab.30884846"},
+      {"Article": "https://doi.org/10.1111/mec.70204"}
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.30884846",
+    "fileName": "Anthophora_retusa_isoseq.gff",
+    "principalInvestigator": "Matthew Webster",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "16/12/2025"
+  },
+  {
+    "dataTrackName": "Nucleotide diversity (Pi), 5kb windows",
+    "description": "Nucleotide diversity (π) estimated in non-overlapping 5 kb windows across each genome using variant calls generated from population sequencing data from 57 A. retusa individuals.",
+    "links": [
+      {"Website": "https://doi.org/10.17044/scilifelab.30884846"},
+      {"Article": "https://doi.org/10.1111/mec.70204"}
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.30884846",
+    "fileName": "retusa_5kb.windowed.pi",
+    "principalInvestigator": "Matthew Webster",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "16/12/2025"
+  },
+  {
+    "dataTrackName": "Tajima's D, calculated with 10kb windows",
+    "description": "Tajima’s D was calculated in sliding windows across the genome using A. retusa SNP datasets.",
+    "links": [
+      {"Website": "https://doi.org/10.17044/scilifelab.30884846"},
+      {"Article": "https://doi.org/10.1111/mec.70204"}
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.30884846",
+    "fileName": "plagiata.Tajima.D.end_column_5kb_midpoint.bed",
+    "principalInvestigator": "Matthew Webster",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "16/12/2025"
   }
 ]

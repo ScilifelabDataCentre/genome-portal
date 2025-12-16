@@ -3,7 +3,7 @@
 # unless you were warned by the add-new-species.py script.
 title: "*Anthophora plagiata*"
 subtitle: "A bee species"
-last_updated: "12/05/2025" # format DD/MM/YYYY
+last_updated: "16/12/2025" # format DD/MM/YYYY
 
 layout: "species_intro"
 banner_title: "Species overview"
@@ -60,4 +60,4 @@ Swedish Reference Genome Portal (Retrieved DATE_ACCESSED), SciLifeLab Data Centr
 
 #### Changelog
 
-- 27/05/2025 - Species first published on the Portal
+- 16/12/2025 - Species first published on the Portal
