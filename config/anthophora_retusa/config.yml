@@ -24,9 +24,9 @@ tracks:
   GWAS: true
   scoreColumnGWAS: "PI"
   color: "rgb(242, 142, 44)"
-- name: "Tajima's D"
-  url: "https://nextcloud.dc.scilifelab.se/s/K58H5LDxzp38zXJ/download/retusa.Tajima.D.end_column_added.drop_nan.bed" #temp storage for the track
-  fileName: "retusa.Tajima.D.end_column_added.drop_nan.bed"
+- name: "Tajima's D, calculated with 10kb windows"
+  url: "https://nextcloud.dc.scilifelab.se/s/QpnAeGMorLpQnkc/download/retusa.Tajima.D.end_column_5kb_midpoint.drop_nan.bed" #temp storage for the track
+  fileName: "retusa.Tajima.D.end_column_5kb_midpoint.drop_nan.bed"
   addTrack: false
   defaultSession: true
   GWAS: true

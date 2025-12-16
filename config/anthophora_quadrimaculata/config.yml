@@ -24,9 +24,9 @@ tracks:
   GWAS: true
   scoreColumnGWAS: "PI"
   color: "rgb(242, 142, 44)"
-- name: "Tajima's D"
-  url: "https://nextcloud.dc.scilifelab.se/s/k4X5XCq8zGKyn83/download/quadri.Tajima.D.end_column_added.bed" #temp storage for the track
-  fileName: "quadri.Tajima.D.end_column_added.bed"
+- name: "Tajima's D, calculated with 10kb windows"
+  url: "https://nextcloud.dc.scilifelab.se/s/j4jm27BeEkidYPq/download/quadri.Tajima.D.end_column_5kb_midpoint.bed" #temp storage for the track
+  fileName: "quadri.Tajima.D.end_column_5kb_midpoint.bed"
   addTrack: false
   defaultSession: true
   GWAS: true

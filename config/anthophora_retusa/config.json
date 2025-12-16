@@ -154,7 +154,7 @@
     {
       "type": "FeatureTrack",
       "trackId": "aret_gwas_Tajimas_D",
-      "name": "Tajima's D",
+      "name": "Tajima's D, calculated with 10kb windows",
       "assemblyNames": [
         "iyAntRet1"
       ],
@@ -165,11 +165,11 @@
         "type": "BedTabixAdapter",
         "scoreColumn": "TajimaD",
         "bedGzLocation": {
-          "uri": "retusa.Tajima.D.end_column_added.drop_nan.bed.bgz"
+          "uri": "retusa.Tajima.D.end_column_5kb_midpoint.drop_nan.bed.bgz"
         },
         "index": {
           "location": {
-            "uri": "retusa.Tajima.D.end_column_added.drop_nan.bed.bgz.csi"
+            "uri": "retusa.Tajima.D.end_column_5kb_midpoint.drop_nan.bed.bgz.csi"
           },
           "indexType": "CSI"
         }

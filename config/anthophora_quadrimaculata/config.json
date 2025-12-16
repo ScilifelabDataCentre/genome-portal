@@ -154,7 +154,7 @@
     {
       "type": "FeatureTrack",
       "trackId": "aqua_gwas_Tajimas_D",
-      "name": "Tajima's D",
+      "name": "Tajima's D, calculated with 10kb windows",
       "assemblyNames": [
         "iyAntQuad1"
       ],
@@ -165,11 +165,11 @@
         "type": "BedTabixAdapter",
         "scoreColumn": "TajimaD",
         "bedGzLocation": {
-          "uri": "quadri.Tajima.D.end_column_added.bed.bgz"
+          "uri": "quadri.Tajima.D.end_column_5kb_midpoint.bed.bgz"
         },
         "index": {
           "location": {
-            "uri": "quadri.Tajima.D.end_column_added.bed.bgz.csi"
+            "uri": "quadri.Tajima.D.end_column_5kb_midpoint.bed.bgz.csi"
           },
           "indexType": "CSI"
         }

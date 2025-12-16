@@ -92,6 +92,20 @@
                 "color": "rgb(242, 142, 44)"
               }
             ]
+          },
+          {
+            "id": "apla_default_Tajimas_D",
+            "type": "FeatureTrack",
+            "configuration": "apla_gwas_Tajimas_D",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "apla_default_Tajimas_D_display",
+                "type": "LinearManhattanDisplay",
+                "heightPreConfig": 150,
+                "configuration": "apla_gwas_Tajimas_D_display"
+              }
+            ]
           }
         ]
       }
@@ -133,6 +147,36 @@
       "displays": [
         {
           "displayId": "apla_gwas_Nucleotide_diversity_(Pi)_5kb_windows_display",
+          "type": "LinearManhattanDisplay"
+        }
+      ]
+    },
+    {
+      "type": "FeatureTrack",
+      "trackId": "apla_gwas_Tajimas_D",
+      "name": "Tajima's D, calculated with 10kb windows",
+      "assemblyNames": [
+        "iyAntPlag1"
+      ],
+      "category": [
+        "GWAS"
+      ],
+      "adapter": {
+        "type": "BedTabixAdapter",
+        "scoreColumn": "TajimaD",
+        "bedGzLocation": {
+          "uri": "plagiata.Tajima.D.end_column_5kb_midpoint.bed.bgz"
+        },
+        "index": {
+          "location": {
+            "uri": "plagiata.Tajima.D.end_column_5kb_midpoint.bed.bgz.csi"
+          },
+          "indexType": "CSI"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "apla_gwas_Tajimas_D_display",
           "type": "LinearManhattanDisplay"
         }
       ]

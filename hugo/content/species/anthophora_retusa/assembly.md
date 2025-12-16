@@ -23,7 +23,11 @@ BUSCO notation: C: Complete; S: Single-copy; D: Duplicated; F: Fragmented; M: Mi
 
 ### Publication(s)
 
-There is currently no publication accociated with this genome of _Anthophora retusa_. In the meantime, please cite the genome assembly submission: GCA_963995495.1.
+The data for _Anthophora retusa_ displayed in the genome portal comes from:
+
+```{style=citation}
+Taliadoros, D., Soares, A. E. R., Dias, G., Bunikis, I., Pippel, M., Olsson, A., Mosbech, M.-B., Heintz, J., Lager, N., Strand, A.-S., Pettersson, M., Pettersson, O. V., Lantz, H., Cederberg, B., Lindblad-Toh, K., & Webster, M. T. (2025). Genome Variation in Three *Anthophora* Bee Species Reflects Divergent Demographic Histories. Molecular Ecology, n/a(n/a), e70204. https://doi.org/10.1111/mec.70204
+```
 
 The tools used by to calculate the statistics shown on top of this page are described in:
 
@@ -33,3 +37,11 @@ The tools used by to calculate the statistics shown on top of this page are desc
 - Manni, M., Berkeley, M. R., Seppey, M., Simão, F. A., & Zdobnov, E. M. (2021). BUSCO Update: Novel and Streamlined Workflows along with Broader and Deeper Phylogenetic Coverage for Scoring of Eukaryotic, Prokaryotic, and Viral Genomes. Molecular Biology and Evolution, 38(10), 4647–4654. <https://doi.org/10.1093/molbev/msab199>
 
 - Mikheenko, A., Prjibelski, A., Saveliev, V., Antipov, D., & Gurevich, A. (2018). Versatile genome assembly evaluation with QUAST-LG. Bioinformatics, 34(13), i142–i150. <https://doi.org/10.1093/bioinformatics/bty266>
+
+### Funding
+
+*The study in which the genome data was generated (Taliadoros et al 2025) acknowledge funding by:*
+
+- Swedish Research Council; Grant number: [2020-06174_VR](https://www.vr.se/english/swecris.html#/project/2020-06174_VR)
+- Science for Life Laboratory
+- National Academic Infrastructure for Supercomputing in Sweden, SNIC 2022/5-333 and SNIC 2023/23-465.
