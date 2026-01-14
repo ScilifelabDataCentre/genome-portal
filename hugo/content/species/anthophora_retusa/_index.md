@@ -56,7 +56,7 @@ Swedish Reference Genome Portal (Retrieved DATE_ACCESSED), SciLifeLab Data Centr
 
 #### References
 
-- SLU Artdatabanken (2025). Artfakta: svartpälsbi (Anthophora retusa). <https://artfakta.se/taxa/102690> [2025-05-27]
+- SLU Artdatabanken (2025). Artfakta: svartpälsbi (_Anthophora retusa_). <https://artfakta.se/taxa/102690> [2025-05-27]
 
 #### Changelog
 

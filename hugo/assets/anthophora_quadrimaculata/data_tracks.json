@@ -47,7 +47,7 @@
     "fileName": "Anthophora_quadrimaculata_repeats.gff",
     "principalInvestigator": "Matthew Webster",
     "principalInvestigatorAffiliation": "Uppsala University",
-    "firstDateOnPortal": "14/01/2026"
+    "firstDateOnPortal": "14 January 2026"
   },
   {
     "dataTrackName": "Transcripts (Isoseq)",
@@ -63,7 +63,7 @@
     "fileName": "Anthophora_quadrimaculata_isoseq.gff",
     "principalInvestigator": "Matthew Webster",
     "principalInvestigatorAffiliation": "Uppsala University",
-    "firstDateOnPortal": "14/01/2026"
+    "firstDateOnPortal": "14 January 2026"
   },
   {
     "dataTrackName": "Nucleotide diversity (Pi), 5kb windows",
@@ -79,7 +79,7 @@
     "fileName": "quad_5kb.windowed.pi",
     "principalInvestigator": "Matthew Webster",
     "principalInvestigatorAffiliation": "Uppsala University",
-    "firstDateOnPortal": "14/01/2026"
+    "firstDateOnPortal": "14 January 2026"
   },
   {
     "dataTrackName": "Tajima's D, calculated with 10kb windows",
@@ -95,6 +95,6 @@
     "fileName": "quadri.Tajima.D.end_column_5kb_midpoint.bed",
     "principalInvestigator": "Matthew Webster",
     "principalInvestigatorAffiliation": "Uppsala University",
-    "firstDateOnPortal": "14/01/2026"
+    "firstDateOnPortal": "14 January 2026"
   }
 ]
