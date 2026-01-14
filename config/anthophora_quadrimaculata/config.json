@@ -39,14 +39,14 @@
           {
             "id": "aqua_default_protein_coding_genes_view_0",
             "type": "FeatureTrack",
-            "configuration": "GCA_963995475.1_iyAntQuad1_genomic.gff.renamed.gff",
+            "configuration": "GCA_963995475.1_iyAntQuad1_genomic.gff",
             "minimized": false,
             "displays": [
               {
                 "id": "aqua_default_protein_coding_genes_view_0_display",
                 "type": "LinearBasicDisplay",
                 "heightPreConfig": 200,
-                "configuration": "GCA_963995475.1_iyAntQuad1_genomic.gff.renamed.gff-LinearBasicDisplay"
+                "configuration": "GCA_963995475.1_iyAntQuad1_genomic.gff-LinearBasicDisplay"
               }
             ]
           },
