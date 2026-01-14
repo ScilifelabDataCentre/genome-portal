@@ -14,7 +14,7 @@
     "fileName": "CAXEFM01.fasta.gz",
     "principalInvestigator": "Matthew Webster",
     "principalInvestigatorAffiliation": "Uppsala University",
-    "firstDateOnPortal": "27/05/2025"
+    "firstDateOnPortal": "14 January 2026"
   },
   {
     "dataTrackName": "Protein-coding genes",
@@ -47,7 +47,7 @@
     "fileName": "Anthophora_retusa_repeats.gff",
     "principalInvestigator": "Matthew Webster",
     "principalInvestigatorAffiliation": "Uppsala University",
-    "firstDateOnPortal": "14/01/2026"
+    "firstDateOnPortal": "14 January 2026"
   },
   {
     "dataTrackName": "Transcripts (Isoseq)",
@@ -63,7 +63,7 @@
     "fileName": "Anthophora_retusa_isoseq.gff",
     "principalInvestigator": "Matthew Webster",
     "principalInvestigatorAffiliation": "Uppsala University",
-    "firstDateOnPortal": "14/01/2026"
+    "firstDateOnPortal": "14 January 2026"
   },
   {
     "dataTrackName": "Nucleotide diversity (Pi), 5kb windows",
@@ -79,7 +79,7 @@
     "fileName": "retusa_5kb.windowed.pi",
     "principalInvestigator": "Matthew Webster",
     "principalInvestigatorAffiliation": "Uppsala University",
-    "firstDateOnPortal": "14/01/2026"
+    "firstDateOnPortal": "14 January 2026"
   },
   {
     "dataTrackName": "Tajima's D, calculated with 10kb windows",
@@ -95,6 +95,6 @@
     "fileName": "retusa.Tajima.D.end_column_5kb_midpoint.bed",
     "principalInvestigator": "Matthew Webster",
     "principalInvestigatorAffiliation": "Uppsala University",
-    "firstDateOnPortal": "14/01/2026"
+    "firstDateOnPortal": "14 January 2026"
   }
 ]
