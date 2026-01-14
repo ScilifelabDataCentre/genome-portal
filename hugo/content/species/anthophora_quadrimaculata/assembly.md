@@ -17,7 +17,7 @@ stats_data_path: "anthophora_quadrimaculata/species_stats"
 lineage_data_path: "anthophora_quadrimaculata/taxonomy"
 ---
 
-Notes: Assembly statistics were calculated for the primary genome assembly GCA_963995475.1 (CAXEFK01.fasta) using Quast (v5.2.0; Mikheenko et al. 2018). Busco statistics (Manni et al., 2021) were recieved by communication with the authors. Annotation statistics were calculated for GCA_963995475.1_iyAntQuad1_genomic.gff using AGAT (v1.4.1; Dainat, 2024).
+Notes: Assembly statistics were calculated for the primary genome assembly GCA_963995475.1 (CAXEFK01.fasta) using Quast (v5.2.0; Mikheenko et al. 2018). Busco statistics (Manni et al., 2021) were received by communication with the authors. Annotation statistics were calculated for GCA_963995475.1_iyAntQuad1_genomic.gff using AGAT (v1.4.1; Dainat, 2024).
 
 BUSCO notation: C: Complete; S: Single-copy; D: Duplicated; F: Fragmented; M: Missing; n: Total BUSCO genes included in the dataset (here: arthropoda_odb10). See also [the official BUSCO manual](https://busco.ezlab.org/busco_userguide.html#interpreting-the-results).
 
