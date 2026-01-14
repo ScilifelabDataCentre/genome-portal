@@ -3,7 +3,7 @@ assembly:
   name: iyAntPlag1
   displayName: A. plagiata genome assembly GCA_963995485.1
   accession: GCA_963995485.1
-  url: ftp://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/cax/CAXEFL01.fasta.gz
+  url: "https://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/cax/CAXEFL01.fasta.gz"
   fileName: CAXEFL01.fasta.gz
   defaultScaffold: "ENA|CAXEFL010000280|CAXEFL010000280.1"
 tracks:
