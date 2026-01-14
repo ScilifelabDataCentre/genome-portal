@@ -1,0 +1,185 @@
+{
+  "defaultSession": {
+    "id": "aqua_default_session",
+    "name": "Anthophora quadrimaculata",
+    "widgets": {
+      "hierarchicalTrackSelector": {
+        "id": "hierarchicalTrackSelector",
+        "type": "HierarchicalTrackSelectorWidget",
+        "view": "aqua_default_session_view_0",
+        "faceted": {
+          "showSparse": false,
+          "showFilters": true,
+          "showOptions": false,
+          "panelWidth": 400
+        }
+      }
+    },
+    "activeWidgets": {
+      "hierarchicalTrackSelector": "hierarchicalTrackSelector"
+    },
+    "views": [
+      {
+        "id": "aqua_default_session_view_0",
+        "minimized": false,
+        "type": "LinearGenomeView",
+        "trackLabels": "offset",
+        "offsetPx": 0,
+        "bpPerPx": 50,
+        "displayedRegions": [
+          {
+            "refName": "ENA|CAXEFK010000001|CAXEFK010000001.1",
+            "start": 0,
+            "end": 22872068,
+            "reversed": false,
+            "assemblyName": "iyAntQuad1"
+          }
+        ],
+        "tracks": [
+          {
+            "id": "aqua_default_protein_coding_genes_view_0",
+            "type": "FeatureTrack",
+            "configuration": "GCA_963995475.1_iyAntQuad1_genomic.gff",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "aqua_default_protein_coding_genes_view_0_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 200,
+                "configuration": "GCA_963995475.1_iyAntQuad1_genomic.gff-LinearBasicDisplay"
+              }
+            ]
+          },
+          {
+            "id": "aqua_default_Repeats",
+            "type": "FeatureTrack",
+            "configuration": "Anthophora_quadrimaculata_repeats.gff",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "aqua_default_Repeats_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 150,
+                "configuration": "Anthophora_quadrimaculata_repeats.gff-LinearBasicDisplay"
+              }
+            ]
+          },
+          {
+            "id": "aqua_default_Transcripts_(Isoseq)",
+            "type": "FeatureTrack",
+            "configuration": "Anthophora_quadrimaculata_isoseq.gff",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "aqua_default_Transcripts_(Isoseq)_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 150,
+                "configuration": "Anthophora_quadrimaculata_isoseq.gff-LinearBasicDisplay"
+              }
+            ]
+          },
+          {
+            "id": "aqua_default_Nucleotide_diversity_(Pi)_5kb_windows",
+            "type": "FeatureTrack",
+            "configuration": "aqua_gwas_Nucleotide_diversity_(Pi)_5kb_windows",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "aqua_default_Nucleotide_diversity_(Pi)_5kb_windows_display",
+                "type": "LinearManhattanDisplay",
+                "heightPreConfig": 150,
+                "configuration": "aqua_gwas_Nucleotide_diversity_(Pi)_5kb_windows_display",
+                "color": "rgb(242, 142, 44)"
+              }
+            ]
+          },
+          {
+            "id": "aqua_default_Tajimas_D",
+            "type": "FeatureTrack",
+            "configuration": "aqua_gwas_Tajimas_D",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "aqua_default_Tajimas_D_display",
+                "type": "LinearManhattanDisplay",
+                "heightPreConfig": 150,
+                "configuration": "aqua_gwas_Tajimas_D_display"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "configuration": {
+    "disableAnalytics": true
+  },
+  "plugins": [
+    {
+      "name": "GWAS",
+      "url": "https://unpkg.com/jbrowse-plugin-gwas/dist/jbrowse-plugin-gwas.umd.production.min.js"
+    }
+  ],
+  "tracks": [
+    {
+      "type": "FeatureTrack",
+      "trackId": "aqua_gwas_Nucleotide_diversity_(Pi)_5kb_windows",
+      "name": "Nucleotide diversity (Pi), 5kb windows",
+      "assemblyNames": [
+        "iyAntQuad1"
+      ],
+      "category": [
+        "GWAS"
+      ],
+      "adapter": {
+        "type": "BedTabixAdapter",
+        "scoreColumn": "PI",
+        "bedGzLocation": {
+          "uri": "quad_5kb.windowed.bed.bgz"
+        },
+        "index": {
+          "location": {
+            "uri": "quad_5kb.windowed.bed.bgz.csi"
+          },
+          "indexType": "CSI"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "aqua_gwas_Nucleotide_diversity_(Pi)_5kb_windows_display",
+          "type": "LinearManhattanDisplay"
+        }
+      ]
+    },
+    {
+      "type": "FeatureTrack",
+      "trackId": "aqua_gwas_Tajimas_D",
+      "name": "Tajima's D, calculated with 10kb windows",
+      "assemblyNames": [
+        "iyAntQuad1"
+      ],
+      "category": [
+        "GWAS"
+      ],
+      "adapter": {
+        "type": "BedTabixAdapter",
+        "scoreColumn": "TajimaD",
+        "bedGzLocation": {
+          "uri": "quadri.Tajima.D.end_column_5kb_midpoint.bed.bgz"
+        },
+        "index": {
+          "location": {
+            "uri": "quadri.Tajima.D.end_column_5kb_midpoint.bed.bgz.csi"
+          },
+          "indexType": "CSI"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "aqua_gwas_Tajimas_D_display",
+          "type": "LinearManhattanDisplay"
+        }
+      ]
+    }
+  ]
+}
