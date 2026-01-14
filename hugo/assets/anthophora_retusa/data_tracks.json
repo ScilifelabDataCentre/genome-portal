@@ -4,7 +4,7 @@
     "description": "Reference genome sequence",
     "links": [
       {
-        "Download": "ftp://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/cax/CAXEFM01.fasta.gz"
+        "Download": "https://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/cax/CAXEFM01.fasta.gz"
       },
       {
         "Website": "https://www.ebi.ac.uk/ena/browser/view/GCA_963995495.1"
