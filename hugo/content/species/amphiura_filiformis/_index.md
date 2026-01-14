@@ -57,4 +57,4 @@ Swedish Reference Genome Portal (Retrieved DATE_ACCESSED), SciLifeLab Data Centr
 
 #### Changelog
 
-- 23/01/2025 - Species first published on the Portal
+- 14/01/2026 - Species first published on the Portal

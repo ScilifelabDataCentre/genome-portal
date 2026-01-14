@@ -8,17 +8,17 @@ assembly:
   defaultScaffold: "ENA|CAXEFL010000280|CAXEFL010000280.1"
 tracks:
 - name: Protein-coding genes
-  url: https://nextcloud.dc.scilifelab.se/s/CcnntPSTKqXMzLk/download/GCA_963995485.1_iyAntPlag1_genomic.gff.renamed.gff.gz
+  url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/963/995/485/GCA_963995485.1_iyAntPlag1/GCA_963995485.1_iyAntPlag1_genomic.gff.gz
 - name: Repeats
-  url: "https://nextcloud.dc.scilifelab.se/s/XDCDXCwi8BsSMoe/download/Anthophora_plagiata_repeats.gff" #temp storage for the track
+  url: "https://figshare.scilifelab.se/ndownloader/files/60419363"
   fileName: "Anthophora_plagiata_repeats.gff"
   defaultSession: true 
 - name: Transcripts (Isoseq)
-  url: "https://nextcloud.dc.scilifelab.se/s/5MBS8ZeBfQkSbPx/download/Anthophora_plagiata_isoseq.gff" #temp storage for the track
+  url: "https://figshare.scilifelab.se/ndownloader/files/60419351" 
   fileName: "Anthophora_plagiata_isoseq.gff" 
   defaultSession: true
 - name: "Nucleotide diversity (Pi), 5kb windows"
-  url: "https://nextcloud.dc.scilifelab.se/s/Z527RkCJbtcaj6J/download/plag_5kb.windowed.pi" #temp storage for the track
+  url: "https://figshare.scilifelab.se/ndownloader/files/60419333"
   fileName: "plag_5kb.windowed.bed"
   addTrack: false
   defaultSession: true
@@ -26,7 +26,7 @@ tracks:
   scoreColumnGWAS: "PI"
   color: "rgb(242, 142, 44)"
 - name: "Tajima's D, calculated with 10kb windows"
-  url: "https://nextcloud.dc.scilifelab.se/s/RinRnGCoYnHW3FZ/download/plagiata.Tajima.D.end_column_5kb_midpoint.bed" #temp storage for the track
+  url: "https://figshare.scilifelab.se/ndownloader/files/60419336"
   fileName: "plagiata.Tajima.D.end_column_5kb_midpoint.bed"
   addTrack: false
   defaultSession: true

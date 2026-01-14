@@ -15,7 +15,7 @@
     "fileName": "CAXEFL01.fasta.gz",
     "principalInvestigator": "Matthew Webster",
     "principalInvestigatorAffiliation": "Uppsala University",
-    "firstDateOnPortal": "16/12/2025"
+    "firstDateOnPortal": "14/01/2026"
   },
   {
     "dataTrackName": "Protein-coding genes",
@@ -33,58 +33,70 @@
     "fileName": "GCA_963995485.1_iyAntPlag1_genomic.gff.gz",
     "principalInvestigator": "Matthew Webster",
     "principalInvestigatorAffiliation": "Uppsala University",
-    "firstDateOnPortal": "16/12/2025"
+    "firstDateOnPortal": "14/01/2026"
   },
   {
     "dataTrackName": "Repeats",
     "description": "Nucleotide sequences of the predicted repetitive elements in GFF format.",
     "links": [
-      {"Website": "https://doi.org/10.17044/scilifelab.30884846"},
+      {
+        "Download": "https://figshare.scilifelab.se/ndownloader/files/60419363"
+      },
+      {"Website": "https://doi.org/10.17044/scilifelab.30884846.v1"},
       {"Article": "https://doi.org/10.1111/mec.70204"}
     ],
     "accessionOrDOI": "10.17044/scilifelab.30884846",
     "fileName": "Anthophora_plagiata_repeats.gff",
     "principalInvestigator": "Matthew Webster",
     "principalInvestigatorAffiliation": "Uppsala University",
-    "firstDateOnPortal": "16/12/2025"
+    "firstDateOnPortal": "14/01/2026"
   },
   {
     "dataTrackName": "Transcripts (Isoseq)",
     "description": "PacBio IsoSeq transcripts aligned to the primary genome assembly using miniprot v.0.10-r226.",
     "links": [
-      {"Website": "https://doi.org/10.17044/scilifelab.30884846"},
+      {
+        "Download": "https://figshare.scilifelab.se/ndownloader/files/60419351"
+      },
+      {"Website": "https://doi.org/10.17044/scilifelab.30884846.v1"},
       {"Article": "https://doi.org/10.1111/mec.70204"}
     ],
     "accessionOrDOI": "10.17044/scilifelab.30884846",
     "fileName": "Anthophora_plagiata_isoseq.gff",
     "principalInvestigator": "Matthew Webster",
     "principalInvestigatorAffiliation": "Uppsala University",
-    "firstDateOnPortal": "16/12/2025"
+    "firstDateOnPortal": "14/01/2026"
   },
   {
     "dataTrackName": "Nucleotide diversity (Pi), 5kb windows",
     "description": "Nucleotide diversity (π) estimated in non-overlapping 5 kb windows across each genome using variant calls generated from population sequencing data from 27 A. plagiata individuals.",
     "links": [
-      {"Website": "https://doi.org/10.17044/scilifelab.30884846"},
+      {
+        "Download": "https://figshare.scilifelab.se/ndownloader/files/60419333"
+      },
+      {"Website": "https://doi.org/10.17044/scilifelab.30884846.v1"},
       {"Article": "https://doi.org/10.1111/mec.70204"}
     ],
     "accessionOrDOI": "10.17044/scilifelab.30884846",
     "fileName": "plag_5kb.windowed.pi",
     "principalInvestigator": "Matthew Webster",
     "principalInvestigatorAffiliation": "Uppsala University",
-    "firstDateOnPortal": "16/12/2025"
+    "firstDateOnPortal": "14/01/2026"
   },
   {
     "dataTrackName": "Tajima's D, calculated with 10kb windows",
     "description": "Tajima’s D was calculated in sliding windows across the genome using A. plagiata SNP datasets.",
     "links": [
-      {"Website": "https://doi.org/10.17044/scilifelab.30884846"},
+      {
+        "Download": "https://figshare.scilifelab.se/ndownloader/files/60419336"
+      },
+      {"Website": "https://doi.org/10.17044/scilifelab.30884846.v1"},
       {"Article": "https://doi.org/10.1111/mec.70204"}
     ],
     "accessionOrDOI": "10.17044/scilifelab.30884846",
     "fileName": "plagiata.Tajima.D.end_column_5kb_midpoint.bed",
     "principalInvestigator": "Matthew Webster",
     "principalInvestigatorAffiliation": "Uppsala University",
-    "firstDateOnPortal": "16/12/2025"
+    "firstDateOnPortal": "14/01/2026"
   }
 ]

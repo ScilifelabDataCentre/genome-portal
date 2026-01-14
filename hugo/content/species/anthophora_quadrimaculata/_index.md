@@ -3,7 +3,7 @@
 # unless you were warned by the add-new-species.py script.
 title: "*Anthophora quadrimaculata*"
 subtitle: "Four-banded Flower Bee"
-last_updated: "16/12/2025" # format DD/MM/YYYY
+last_updated: "14/01/2026" # format DD/MM/YYYY
 
 layout: "species_intro"
 banner_title: "Species overview"
@@ -60,4 +60,4 @@ Swedish Reference Genome Portal (Retrieved DATE_ACCESSED), SciLifeLab Data Centr
 
 #### Changelog
 
-- 16/12/2025 - Species first published on the Portal
+- 14/01/2026 - Species first published on the Portal

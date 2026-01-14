@@ -7,17 +7,17 @@ assembly:
   fileName: CAXEFK01.fasta.gz
 tracks:
 - name: Protein-coding genes
-  url: https://nextcloud.dc.scilifelab.se/s/Lz8MBsjeoxMrqCn/download/GCA_963995475.1_iyAntQuad1_genomic.gff.renamed.gff.gz
+  url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/963/995/475/GCA_963995475.1_iyAntQuad1/GCA_963995475.1_iyAntQuad1_genomic.gff.gz
 - name: Repeats
-  url: "https://nextcloud.dc.scilifelab.se/s/Xk4ft3fYNjtPSde/download/Anthophora_quadrimaculata_repeats.gff" #temp storage for the track
+  url: "https://figshare.scilifelab.se/ndownloader/files/60419360"
   fileName: "Anthophora_quadrimaculata_repeats.gff"
   defaultSession: true 
 - name: Transcripts (Isoseq)
-  url: "https://nextcloud.dc.scilifelab.se/s/KAaPE23ztENdW9m/download/Anthophora_quadrimaculata_isoseq.gff" #temp storage for the track
+  url: "https://figshare.scilifelab.se/ndownloader/files/60419357"
   fileName: "Anthophora_quadrimaculata_isoseq.gff"
   defaultSession: true
 - name: "Nucleotide diversity (Pi), 5kb windows"
-  url: "https://nextcloud.dc.scilifelab.se/s/25kXSD6NmqrG5wj/download/quad_5kb.windowed.pi" #temp storage for the track
+  url: "https://figshare.scilifelab.se/ndownloader/files/60419342"
   fileName: "quad_5kb.windowed.bed"
   addTrack: false
   defaultSession: true
@@ -25,7 +25,7 @@ tracks:
   scoreColumnGWAS: "PI"
   color: "rgb(242, 142, 44)"
 - name: "Tajima's D, calculated with 10kb windows"
-  url: "https://nextcloud.dc.scilifelab.se/s/j4jm27BeEkidYPq/download/quadri.Tajima.D.end_column_5kb_midpoint.bed" #temp storage for the track
+  url: "https://figshare.scilifelab.se/ndownloader/files/60419339"
   fileName: "quadri.Tajima.D.end_column_5kb_midpoint.bed"
   addTrack: false
   defaultSession: true
