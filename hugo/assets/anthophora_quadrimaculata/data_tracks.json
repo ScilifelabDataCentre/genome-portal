@@ -8,7 +8,8 @@
       },
       {
         "Website": "https://www.ebi.ac.uk/ena/browser/view/GCA_963995475.1"
-      }
+      },
+      {"Article": "https://doi.org/10.1111/mec.70204"}
     ],
     "accessionOrDOI": "GCA_963995475.1",
     "fileName": "CAXEFK01.fasta.gz",
@@ -25,7 +26,8 @@
       },
       {
         "Website": "https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_963995475.1/"
-      }
+      },
+      {"Article": "https://doi.org/10.1111/mec.70204"}
     ],
     "accessionOrDOI": "GCA_963995475.1",
     "fileName": "GCA_963995475.1_iyAntQuad1_genomic.gff.gz",
