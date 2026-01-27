@@ -1,0 +1,42 @@
+[
+  {
+    "dataTrackName": "Genome",
+    "description": "Reference genome sequence",
+    "links": [
+      {
+        "Download": "https://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/cak/CAKOGL01.fasta.gz"
+      },
+      {
+        "Website": "https://www.ebi.ac.uk/ena/browser/view/GCA_933666425"
+      },
+      {
+        "Article": "https://doi.org/10.1093/gbe/evac113"
+      }
+    ],
+    "accessionOrDOI": "GCA_933666425.1",
+    "fileName": "CAKOGL01.fasta.gz",
+    "principalInvestigator": "Christopher Wheat",
+    "principalInvestigatorAffiliation": "Stockholm University",
+    "firstDateOnPortal": "08 September 2025"
+  },
+  {
+    "dataTrackName": "Protein-coding genes",
+    "description": "Structural annotation of protein-coding genes in the primary genome assembly",
+    "links": [
+      {
+        "Download": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/933/666/425/GCA_933666425.1_Euphydryas_editha/GCA_933666425.1_Euphydryas_editha_genomic.gff.gz"
+      },
+      {
+        "Website": "https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_933666425.1/"
+      },
+      {
+        "Article": "https://doi.org/10.1093/gbe/evac113"
+      }
+    ],
+    "accessionOrDOI": "GCA_933666425.1",
+    "fileName": "GCA_933666425.1_Euphydryas_editha_genomic.gff.gz",
+    "principalInvestigator": "Christopher Wheat",
+    "principalInvestigatorAffiliation": "Stockholm University",
+    "firstDateOnPortal": "08 September 2025"
+  }
+]
