@@ -45,7 +45,7 @@ Edith's Checkerspot Butterfly (_Euphydryas editha_) is found in North America, e
 If you use the data presented in the genome portal from this species in your research, please cite the original publication:
 
 ```{style=citation}
-Tunstrom, K., Wheat, C. W., Parmesan, C., Singer, M. C., & Mikheyev, A. S. (2022). A Genome for Edith's Checkerspot Butterfly: An Insect with Complex Host-Adaptive Suites and Rapid Evolutionary Responses to Environmental Changes. Genome Biology and Evolution, 14(8), evac113. https://doi.org/10.1093/gbe/evac11
+Tunstrom, K., Wheat, C. W., Parmesan, C., Singer, M. C., & Mikheyev, A. S. (2022). A Genome for Edith's Checkerspot Butterfly: An Insect with Complex Host-Adaptive Suites and Rapid Evolutionary Responses to Environmental Changes. Genome Biology and Evolution, 14(8), evac113. https://doi.org/10.1093/gbe/evac113
 ```
 
 If you have used the pages for this species in the Genome Portal, please refer to it in-text as: "The _Euphydryas editha_ entry in the Swedish Reference Genome Portal (Retrieved <span class="todays-date"></span>)." and use the following for the bibliography:
