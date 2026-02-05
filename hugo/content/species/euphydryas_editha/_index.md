@@ -3,7 +3,7 @@
 # unless you were warned by the add-new-species.py script.
 title: "*Euphydryas editha*"
 subtitle: "Edith's Checkerspot Butterfly"
-last_updated: "08/09/2025" # format DD/MM/YYYY
+last_updated: "05/02/2026" # format DD/MM/YYYY
 
 layout: "species_intro"
 banner_title: "Species overview"
@@ -60,4 +60,4 @@ Swedish Reference Genome Portal (Retrieved DATE_ACCESSED), SciLifeLab Data Centr
 
 #### Changelog
 
-- 07/05/2025 - Species first published on the Portal
+- 05/02/2026 - Species first published on the Portal
