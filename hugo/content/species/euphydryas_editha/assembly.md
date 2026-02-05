@@ -40,7 +40,7 @@ The tools used by the Genome Portal staff to calculate the statistics shown on t
 
 ### Funding
 
-*The study in which the genome data was generated (Tunstrom et al. (2022)) acknowledge funding by:*
+*The study in which the genome data was generated (Tunstrom et al. 2022) acknowledge funding by:*
 
 - Swedish Research Council (Grant number: [2017-04386](https://www.vr.se/swecris.html#/project/2017-04386_VR))
 - The French Make Our Planet Great Again award (Project CCISS, number ANR-17-MPGA-0007)
