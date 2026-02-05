@@ -1,0 +1,30 @@
+[
+  {
+    "dataTrackName": "Genome",
+    "description": "Reference genome sequence",
+    "links": [
+      {"Download": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/963/931/945/GCA_963931945.1_Bufotes_viridis_n_2023_12/GCA_963931945.1_Bufotes_viridis_n_2023_12_genomic.fna.gz"},
+      {"Website": "https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_963931945.1/"},
+      {"Article": "https://doi.org/10.1093/g3journal/jkaf002"}
+    ],
+    "accessionOrDOI": "GCA_963931945.1",
+    "fileName": "GCA_963931945.1_Bufotes_viridis_n_2023_12_genomic.fna.gz",
+    "principalInvestigator": "Jacob Höglund",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "10 June 2025"
+  },
+  {
+    "dataTrackName": "Protein-coding genes",
+    "description": "Functional annotation of protein-coding genes in the primary genome assembly",
+    "links": [
+      {"Download": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/963/931/945/GCA_963931945.1_Bufotes_viridis_n_2023_12/GCA_963931945.1_Bufotes_viridis_n_2023_12_genomic.gff.gz"},
+      {"Website": "https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_963931945.1/"},
+      {"Article": "https://doi.org/10.1093/g3journal/jkaf002"}
+    ],
+    "accessionOrDOI": "GCA_963931945.1",
+    "fileName": "GCA_963931945.1_Bufotes_viridis_n_2023_12_genomic.gff.gz",
+    "principalInvestigator": "Jacob Höglund",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "10 June 2025"
+  }
+]

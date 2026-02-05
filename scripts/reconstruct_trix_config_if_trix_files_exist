@@ -1,0 +1,40 @@
+#!/bin/bash
+
+CONFIG="$1"
+TRIX_DIR="$2"
+
+if [ ! -f "$CONFIG" ] || [ ! -d "$TRIX_DIR" ]; then
+    echo "Usage: $0 <config.json> <trix_dir>"
+    exit 1
+fi
+
+ASSEMBLIES=$(jq -r '.assemblies[].name' "$CONFIG" 2>/dev/null)
+
+ADAPTERS="[]"
+for asm in $ASSEMBLIES; do
+    if [ -f "$TRIX_DIR/${asm}.ix" ]; then
+        ADAPTER=$(jq -n \
+            --arg asm "$asm" \
+            '{
+                type: "TrixTextSearchAdapter",
+                textSearchAdapterId: ($asm + "-index"),
+                ixFilePath: {
+                    uri: ("trix/" + $asm + ".ix"),
+                    locationType: "UriLocation"
+                },
+                ixxFilePath: {
+                    uri: ("trix/" + $asm + ".ixx"),
+                    locationType: "UriLocation"
+                },
+                metaFilePath: {
+                    uri: ("trix/" + $asm + "_meta.json"),
+                    locationType: "UriLocation"
+                },
+                assemblyNames: [$asm]
+            }')
+        ADAPTERS=$(echo "$ADAPTERS" | jq --argjson adapter "$ADAPTER" '. += [$adapter]')
+    fi
+done
+
+# Add to config.json
+jq --argjson adapters "$ADAPTERS" '.aggregateTextSearchAdapters = $adapters' "$CONFIG" > "$CONFIG.tmp" && mv "$CONFIG.tmp" "$CONFIG"

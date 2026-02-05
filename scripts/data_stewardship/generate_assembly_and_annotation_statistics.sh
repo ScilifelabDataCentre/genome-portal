@@ -150,7 +150,7 @@ convert_bp_to_mbp() {
 
 populate_yaml_template() {
     echo -e "\n- Populating YAML template..."
-    template_path="$git_root/scripts/templates/species_stats.yml"
+    template_path="$git_root/scripts/add_new_species/templates/species_stats.yml"
     output_path="${git_root}/scripts/data_stewardship/temp/species_stats_$(basename "$fasta" .fna).yml"
 
     # Extract relevant information from the quast report

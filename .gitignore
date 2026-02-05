@@ -4,6 +4,7 @@
 /data
 tests/data
 tests/public
+config/tiny_herb/*
 
 # Hugo data directory - from make install 
 hugo/static/data
@@ -17,7 +18,10 @@ hugo/.hugo_build.lock
 #data stewardship
 scripts/data_stewardship/temp/**
 scripts/data_stewardship/logs/**
-scripts/data_stewardship/*.agat.log
+*.agat.log
+
+# MS Office temp files
+scripts/add_new_species/tests/fixtures/submission_form_example/~*
 
 # OSX
 *.DS_Store

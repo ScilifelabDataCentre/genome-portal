@@ -1,0 +1,12 @@
+organism: Blastobotrys mokoenaii
+assembly:
+  name: ASM370576v3
+  displayName: B. mokoenaii genome assembly GCA_003705765.3
+  accession: GCA_003705765.3
+  url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/003/705/765/GCA_003705765.3_ASM370576v3/GCA_003705765.3_ASM370576v3_genomic.fna.gz
+  fileName: GCA_003705765.3_ASM370576v3_genomic.fna.gz
+tracks:
+- name: Genes
+  url: https://figshare.scilifelab.se/ndownloader/files/53044763
+  fileName: bmokoenaii_annotation.gff
+  addTrack: false 

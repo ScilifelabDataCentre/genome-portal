@@ -1,0 +1,276 @@
+{
+  "defaultSession": {
+    "id": "ther_default_session",
+    "name": "Tiny herb",
+    "widgets": {
+      "hierarchicalTrackSelector": {
+        "id": "hierarchicalTrackSelector",
+        "type": "HierarchicalTrackSelectorWidget",
+        "view": "ther_default_session_view_0",
+        "faceted": {
+          "showSparse": false,
+          "showFilters": true,
+          "showOptions": false,
+          "panelWidth": 400
+        }
+      }
+    },
+    "activeWidgets": {
+      "hierarchicalTrackSelector": "hierarchicalTrackSelector"
+    },
+    "views": [
+      {
+        "id": "ther_default_session_view_0",
+        "minimized": false,
+        "type": "LinearGenomeView",
+        "trackLabels": "offset",
+        "offsetPx": 0,
+        "bpPerPx": 200,
+        "displayedRegions": [
+          {
+            "refName": "ENA|CAMGYJ010000002|CAMGYJ010000002.1",
+            "start": 0,
+            "end": 72476498,
+            "reversed": false,
+            "assemblyName": "Linum_tenue_thrum_v1"
+          }
+        ],
+        "tracks": [
+          {
+            "id": "ther_default_Protein-coding_genes",
+            "type": "FeatureTrack",
+            "configuration": "ltenue_v1_genes.gff",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "ther_default_Protein-coding_genes_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 150,
+                "configuration": "ltenue_v1_genes.gff-LinearBasicDisplay"
+              }
+            ]
+          },
+          {
+            "id": "ther_default_Repeats",
+            "type": "FeatureTrack",
+            "configuration": "L_tenue_v1_rep.bed",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "ther_default_Repeats_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 150,
+                "configuration": "L_tenue_v1_rep.bed-LinearBasicDisplay"
+              }
+            ]
+          },
+          {
+            "id": "ther_default_Tajimas_D_population_06",
+            "type": "FeatureTrack",
+            "configuration": "Lten_pop06_TD.bed",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "ther_default_Tajimas_D_population_06_display",
+                "type": "LinearManhattanDisplay",
+                "heightPreConfig": 150,
+                "configuration": "Lten_pop06_TD.bed-LinearManhattanDisplay"
+              }
+            ]
+          },
+          {
+            "id": "ther_default_Test_of_Arc_track",
+            "type": "FeatureTrack",
+            "configuration": "Lten_pop08_TD.bed",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "ther_default_Test_of_Arc_track_display",
+                "type": "LinearArcDisplay",
+                "heightPreConfig": 150,
+                "configuration": "Lten_pop08_TD.bed-LinearArcDisplay"
+              }
+            ]
+          },
+          {
+            "id": "ther_default_Test_of_bedGraph_track",
+            "type": "QuantitativeTrack",
+            "configuration": "Lten_pop08_TD_for_wiggle.bed",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "ther_default_Test_of_bedGraph_track_display",
+                "type": "LinearWiggleDisplay",
+                "heightPreConfig": 150,
+                "configuration": "Lten_pop08_TD_for_wiggle.bed-LinearWiggleDisplay"
+              }
+            ]
+          },
+          {
+            "id": "ther_default_Test_of_GFF_addTrack:false",
+            "type": "FeatureTrack",
+            "configuration": "test_gene_track.gff",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "ther_default_Test_of_GFF_addTrack:false_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 150,
+                "configuration": "test_gene_track.gff-LinearBasicDisplay"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "ther_default_session_view_1",
+        "minimized": false,
+        "type": "LinearGenomeView",
+        "trackLabels": "offset",
+        "offsetPx": 0,
+        "bpPerPx": 50,
+        "displayedRegions": [
+          {
+            "refName": "ENA|OZ075093|OZ075093.1",
+            "start": 0,
+            "end": 15425,
+            "reversed": false,
+            "assemblyName": "Mito_assembly"
+          }
+        ],
+        "tracks": [
+          {
+            "id": "ther_default_Mitochondrial_genes",
+            "type": "FeatureTrack",
+            "configuration": "pmne_mtdna.gff",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "ther_default_Mitochondrial_genes_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 150,
+                "configuration": "pmne_mtdna.gff-LinearBasicDisplay"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "configuration": {
+    "disableAnalytics": true
+  },
+  "tracks": [
+    {
+      "type": "FeatureTrack",
+      "trackId": "Lten_pop06_TD.bed",
+      "name": "Tajima's D, population 06",
+      "assemblyNames": [
+        "Linum_tenue_thrum_v1"
+      ],
+      "adapter": {
+        "type": "BedTabixAdapter",
+        "bedGzLocation": {
+          "uri": "Lten_pop06_TD.bed.bgz"
+        },
+        "index": {
+          "location": {
+            "uri": "Lten_pop06_TD.bed.bgz.csi"
+          },
+          "indexType": "CSI"
+        },
+        "scoreColumn": "TajimaD"
+      },
+      "displays": [
+        {
+          "type": "LinearManhattanDisplay",
+          "displayId": "Lten_pop06_TD.bed-LinearManhattanDisplay"
+        }
+      ]
+    },
+    {
+      "type": "FeatureTrack",
+      "trackId": "Lten_pop08_TD.bed",
+      "name": "Test of Arc track",
+      "assemblyNames": [
+        "Linum_tenue_thrum_v1"
+      ],
+      "adapter": {
+        "type": "BedTabixAdapter",
+        "bedGzLocation": {
+          "uri": "Lten_pop08_TD.bed.bgz"
+        },
+        "index": {
+          "location": {
+            "uri": "Lten_pop08_TD.bed.bgz.csi"
+          },
+          "indexType": "CSI"
+        }
+      },
+      "displays": [
+        {
+          "type": "LinearArcDisplay",
+          "displayId": "Lten_pop08_TD.bed-LinearArcDisplay"
+        }
+      ]
+    },
+    {
+      "type": "QuantitativeTrack",
+      "trackId": "Lten_pop08_TD_for_wiggle.bed",
+      "name": "Test of bedGraph track",
+      "assemblyNames": [
+        "Linum_tenue_thrum_v1"
+      ],
+      "adapter": {
+        "type": "BedGraphAdapter",
+        "bedGraphLocation": {
+          "uri": "Lten_pop08_TD_for_wiggle.bed.bgz"
+        },
+        "index": {
+          "location": {
+            "uri": "Lten_pop08_TD_for_wiggle.bed.bgz.csi"
+          },
+          "indexType": "CSI"
+        }
+      },
+      "displays": [
+        {
+          "type": "LinearWiggleDisplay",
+          "displayId": "Lten_pop08_TD_for_wiggle.bed-LinearWiggleDisplay"
+        }
+      ]
+    },
+    {
+      "type": "FeatureTrack",
+      "trackId": "test_gene_track.gff",
+      "name": "Test of GFF addTrack:false",
+      "assemblyNames": [
+        "Linum_tenue_thrum_v1"
+      ],
+      "adapter": {
+        "type": "Gff3TabixAdapter",
+        "gffGzLocation": {
+          "uri": "test_gene_track.gff.bgz"
+        },
+        "index": {
+          "location": {
+            "uri": "test_gene_track.gff.bgz.csi"
+          },
+          "indexType": "CSI"
+        }
+      },
+      "displays": [
+        {
+          "type": "LinearBasicDisplay",
+          "displayId": "test_gene_track.gff-LinearBasicDisplay"
+        }
+      ]
+    }
+  ],
+  "plugins": [
+    {
+      "name": "GWAS",
+      "url": "https://unpkg.com/jbrowse-plugin-gwas/dist/jbrowse-plugin-gwas.umd.production.min.js"
+    }
+  ]
+}

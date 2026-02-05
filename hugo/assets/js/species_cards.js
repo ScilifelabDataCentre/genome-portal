@@ -41,6 +41,7 @@ function initState() {
         sortOrder: SORT_OPTIONS.LAST_UPDATED,
         searchText: '',
         numbMatches: 0,
+        showAllSpecies: false,
     };
     const templates = document.querySelectorAll('template[id^="card-"]');
     state.numbMatches = templates.length;
@@ -75,7 +76,7 @@ function renderSpeciesCards(state, cardContainer) {
     state.numbMatches = speciesIds.length;
 
     let speciesToDisplay;
-    if (paginationExists) {
+    if (paginationExists && !state.showAllSpecies) {
         speciesToDisplay = paginateSpecies(speciesIds, state.currentPage);
     } else {
         speciesToDisplay = speciesIds;
@@ -180,6 +181,16 @@ function updateSortDropdown(sortOrder) {
 
 
 /**
+ * If a user clicks the button to show all species, pagination buttons are hidden and all species are shown.
+ * (The show all button only exists if pagination is enabled).
+ */
+function hidePaginationButtons() {
+    paginationSection = document.querySelector('#speciesPagination');
+    paginationSection.style.display = 'none';
+}
+
+
+/**
  * Updates the page number shown as active in the pagination
  *
  * @param {number} currentPage - Page number to be shown as active.
@@ -266,6 +277,7 @@ let cardContainer;
 let paginationItems;
 let noResultsCard;
 let paginationExists;
+let showAllSpecies;
 let cardsPerPage;
 
 /**
@@ -273,8 +285,8 @@ let cardsPerPage;
  */
 function main() {
     cardContainer = document.getElementById('card-container');
-    paginationItems = document.querySelectorAll('.pagination .page-item');
     noResultsCard = document.getElementById('no-filtered-card');
+    paginationItems = document.querySelectorAll('.pagination .page-item');
     paginationExists = paginationItems.length > 0; // if not enough species, there will be no pagination yet.
     cardsPerPage = parseInt(cardContainer.dataset.numbCardsPerPage);
 
@@ -318,6 +330,17 @@ function main() {
             }
         });
     }
+
+    // Event: Show all species - this button only exists if pagination is enabled.
+    // hide pagination buttons, set state to show all species and render cards
+    if (paginationExists) {
+        document.querySelector('#showAllSpeciesBtn').addEventListener('click', (event) => {
+            state.showAllSpecies = true;
+            hidePaginationButtons();
+            renderSpeciesCards(state, cardContainer);
+        });
+    }
+
 }
 
 document.addEventListener('DOMContentLoaded', main);

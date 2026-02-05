@@ -1,0 +1,12 @@
+organism: Blastobotrys malaysiensis
+assembly:
+  name: ASM3055881v1
+  displayName: B. malaysiensis genome assembly GCA_030558815.1
+  accession: GCA_030558815.1
+  url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/030/558/815/GCA_030558815.1_ASM3055881v1/GCA_030558815.1_ASM3055881v1_genomic.fna.gz
+  fileName: GCA_030558815.1_ASM3055881v1_genomic.fna.gz
+tracks:
+- name: Genes
+  url: https://figshare.scilifelab.se/ndownloader/files/53044787
+  fileName: bmalaysiensis_annotation.gff
+  addTrack: false 

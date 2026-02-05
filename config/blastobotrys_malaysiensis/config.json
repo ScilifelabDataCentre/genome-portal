@@ -1,0 +1,93 @@
+{
+  "defaultSession": {
+    "id": "bmal_default_session",
+    "name": "Blastobotrys malaysiensis",
+    "widgets": {
+      "hierarchicalTrackSelector": {
+        "id": "hierarchicalTrackSelector",
+        "type": "HierarchicalTrackSelectorWidget",
+        "view": "bmal_default_session_view_0",
+        "faceted": {
+          "showSparse": false,
+          "showFilters": true,
+          "showOptions": false,
+          "panelWidth": 400
+        }
+      }
+    },
+    "activeWidgets": {
+      "hierarchicalTrackSelector": "hierarchicalTrackSelector"
+    },
+    "views": [
+      {
+        "id": "bmal_default_session_view_0",
+        "minimized": false,
+        "type": "LinearGenomeView",
+        "trackLabels": "offset",
+        "offsetPx": 0,
+        "bpPerPx": 50,
+        "displayedRegions": [
+          {
+            "refName": "JAKTQL010002544.1",
+            "start": 0,
+            "end": 501258,
+            "reversed": false,
+            "assemblyName": "ASM3055881v1"
+          }
+        ],
+        "tracks": [
+          {
+            "id": "bmal_default_genes_view_0",
+            "type": "FeatureTrack",
+            "configuration": "bmalaysiensis_annotation.gff",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "bmal_default_genes_view_0_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 250,
+                "configuration": "bmalaysiensis_annotation.gff-LinearBasicDisplay"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "configuration": {
+    "disableAnalytics": true
+  },
+  "plugins": [
+  {
+    "name": "DbxrefPlugin",
+    "esmUrl": "../../custom_jbrowse_plugins/dbxref_plugin.js"
+  }
+],
+"tracks": [
+    {
+      "type": "FeatureTrack",
+      "trackId": "bmalaysiensis_annotation.gff",
+      "name": "Genes",
+      "adapter": {
+        "type": "Gff3TabixAdapter",
+        "gffGzLocation": {
+          "uri": "bmalaysiensis_annotation.gff.bgz",
+          "locationType": "UriLocation"
+        },
+        "index": {
+          "location": {
+            "uri": "bmalaysiensis_annotation.gff.bgz.csi",
+            "locationType": "UriLocation"
+          },
+          "indexType": "CSI"
+        }
+      },
+      "formatDetails": {
+          "subfeatures": "jexl:{dbxref:dbxrefLinkout(feature), ontology_term:ontologyLinkout(feature),  uniprot_id:uniprotLinkout(feature)}"
+        },
+      "assemblyNames": [
+        "ASM3055881v1"
+      ]
+    }
+  ]
+}

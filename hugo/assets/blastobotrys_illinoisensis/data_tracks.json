@@ -1,0 +1,36 @@
+[
+  {
+    "dataTrackName": "Genome",
+    "description": "Reference genome sequence",
+    "links": [
+      {
+        "Download": "https://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/cbc/CBCOUN01.fasta.gz"
+      },
+      {
+        "Website": "https://www.ebi.ac.uk/ena/browser/view/GCA_965113335.1"
+      }
+    ],
+    "accessionOrDOI": "GCA_965113335.1",
+    "fileName": "CBCOUN01.fasta.gz",
+    "principalInvestigator": "Cecilia Geijer",
+    "principalInvestigatorAffiliation": "Chalmers University of Technology",
+    "firstDateOnPortal": "05 May 2025"
+  },
+  {
+    "dataTrackName": "Genes",
+    "description": "Functional annotation of genes in the primary genome assembly",
+    "links": [
+      {
+        "Download": "https://figshare.scilifelab.se/ndownloader/files/53044784"
+      },
+      {
+        "Website": "https://figshare.scilifelab.se/articles/dataset/Gene_annotation_of_i_Blastobotrys_mokoenaii_i_i_Blastobotrys_illinoisensis_i_and_i_Blastobotrys_malaysiensis_i_/28606814"
+      }
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.28606814.v1",
+    "fileName": "billinoisensis_annotation.gff",
+    "principalInvestigator": "Cecilia Geijer",
+    "principalInvestigatorAffiliation": "Chalmers University of Technology",
+    "firstDateOnPortal": "05 May 2025"
+  }
+]

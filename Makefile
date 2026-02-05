@@ -25,6 +25,12 @@ SPECIES_DIRS := $(addprefix $(CONFIG_DIR)/, $(sort $(subst $(comma), ,$(SPECIES)
 else
 SPECIES_DIRS := $(CONFIG_DIR)
 endif
+# Determine TRIX data directories
+ifeq ($(SPECIES_DIRS),$(CONFIG_DIR))
+TRIX_DATA_DIRS := $(wildcard $(DATA_DIR)/*)
+else
+TRIX_DATA_DIRS := $(patsubst $(CONFIG_DIR)/%, $(DATA_DIR)/%, $(SPECIES_DIRS))
+endif
 
 CONFIGS := $(shell find $(SPECIES_DIRS) -type f -name 'config.yml')
 JBROWSE_CONFIGS := $(patsubst $(CONFIG_DIR)/%,$(DATA_DIR)/%,$(CONFIGS:.yml=.json))
@@ -59,11 +65,35 @@ GTF := $(filter %.gtf,$(unzipped))
 BED := $(addsuffix .bgz,$(filter %.bed,$(unzipped)))
 BED_INDICES := $(addsuffix .csi,$(BED))
 
+# trix files and subdirectories. Since trix indexing creates multiple files based on the assembly name, use wildcard to capture them.
+TRIX_FILES := $(foreach dir,$(TRIX_DATA_DIRS),$(wildcard $(dir)/trix/*.ix*) $(wildcard $(dir)/trix/*_meta.json))
+
+# Check if trix files match assembly names in config.json. Handles the case of updates to the assembly name
+TRIX_OUTDATED := $(foreach dir,$(TRIX_DATA_DIRS),$(shell \
+	if [ -f "$(dir)/config.json" ] && [ -d "$(dir)/trix" ]; then \
+	    assemblies=$$(jq -r '.assemblies[].name' "$(dir)/config.json" 2>/dev/null | sort); \
+	    trix_bases=$$(find "$(dir)/trix" -name '*.ix' 2>/dev/null | xargs -r -n1 basename | sed 's/\.ix$$//' | sort); \
+	    if [ "$$assemblies" != "$$trix_bases" ]; then \
+	        echo "$(dir)"; \
+	    fi; \
+	elif [ -d "$(dir)/trix" ] && [ ! -f "$(dir)/config.json" ]; then \
+	    echo "$(dir)"; \
+	fi \
+))
+
+
+TRIX_NEEDS_INDEXING := $(sort \
+	$(foreach dir,$(TRIX_DATA_DIRS), \
+	    $(if $(wildcard $(dir)/trix/*.ix),,$(dir)) \
+	) \
+	$(TRIX_OUTDATED))
+
 LOCAL_FILES := $(GFF) $(GFF_INDICES) \
 	$(FASTA) $(FASTA_INDICES) $(FASTA_GZINDICES) \
 	$(GTF) \
 	$(BED) $(BED_INDICES) \
-	$(ALIASES)
+	$(ALIASES) \
+	$(TRIX_FILES)
 
 # Files to install
 INSTALLED_FILES := $(patsubst $(DATA_DIR)/%,$(INSTALL_DIR)/%, $(LOCAL_FILES) $(JBROWSE_CONFIGS))
@@ -77,19 +107,19 @@ $(info $(shell printf '%*s\U1f43f%s\n' 30 '** ' '  **'))
 endef
 
 define log_info
-@printf $(INFO)$(1)$(RESET)'\n'
+	printf $(INFO)$(1)$(RESET)'\n'
 endef
 
 define log_list
-@printf $(1)"\n"
-@printf "  - %s\n" $(sort $(2))
+	printf $(1)"\n"
+	printf "  - %s\n" $(sort $(2))
 endef
 .PHONY: all
 all: build install
 	$(greet)
 
 .PHONY: build
-build: download recompress index aliases jbrowse-config
+build: download recompress index aliases jbrowse-config ensure-trix-config text-index
 
 .PHONY: debug
 debug:
@@ -101,15 +131,22 @@ debug:
 	$(call log_list, "FASTA indices:", $(FASTA_INDICES) $(FASTA_GZINDICES))
 	$(call log_list, "GFF indices:", $(GFF_INDICES))
 	$(call log_list, "BED indices:", $(BED_INDICES))
+	$(call log_list, "Trix indices:", $(TRIX_FILES))
 	$(call log_list, "Files to install:", $(INSTALLED_FILES))
 
 .PHONY:
 aliases: $(ALIASES)
-	$(call log_list, "Generated aliases: ", $(ALIASES))
+	$(call log_info, "Generated aliases ", $(ALIASES))
 
 .PHONY: clean-aliases
 clean-aliases:
 	@rm -f $(ALIASES)
+
+# Trix writes to files in <SPECIES_NAME>/trix and to config.json. 
+# Thus, all those files needs to be removed in the cleanup
+.PHONY: clean-trix
+clean-trix: clean-config
+	@rm -f $(TRIX_FILES)
 
 .PHONY: jbrowse-config
 jbrowse-config: $(JBROWSE_CONFIGS)
@@ -140,14 +177,14 @@ clean-local:
 
 # Remove all artifacts
 .PHONY: clean
-clean: clean-upstream clean-local clean-config
+clean: clean-upstream clean-local clean-config clean-trix
 
 .PHONY: recompress
 recompress: $(GFF) $(FASTA) $(GTF) $(BED);
 
 # Copy data and configuration to hugo static folder
 .PHONY: install
-install: $(INSTALLED_FILES);
+install: $(INSTALLED_FILES) install-trix;
 
 $(INSTALLED_FILES): $(INSTALL_DIR)/%: $(DATA_DIR)/%
 	@echo "Installing $*"
@@ -187,7 +224,14 @@ $(FASTA_INDICES): %.fai: %
 $(JBROWSE_CONFIGS): $(DATA_DIR)/%/config.json: $(CONFIG_DIR)/%/config.yml $(CONFIG_DIR)/%/config.json
 	@echo "Generating JBrowse configuration for $*"; \
 	cp $(lastword $^) $@ && \
-	$(SHELL) scripts/generate_jbrowse_config $@ $<
+	$(SHELL) scripts/generate_jbrowse_config $@ $<; \
+	if [ -d "$(DATA_DIR)/$*/trix" ] && [ -n "$$(find $(DATA_DIR)/$*/trix -name '*.ix' 2>/dev/null)" ]; then \
+		has_adapters=$$(jq -e '.aggregateTextSearchAdapters | length > 0' "$@" 2>/dev/null || echo "false"); \
+		if [ "$$has_adapters" != "true" ]; then \
+			echo "Reconstructing aggregateTextSearchAdapters from trix files for $*"; \
+			$(SHELL) scripts/reconstruct_trix_config_if_trix_files_exist "$@" "$(DATA_DIR)/$*/trix"; \
+		fi; \
+	fi
 
 
 $(CONFIG_DIR)/%/config.json:
@@ -200,7 +244,13 @@ $(CONFIG_DIR)/%/config.json:
 $(DOWNLOAD_TARGETS): $(DATA_DIR)/%:| $(DATA_DIR)/.downloads/%
 	@echo "Downloading $@ ..."; \
 	mkdir -p --mode=0755 $(@D) && \
-	curl -# -f -L --output $@ "$$(< $|)"
+	url="$$(< $|)"; \
+	case "$$url" in \
+		https://figshare.scilifelab.se/*) \
+			curl -# -f -L -A "Mozilla/5.0" --output $@ "$$url" ;; \
+		*) \
+			curl -# -f -L --output $@ "$$url" ;; \
+	esac
 
 # Recompress downloaded files using bgzip(1).
 #
@@ -223,3 +273,46 @@ $(GTF): $$(filter $$@$$(_pattern),$$(DOWNLOAD_TARGETS))
 $(ALIASES): %/aliases.txt: $$(filter $$*$$(_pattern),$$(FASTA))
 	@echo "[aliases] Generating aliases from $^" >&2
 	@$(SHELL) ./scripts/aliases $^ > $@
+
+TRIX_INSTALLED := $(patsubst $(DATA_DIR)/%/trix/%, $(INSTALL_DIR)/%/trix/%, $(TRIX_FILES))
+
+.PHONY: ensure-trix-config
+ensure-trix-config: $(JBROWSE_CONFIGS)
+	@for dir in $(TRIX_DATA_DIRS); do \
+	    if [ -f "$$dir/config.json" ] && [ -d "$$dir/trix" ] && [ -n "$$(find $$dir/trix -name '*.ix' 2>/dev/null)" ]; then \
+	        if ! jq -e '.aggregateTextSearchAdapters | length > 0' "$$dir/config.json" > /dev/null 2>&1; then \
+	            echo "Reconstructing aggregateTextSearchAdapters for $$(basename $$dir)"; \
+	            $(SHELL) scripts/reconstruct_trix_config_if_trix_files_exist "$$dir/config.json" "$$dir/trix"; \
+	        fi; \
+	    fi; \
+	done
+
+# Trix-indexing of the protein coding genes track to enable searching for gene names in JBrowse
+# It needs to read the config.json file generated by the build recipe
+.PHONY: text-index
+text-index: $(JBROWSE_CONFIGS)
+	@for dir in $(TRIX_NEEDS_INDEXING); do \
+	    if [ -d "$$dir" ] && [ -f "$$dir/config.json" ]; then \
+	        $(call log_info,'Checking for trix indexes '); \
+	        if [ -d "$$dir/trix" ]; then \
+	            rm -rf "$$dir/trix"; \
+	        fi; \
+	        jbrowse text-index --target "$$dir"; \
+	    fi; \
+	done
+	@if [ -n "$(TRIX_NEEDS_INDEXING)" ]; then \
+	    printf '\x1b[0;46mGenerated trix index files\x1b[0m\n'; \
+	else \
+	    printf '\x1b[0;46mAll trix index files up to date\x1b[0m\n'; \
+	fi
+	@for dir in $(TRIX_DATA_DIRS); do \
+	    find "$$dir/trix" -type f -name '*.ix*' -or -name '*_meta.json' 2>/dev/null | sort; \
+	done
+
+# Install the trix files in the destination directory
+
+$(INSTALL_DIR)/%/trix/%: $(DATA_DIR)/%/trix/%
+	@mkdir -p $(@D)
+	@cp $< $@
+
+install-trix: $(TRIX_INSTALLED)

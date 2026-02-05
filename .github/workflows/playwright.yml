@@ -1,12 +1,13 @@
 name: Playwright e2e tests
 on:
   pull_request:
-    branches: main
+    branches: 
+      - main
     paths:
       - 'hugo/**'
       - 'playwright/**'
       - 'requirements.txt'
-      - 'dockerfiles/hugo.dockerfile'
+      - 'docker/hugo.dockerfile'
       - '.github/workflows/playwright.yml'
 
 jobs:

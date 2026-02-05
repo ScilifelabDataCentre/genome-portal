@@ -1,0 +1,58 @@
+{
+    "Species": {
+        "science_name": "Blastobotrys illinoisensis",
+        "tax_id": "378048",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:378048",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=378048",
+        "display_order": 1
+    },
+    "Genus": {
+        "science_name": "Blastobotrys",
+        "tax_id": "43971",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:43971",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=43971",
+        "display_order": 2
+    },
+    "Family": {
+        "science_name": "Trichomonascaceae",
+        "tax_id": "410830",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:410830",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=410830",
+        "display_order": 3
+    },
+    "Order": {
+        "science_name": "Dipodascales",
+        "tax_id": "3243772",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:3243772",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=3243772",
+        "display_order": 4
+    },
+    "Class": {
+        "science_name": "Dipodascomycetes",
+        "tax_id": "3239873",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:3239873",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=3239873",
+        "display_order": 5
+    },
+    "Phylum": {
+        "science_name": "Ascomycota",
+        "tax_id": "4890",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:4890",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=4890",
+        "display_order": 6
+    },
+    "Kingdom": {
+        "science_name": "Fungi",
+        "tax_id": "4751",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:4751",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=4751",
+        "display_order": 7
+    },
+    "Superkingdom": {
+        "science_name": "Eukaryota",
+        "tax_id": "2759",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:2759",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=2759",
+        "display_order": 8
+    }
+}
