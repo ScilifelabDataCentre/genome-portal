@@ -56,7 +56,7 @@ Swedish Reference Genome Portal (Retrieved DATE_ACCESSED), SciLifeLab Data Centr
 
 #### References
 
-- Tunstrom, K., Wheat, C. W., Parmesan, C., Singer, M. C., & Mikheyev, A. S. (2022). A Genome for Edith's Checkerspot Butterfly: An Insect with Complex Host-Adaptive Suites and Rapid Evolutionary Responses to Environmental Changes. Genome Biology and Evolution, 14(8), evac113. <https://doi.org/10.1093/gbe/evac11>
+- Tunstrom, K., Wheat, C. W., Parmesan, C., Singer, M. C., & Mikheyev, A. S. (2022). A Genome for Edith's Checkerspot Butterfly: An Insect with Complex Host-Adaptive Suites and Rapid Evolutionary Responses to Environmental Changes. Genome Biology and Evolution, 14(8), evac113. <https://doi.org/10.1093/gbe/evac113>
 
 #### Changelog
 
