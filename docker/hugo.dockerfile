@@ -1,5 +1,6 @@
 ARG NODE_VERSION=22.2.0
 ARG JBROWSE_VERSION=4.1.13
+ARG GWAS_PLUGIN_VERSION=2.1.4
 
 ## Stage 1: Download HUGO + build static site. 
 
@@ -38,11 +39,19 @@ RUN mkdir /target && \
 ## Stage 2: Install JBrowse and GWAS plugin
 FROM node:${NODE_VERSION}-slim AS jbrowse
 ARG JBROWSE_VERSION
+ARG GWAS_PLUGIN_VERSION
 
 WORKDIR /tmp
 RUN npm install -g @jbrowse/cli
 COPY ./scripts/download_jbrowse .
 RUN bash ./download_jbrowse v${JBROWSE_VERSION} /tmp/browser
+
+# Download pinned version of jbrowse-plugin-gwas and bundle it with the image
+RUN mkdir -p /tmp/browser/plugins /tmp/gwas-plugin-stage && \
+    npm pack "jbrowse-plugin-gwas@${GWAS_PLUGIN_VERSION}" --pack-destination /tmp && \
+    tar -xzf "/tmp/jbrowse-plugin-gwas-${GWAS_PLUGIN_VERSION}.tgz" -C /tmp/gwas-plugin-stage --strip-components=1 && \
+    cp /tmp/gwas-plugin-stage/dist/jbrowse-plugin-gwas.umd.production.min.js /tmp/browser/plugins/
+
 
 ## Stage 3: Serve the generated html using nginx
 FROM nginxinc/nginx-unprivileged:stable-alpine
