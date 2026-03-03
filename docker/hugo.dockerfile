@@ -1,5 +1,5 @@
 ARG NODE_VERSION=22.2.0
-ARG JBROWSE_VERSION=3.2.0
+ARG JBROWSE_VERSION=4.1.13
 
 # Stage 1: Download HUGO + build static site. 
 FROM alpine:latest AS build
