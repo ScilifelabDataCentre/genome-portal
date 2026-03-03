@@ -69,7 +69,7 @@ class TrackParams:
         if track_params.display_type == "LinearManhattanDisplay":
             return {
                 "name": "GWAS",
-                "url": "https://unpkg.com/jbrowse-plugin-gwas/dist/jbrowse-plugin-gwas.umd.production.min.js",
+                "url": "/browser/plugins/jbrowse-plugin-gwas.umd.production.min.js",
             }
         return None
 
