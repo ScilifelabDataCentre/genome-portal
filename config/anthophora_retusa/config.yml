@@ -1,0 +1,33 @@
+organism: Anthophora retusa
+assembly:
+  name: iyAntRet1
+  displayName: A. retusa genome assembly GCA_963995495.1
+  accession: GCA_963995495.1
+  url: "https://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/cax/CAXEFM01.fasta.gz"
+  fileName: CAXEFM01.fasta.gz
+tracks:
+- name: Protein-coding genes
+  url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/963/995/495/GCA_963995495.1_iyAntRet1/GCA_963995495.1_iyAntRet1_genomic.gff.gz
+- name: Repeats
+  url: "https://figshare.scilifelab.se/ndownloader/files/60419366"
+  fileName: "Anthophora_retusa_repeats.gff"
+  defaultSession: true 
+- name: Transcripts (Isoseq)
+  url: "https://figshare.scilifelab.se/ndownloader/files/60419354"
+  fileName: "Anthophora_retusa_isoseq.gff"
+  defaultSession: true
+- name: "Nucleotide diversity (Pi), 5kb windows"
+  url: "https://figshare.scilifelab.se/ndownloader/files/60419345"
+  fileName: "retusa_5kb.windowed.bed"
+  addTrack: false
+  defaultSession: true
+  GWAS: true
+  scoreColumnGWAS: "PI"
+  color: "rgb(242, 142, 44)"
+- name: "Tajima's D, calculated with 10kb windows"
+  url: "https://figshare.scilifelab.se/ndownloader/files/60419348"
+  fileName: "retusa.Tajima.D.end_column_5kb_midpoint.drop_nan.bed"
+  addTrack: false
+  defaultSession: true
+  GWAS: true
+  scoreColumnGWAS: "TajimaD"

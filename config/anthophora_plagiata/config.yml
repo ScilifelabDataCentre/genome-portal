@@ -1,0 +1,36 @@
+organism: Anthophora plagiata
+assembly:
+  name: iyAntPlag1
+  displayName: A. plagiata genome assembly GCA_963995485.1
+  accession: GCA_963995485.1
+  url: "https://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/cax/CAXEFL01.fasta.gz"
+  fileName: CAXEFL01.fasta.gz
+  defaultScaffold: "ENA|CAXEFL010000280|CAXEFL010000280.1"
+tracks:
+- name: Protein-coding genes
+  url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/963/995/485/GCA_963995485.1_iyAntPlag1/GCA_963995485.1_iyAntPlag1_genomic.gff.gz
+- name: Repeats
+  url: "https://figshare.scilifelab.se/ndownloader/files/60419363"
+  fileName: "Anthophora_plagiata_repeats.gff"
+  defaultSession: true 
+- name: Transcripts (Isoseq)
+  url: "https://figshare.scilifelab.se/ndownloader/files/60419351" 
+  fileName: "Anthophora_plagiata_isoseq.gff" 
+  defaultSession: true
+- name: "Nucleotide diversity (Pi), 5kb windows"
+  url: "https://figshare.scilifelab.se/ndownloader/files/60419333"
+  fileName: "plag_5kb.windowed.bed"
+  addTrack: false
+  defaultSession: true
+  GWAS: true
+  scoreColumnGWAS: "PI"
+  color: "rgb(242, 142, 44)"
+- name: "Tajima's D, calculated with 10kb windows"
+  url: "https://figshare.scilifelab.se/ndownloader/files/60419336"
+  fileName: "plagiata.Tajima.D.end_column_5kb_midpoint.bed"
+  addTrack: false
+  defaultSession: true
+  GWAS: true
+  scoreColumnGWAS: "TajimaD"
+
+

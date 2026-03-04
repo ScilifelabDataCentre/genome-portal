@@ -1,13 +1,16 @@
 ARG NODE_VERSION=22.2.0
-ARG JBROWSE_VERSION=3.2.0
+ARG JBROWSE_VERSION=4.1.13
+ARG GWAS_PLUGIN_VERSION=2.1.4
 
-# Stage 1: Download HUGO + build static site. 
-FROM alpine:latest AS build
+## Stage 1: Download HUGO + build static site. 
+
+# Use debian instead of alpine for build to avoid a MacOS + Rancher desktop build issue.
+FROM debian:stable-slim AS build
 
 ARG HUGO_VERSION=0.138.0
 ARG JBROWSE_VERSION
 
-RUN apk add --no-cache wget
+RUN apt-get update && apt-get install -y --no-install-recommends wget ca-certificates && rm -rf /var/lib/apt/lists/*
 
 RUN wget --quiet "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.tar.gz" && \
     tar xzf hugo_${HUGO_VERSION}_Linux-64bit.tar.gz && \
@@ -26,21 +29,31 @@ ARG HUGO_GIT_REF_NAME
 ARG HUGO_GIT_SHA
 
 # pass the environment variables to the build
+# On MacOS with Rancher desktop, the build VM can run out of memory when building the hugo image, causing a crash in Go's lfstack implementation. 
+# Setting GOGC=off disables Go's runtime GC, working around this issue.
+
 RUN mkdir /target && \
-    hugo -d /target --minify --gc
+    GOGC=off hugo -d /target --minify --gc
 
 
-# Stage 2: Install JBrowse
+## Stage 2: Install JBrowse and GWAS plugin
 FROM node:${NODE_VERSION}-slim AS jbrowse
 ARG JBROWSE_VERSION
+ARG GWAS_PLUGIN_VERSION
 
 WORKDIR /tmp
-RUN npm install -g @jbrowse/cli
+RUN npm install -g @jbrowse/cli@${JBROWSE_VERSION}
 COPY ./scripts/download_jbrowse .
 RUN bash ./download_jbrowse v${JBROWSE_VERSION} /tmp/browser
 
+# Download pinned version of jbrowse-plugin-gwas and bundle it with the image
+RUN mkdir -p /tmp/browser/plugins /tmp/gwas-plugin-stage && \
+    npm pack "jbrowse-plugin-gwas@${GWAS_PLUGIN_VERSION}" --pack-destination /tmp && \
+    tar -xzf "/tmp/jbrowse-plugin-gwas-${GWAS_PLUGIN_VERSION}.tgz" -C /tmp/gwas-plugin-stage --strip-components=1 && \
+    cp /tmp/gwas-plugin-stage/dist/jbrowse-plugin-gwas.umd.production.min.js /tmp/browser/plugins/
 
-# Stage 3: Serve the generated html using nginx
+
+## Stage 3: Serve the generated html using nginx
 FROM nginxinc/nginx-unprivileged:stable-alpine
 
 COPY docker/nginx-custom.conf /etc/nginx/conf.d/default.conf 

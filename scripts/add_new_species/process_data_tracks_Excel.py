@@ -13,6 +13,7 @@ from pathlib import Path
 
 import pandas as pd
 from add_content_files import TEMPLATE_DIR
+from get_assembly_metadata_from_ENA_NCBI import extract_accession_from_url
 
 JSON_FILE_NAME = "data_tracks.json"
 TEMPLATE_FILE_PATH = TEMPLATE_DIR / JSON_FILE_NAME
@@ -27,29 +28,32 @@ def df_row_to_json(row: pd.Series, template_json: str) -> dict[str, str]:
     """
 
     data_track = json.loads(template_json)
+    accession_or_doi = None
 
     if "data_track_name" in row and pd.notna(row["data_track_name"]):
         data_track["dataTrackName"] = row["data_track_name"]
     if "data_track_description" in row and pd.notna(row["data_track_description"]):
         data_track["description"] = row["data_track_description"]
-    if "direct_link_to_file" in row and pd.notna(row["direct_link_to_file"]):
-        data_track["links"][0]["Download"] = row["direct_link_to_file"]
     if "doi_link_to_repository" in row and pd.notna(row["doi_link_to_repository"]):
         data_track["links"][1]["Website"] = row["doi_link_to_repository"]
-    if "doi_link_to_scientific_article" in row and pd.notna(row["doi_link_to_scientific_article"]):
-        data_track["links"][2]["Article"] = row["doi_link_to_scientific_article"]
-    if "accesion_number_or_doi" in row and pd.notna(row["accesion_number_or_doi"]):
-        data_track["accessionOrDOI"] = row["accesion_number_or_doi"]
+        accession_or_doi = extract_accession_from_url(row["doi_link_to_repository"])
     if "filename" in row and pd.notna(row["filename"]):
         data_track["fileName"] = row["filename"]
     if "principal_investigator_name" in row and pd.notna(row["principal_investigator_name"]):
         data_track["principalInvestigator"] = row["principal_investigator_name"]
     if "principal_investigator_affiliation" in row and pd.notna(row["principal_investigator_affiliation"]):
         data_track["principalInvestigatorAffiliation"] = row["principal_investigator_affiliation"]
+    if "direct_link_to_file_for_download" in row and pd.notna(row["direct_link_to_file_for_download"]):
+        data_track["links"][0]["Download"] = row["direct_link_to_file_for_download"]
+    if "doi_link_to_scientific_article" in row and pd.notna(row["doi_link_to_scientific_article"]):
+        data_track["links"][2]["Article"] = row["doi_link_to_scientific_article"]
     if "firstDateOnPortal" in row and pd.notna(row["firstDateOnPortal"]):
         data_track["firstDateOnPortal"] = row["firstDateOnPortal"]
     else:
         data_track["firstDateOnPortal"] = datetime.now().strftime("%d/%m/%Y")
+
+    if accession_or_doi:
+        data_track["accessionOrDOI"] = accession_or_doi
 
     return data_track
 
@@ -57,6 +61,7 @@ def df_row_to_json(row: pd.Series, template_json: str) -> dict[str, str]:
 def parse_excel_file(spreadsheet_file_path: str, sheet_name: str) -> list[dict]:
     """
     Parse the Excel file with Pandas and return a JSON-style structure (list of dicts).
+    JSON was chosen over dataclass since the data is used to populate data_track.json.
     """
     df = pd.read_excel(spreadsheet_file_path, sheet_name=sheet_name, engine="openpyxl")
 

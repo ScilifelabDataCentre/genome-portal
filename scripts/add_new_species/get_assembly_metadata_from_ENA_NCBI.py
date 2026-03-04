@@ -8,6 +8,7 @@ Notably, the ENA metadata lacks one field (assembly_type) that is present in the
 Hence, this submodule queries both ENA and NCBI APIs to get the desired metadata fields.
 """
 
+import re
 from dataclasses import dataclass
 from xml.etree import ElementTree
 
@@ -87,25 +88,25 @@ def get_ncbi_assembly_metadata_json(accession: str) -> dict:
 
 def extract_genome_accession(user_data_tracks: list[dict]) -> str:
     """
-    Extract the value of 'accessionOrDOI' for the top-level key 'Genome' from the list of dictionaries.
-    """
+    Extract the GenBank genome assembly accession from the 'doi_link_to_repository' field
+    for the top-level key 'Genome' from the list of dictionaries.
 
-    genome_assembly_accession = None
+    Assumes that the url contains the accession in the format GCA_xxxxxxx.x
+
+    In dataTrackName, the url resides in 'Website' under 'links' for the 'Genome' data track.
+    """
     for data_track in user_data_tracks:
         if data_track.get("dataTrackName") == "Genome":
-            genome_assembly_accession = data_track.get("accessionOrDOI", None)
+            for link in data_track.get("links", []):
+                url = link.get("Website", "")
+                if url:
+                    accession = extract_accession_from_url(url)
+                    if accession.startswith("GCA"):
+                        return accession
             break
-    if not genome_assembly_accession or genome_assembly_accession == "[EDIT]":
-        raise ValueError(
-            "Genome assembly accession not found in the user spreadsheet. Please check the field is not empty."
-        )
-    if not genome_assembly_accession.startswith("GCA"):
-        raise ValueError(
-            f"The accession in the user spreadsheet, {genome_assembly_accession}, "
-            "does not look like a GenBank genome assembly accession. It must start with 'GCA'."
-        )
-
-    return genome_assembly_accession
+    raise ValueError(
+        "Genome assembly accession or DOI not found in the user spreadsheet. Please check the field is not empty or valid."
+    )
 
 
 def fetch_assembly_metadata(user_data_tracks: dict, species_name: str) -> AssemblyMetadata:
@@ -131,3 +132,21 @@ def fetch_assembly_metadata(user_data_tracks: dict, species_name: str) -> Assemb
         species_name=species_name,
         species_name_abbrev=species_name_abbrev,
     )
+
+
+def extract_accession_from_url(url: str) -> str | None:
+    """
+    Extract a GenBank accession (GCA_xxxxxxx.x) from ENA/NCBI/DOI URLs.
+
+    ENA genome accession example: https://www.ebi.ac.uk/ena/browser/view/GCA_963668995.1
+    DOI pattern example: https://doi.org/10.17044/scilifelab.28606814.v1
+    """
+
+    acession_match = re.search(r"(GCA_\d+\.\d+)", url)
+    if acession_match:
+        return acession_match.group(1)
+
+    doi_match = re.search(r"doi\.org/([\w\.\-/]+)", url)
+    if doi_match:
+        return doi_match.group(1)
+    return None
