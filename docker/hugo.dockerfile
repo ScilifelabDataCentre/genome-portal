@@ -42,7 +42,7 @@ ARG JBROWSE_VERSION
 ARG GWAS_PLUGIN_VERSION
 
 WORKDIR /tmp
-RUN npm install -g @jbrowse/cli
+RUN npm install -g @jbrowse/cli@${JBROWSE_VERSION}
 COPY ./scripts/download_jbrowse .
 RUN bash ./download_jbrowse v${JBROWSE_VERSION} /tmp/browser
 
