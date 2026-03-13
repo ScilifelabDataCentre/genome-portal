@@ -1,0 +1,36 @@
+organism: Linum grandiflorum
+assembly:
+  name: Lgrand_primary_v1
+  displayName: L. grandiflorum genome assembly Lgrand_primary_v1
+  accession: # To be added when ENA version has been corrected
+  url: "https://ndownloader.figshare.com/files/62112240"
+  fileName: Lgrand_primary_v1.fasta.gz
+tracks:
+- name: Protein-coding genes
+  url: "https://ndownloader.figshare.com/files/62112243"
+  fileName: Lgrand_primary_v1_genes.gff.gz
+---
+assembly:
+  name: Lgrand_hap1_v1
+  displayName: L. grandiflorum Haplotype 1 assembly Lgrand_hap1_v1
+  accession: # To be added when ENA version has been corrected
+  url: "https://ndownloader.figshare.com/files/62111940"
+  fileName: Lgrand_hap1_v1.fasta.gz
+tracks:
+- name: Gene annotation for Haplotype 1 assembly 
+  url: "https://ndownloader.figshare.com/files/62109405"
+  fileName: Lgrand_hap1_v1_genes.gff.gz
+  defaultSession: true
+---
+assembly:
+  name: Linum_grandiflorum_haplotype_2_assembly_n_2025_03
+  displayName: L. grandiflorum Haplotype 2 assembly GCA_965225055.1
+  accession: GCA_965225055.1
+  url: "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/965/225/055/GCA_965225055.1_Linum_grandiflorum_haplotype_2_assembly_n_2025_03/GCA_965225055.1_Linum_grandiflorum_haplotype_2_assembly_n_2025_03_genomic.fna.gz"
+  fileName: GCA_965225055.1_Linum_grandiflorum_haplotype_2_assembly_n_2025_03_genomic.fna.gz
+tracks:
+- name: Gene annotation for Haplotype 2 assembly 
+  url: "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/965/225/055/GCA_965225055.1_Linum_grandiflorum_haplotype_2_assembly_n_2025_03/GCA_965225055.1_Linum_grandiflorum_haplotype_2_assembly_n_2025_03_genomic.gff.gz"
+  fileName: GCA_965225055.1_Linum_grandiflorum_haplotype_2_assembly_n_2025_03_genomic.gff.gz
+  defaultSession: true
+

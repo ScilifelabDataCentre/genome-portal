@@ -1,0 +1,126 @@
+{
+  "defaultSession": {
+    "id": "lgra_default_session",
+    "name": "Linum grandiflorum",
+    "widgets": {
+      "hierarchicalTrackSelector": {
+        "id": "hierarchicalTrackSelector",
+        "type": "HierarchicalTrackSelectorWidget",
+        "view": "lgra_default_session_view_0",
+        "faceted": {
+          "showSparse": false,
+          "showFilters": true,
+          "showOptions": false,
+          "panelWidth": 400
+        }
+      }
+    },
+    "activeWidgets": {
+      "hierarchicalTrackSelector": "hierarchicalTrackSelector"
+    },
+    "views": [
+      {
+        "id": "lgra_default_session_view_0",
+        "minimized": false,
+        "type": "LinearGenomeView",
+        "trackLabels": "offset",
+        "offsetPx": 0,
+        "bpPerPx": 50,
+        "displayedRegions": [
+          {
+            "refName": "ptg000001l",
+            "start": 0,
+            "end": 54664519,
+            "reversed": false,
+            "assemblyName": "Lgrand_primary_v1"
+          }
+        ],
+        "tracks": [
+          {
+            "id": "lgra_default_Protein-coding_genes",
+            "type": "FeatureTrack",
+            "configuration": "Lgrand_primary_v1_genes.gff",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "lgra_default_Protein-coding_genes_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 150,
+                "configuration": "Lgrand_primary_v1_genes.gff-LinearBasicDisplay"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "lgra_default_session_view_1",
+        "minimized": false,
+        "type": "LinearGenomeView",
+        "trackLabels": "offset",
+        "offsetPx": 0,
+        "bpPerPx": 50,
+        "displayedRegions": [
+          {
+            "refName": "h1tg000001l",
+            "start": 0,
+            "end": 10846856,
+            "reversed": false,
+            "assemblyName": "Lgrand_hap1_v1"
+          }
+        ],
+        "tracks": [
+          {
+            "id": "lgra_default_Gene_annotation_for_Haplotype_1_assembly",
+            "type": "FeatureTrack",
+            "configuration": "Lgrand_hap1_v1_genes.gff",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "lgra_default_Gene_annotation_for_Haplotype_1_assembly_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 150,
+                "configuration": "Lgrand_hap1_v1_genes.gff-LinearBasicDisplay"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "lgra_default_session_view_2",
+        "minimized": false,
+        "type": "LinearGenomeView",
+        "trackLabels": "offset",
+        "offsetPx": 0,
+        "bpPerPx": 200,
+        "displayedRegions": [
+          {
+            "refName": "CBDDFH010000001.1",
+            "start": 0,
+            "end": 18380552,
+            "reversed": false,
+            "assemblyName": "Linum_grandiflorum_haplotype_2_assembly_n_2025_03"
+          }
+        ],
+        "tracks": [
+          {
+            "id": "lgra_default_Gene_annotation_for_Haplotype_2_assembly",
+            "type": "FeatureTrack",
+            "configuration": "GCA_965225055.1_Linum_grandiflorum_haplotype_2_assembly_n_2025_03_genomic.gff",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "lgra_default_Gene_annotation_for_Haplotype_2_assembly_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 150,
+                "configuration": "GCA_965225055.1_Linum_grandiflorum_haplotype_2_assembly_n_2025_03_genomic.gff-LinearBasicDisplay"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "configuration": {
+    "disableAnalytics": true
+  }
+}
