@@ -17,7 +17,7 @@ stats_data_path: "linum_grandiflorum/species_stats"
 lineage_data_path: "linum_grandiflorum/taxonomy"
 ---
 
-Notes: Assembly statistics were calculated for the primary genome assembly GCA_965225045.1 ([EDIT:genome_assembly_filename]) using Quast (v5.2.0; Mikheenko et al. 2018). Busco statistics (Manni et al., 2021) were taken from [EDIT:publication_reference]. Annotation statistics were calculated for [EDIT:annotation_file_name] using AGAT (v1.4.1; Dainat, 2024).
+Notes: Assembly statistics were calculated for the primary genome assembly (Lgrand_primary_v1.fasta.gz) using Quast (v5.2.0; Mikheenko et al. 2018). Annotation statistics were calculated for Lgrand_primary_v1_genes.gff.gz using AGAT (v1.4.1; Dainat, 2024).
 
 BUSCO notation: C: Complete; S: Single-copy; D: Duplicated; F: Fragmented; M: Missing; n: Total BUSCO genes included in the dataset (here: [EDIT:ODB_database]). See also [the official BUSCO manual](https://busco.ezlab.org/busco_userguide.html#interpreting-the-results).
 
@@ -26,7 +26,7 @@ BUSCO notation: C: Complete; S: Single-copy; D: Duplicated; F: Fragmented; M: Mi
 The data for *Linum grandiflorum* displayed in the genome portal comes from:
 
 ```{style=citation}
-Zervakis, P.-I., Postel, Z., Losvik, A., Fracassetti, M., Solér, L., Proux-Wéra, E., Bunikis, I., Churcher, A., & Slotte, T. (2025). Genomic studies in Linum shed light on the evolution of the distyly supergene and the molecular basis of convergent floral evolution. New Phytologist, 247(6), 2964--2981. https://doi.org/10.1111/nph.70392
+Zervakis, P.-I., Postel, Z., Losvik, A., Fracassetti, M., Solér, L., Proux-Wéra, E., Bunikis, I., Churcher, A., & Slotte, T. (2025). Genomic studies in *Linum* shed light on the evolution of the distyly supergene and the molecular basis of convergent floral evolution. New Phytologist, 247(6), 2964--2981. https://doi.org/10.1111/nph.70392
 ```
 
 The tools used by to calculate the statistics shown on top of this page are described in:

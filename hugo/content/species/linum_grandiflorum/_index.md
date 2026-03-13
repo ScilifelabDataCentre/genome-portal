@@ -1,7 +1,7 @@
 ---
 # The params below were auto-generated, you should not need to edit them...
 # unless you were warned by the add-new-species.py script.
-title: "*Linum grandiflorum*"
+title: "*Linum grandiflorum* Desf."
 subtitle: "Crimson flax"
 last_updated: "13/03/2026" # format DD/MM/YYYY
 
@@ -38,14 +38,16 @@ initialZoom: 1
 
 ### Description
 
-Linum grandiflorum Desf., commonly known as flowering flax, red flax, scarlet flax and crimson flax (blomsterlin in Swedish), is an annual herb native to the temperate biomes of North Africa, specifically Algeria and Tunisia. First described by René Desfontaines in Fl. Atlant. 1: 277 (1798), this species is widely established in ornamental horticulture due to its vibrant, satin-like crimson petals.\ Biologically, the genus Linum is a premier model for heteromorphic self-incompatibility (Murray, 1986), a system ensuring pollination only occurs between its two floral morphs: the \"pin\" (long-styled) and \"thrum\" (short-styled) phenotypes.\ While the thrum-specific gene TSS1 was first identified in L. grandiflorum by Ushijima (2015), the surrounding genomic context remained unknown. Recent research by Zervakis, Postel et al. (2025) has finally mapped the entire S-locus supergene. This 1.2 Mb region contains the two primary candidate genes, TSS1 and WDR44, which together govern the morphological and physiological differences between the two types of flowers.
+*Linum grandiflorum* Desf., commonly known as flowering flax, red flax, scarlet flax and crimson flax (blomsterlin in Swedish), is an annual herb native to the temperate biomes of North Africa, specifically Algeria and Tunisia. First described by René Desfontaines in Fl. Atlant. 1: 277 (1798), this species is widely established in ornamental horticulture due to its vibrant, satin-like crimson petals.
+
+ Biologically, the genus *Linum* is a premier model for heteromorphic self-incompatibility (Murray, 1986), a system ensuring pollination only occurs between its two floral morphs: the "pin" (long-styled) and "thrum" (short-styled) phenotypes. While the thrum-specific gene TSS1 was first identified in *L. grandiflorum* by Ushijima (2015), the surrounding genomic context remained unknown. Recent research by Zervakis, Postel et al. (2025) has finally mapped the entire S-locus supergene. This 1.2 Mb region contains the two primary candidate genes, TSS1 and WDR44, which together govern the morphological and physiological differences between the two types of flowers.
 
 #### How to cite
 
 If you use the data presented in the genome portal from this species in your research, please cite the original publication:
 
 ```{style=citation}
-Zervakis, P.-I., Postel, Z., Losvik, A., Fracassetti, M., Solér, L., Proux-Wéra, E., Bunikis, I., Churcher, A., & Slotte, T. (2025). Genomic studies in Linum shed light on the evolution of the distyly supergene and the molecular basis of convergent floral evolution. New Phytologist, 247(6), 2964--2981. https://doi.org/10.1111/nph.70392
+Zervakis, P.-I., Postel, Z., Losvik, A., Fracassetti, M., Solér, L., Proux-Wéra, E., Bunikis, I., Churcher, A., & Slotte, T. (2025). Genomic studies in *Linum* shed light on the evolution of the distyly supergene and the molecular basis of convergent floral evolution. New Phytologist, 247(6), 2964--2981. https://doi.org/10.1111/nph.70392
 ```
 
 If you have used the pages for this species in the Genome Portal, please refer to it in-text as: "The *Linum grandiflorum* entry in the Swedish Reference Genome Portal (Retrieved <span class="todays-date"></span>)." and use the following for the bibliography:
@@ -57,9 +59,9 @@ Swedish Reference Genome Portal (Retrieved DATE_ACCESSED), SciLifeLab Data Centr
 #### References
 
 - Desfontaines, R. L. (1798). Flora Atlantica: Sive historia plantarum quae in Atlante, agro Tunetano et Algeriensi crescunt (Vol. 1). Apud Carolum Panckoucke. <https://www.biodiversitylibrary.org/bibliography/6364>
-- Murray, B. G. (1986). Floral Biology and Self-Incompatibility in Linum. Botanical Gazette, 147(3), 327--333. <https://doi.org/10.1086/337599>
-- Ushijima, K., Nakano, R., Bando, M., Shigezane, Y., Ikeda, K., Namba, Y., Kume, S., Kitabata, T., Mori, H., & Kubo, Y. (2012). Isolation of the floral morph‐related genes in heterostylous flax ( Linum grandiflorum ): The genetic polymorphism and the transcriptional and post‐transcriptional regulations of the S locus. The Plant Journal, 69(2), 317--331. <https://doi.org/10.1111/j.1365-313X.2011.04792.x>
-- Zervakis, P.-I., Postel, Z., Losvik, A., Fracassetti, M., Solér, L., Proux-Wéra, E., Bunikis, I., Churcher, A., & Slotte, T. (2025). Genomic studies in Linum shed light on the evolution of the distyly supergene and the molecular basis of convergent floral evolution. New Phytologist, 247(6), 2964--2981. <https://doi.org/10.1111/nph.70392>
+- Murray, B. G. (1986). Floral Biology and Self-Incompatibility in *Linum*. Botanical Gazette, 147(3), 327--333. <https://doi.org/10.1086/337599>
+- Ushijima, K., Nakano, R., Bando, M., Shigezane, Y., Ikeda, K., Namba, Y., Kume, S., Kitabata, T., Mori, H., & Kubo, Y. (2012). Isolation of the floral morph‐related genes in heterostylous flax (*Linum grandiflorum*): The genetic polymorphism and the transcriptional and post‐transcriptional regulations of the S locus. The Plant Journal, 69(2), 317--331. <https://doi.org/10.1111/j.1365-313X.2011.04792.x>
+- Zervakis, P.-I., Postel, Z., Losvik, A., Fracassetti, M., Solér, L., Proux-Wéra, E., Bunikis, I., Churcher, A., & Slotte, T. (2025). Genomic studies in *Linum* shed light on the evolution of the distyly supergene and the molecular basis of convergent floral evolution. New Phytologist, 247(6), 2964--2981. <https://doi.org/10.1111/nph.70392>
 
 #### Changelog
 
