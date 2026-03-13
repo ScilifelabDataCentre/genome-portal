@@ -1,0 +1,20 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:best-practices"
+  ],
+  "packageRules": [
+    {
+      "matchFileNames": ["requirements.txt"],
+      "enabled": false
+    },
+    {
+      "groupName": "Github Actions",
+      "matchFileNames": [".github/workflows/*.yml"]
+    },
+    {
+      "groupName": "Docker images",
+      "matchFileNames": ["docker/*.dockerfile"]
+    }
+  ]
+}
