@@ -25,7 +25,7 @@
         "type": "LinearGenomeView",
         "trackLabels": "offset",
         "offsetPx": 0,
-        "bpPerPx": 50,
+        "bpPerPx": 1600,
         "displayedRegions": [
           {
             "refName": "ENA|CBDDTU010000001|CBDDTU010000001.1",
@@ -45,7 +45,7 @@
               {
                 "id": "lper_default_Protein-coding_genes_display",
                 "type": "LinearBasicDisplay",
-                "heightPreConfig": 150,
+                "heightPreConfig": 200,
                 "configuration": "GCA_965231395.1_Linum_perenne_primary_assembly_n_2025_03_genomic.gff-LinearBasicDisplay"
               }
             ]
@@ -58,7 +58,7 @@
         "type": "LinearGenomeView",
         "trackLabels": "offset",
         "offsetPx": 0,
-        "bpPerPx": 50,
+        "bpPerPx": 1600,
         "displayedRegions": [
           {
             "refName": "ENA|CBDEYK010000001|CBDEYK010000001.1",
@@ -78,7 +78,7 @@
               {
                 "id": "lper_default_Gene_annotation_for_Haplotype_1_assembly_display",
                 "type": "LinearBasicDisplay",
-                "heightPreConfig": 150,
+                "heightPreConfig": 200,
                 "configuration": "GCA_965240515.1_Linum_perenne_haplotype_1_assembly_n_2025_03_genomic.gff-LinearBasicDisplay"
               }
             ]
@@ -91,7 +91,7 @@
         "type": "LinearGenomeView",
         "trackLabels": "offset",
         "offsetPx": 0,
-        "bpPerPx": 50,
+        "bpPerPx": 800,
         "displayedRegions": [
           {
             "refName": "ENA|CBDDQB010000001|CBDDQB010000001.1",
@@ -111,7 +111,7 @@
               {
                 "id": "lper_default_Gene_annotation_for_Haplotype_2_assembly_display",
                 "type": "LinearBasicDisplay",
-                "heightPreConfig": 150,
+                "heightPreConfig": 300,
                 "configuration": "GCA_965232625.1_Linum_perenne_haplotype_2_assembly_n_2025_03_genomic.gff-LinearBasicDisplay"
               }
             ]

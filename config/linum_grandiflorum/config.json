@@ -91,7 +91,7 @@
         "type": "LinearGenomeView",
         "trackLabels": "offset",
         "offsetPx": 0,
-        "bpPerPx": 50,
+        "bpPerPx": 200,
         "displayedRegions": [
           {
             "refName": "CBDDFH010000001.1",
