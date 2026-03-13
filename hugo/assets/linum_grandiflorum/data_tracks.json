@@ -1,0 +1,102 @@
+[
+  {
+    "dataTrackName": "Genome",
+    "description": "Primary gene annotated assembly of L. grandiflorum genome",
+    "links": [
+      {
+        "Download": "[EDIT]"
+      },
+      {
+        "Website": "https://www.ebi.ac.uk/ena/browser/view/GCA_965225045.1"
+      },
+      {
+        "Article": "https://doi.org/10.1111/nph.70392"
+      }
+    ],
+    "accessionOrDOI": "GCA_965225045.1",
+    "fileName": "Lgrand_primary_v1.fasta",
+    "principalInvestigator": "Tanja Slotte",
+    "principalInvestigatorAffiliation": "Tanja Slotte",
+    "firstDateOnPortal": "13/03/2026"
+  },
+  {
+    "dataTrackName": "Protein-coding genes",
+    "description": "Gene annotation for Primary assembly of L. grandiflorum genome",
+    "links": [
+      {
+        "Download": "[EDIT]"
+      },
+      {
+        "Website": "https://doi.org/10.17044/scilifelab.31362553"
+      },
+      {
+        "Article": "https://doi.org/10.1111/nph.70392"
+      }
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.31362553",
+    "fileName": "Lgrand_primary_v1_genes.gff",
+    "principalInvestigator": "Tanja Slotte",
+    "principalInvestigatorAffiliation": "Tanja Slotte",
+    "firstDateOnPortal": "13/03/2026"
+  },
+  {
+    "dataTrackName": "Linum grandiflorum hap1",
+    "description": "Haplotype 1 assembly of L. grandiflorum genome",
+    "links": [
+      {
+        "Download": "[EDIT]"
+      },
+      {
+        "Website": "https://doi.org/10.17044/scilifelab.31313980"
+      },
+      {
+        "Article": "https://doi.org/10.1111/nph.70392"
+      }
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.31313980",
+    "fileName": "Lgrand_hap1_v1.fasta",
+    "principalInvestigator": "Tanja Slotte",
+    "principalInvestigatorAffiliation": "Tanja Slotte",
+    "firstDateOnPortal": "13/03/2026"
+  },
+  {
+    "dataTrackName": "Linum grandiflorum hap1 genes",
+    "description": "Gene annotation for Haplotype 1 assembly of L. grandiflorum genome",
+    "links": [
+      {
+        "Download": "[EDIT]"
+      },
+      {
+        "Website": "https://doi.org/10.17044/scilifelab.31313980"
+      },
+      {
+        "Article": "https://doi.org/10.1111/nph.70392"
+      }
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.31313980",
+    "fileName": "Lgrand_hap1_v1_genes.gff",
+    "principalInvestigator": "Tanja Slotte",
+    "principalInvestigatorAffiliation": "Tanja Slotte",
+    "firstDateOnPortal": "13/03/2026"
+  },
+  {
+    "dataTrackName": "Linum grandiflorum hap2",
+    "description": "Haplotype 2 gene annotated assembly of L. grandiflorum genome",
+    "links": [
+      {
+        "Download": "[EDIT]"
+      },
+      {
+        "Website": "https://www.ebi.ac.uk/ena/browser/view/GCA_965225055.1"
+      },
+      {
+        "Article": "https://doi.org/10.1111/nph.70392"
+      }
+    ],
+    "accessionOrDOI": "GCA_965225055.1",
+    "fileName": "GCA_965225055.1",
+    "principalInvestigator": "Tanja Slotte",
+    "principalInvestigatorAffiliation": "Tanja Slotte",
+    "firstDateOnPortal": "13/03/2026"
+  }
+]

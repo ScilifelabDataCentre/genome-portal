@@ -1,0 +1,58 @@
+{
+    "Species": {
+        "science_name": "Linum grandiflorum",
+        "tax_id": "559336",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:559336",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=559336",
+        "display_order": 1
+    },
+    "Genus": {
+        "science_name": "Linum",
+        "tax_id": "4005",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:4005",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=4005",
+        "display_order": 2
+    },
+    "Family": {
+        "science_name": "Linaceae",
+        "tax_id": "4004",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:4004",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=4004",
+        "display_order": 3
+    },
+    "Order": {
+        "science_name": "Malpighiales",
+        "tax_id": "3646",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:3646",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=3646",
+        "display_order": 4
+    },
+    "Class": {
+        "science_name": "Magnoliopsida",
+        "tax_id": "3398",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:3398",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=3398",
+        "display_order": 5
+    },
+    "Phylum": {
+        "science_name": "Streptophyta",
+        "tax_id": "35493",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:35493",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=35493",
+        "display_order": 6
+    },
+    "Kingdom": {
+        "science_name": "Viridiplantae",
+        "tax_id": "33090",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:33090",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=33090",
+        "display_order": 7
+    },
+    "Domain": {
+        "science_name": "Eukaryota",
+        "tax_id": "2759",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:2759",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=2759",
+        "display_order": 8
+    }
+}
