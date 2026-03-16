@@ -13,6 +13,8 @@ assembly:
   - "Scaffold N90 (Mbp)": "13.12"
   - "Scaffold L90": "12"
   - "Scaffolds >= 10 kb": "646"
+  - "BUSCO % (eudicots_odb10)": "C:89.7% [S:85.6%, D:4.1%], F:1.3%, M:9.0%, n:2326"
+
 annotation:
   - "Gene #": "42070"
   - "Transcript #": "176281"

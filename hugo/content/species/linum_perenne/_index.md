@@ -13,8 +13,8 @@ url: "linum_perenne"
 science_name: "Linum perenne"
 lineage_data_path: "linum_perenne/taxonomy"
 
-cover_image: "/img/species/linum_perenne.webp"
-img_attrib_text: "Linum perenne by Aleksandra Losvik, CC BY 4.0"
+cover_image: "/img/species/Linum-perenne_crop43_centered.webp"
+img_attrib_text: "Flower of Linum perenne, by Aleksandra Losvik, CC BY 4.0"
 img_attrib_link: ""
 
 gbif_taxon_id: "2873878"

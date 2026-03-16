@@ -17,7 +17,15 @@ stats_data_path: "linum_perenne/species_stats"
 lineage_data_path: "linum_perenne/taxonomy"
 ---
 
-Notes: Assembly statistics were calculated for the primary genome assembly GCA_965231395.1 (CBDDTU01.fasta.gz) using Quast (v5.2.0; Mikheenko et al. 2018) Annotation statistics were calculated for GCA_965231395.1_Linum_perenne_primary_assembly_n_2025_03_genomic.gff.gz using AGAT (v1.4.1; Dainat, 2024).
+Notes: Assembly statistics were calculated for the primary genome assembly GCA_965231395.1 (CBDDTU01.fasta.gz) using Quast (v5.2.0; Mikheenko et al. 2018). Busco statistics (Manni et al., 2021) were provided by the authors. Annotation statistics were calculated for GCA_965231395.1_Linum_perenne_primary_assembly_n_2025_03_genomic.gff.gz using AGAT (v1.4.1; Dainat, 2024).
+
+BUSCO notation: C: Complete; S: Single-copy; D: Duplicated; F: Fragmented; M: Missing; n: Total BUSCO genes included in the dataset (here: eudicots_odb10). See also [the official BUSCO manual](https://busco.ezlab.org/busco_userguide.html#interpreting-the-results).
+
+BUSCO statistics for the haploytype assemblies:
+
+- *Linum perenne* hap1 assembly: C:91.2% [S:86.3%, D:4.9%], F:1.4%, M:7.4%, n:2326
+
+- *Linum perenne* hap2 assembly: C:84.8% [S:80.7%, D:4.1%], F:5.2%, M:10.0%, n:2326
 
 ### Publication(s)
 

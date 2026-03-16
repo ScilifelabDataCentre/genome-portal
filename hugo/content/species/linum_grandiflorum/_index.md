@@ -14,7 +14,7 @@ science_name: "Linum grandiflorum"
 lineage_data_path: "linum_grandiflorum/taxonomy"
 
 cover_image: "/img/species/linum_grandiflorum.webp"
-img_attrib_text: "Linum grandiflorum by Aleksandra Losvik, CC BY 4.0"
+img_attrib_text: "Flower of Linum grandiflorum, by Aleksandra Losvik, CC BY 4.0"
 img_attrib_link: ""
 
 gbif_taxon_id: "2873926"
