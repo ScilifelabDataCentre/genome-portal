@@ -21,7 +21,7 @@ Notes: Assembly statistics were calculated for the primary genome assembly GCA_9
 
 BUSCO notation: C: Complete; S: Single-copy; D: Duplicated; F: Fragmented; M: Missing; n: Total BUSCO genes included in the dataset (here: eudicots_odb10). See also [the official BUSCO manual](https://busco.ezlab.org/busco_userguide.html#interpreting-the-results).
 
-BUSCO statistics for the haploytype assemblies:
+BUSCO statistics for the haplotype assemblies:
 
 - *Linum perenne* hap1 assembly: C:91.2% [S:86.3%, D:4.9%], F:1.4%, M:7.4%, n:2326
 
@@ -35,7 +35,7 @@ The data for *Linum perenne* displayed in the genome portal comes from:
 Zervakis, P.-I., Postel, Z., Losvik, A., Fracassetti, M., Solér, L., Proux-Wéra, E., Bunikis, I., Churcher, A., & Slotte, T. (2025). Genomic studies in *Linum* shed light on the evolution of the distyly supergene and the molecular basis of convergent floral evolution. New Phytologist, 247(6), 2964--2981. https://doi.org/10.1111/nph.70392
 ```
 
-The tools used by to calculate the statistics shown on top of this page are described in:
+The tools used to calculate the statistics shown on top of this page are described in:
 
 - Dainat J. (2024). AGAT: Another Gff Analysis Toolkit to handle annotations in any GTF/GFF format.
 (Version v1.4.1). Zenodo. <https://www.doi.org/10.5281/zenodo.3552717>
@@ -46,7 +46,7 @@ The tools used by to calculate the statistics shown on top of this page are desc
 
 ### Funding
 
-*The study in which the genome data was generated ([EDIT:publication_reference]) acknowledge funding by:*
+*The study in which the genome data was generated (Zervakis et al., 2025) acknowledges funding from:*
 
 - Supergene evolution in a classic plant system - bringing the study of distyly into the genomic era (Grant agreement ID: 757451) European Research Council
 - AdaptiveTarget: Accessing haplotype variation at complex loci with optimized targeting and adaptive sampling (Grant agreement ID: 101132305) European Research Council

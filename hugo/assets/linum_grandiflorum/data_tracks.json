@@ -1,7 +1,7 @@
 [
   {
     "dataTrackName": "Genome",
-    "description": "Primary genome assembly of L. grandiflorum ",
+    "description": "Primary genome assembly of L. grandiflorum",
     "links": [
       {
         "Download": "https://ndownloader.figshare.com/files/62112240"
@@ -14,9 +14,9 @@
       }
     ],
     "accessionOrDOI": "10.17044/scilifelab.31362553",
-    "fileName": "Lgrand_primary_v1.fasta",
+    "fileName": "Lgrand_primary_v1.fasta.gz",
     "principalInvestigator": "Tanja Slotte",
-    "principalInvestigatorAffiliation": "Tanja Slotte",
+    "principalInvestigatorAffiliation": "Stockholm University",
     "firstDateOnPortal": "16 March 2026"
   },
   {
@@ -34,9 +34,9 @@
       }
     ],
     "accessionOrDOI": "10.17044/scilifelab.31362553",
-    "fileName": "Lgrand_primary_v1_genes.gff",
+    "fileName": "Lgrand_primary_v1_genes.gff.gz",
     "principalInvestigator": "Tanja Slotte",
-    "principalInvestigatorAffiliation": "Tanja Slotte",
+    "principalInvestigatorAffiliation": "Stockholm University",
     "firstDateOnPortal": "16 March 2026"
   },
   {
@@ -54,9 +54,9 @@
       }
     ],
     "accessionOrDOI": "10.17044/scilifelab.31313980",
-    "fileName": "Lgrand_hap1_v1.fasta",
+    "fileName": "Lgrand_hap1_v1.fasta.gz",
     "principalInvestigator": "Tanja Slotte",
-    "principalInvestigatorAffiliation": "Tanja Slotte",
+    "principalInvestigatorAffiliation": "Stockholm University",
     "firstDateOnPortal": "16 March 2026"
   },
   {
@@ -74,9 +74,9 @@
       }
     ],
     "accessionOrDOI": "10.17044/scilifelab.31313980",
-    "fileName": "Lgrand_hap1_v1_genes.gff",
+    "fileName": "Lgrand_hap1_v1_genes.gff.gz",
     "principalInvestigator": "Tanja Slotte",
-    "principalInvestigatorAffiliation": "Tanja Slotte",
+    "principalInvestigatorAffiliation": "Stockholm University",
     "firstDateOnPortal": "16 March 2026"
   },
   {
@@ -84,7 +84,7 @@
     "description": "L. grandiflorum Haplotype 2 assembly",
     "links": [
       {
-        "Download": "https://www.ebi.ac.uk/ena/browser/api/fasta/GCA_965225055.1?download=true&gzip=true"
+        "Download": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/965/225/055/GCA_965225055.1_genomic.fna.gz"
       },
       {
         "Website": "https://www.ebi.ac.uk/ena/browser/view/GCA_965225055.1"

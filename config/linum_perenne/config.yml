@@ -17,7 +17,7 @@ assembly:
   url: "https://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/cbd/CBDEYK01.fasta.gz"
   fileName: CBDEYK01.fasta.gz
 tracks:
-- name: Gene annotation for Haplotype 1 assembly 
+- name: Gene annotation for Haplotype 1 assembly
   url: "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/965/240/515/GCA_965240515.1_Linum_perenne_haplotype_1_assembly_n_2025_03/GCA_965240515.1_Linum_perenne_haplotype_1_assembly_n_2025_03_genomic.gff.gz"
   fileName: GCA_965240515.1_Linum_perenne_haplotype_1_assembly_n_2025_03_genomic.gff.gz
   defaultSession: true
@@ -29,7 +29,7 @@ assembly:
   url: https://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/cbd/CBDDQB01.fasta.gz
   fileName: CBDDQB01.fasta.gz
 tracks:
-- name: Gene annotation for Haplotype 2 assembly 
+- name: Gene annotation for Haplotype 2 assembly
   url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/965/232/625/GCA_965232625.1_Linum_perenne_haplotype_2_assembly_n_2025_03/GCA_965232625.1_Linum_perenne_haplotype_2_assembly_n_2025_03_genomic.gff.gz
   fileName: GCA_965232625.1_Linum_perenne_haplotype_2_assembly_n_2025_03_genomic.gff.gz
   defaultSession: true

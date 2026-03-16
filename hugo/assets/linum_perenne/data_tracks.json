@@ -14,9 +14,9 @@
       }
     ],
     "accessionOrDOI": "GCA_965231395.1",
-    "fileName": "GCA_965231395.1",
+    "fileName": "CBDDTU01.fasta.gz",
     "principalInvestigator": "Tanja Slotte",
-    "principalInvestigatorAffiliation": "Tanja Slotte",
+    "principalInvestigatorAffiliation": "Stockholm University",
     "firstDateOnPortal": "16 March 2026"
   },
   {
@@ -34,9 +34,9 @@
       }
     ],
     "accessionOrDOI": "GCA_965231395.1",
-    "fileName": "GCA_965231395.1",
+    "fileName": "GCA_965231395.1_Linum_perenne_primary_assembly_n_2025_03_genomic.gff.gz",
     "principalInvestigator": "Tanja Slotte",
-    "principalInvestigatorAffiliation": "Tanja Slotte",
+    "principalInvestigatorAffiliation": "Stockholm University",
     "firstDateOnPortal": "16 March 2026"
   },
   {
@@ -54,9 +54,9 @@
       }
     ],
     "accessionOrDOI": "GCA_965240515.1",
-    "fileName": "GCA_965240515.1",
+    "fileName": "CBDEYK01.fasta.gz",
     "principalInvestigator": "Tanja Slotte",
-    "principalInvestigatorAffiliation": "Tanja Slotte",
+    "principalInvestigatorAffiliation": "Stockholm University",
     "firstDateOnPortal": "16 March 2026"
   },
   {
@@ -74,9 +74,9 @@
       }
     ],
     "accessionOrDOI": "GCA_965240515.1",
-    "fileName": "GCA_965240515.1",
+    "fileName": "GCA_965240515.1_Linum_perenne_haplotype_1_assembly_n_2025_03_genomic.gff.gz",
     "principalInvestigator": "Tanja Slotte",
-    "principalInvestigatorAffiliation": "Tanja Slotte",
+    "principalInvestigatorAffiliation": "Stockholm University",
     "firstDateOnPortal": "16 March 2026"
   },
   {
@@ -94,7 +94,7 @@
       }
     ],
     "accessionOrDOI": "GCA_965232625.1",
-    "fileName": "GCA_965232625.1",
+    "fileName": "CBDDQB01.fasta.gz",
     "principalInvestigator": "Tanja Slotte",
     "principalInvestigatorAffiliation": "Tanja Slotte",
     "firstDateOnPortal": "16 March 2026"
@@ -114,7 +114,7 @@
       }
     ],
     "accessionOrDOI": "GCA_965232625.1",
-    "fileName": "GCA_965232625.1",
+    "fileName": "GCA_965232625.1_Linum_perenne_haplotype_2_assembly_n_2025_03_genomic.gff.gz",
     "principalInvestigator": "Tanja Slotte",
     "principalInvestigatorAffiliation": "Tanja Slotte",
     "firstDateOnPortal": "16 March 2026"
