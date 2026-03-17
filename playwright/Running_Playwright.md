@@ -31,19 +31,17 @@ python -m playwright install
 **3. Start running a local version of the server:**
 
 ```bash
-./scripts/dockerbuild hugo
+./scripts/dockerbuild -t local -k hugo
 ./scripts/dockerserve -t local
 ```
 
 **4. Run the tests**
 
 Run playwright:
-```bash
-pytest playwright/tests/ --base-url http://localhost:8080 
-```
-
-Note: if you want to run the tests in parralel using playwright you can add the flag `--numprocesses auto`
 
 ```bash
 pytest playwright/tests/ --base-url http://localhost:8080 --numprocesses auto
 ```
+
+Note the use of the `--numprocesses auto` to run the tests in parallel, which is recommended to speed up the testing process.
+
