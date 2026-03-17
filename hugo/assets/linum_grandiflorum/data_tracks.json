@@ -84,10 +84,10 @@
     "description": "L. grandiflorum Haplotype 2 assembly",
     "links": [
       {
-        "Download": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/965/225/055/GCA_965225055.1_genomic.fna.gz"
+        "Download": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/965/225/055/GCA_965225055.1_Linum_grandiflorum_haplotype_2_assembly_n_2025_03/GCA_965225055.1_Linum_grandiflorum_haplotype_2_assembly_n_2025_03_genomic.fna.gz"
       },
       {
-        "Website": "https://www.ebi.ac.uk/ena/browser/view/GCA_965225055.1"
+        "Website": "https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_965225055.1/"
       },
       {
         "Article": "https://doi.org/10.1111/nph.70392"
