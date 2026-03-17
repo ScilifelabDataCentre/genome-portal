@@ -53,8 +53,8 @@
 
 
     {{ $aliasFileURL := "" }}
-    {{ if .Params.alias_file_url }}
-        {{ $aliasFileURL = .Params.alias_file_url }}
+    {{ if and .Params.alias_file_url (ne .Params.alias_file_url "[EDIT]") (ne .Params.alias_file_url "") }}
+    {{ $aliasFileURL = .Params.alias_file_url }}
     {{ end }}
 
 

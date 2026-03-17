@@ -1,0 +1,35 @@
+organism: Linum perenne
+assembly:
+  name: Linum_perenne_primary_assembly_n_2025_03
+  displayName: L. perenne genome assembly GCA_965231395.1
+  accession: GCA_965231395.1
+  url: https://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/cbd/CBDDTU01.fasta.gz
+  fileName: CBDDTU01.fasta.gz
+tracks:
+- name: Protein-coding genes
+  url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/965/231/395/GCA_965231395.1_Linum_perenne_primary_assembly_n_2025_03/GCA_965231395.1_Linum_perenne_primary_assembly_n_2025_03_genomic.gff.gz
+  fileName: GCA_965231395.1_Linum_perenne_primary_assembly_n_2025_03_genomic.gff.gz
+---
+assembly:
+  name: Linum_perenne_haplotype_1_assembly_n_2025_03
+  displayName: L. perenne Haplotype 1 assembly GCA_965240515.1
+  accession: GCA_965240515.1
+  url: "https://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/cbd/CBDEYK01.fasta.gz"
+  fileName: CBDEYK01.fasta.gz
+tracks:
+- name: Gene annotation for Haplotype 1 assembly
+  url: "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/965/240/515/GCA_965240515.1_Linum_perenne_haplotype_1_assembly_n_2025_03/GCA_965240515.1_Linum_perenne_haplotype_1_assembly_n_2025_03_genomic.gff.gz"
+  fileName: GCA_965240515.1_Linum_perenne_haplotype_1_assembly_n_2025_03_genomic.gff.gz
+  defaultSession: true
+---
+assembly:
+  name: Linum_perenne_haplotype_2_assembly_n_2025_03
+  displayName: L. perenne Haplotype 2 assembly GCA_965232625.1
+  accession: GCA_965232625.1
+  url: https://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/cbd/CBDDQB01.fasta.gz
+  fileName: CBDDQB01.fasta.gz
+tracks:
+- name: Gene annotation for Haplotype 2 assembly
+  url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/965/232/625/GCA_965232625.1_Linum_perenne_haplotype_2_assembly_n_2025_03/GCA_965232625.1_Linum_perenne_haplotype_2_assembly_n_2025_03_genomic.gff.gz
+  fileName: GCA_965232625.1_Linum_perenne_haplotype_2_assembly_n_2025_03_genomic.gff.gz
+  defaultSession: true

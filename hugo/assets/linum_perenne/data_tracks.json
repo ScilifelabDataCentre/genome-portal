@@ -1,0 +1,122 @@
+[
+  {
+    "dataTrackName": "Genome",
+    "description": "Primary gene annotated assembly of L. perenne genome",
+    "links": [
+      {
+        "Download": "https://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/cbd/CBDDTU01.fasta.gz"
+      },
+      {
+        "Website": "https://www.ebi.ac.uk/ena/browser/view/GCA_965231395.1"
+      },
+      {
+        "Article": "https://doi.org/10.1111/nph.70392"
+      }
+    ],
+    "accessionOrDOI": "GCA_965231395.1",
+    "fileName": "CBDDTU01.fasta.gz",
+    "principalInvestigator": "Tanja Slotte",
+    "principalInvestigatorAffiliation": "Stockholm University",
+    "firstDateOnPortal": "16 March 2026"
+  },
+  {
+    "dataTrackName": "Protein-coding genes",
+    "description": "Gene annotation for L. perenne Primary assembly",
+    "links": [
+      {
+        "Download": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/965/231/395/GCA_965231395.1_Linum_perenne_primary_assembly_n_2025_03/GCA_965231395.1_Linum_perenne_primary_assembly_n_2025_03_genomic.gff.gz"
+      },
+      {
+        "Website": "https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_965231395.1/"
+      },
+      {
+        "Article": "https://doi.org/10.1111/nph.70392"
+      }
+    ],
+    "accessionOrDOI": "GCA_965231395.1",
+    "fileName": "GCA_965231395.1_Linum_perenne_primary_assembly_n_2025_03_genomic.gff.gz",
+    "principalInvestigator": "Tanja Slotte",
+    "principalInvestigatorAffiliation": "Stockholm University",
+    "firstDateOnPortal": "16 March 2026"
+  },
+  {
+    "dataTrackName": "Linum perenne hap1 assembly",
+    "description": "L. perenne Haplotype 1 assembly",
+    "links": [
+      {
+        "Download": "https://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/cbd/CBDEYK01.fasta.gz"
+      },
+      {
+        "Website": "https://www.ebi.ac.uk/ena/browser/view/GCA_965240515.1"
+      },
+      {
+        "Article": "https://doi.org/10.1111/nph.70392"
+      }
+    ],
+    "accessionOrDOI": "GCA_965240515.1",
+    "fileName": "CBDEYK01.fasta.gz",
+    "principalInvestigator": "Tanja Slotte",
+    "principalInvestigatorAffiliation": "Stockholm University",
+    "firstDateOnPortal": "16 March 2026"
+  },
+  {
+    "dataTrackName": "Linum perenne hap1 genes",
+    "description": "Gene annotation for L. perenne Haplotype 1 assembly",
+    "links": [
+      {
+        "Download": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/965/240/515/GCA_965240515.1_Linum_perenne_haplotype_1_assembly_n_2025_03/GCA_965240515.1_Linum_perenne_haplotype_1_assembly_n_2025_03_genomic.gff.gz"
+      },
+      {
+        "Website": "https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_965240515.1/"
+      },
+      {
+        "Article": "https://doi.org/10.1111/nph.70392"
+      }
+    ],
+    "accessionOrDOI": "GCA_965240515.1",
+    "fileName": "GCA_965240515.1_Linum_perenne_haplotype_1_assembly_n_2025_03_genomic.gff.gz",
+    "principalInvestigator": "Tanja Slotte",
+    "principalInvestigatorAffiliation": "Stockholm University",
+    "firstDateOnPortal": "16 March 2026"
+  },
+  {
+    "dataTrackName": "Linum perenne hap2 assembly",
+    "description": "L. perenne Haplotype 2 assembly",
+    "links": [
+      {
+        "Download": "https://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/cbd/CBDDQB01.fasta.gz"
+      },
+      {
+        "Website": "https://www.ebi.ac.uk/ena/browser/view/GCA_965232625.1"
+      },
+      {
+        "Article": "https://doi.org/10.1111/nph.70392"
+      }
+    ],
+    "accessionOrDOI": "GCA_965232625.1",
+    "fileName": "CBDDQB01.fasta.gz",
+    "principalInvestigator": "Tanja Slotte",
+    "principalInvestigatorAffiliation": "Tanja Slotte",
+    "firstDateOnPortal": "16 March 2026"
+  },
+  {
+    "dataTrackName": "Linum perenne hap2 genes",
+    "description": "Gene annotation for L. perenne Haplotype 2 assembly",
+    "links": [
+      {
+        "Download": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/965/232/625/GCA_965232625.1_Linum_perenne_haplotype_2_assembly_n_2025_03/GCA_965232625.1_Linum_perenne_haplotype_2_assembly_n_2025_03_genomic.gff.gz"
+      },
+      {
+        "Website": "https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_965232625.1/"
+      },
+      {
+        "Article": "https://doi.org/10.1111/nph.70392"
+      }
+    ],
+    "accessionOrDOI": "GCA_965232625.1",
+    "fileName": "GCA_965232625.1_Linum_perenne_haplotype_2_assembly_n_2025_03_genomic.gff.gz",
+    "principalInvestigator": "Tanja Slotte",
+    "principalInvestigatorAffiliation": "Tanja Slotte",
+    "firstDateOnPortal": "16 March 2026"
+  }
+]

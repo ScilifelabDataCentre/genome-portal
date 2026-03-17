@@ -112,18 +112,20 @@ def validate_download_link(page: Page, link_locator: Locator, link_href: str) ->
     Checks the link is a direct download link, but does not wait for the download to complete.
     That could take way too long.
     """
-
-    download_works = True
-    try:
-        with page.expect_download() as _:
-            link_locator.click()
-    except PlaywrightTimeoutError:
-        download_works = False
-
-    assert download_works, (
-        f"A Download button link on the table on page: {page.url} does not appear to be a link.\n"
-        f"This is the href: {link_href}"
-    )
+    retries = 3
+    for attempt in range(1, retries + 1):
+        try:
+            with page.expect_download() as _:
+                link_locator.click(timeout=1000)
+        except PlaywrightTimeoutError:
+            if attempt < retries:
+                print(f"Attempt {attempt} failed for download link: {link_href}. Retrying...")
+            else:
+                raise AssertionError(
+                    f"A Download button link on the table on page: {page.url} does not appear to be a link.\n"
+                    f"This is the href: {link_href}"
+                    f"\nNOTE: TEST THE LINK YOURSELF, IT MAY BE VALID, THIS TEST CAN GIVE FALSE NEGATIVES"
+                ) from None
 
 
 def validate_article_link(page: Page, link_href: str) -> None:
