@@ -1,7 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:best-practices", ":disableDependencyDashboard"],
-  "schedule": ["every monday after 9am and before 12pm"],  
+  "schedule": "* 9-12 * * 1",
   "packageRules": [
     {
       "matchFileNames": ["requirements.txt"],
