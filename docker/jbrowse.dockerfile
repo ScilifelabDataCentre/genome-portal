@@ -1,4 +1,4 @@
-FROM node:22.22.1-slim@sha256:9c2c405e3ff9b9afb2873232d24bb06367d649aa3e6259cbe314da59578e81e9
+FROM node:24.14.1-slim@sha256:06e5c9f86bfa0aaa7163cf37a5eaa8805f16b9acb48e3f85645b09d459fc2a9f
 WORKDIR /app
 RUN npm install -g @jbrowse/cli serve && jbrowse create /app
 RUN mv test_data/volvox data && rm -rf test_data && \
