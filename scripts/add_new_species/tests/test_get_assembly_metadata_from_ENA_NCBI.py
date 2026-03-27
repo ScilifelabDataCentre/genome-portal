@@ -70,12 +70,12 @@ def test_test_get_ncbi_assembly_metadata_json_mock_invalid_accession(mock_get: M
 
 def test_placeholder_assembly_metadata_with_extractable_accession() -> None:
     """
-    Test that placeholder metadata keeps an extractable GCA accession if present in Website URL.
+    Test that placeholder metadata keeps a valid GCA accession from assemblyCGAAccession.
     """
     user_data_tracks = [
         {
             "dataTrackName": "Genome",
-            "links": [{"Website": "https://www.ebi.ac.uk/ena/browser/view/GCA_000011425.1"}],
+            "assemblyCGAAccession": "GCA_000011425.1",
         }
     ]
 
@@ -91,12 +91,12 @@ def test_placeholder_assembly_metadata_with_extractable_accession() -> None:
 
 def test_placeholder_assembly_metadata_without_extractable_accession() -> None:
     """
-    Test that placeholder metadata falls back to [EDIT] accession when none can be extracted.
+    Test that placeholder metadata falls back to [EDIT] accession when it is missing.
     """
     user_data_tracks = [
         {
             "dataTrackName": "Genome",
-            "links": [{"Website": "https://doi.org/10.17044/example"}],
+            "assemblyCGAAccession": "",
         }
     ]
 

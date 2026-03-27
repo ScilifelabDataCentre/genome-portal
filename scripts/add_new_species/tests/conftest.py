@@ -30,8 +30,8 @@ def example_excel_files() -> dict[str, Path]:
     Paths to example Excel files for testing.
     """
     excel_files = {
-        "excel_form_with_comments": FORM_FIXTURES_DIR / "02-test_Data_Tracks_Form_v1.1.0.xlsx",
-        "excel_form_wo_comments": FORM_FIXTURES_DIR / "02-test-data-tracks_v1.2.xlsx",
+        "excel_form_with_comments": FORM_FIXTURES_DIR / "02-test_Data_Tracks_Form_v1.1.0_w_comments.xlsx",
+        "excel_form_wo_comments": FORM_FIXTURES_DIR / "02-test-data-tracks_v1.3.xlsx",
     }
     return excel_files
 
@@ -91,6 +91,7 @@ def user_data_tracks() -> list[dict]:
         {
             "dataTrackName": "Genome",
             "description": "Reference genome sequence",
+            "assemblyCGAAccession": "GCA_000011425.1",
             "links": [
                 {"Download": "https://example.com/genome.fasta"},
                 {"Website": "https://doi.org/10.1234/repository"},
@@ -104,6 +105,7 @@ def user_data_tracks() -> list[dict]:
         {
             "dataTrackName": "Protein-coding genes",
             "description": "Structural annotation of protein-coding genes",
+            "assemblyCGAAccession": "",
             "links": [
                 {"Download": "https://example.com/track1.gff"},
                 {"Website": "https://doi.org/10.5678/repository"},
@@ -117,6 +119,7 @@ def user_data_tracks() -> list[dict]:
         {
             "dataTrackName": "Repeats",
             "description": "Annotation of the repetitive regions",
+            "assemblyCGAAccession": "",
             "links": [
                 {"Download": "https://example.com/track2.gff"},
                 {"Website": "https://doi.org/10.9101/repository"},

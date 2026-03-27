@@ -149,24 +149,28 @@ def get_ncbi_assembly_metadata_json(accession: str) -> dict:
 
 def extract_genome_accession(user_data_tracks: list[dict]) -> str:
     """
-    Extract the GenBank genome assembly accession from the 'doi_link_to_repository' field
-    for the top-level key 'Genome' from the list of dictionaries.
-
-    Assumes that the url contains the accession in the format GCA_xxxxxxx.x
-
-    In dataTrackName, the url resides in 'Website' under 'links' for the 'Genome' data track.
+    Extract the GenBank genome assembly accession from the dedicated
+    'assembly_CGA_accession' spreadsheet column (stored in JSON as 'assemblyCGAAccession')
+    for the 'Genome' data track.
     """
     for data_track in user_data_tracks:
         if data_track.get("dataTrackName") == "Genome":
-            for link in data_track.get("links", []):
-                url = link.get("Website", "")
-                if url:
-                    accession = extract_accession_from_url(url)
-                    if accession.startswith("GCA"):
-                        return accession
-            break
+            accession = data_track.get("assemblyCGAAccession")
+            if accession in ("", None, PLACEHOLDER_VALUE):
+                raise ValueError(
+                    "Genome assembly accession is mandatory for ENA/NCBI metadata lookup. "
+                    "Please populate 'assembly_CGA_accession' for the 'Genome' row, "
+                    "or run with '--skip-assembly-metadata-fetch' if no GCA accession is available."
+                )
+            if isinstance(accession, str) and accession.startswith("GCA"):
+                return accession
+            raise ValueError(
+                f"'{accession}' does not look like a GenBank genome assembly accession. It must start with 'GCA'."
+            )
     raise ValueError(
-        "Genome assembly accession or DOI not found in the user spreadsheet. Please check the field is not empty or valid."
+        "Genome assembly accession is mandatory for ENA/NCBI metadata lookup. "
+        "Please populate 'assembly_CGA_accession' for the 'Genome' row, "
+        "or run with '--skip-assembly-metadata-fetch' if no GCA accession is available."
     )
 
 

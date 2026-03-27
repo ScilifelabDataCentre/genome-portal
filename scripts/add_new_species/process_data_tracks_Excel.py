@@ -14,7 +14,6 @@ from pathlib import Path
 
 import pandas as pd
 from add_content_files import TEMPLATE_DIR
-from get_assembly_metadata_from_ENA_NCBI import extract_accession_from_url
 
 JSON_FILE_NAME = "data_tracks.json"
 TEMPLATE_FILE_PATH = TEMPLATE_DIR / JSON_FILE_NAME
@@ -28,6 +27,7 @@ class ExpectedExcelColumns(str, Enum):
     SPECIES_SCIENTIFIC_NAME = "species_scientific_name"
     DATA_TRACK_NAME = "data_track_name"
     DATA_TRACK_DESCRIPTION = "data_track_description"
+    ASSEMBLY_CGA_ACCESSION = "assembly_CGA_accession"
     DOI_LINK_TO_REPOSITORY = "doi_link_to_repository"
     FILENAME = "filename"
     PRINCIPAL_INVESTIGATOR_NAME = "principal_investigator_name"
@@ -72,11 +72,14 @@ def df_row_to_json(row: pd.Series, template_json: str) -> dict[str, str]:
 
     if "data_track_name" in row and pd.notna(row["data_track_name"]):
         data_track["dataTrackName"] = row["data_track_name"]
+    if "assembly_CGA_accession" in row and pd.notna(row["assembly_CGA_accession"]):
+        data_track["assemblyCGAAccession"] = row["assembly_CGA_accession"]
+        if data_track.get("dataTrackName") == "Genome":
+            accession_or_doi = row["assembly_CGA_accession"]
     if "data_track_description" in row and pd.notna(row["data_track_description"]):
         data_track["description"] = row["data_track_description"]
     if "doi_link_to_repository" in row and pd.notna(row["doi_link_to_repository"]):
         data_track["links"][1]["Website"] = row["doi_link_to_repository"]
-        accession_or_doi = extract_accession_from_url(row["doi_link_to_repository"])
     if "filename" in row and pd.notna(row["filename"]):
         data_track["fileName"] = row["filename"]
     if "principal_investigator_name" in row and pd.notna(row["principal_investigator_name"]):
