@@ -4,11 +4,11 @@ help() {
   echo "\
 Build the Genome Portal Docker images
 
-Usage: dockerbuild [-h] [-k data|hugo ] [-t TAG] [-u]
+Usage: dockerbuild [-h] [-k data|hugo|add_species ] [-t TAG] [-u]
 
 Options:
   -h            Display this help message and exit
-  -k KIND       Kind of image to build, 'data' (the default) or 'hugo'.
+  -k KIND       Kind of image to build, 'data' (the default), 'hugo', or 'add_species'.
   -t TAG        Docker tag
   -u            Use default user and group IDs in the data builder image (see below)
   -n            Dry run, print the Docker build command
@@ -27,6 +27,10 @@ The HUGO_GIT_REF_NAME and HUGO_GIT_SHA environment variables can be
 set to control the version information shown on the footer of each
 page They both default to the checked out branch name and commit hash
 respectively.
+
+Add species (docker/add_species.dockerfile):
+
+Image with dependencies for scripts/add_new_species (including AGAT and QUAST).
 "
 }
 
@@ -74,8 +78,12 @@ main () {
       "--build-arg" "HUGO_GIT_REF_NAME=${HUGO_GIT_REF_NAME:-$(git branch --show-current)}"
       "--build-arg" "HUGO_GIT_SHA=${HUGO_GIT_SHA:-$(git rev-parse HEAD)}"
     )
+  elif [[ "${kind}" == add_species ]]; then
+    image=ghcr.io/scilifelabdatacentre/swg-add-species
+    dockerfile=docker/add_species.dockerfile
+    build_args=()
   else
-    >&2 echo "Argument to option -k must be either 'data' or 'hugo'"
+    >&2 echo "Argument to option -k must be one of: 'data', 'hugo', 'add_species'"
     >&2 help
     exit 1
   fi
