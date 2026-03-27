@@ -16,6 +16,7 @@ import requests
 
 ENA_API_XML_URL = r"https://www.ebi.ac.uk/ena/browser/api/xml"
 NCBI_API_JSON_URL = "https://api.ncbi.nlm.nih.gov/datasets/v2/genome/accession"
+PLACEHOLDER_VALUE = "[EDIT]"
 
 
 @dataclass
@@ -32,6 +33,66 @@ class AssemblyMetadata:
     assembly_type: str
     species_name: str
     species_name_abbrev: str
+
+
+def abbreviate_species_name(species_name: str) -> str:
+    """
+    Convert a species name to abbreviated form, e.g. 'Aspergillus nidulans' -> 'A. nidulans'.
+    Falls back to the original value for single-word names.
+    """
+    species_name_words = species_name.split()
+    if len(species_name_words) >= 2:
+        return f"{species_name_words[0][0].upper()}. {species_name_words[1]}"
+    if len(species_name_words) == 1:
+        return species_name_words[0]
+    return PLACEHOLDER_VALUE
+
+
+def build_assembly_metadata(
+    species_name: str,
+    assembly_accession: str,
+    assembly_name: str,
+    assembly_level: str,
+    genome_representation: str,
+    assembly_type: str,
+) -> AssemblyMetadata:
+    """
+    Construct AssemblyMetadata with consistently generated species abbreviation.
+    Used for both the ENA/NCBI fetch and the placeholder metadata creation to ensure the same format.
+    """
+    return AssemblyMetadata(
+        assembly_name=assembly_name,
+        assembly_level=assembly_level,
+        genome_representation=genome_representation,
+        assembly_accession=assembly_accession,
+        assembly_type=assembly_type,
+        species_name=species_name,
+        species_name_abbrev=abbreviate_species_name(species_name),
+    )
+
+
+def extract_genome_accession_or_placeholder(user_data_tracks: list[dict]) -> str:
+    """
+    Try to extract genome accession from tracks, otherwise return placeholder.
+    """
+    try:
+        return extract_genome_accession(user_data_tracks)
+    except (ValueError, AttributeError):
+        return PLACEHOLDER_VALUE
+
+
+def placeholder_assembly_metadata(user_data_tracks: list[dict], species_name: str) -> AssemblyMetadata:
+    """
+    Build placeholder assembly metadata when ENA/NCBI lookup is intentionally skipped.
+    """
+    return build_assembly_metadata(
+        species_name=species_name,
+        assembly_accession=extract_genome_accession_or_placeholder(user_data_tracks),
+        assembly_name=PLACEHOLDER_VALUE,
+        assembly_level=PLACEHOLDER_VALUE,
+        genome_representation=PLACEHOLDER_VALUE,
+        assembly_type=PLACEHOLDER_VALUE,
+    )
 
 
 def get_ena_assembly_metadata_xml(accession: str) -> dict:
@@ -120,17 +181,13 @@ def fetch_assembly_metadata(user_data_tracks: dict, species_name: str) -> Assemb
     partial_metadata_dict = get_ena_assembly_metadata_xml(accession)
     assembly_type = get_ncbi_assembly_metadata_json(accession)
 
-    species_name_words = species_name.split()
-    species_name_abbrev = f"{species_name_words[0][0].upper()}. {species_name_words[1]}"
-
-    return AssemblyMetadata(
+    return build_assembly_metadata(
+        species_name=species_name,
+        assembly_accession=accession,
         assembly_name=partial_metadata_dict["assembly_name"],
         assembly_level=partial_metadata_dict["assembly_level"],
         genome_representation=partial_metadata_dict["genome_representation"],
-        assembly_accession=accession,
         assembly_type=assembly_type,
-        species_name=species_name,
-        species_name_abbrev=species_name_abbrev,
     )
 
 

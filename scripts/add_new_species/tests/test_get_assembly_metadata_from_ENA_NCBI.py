@@ -2,8 +2,10 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 from get_assembly_metadata_from_ENA_NCBI import (
+    build_assembly_metadata,
     get_ena_assembly_metadata_xml,
     get_ncbi_assembly_metadata_json,
+    placeholder_assembly_metadata,
 )
 
 VALID_ACCESSION = "GCA_000011425.1"
@@ -64,3 +66,62 @@ def test_test_get_ncbi_assembly_metadata_json_mock_invalid_accession(mock_get: M
 
     with pytest.raises(ValueError, match="No results found for accession"):
         get_ncbi_assembly_metadata_json(INVALID_ACCESSION)
+
+
+def test_placeholder_assembly_metadata_with_extractable_accession() -> None:
+    """
+    Test that placeholder metadata keeps an extractable GCA accession if present in Website URL.
+    """
+    user_data_tracks = [
+        {
+            "dataTrackName": "Genome",
+            "links": [{"Website": "https://www.ebi.ac.uk/ena/browser/view/GCA_000011425.1"}],
+        }
+    ]
+
+    metadata = placeholder_assembly_metadata(user_data_tracks=user_data_tracks, species_name="Aspergillus nidulans")
+
+    assert metadata.assembly_accession == "GCA_000011425.1"
+    assert metadata.assembly_name == "[EDIT]"
+    assert metadata.assembly_level == "[EDIT]"
+    assert metadata.genome_representation == "[EDIT]"
+    assert metadata.assembly_type == "[EDIT]"
+    assert metadata.species_name_abbrev == "A. nidulans"
+
+
+def test_placeholder_assembly_metadata_without_extractable_accession() -> None:
+    """
+    Test that placeholder metadata falls back to [EDIT] accession when none can be extracted.
+    """
+    user_data_tracks = [
+        {
+            "dataTrackName": "Genome",
+            "links": [{"Website": "https://doi.org/10.17044/example"}],
+        }
+    ]
+
+    metadata = placeholder_assembly_metadata(user_data_tracks=user_data_tracks, species_name="Aspergillus nidulans")
+
+    assert metadata.assembly_accession == "[EDIT]"
+
+
+def test_build_assembly_metadata_sets_expected_fields() -> None:
+    """
+    Test that the shared metadata builder populates all fields and species abbreviation.
+    """
+    metadata = build_assembly_metadata(
+        "Aspergillus nidulans",
+        "GCA_000011425.1",
+        "ASM1142v1",
+        "Chromosome",
+        "full",
+        "haploid",
+    )
+
+    assert metadata.species_name == "Aspergillus nidulans"
+    assert metadata.species_name_abbrev == "A. nidulans"
+    assert metadata.assembly_accession == "GCA_000011425.1"
+    assert metadata.assembly_name == "ASM1142v1"
+    assert metadata.assembly_level == "Chromosome"
+    assert metadata.genome_representation == "full"
+    assert metadata.assembly_type == "haploid"

@@ -36,15 +36,18 @@ Example:
 """
 
 import argparse
+import logging
 from pathlib import Path
 
 from add_config_yml import populate_config_yml
 from add_content_files import add_assembly_md, add_download_md, add_index_md
 from add_stats_file import add_stats_file
 from form_parser import parse_user_form
-from get_assembly_metadata_from_ENA_NCBI import fetch_assembly_metadata
+from get_assembly_metadata_from_ENA_NCBI import fetch_assembly_metadata, placeholder_assembly_metadata
 from image_processer import process_species_image
 from process_data_tracks_Excel import parse_excel_file, populate_data_tracks_json
+
+logger = logging.getLogger(__name__)
 
 
 def non_empty_path(value: str) -> Path:
@@ -105,6 +108,15 @@ def run_argparse() -> argparse.Namespace:
         action="store_true",
         help="""If the files for the species already exist, should they be overwritten?
             If flag NOT provided, no overwrite performed.""",
+    )
+    parser.add_argument(
+        "--skip-assembly-metadata-fetch",
+        action="store_true",
+        help=(
+            "Skip ENA/NCBI assembly metadata lookup. "
+            "Use this for assemblies not available in ENA/NCBI. "
+            "Assembly metadata fields will be set to '[EDIT]' placeholders for manual completion."
+        ),
     )
 
     return parser.parse_args()
@@ -169,10 +181,20 @@ if __name__ == "__main__":
         sheet_name=args.data_tracks_sheet_name,
     )
 
-    assembly_metadata = fetch_assembly_metadata(
-        user_data_tracks=user_data_tracks,
-        species_name=user_form_data.species_name,
-    )
+    if args.skip_assembly_metadata_fetch:
+        logger.warning(
+            "Skipping ENA/NCBI assembly metadata fetch (--skip-assembly-metadata-fetch). "
+            "Assembly metadata fields have been set to '[EDIT]' placeholders and need manual updates.",
+        )
+        assembly_metadata = placeholder_assembly_metadata(
+            user_data_tracks=user_data_tracks,
+            species_name=user_form_data.species_name,
+        )
+    else:
+        assembly_metadata = fetch_assembly_metadata(
+            user_data_tracks=user_data_tracks,
+            species_name=user_form_data.species_name,
+        )
 
     add_index_md(
         user_form_data=user_form_data,
