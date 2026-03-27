@@ -28,8 +28,8 @@ def example_excel_files() -> dict[str, Path]:
     Paths to example Excel files for testing.
     """
     excel_files = {
-        "excel_form_with_comments": FORM_FIXTURES_DIR / "02-Data_Tracks_Form_v1.1.0.xlsx",
-        "excel_form_wo_comments": FORM_FIXTURES_DIR / "02-Data_Tracks_Form_v1.1.0_fix.xlsx",
+        "excel_form_with_comments": FORM_FIXTURES_DIR / "02-test_Data_Tracks_Form_v1.1.0.xlsx",
+        "excel_form_wo_comments": FORM_FIXTURES_DIR / "02-test-data-tracks_v1.2.xlsx",
     }
     return excel_files
 
@@ -40,8 +40,8 @@ def example_user_forms() -> dict[str, Path]:
     Paths to example user form files for testing.
     """
     form_files = {
-        "markdown_form": FORM_FIXTURES_DIR / "converted_species_submit_form.md",
-        "docx_form": FORM_FIXTURES_DIR / "01-species_submission_form_v1.1.0.docx",
+        "markdown_form": FORM_FIXTURES_DIR / "converted_test-species_submission_form_v1.1.0.md",
+        "docx_form": FORM_FIXTURES_DIR / "01-test-species-submission_v1.2.docx",
     }
     return form_files
 
