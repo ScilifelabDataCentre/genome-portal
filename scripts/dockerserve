@@ -24,6 +24,8 @@ port 8000 with the 'latest' tag, the following are equivalent:
 }
 
 main() {
+  CWD="$(git rev-parse --show-toplevel)"
+  readonly CWD
 
   local image="${SWG_IMAGE:-ghcr.io/scilifelabdatacentre/swg-hugo-site}" \
         tag="${SWG_TAG:-local}" \
@@ -76,13 +78,13 @@ run() {
     ${run_cmd} --rm -d  \
            -p "${port}":1313 \
            -p 1313:1313 \
-           -v "$(pwd)/hugo":"/src" \
+           -v "${CWD}/hugo":"/src" \
            --name "${container_name}" \
            "${hugo_image}:${hugo_tag}" hugo server --bind 0.0.0.0
   else
     ${run_cmd} -d  \
            -p "${port}":8080 \
-           -v "$(pwd)/${datadir}":"/usr/share/nginx/html/data" \
+           -v "${CWD}/${datadir}":"/usr/share/nginx/html/data" \
            --name "${container_name}" \
            "${image}:${tag}"
   fi

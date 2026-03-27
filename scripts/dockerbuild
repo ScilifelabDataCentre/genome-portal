@@ -31,6 +31,9 @@ respectively.
 }
 
 main () {
+  CWD="$(git rev-parse --show-toplevel)"
+  readonly CWD
+
   local kind tag image use_host_uid dry_run
   declare -a build_args
 
@@ -86,8 +89,7 @@ docker_build () {
 
   ${cmd} "${build_args[@]}" \
          -t "${image}:${tag}" \
-         -f "${dockerfile}" .
+         -f "${CWD}/${dockerfile}" "${CWD}"
 }
 
 main "$@"
-
