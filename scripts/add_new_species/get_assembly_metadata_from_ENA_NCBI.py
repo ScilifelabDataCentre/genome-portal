@@ -17,6 +17,7 @@ import requests
 ENA_API_XML_URL = r"https://www.ebi.ac.uk/ena/browser/api/xml"
 NCBI_API_JSON_URL = "https://api.ncbi.nlm.nih.gov/datasets/v2/genome/accession"
 PLACEHOLDER_VALUE = "[EDIT]"
+REQUEST_TIMEOUT = (5, 30)
 
 
 @dataclass
@@ -33,6 +34,22 @@ class AssemblyMetadata:
     assembly_type: str
     species_name: str
     species_name_abbrev: str
+
+
+class AssemblyMetadataApiException(Exception):
+    """
+    Raised when ENA/NCBI assembly metadata API calls fail or return unusable responses.
+    """
+
+    pass
+
+
+class MissingGenomeAccessionError(ValueError):
+    """
+    Raised when assembly_CGA_accession is missing for the Genome row.
+    """
+
+    pass
 
 
 def abbreviate_species_name(species_name: str) -> str:
@@ -102,10 +119,13 @@ def get_ena_assembly_metadata_xml(accession: str) -> dict:
     """
     url = f"{ENA_API_XML_URL}/{accession}"
 
-    response = requests.get(url)
+    try:
+        response = requests.get(url, timeout=REQUEST_TIMEOUT)
+    except requests.exceptions.RequestException as e:
+        raise AssemblyMetadataApiException(f"Failed to query ENA metadata for {accession}: {e}") from e
 
     if response.status_code != 200:
-        raise Exception(
+        raise AssemblyMetadataApiException(
             f"Failed to get metadata for {accession} from the ENA API. Response code: {response.status_code}"
         )
 
@@ -134,12 +154,18 @@ def get_ncbi_assembly_metadata_json(accession: str) -> dict:
     url = f"{NCBI_API_JSON_URL}/{accession}/dataset_report"
     headers = {"accept": "application/json"}
 
-    response = requests.get(url, headers=headers)
+    try:
+        response = requests.get(url, headers=headers, timeout=REQUEST_TIMEOUT)
+    except requests.exceptions.RequestException as e:
+        raise AssemblyMetadataApiException(f"Failed to query NCBI metadata for {accession}: {e}") from e
 
-    ncbi_json = response.json()
+    try:
+        ncbi_json = response.json()
+    except ValueError as e:
+        raise AssemblyMetadataApiException(f"Invalid JSON response from NCBI for {accession}: {e}") from e
 
     if not ncbi_json.get("reports"):
-        raise ValueError(f"No results found for accession {accession}. The accession may be invalid.")
+        raise AssemblyMetadataApiException(f"No results found for accession {accession}. The accession may be invalid.")
 
     reports = ncbi_json["reports"]
     assembly_type = reports[0]["assembly_info"]["assembly_type"]
@@ -157,7 +183,7 @@ def extract_genome_accession(user_data_tracks: list[dict]) -> str:
         if data_track.get("dataTrackName") == "Genome":
             accession = data_track.get("assemblyCGAAccession")
             if accession in ("", None, PLACEHOLDER_VALUE):
-                raise ValueError(
+                raise MissingGenomeAccessionError(
                     "Genome assembly accession is mandatory for ENA/NCBI metadata lookup. "
                     "Please populate 'assembly_CGA_accession' for the 'Genome' row, "
                     "or run with '--skip-assembly-metadata-fetch' if no GCA accession is available."
@@ -167,7 +193,7 @@ def extract_genome_accession(user_data_tracks: list[dict]) -> str:
             raise ValueError(
                 f"'{accession}' does not look like a GenBank genome assembly accession. It must start with 'GCA'."
             )
-    raise ValueError(
+    raise MissingGenomeAccessionError(
         "Genome assembly accession is mandatory for ENA/NCBI metadata lookup. "
         "Please populate 'assembly_CGA_accession' for the 'Genome' row, "
         "or run with '--skip-assembly-metadata-fetch' if no GCA accession is available."

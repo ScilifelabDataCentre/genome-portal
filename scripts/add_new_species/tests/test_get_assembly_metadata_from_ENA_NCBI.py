@@ -2,7 +2,11 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 from get_assembly_metadata_from_ENA_NCBI import (
+    AssemblyMetadataApiException,
+    MissingGenomeAccessionError,
     build_assembly_metadata,
+    extract_genome_accession,
+    fetch_assembly_metadata,
     get_ena_assembly_metadata_xml,
     get_ncbi_assembly_metadata_json,
     placeholder_assembly_metadata,
@@ -30,6 +34,7 @@ def test_get_ena_assembly_metadata_xml_mock_valid_accession(mock_get: MagicMock)
     result = get_ena_assembly_metadata_xml(VALID_ACCESSION)
 
     assert mock_get.return_value.status_code == 200
+    assert "timeout" in mock_get.call_args.kwargs
     assert isinstance(result, dict)
     assert result["assembly_name"] == "ASM1142v1"
     assert result["assembly_level"] == "Chromosome"
@@ -43,7 +48,7 @@ def test_get_ena_assembly_metadata_xml_mock_invalid_accession(mock_get: MagicMoc
     """
     mock_get.return_value.status_code = 404
 
-    with pytest.raises(Exception, match="Failed to get metadata"):
+    with pytest.raises(AssemblyMetadataApiException, match="Failed to get metadata"):
         get_ena_assembly_metadata_xml(INVALID_ACCESSION)
 
 
@@ -54,6 +59,7 @@ def test_get_ncbi_assembly_metadata_json_mock_valid_accession(mock_get: MagicMoc
     """
     mock_get.return_value.json.return_value = {"reports": [{"assembly_info": {"assembly_type": "haploid"}}]}
     result = get_ncbi_assembly_metadata_json(VALID_ACCESSION)
+    assert "timeout" in mock_get.call_args.kwargs
     assert result
 
 
@@ -64,7 +70,7 @@ def test_test_get_ncbi_assembly_metadata_json_mock_invalid_accession(mock_get: M
     """
     mock_get.return_value.json.return_value = {"reports": []}
 
-    with pytest.raises(ValueError, match="No results found for accession"):
+    with pytest.raises(AssemblyMetadataApiException, match="No results found for accession"):
         get_ncbi_assembly_metadata_json(INVALID_ACCESSION)
 
 
@@ -125,3 +131,26 @@ def test_build_assembly_metadata_sets_expected_fields() -> None:
     assert metadata.assembly_level == "Chromosome"
     assert metadata.genome_representation == "full"
     assert metadata.assembly_type == "haploid"
+
+
+def test_extract_genome_accession_missing_raises_hard_error() -> None:
+    """
+    Test that missing Genome assembly_CGA_accession raises MissingGenomeAccessionError.
+    """
+    user_data_tracks = [{"dataTrackName": "Genome", "assemblyCGAAccession": ""}]
+
+    with pytest.raises(MissingGenomeAccessionError, match="Genome assembly accession is mandatory"):
+        extract_genome_accession(user_data_tracks)
+
+
+@patch("get_assembly_metadata_from_ENA_NCBI.get_ena_assembly_metadata_xml")
+def test_fetch_assembly_metadata_propagates_api_errors(mock_get_ena: MagicMock) -> None:
+    """
+    Test that ENA/NCBI API failures are propagated by fetch_assembly_metadata.
+    Fallback-to-placeholder is controlled in __main__ only when skip flag is set.
+    """
+    mock_get_ena.side_effect = AssemblyMetadataApiException("ENA timeout")
+    user_data_tracks = [{"dataTrackName": "Genome", "assemblyCGAAccession": VALID_ACCESSION}]
+
+    with pytest.raises(AssemblyMetadataApiException, match="ENA timeout"):
+        fetch_assembly_metadata(user_data_tracks, species_name="Aspergillus nidulans")

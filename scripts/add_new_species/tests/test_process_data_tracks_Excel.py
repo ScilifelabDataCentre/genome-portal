@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pandas as pd
 import pytest
-from get_assembly_metadata_from_ENA_NCBI import extract_genome_accession
+from get_assembly_metadata_from_ENA_NCBI import MissingGenomeAccessionError, extract_genome_accession
 from process_data_tracks_Excel import (
     EXPECTED_EXCEL_COLUMNS,
     df_row_to_json,
@@ -157,7 +157,9 @@ def test_extract_genome_accession_blank_accession(user_data_tracks: list[dict], 
 
     user_data_tracks[0]["assemblyCGAAccession"] = invalid_value
 
-    with pytest.raises(ValueError, match="Genome assembly accession is mandatory for ENA/NCBI metadata lookup."):
+    with pytest.raises(
+        MissingGenomeAccessionError, match="Genome assembly accession is mandatory for ENA/NCBI metadata lookup."
+    ):
         extract_genome_accession(user_data_tracks)
 
 

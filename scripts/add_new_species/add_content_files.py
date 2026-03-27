@@ -13,6 +13,7 @@ INDEX_FILE = "_index.md"
 ASSEMBLY_FILE = "assembly.md"
 DOWNLOAD_FILE = "download.md"
 TAXONOMY_FILE = "taxonomy.json"
+REQUEST_TIMEOUT = (5, 30)
 
 
 def add_index_md(
@@ -154,7 +155,7 @@ def get_gbif_taxon_key(species_name: str) -> str:
 
     species_name = species_name.replace(" ", "%20").lower()
     url = f"{GBIF_ENDPOINT}{species_name}"
-    response = requests.get(url)
+    response = requests.get(url, timeout=REQUEST_TIMEOUT)
     response.raise_for_status()
     return str(response.json()["usageKey"])
 

@@ -43,7 +43,11 @@ from add_config_yml import populate_config_yml
 from add_content_files import add_assembly_md, add_download_md, add_index_md
 from add_stats_file import add_stats_file
 from form_parser import parse_user_form
-from get_assembly_metadata_from_ENA_NCBI import fetch_assembly_metadata, placeholder_assembly_metadata
+from get_assembly_metadata_from_ENA_NCBI import (
+    AssemblyMetadataApiException,
+    fetch_assembly_metadata,
+    placeholder_assembly_metadata,
+)
 from image_processer import process_species_image
 from process_data_tracks_Excel import parse_excel_file, populate_data_tracks_json
 
@@ -191,10 +195,18 @@ if __name__ == "__main__":
             species_name=user_form_data.species_name,
         )
     else:
-        assembly_metadata = fetch_assembly_metadata(
-            user_data_tracks=user_data_tracks,
-            species_name=user_form_data.species_name,
-        )
+        try:
+            assembly_metadata = fetch_assembly_metadata(
+                user_data_tracks=user_data_tracks,
+                species_name=user_form_data.species_name,
+            )
+        except AssemblyMetadataApiException as e:
+            # Fallback to placeholder metadata if ENA/NCBI API lookup times out, to allow the rest of the files to be created.
+            logger.warning("%s", e)
+            assembly_metadata = placeholder_assembly_metadata(
+                user_data_tracks=user_data_tracks,
+                species_name=user_form_data.species_name,
+            )
 
     add_index_md(
         user_form_data=user_form_data,

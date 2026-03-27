@@ -33,6 +33,7 @@ ENDPOINT_URL = r"https://www.ebi.ac.uk/ena/taxonomy/rest/scientific-name"
 ENA_XML_URL = r"https://www.ebi.ac.uk/ena/browser/api/xml"
 ENA_BASE_URL = r"https://www.ebi.ac.uk/ena/browser/view/Taxon:"
 NCBI_BASE_URL = r"https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id="
+REQUEST_TIMEOUT = (5, 30)
 
 TAXONOMIC_RANKS = [
     "genus",
@@ -69,7 +70,10 @@ def get_tax_id(scientific_name: str) -> str:
     Returns the taxonomy id as a string.
     """
     url = create_endpoint_url(scientific_name)
-    response = requests.get(url)
+    try:
+        response = requests.get(url, timeout=REQUEST_TIMEOUT)
+    except requests.exceptions.RequestException as e:
+        raise EbiRestException(f"Failed to query taxonomy info for {scientific_name}: {e}") from e
 
     if response.status_code != 200:
         raise EbiRestException(
@@ -96,13 +100,9 @@ def get_lineage_section(tax_id: str | int) -> str:
     """
     try:
         ena_url = f"{ENA_XML_URL}/{str(tax_id)}"
-        response = requests.get(ena_url)
+        response = requests.get(ena_url, timeout=REQUEST_TIMEOUT)
     except requests.exceptions.RequestException as e:
-        raise EbiRestException from e(
-            f"""Failed to get lineage info for tax_id: {str(tax_id)}.
-            Error is as follows:
-            {e}"""
-        )
+        raise EbiRestException(f"Failed to get lineage info for tax_id: {str(tax_id)}. Error is as follows: {e}") from e
 
     tree = ElementTree.fromstring(response.content)
     lineage_element = tree.find(".//lineage")
