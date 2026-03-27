@@ -131,14 +131,24 @@ def get_ena_assembly_metadata_xml(accession: str) -> dict:
 
     tree = ElementTree.fromstring(response.content)
 
-    name_element = tree.find(".//NAME")
-    assembly_level_element = tree.find(".//ASSEMBLY_LEVEL")
-    genome_representation_element = tree.find(".//GENOME_REPRESENTATION")
+    def required_xml_text(xpath: str, field_name: str) -> str:
+        element = tree.find(xpath)
+
+        if element is not None:
+            text = element.text
+        else:
+            text = None
+
+        if text is None or not text.strip():
+            raise AssemblyMetadataApiException(
+                f"ENA metadata for {accession} is missing required field '{field_name}' ({xpath})."
+            )
+        return text.strip()
 
     return {
-        "assembly_name": name_element.text.strip(),
-        "assembly_level": assembly_level_element.text.strip(),
-        "genome_representation": genome_representation_element.text.strip(),
+        "assembly_name": required_xml_text(".//NAME", "assembly_name"),
+        "assembly_level": required_xml_text(".//ASSEMBLY_LEVEL", "assembly_level"),
+        "genome_representation": required_xml_text(".//GENOME_REPRESENTATION", "genome_representation"),
     }
 
 

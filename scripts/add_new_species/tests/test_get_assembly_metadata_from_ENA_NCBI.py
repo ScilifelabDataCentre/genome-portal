@@ -53,6 +53,25 @@ def test_get_ena_assembly_metadata_xml_mock_invalid_accession(mock_get: MagicMoc
 
 
 @patch("get_assembly_metadata_from_ENA_NCBI.requests.get")
+def test_get_ena_assembly_metadata_xml_missing_required_xml_field(mock_get: MagicMock):
+    """
+    Test that missing required ENA XML fields raise a clear AssemblyMetadataApiException.
+    """
+    mock_get.return_value.status_code = 200
+    mock_get.return_value.content = """
+    <ASSEMBLY_SET>
+        <ASSEMBLY accession="GCA_000011425.1" alias="ASM1142v1">
+            <NAME>ASM1142v1</NAME>
+            <ASSEMBLY_LEVEL>Chromosome</ASSEMBLY_LEVEL>
+        </ASSEMBLY>
+    </ASSEMBLY_SET>
+    """
+
+    with pytest.raises(AssemblyMetadataApiException, match="missing required field 'genome_representation'"):
+        get_ena_assembly_metadata_xml(VALID_ACCESSION)
+
+
+@patch("get_assembly_metadata_from_ENA_NCBI.requests.get")
 def test_get_ncbi_assembly_metadata_json_mock_valid_accession(mock_get: MagicMock):
     """
     Test sucessfully calls get_ncbi_assembly_metadata_json with a valid accession.

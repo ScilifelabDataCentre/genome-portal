@@ -201,7 +201,7 @@ if __name__ == "__main__":
                 species_name=user_form_data.species_name,
             )
         except AssemblyMetadataApiException as e:
-            # Fallback to placeholder metadata if ENA/NCBI API lookup times out, to allow the rest of the files to be created.
+            # Fallback to placeholder metadata if ENA/NCBI API lookup fails (timeout, missing fields in the response), to allow the rest of the files to be created.
             logger.warning("%s", e)
             assembly_metadata = placeholder_assembly_metadata(
                 user_data_tracks=user_data_tracks,
