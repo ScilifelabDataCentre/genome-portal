@@ -90,7 +90,7 @@ def df_row_to_json(row: pd.Series, template_json: str) -> dict[str, str]:
     if "firstDateOnPortal" in row and pd.notna(row["firstDateOnPortal"]):
         data_track["firstDateOnPortal"] = row["firstDateOnPortal"]
     else:
-        data_track["firstDateOnPortal"] = datetime.now().strftime("%d/%m/%Y")
+        data_track["firstDateOnPortal"] = datetime.now().strftime("%d %B %Y")
 
     if accession_or_doi:
         data_track["accessionOrDOI"] = accession_or_doi

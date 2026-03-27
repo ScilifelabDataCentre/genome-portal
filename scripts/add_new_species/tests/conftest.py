@@ -1,6 +1,8 @@
+import json
 from pathlib import Path
 
 import pytest
+from add_content_files import TEMPLATE_DIR
 from form_parser import UserFormData
 from get_assembly_metadata_from_ENA_NCBI import AssemblyMetadata
 
@@ -126,3 +128,13 @@ def user_data_tracks() -> list[dict]:
             "principalInvestigatorAffiliation": "University of Example",
         },
     ]
+
+
+@pytest.fixture
+def data_tracks_template_json() -> str:
+    """
+    The canonical single-track data_tracks JSON template as a serialized string.
+    """
+    template_file_path = TEMPLATE_DIR / "data_tracks.json"
+    with open(template_file_path, "r") as f:
+        return json.dumps(json.load(f)[0])
