@@ -21,7 +21,9 @@ def test_parse_excel_file_with_comments(example_excel_files: dict[str, Path]) ->
     sheet_name = "Sheet1"
     # list_of_dicts=parse_excel_file(input_excel_file, sheet_name)
 
-    with pytest.raises(ValueError, match="Unable to read workbook"):
+    with pytest.raises(
+        ValueError, match="Your spreadsheet likely contains comments/invalid XML. Remove comments and re-run."
+    ):
         parse_excel_file(input_excel_file, sheet_name)
 
 

@@ -103,7 +103,10 @@ def parse_excel_file(spreadsheet_file_path: str, sheet_name: str) -> list[dict]:
     Parse the Excel file with Pandas and return a JSON-style structure (list of dicts).
     JSON was chosen over dataclass since the data is used to populate data_track.json.
     """
-    df = pd.read_excel(spreadsheet_file_path, sheet_name=sheet_name, engine="openpyxl")
+    try:
+        df = pd.read_excel(spreadsheet_file_path, sheet_name=sheet_name, engine="openpyxl")
+    except ValueError as e:
+        raise ValueError("Your spreadsheet likely contains comments/invalid XML. Remove comments and re-run.") from e
     df = validate_excel_columns(df)
 
     with open(TEMPLATE_FILE_PATH, "r") as file:
