@@ -47,6 +47,15 @@ from image_processer import process_species_image
 from process_data_tracks_Excel import parse_excel_file, populate_data_tracks_json
 
 
+def non_empty_path(value: str) -> Path:
+    """
+    Argparse type validator: reject empty/whitespace-only path strings.
+    """
+    if not value.strip():
+        raise argparse.ArgumentTypeError("must not be empty")
+    return Path(value)
+
+
 def run_argparse() -> argparse.Namespace:
     """
     Run argparse and return the user arguments.
@@ -56,7 +65,7 @@ def run_argparse() -> argparse.Namespace:
     parser.add_argument(
         "-f",
         "--species-submission-form",
-        type=Path,
+        type=non_empty_path,
         metavar="[user form location]",
         help="The path to the filled in user form, a word document.",
         required=True,
@@ -65,7 +74,7 @@ def run_argparse() -> argparse.Namespace:
     parser.add_argument(
         "-d",
         "--data-tracks-sheet",
-        type=Path,
+        type=non_empty_path,
         metavar="[user spreadsheet location]",
         help="The path to the filled in user spreadsheet, an excel file.",
         required=True,
@@ -83,9 +92,11 @@ def run_argparse() -> argparse.Namespace:
     parser.add_argument(
         "-i",
         "--species-image",
-        type=Path,
+        type=non_empty_path,
         metavar="[image file location]",
-        help="Path to the species image to be added. The image must be 4:3 aspect ratio.",
+        help="Path to the species image to be added. The image must be 4:3 aspect ratio. "
+        "If no image is available yet, use scripts/add_new_species/templates/placeholder_image_4-3_ratio.webp.",
+        required=True,
     )
 
     parser.add_argument(
@@ -193,4 +204,4 @@ if __name__ == "__main__":
     )
 
     out_img_path = output_dir_paths["image_dir_path"] / f"{user_form_data.species_slug}.webp"
-    process_species_image(in_img_path=Path(args.species_image), out_img_path=out_img_path)
+    process_species_image(in_img_path=args.species_image, out_img_path=out_img_path)
