@@ -2,7 +2,7 @@ import subprocess
 from pathlib import Path
 
 import pytest
-from form_parser import create_markdown_content, parse_user_form
+from form_parser import create_markdown_content, parse_user_form, validate_species_name_is_binomial
 
 
 def test_create_markdown_content_docx_success(example_user_forms: dict[str, Path]) -> None:
@@ -36,3 +36,22 @@ def test_parse_user_form_success(example_user_forms: dict[str, Path]) -> None:
 
     for key, value in vars(UserFormData).items():
         assert value, f"Field: {key} is empty"
+
+
+def test_validate_species_name_is_binomial_success() -> None:
+    """
+    Test that a valid binomial species name passes validation.
+    """
+    validate_species_name_is_binomial("Linum grandiflorum")
+
+
+@pytest.mark.parametrize("invalid_name", ["Linum", "Linum grandiflorum Desf", ""])
+def test_validate_species_name_is_binomial_fail(invalid_name: str) -> None:
+    """
+    Test that non-binomial species names fail with a clear actionable message.
+    """
+    with pytest.raises(
+        ValueError,
+        match="Species name must be binomial \\(Genus species\\). Remove any extra descriptors from the species field.",
+    ):
+        validate_species_name_is_binomial(invalid_name)

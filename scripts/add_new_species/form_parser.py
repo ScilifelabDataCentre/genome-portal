@@ -31,6 +31,7 @@ def parse_user_form(form_file_path: Path) -> UserFormData:
     markdown_content = create_markdown_content(form_file_path)
 
     species_names = extract_species_names(markdown_content)
+    validate_species_name_is_binomial(species_names["species_name"])
     description = extract_description(markdown_content)
     references = extract_references(markdown_content)
     publication = extract_publication(markdown_content)
@@ -48,6 +49,21 @@ def parse_user_form(form_file_path: Path) -> UserFormData:
         img_attrib_text=img_attrib["text"],
         img_attrib_link=img_attrib["url"],
     )
+
+
+def validate_species_name_is_binomial(species_name: str) -> None:
+    """
+    Validate that the species name is exactly binomial: 'Genus species'.
+
+    This is a crucial value since it is used for the species directories and taxnomony lookup.
+    Thus, the species name should not contain extra desciriptors such as the authority (e.g. 'Desf')
+    or strain name. These can be manually added to the hugo pages after the initial creation of the files.
+    """
+    parts = species_name.split()
+    if len(parts) != 2:
+        raise ValueError(
+            "Species name must be binomial (Genus species). " "Remove any extra descriptors from the species field."
+        )
 
 
 def create_markdown_content(form_file_path: Path) -> str:
