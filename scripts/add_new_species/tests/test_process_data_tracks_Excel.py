@@ -1,9 +1,15 @@
 import json
 from pathlib import Path
 
+import pandas as pd
 import pytest
 from get_assembly_metadata_from_ENA_NCBI import extract_genome_accession
-from process_data_tracks_Excel import parse_excel_file, populate_data_tracks_json
+from process_data_tracks_Excel import (
+    EXPECTED_EXCEL_COLUMNS,
+    parse_excel_file,
+    populate_data_tracks_json,
+    validate_excel_columns,
+)
 
 
 def test_parse_excel_file_with_comments(example_excel_files: dict[str, Path]) -> None:
@@ -28,6 +34,43 @@ def test_parse_excel_file_without_comments(example_excel_files: dict[str, Path])
     list_of_dicts = parse_excel_file(input_excel_file, sheet_name)
 
     assert isinstance(list_of_dicts, list), "The output is not a list"
+
+
+def test_validate_excel_columns_missing_required_column() -> None:
+    """
+    Test that missing required columns fail validation.
+    """
+
+    columns = list(EXPECTED_EXCEL_COLUMNS - {"principal_investigator_name"})
+
+    df = pd.DataFrame(columns=columns)
+
+    with pytest.raises(ValueError, match="Invalid columns in data tracks sheet"):
+        validate_excel_columns(df)
+
+
+def test_validate_excel_columns_rejects_unexpected_column() -> None:
+    """
+    Test that unexpected columns are rejected.
+    """
+    columns = list(EXPECTED_EXCEL_COLUMNS) + ["added_extra_column"]
+    df = pd.DataFrame(columns=columns)
+
+    with pytest.raises(ValueError, match="Invalid columns in data tracks sheet"):
+        validate_excel_columns(df)
+
+
+def test_validate_excel_columns_rejects_case_and_whitespace_variants() -> None:
+    """
+    Test that non-exact column variants are rejected.
+    """
+
+    columns = list(EXPECTED_EXCEL_COLUMNS - {"data_track_name"}) + [" Data Track Name "]
+
+    df = pd.DataFrame(columns=columns)
+
+    with pytest.raises(ValueError, match="Invalid columns in data tracks sheet"):
+        validate_excel_columns(df)
 
 
 def test_extract_genome_accession_genbank_accession(user_data_tracks: list[dict]) -> None:

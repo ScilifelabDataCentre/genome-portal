@@ -9,6 +9,7 @@ NB! The Excel files cannot contain comments; if it does, pd.read_excel will fail
 
 import json
 from datetime import datetime
+from enum import Enum
 from pathlib import Path
 
 import pandas as pd
@@ -17,6 +18,45 @@ from get_assembly_metadata_from_ENA_NCBI import extract_accession_from_url
 
 JSON_FILE_NAME = "data_tracks.json"
 TEMPLATE_FILE_PATH = TEMPLATE_DIR / JSON_FILE_NAME
+
+
+class ExpectedExcelColumns(str, Enum):
+    """
+    Enum for the different expected columns in the Excel file.
+    """
+
+    DATA_TRACK_NAME = "data_track_name"
+    DATA_TRACK_DESCRIPTION = "data_track_description"
+    DOI_LINK_TO_REPOSITORY = "doi_link_to_repository"
+    FILENAME = "filename"
+    PRINCIPAL_INVESTIGATOR_NAME = "principal_investigator_name"
+    PRINCIPAL_INVESTIGATOR_AFFILIATION = "principal_investigator_affiliation"
+    DIRECT_LINK_TO_FILE_FOR_DOWNLOAD = "direct_link_to_file_for_download"
+    DOI_LINK_TO_SCIENTIFIC_ARTICLE = "doi_link_to_scientific_article"
+    FIRST_DATE_ON_PORTAL = "firstDateOnPortal"
+
+
+EXPECTED_EXCEL_COLUMNS = {column.value for column in ExpectedExcelColumns}
+
+
+def validate_excel_columns(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Validate that spreadsheet columns match the enum-defined schema exactly.
+    Users should not add or alter any column names.
+    """
+    actual_columns = {str(col) for col in df.columns}
+
+    missing_columns = sorted(EXPECTED_EXCEL_COLUMNS - actual_columns)
+    unexpected_columns = sorted(actual_columns - EXPECTED_EXCEL_COLUMNS)
+    if missing_columns or unexpected_columns:
+        raise ValueError(
+            "Invalid columns in data tracks sheet. "
+            f"Missing: {missing_columns or 'None'}. "
+            f"Unexpected: {unexpected_columns or 'None'}. "
+            "Only enum-defined columns are allowed."
+        )
+
+    return df
 
 
 def df_row_to_json(row: pd.Series, template_json: str) -> dict[str, str]:
@@ -64,6 +104,7 @@ def parse_excel_file(spreadsheet_file_path: str, sheet_name: str) -> list[dict]:
     JSON was chosen over dataclass since the data is used to populate data_track.json.
     """
     df = pd.read_excel(spreadsheet_file_path, sheet_name=sheet_name, engine="openpyxl")
+    df = validate_excel_columns(df)
 
     with open(TEMPLATE_FILE_PATH, "r") as file:
         template_json = json.dumps(json.load(file)[0])
