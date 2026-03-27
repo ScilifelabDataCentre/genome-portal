@@ -25,6 +25,7 @@ class ExpectedExcelColumns(str, Enum):
     Enum for the different expected columns in the Excel file.
     """
 
+    SPECIES_SCIENTIFIC_NAME = "species_scientific_name"
     DATA_TRACK_NAME = "data_track_name"
     DATA_TRACK_DESCRIPTION = "data_track_description"
     DOI_LINK_TO_REPOSITORY = "doi_link_to_repository"
@@ -33,7 +34,6 @@ class ExpectedExcelColumns(str, Enum):
     PRINCIPAL_INVESTIGATOR_AFFILIATION = "principal_investigator_affiliation"
     DIRECT_LINK_TO_FILE_FOR_DOWNLOAD = "direct_link_to_file_for_download"
     DOI_LINK_TO_SCIENTIFIC_ARTICLE = "doi_link_to_scientific_article"
-    FIRST_DATE_ON_PORTAL = "firstDateOnPortal"
 
 
 EXPECTED_EXCEL_COLUMNS = {column.value for column in ExpectedExcelColumns}
