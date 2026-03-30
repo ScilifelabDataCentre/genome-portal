@@ -1,5 +1,6 @@
 import re
 import subprocess
+import unicodedata
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Optional
@@ -31,7 +32,6 @@ def parse_user_form(form_file_path: Path) -> UserFormData:
     markdown_content = create_markdown_content(form_file_path)
 
     species_names = extract_species_names(markdown_content)
-    validate_species_name_is_binomial(species_names["species_name"])
     description = extract_description(markdown_content)
     references = extract_references(markdown_content)
     publication = extract_publication(markdown_content)
@@ -60,9 +60,33 @@ def validate_species_name_is_binomial(species_name: str) -> None:
     or strain name. These can be manually added to the hugo pages after the initial creation of the files.
     """
     parts = species_name.split()
-    if len(parts) != 2:
+    if len(parts) != 2 or not all(part.isalpha() for part in parts):
         raise ValueError(
             "Species name must be binomial (Genus species). " "Remove any extra descriptors from the species field."
+        )
+
+
+def normalize_species_name(species_name: str) -> str:
+    """
+    Normalize species name extracted from the user form.
+
+    Handles odd unicode/whitespace from DOCX conversion to produce a clean value.
+    """
+    normalized = unicodedata.normalize("NFKC", species_name)
+    normalized = re.sub(r"\s+", " ", normalized, flags=re.UNICODE).strip()
+    return normalized
+
+
+def slug_from_normalized_species_name(species_name: str) -> str:
+    """Derive species slug from a normalized species name."""
+    return species_name.replace(" ", "_").lower()
+
+
+def validate_species_slug(species_slug: str) -> None:
+    """Validate species slug format used for repository paths."""
+    if not re.fullmatch(r"[a-z_]+", species_slug or ""):
+        raise ValueError(
+            f"Invalid species slug: '{species_slug}'. " "Allowed lowercase characters: letters, underscore,."
         )
 
 
@@ -100,10 +124,12 @@ def extract_species_names(markdown_content: str) -> dict[str, str]:
     )
 
     species_name_cells = extract_table_cells(species_name_section)
-    species_names["species_name"] = species_name_cells.get("Scientific name:", "")
+    species_names["species_name"] = normalize_species_name(species_name_cells.get("Scientific name:", ""))
     species_names["common_name"] = species_name_cells.get("English (common) name:", "")
 
-    species_names["species_slug"] = species_names["species_name"].replace(" ", "_").lower()
+    validate_species_name_is_binomial(species_names["species_name"])
+    species_names["species_slug"] = slug_from_normalized_species_name(species_names["species_name"])
+    validate_species_slug(species_names["species_slug"])
     return species_names
 
 

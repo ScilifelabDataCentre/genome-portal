@@ -50,6 +50,7 @@ from get_assembly_metadata_from_ENA_NCBI import (
 )
 from image_processer import process_species_image
 from process_data_tracks_Excel import parse_excel_file, populate_data_tracks_json
+from species_paths import SpeciesPaths, get_species_paths
 
 logger = logging.getLogger(__name__)
 
@@ -126,40 +127,17 @@ def run_argparse() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def all_dir_paths(species_slug: str) -> dict[str, Path]:
-    """
-    Make a dict of all the output folder paths for the species.
-    Makes sure that any folders that need to be created are created.
-    """
-    content_dir_path = Path(__file__).parent / f"../../hugo/content/species/{species_slug}"
-    data_dir_path = Path(__file__).parent / f"../../hugo/data/{species_slug}"
-    assets_dir_path = Path(__file__).parent / f"../../hugo/assets/{species_slug}"
-    image_dir_path = Path(__file__).parent / "../../hugo/static/img/species"
-    config_dir_path = Path(__file__).parent / f"../../config/{species_slug}"
-
-    for path in (content_dir_path, data_dir_path, assets_dir_path, config_dir_path):
-        path.mkdir(parents=False, exist_ok=True)
-
-    return {
-        "content_dir_path": content_dir_path,
-        "data_dir_path": data_dir_path,
-        "assets_dir_path": assets_dir_path,
-        "image_dir_path": image_dir_path,
-        "config_dir_path": config_dir_path,
-    }
-
-
-def check_dirs_empty(all_dir_paths: dict[str, Path], species_name: str) -> None:
+def check_dirs_empty(output_paths: SpeciesPaths, species_name: str) -> None:
     """
     If overwrite mode not specificed in args, check that the folders are empty.
     Raise error if not.
     """
 
     empty_dirs = [
-        all_dir_paths["content_dir_path"],
-        all_dir_paths["data_dir_path"],
-        all_dir_paths["assets_dir_path"],
-        all_dir_paths["config_dir_path"],
+        output_paths.content_dir_path,
+        output_paths.data_dir_path,
+        output_paths.assets_dir_path,
+        output_paths.config_dir_path,
     ]
     for dir_path in empty_dirs:
         if any(dir_path.iterdir()):
@@ -176,9 +154,10 @@ if __name__ == "__main__":
 
     user_form_data = parse_user_form(form_file_path=args.species_submission_form)
 
-    output_dir_paths = all_dir_paths(user_form_data.species_slug)
+    output_dir_paths = get_species_paths(species_slug=user_form_data.species_slug)
+    output_dir_paths.ensure_parent_dirs()
     if not args.overwrite:
-        check_dirs_empty(all_dir_paths=output_dir_paths, species_name=user_form_data.species_name)
+        check_dirs_empty(output_paths=output_dir_paths, species_name=user_form_data.species_name)
 
     user_data_tracks = parse_excel_file(
         spreadsheet_file_path=args.data_tracks_sheet,
@@ -210,32 +189,32 @@ if __name__ == "__main__":
 
     add_index_md(
         user_form_data=user_form_data,
-        content_dir_path=output_dir_paths["content_dir_path"],
-        data_dir_path=output_dir_paths["data_dir_path"],
+        content_dir_path=output_dir_paths.content_dir_path,
+        data_dir_path=output_dir_paths.data_dir_path,
     )
 
     add_assembly_md(
         user_form_data=user_form_data,
         assembly_metadata=assembly_metadata,
-        content_dir_path=output_dir_paths["content_dir_path"],
+        content_dir_path=output_dir_paths.content_dir_path,
     )
 
     add_download_md(
         species_slug=user_form_data.species_slug,
-        content_dir_path=output_dir_paths["content_dir_path"],
+        content_dir_path=output_dir_paths.content_dir_path,
     )
 
     add_stats_file(
-        data_dir_path=output_dir_paths["data_dir_path"],
+        data_dir_path=output_dir_paths.data_dir_path,
     )
 
-    populate_data_tracks_json(user_data_tracks, assets_dir_path=output_dir_paths["assets_dir_path"])
+    populate_data_tracks_json(user_data_tracks, assets_dir_path=output_dir_paths.assets_dir_path)
 
     populate_config_yml(
         assembly_metadata=assembly_metadata,
         user_data_tracks=user_data_tracks,
-        config_dir_path=output_dir_paths["config_dir_path"],
+        config_dir_path=output_dir_paths.config_dir_path,
     )
 
-    out_img_path = output_dir_paths["image_dir_path"] / f"{user_form_data.species_slug}.webp"
+    out_img_path = output_dir_paths.image_file_path
     process_species_image(in_img_path=args.species_image, out_img_path=out_img_path)
