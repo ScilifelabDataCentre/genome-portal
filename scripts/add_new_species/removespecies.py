@@ -10,7 +10,7 @@ Note! This does not act on files created by the makefile.
 To clean those, run: dockermake SPECIES=<SPECIES_NAME> clean uninstall
 
 Usage:
-    python scripts/removespecies.py -s <species_slug> [-f]
+    python scripts/add_new_species/removespecies.py -s <species_slug> [-f]
 
 
 """
@@ -19,8 +19,14 @@ import argparse
 import shutil
 import sys
 
-from add_new_species.form_parser import validate_species_slug
-from add_new_species.species_paths import get_species_paths
+try:
+    from .form_parser import validate_species_slug
+    from .species_paths import get_species_paths
+except ImportError:
+    # Support direct script execution:
+    #   python scripts/add_new_species/removespecies.py ...
+    from form_parser import validate_species_slug
+    from species_paths import get_species_paths
 
 
 def parse_args() -> argparse.Namespace:

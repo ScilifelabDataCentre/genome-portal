@@ -24,6 +24,9 @@ Usage:
     Run this script as a module or standalone script, providing the required arguments for the species submission form,
     data tracks spreadsheet, and species image. Use the --overwrite flag to allow overwriting existing species entries.
 
+    There is a related, but separate, script for deleting species entries created by this package:
+    scripts/add_new_species/removespecies.py.
+
 Example:
     python -m add_new_species -f path/to/species_form.docx -d path/to/data_tracks.xlsx -i path/to/image.png
 
@@ -33,6 +36,9 @@ Example:
     --data-tracks-sheet="scripts/add_new_species/tests/fixtures/submission_form_example/02-Data_Tracks_Form_v1.1.0_fix.xlsx" \\
     --species-image="scripts/add_new_species/tests/fixtures/example_images/image_4_3.png" \\
     --overwrite
+
+    # To remove the created species entry:
+    python scripts/add_new_species/removespecies.py -s <species_slug> [-f]
 """
 
 import argparse
