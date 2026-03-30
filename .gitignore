@@ -22,6 +22,8 @@ hugo/.hugo_build.lock
 #data stewardship
 scripts/data_stewardship/temp/**
 scripts/data_stewardship/logs/**
+scripts/generate_species_stats/temp/**
+scripts/generate_species_stats/logs/**
 *.agat.log
 
 # MS Office temp files

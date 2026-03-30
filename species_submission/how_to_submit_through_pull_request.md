@@ -2,6 +2,9 @@
 
 TODO add text here
 
+This guide is for users, as well as for staff.
+
+It takes the two species submission forms and uses them to create and populate the pages for the new species.
 
 ## 1. Setup
 
@@ -83,6 +86,12 @@ Note! Ensure that both commands have been run.
 #### 3.2.6. Collect statisics from the assembly and the protein-coding genes annotation
 
 TODO
+
+Example:
+
+```bash
+./scripts/dockeraddspecies python scripts/generate_species_stats --yaml config/volvox_carteri/config.yml
+```
 
 
 #### 3.2.7. Build the hugo image and view the output in localhost

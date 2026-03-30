@@ -4,6 +4,11 @@ from dataclasses import dataclass
 from pathlib import Path
 
 
+def get_repo_root() -> Path:
+    """Repository root path shared across species tooling."""
+    return Path(__file__).resolve().parents[2]
+
+
 @dataclass(frozen=True)
 class SpeciesPaths:
     """All repository paths tied to one species slug (underscored lowercased binomial name)."""
@@ -27,9 +32,9 @@ class SpeciesPaths:
             path.mkdir(parents=False, exist_ok=True)
 
 
-def get_species_paths(species_slug: str) -> SpeciesPaths:
+def get_species_paths(species_slug: str, repo_root: Path | None = None) -> SpeciesPaths:
     """Build SpeciesPaths based on the repository root."""
-    repo_root = Path(__file__).resolve().parents[2]
+    repo_root = repo_root or get_repo_root()
     image_dir_path = repo_root / "hugo" / "static" / "img" / "species"
 
     return SpeciesPaths(
