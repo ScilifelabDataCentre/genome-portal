@@ -6,6 +6,8 @@ tests/data
 tests/public
 config/tiny_herb/*
 
+
+
 # Hugo data directory - from make install 
 hugo/static/data
 
