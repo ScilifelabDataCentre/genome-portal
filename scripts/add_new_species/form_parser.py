@@ -77,7 +77,7 @@ def normalize_species_name(species_name: str) -> str:
     return normalized
 
 
-def slug_from_normalized_species_name(species_name: str) -> str:
+def slug_from_species_name(species_name: str) -> str:
     """Derive species slug from a normalized species name."""
     return species_name.replace(" ", "_").lower()
 
@@ -86,7 +86,7 @@ def validate_species_slug(species_slug: str) -> None:
     """Validate species slug format used for repository paths."""
     if not re.fullmatch(r"[a-z_]+", species_slug or ""):
         raise ValueError(
-            f"Invalid species slug: '{species_slug}'. " "Allowed lowercase characters: letters, underscore,."
+            f"Invalid species slug: '{species_slug}'. " "Allowed lowercase characters: letters and underscore."
         )
 
 
@@ -124,11 +124,11 @@ def extract_species_names(markdown_content: str) -> dict[str, str]:
     )
 
     species_name_cells = extract_table_cells(species_name_section)
-    species_names["species_name"] = normalize_species_name(species_name_cells.get("Scientific name:", ""))
+    species_names["species_name"] = normalize_species_name(species_name=species_name_cells.get("Scientific name:", ""))
     species_names["common_name"] = species_name_cells.get("English (common) name:", "")
 
-    validate_species_name_is_binomial(species_names["species_name"])
-    species_names["species_slug"] = slug_from_normalized_species_name(species_names["species_name"])
+    validate_species_name_is_binomial(species_name=species_names["species_name"])
+    species_names["species_slug"] = slug_from_species_name(species_name=species_names["species_name"])
     validate_species_slug(species_names["species_slug"])
     return species_names
 
@@ -285,8 +285,11 @@ def extract_table_cells(table_block: str) -> dict[str, str]:
             field = match.group(1).strip()
             value = match.group(2).strip()
 
-            # Handle multi-line field
-            if current_field and field.endswith(":") and not field.startswith(">"):
+            # Handle wrapped/multi-line field names where the first line did not
+            # include a trailing colon (e.g. "English (common)" + "name:").
+            # Avoid merging normal consecutive fields like:
+            # "Scientific name:" then "English (common) name:".
+            if current_field and not current_field.endswith(":") and field.endswith(":") and not field.startswith(">"):
                 current_field = current_field + " " + field
                 if value:
                     current_value_lines.append(value)

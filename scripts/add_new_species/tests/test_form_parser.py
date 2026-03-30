@@ -2,7 +2,15 @@ import subprocess
 from pathlib import Path
 
 import pytest
-from form_parser import create_markdown_content, parse_user_form, validate_species_name_is_binomial
+from form_parser import (
+    create_markdown_content,
+    extract_species_names,
+    normalize_species_name,
+    parse_user_form,
+    slug_from_species_name,
+    validate_species_name_is_binomial,
+    validate_species_slug,
+)
 
 
 def test_create_markdown_content_docx_success(example_user_forms: dict[str, Path]) -> None:
@@ -55,3 +63,66 @@ def test_validate_species_name_is_binomial_fail(invalid_name: str) -> None:
         match="Species name must be binomial \\(Genus species\\). Remove any extra descriptors from the species field.",
     ):
         validate_species_name_is_binomial(invalid_name)
+
+
+@pytest.mark.parametrize(
+    ("raw_name", "expected"),
+    [
+        ("Volvox carteri", "Volvox carteri"),
+        ("  Volvox   carteri  ", "Volvox carteri"),
+        ("Volvox\u00a0carteri", "Volvox carteri"),
+    ],
+)
+def test_normalize_species_name(raw_name: str, expected: str) -> None:
+    """
+    Test that species names are normalized for odd DOCX spacing/unicode.
+    """
+    assert normalize_species_name(raw_name) == expected
+
+
+def test_slug_from_species_name() -> None:
+    """
+    Test slug derivation from normalized species name.
+    """
+    assert slug_from_species_name("Volvox carteri") == "volvox_carteri"
+
+
+@pytest.mark.parametrize("valid_slug", ["volvox_carteri", "linum_grandiflorum", "a_b"])
+def test_validate_species_slug_success(valid_slug: str) -> None:
+    """
+    Test accepted slug formats.
+    """
+    validate_species_slug(valid_slug)
+
+
+@pytest.mark.parametrize(
+    "invalid_slug", ["", "volvox/carteri", "volvox carteri", "volvox@carteri", "volvox-carteri", "V2_1"]
+)
+def test_validate_species_slug_fail(invalid_slug: str) -> None:
+    """
+    Test rejected slug formats.
+    """
+    with pytest.raises(
+        ValueError,
+        match="Invalid species slug:",
+    ):
+        validate_species_slug(invalid_slug)
+
+
+def test_extract_species_names_normalizes_and_validates_slug() -> None:
+    """
+    Test species extraction + normalization + slug creation in one flow.
+    """
+    markdown_content = "\n".join(
+        [
+            "| > fungus |",
+            "| Scientific name: | Volvox\u00a0carteri |",
+            "| English (common) name: | green algae |",
+            "| Species description |",
+        ]
+    )
+    species_names = extract_species_names(markdown_content)
+
+    assert species_names["species_name"] == "Volvox carteri"
+    assert species_names["species_slug"] == "volvox_carteri"
+    assert species_names["common_name"] == "green algae"
