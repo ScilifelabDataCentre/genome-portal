@@ -46,7 +46,7 @@ class AssemblyMetadataApiException(Exception):
 
 class MissingGenomeAccessionError(ValueError):
     """
-    Raised when assembly_CGA_accession is missing for the Genome row.
+    Raised when assembly_GCA_accession is missing for the Genome row.
     """
 
     pass
@@ -186,16 +186,16 @@ def get_ncbi_assembly_metadata_json(accession: str) -> dict:
 def extract_genome_accession(user_data_tracks: list[dict]) -> str:
     """
     Extract the GenBank genome assembly accession from the dedicated
-    'assembly_CGA_accession' spreadsheet column (stored in JSON as 'assemblyCGAAccession')
+    'assembly_GCA_accession' spreadsheet column (stored in JSON as 'assemblyGCAAccession')
     for the 'Genome' data track.
     """
     for data_track in user_data_tracks:
         if data_track.get("dataTrackName") == "Genome":
-            accession = data_track.get("assemblyCGAAccession")
+            accession = data_track.get("assemblyGCAAccession")
             if accession in ("", None, PLACEHOLDER_VALUE):
                 raise MissingGenomeAccessionError(
                     "Genome assembly accession is mandatory for ENA/NCBI metadata lookup. "
-                    "Please populate 'assembly_CGA_accession' for the 'Genome' row, "
+                    "Please populate 'assembly_GCA_accession' for the 'Genome' row, "
                     "or run with '--skip-assembly-metadata-fetch' if no GCA accession is available."
                 )
             if isinstance(accession, str) and accession.startswith("GCA"):
@@ -205,7 +205,7 @@ def extract_genome_accession(user_data_tracks: list[dict]) -> str:
             )
     raise MissingGenomeAccessionError(
         "Genome assembly accession is mandatory for ENA/NCBI metadata lookup. "
-        "Please populate 'assembly_CGA_accession' for the 'Genome' row, "
+        "Please populate 'assembly_GCA_accession' for the 'Genome' row, "
         "or run with '--skip-assembly-metadata-fetch' if no GCA accession is available."
     )
 

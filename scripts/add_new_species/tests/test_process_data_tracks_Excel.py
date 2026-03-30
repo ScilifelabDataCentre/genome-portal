@@ -87,21 +87,21 @@ def test_df_row_to_json_sets_default_first_date_on_portal_format(data_tracks_tem
     datetime.strptime(output["firstDateOnPortal"], "%d %B %Y")
 
 
-def test_df_row_to_json_uses_assembly_cga_accession_for_genome(data_tracks_template_json: str) -> None:
+def test_df_row_to_json_uses_assembly_GCA_accession_for_genome(data_tracks_template_json: str) -> None:
     """
-    Test that Genome track accession is taken from assembly_CGA_accession, not DOI URL parsing.
+    Test that Genome track accession is taken from assembly_GCA_accession, not DOI URL parsing.
     """
     row = pd.Series(
         {
             "data_track_name": "Genome",
-            "assembly_CGA_accession": "GCA_000011425.1",
+            "assembly_GCA_accession": "GCA_000011425.1",
             "doi_link_to_repository": "https://doi.org/10.17044/example",
         }
     )
 
     output = df_row_to_json(row, data_tracks_template_json)
 
-    assert output["assemblyCGAAccession"] == "GCA_000011425.1"
+    assert output["assemblyGCAAccession"] == "GCA_000011425.1"
     assert output["accessionOrDOI"] == "GCA_000011425.1"
 
 
@@ -139,7 +139,7 @@ def test_extract_genome_accession_not_genbank_accession(user_data_tracks: list[d
     (For fun, here we use the NCBI RefSeq accession for the equivalent strain found in GCA_000011425.1)
     """
 
-    user_data_tracks[0]["assemblyCGAAccession"] = "GCF_000011425.1"
+    user_data_tracks[0]["assemblyGCAAccession"] = "GCF_000011425.1"
 
     with pytest.raises(
         ValueError, match="does not look like a GenBank genome assembly accession. It must start with 'GCA'"
@@ -155,7 +155,7 @@ def test_extract_genome_accession_blank_accession(user_data_tracks: list[dict], 
     will currently always resort to the placeholder value "[EDIT]" if the spreadsheet is blank.)
     """
 
-    user_data_tracks[0]["assemblyCGAAccession"] = invalid_value
+    user_data_tracks[0]["assemblyGCAAccession"] = invalid_value
 
     with pytest.raises(
         MissingGenomeAccessionError, match="Genome assembly accession is mandatory for ENA/NCBI metadata lookup."

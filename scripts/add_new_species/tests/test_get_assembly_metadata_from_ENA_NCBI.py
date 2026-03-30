@@ -95,12 +95,12 @@ def test_test_get_ncbi_assembly_metadata_json_mock_invalid_accession(mock_get: M
 
 def test_placeholder_assembly_metadata_with_extractable_accession() -> None:
     """
-    Test that placeholder metadata keeps a valid GCA accession from assemblyCGAAccession.
+    Test that placeholder metadata keeps a valid GCA accession from assemblyGCAAccession.
     """
     user_data_tracks = [
         {
             "dataTrackName": "Genome",
-            "assemblyCGAAccession": "GCA_000011425.1",
+            "assemblyGCAAccession": "GCA_000011425.1",
         }
     ]
 
@@ -121,7 +121,7 @@ def test_placeholder_assembly_metadata_without_extractable_accession() -> None:
     user_data_tracks = [
         {
             "dataTrackName": "Genome",
-            "assemblyCGAAccession": "",
+            "assemblyGCAAccession": "",
         }
     ]
 
@@ -154,9 +154,9 @@ def test_build_assembly_metadata_sets_expected_fields() -> None:
 
 def test_extract_genome_accession_missing_raises_hard_error() -> None:
     """
-    Test that missing Genome assembly_CGA_accession raises MissingGenomeAccessionError.
+    Test that missing Genome assembly_GCA_accession raises MissingGenomeAccessionError.
     """
-    user_data_tracks = [{"dataTrackName": "Genome", "assemblyCGAAccession": ""}]
+    user_data_tracks = [{"dataTrackName": "Genome", "assemblyGCAAccession": ""}]
 
     with pytest.raises(MissingGenomeAccessionError, match="Genome assembly accession is mandatory"):
         extract_genome_accession(user_data_tracks)
@@ -169,7 +169,7 @@ def test_fetch_assembly_metadata_propagates_api_errors(mock_get_ena: MagicMock) 
     Fallback-to-placeholder is controlled in __main__ only when skip flag is set.
     """
     mock_get_ena.side_effect = AssemblyMetadataApiException("ENA timeout")
-    user_data_tracks = [{"dataTrackName": "Genome", "assemblyCGAAccession": VALID_ACCESSION}]
+    user_data_tracks = [{"dataTrackName": "Genome", "assemblyGCAAccession": VALID_ACCESSION}]
 
     with pytest.raises(AssemblyMetadataApiException, match="ENA timeout"):
         fetch_assembly_metadata(user_data_tracks, species_name="Aspergillus nidulans")
