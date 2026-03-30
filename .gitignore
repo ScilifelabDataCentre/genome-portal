@@ -6,7 +6,9 @@ tests/data
 tests/public
 config/tiny_herb/*
 
-
+# Input dir for species submission form data. Mounted by dockeraddspecies script
+species_submission/local_inputs/*
+!species_submission/local_inputs/.gitkeep
 
 # Hugo data directory - from make install 
 hugo/static/data
