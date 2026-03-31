@@ -1,5 +1,17 @@
 #!/bin/bash
 
+# This script generates a metrics.json file containing the number of species and the total number of
+# data tracks (excluding genome assemblies) across all species in the Genome Portal.
+# It is intended to be run in the build stage of the Hugo Docker image, so that the generated metrics
+# are included in the static files served by Hugo.
+#
+# It can be run locally for development purposes:
+# Ensure that you are in the root of the genome-portal repository
+# bash scripts/generate_metrics.sh
+# ./scripts/dockerbuild -u -t local -k hugo
+# docker rm -f "genome-portal"; ./scripts/dockerserve -t local
+# then visit http://localhost:8080/api/metrics.json
+
 set -o pipefail
 shopt -s nullglob
 
@@ -8,13 +20,14 @@ species_count=0
 species_slugs=()
 total_tracks=0
 
+# For local dev, assume hugo root in ./hugo. Override this with ROOT_DIR=/src for the hugo Docker container.
 ROOT_DIR="${ROOT_DIR:-hugo}"
 OUTPUT_FILE="${ROOT_DIR}/static/api/metrics.json"
 
 
 ### 1. Identify all species that does not have status draft:true in their YAML front matter.
 
-for file in hugo/content/species/*/_index.md; do
+for file in "${ROOT_DIR}/content/species"/*/_index.md; do
     slug="$(basename "$(dirname "$file")")"
 
     # Handle legacy "draft" key: skip a species if the _index.md contains "draft: true" in the front matter block (between first two --- lines)
@@ -39,7 +52,7 @@ for pattern in "${EXCLUDE_TRACK_PATTERNS[@]:1}"; do
 done
 
 for slug in "${species_slugs[@]}"; do
-    json_file="hugo/assets/$slug/data_tracks.json"
+    json_file="${ROOT_DIR}/assets/$slug/data_tracks.json"
     if [[ -f "$json_file" ]]; then
         count=$(
             # Use jq to filter data tracks that do not match the exclude patterns and count them.
