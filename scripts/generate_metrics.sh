@@ -29,13 +29,6 @@ OUTPUT_FILE="${ROOT_DIR}/static/api/metrics.json"
 
 for file in "${ROOT_DIR}/content/species"/*/_index.md; do
     slug="$(basename "$(dirname "$file")")"
-
-    # Handle legacy "draft" key: skip a species if the _index.md contains "draft: true" in the front matter block (between first two --- lines)
-    front_matter="$(sed -n '/^---[[:space:]]*$/,/^---[[:space:]]*$/p' "$file")"
-    if echo "$front_matter" | grep -Eiq '^[[:space:]]*draft:[[:space:]]*true([[:space:]]*#.*)?$'; then
-        continue
-    fi
-
     species_count=$((species_count + 1))
     species_slugs+=("$slug")
 done

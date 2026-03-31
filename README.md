@@ -99,7 +99,7 @@ source code.
 
 - The website content resides in the `hugo` directory.
   - Most importantly, each species gets:
-    1. A content subdirectory in `hugo/content/species/` (e.g. `hugo/content/species/clupea_harengus`).
+    1. A content subdirectory in `hugo/content/species/` (e.g. `hugo/content/species/parnassius_apollo`).
 	2. A data directory in `hugo/data/` (taxonomic information and statistics).
 	3. An assets directory in `hugo/assets` (data inventory).
 
@@ -142,7 +142,7 @@ only a subset of species be of interest, you can restrict the
 scope of the build:
 
 ```bash
-./scripts/dockermake SPECIES=clupea_harengus,linum_tenue
+./scripts/dockermake SPECIES=parnassius_apollo,linum_tenue
 ```
 
 **3. Run the web application container**
