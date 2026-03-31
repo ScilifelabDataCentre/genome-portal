@@ -67,3 +67,4 @@ jq -n \
     > "$tmp_file"
 
 mv "$tmp_file" "$OUTPUT_FILE"
+chmod 644 "$OUTPUT_FILE" # Ensure the output file is readable by all users (the Docker container runs as a non-root user for the app)
