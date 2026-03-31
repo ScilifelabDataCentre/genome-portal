@@ -4,9 +4,13 @@ set -o pipefail
 shopt -s nullglob
 
 
-published_count=0
-published_slugs=()
+species_count=0
+species_slugs=()
 total_tracks=0
+
+ROOT_DIR="${ROOT_DIR:-hugo}"
+OUTPUT_FILE="${ROOT_DIR}/static/api/metrics.json"
+
 
 ### 1. Identify all species that does not have status draft:true in their YAML front matter.
 
@@ -19,11 +23,9 @@ for file in hugo/content/species/*/_index.md; do
         continue
     fi
 
-    published_count=$((published_count + 1))
-    published_slugs+=("$slug")
+    species_count=$((species_count + 1))
+    species_slugs+=("$slug")
 done
-
-echo "Number of published species: $published_count"
 
 
 ### 2. For each species identified in step 1, read the data_tracks.json file and count the number of non-genome assembly data tracks
@@ -36,7 +38,7 @@ for pattern in "${EXCLUDE_TRACK_PATTERNS[@]:1}"; do
     EXCLUDE_REGEX="${EXCLUDE_REGEX}|${pattern}"
 done
 
-for slug in "${published_slugs[@]}"; do
+for slug in "${species_slugs[@]}"; do
     json_file="hugo/assets/$slug/data_tracks.json"
     if [[ -f "$json_file" ]]; then
         count=$(
@@ -51,5 +53,17 @@ for slug in "${published_slugs[@]}"; do
     fi
 done
 
-echo "Number of data tracks: $total_tracks"
+### 3. Write the metrics to JSON file
 
+mkdir -p "$(dirname "$OUTPUT_FILE")"
+
+tmp_file="$(mktemp "${OUTPUT_FILE}.tmp.XXXXXX")"
+
+# Use jq to ensure valid JSON output
+jq -n \
+    --argjson species_count "$species_count" \
+    --argjson data_track_count "$total_tracks" \
+    '{species_count: $species_count, data_track_count_excluding_genome_assemblies: $data_track_count}' \
+    > "$tmp_file"
+
+mv "$tmp_file" "$OUTPUT_FILE"

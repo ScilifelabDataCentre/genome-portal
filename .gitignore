@@ -14,6 +14,7 @@ hugo/public
 
 # more Hugo stuff
 hugo/.hugo_build.lock
+hugo/static/api/metrics.json
 
 #data stewardship
 scripts/data_stewardship/temp/**
