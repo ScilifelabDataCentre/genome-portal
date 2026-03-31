@@ -3,7 +3,7 @@
 # unless you were warned by the add-new-species.py script.
 title: "*Linum grandiflorum* Desf."
 subtitle: "Crimson flax"
-last_updated: "13/03/2026" # format DD/MM/YYYY
+last_updated: "16/03/2026" # format DD/MM/YYYY
 
 layout: "species_intro"
 banner_title: "Species overview"
@@ -14,7 +14,7 @@ science_name: "Linum grandiflorum"
 lineage_data_path: "linum_grandiflorum/taxonomy"
 
 cover_image: "/img/species/linum_grandiflorum.webp"
-img_attrib_text: "Aleksandra Losvik, CC BY 4.0"
+img_attrib_text: "Flower of Linum grandiflorum, by Aleksandra Losvik, CC BY 4.0"
 img_attrib_link: ""
 
 gbif_taxon_id: "2873926"
@@ -40,7 +40,7 @@ initialZoom: 1
 
 *Linum grandiflorum* Desf., commonly known as flowering flax, red flax, scarlet flax and crimson flax (blomsterlin in Swedish), is an annual herb native to the temperate biomes of North Africa, specifically Algeria and Tunisia. First described by René Desfontaines in Fl. Atlant. 1: 277 (1798), this species is widely established in ornamental horticulture due to its vibrant, satin-like crimson petals.
 
- Biologically, the genus *Linum* is a premier model for heteromorphic self-incompatibility (Murray, 1986), a system ensuring pollination only occurs between its two floral morphs: the "pin" (long-styled) and "thrum" (short-styled) phenotypes. While the thrum-specific gene TSS1 was first identified in *L. grandiflorum* by Ushijima (2015), the surrounding genomic context remained unknown. Recent research by Zervakis, Postel et al. (2025) has finally mapped the entire S-locus supergene. This 1.2 Mb region contains the two primary candidate genes, TSS1 and WDR44, which together govern the morphological and physiological differences between the two types of flowers.
+ Biologically, the genus *Linum* is a premier model for heteromorphic self-incompatibility (Murray, 1986), a system ensuring pollination only occurs between its two floral morphs: the "pin" (long-styled) and "thrum" (short-styled) phenotypes. While the thrum-specific gene TSS1 was first identified in *L. grandiflorum* by Ushijima et al. (2012), the surrounding genomic context remained unknown. Recent research by Zervakis, Postel et al. (2025) has finally mapped the entire S-locus supergene. This 1.2 Mb region contains the two primary candidate genes, TSS1 and WDR44, which together govern the morphological and physiological differences between the two types of flowers.
 
 #### How to cite
 
@@ -65,4 +65,4 @@ Swedish Reference Genome Portal (Retrieved DATE_ACCESSED), SciLifeLab Data Centr
 
 #### Changelog
 
-- 13/03/2026 - Species first published on the Portal
+- 16/03/2026 - Species first published on the Portal

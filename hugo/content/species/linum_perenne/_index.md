@@ -3,7 +3,7 @@
 # unless you were warned by the add-new-species.py script.
 title: "*Linum perenne* L."
 subtitle: "Blue flax"
-last_updated: "13/03/2026" # format DD/MM/YYYY
+last_updated: "16/03/2026" # format DD/MM/YYYY
 
 layout: "species_intro"
 banner_title: "Species overview"
@@ -13,8 +13,8 @@ url: "linum_perenne"
 science_name: "Linum perenne"
 lineage_data_path: "linum_perenne/taxonomy"
 
-cover_image: "/img/species/linum_perenne.webp"
-img_attrib_text: "Aleksandra Losvik, CC BY 4.0"
+cover_image: "/img/species/Linum-perenne_crop43_centered.webp"
+img_attrib_text: "Flower of Linum perenne, by Aleksandra Losvik, CC BY 4.0"
 img_attrib_link: ""
 
 gbif_taxon_id: "2873878"
@@ -63,4 +63,4 @@ Swedish Reference Genome Portal (Retrieved DATE_ACCESSED), SciLifeLab Data Centr
 
 #### Changelog
 
-- 13/03/2026 - Species first published on the Portal
+- 16/03/2026 - Species first published on the Portal
