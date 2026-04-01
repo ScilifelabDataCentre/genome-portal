@@ -53,7 +53,9 @@ We will use example data for this.
 Example: 
 
 ```bash
-./scripts/dockeraddspecies python scripts/add_new_species --species-submission-form=/local_inputs/01-test-species-submission_v1.2.docx --data-tracks-sheet=/local_inputs/02-test-data-tracks_v1.3.xlsx --species-image=/scripts/add_new_species/templates/placeholder_image_4-3_ratio.webp --overwrite
+./scripts/dockeraddspecies python scripts/add_new_species --species-submission-form=/local_inputs/01-test-species-submission_v1.2.docx --data-tracks-sheet=/local_inputs/02-test-data-tracks_v1.3.xlsx --species-image=/scripts/add_new_species/templates/placeholder_image_4-3_ratio.webp --overwrite 
+
+# add the option --print-species-slug-only to have the script only print the species_name as output. This can be useful if scripting with the species_slug, which is the case of the script in section 3.1
 ```
 
 #### 3.2.3. Build the data builder Docker container
@@ -112,6 +114,16 @@ docker rm -f "genome-portal"; ./scripts/dockerserve -t local
 
 Step 3.2.1. and 3.2.3. (build Docker images for `dockeraddnewspecies` and `dockerbuild`) can most likely be skipped here. But if long time has passed since you last made changes to the branch, it would be good practice to rebuild these images too
 
+### 3.3. When files need to be deleted
+
+Example:
+
+```bash
+python scripts/add_new_species/removespecies.py -s volvox_carteri -f
+
+dockermake SPECIES=volvox_carteri clean uninstall
+
+```
 
 ## 4. Make a Pull Request
 

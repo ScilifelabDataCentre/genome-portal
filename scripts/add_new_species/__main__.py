@@ -42,7 +42,9 @@ Example:
 """
 
 import argparse
+import io
 import logging
+from contextlib import redirect_stdout
 from pathlib import Path
 
 from add_config_yml import populate_config_yml
@@ -129,6 +131,13 @@ def run_argparse() -> argparse.Namespace:
             "Assembly metadata fields will be set to '[EDIT]' placeholders for manual completion."
         ),
     )
+    parser.add_argument(
+        "--print-species-slug-only",
+        action="store_true",
+        help=(
+            "Suppress normal stdout output and print only the derived species slug on success. Useful for scripting."
+        ),
+    )
 
     return parser.parse_args()
 
@@ -155,9 +164,8 @@ def check_dirs_empty(output_paths: SpeciesPaths, species_name: str) -> None:
             )
 
 
-if __name__ == "__main__":
-    args = run_argparse()
-
+def run_add_new_species(args: argparse.Namespace) -> str:
+    """Run add_new_species workflow and return derived species slug."""
     user_form_data = parse_user_form(form_file_path=args.species_submission_form)
 
     output_dir_paths = get_species_paths(species_slug=user_form_data.species_slug)
@@ -224,3 +232,20 @@ if __name__ == "__main__":
 
     out_img_path = output_dir_paths.image_file_path
     process_species_image(in_img_path=args.species_image, out_img_path=out_img_path)
+    return user_form_data.species_slug
+
+
+def main() -> None:
+    args = run_argparse()
+    if args.print_species_slug_only:
+        # Suppress all output except the species slug, to allow for scripts that need just the slug.
+        with redirect_stdout(io.StringIO()):
+            species_slug = run_add_new_species(args)
+        print(species_slug)
+        return
+
+    run_add_new_species(args)
+
+
+if __name__ == "__main__":
+    main()
