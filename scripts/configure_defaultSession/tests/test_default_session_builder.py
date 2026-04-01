@@ -7,7 +7,7 @@ from default_session_builder import (
     create_view,
     process_tracks,
 )
-from default_session_utils import get_base_extension
+from default_session_utils import get_base_extension, get_track_file_name
 
 
 def test_create_views_from_fixture(example_configs: list[Any], example_init_default_session: DefaultSession) -> None:
@@ -122,3 +122,9 @@ def test_get_track_adapter_config(example_track_params: dict[str, TrackParams]) 
             else:
                 assert adapter_config["adapter_type"] == "BedTabixAdapter"
                 assert adapter_config["location_key"] == "bedGzLocation"
+
+
+def test_get_track_file_name_strips_bigwig_and_bigbed_extensions() -> None:
+    assert get_track_file_name({"url": "https://example.org/a/GCF_123.rmsk.bb"}) == "GCF_123.rmsk"
+    assert get_track_file_name({"url": "https://example.org/a/GCF_123.gc5Base.bw"}) == "GCF_123.gc5Base"
+    assert get_track_file_name({"fileName": "GCF_123.signal.bigWig"}) == "GCF_123.signal"

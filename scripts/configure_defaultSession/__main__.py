@@ -52,6 +52,13 @@ from default_session_builder import DefaultSession, create_view, process_tracks
 from default_session_utils import check_config_json_exists, save_json
 
 
+def _is_big_binary_track(track: dict) -> bool:
+    """Return True for BigBed/BigWig-like track file names/URLs."""
+    track_file_or_url = str(track.get("fileName") or track.get("url") or "").strip().lower()
+    track_file_or_url = track_file_or_url.split("?", 1)[0]
+    return track_file_or_url.endswith((".bw", ".bigwig"))
+
+
 def set_default_session_true_for_all_tracks(configs: list[dict]) -> list[dict]:
     """Set ``defaultSession: true`` for all track entries in all YAML documents."""
     for config in configs:
@@ -62,6 +69,14 @@ def set_default_session_true_for_all_tracks(configs: list[dict]) -> list[dict]:
             continue
         for track in tracks:
             if isinstance(track, dict):
+                # Skip placeholder/unset tracks to avoid creating invalid defaultSession entries.
+                track_file_or_url = str(track.get("fileName") or track.get("url") or "").strip()
+                if not track_file_or_url or track_file_or_url == "[EDIT]":
+                    track["defaultSession"] = False
+                    continue
+                # Keep BigBed/BigWig tracks unchanged until their default session settings are fully supported.
+                if _is_big_binary_track(track=track):
+                    continue
                 track["defaultSession"] = True
     return configs
 
