@@ -89,8 +89,9 @@ def test_full_run_publishes_and_cleans_temp(tmp_path: Path, monkeypatch: pytest.
         workflow, "run_agat", lambda gff_path, output_dir, force, temp_dir: _write_agat_report(output_dir)
     )
 
-    destination, unresolved = run_stats_workflow(_options(repo_root, tmp_path / "work"))
-    assert destination == repo_root / "hugo" / "data" / "species_x" / "species_stats.yml"
+    destination_display, unresolved = run_stats_workflow(_options(repo_root, tmp_path / "work"))
+    assert destination_display == "hugo/data/species_x/species_stats.yml"
+    destination = repo_root / "hugo" / "data" / "species_x" / "species_stats.yml"
     assert destination.exists()
     assert not unresolved
 
@@ -125,7 +126,8 @@ def test_skip_quast_uses_existing_cache(tmp_path: Path, monkeypatch: pytest.Monk
         workflow, "run_agat", lambda gff_path, output_dir, force, temp_dir: _write_agat_report(output_dir)
     )
 
-    destination, _ = run_stats_workflow(_options(repo_root, work_base, skip_quast=True))
+    _, _ = run_stats_workflow(_options(repo_root, work_base, skip_quast=True))
+    destination = repo_root / "hugo" / "data" / "species_x" / "species_stats.yml"
     with open(destination, "r", encoding="utf-8") as handle:
         data = yaml.safe_load(handle)
     assert data["assembly"][0]["Assembly length (Mbp)"] == "4.00"
@@ -147,7 +149,8 @@ def test_skip_agat_missing_cache_keeps_placeholder(tmp_path: Path, monkeypatch: 
         lambda *args, **kwargs: (_ for _ in ()).throw(RuntimeError("run_agat should not be called")),
     )
 
-    destination, unresolved = run_stats_workflow(_options(repo_root, tmp_path / "work", skip_agat=True))
+    _, unresolved = run_stats_workflow(_options(repo_root, tmp_path / "work", skip_agat=True))
+    destination = repo_root / "hugo" / "data" / "species_x" / "species_stats.yml"
     with open(destination, "r", encoding="utf-8") as handle:
         data = yaml.safe_load(handle)
     assert data["annotation"][0]["Gene #"] == ["EDIT"]
@@ -200,7 +203,8 @@ def test_existing_quast_cache_is_reused_without_skip(tmp_path: Path, monkeypatch
         workflow, "run_agat", lambda gff_path, output_dir, force, temp_dir: _write_agat_report(output_dir)
     )
 
-    destination, _ = run_stats_workflow(_options(repo_root, work_base, skip_quast=False))
+    _, _ = run_stats_workflow(_options(repo_root, work_base, skip_quast=False))
+    destination = repo_root / "hugo" / "data" / "species_x" / "species_stats.yml"
     with open(destination, "r", encoding="utf-8") as handle:
         data = yaml.safe_load(handle)
     assert data["assembly"][0]["Assembly length (Mbp)"] == "5.00"

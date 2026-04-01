@@ -29,6 +29,17 @@ def _safe_name(value: str) -> str:
     return re.sub(r"[^A-Za-z0-9._-]+", "_", value)
 
 
+def _display_path(path: Path, repo_root: Path) -> str:
+    """
+    Return a user-friendly string representation of a path, relative to the repo root if possible.
+    Ensures that if the script is run in with dockeraddnewspecies, the path does not include swedgene/.
+    """
+    try:
+        return str(path.relative_to(repo_root))
+    except ValueError:
+        return str(path)
+
+
 def _agat_log_name(gff_path: Path) -> str:
     name = gff_path.name
     for suffix in (".gff.bgz", ".gff.gz", ".gff.nozip", ".gff3.bgz", ".gff3.gz", ".gff3", ".gff"):
@@ -37,7 +48,7 @@ def _agat_log_name(gff_path: Path) -> str:
     return gff_path.stem
 
 
-def _warn_if_stale_report(report_path: Path, input_path: Path, label: str) -> None:
+def _warn_if_stale_report(report_path: Path, input_path: Path, label: str, repo_root: Path) -> None:
     """Log a warning if the report file is older than the input file, indicating that the cached report may be stale."""
     if not report_path.exists() or not input_path.exists():
         return
@@ -45,8 +56,8 @@ def _warn_if_stale_report(report_path: Path, input_path: Path, label: str) -> No
         logger.warning(
             "Using stale %s cache: report %s is older than input %s.",
             label,
-            report_path,
-            input_path,
+            _display_path(report_path, repo_root),
+            _display_path(input_path, repo_root),
         )
 
 
@@ -66,6 +77,7 @@ def _read_cached_report_or_placeholder(
     force: bool,
     output_dir: Path,
     tool_name: str,
+    repo_root: Path,
     parse_report: Callable[[Path], dict[str, str | None]],
 ) -> dict[str, str | None] | None:
     """Check if we can use a cached report or if we need to run the tool.
@@ -75,13 +87,13 @@ def _read_cached_report_or_placeholder(
 
     if skip:
         if report_path.exists():
-            _warn_if_stale_report(report_path, input_path, tool_name)
+            _warn_if_stale_report(report_path, input_path, tool_name, repo_root)
             return parse_report(report_path)
         logger.warning(
             "--skip-%s requested, but no previous %s report found at %s. Using placeholders.",
             tool_name.lower(),
             tool_name,
-            report_path,
+            _display_path(report_path, repo_root),
         )
         return {}
 
@@ -89,9 +101,9 @@ def _read_cached_report_or_placeholder(
         logger.warning(
             "%s output already exists at %s. Reusing cached report. Use --force to regenerate.",
             tool_name,
-            output_dir,
+            _display_path(output_dir, repo_root),
         )
-        _warn_if_stale_report(report_path, input_path, tool_name)
+        _warn_if_stale_report(report_path, input_path, tool_name, repo_root)
         return parse_report(report_path)
 
     return None
@@ -143,6 +155,7 @@ def _collect_quast_stats(
     fasta_path: Path,
     quast_dir: Path,
     force: bool,
+    repo_root: Path,
 ) -> dict[str, str | None]:
     """Collect Quast statistics, either by parsing an existing report or by running Quast if needed."""
 
@@ -153,23 +166,24 @@ def _collect_quast_stats(
         force=force,
         output_dir=quast_dir,
         tool_name="Quast",
+        repo_root=repo_root,
         parse_report=parse_quast_report,
     )
     if cached_stats is not None:
         return cached_stats
 
     if not fasta_path.exists():
-        raise FileNotFoundError(f"Quast input file not found: {fasta_path}")
+        raise FileNotFoundError(f"Quast input file not found: {_display_path(fasta_path, repo_root)}")
 
     # Handle the case where the output directory exists but the report is missing.
     if quast_dir.exists() and not force:
         logger.warning(
             "Quast output directory exists but no report found at %s. Cleaning and forcing a re-run of Quast.",
-            quast_report,
+            _display_path(quast_report, repo_root),
         )
     effective_force = force or quast_dir.exists()
 
-    logger.info("Running Quast on %s", fasta_path)
+    logger.info("Running Quast on %s", _display_path(fasta_path, repo_root))
     run_quast(fasta_path=fasta_path, output_dir=quast_dir, force=effective_force)
 
     return parse_quast_report(quast_report)
@@ -182,6 +196,7 @@ def _collect_agat_stats(
     agat_dir: Path,
     force: bool,
     temp_dir: Path,
+    repo_root: Path,
 ) -> dict[str, str | None]:
     """Collect AGAT statistics, either by parsing an existing report or by running AGAT if needed."""
 
@@ -192,30 +207,31 @@ def _collect_agat_stats(
         force=force,
         output_dir=agat_dir,
         tool_name="AGAT",
+        repo_root=repo_root,
         parse_report=parse_agat_report,
     )
     if cached_stats is not None:
         return cached_stats
 
     if not gff_path.exists():
-        raise FileNotFoundError(f"AGAT input file not found: {gff_path}")
+        raise FileNotFoundError(f"AGAT input file not found: {_display_path(gff_path, repo_root)}")
 
     # Handle the case where the output directory exists but the report is missing.
     if agat_dir.exists() and not force:
         logger.warning(
             "AGAT output directory exists but no report found at %s. Cleaning and forcing a re-run of AGAT.",
-            agat_report,
+            _display_path(agat_report, repo_root),
         )
     effective_force = force or agat_dir.exists()
 
-    logger.info("Running AGAT on %s", gff_path)
+    logger.info("Running AGAT on %s", _display_path(gff_path, repo_root))
     run_agat(gff_path=gff_path, output_dir=agat_dir, force=effective_force, temp_dir=temp_dir)
 
     return parse_agat_report(agat_report)
 
 
-def run_stats_workflow(options: WorkflowOptions) -> tuple[Path, list[str]]:
-    """Run the full workflow to generate species stats, returning the final output path and any unresolved placeholders."""
+def run_stats_workflow(options: WorkflowOptions) -> tuple[str, list[str]]:
+    """Run the full workflow to generate species stats. Returns the display path of the published stats file and a list of any unresolved placeholders."""
 
     work_dirs = _get_work_dirs(base_dir=options.script_base_dir)
 
@@ -232,6 +248,7 @@ def run_stats_workflow(options: WorkflowOptions) -> tuple[Path, list[str]]:
         fasta_path=options.fasta_path,
         quast_dir=quast_dir,
         force=options.force,
+        repo_root=options.repo_root,
     )
 
     agat_stats = _collect_agat_stats(
@@ -241,6 +258,7 @@ def run_stats_workflow(options: WorkflowOptions) -> tuple[Path, list[str]]:
         agat_dir=agat_dir,
         force=options.force,
         temp_dir=work_dirs.temp_dir,
+        repo_root=options.repo_root,
     )
 
     # Use species_stats.yml template as sourcce of truth for which metrics to include in the final report, and combine Quast and AGAT stats accordingly.
@@ -261,4 +279,5 @@ def run_stats_workflow(options: WorkflowOptions) -> tuple[Path, list[str]]:
     if temp_output.exists():
         temp_output.unlink()
 
-    return output_file_destination, unresolved_placeholders
+    display_destination = _display_path(path=output_file_destination, repo_root=options.repo_root)
+    return display_destination, unresolved_placeholders

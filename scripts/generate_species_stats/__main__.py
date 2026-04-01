@@ -20,8 +20,8 @@ import argparse
 import sys
 from pathlib import Path
 
-from scripts.generate_species_stats.species_stats_utils import resolve_inputs
-from scripts.generate_species_stats.workflow import WorkflowOptions, run_stats_workflow
+from species_stats_utils import resolve_inputs
+from workflow import WorkflowOptions, run_stats_workflow
 
 MODULE_DIR = Path(__file__).resolve().parent
 if str(MODULE_DIR) not in sys.path:
@@ -85,9 +85,9 @@ def main() -> None:
         force=args.force,
     )
 
-    output_file_destination, unresolved_placeholders = run_stats_workflow(options=options)
+    display_destination, unresolved_placeholders = run_stats_workflow(options=options)
 
-    print(f"Published species stats to: {output_file_destination}")
+    print(f"Published species stats to: {display_destination}")
     if unresolved_placeholders:
         print("Unresolved fields kept as '[EDIT]' placeholders:")
         for key in unresolved_placeholders:
