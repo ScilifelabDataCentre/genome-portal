@@ -15,9 +15,9 @@ INSTALL_DIR := $(SWG_INSTALL_DIR)
 # comma-separated list to the SPECIES variable, either in the
 # environment or as command-line option. Equivalent examples:
 #
-#     make SPECIES=linum_tenue,clupea_harengus build
+#     make SPECIES=linum_tenue,parnassius_apollo build
 #
-#     export SPECIES=linum_tenue,clupea_harengue
+#     export SPECIES=linum_tenue,parnassius_apollo
 #     make build
 ifneq ($(strip $(SPECIES)),)
 comma = ,

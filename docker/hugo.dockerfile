@@ -10,7 +10,7 @@ FROM debian:stable-slim@sha256:85dfcffff3c1e193877f143d05eaba8ae7f3f95cb0a32e0bc
 ARG HUGO_VERSION=0.138.0
 ARG JBROWSE_VERSION
 
-RUN apt-get update && apt-get install -y --no-install-recommends wget ca-certificates && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends wget ca-certificates jq && rm -rf /var/lib/apt/lists/*
 
 RUN wget --quiet "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.tar.gz" && \
     tar xzf hugo_${HUGO_VERSION}_Linux-64bit.tar.gz && \
@@ -27,6 +27,10 @@ COPY ./hugo/ /src
 ARG HUGO_JBROWSE_VERSION=${JBROWSE_VERSION}
 ARG HUGO_GIT_REF_NAME
 ARG HUGO_GIT_SHA
+
+# Generate the metrics file before building the hugo site, so that the metrics are included in the generated static files.
+COPY ./scripts/generate_metrics.sh /usr/local/bin/generate_metrics.sh
+RUN ROOT_DIR=/src bash /usr/local/bin/generate_metrics.sh
 
 # pass the environment variables to the build
 # On MacOS with Rancher desktop, the build VM can run out of memory when building the hugo image, causing a crash in Go's lfstack implementation. 
