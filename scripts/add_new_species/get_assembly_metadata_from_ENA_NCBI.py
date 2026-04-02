@@ -8,7 +8,6 @@ Notably, the ENA metadata lacks one field (assembly_type) that is present in the
 Hence, this submodule queries both ENA and NCBI APIs to get the desired metadata fields.
 """
 
-import re
 from dataclasses import dataclass
 from xml.etree import ElementTree
 
@@ -229,21 +228,3 @@ def fetch_assembly_metadata(user_data_tracks: dict, species_name: str) -> Assemb
         genome_representation=partial_metadata_dict["genome_representation"],
         assembly_type=assembly_type,
     )
-
-
-def extract_accession_from_url(url: str) -> str | None:
-    """
-    Extract a GenBank accession (GCA_xxxxxxx.x) from ENA/NCBI/DOI URLs.
-
-    ENA genome accession example: https://www.ebi.ac.uk/ena/browser/view/GCA_963668995.1
-    DOI pattern example: https://doi.org/10.17044/scilifelab.28606814.v1
-    """
-
-    acession_match = re.search(r"(GCA_\d+\.\d+)", url)
-    if acession_match:
-        return acession_match.group(1)
-
-    doi_match = re.search(r"doi\.org/([\w\.\-/]+)", url)
-    if doi_match:
-        return doi_match.group(1)
-    return None
