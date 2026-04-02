@@ -104,8 +104,15 @@ def get_lineage_section(tax_id: str | int) -> str:
     except requests.exceptions.RequestException as e:
         raise EbiRestException(f"Failed to get lineage info for tax_id: {str(tax_id)}. Error is as follows: {e}") from e
 
+    if response.status_code != 200:
+        raise EbiRestException(
+            f"Failed to get lineage info for tax_id: {str(tax_id)}, response code: {response.status_code}"
+        )
+
     tree = ElementTree.fromstring(response.content)
     lineage_element = tree.find(".//lineage")
+    if lineage_element is None:
+        raise EbiRestException(f"Lineage element missing in ENA XML response for tax_id: {str(tax_id)}")
     lineage_section = ElementTree.tostring(lineage_element).decode()
 
     return lineage_section
