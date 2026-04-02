@@ -1,7 +1,7 @@
 ---
 # The params below were auto-generated, you should not need to edit them...
 # unless you were warned by the add-new-species.py script.
-title: "*${species_name}*"
+title: "${title}"
 subtitle: "${common_name}"
 last_updated: "${todays_date}" # format DD/MM/YYYY
 

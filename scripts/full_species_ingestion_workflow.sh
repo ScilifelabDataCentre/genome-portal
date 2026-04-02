@@ -119,4 +119,4 @@ echo "Running generate_species_stats to generate stats for species slug: $SPECIE
 
 ./scripts/dockerbuild -u -t "$TAG" -k hugo && \
 docker rm -f "genome-portal"; ./scripts/dockerserve -t "$TAG" && \
-echo "The full species ingestion workflow is complete! You can now visit http://localhost:8080/species/${SPECIES_SLUG} to see the new species page"
+echo "The full species ingestion workflow is complete! You can now visit http://localhost:8080/${SPECIES_SLUG} to see the new species page"

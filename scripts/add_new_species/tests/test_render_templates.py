@@ -1,7 +1,7 @@
 from datetime import datetime
 from itertools import chain
 
-from add_content_files import TEMPLATE_DIR
+from add_content_files import TEMPLATE_DIR, format_species_title
 from form_parser import UserFormData
 from render_templates import read_text_file, render
 
@@ -13,6 +13,10 @@ def test_process_template_file_index_md_all_replacements(user_form_data: UserFor
     template_file_path = TEMPLATE_DIR / "_index.md"
 
     required_replacements = {
+        "title": format_species_title(
+            species_name=user_form_data.species_name,
+            additional_descriptor=user_form_data.additional_descriptor,
+        ),
         "species_name": user_form_data.species_name,
         "species_slug": user_form_data.species_slug,
         "common_name": user_form_data.common_name,
@@ -49,6 +53,10 @@ def test_process_template_file_index_md_missing_optional_replacements(user_form_
     template_file_path = TEMPLATE_DIR / "_index.md"
 
     required_replacements = {
+        "title": format_species_title(
+            species_name=user_form_data.species_name,
+            additional_descriptor=user_form_data.additional_descriptor,
+        ),
         "species_name": user_form_data.species_name,
         "species_slug": user_form_data.species_slug,
         "common_name": user_form_data.common_name,

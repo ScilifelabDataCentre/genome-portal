@@ -16,6 +16,7 @@ class UserFormData:
     species_name: str
     species_slug: str
     common_name: str
+    additional_descriptor: str
     description: str
     references: str
     publication: str
@@ -42,6 +43,7 @@ def parse_user_form(form_file_path: Path) -> UserFormData:
         species_name=species_names["species_name"],
         species_slug=species_names["species_slug"],
         common_name=species_names["common_name"],
+        additional_descriptor=species_names["additional_descriptor"],
         description=description,
         references=references,
         publication=publication,
@@ -82,6 +84,33 @@ def slug_from_species_name(species_name: str) -> str:
     return species_name.replace(" ", "_").lower()
 
 
+def normalize_optional_form_value(value: str) -> str:
+    """Normalize optional DOCX form values by stripping placeholder text."""
+    if value == "Click or tap here to enter text.":
+        return ""
+    # DOCX -> pandoc markdown can escape punctuation (e.g. "f\\. nagariensis").
+    # Strip markdown escape backslashes for plain front matter values.
+    value = re.sub(r"\\([`*_\[\](){}#+\-.!|])", r"\1", value)
+    return value
+
+
+def normalize_table_key(key: str) -> str:
+    """Normalize markdown table key labels for matching."""
+    key = key.replace("*", "")
+    key = re.sub(r"\s+", " ", key).strip()
+    return key
+
+
+def get_table_value_by_key(cells: dict[str, str], target_key: str) -> str:
+    """Get table value by normalized key label."""
+    normalized_target = normalize_table_key(target_key).lower()
+    for raw_key, value in cells.items():
+        normalized_key = normalize_table_key(raw_key).lower()
+        if normalized_key == normalized_target:
+            return value
+    return ""
+
+
 def validate_species_slug(species_slug: str) -> None:
     """Validate species slug format used for repository paths."""
     if not re.fullmatch(r"[a-z_]+", species_slug or ""):
@@ -115,17 +144,31 @@ def extract_species_names(markdown_content: str) -> dict[str, str]:
         "species_name": "",
         "species_slug": "",
         "common_name": "",
+        "additional_descriptor": "",
     }
 
-    species_name_section = extract_block_of_markdown(
-        start_marker="| > fungus",
-        end_marker="| Species description",
-        markdown_content=markdown_content,
-    )
+    species_name_cells = extract_table_cells(markdown_content)
 
-    species_name_cells = extract_table_cells(species_name_section)
-    species_names["species_name"] = normalize_species_name(species_name=species_name_cells.get("Scientific name:", ""))
-    species_names["common_name"] = species_name_cells.get("English (common) name:", "")
+    scientific_name = get_table_value_by_key(species_name_cells, "Scientific name (Genus species):")
+    if not scientific_name:
+        scientific_name = get_table_value_by_key(species_name_cells, "Scientific name:")
+    if not scientific_name:
+        # Fall back for legacy forms that had slightly different key formatting of the species name field
+        for key, value in species_name_cells.items():
+            normalized_key = normalize_table_key(key).lower()
+            if normalized_key.endswith("scientific name:") or normalized_key.endswith(
+                "scientific name (genus species):"
+            ):
+                scientific_name = value
+                break
+    species_names["species_name"] = normalize_species_name(species_name=scientific_name)
+    species_names["common_name"] = normalize_optional_form_value(
+        get_table_value_by_key(species_name_cells, "English (common) name:")
+    )
+    additional_descriptor = normalize_optional_form_value(
+        get_table_value_by_key(species_name_cells, "Additional descriptor (optional):")
+    )
+    species_names["additional_descriptor"] = additional_descriptor
 
     validate_species_name_is_binomial(species_name=species_names["species_name"])
     species_names["species_slug"] = slug_from_species_name(species_name=species_names["species_name"])

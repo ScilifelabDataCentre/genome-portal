@@ -4,7 +4,7 @@ from unittest.mock import patch
 
 import yaml
 from add_config_yml import populate_config_yml
-from add_content_files import add_assembly_md, add_index_md
+from add_content_files import add_assembly_md, add_index_md, format_species_title
 from form_parser import UserFormData
 from get_assembly_metadata_from_ENA_NCBI import AssemblyMetadata
 
@@ -75,6 +75,12 @@ def test_add_index_md(mock_process_taxonomy, mock_get_gbif_taxon_key, user_form_
     for placeholder, expected_value in placeholders_and_replacements.items():
         assert placeholder not in updated_index_md, f"Placeholder {placeholder} was not replaced."
         assert expected_value in updated_index_md, f"Expected value {expected_value} not found in the output."
+
+    expected_title = format_species_title(
+        species_name=user_form_data.species_name,
+        additional_descriptor=user_form_data.additional_descriptor,
+    )
+    assert f'title: "{expected_title}"' in updated_index_md
 
     mock_get_gbif_taxon_key.assert_called_once_with(species_name=user_form_data.species_name)
     mock_process_taxonomy.assert_called_once_with(user_form_data.species_name, tmp_path)

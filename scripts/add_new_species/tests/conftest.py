@@ -9,6 +9,7 @@ from get_assembly_metadata_from_ENA_NCBI import AssemblyMetadata
 FIXTURES_DIR = Path(__file__).parent / "fixtures"
 IMG_FIXTURES_DIR = FIXTURES_DIR / "example_images"
 FORM_FIXTURES_DIR = FIXTURES_DIR / "submission_form_example"
+REPO_ROOT = Path(__file__).resolve().parents[3]
 
 
 @pytest.fixture
@@ -43,7 +44,7 @@ def example_user_forms() -> dict[str, Path]:
     """
     form_files = {
         "markdown_form": FORM_FIXTURES_DIR / "converted_test-species_submission_form_v1.1.0.md",
-        "docx_form": FORM_FIXTURES_DIR / "01-test-species-submission_v1.2.docx",
+        "docx_form": REPO_ROOT / "species_submission" / "submission_form_templates" / "01-species-submission_v1.3.docx",
     }
     return form_files
 
@@ -57,6 +58,7 @@ def user_form_data() -> UserFormData:
         species_name="Aspergillus nidulans",
         species_slug="aspergillus_nidulans",
         common_name="A species of mold",
+        additional_descriptor="FGSC A4",
         description="Aspergillus nidulans is a filamentous fungus widely used as a model organism in genetics and cell biology.",
         references="- Reference 1: https://doi.org/10.1234/reference1\n- Reference 2: https://doi.org/10.5678/reference2",
         publication="Published in Journal of Mycology, 2025.",

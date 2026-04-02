@@ -35,15 +35,16 @@ def test_create_markdown_content_docx_fail(example_user_forms: dict[str, Path]) 
         create_markdown_content(input_form_file)
 
 
-def test_parse_user_form_success(example_user_forms: dict[str, Path]) -> None:
+def test_parse_user_form_fails_for_unfilled_template(example_user_forms: dict[str, Path]) -> None:
     """
-    Test that sucessfully runs the 'main' function of the module and returns a UserFormData object (dataclass).
+    Test that an unfilled v1.3 template docx fails validation for required species name.
     """
     input_form_file = example_user_forms["docx_form"]
-    UserFormData = parse_user_form(input_form_file)
-
-    for key, value in vars(UserFormData).items():
-        assert value, f"Field: {key} is empty"
+    with pytest.raises(
+        ValueError,
+        match="Species name must be binomial \\(Genus species\\). Remove any extra descriptors from the species field.",
+    ):
+        parse_user_form(input_form_file)
 
 
 def test_validate_species_name_is_binomial_success() -> None:
@@ -115,9 +116,10 @@ def test_extract_species_names_normalizes_and_validates_slug() -> None:
     """
     markdown_content = "\n".join(
         [
-            "| > fungus |",
-            "| Scientific name: | Volvox\u00a0carteri |",
+            "| Scientific name |",
+            "| Scientific name (Genus species): | Volvox\u00a0carteri |",
             "| English (common) name: | green algae |",
+            "| Additional descriptor (optional): | FGSC A4 |",
             "| Species description |",
         ]
     )
@@ -126,3 +128,57 @@ def test_extract_species_names_normalizes_and_validates_slug() -> None:
     assert species_names["species_name"] == "Volvox carteri"
     assert species_names["species_slug"] == "volvox_carteri"
     assert species_names["common_name"] == "green algae"
+    assert species_names["additional_descriptor"] == "FGSC A4"
+
+
+def test_extract_species_names_handles_empty_optional_descriptor_placeholder() -> None:
+    markdown_content = "\n".join(
+        [
+            "| Scientific name |",
+            "| Scientific name (Genus species): | Volvox carteri |",
+            "| English (common) name: | green algae |",
+            "| Additional descriptor (optional): | Click or tap here to enter text. |",
+            "| Species description |",
+        ]
+    )
+
+    species_names = extract_species_names(markdown_content)
+
+    assert species_names["species_name"] == "Volvox carteri"
+    assert species_names["species_slug"] == "volvox_carteri"
+    assert species_names["common_name"] == "green algae"
+    assert species_names["additional_descriptor"] == ""
+
+
+def test_extract_species_names_unescapes_markdown_in_additional_descriptor() -> None:
+    markdown_content = "\n".join(
+        [
+            "| Scientific name |",
+            "| Scientific name (Genus species): | Volvox carteri |",
+            "| English (common) name: | green algae |",
+            r"| Additional descriptor (optional): | f\. nagariensis Eve |",
+            "| Species description |",
+        ]
+    )
+
+    species_names = extract_species_names(markdown_content)
+    assert species_names["additional_descriptor"] == "f. nagariensis Eve"
+
+
+def test_extract_species_names_supports_legacy_scientific_name_key() -> None:
+    markdown_content = "\n".join(
+        [
+            "| Scientific name |",
+            "| Scientific name: | Volvox carteri |",
+            "| English (common) name: | green algae |",
+            "| Additional descriptor (optional): | FGSC A4 |",
+            "| Species description |",
+        ]
+    )
+
+    species_names = extract_species_names(markdown_content)
+
+    assert species_names["species_name"] == "Volvox carteri"
+    assert species_names["species_slug"] == "volvox_carteri"
+    assert species_names["common_name"] == "green algae"
+    assert species_names["additional_descriptor"] == "FGSC A4"

@@ -16,6 +16,16 @@ TAXONOMY_FILE = "taxonomy.json"
 REQUEST_TIMEOUT = (5, 30)
 
 
+def format_species_title(species_name: str, additional_descriptor: str) -> str:
+    """
+    Build Hugo title value where scientific name is italicized and optional descriptor is plain text.
+    """
+    title = f"*{species_name}*"
+    if additional_descriptor:
+        title = f"{title} {additional_descriptor}"
+    return title
+
+
 def add_index_md(
     user_form_data: UserFormData,
     content_dir_path: Path,
@@ -57,6 +67,10 @@ def add_index_md(
     content = render(
         template_text=template_text,
         required_replacements={
+            "title": format_species_title(
+                species_name=species_name,
+                additional_descriptor=user_form_data.additional_descriptor,
+            ),
             "species_name": species_name,
             "species_slug": user_form_data.species_slug,
             "common_name": user_form_data.common_name,
