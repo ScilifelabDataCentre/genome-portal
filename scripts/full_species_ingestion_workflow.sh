@@ -82,12 +82,13 @@ RAW_SPECIES_SLUG="$(
 )"
 # In the spirit of this being a "I'm feeling lucky" script, hardcode --overwrite
 
-# docker -it output can include carriage returns; normalize to a clean slug.
-SPECIES_SLUG="$(printf '%s' "$RAW_SPECIES_SLUG" | tail -n 1 | tr -d '\r\n' | xargs)"
+# Normalize the species slug
+SPECIES_SLUG="$(printf '%s' "$RAW_SPECIES_SLUG" | tail -n 1 | xargs)"
 if [[ ! "$SPECIES_SLUG" =~ ^[a-z_]+$ ]]; then
   echo "Failed to parse a valid species slug from add_new_species output: '$RAW_SPECIES_SLUG'" >&2
   exit 1
 fi
+
 
 echo "add_new_species step was successful. The species slug for this input data is: $SPECIES_SLUG"
 

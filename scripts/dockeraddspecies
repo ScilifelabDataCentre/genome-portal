@@ -79,7 +79,6 @@ run() {
   declare -a docker_flags
   docker_flags=(
     --rm
-    -it
     -u "${docker_user}"
     -w /swedgene
     -v "${CWD}:/swedgene"
