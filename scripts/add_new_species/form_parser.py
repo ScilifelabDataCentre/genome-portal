@@ -245,13 +245,21 @@ def extract_publication(markdown_content: str) -> str:
     """
 
     pubs_section = extract_block_of_markdown(
-        start_marker="| > in [APA 7](https://apastyle.apa.org/).",
-        end_marker="Funding",
+        start_marker="| Scientific article (Optional)",
+        end_marker="| Funding",
         markdown_content=markdown_content,
     )
 
-    pubs_section_borderless = strip_table_borders(pubs_section)
+    # Drop instruction rows and keep only submitted publication content rows.
+    publication_lines = []
+    for line in pubs_section.splitlines():
+        if re.match(r"^\|\s*>\s*", line):
+            continue
+        if re.match(r"^\s*[\|\+\-=]+\s*$", line):
+            continue
+        publication_lines.append(line)
 
+    pubs_section_borderless = strip_table_borders("\n".join(publication_lines))
     return pubs_section_borderless.strip()
 
 

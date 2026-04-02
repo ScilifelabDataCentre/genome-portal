@@ -4,6 +4,7 @@ from pathlib import Path
 import pytest
 from form_parser import (
     create_markdown_content,
+    extract_publication,
     extract_species_names,
     normalize_species_name,
     parse_user_form,
@@ -198,3 +199,18 @@ def test_extract_species_names_supports_legacy_scientific_name_key() -> None:
     assert species_names["species_slug"] == "volvox_carteri"
     assert species_names["common_name"] == "green algae"
     assert species_names["additional_descriptor"] == "FGSC A4"
+
+
+def test_extract_publication_from_scientific_article_section() -> None:
+    markdown_content = "\n".join(
+        [
+            "| Scientific article (Optional) |",
+            "| > If available, provide references. |",
+            "| > Format all reference in [APA 7](https://apastyle.apa.org/). |",
+            "| ReftestGenome1, T. (2025). Test of ref parsing1. Journal. DOI. |",
+            "| Funding |",
+        ]
+    )
+
+    publication = extract_publication(markdown_content)
+    assert publication == "ReftestGenome1, T. (2025). Test of ref parsing1. Journal. DOI."
