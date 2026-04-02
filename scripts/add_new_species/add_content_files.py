@@ -3,6 +3,7 @@ from datetime import datetime
 from pathlib import Path
 
 import requests
+from busco_utils import select_odb_database_from_tracks
 from form_parser import UserFormData
 from get_assembly_metadata_from_ENA_NCBI import AssemblyMetadata
 from get_taxonomy import EbiRestException, get_taxonomy, save_taxonomy_file
@@ -86,7 +87,12 @@ def add_index_md(
     save_text_file(content=content, output_file_path=output_file_path)
 
 
-def add_assembly_md(user_form_data: UserFormData, assembly_metadata: AssemblyMetadata, content_dir_path: Path) -> None:
+def add_assembly_md(
+    user_form_data: UserFormData,
+    assembly_metadata: AssemblyMetadata,
+    content_dir_path: Path,
+    user_data_tracks: list[dict],
+) -> None:
     """
     Use the template assembly.md file to create the assembly.md file for the species.
     Template files are modified with the species specific information.
@@ -110,6 +116,11 @@ def add_assembly_md(user_form_data: UserFormData, assembly_metadata: AssemblyMet
             "assembly_accession": assembly_metadata.assembly_accession,
         },
     )
+
+    odb_database = select_odb_database_from_tracks(user_data_tracks=user_data_tracks)
+    if odb_database:
+        content = content.replace("[EDIT:ODB_database]", odb_database)
+
     save_text_file(content=content, output_file_path=output_file_path)
 
 

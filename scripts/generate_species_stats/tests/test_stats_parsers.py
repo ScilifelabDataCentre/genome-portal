@@ -99,3 +99,26 @@ def test_extract_template_metric_keys_reads_assembly_and_annotation_sections(tmp
 
     keys = extract_template_metric_keys(template_path=template)
     assert keys == ["Assembly length (Mbp)", "GC %", "Gene #"]
+
+
+def test_render_stats_yaml_does_not_flag_prefilled_non_placeholder_values_as_unresolved(tmp_path: Path) -> None:
+    template = tmp_path / "species_stats.yml"
+    template.write_text(
+        "\n".join(
+            [
+                "---",
+                "assembly:",
+                '  - "BUSCO % [EDIT]": "C:99% [S:98%, D:1%], F:0.5%, M:0.5%, n:5286 (odb)"',
+                "annotation:",
+                '  - "BUSCO % [EDIT]": "C:98% [S:96%, D:2%], F:1.0%, M:1.0%, n:255 (odb)"',
+            ]
+        ),
+        encoding="utf-8",
+    )
+    output = tmp_path / "out.yml"
+    unresolved = render_stats_yaml(
+        template_path=template,
+        output_path=output,
+        values={"BUSCO % [EDIT]": None},
+    )
+    assert unresolved == []

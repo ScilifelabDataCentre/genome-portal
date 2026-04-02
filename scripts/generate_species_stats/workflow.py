@@ -70,6 +70,22 @@ def _publish_output_file_to_hugo_dir(temp_output: Path, destination: Path) -> No
     destination_tmp.replace(destination)
 
 
+def _update_assembly_notes_placeholders(
+    repo_root: Path,
+    species_slug: str,
+    fasta_file_name: str,
+    annotation_file_name: str,
+) -> None:
+    assembly_md_path = repo_root / "hugo" / "content" / "species" / species_slug / "assembly.md"
+    if not assembly_md_path.exists():
+        return
+
+    content = assembly_md_path.read_text(encoding="utf-8")
+    content = content.replace("[EDIT:genome_assembly_filename]", fasta_file_name)
+    content = content.replace("[EDIT:annotation_file_name]", annotation_file_name)
+    assembly_md_path.write_text(content, encoding="utf-8")
+
+
 def _read_cached_report_or_placeholder(
     skip: bool,
     report_path: Path,
@@ -282,6 +298,13 @@ def run_stats_workflow(options: WorkflowOptions) -> tuple[str, list[str]]:
     _publish_output_file_to_hugo_dir(temp_output=temp_output, destination=output_file_destination)
     if temp_output.exists():
         temp_output.unlink()
+
+    _update_assembly_notes_placeholders(
+        repo_root=options.repo_root,
+        species_slug=options.species_slug,
+        fasta_file_name=options.fasta_path.name,
+        annotation_file_name=options.gff_path.name,
+    )
 
     display_destination = _display_path(path=output_file_destination, repo_root=options.repo_root)
     return display_destination, unresolved_placeholders

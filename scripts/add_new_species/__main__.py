@@ -211,6 +211,7 @@ def run_add_new_species(args: argparse.Namespace) -> str:
         user_form_data=user_form_data,
         assembly_metadata=assembly_metadata,
         content_dir_path=output_dir_paths.content_dir_path,
+        user_data_tracks=user_data_tracks,
     )
 
     add_download_md(

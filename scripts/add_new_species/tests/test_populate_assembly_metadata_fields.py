@@ -98,6 +98,7 @@ def test_add_assembly_md(user_form_data: UserFormData, assembly_metadata: Assemb
         user_form_data=user_form_data,
         assembly_metadata=assembly_metadata,
         content_dir_path=tmp_path,
+        user_data_tracks=[],
     )
 
     output_file_path = tmp_path / "assembly.md"
@@ -120,3 +121,26 @@ def test_add_assembly_md(user_form_data: UserFormData, assembly_metadata: Assemb
     for placeholder, expected_value in placeholders_and_replacements.items():
         assert placeholder not in updated_assembly_md, f"Placeholder {placeholder} was not replaced."
         assert expected_value in updated_assembly_md, f"Expected value {expected_value} not found in the output."
+
+
+def test_add_assembly_md_populates_odb_database_from_busco(
+    user_form_data: UserFormData, assembly_metadata: AssemblyMetadata, tmp_path: Path
+) -> None:
+    user_data_tracks = [
+        {
+            "dataTrackName": "Genome",
+            "buscoStats": "C:99% [S:97.8%, D:1.2%], F:0.2%, M:0.8%, n:5286 (lepidoptera_odb10)",
+        }
+    ]
+
+    add_assembly_md(
+        user_form_data=user_form_data,
+        assembly_metadata=assembly_metadata,
+        content_dir_path=tmp_path,
+        user_data_tracks=user_data_tracks,
+    )
+
+    output_file_path = tmp_path / "assembly.md"
+    updated_assembly_md = output_file_path.read_text()
+    assert "[EDIT:ODB_database]" not in updated_assembly_md
+    assert "lepidoptera_odb10" in updated_assembly_md

@@ -276,3 +276,33 @@ def test_existing_hugo_species_stats_template_is_preferred_and_preserves_busco_r
     assert data["annotation"][0]["Gene #"] == "123"
     assert data["assembly"][-1]["BUSCO % [EDIT]"] == "C:99% [S:98%, D:1%], F:0.5%, M:0.5%, n:5286 (odb)"
     assert data["annotation"][-1]["BUSCO % [EDIT]"] == "C:98% [S:96%, D:2%], F:1.0%, M:1.0%, n:255 (odb)"
+
+
+def test_run_updates_assembly_md_notes_placeholders(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    repo_root = tmp_path
+    _write_template(repo_root)
+    fasta = repo_root / "data" / "species_x" / "assembly.fna.gz"
+    gff = repo_root / "data" / "species_x" / "annotation.gff.gz"
+    fasta.parent.mkdir(parents=True, exist_ok=True)
+    fasta.write_text(">", encoding="utf-8")
+    gff.write_text("##gff-version 3\n", encoding="utf-8")
+
+    assembly_md = repo_root / "hugo" / "content" / "species" / "species_x" / "assembly.md"
+    assembly_md.parent.mkdir(parents=True, exist_ok=True)
+    assembly_md.write_text(
+        "Notes: [EDIT:genome_assembly_filename] and [EDIT:annotation_file_name] and [EDIT:ODB_database]",
+        encoding="utf-8",
+    )
+
+    monkeypatch.setattr(workflow, "run_quast", lambda fasta_path, output_dir, force: _write_quast_report(output_dir))
+    monkeypatch.setattr(
+        workflow, "run_agat", lambda gff_path, output_dir, force, temp_dir: _write_agat_report(output_dir)
+    )
+
+    run_stats_workflow(_options(repo_root, tmp_path / "work"))
+    updated = assembly_md.read_text(encoding="utf-8")
+    assert "[EDIT:genome_assembly_filename]" not in updated
+    assert "[EDIT:annotation_file_name]" not in updated
+    assert "[EDIT:ODB_database]" in updated
+    assert "assembly.fna.gz" in updated
+    assert "annotation.gff.gz" in updated

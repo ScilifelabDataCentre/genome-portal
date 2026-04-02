@@ -108,6 +108,13 @@ def render_stats_yaml(
     with open(template_path, "r", encoding="utf-8") as handle:
         template_data = yaml.safe_load(handle)
 
+    def is_edit_placeholder(raw_value: object) -> bool:
+        if raw_value == "[EDIT]":
+            return True
+        if isinstance(raw_value, list) and raw_value == ["EDIT"]:
+            return True
+        return False
+
     unresolved_placeholders: list[str] = []
     for section in ("assembly", "annotation"):
         for row in template_data.get(section, []):
@@ -116,7 +123,10 @@ def render_stats_yaml(
                     continue
                 value = values[key]
                 if value is None:
-                    unresolved_placeholders.append(key)
+                    # Keep pre-filled template values (e.g. BUSCO from add_new_species)
+                    # and only mark unresolved when the field still has an [EDIT] placeholder.
+                    if is_edit_placeholder(row[key]):
+                        unresolved_placeholders.append(key)
                 else:
                     row[key] = str(value)
 
