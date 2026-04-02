@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Assumes that:
-# ./scripts/dockerbuild -k add_species -t local and
-# ./scripts/dockerbuild -u -t local -k data
+# ./scripts/dockerbuild -k add_species -t <tag> and
+# ./scripts/dockerbuild -u -t <tag> -k data
 # have been run, and that the generated images are available locally.
 #
 # "I'm feeling lucky" script to run the full species ingestion workflow in one command, for testing and development purposes.
@@ -33,6 +33,26 @@ TRACKS=""
 IMAGE="/scripts/add_new_species/templates/placeholder_image_4-3_ratio.webp"
 TAG="local"
 
+require_local_image() {
+  local image="$1"
+  local build_hint="$2"
+  if ! docker image inspect "${image}:${TAG}" >/dev/null 2>&1; then
+    echo "Missing required image: ${image}:${TAG}" >&2
+    echo "Build it with:" >&2
+    echo "  ${build_hint}" >&2
+    exit 1
+  fi
+}
+
+check_required_images() {
+  require_local_image \
+    "ghcr.io/scilifelabdatacentre/swg-add-species" \
+    "./scripts/dockerbuild -t \"${TAG}\" -k add_species"
+  require_local_image \
+    "ghcr.io/scilifelabdatacentre/swg-data-builder" \
+    "./scripts/dockerbuild -u -t \"${TAG}\" -k data"
+}
+
 while [[ $# -gt 0 ]]; do
   case "$1" in
     -f) FORM="$2"; shift 2 ;;
@@ -46,6 +66,7 @@ done
 
 [[ -n "$FORM" ]] || { echo "Missing -f" >&2; help; exit 1; }
 [[ -n "$TRACKS" ]] || { echo "Missing -d" >&2; help; exit 1; }
+check_required_images
 
 # 1. Run the add_new_species script in a Docker container, passing the provided form, data tracks, and image. Capture the printed species slug.
 
@@ -85,7 +106,7 @@ echo "Running dockeraddspecies to configure default session for species slug: $S
   --yaml "config/${SPECIES_SLUG}/config.yml" \
   --set-default-session-all-tracks \
   -o && \
-  ./scripts/dockermake -t local SPECIES="$SPECIES_SLUG" jbrowse-config
+  ./scripts/dockermake -t "$TAG" SPECIES="$SPECIES_SLUG" jbrowse-config
 
 # 4. Run the generate_species_stats script to generate stats for the new species.
 
@@ -95,6 +116,6 @@ echo "Running generate_species_stats to generate stats for species slug: $SPECIE
 
 # 5. Rebuild and serve the Hugo site, then print the URL for the new species page.
 
-./scripts/dockerbuild -u -t local -k hugo && \
-docker rm -f "genome-portal"; ./scripts/dockerserve -t local && \
+./scripts/dockerbuild -u -t "$TAG" -k hugo && \
+docker rm -f "genome-portal"; ./scripts/dockerserve -t "$TAG" && \
 echo "The full species ingestion workflow is complete! You can now visit http://localhost:8080/species/${SPECIES_SLUG} to see the new species page"
