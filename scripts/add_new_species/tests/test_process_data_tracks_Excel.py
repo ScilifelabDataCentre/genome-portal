@@ -5,13 +5,24 @@ from pathlib import Path
 import pandas as pd
 import pytest
 from get_assembly_metadata_from_ENA_NCBI import MissingGenomeAccessionError, extract_genome_accession
+from openpyxl import Workbook
 from process_data_tracks_Excel import (
     EXPECTED_EXCEL_COLUMNS,
     df_row_to_json,
     parse_excel_file,
     populate_data_tracks_json,
     validate_excel_columns,
+    validate_excel_form_version,
 )
+
+
+def _write_minimal_versioned_workbook(path: Path, instructions_a1: str = "Instructions (version 1.3)") -> None:
+    workbook = Workbook()
+    instructions_sheet = workbook.active
+    instructions_sheet.title = "Instructions"
+    instructions_sheet["A1"] = instructions_a1
+    workbook.create_sheet("Sheet1")
+    workbook.save(path)
 
 
 def test_parse_excel_file_with_comments(example_excel_files: dict[str, Path]) -> None:
@@ -38,6 +49,36 @@ def test_parse_excel_file_without_comments(example_excel_files: dict[str, Path])
     list_of_dicts = parse_excel_file(input_excel_file, sheet_name)
 
     assert isinstance(list_of_dicts, list), "The output is not a list"
+
+
+def test_validate_excel_form_version_accepts_1_3(tmp_path: Path) -> None:
+    workbook_path = tmp_path / "valid_version.xlsx"
+    _write_minimal_versioned_workbook(workbook_path, "Instructions (version 1.3)")
+    validate_excel_form_version(str(workbook_path))
+
+
+def test_validate_excel_form_version_rejects_wrong_version(tmp_path: Path) -> None:
+    workbook_path = tmp_path / "wrong_version.xlsx"
+    _write_minimal_versioned_workbook(workbook_path, "Instructions (version 1.2)")
+    with pytest.raises(ValueError, match="Unsupported data tracks form version 1.2"):
+        validate_excel_form_version(str(workbook_path))
+
+
+def test_validate_excel_form_version_rejects_missing_instructions_sheet(tmp_path: Path) -> None:
+    workbook_path = tmp_path / "missing_instructions.xlsx"
+    workbook = Workbook()
+    workbook.active.title = "Sheet1"
+    workbook.save(workbook_path)
+
+    with pytest.raises(ValueError, match="Missing 'Instructions' sheet"):
+        validate_excel_form_version(str(workbook_path))
+
+
+def test_validate_excel_form_version_rejects_unparseable_a1(tmp_path: Path) -> None:
+    workbook_path = tmp_path / "bad_a1.xlsx"
+    _write_minimal_versioned_workbook(workbook_path, "Instructions")
+    with pytest.raises(ValueError, match="Could not detect data tracks form version"):
+        validate_excel_form_version(str(workbook_path))
 
 
 def test_validate_excel_columns_missing_required_column() -> None:

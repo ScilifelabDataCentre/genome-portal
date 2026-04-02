@@ -61,13 +61,27 @@ RUN curl -fsSL -o /usr/local/bin/yq https://github.com/mikefarah/yq/releases/lat
 FROM python:${PYTHON_IMAGE_TAG}
 
 ARG CONDA_ENV_NAME=add-species-tools
+ARG PANDOC_VERSION=3.9.0.2
+ARG TARGETARCH
 
 WORKDIR /swedgene
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
-    pandoc \
+    curl \
+    tar \
     && rm -rf /var/lib/apt/lists/*
+
+RUN case "${TARGETARCH}" in \
+      amd64) PANDOC_ARCH="amd64" ;; \
+      arm64) PANDOC_ARCH="arm64" ;; \
+      *) echo "Unsupported architecture: ${TARGETARCH}" >&2; exit 1 ;; \
+    esac \
+    && curl -fsSL -o /tmp/pandoc.tar.gz \
+      "https://github.com/jgm/pandoc/releases/download/${PANDOC_VERSION}/pandoc-${PANDOC_VERSION}-linux-${PANDOC_ARCH}.tar.gz" \
+    && tar -xzf /tmp/pandoc.tar.gz -C /tmp \
+    && cp "/tmp/pandoc-${PANDOC_VERSION}/bin/pandoc" /usr/local/bin/pandoc \
+    && rm -rf /tmp/pandoc.tar.gz "/tmp/pandoc-${PANDOC_VERSION}"
 
 COPY --from=non_conda_build /usr/local/bin/yq /usr/local/bin/yq
 COPY --from=non_conda_build /usr/local/bin/quast /usr/local/bin/quast

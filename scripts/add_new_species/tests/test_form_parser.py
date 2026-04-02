@@ -8,6 +8,7 @@ from form_parser import (
     normalize_species_name,
     parse_user_form,
     slug_from_species_name,
+    validate_docx_form_version,
     validate_species_name_is_binomial,
     validate_species_slug,
 )
@@ -45,6 +46,21 @@ def test_parse_user_form_fails_for_unfilled_template(example_user_forms: dict[st
         match="Species name must be binomial \\(Genus species\\). Remove any extra descriptors from the species field.",
     ):
         parse_user_form(input_form_file)
+
+
+def test_validate_docx_form_version_accepts_v1_3(example_user_forms: dict[str, Path]) -> None:
+    input_form_file = example_user_forms["docx_form"]
+    markdown_content = create_markdown_content(input_form_file)
+    validate_docx_form_version(markdown_content=markdown_content)
+
+
+def test_validate_docx_form_version_rejects_v1_2(example_user_forms: dict[str, Path]) -> None:
+    input_form_file = example_user_forms["docx_form_v1_2"]
+    with pytest.raises(
+        ValueError, match="Could not detect species submission form version|Unsupported species submission form version"
+    ):
+        markdown_content = create_markdown_content(input_form_file)
+        validate_docx_form_version(markdown_content=markdown_content)
 
 
 def test_validate_species_name_is_binomial_success() -> None:

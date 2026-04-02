@@ -5,6 +5,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Optional
 
+EXPECTED_SPECIES_SUBMISSION_FORM_VERSION = "1.3"
+
 
 @dataclass
 class UserFormData:
@@ -31,6 +33,7 @@ def parse_user_form(form_file_path: Path) -> UserFormData:
     Returning an object with all the attributes that need to be extracted
     """
     markdown_content = create_markdown_content(form_file_path)
+    validate_docx_form_version(markdown_content=markdown_content)
 
     species_names = extract_species_names(markdown_content)
     description = extract_description(markdown_content)
@@ -134,6 +137,27 @@ def create_markdown_content(form_file_path: Path) -> str:
     )
 
     return pandoc_result.stdout
+
+
+def validate_docx_form_version(
+    markdown_content: str, expected_version: str = EXPECTED_SPECIES_SUBMISSION_FORM_VERSION
+) -> None:
+    """
+    Validate form version from pandoc-generated markdown.
+    Expected line format in the form body: 'Form version 1.3'
+    """
+    version_match = re.search(r"\bForm\s+version\s+([0-9]+(?:\.[0-9]+)?)\b", markdown_content, flags=re.I)
+    detected_version = version_match.group(1) if version_match else None
+    if not detected_version:
+        raise ValueError(
+            f"Could not detect species submission form version in markdown content. "
+            f"Expected version {expected_version}."
+        )
+    if detected_version != expected_version:
+        raise ValueError(
+            f"Unsupported species submission form version {detected_version}. "
+            f"Expected version {expected_version}. Please use the latest template."
+        )
 
 
 def extract_species_names(markdown_content: str) -> dict[str, str]:

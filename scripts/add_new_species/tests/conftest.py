@@ -45,6 +45,7 @@ def example_user_forms() -> dict[str, Path]:
     form_files = {
         "markdown_form": FORM_FIXTURES_DIR / "converted_test-species_submission_form_v1.1.0.md",
         "docx_form": REPO_ROOT / "species_submission" / "submission_form_templates" / "01-species-submission_v1.3.docx",
+        "docx_form_v1_2": FORM_FIXTURES_DIR / "01-test-species-submission_v1.2.docx",
     }
     return form_files
 
