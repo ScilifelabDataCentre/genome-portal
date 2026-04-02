@@ -122,6 +122,17 @@ def test_df_row_to_json_does_not_set_accession_from_doi_for_non_genome(data_trac
     assert output["accessionOrDOI"] == "[EDIT]"
 
 
+def test_df_row_to_json_ingests_optional_busco_stats(data_tracks_template_json: str) -> None:
+    row = pd.Series(
+        {
+            "data_track_name": "Genome",
+            "BUSCO_stats": "C:99% [S:97.8%, D:1.2%], F:0.2%, M:0.8%, n:5286 (lepidoptera_odb10)",
+        }
+    )
+    output = df_row_to_json(row, data_tracks_template_json)
+    assert output["buscoStats"] == "C:99% [S:97.8%, D:1.2%], F:0.2%, M:0.8%, n:5286 (lepidoptera_odb10)"
+
+
 def test_extract_genome_accession_genbank_accession(user_data_tracks: list[dict]) -> None:
     """
     Test that sucessfully extracts the GenBank accession from a fixture that

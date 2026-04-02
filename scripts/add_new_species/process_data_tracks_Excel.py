@@ -32,11 +32,16 @@ class ExpectedExcelColumns(str, Enum):
     FILENAME = "filename"
     PRINCIPAL_INVESTIGATOR_NAME = "principal_investigator_name"
     PRINCIPAL_INVESTIGATOR_AFFILIATION = "principal_investigator_affiliation"
+    BUSCO_STATS = "BUSCO_stats"
     DIRECT_LINK_TO_FILE_FOR_DOWNLOAD = "direct_link_to_file_for_download"
     DOI_LINK_TO_SCIENTIFIC_ARTICLE = "doi_link_to_scientific_article"
 
 
 EXPECTED_EXCEL_COLUMNS = {column.value for column in ExpectedExcelColumns}
+
+# Backwards compatible fallback for older form versions that did not have the BUSCO_stats column
+OPTIONAL_EXCEL_COLUMNS = {ExpectedExcelColumns.BUSCO_STATS.value}
+REQUIRED_EXCEL_COLUMNS = EXPECTED_EXCEL_COLUMNS - OPTIONAL_EXCEL_COLUMNS
 
 
 def validate_excel_columns(df: pd.DataFrame) -> pd.DataFrame:
@@ -46,7 +51,7 @@ def validate_excel_columns(df: pd.DataFrame) -> pd.DataFrame:
     """
     actual_columns = {str(col) for col in df.columns}
 
-    missing_columns = sorted(EXPECTED_EXCEL_COLUMNS - actual_columns)
+    missing_columns = sorted(REQUIRED_EXCEL_COLUMNS - actual_columns)
     unexpected_columns = sorted(actual_columns - EXPECTED_EXCEL_COLUMNS)
     if missing_columns or unexpected_columns:
         raise ValueError(
@@ -86,6 +91,8 @@ def df_row_to_json(row: pd.Series, template_json: str) -> dict[str, str]:
         data_track["principalInvestigator"] = row["principal_investigator_name"]
     if "principal_investigator_affiliation" in row and pd.notna(row["principal_investigator_affiliation"]):
         data_track["principalInvestigatorAffiliation"] = row["principal_investigator_affiliation"]
+    if "BUSCO_stats" in row and pd.notna(row["BUSCO_stats"]):
+        data_track["buscoStats"] = row["BUSCO_stats"]
     if "direct_link_to_file_for_download" in row and pd.notna(row["direct_link_to_file_for_download"]):
         data_track["links"][0]["Download"] = row["direct_link_to_file_for_download"]
     if "doi_link_to_scientific_article" in row and pd.notna(row["doi_link_to_scientific_article"]):

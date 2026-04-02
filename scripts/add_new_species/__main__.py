@@ -220,6 +220,7 @@ def run_add_new_species(args: argparse.Namespace) -> str:
 
     add_stats_file(
         data_dir_path=output_dir_paths.data_dir_path,
+        user_data_tracks=user_data_tracks,
     )
 
     populate_data_tracks_json(user_data_tracks, assets_dir_path=output_dir_paths.assets_dir_path)

@@ -230,3 +230,49 @@ def test_run_agat_uses_temp_dir_as_cwd(
     workflow.run_agat(gff_path=gff, output_dir=output_dir, force=False, temp_dir=temp_dir)
 
     assert captured["cwd"] == temp_dir
+
+
+def test_existing_hugo_species_stats_template_is_preferred_and_preserves_busco_rows(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    repo_root = tmp_path
+    _write_template(repo_root)
+
+    destination = repo_root / "hugo" / "data" / "species_x" / "species_stats.yml"
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    destination.write_text(
+        "\n".join(
+            [
+                "---",
+                "assembly:",
+                '  - "Assembly length (Mbp)": [EDIT]',
+                '  - "GC %": [EDIT]',
+                '  - "BUSCO % [EDIT]": "C:99% [S:98%, D:1%], F:0.5%, M:0.5%, n:5286 (odb)"',
+                "annotation:",
+                '  - "Gene #": [EDIT]',
+                '  - "BUSCO % [EDIT]": "C:98% [S:96%, D:2%], F:1.0%, M:1.0%, n:255 (odb)"',
+            ]
+        ),
+        encoding="utf-8",
+    )
+
+    fasta = repo_root / "data" / "species_x" / "assembly.fna.gz"
+    gff = repo_root / "data" / "species_x" / "annotation.gff.gz"
+    fasta.parent.mkdir(parents=True, exist_ok=True)
+    fasta.write_text(">", encoding="utf-8")
+    gff.write_text("##gff-version 3\n", encoding="utf-8")
+
+    monkeypatch.setattr(workflow, "run_quast", lambda fasta_path, output_dir, force: _write_quast_report(output_dir))
+    monkeypatch.setattr(
+        workflow, "run_agat", lambda gff_path, output_dir, force, temp_dir: _write_agat_report(output_dir)
+    )
+
+    run_stats_workflow(_options(repo_root, tmp_path / "work"))
+    with open(destination, "r", encoding="utf-8") as handle:
+        data = yaml.safe_load(handle)
+
+    assert data["assembly"][0]["Assembly length (Mbp)"] == "2.00"
+    assert data["annotation"][0]["Gene #"] == "123"
+    assert data["assembly"][-1]["BUSCO % [EDIT]"] == "C:99% [S:98%, D:1%], F:0.5%, M:0.5%, n:5286 (odb)"
+    assert data["annotation"][-1]["BUSCO % [EDIT]"] == "C:98% [S:96%, D:2%], F:1.0%, M:1.0%, n:255 (odb)"

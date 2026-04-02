@@ -261,8 +261,13 @@ def run_stats_workflow(options: WorkflowOptions) -> tuple[str, list[str]]:
         repo_root=options.repo_root,
     )
 
-    # Use species_stats.yml template as sourcce of truth for which metrics to include in the final report, and combine Quast and AGAT stats accordingly.
-    template_path = options.repo_root / "scripts" / "add_new_species" / "templates" / "species_stats.yml"
+    # Prefer existing hugo/data species_stats.yml as template source (preserves BUSCO/custom rows),
+    # then fall back to the canonical add_new_species template.
+    output_file_destination = options.repo_root / "hugo" / "data" / options.species_slug / "species_stats.yml"
+    canonical_template_path = options.repo_root / "scripts" / "add_new_species" / "templates" / "species_stats.yml"
+    template_path = output_file_destination if output_file_destination.exists() else canonical_template_path
+
+    # Use selected species_stats.yml template as source of truth for which metrics to include in the final report.
     template_keys = extract_template_metric_keys(template_path=template_path)
     combined_values: dict[str, str | None] = {key: None for key in template_keys}
     combined_values.update(quast_stats)
@@ -274,7 +279,6 @@ def run_stats_workflow(options: WorkflowOptions) -> tuple[str, list[str]]:
         template_path=template_path, output_path=temp_output, values=combined_values
     )
 
-    output_file_destination = options.repo_root / "hugo" / "data" / options.species_slug / "species_stats.yml"
     _publish_output_file_to_hugo_dir(temp_output=temp_output, destination=output_file_destination)
     if temp_output.exists():
         temp_output.unlink()
