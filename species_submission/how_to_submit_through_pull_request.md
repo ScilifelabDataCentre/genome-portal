@@ -8,14 +8,15 @@ It takes the two species submission forms and uses them to create and populate t
 
 ## 1. Setup
 
-This workflow expects a UNIX-computer and Docker. We reccomend Rancher Desktop (completely open-source) or Docker Desktop for ease of installation.
+This workflow expects a UNIX-computer with Docker installed. We reccomend Rancher Desktop (completely open-source) or Docker Desktop for ease of installation. 
 
+Start by cloning the repository. git is commonly included in UNIX systems, but you might need to install it on your computer.
 
 ```bash
 git clone https://github.com/ScilifelabDataCentre/genome-portal.git
 ```
 
-Create a new branch. You can name this anything, but we reccomend `add-<species-name>`. Example: `add-clupea-harengus`.
+Create a new branch. You can name this anything, but we reccomend `add-<species-name>`. Example: `add-volvox-carteri`.
 
 ```bash
 git checkout -b add-<species-name>
@@ -25,6 +26,8 @@ git checkout -b add-<species-name>
 ## 2. Fill out the submisison forms and crop your image to 4:3-ratio
 
 TODO add text here
+
+The forms are in MS Office format, and have only been tested with MS Word and MS Excel.
 
 ## 3. Run the form ingestion workflow
 
@@ -37,9 +40,11 @@ There are three Docker images that need to be built in order to run the workflow
 
 The third one has the website data, and needs to be run everytime you make an update to the content or data of the webpages. The guide will tell you below when that docker build step needs to be run.
 
-To follow along with the example:
+To follow along with the Example, copy two pre-filled test forms to `species_submission/local_inputs`:
 
-cp the files from fixture to local_inputs. the docker container mounts that with /local_inputs/
+```bash
+cp scripts/add_new_species/tests/fixtures/submission_form_example/01-test-species-submission_v1.3.docx species_submission/local_inputs
+```
 
 ### 3.1. Option 1: Run the whole workflow with a "I'm feeling lucky" script
 
@@ -49,10 +54,9 @@ This will currently not work on quantiative tracks were a score column needs to 
 
 ```bash
 bash scripts/full_species_ingestion_workflow.sh \
--f /local_inputs/01-test-species-submission_v1.2.docx \
+-f /local_inputs/01-test-species-submission_v1.3.docx \
 -d /local_inputs/02-test-data-tracks_v1.3.xlsx \
 -i /scripts/add_new_species/templates/placeholder_image_4-3_ratio.webp 
-
 ```
 
 
@@ -60,7 +64,7 @@ bash scripts/full_species_ingestion_workflow.sh \
 
 TODO needed for finetuning some tracks
 
-A continuing parmeter is `<species_name>` which is the lowercase, underscored binomial species name. For instance _Clupea harengus_ becomes `clupea_harengus`.
+A recurring parameter is `<species_name>` which is the lowercase, underscored binomial species name. In the mini-tutorial that will run along with the instructions in this guide, we will be using public data from the algae _Volvox carteri_, which then becomes `volvox_carteri`.
 
 We will use example data for this. 
 
@@ -76,7 +80,7 @@ We will use example data for this.
 Example: 
 
 ```bash
-./scripts/dockeraddspecies python scripts/add_new_species --species-submission-form=/local_inputs/01-test-species-submission_v1.2.docx --data-tracks-sheet=/local_inputs/02-test-data-tracks_v1.3.xlsx --species-image=/scripts/add_new_species/templates/placeholder_image_4-3_ratio.webp --overwrite 
+./scripts/dockeraddspecies python scripts/add_new_species --species-submission-form=/local_inputs/01-test-species-submission_v1.3.docx --data-tracks-sheet=/local_inputs/02-test-data-tracks_v1.3.xlsx --species-image=/scripts/add_new_species/templates/placeholder_image_4-3_ratio.webp --overwrite 
 
 # add the option --print-species-slug-only to have the script only print the species_name as output. This can be useful if scripting with the species_slug, which is the case of the script in section 3.1
 ```
