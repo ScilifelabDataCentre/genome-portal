@@ -18,12 +18,14 @@ hugo/public
 
 # more Hugo stuff
 hugo/.hugo_build.lock
+hugo/static/api/metrics.json
 
 #data stewardship
 scripts/data_stewardship/temp/**
 scripts/data_stewardship/logs/**
 scripts/generate_species_stats/temp/**
 scripts/generate_species_stats/logs/**
+scripts/add_new_species/tests/fixtures/submission_form_example/~$-*
 *.agat.log
 
 # MS Office temp files
