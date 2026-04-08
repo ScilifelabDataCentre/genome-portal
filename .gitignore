@@ -28,8 +28,10 @@ scripts/generate_species_stats/logs/**
 *.agat.log
 
 # MS Office temp files
-scripts/add_new_species/tests/fixtures/submission_form_example/~$-*.docx
-species_submission/submission_form_templates/~$-*.docx
+scripts/add_new_species/tests/fixtures/submission_form_example/~$*.docx
+scripts/add_new_species/tests/fixtures/submission_form_example/~$*.xlsx
+species_submission/submission_form_templates/~$*.docx
+species_submission/submission_form_templates/~$*.xlsx
 
 # OSX
 *.DS_Store
