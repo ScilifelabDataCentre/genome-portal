@@ -38,6 +38,8 @@ jobs:
             image_name: swg-hugo-site
           - dockerfile: data.dockerfile
             image_name: swg-data-builder
+          - dockerfile: add_species.dockerfile
+            image_name: swg-add-species
         
     steps:
       - name: Check out the repo
