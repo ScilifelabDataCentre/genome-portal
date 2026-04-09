@@ -44,7 +44,7 @@ There are two special mandatory case that we would like to emphasize here: namel
 
 The data track row for the primary genome assembly must have the value `Genome` in the column `data_track_name`. It is possible to add multiple assemblies to the Genome Portal, but only the primary genome can be named `Genome`. 
 
-This row needs to have a ENA/NCBI accession number starting with `GCA_` in the column `assembly_GCA_accession`. Genomes that are published in ENA/NCBI will have this accession. 
+This row needs to have a ENA/NCBI accession number starting with `GCA_` in the column `assembly_GCA_accession`. Genomes that are published in ENA/NCBI will have this accession. We expect that almost all primary genome assemblies displayed to be published in ENA/NCBI at the point in time when the speices' Genome Portal pages go live. Nevertheless, we do recognize that there are cases where it is of interest to start building the Genome Portal pages for testing purposes before the assembly is public in ENA/NCBI, and an override option `--skip-assembly-metadata-fetch` that skips the `assembly_GCA_accession` value will be discussed below.
 
 There is also an optional column `BUSCO_stats` for adding the BUSCO values and which odb-database that was used. We encourage users to add this to the genome assembly. 
 
@@ -95,6 +95,13 @@ bash scripts/full_species_ingestion_workflow.sh \
 -i /scripts/add_new_species/templates/placeholder_image_4-3_ratio.webp 
 ```
 
+For cases where there is no public ENA/NCBI record of the primary genome assembly yet, add the following flag to skip the step of the code that fetches assembly metadata from the ENA and NCBI APIs.
+
+```bash
+--skip-assembly-metadata-fetch
+````
+
+
 
 ### 3.2. Option 2: Run the workflow step-by-step
 
@@ -120,6 +127,13 @@ Example:
 
 # add the option --print-species-slug-only to have the script only print the species_name as output. This can be useful if scripting with the species_slug, which is the case of the script in section 3.1
 ```
+
+For cases where there is no public ENA/NCBI record of the primary genome assembly yet, add the following flag to skip the step of the code that fetches assembly metadata from the ENA and NCBI APIs.
+
+```bash
+--skip-assembly-metadata-fetch
+````
+
 
 #### 3.2.3. Build the data builder Docker container
 
