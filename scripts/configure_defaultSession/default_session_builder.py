@@ -100,9 +100,8 @@ class TrackParams:
         """
         Create a TrackParams instance from a track dictionary.
         """
-        track_view_id = (
-            f"{species_abbreviation}_default_{track['name'].replace(' ', '_').replace('\'', '').replace(',', '')}"
-        )
+        sanitized_track_name = track["name"].replace(" ", "_").replace("'", "").replace(",", "")
+        track_view_id = f"{species_abbreviation}_default_{sanitized_track_name}"
         track_file_name = get_track_file_name(track)
         display_type_key, display_type = cls.get_display_type(track)
         display_config = f"{track_file_name}-{display_type}"
