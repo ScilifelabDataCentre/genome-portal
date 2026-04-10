@@ -1,22 +1,29 @@
 # How to submit a new species to the Swedish Reference Genome Portal through a pull request 
 
-This guide describes the full workflow for creating pages for a new species in the Genome Portal. The guide is written with bioinformatics-skilled users or staff in mind and includes every step from filling out the submission forms and generating the files needed for the website and JBrowse configurartion, to building a local test instance of the new pages and eventually opening a Pull Request for review.
+This guide describes the full workflow for creating pages for a new species in the Genome Portal. The guide is written with bioinformatics-skilled users or Genome Portal staff in mind and includes every step from filling out the submission forms and generating the files needed for the website and JBrowse configurartion, to building a local test instance of the new pages and eventually opening a Pull Request for review.
 
 Throughout the guide there will be a tutorial case that uses public data from the algae _Volvox carteri_. If this is your first time adding a species to the Genome Portal, you may want to follow along by trying out those commands.
 
-If you run into any issues or have question, don't hesitate to contact the Genome Portal staff as described in the [main README at the top of the repository](https://github.com/ScilifelabDataCentre/genome-portal).
+If you run into issues or have any questions, don't hesitate to contact the Genome Portal staff as described in the [main README at the top of the repository](https://github.com/ScilifelabDataCentre/genome-portal).
 
 ## 1. Setup
 
 This workflow expects a UNIX-computer with Docker installed. We reccomend [Rancher Desktop](https://rancherdesktop.io/) (full open-source software) or [Docker Desktop](https://www.docker.com/products/docker-desktop/) (open-source software with paid elements) for ease of installation. 
 
-Start by cloning the repository. `git` is commonly included in UNIX systems, but you might need to install it on your computer if not already present. Choose a directory of your liking and clone the main branch of the Genome Portal into it with:
+Start by `git` cloning the repository. Choose a directory of your liking and clone the main branch of the Genome Portal into it with:
 
 ```bash
 git clone https://github.com/ScilifelabDataCentre/genome-portal.git
 ```
 
-Create a new branch. You can name this anything, but we reccomend `add-<species-name>`. Example: `add-volvox-carteri`.
+This should take you to the main branch. If you already have cloned the repository since before, switch to `main` and ensure that you have the latest updates with:
+
+```bash
+git pull
+```
+
+
+Create a new branch off the `main` branch. You can name the new branch as you like, but we reccomend `add-<species-name>`. Example: `add-volvox-carteri`.
 
 ```bash
 git checkout -b add-<species-name>
@@ -26,60 +33,69 @@ git checkout -b add-<species-name>
 
 The species ingestion pipeline takes two submission forms and one picture file and uses that to create and populate the pages for the species. In order for this to work, all data from the species that are to be displayed in JBrowse needs to be publicly available in an end-repository, such as ENA/NCBI, Zenodo, or SciLifeLab Data Repository (Figshare). This allows the ingestion pipeline to download the data, and ensures that that the data is properly archived in an end-repository.
 
-Fill out the forms and prepare the picture of the species as described in sections [2.1](#21-submission-forms) and [2.2](#22-species-picture) below. Save the final files to `species_submission/local_inputs`. This directory has a special meaning for the Docker images we will be using, and it not under source control since we do not need the particular files to be commited to the repository.
+Fill out the forms and prepare the picture of the species as described in sections [2.1](#21-submission-forms) and [2.2](#22-species-picture) below. Save the final files to `species_submission/local_inputs`. This directory will be mounted by one of the Docker images we will be using; it is also not under source control since we do not need these versions of the files to be commited to the repository.
 
 ### 2.1. Submission forms
 
 To be able to accomdate a wide range of user with different technical skillsets, the Genome Portal submission forms are provided in MS Office format (`.docx` and `.xlxs`). Note that the form ingestion pipeline that we will be using below has only been tested with forms that have been edited with MS Word and MS Excel; your milage may therefore vary if you use other document editing software to fill out the forms.
 
-The submission form templates are located in [`species_submission/submission_form_templates`](https://github.com/ScilifelabDataCentre/genome-portal/tree/main/species_submission/submission_form_templates). Make a copy of the forms, for instance at `species_submission/local_inputs`, and fill them out based on the instructions contained with in the forms. Start with `01-species-submission_v1.3.docx`; that form will eventually tell you to switch to `02-data-tracks_v1.3.xlsx`.
-
-
+The submission form templates are located in [`species_submission/submission_form_templates`](https://github.com/ScilifelabDataCentre/genome-portal/tree/main/species_submission/submission_form_templates). Make a copy of the forms, for instance at `species_submission/local_inputs`, and fill them out based on the instructions contained with in the forms. Start with `01-species-submission_v1.3.docx`; that form will eventually tell you to switch to filling out `02-data-tracks_v1.3.xlsx`.
 
 The files that will be generated by the ingestion workflow will use a directory structure based on the species names like: `*/genus_species/*`. The name will be taken from field "Species scientific name (_Genus species_)" in `01-species-submission_v1.3.docx`. Please ensure that this name is correctly spelled and only contain genus and species name, since it will be used to fetch e.g. taxonomy data from remote APIs. 
 
 #### 2.1.1 The primary genome assembly and the annotation of its protein-coding genes
 
-There are two special mandatory case that we would like to emphasize here: namely the Genome and Protein-coding genes rows in the spread sheet.
+There are two special mandatory cases that we would like to emphasize here: namely the Genome and Protein-coding genes rows in the spread sheet.
 
 The data track row for the primary genome assembly must have the value `Genome` in the column `data_track_name`. It is possible to add multiple assemblies to the Genome Portal, but only the primary genome can be named `Genome`. 
 
-This row needs to have a ENA/NCBI accession number starting with `GCA_` in the column `assembly_GCA_accession`. Genomes that are published in ENA/NCBI will have this accession. We expect that almost all primary genome assemblies displayed to be published in ENA/NCBI at the point in time when the speices' Genome Portal pages go live. Nevertheless, we do recognize that there are cases where it is of interest to start building the Genome Portal pages for testing purposes before the assembly is public in ENA/NCBI, and an override option `--skip-assembly-metadata-fetch` that skips the `assembly_GCA_accession` value will be discussed below.
+TODO: add picture of excel sheet here
 
-There is also an optional column `BUSCO_stats` for adding the BUSCO values and which odb-database that was used. We encourage users to add this to the genome assembly. 
+This row needs to have a ENA/NCBI accession number starting with `GCA_` in the column `assembly_GCA_accession`. Genomes that are published in ENA/NCBI will have this accession. We expect that almost all primary genome assemblies displayed to be published in ENA/NCBI at the point in time when the speices' Genome Portal pages go live. Nevertheless, we do recognize that there are cases where it is of interest to start building the Genome Portal pages for testing purposes before the assembly is public in ENA/NCBI: for this reason there is an override option `--skip-assembly-metadata-fetch` that skips the `assembly_GCA_accession` value. This will be discussed in more detail below.
+
+There is also an optional column `BUSCO_stats` for adding the BUSCO values and which odb-database that was used. This is optional, but we encourage users to add this to the genome assembly row since the ingestion workflow will not run any BUSCO analyses. 
 
 The protein-coding genes track is mandatory since that is the only required data track other than the primary genome assembly. This track must have the value `Protein-coding genes` in the column `data_track_name`. It is also possible to add BUSCO stats for the protein coding genes file too. Add it on this row under `BUSCO_stats` to make it show up in a separate table in the final pages.
 
 
-TODO - implement a fallback if there is no GCA. For unpublished data that we know will be published down the line, what do we do? Maybe a flag --skip-gca
-
-
 ### 2.2. Species picture
 
-Each species in the Genome Portal will be represented with an picture. See the home page at [https://genomes.scilifelab.se/](https://genomes.scilifelab.se/) for previous examples. 
+Each species in the Genome Portal will be represented with an picture. See the home page at [https://genomes.scilifelab.se/](https://genomes.scilifelab.se/) for previous examples. If you don't have a picture, please use a public domain image, for instance from [Wikimedia Commons](https://commons.wikimedia.org/wiki/Main_Page). You can also use this  placeholder image `/scripts/add_new_species/templates/placeholder_image_4-3_ratio.webp` for testing the ingestion workflow. Note that for the final published species pages, a non-placeholder picture is needed.
 
-The image need to be cropped to a 4:3 aspect ratio. The ingestion pipeline does not crop the image, but sends an error if it has another aspect ratio. Please use an image editing software of your choice to crop the image, or ask the Genome Portal staff for assistance. 
+The image need to be cropped to a 4:3 aspect ratio. The ingestion pipeline does not crop the image, but sends an error if it has another aspect ratio. Please use an image editing software of your choice to crop the image, or ask the Genome Portal staff for assistance.
 
-You can use several different image formats. The Genome Portal uses the [`Pillow` python library](https://github.com/python-pillow/Pillow/), which accepts several common image formats, including `.jpg`, `.png`, `.gif` `.tif`, `.webp`. The ingestion pipeline will convert the convert input picture files to `.webp` format with a max size of 500 kb.
+You can use several different image formats. The Genome Portal uses the [`Pillow` python library](https://github.com/python-pillow/Pillow/), which accepts several common image formats, including `.jpg`, `.png`, `.gif` `.tif`, `.webp`. The ingestion pipeline will convert the input picture files to `.webp` format with a max size of 500 kb.
 
 ## 3. Run the form ingestion workflow
 
-There are three Docker images that need to be built in order to run the workflow to add a new species to the Genome Portal. The following two image are enough to build once every time main branch of the GitHub repo has been updated. In practice, that means it should be enough to build them once at the start of the species submission workflow. 
+There are three Docker images that are needed to be in order to run the workflow to add a new species to the Genome Portal. Two of them can be pulled from the latest release of the Genome Portal using. You should in practice only need to pull them once every time there is a new [release of the Genome Portal](https://github.com/ScilifelabDataCentre/genome-portal/releases). Unless you are submitting several species in a short time, it could be a good habit to pull these images at the start of every new species submission workflow: 
+
+```bash
+docker pull ghcr.io/scilifelabdatacentre/swg-add-species:latest && \
+docker pull ghcr.io/scilifelabdatacentre/swg-data-builder:latest
+```
+
+The Genome Portal is a fairly stable project, so the tag `latest` will in most cases point to the images that were published during the last release. If you want to ensure that you use the last semantically versioned release, you need to find the version from the last [release](https://github.com/ScilifelabDataCentre/genome-portal/releases) and use that as the tag instead of `latest`. For instance: `v1.8.0`. If you do, you will also need to specify that version with the `-t` option in all the script calls in [Section 3](#3-run-the-form-ingestion-workflow).
+
+
+TODO publish the addspecies image so that it can also be pulled and tied to a release. then update the sentence below.
+
+
+Note! If you have issues with the published remote images, it is possible to build them locally using:
 
 ```bash
 ./scripts/dockerbuild -k add_species -t local && \
-./scripts/dockerbuild -u -t local -k data
+./scripts/dockerbuild -u -k data -t local
 ```
 
 The third Docker image contains the website data, and needs to be run everytime you make an update to the content or data of the webpages. The guide will tell you when that Docker build step needs to be run.
 
-To follow along with the Example, copy two pre-filled test forms to `species_submission/local_inputs`:
+To follow along with the _Volvox carteri_ tutorial data, copy two pre-filled forms to `species_submission/local_inputs` with :
 
 ```bash
 cp scripts/add_new_species/tests/fixtures/submission_form_example/01-test-species-submission_v1.3.docx species_submission/local_inputs/ && \
 cp scripts/add_new_species/tests/fixtures/submission_form_example/02-test-data-tracks_v1.3.xlsx species_submission/local_inputs/
 ```
-
 
 
 ### 3.1. Option 1: Run the whole workflow with a "I'm feeling lucky" script
@@ -90,6 +106,7 @@ This will currently not work on quantiative tracks were a score column needs to 
 
 ```bash
 bash scripts/full_species_ingestion_workflow.sh \
+-t latest \
 -f /local_inputs/01-test-species-submission_v1.3.docx \
 -d /local_inputs/02-test-data-tracks_v1.3.xlsx \
 -i /scripts/add_new_species/templates/placeholder_image_4-3_ratio.webp 
@@ -99,7 +116,7 @@ For cases where there is no public ENA/NCBI record of the primary genome assembl
 
 ```bash
 --skip-assembly-metadata-fetch
-````
+```
 
 
 
@@ -111,7 +128,9 @@ A recurring parameter is `<species_name>` which is the lowercase, underscored bi
 
 We will use example data for this. 
 
-#### 3.2.1. Build the add-new-species Docker container
+#### 3.2.1. Ensure that the add-new-species Docker container
+
+See [Section 3](#3-run-the-form-ingestion-workflow) above.
 
 
 ```bash
@@ -123,7 +142,7 @@ We will use example data for this.
 Example: 
 
 ```bash
-./scripts/dockeraddspecies python scripts/add_new_species --species-submission-form=/local_inputs/01-test-species-submission_v1.3.docx --data-tracks-sheet=/local_inputs/02-test-data-tracks_v1.3.xlsx --species-image=/scripts/add_new_species/templates/placeholder_image_4-3_ratio.webp --overwrite 
+./scripts/dockeraddspecies -t latest python scripts/add_new_species --species-submission-form=/local_inputs/01-test-species-submission_v1.3.docx --data-tracks-sheet=/local_inputs/02-test-data-tracks_v1.3.xlsx --species-image=/scripts/add_new_species/templates/placeholder_image_4-3_ratio.webp --overwrite 
 
 # add the option --print-species-slug-only to have the script only print the species_name as output. This can be useful if scripting with the species_slug, which is the case of the script in section 3.1
 ```
@@ -146,7 +165,7 @@ For cases where there is no public ENA/NCBI record of the primary genome assembl
 Example:
 
 ```bash
-./scripts/dockermake -t local SPECIES=volvox_carteri
+./scripts/dockermake -t latest SPECIES=volvox_carteri
 ```
 
 #### 3.2.5. Create a defaultSession configuration for the species
@@ -160,8 +179,8 @@ This requires that the genome assembly has been downloaded, therefore it needs t
 Example:
 
 ```bash
-./scripts/dockeraddspecies python scripts/configure_defaultSession --yaml config/volvox_carteri/config.yml -o && \
-./scripts/dockermake -t local SPECIES=volvox_carteri jbrowse-config
+./scripts/dockeraddspecies -t latest python scripts/configure_defaultSession --yaml config/volvox_carteri/config.yml -o && \
+./scripts/dockermake -t latest SPECIES=volvox_carteri jbrowse-config
 ```
 
 Note! Ensure that both commands have been run.
@@ -190,7 +209,7 @@ TODO
 Example:
 
 ```bash
-./scripts/dockeraddspecies python scripts/generate_species_stats --yaml config/volvox_carteri/config.yml
+./scripts/dockeraddspecies -t latest python scripts/generate_species_stats --yaml config/volvox_carteri/config.yml
 ```
 
 
@@ -199,11 +218,11 @@ Example:
 This takes the specific files, so unlike the dockeraddspecies and dockerbuild, this image needs to be rebuilt every time you make changes to the species data
 
 ```bash
-./scripts/dockerbuild -u -t local -k hugo 
+./scripts/dockerbuild -u -t latest -k hugo 
 ```
 
 ```bash
-docker rm -f "genome-portal"; ./scripts/dockerserve -t local
+docker rm -f "genome-portal"; ./scripts/dockerserve -t latest
 ```
 
 
@@ -220,7 +239,7 @@ If you have only used the add_new_species script, you can skip the dockermake
 Example:
 
 ```bash
-./scripts/dockermake SPECIES=volvox_carteri clean uninstall && python scripts/add_new_species/removespecies.py -s volvox_carteri -f
+./scripts/dockermake -t latest SPECIES=volvox_carteri clean uninstall && python scripts/add_new_species/removespecies.py -s volvox_carteri -f
 ```
 
 
