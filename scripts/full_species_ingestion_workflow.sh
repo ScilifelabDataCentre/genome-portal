@@ -131,6 +131,6 @@ echo "Running generate_species_stats to generate stats for species slug: $SPECIE
 
 # 5. Rebuild and serve the Hugo site, then print the URL for the new species page.
 
-./scripts/dockerbuild -u -t "$TAG" -k hugo && \
-docker rm -f "genome-portal"; ./scripts/dockerserve -t "$TAG" && \
+./scripts/dockerbuild -u -t local -k hugo && \
+docker rm -f "genome-portal"; ./scripts/dockerserve -t local && \
 echo "The full species ingestion workflow is complete! You can now visit http://localhost:8080/${SPECIES_SLUG} to see the new species page"
