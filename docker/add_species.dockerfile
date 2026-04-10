@@ -1,5 +1,6 @@
 ARG MICROMAMBA_TAG=2.5.0-debian12
-ARG PYTHON_IMAGE_TAG=3.12-slim
+ARG PYTHON_IMAGE_TAG=3.11-slim 
+# Be careful with bumping Python in this image. Quast v5.3.0 (latest at the time of writing) requires distutils, which was removed from the Python standard library in Python 3.12.
 
 # Build stage 1: Conda-only build stage. Install agat through conda since its dependencies are complex
 FROM mambaorg/micromamba:${MICROMAMBA_TAG} AS conda_tools
@@ -7,7 +8,6 @@ FROM mambaorg/micromamba:${MICROMAMBA_TAG} AS conda_tools
 ARG CONDA_CHANNEL_PRIMARY=conda-forge
 ARG CONDA_CHANNEL_BIO=bioconda
 ARG CONDA_ENV_NAME=add-species-tools
-ARG CONDA_PYTHON_VERSION=3.11
 ARG AGAT_VERSION=1.6.1
 
 RUN micromamba create -y -n ${CONDA_ENV_NAME} \
@@ -15,14 +15,13 @@ RUN micromamba create -y -n ${CONDA_ENV_NAME} \
     -c ${CONDA_CHANNEL_BIO} \
     --override-channels \
     --strict-channel-priority \
-    python=${CONDA_PYTHON_VERSION} \
+    python=3.11 \
     agat=${AGAT_VERSION} \
     && micromamba clean --all --yes
 
 # Build stage 2
 FROM python:${PYTHON_IMAGE_TAG} AS non_conda_build
 
-ARG CONDA_ENV_NAME=add-species-tools
 ARG PANDAS_VERSION=2.2.3
 ARG OPENPYXL_VERSION=3.1.5
 ARG PILLOW_VERSION=10.3.0
@@ -45,14 +44,14 @@ RUN pip install --upgrade pip \
     requests==${REQUESTS_VERSION} \
     pyyaml==${PYYAML_VERSION}
 
-# quast requres distutils, which is not included in Python 3.12 and was not correctly resolved by conda, so make it use Python 3.11 from the conda env after installation. 
+# Install QUAST from GH release since the bioconda recipe has a bug related to distutils depreciation (at the time of writing)
 RUN mkdir -p /opt/quast \
     && curl -fsSL -o /tmp/quast.tar.gz \
     https://github.com/ablab/quast/releases/download/quast_${QUAST_VERSION}/quast-${QUAST_VERSION}.tar.gz \
     && tar -xzf /tmp/quast.tar.gz -C /opt/quast \
     && rm -f /tmp/quast.tar.gz \
-    && printf '%s\n' '#!/bin/sh' "exec /opt/conda/envs/${CONDA_ENV_NAME}/bin/python /opt/quast/quast-${QUAST_VERSION}/quast.py \"\$@\"" > /usr/local/bin/quast \
-    && printf '%s\n' '#!/bin/sh' "exec /opt/conda/envs/${CONDA_ENV_NAME}/bin/python /opt/quast/quast-${QUAST_VERSION}/quast.py \"\$@\"" > /usr/local/bin/quast.py \
+    && printf '%s\n' '#!/bin/sh' "exec /opt/venv/bin/python /opt/quast/quast-${QUAST_VERSION}/quast.py \"\$@\"" > /usr/local/bin/quast \
+    && printf '%s\n' '#!/bin/sh' "exec /opt/venv/bin/python /opt/quast/quast-${QUAST_VERSION}/quast.py \"\$@\"" > /usr/local/bin/quast.py \
     && chmod +x /usr/local/bin/quast /usr/local/bin/quast.py
 RUN curl -fsSL -o /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 \
     && chmod +x /usr/local/bin/yq
