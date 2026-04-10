@@ -54,7 +54,7 @@ Two types of contributions are especially welcome:
 
 - **Datasets for display in the portal**: Consult our
 [requirements](https://genomes.scilifelab.se/contribute) for including a
-genome dataset to the portal, and contact us if you have any questions.
+genome dataset to the portal, and contact us if you have any questions. We also offer the possibility to submit a new species by Pull Request, as described in [this guide](species_submission/how_to_submit_through_pull_request.md).
 
 - **Source code and documentation**: We welcome contributions, small and large,
 to our codebase and documentation. They will be published after review and
