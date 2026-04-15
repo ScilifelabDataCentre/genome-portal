@@ -65,16 +65,16 @@ You can use several different image formats. The Genome Portal uses the [`Pillow
 
 ## 3. Run the form ingestion workflow
 
-There are three Docker images needed in order to run the workflow to add a new species to the Genome Portal. Two of them can be pulled from the latest release of the Genome Portal with: 
+There are three Docker images needed in order to run the workflow to add a new species to the Genome Portal. Two of them can be pulled from the latest stable release of the Genome Portal with: 
 
 ```bash
-docker pull ghcr.io/scilifelabdatacentre/swg-add-species:latest && \
-docker pull ghcr.io/scilifelabdatacentre/swg-data-builder:latest
+docker pull ghcr.io/scilifelabdatacentre/swg-add-species:stable && \
+docker pull ghcr.io/scilifelabdatacentre/swg-data-builder:stable
 ```
 
 You should in practice only need to pull them once every time there is a new [release of the Genome Portal](https://github.com/ScilifelabDataCentre/genome-portal/releases). Unless you are submitting several species in a short time, it could be a good habit to pull these images at the start of every new species submission workflow.
 
-The Genome Portal is a fairly stable project, so the tag `latest` will in most cases point to the images that were published during the last release. If you want to ensure that you use the latest semantically versioned release, you need to find the version from the last [release](https://github.com/ScilifelabDataCentre/genome-portal/releases) and use that as the tag instead of `latest`. For instance: `v1.8.0`. If you do, you will also need to specify that version with the `-t` option in all script calls in [Section 3](#3-run-the-form-ingestion-workflow).
+For most cases, using the `stable` tag to pull the latest release should be sufficient. Another possibility is to specify a specific release tag [release](https://github.com/ScilifelabDataCentre/genome-portal/releases) for instance: `v1.8.0`. If you do, you will also need to specify that version with the `-t` option in all script calls in [Section 3](#3-run-the-form-ingestion-workflow).
 
 Note! If you have issues with the published remote images, it is also possible to build them locally using:
 
@@ -102,7 +102,7 @@ The wrapper script can currently not handle quantitative tracks where a score co
 
 ```bash
 bash scripts/full_species_ingestion_workflow.sh \
--t latest \
+-t stable \
 -f /local_inputs/01-test-species-submission_v1.3.docx \
 -d /local_inputs/02-test-data-tracks_v1.3.xlsx \
 -i /scripts/add_new_species/templates/placeholder_image_4-3_ratio.webp 
@@ -125,7 +125,7 @@ A recurring input parameter for the scripts in this section is `<species_name>`.
 Example: 
 
 ```bash
-./scripts/dockeraddspecies -t latest python scripts/add_new_species --species-submission-form=/local_inputs/01-test-species-submission_v1.3.docx --data-tracks-sheet=/local_inputs/02-test-data-tracks_v1.3.xlsx --species-image=/scripts/add_new_species/templates/placeholder_image_4-3_ratio.webp --overwrite 
+./scripts/dockeraddspecies -t stable python scripts/add_new_species --species-submission-form=/local_inputs/01-test-species-submission_v1.3.docx --data-tracks-sheet=/local_inputs/02-test-data-tracks_v1.3.xlsx --species-image=/scripts/add_new_species/templates/placeholder_image_4-3_ratio.webp --overwrite 
 
 # add the option --print-species-slug-only to have the script only print the species_name as output. This can be useful if scripting with the species_slug, which is the case of the script in section 3.1
 ```
@@ -145,7 +145,7 @@ The Genome Portal backend will download all the tracks specified in `./config/<s
 The general usage is: 
 
 ```bash
-./scripts/dockermake -t latest SPECIES=<species_name>
+./scripts/dockermake -t stable SPECIES=<species_name>
 ```
 
 The argument `SPECIES=` can take several species separated by comma. If omitted, it will download the files for all species that are published on the Genome Portal; this will take quite a bit of time since several of the species have large assemblies. We recommend users to use the `SPECIES=` argument for a smoother experience
@@ -153,7 +153,7 @@ The argument `SPECIES=` can take several species separated by comma. If omitted,
 For the example data, run:
 
 ```bash
-./scripts/dockermake -t latest SPECIES=volvox_carteri
+./scripts/dockermake -t stable SPECIES=volvox_carteri
 ```
 
 #### 3.2.3. Create a defaultSession configuration for the species
@@ -165,8 +165,8 @@ The script will read the `./config/<species_name>/config.yml` and the downloaded
 To run this to completion, first call the `configure_defaultSession` Python package, and then rerun the `dockermake` step to take the new defaultSession config into account:
 
 ```bash
-./scripts/dockeraddspecies -t latest python scripts/configure_defaultSession --yaml config/<species_name>/config.yml --set-default-session-all-tracks -o && \
-./scripts/dockermake -t latest SPECIES=<species_name>
+./scripts/dockeraddspecies -t stable python scripts/configure_defaultSession --yaml config/<species_name>/config.yml --set-default-session-all-tracks -o && \
+./scripts/dockermake -t stable SPECIES=<species_name>
 ```
 
 The `--set-default-session-all-tracks` option is optional, but will make all the tracks enabled by default when the JBrowse page is opened on the Genome Portal. This is likely the desired behaviour for most tracks.
@@ -178,8 +178,8 @@ If the submission contains quantitative tracks, they need to be manually configu
 Example:
 
 ```bash
-./scripts/dockeraddspecies -t latest python scripts/configure_defaultSession --yaml config/volvox_carteri/config.yml --set-default-session-all-tracks -o &&\
-./scripts/dockermake -t latest SPECIES=volvox_carteri
+./scripts/dockeraddspecies -t stable python scripts/configure_defaultSession --yaml config/volvox_carteri/config.yml --set-default-session-all-tracks -o &&\
+./scripts/dockermake -t stable SPECIES=volvox_carteri
 ```
 
 #### 3.2.4. Collect statistics from the assembly and the protein-coding genes annotation
@@ -187,7 +187,7 @@ Example:
 The bioinformatics statistics for the primary genome assembly and its annotation of protein-coding genes are stored in `hugo/data/<species_name>/species_stats.yml`. It is possible to manually enter the statistics, but we strongly recommend that you run the following script. This will run Quast and Agat on the exact assembly FASTA and annotation GFF/GTF that is displayed in the Genome Portal and avoids the issue that the statistics can drift based on which file version it was calculated on. To run it, use:
 
 ```bash
-./scripts/dockeraddspecies -t latest python scripts/generate_species_stats --yaml config/<species_name>/config.yml
+./scripts/dockeraddspecies -t stable python scripts/generate_species_stats --yaml config/<species_name>/config.yml
 ```
 
 Running Quast and Agat is fairly quick (unless the assembly is very large and fragmented) and easily be scripted. BUSCO statistics, however, can potentially take some time, and more importantly, require that specific odb reference datasets for the most suitable taxa. Therefore, BUSCO statistics is optional and need to be supplied by the user (easiest done through in the submission `.xlsx` form, but also through manual editing of `hugo/data/<species_name>/species_stats.yml`).
@@ -197,7 +197,7 @@ If there are previous Quast and Agat runs for the exact data files, the script n
 For the example data, run:
 
 ```bash
-./scripts/dockeraddspecies -t latest python scripts/generate_species_stats --yaml config/volvox_carteri/config.yml
+./scripts/dockeraddspecies -t stable python scripts/generate_species_stats --yaml config/volvox_carteri/config.yml
 ```
 
 #### 3.2.5. Build and spin up the local version of the site in localhost
@@ -241,7 +241,7 @@ docker rm -f "genome-portal"; ./scripts/dockerserve -t local
 As you are working with the Genome Portal files for the species submission, you might find that you want to purge all files and start over. An easy way to do that is to run the following command:
 
 ```bash
-./scripts/dockermake -t latest SPECIES=<species_name> clean uninstall && python scripts/add_new_species/removespecies.py -s <species_name> -f
+./scripts/dockermake -t stable SPECIES=<species_name> clean uninstall && python scripts/add_new_species/removespecies.py -s <species_name> -f
 ```
 
 If you have only run the step in [Section 3.2.1](#321-run-the-add_new_species-script), you can skip the `dockermake clean uninstall` command. Otherwise, that command must be run as the first of the two for the cleanup to work without issues.
@@ -249,7 +249,7 @@ If you have only run the step in [Section 3.2.1](#321-run-the-add_new_species-sc
 For the example data, run:
 
 ```bash
-./scripts/dockermake -t latest SPECIES=volvox_carteri clean uninstall && python scripts/add_new_species/removespecies.py -s volvox_carteri -f
+./scripts/dockermake -t stable SPECIES=volvox_carteri clean uninstall && python scripts/add_new_species/removespecies.py -s volvox_carteri -f
 ```
 
 

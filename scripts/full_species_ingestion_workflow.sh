@@ -1,13 +1,22 @@
 #!/bin/bash
 
-# Assumes that:
-# ./scripts/dockerbuild -k add_species -t <tag> and
-# ./scripts/dockerbuild -u -t <tag> -k data
-# have been run, and that the generated images are available locally.
+# This is a wrapper script to run the full species ingestion workflow in a single command.
+# In spirit, it is an "I'm feeling lucky" script: if species submission forms are correctly filled out, this should will
+# in many case produce the full species pages with out any need for manual intervention.
+# If there are any issues, users will need to manually troubleshoot and run the remaining step of the workflow. Either by deleting all files produced by
+# earlier runs of this script and re-running it, or by running the individual steps of the workflow manually. See also the documentation on how to
+# add a new species though a pull request for more details.
 #
-# "I'm feeling lucky" script to run the full species ingestion workflow in one command, for testing and development purposes.
-
-# TODO spin up the docker container once?
+# Assumes that the add-speces and data-builder images are available on the local machine. This can be acheieved with:
+#
+# docker pull ghcr.io/scilifelabdatacentre/swg-add-species:stable && \
+# docker pull ghcr.io/scilifelabdatacentre/swg-data-builder:stable
+#
+# or with:
+#
+# ./scripts/dockerbuild -k -t local add_species && \
+# ./scripts/dockerbuild -u -t local -k data
+#
 
 set -euo pipefail
 
@@ -35,7 +44,7 @@ EOF
 FORM=""
 TRACKS=""
 IMAGE="/scripts/add_new_species/templates/placeholder_image_4-3_ratio.webp"
-TAG="local"
+TAG="stable"
 SKIP_ASSEMBLY_METADATA_FETCH=0
 
 require_local_image() {
@@ -78,6 +87,7 @@ check_required_images
 
 echo "Running add_new_species with form: $FORM, tracks: $TRACKS, image: $IMAGE, tag: $TAG"
 
+# In the spirit of this being a "I'm feeling lucky" script, hardcode --overwrite
 add_new_species_args=(
   --species-submission-form="$FORM"
   --data-tracks-sheet="$TRACKS"
@@ -94,7 +104,6 @@ RAW_SPECIES_SLUG="$(
   ./scripts/dockeraddspecies -t "$TAG" python scripts/add_new_species \
     "${add_new_species_args[@]}"
 )"
-# In the spirit of this being a "I'm feeling lucky" script, hardcode --overwrite
 
 # Normalize the species slug
 SPECIES_SLUG="$(printf '%s' "$RAW_SPECIES_SLUG" | tail -n 1 | xargs)"
