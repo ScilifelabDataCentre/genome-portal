@@ -52,6 +52,42 @@ from default_session_builder import DefaultSession, create_view, process_tracks
 from default_session_utils import check_config_json_exists, save_json
 
 
+def _is_big_binary_track(track: dict) -> bool:
+    """Return True for BigBed/BigWig-like track file names/URLs."""
+    track_file_or_url = str(track.get("fileName") or track.get("url") or "").strip().lower()
+    track_file_or_url = track_file_or_url.split("?", 1)[0]
+    return track_file_or_url.endswith((".bw", ".bigwig"))
+
+
+def set_default_session_true_for_all_tracks(configs: list[dict]) -> list[dict]:
+    """Set ``defaultSession: true`` for all track entries in all YAML documents."""
+    for config in configs:
+        if not config or not isinstance(config, dict):
+            continue
+        tracks = config.get("tracks", [])
+        if not isinstance(tracks, list):
+            continue
+        for track in tracks:
+            if isinstance(track, dict):
+                # Skip placeholder/unset tracks to avoid creating invalid defaultSession entries.
+                track_file_or_url = str(track.get("fileName") or track.get("url") or "").strip()
+                if not track_file_or_url or track_file_or_url == "[EDIT]":
+                    track["defaultSession"] = False
+                    continue
+                # Keep BigBed/BigWig tracks unchanged until their default session settings are fully supported.
+                if _is_big_binary_track(track=track):
+                    continue
+                track["defaultSession"] = True
+    return configs
+
+
+def write_config_yaml(config_yml_path: Path, configs: list[dict]) -> None:
+    """Write the updated YAML documents back to config.yml."""
+    with open(config_yml_path, "w", encoding="utf-8") as file:
+        yaml.safe_dump_all(configs, file, sort_keys=False, allow_unicode=True)
+    print(f"Updated config.yml with defaultSession=true for all tracks: {config_yml_path}")
+
+
 def run_argparse() -> argparse.Namespace:
     """
     Run argparse and return the user arguments.
@@ -83,6 +119,12 @@ def run_argparse() -> argparse.Namespace:
             This is useful if the FASTA file is not available.""",
         required=False,
     )
+
+    parser.add_argument(
+        "--set-default-session-all-tracks",
+        action="store_true",
+        help="Set defaultSession: true for all tracks in config.yml before generating config.json.",
+    )
     return parser.parse_args()
 
 
@@ -94,8 +136,12 @@ if __name__ == "__main__":
     if not args.overwrite:
         check_config_json_exists(output_json_path=output_json_path)
 
-    with open(config_yml_path, "r") as file:
+    with open(config_yml_path, "r", encoding="utf-8") as file:
         configs = list(yaml.safe_load_all(file))
+
+    if args.set_default_session_all_tracks:
+        configs = set_default_session_true_for_all_tracks(configs=configs)
+        write_config_yaml(config_yml_path=config_yml_path, configs=configs)
 
     if "organism" not in configs[0] or not configs[0]["organism"]:
         raise KeyError(

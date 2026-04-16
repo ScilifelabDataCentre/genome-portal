@@ -141,7 +141,14 @@ def get_track_file_name(track: dict[str, Any]) -> str:
         raise ValueError(
             "Error: Was not able to obtain the track filenames from the URLs or the fileName keys. Exiting."
         )
-    return file_name.rsplit(".", 1)[0] if file_name.endswith((".gz", ".bgz", ".zip")) else file_name
+
+    # Keep behavior aligned with JBrowse track IDs produced in the Makefile flow.
+    if file_name.endswith((".gz", ".bgz", ".zip")):
+        file_name = file_name.rsplit(".", 1)[0]
+    if file_name.endswith((".bb", ".bw", ".bigBed", ".bigWig")):
+        file_name = file_name.rsplit(".", 1)[0]
+
+    return file_name
 
 
 def save_json(data: dict[str, Any], output_json_path: Path):

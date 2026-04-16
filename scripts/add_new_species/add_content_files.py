@@ -3,6 +3,7 @@ from datetime import datetime
 from pathlib import Path
 
 import requests
+from busco_utils import select_odb_database_from_tracks
 from form_parser import UserFormData
 from get_assembly_metadata_from_ENA_NCBI import AssemblyMetadata
 from get_taxonomy import EbiRestException, get_taxonomy, save_taxonomy_file
@@ -13,6 +14,17 @@ INDEX_FILE = "_index.md"
 ASSEMBLY_FILE = "assembly.md"
 DOWNLOAD_FILE = "download.md"
 TAXONOMY_FILE = "taxonomy.json"
+REQUEST_TIMEOUT = (5, 30)
+
+
+def format_species_title(species_name: str, additional_descriptor: str) -> str:
+    """
+    Build Hugo title value where scientific name is italicized and optional descriptor is plain text.
+    """
+    title = f"*{species_name}*"
+    if additional_descriptor:
+        title = f"{title} {additional_descriptor}"
+    return title
 
 
 def add_index_md(
@@ -56,6 +68,10 @@ def add_index_md(
     content = render(
         template_text=template_text,
         required_replacements={
+            "title": format_species_title(
+                species_name=species_name,
+                additional_descriptor=user_form_data.additional_descriptor,
+            ),
             "species_name": species_name,
             "species_slug": user_form_data.species_slug,
             "common_name": user_form_data.common_name,
@@ -71,7 +87,12 @@ def add_index_md(
     save_text_file(content=content, output_file_path=output_file_path)
 
 
-def add_assembly_md(user_form_data: UserFormData, assembly_metadata: AssemblyMetadata, content_dir_path: Path) -> None:
+def add_assembly_md(
+    user_form_data: UserFormData,
+    assembly_metadata: AssemblyMetadata,
+    content_dir_path: Path,
+    user_data_tracks: list[dict],
+) -> None:
     """
     Use the template assembly.md file to create the assembly.md file for the species.
     Template files are modified with the species specific information.
@@ -95,6 +116,11 @@ def add_assembly_md(user_form_data: UserFormData, assembly_metadata: AssemblyMet
             "assembly_accession": assembly_metadata.assembly_accession,
         },
     )
+
+    odb_database = select_odb_database_from_tracks(user_data_tracks=user_data_tracks)
+    if odb_database:
+        content = content.replace("[EDIT:ODB_database]", odb_database)
+
     save_text_file(content=content, output_file_path=output_file_path)
 
 
@@ -154,7 +180,7 @@ def get_gbif_taxon_key(species_name: str) -> str:
 
     species_name = species_name.replace(" ", "%20").lower()
     url = f"{GBIF_ENDPOINT}{species_name}"
-    response = requests.get(url)
+    response = requests.get(url, timeout=REQUEST_TIMEOUT)
     response.raise_for_status()
     return str(response.json()["usageKey"])
 

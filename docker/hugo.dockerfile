@@ -1,5 +1,5 @@
 ARG NODE_VERSION=22.2.0
-ARG JBROWSE_VERSION=4.1.13
+ARG JBROWSE_VERSION=4.1.15
 ARG GWAS_PLUGIN_VERSION=2.1.4
 
 ## Stage 1: Download HUGO + build static site. 
@@ -46,6 +46,9 @@ ARG JBROWSE_VERSION
 ARG GWAS_PLUGIN_VERSION
 
 WORKDIR /tmp
+
+# Note! The JBrowse CLI is installed from npm, and is then to fetch the prebuilt JBrowse web release assets from GitHub for the same pinned version.
+# There has been an example where the npm packages was available but the GH release had been deleted. The fix was to bump the JBrowse version.
 RUN npm install -g @jbrowse/cli@${JBROWSE_VERSION}
 COPY ./scripts/download_jbrowse .
 RUN bash ./download_jbrowse v${JBROWSE_VERSION} /tmp/browser

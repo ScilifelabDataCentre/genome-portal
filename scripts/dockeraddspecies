@@ -1,0 +1,99 @@
+#!/bin/bash
+
+help() {
+  cat <<'EOF'
+Run ingestion-related commands in a Docker container.
+
+The Docker image used is
+'ghcr.io/scilifelabdatacentre/swg-add-species:local', and an alternative
+tag can be chosen with the -t option.
+
+Usage: dockeraddspecies [-h] [-t TAG] [-I DIR] [-u USER] [-n] command [arg...]
+
+Examples:
+  ./scripts/dockeraddspecies -I /path/to/user/files \
+    python scripts/add_new_species \
+    --species-submission-form=/local_inputs/form.docx \
+    --data-tracks-sheet=/local_inputs/tracks.xlsx \
+    --species-image=/local_inputs/image.webp \
+    --overwrite
+
+  ./scripts/dockeraddspecies \
+    python scripts/configure_defaultSession \
+    --yaml config/linum_grandiflorum/config.yml -o
+
+Options:
+  -h            Display this help message and exit
+  -t TAG        Docker image tag to use (default: local)
+  -I DIR        Host input directory to mount at /local_inputs
+                Default: species_submission/local_inputs
+  -u USER       Docker user, as '<USER>:<GROUP>' (default: host user/group IDs)
+  -n            Dry run. Print the docker command that would be run.
+
+Pass input files as /local_inputs/<path> (or any path already valid inside the container).
+EOF
+}
+
+main() {
+  CWD="$(git rev-parse --show-toplevel)"
+  readonly CWD
+
+  local tag image docker_user dry_run input_dir
+  tag="${SWG_TAG:-local}"
+  image="${SWG_IMAGE:-ghcr.io/scilifelabdatacentre/swg-add-species}"
+  docker_user="$(id -u):$(id -g)"
+  dry_run=0
+  input_dir="${SWG_INPUT_DIR:-${CWD}/species_submission/local_inputs}"
+
+  while getopts hI:t:u:n opt; do
+    case "${opt}" in
+      h) help && exit 0 ;;
+      I) input_dir="${OPTARG}" ;;
+      t) tag="${OPTARG}" ;;
+      u) docker_user="${OPTARG}" ;;
+      n) dry_run=1 ;;
+      \?) >&2 help && exit 1 ;;
+    esac
+  done
+  shift $((OPTIND - 1))
+
+  if (($# == 0)); then
+    >&2 echo "No command provided."
+    >&2 help
+    exit 1
+  fi
+
+  if [[ -n "${input_dir}" && ! -d "${input_dir}" ]]; then
+    >&2 echo "Input directory does not exist: ${input_dir}"
+    >&2 echo "Create it or specify another path with -I <DIR>."
+    exit 1
+  fi
+  if [[ -n "${input_dir}" ]]; then
+    input_dir="$(cd "${input_dir}" && pwd)"
+  fi
+
+  run "$@"
+}
+
+run() {
+  declare -a docker_flags
+  docker_flags=(
+    --rm
+    -u "${docker_user}"
+    -w /swedgene
+    -v "${CWD}:/swedgene"
+    -v "${CWD}/scripts:/scripts:ro" # to match hint message from add_new_species scripts about place holder image paths like /scripts/add_new_species/... paths
+  )
+
+  # Conditionally mount the input directory if specified and valid.
+  if [[ -n "${input_dir}" ]]; then
+    docker_flags+=(-v "${input_dir}:/local_inputs")
+  fi
+
+  cmd="docker run"
+  ((dry_run)) && cmd="echo ${cmd}"
+
+  ${cmd} "${docker_flags[@]}" "${image}:${tag}" "$@"
+}
+
+main "$@"

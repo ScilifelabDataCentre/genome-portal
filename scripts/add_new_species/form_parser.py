@@ -1,8 +1,11 @@
 import re
 import subprocess
+import unicodedata
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Optional
+
+EXPECTED_SPECIES_SUBMISSION_FORM_VERSION = "1.3"
 
 
 @dataclass
@@ -15,6 +18,7 @@ class UserFormData:
     species_name: str
     species_slug: str
     common_name: str
+    additional_descriptor: str
     description: str
     references: str
     publication: str
@@ -29,6 +33,7 @@ def parse_user_form(form_file_path: Path) -> UserFormData:
     Returning an object with all the attributes that need to be extracted
     """
     markdown_content = create_markdown_content(form_file_path)
+    validate_docx_form_version(markdown_content=markdown_content)
 
     species_names = extract_species_names(markdown_content)
     description = extract_description(markdown_content)
@@ -41,6 +46,7 @@ def parse_user_form(form_file_path: Path) -> UserFormData:
         species_name=species_names["species_name"],
         species_slug=species_names["species_slug"],
         common_name=species_names["common_name"],
+        additional_descriptor=species_names["additional_descriptor"],
         description=description,
         references=references,
         publication=publication,
@@ -48,6 +54,72 @@ def parse_user_form(form_file_path: Path) -> UserFormData:
         img_attrib_text=img_attrib["text"],
         img_attrib_link=img_attrib["url"],
     )
+
+
+def validate_species_name_is_binomial(species_name: str) -> None:
+    """
+    Validate that the species name is exactly binomial: 'Genus species'.
+
+    This is a crucial value since it is used for the species directories and taxnomony lookup.
+    Thus, the species name should not contain extra desciriptors such as the authority (e.g. 'Desf')
+    or strain name. These can be manually added to the hugo pages after the initial creation of the files.
+    """
+    parts = species_name.split()
+    if len(parts) != 2 or not all(part.isalpha() for part in parts):
+        raise ValueError(
+            "Species name must be binomial (Genus species). " "Remove any extra descriptors from the species field."
+        )
+
+
+def normalize_species_name(species_name: str) -> str:
+    """
+    Normalize species name extracted from the user form.
+
+    Handles odd unicode/whitespace from DOCX conversion to produce a clean value.
+    """
+    normalized = unicodedata.normalize("NFKC", species_name)
+    normalized = re.sub(r"\s+", " ", normalized, flags=re.UNICODE).strip()
+    return normalized
+
+
+def slug_from_species_name(species_name: str) -> str:
+    """Derive species slug from a normalized species name."""
+    return species_name.replace(" ", "_").lower()
+
+
+def normalize_optional_form_value(value: str) -> str:
+    """Normalize optional DOCX form values by stripping placeholder text."""
+    if value == "Click or tap here to enter text.":
+        return ""
+    # DOCX -> pandoc markdown can escape punctuation (e.g. "f\\. nagariensis").
+    # Strip markdown escape backslashes for plain front matter values.
+    value = re.sub(r"\\([`*_\[\](){}#+\-.!|])", r"\1", value)
+    return value
+
+
+def normalize_table_key(key: str) -> str:
+    """Normalize markdown table key labels for matching."""
+    key = key.replace("*", "")
+    key = re.sub(r"\s+", " ", key).strip()
+    return key
+
+
+def get_table_value_by_key(cells: dict[str, str], target_key: str) -> str:
+    """Get table value by normalized key label."""
+    normalized_target = normalize_table_key(target_key).lower()
+    for raw_key, value in cells.items():
+        normalized_key = normalize_table_key(raw_key).lower()
+        if normalized_key == normalized_target:
+            return value
+    return ""
+
+
+def validate_species_slug(species_slug: str) -> None:
+    """Validate species slug format used for repository paths."""
+    if not re.fullmatch(r"[a-z_]+", species_slug or ""):
+        raise ValueError(
+            f"Invalid species slug: '{species_slug}'. " "Allowed lowercase characters: letters and underscore."
+        )
 
 
 def create_markdown_content(form_file_path: Path) -> str:
@@ -67,6 +139,27 @@ def create_markdown_content(form_file_path: Path) -> str:
     return pandoc_result.stdout
 
 
+def validate_docx_form_version(
+    markdown_content: str, expected_version: str = EXPECTED_SPECIES_SUBMISSION_FORM_VERSION
+) -> None:
+    """
+    Validate form version from pandoc-generated markdown.
+    Expected line format in the form body: 'Form version 1.3'
+    """
+    version_match = re.search(r"\bForm\s+version\s+([0-9]+(?:\.[0-9]+)?)\b", markdown_content, flags=re.I)
+    detected_version = version_match.group(1) if version_match else None
+    if not detected_version:
+        raise ValueError(
+            f"Could not detect species submission form version in markdown content. "
+            f"Expected version {expected_version}."
+        )
+    if detected_version != expected_version:
+        raise ValueError(
+            f"Unsupported species submission form version {detected_version}. "
+            f"Expected version {expected_version}. Please use the latest template."
+        )
+
+
 def extract_species_names(markdown_content: str) -> dict[str, str]:
     """
     Extract the species names from the markdown content.
@@ -75,19 +168,35 @@ def extract_species_names(markdown_content: str) -> dict[str, str]:
         "species_name": "",
         "species_slug": "",
         "common_name": "",
+        "additional_descriptor": "",
     }
 
-    species_name_section = extract_block_of_markdown(
-        start_marker="| > fungus",
-        end_marker="| Species description",
-        markdown_content=markdown_content,
+    species_name_cells = extract_table_cells(markdown_content)
+
+    scientific_name = get_table_value_by_key(species_name_cells, "Scientific name (Genus species):")
+    if not scientific_name:
+        scientific_name = get_table_value_by_key(species_name_cells, "Scientific name:")
+    if not scientific_name:
+        # Fall back for legacy forms that had slightly different key formatting of the species name field
+        for key, value in species_name_cells.items():
+            normalized_key = normalize_table_key(key).lower()
+            if normalized_key.endswith("scientific name:") or normalized_key.endswith(
+                "scientific name (genus species):"
+            ):
+                scientific_name = value
+                break
+    species_names["species_name"] = normalize_species_name(species_name=scientific_name)
+    species_names["common_name"] = normalize_optional_form_value(
+        get_table_value_by_key(species_name_cells, "English (common) name:")
     )
+    additional_descriptor = normalize_optional_form_value(
+        get_table_value_by_key(species_name_cells, "Additional descriptor (optional):")
+    )
+    species_names["additional_descriptor"] = additional_descriptor
 
-    species_name_cells = extract_table_cells(species_name_section)
-    species_names["species_name"] = species_name_cells.get("Scientific name:", "")
-    species_names["common_name"] = species_name_cells.get("English (common) name:", "")
-
-    species_names["species_slug"] = species_names["species_name"].replace(" ", "_").lower()
+    validate_species_name_is_binomial(species_name=species_names["species_name"])
+    species_names["species_slug"] = slug_from_species_name(species_name=species_names["species_name"])
+    validate_species_slug(species_names["species_slug"])
     return species_names
 
 
@@ -136,13 +245,21 @@ def extract_publication(markdown_content: str) -> str:
     """
 
     pubs_section = extract_block_of_markdown(
-        start_marker="| > in [APA 7](https://apastyle.apa.org/).",
-        end_marker="Funding",
+        start_marker="| Scientific article (Optional)",
+        end_marker="| Funding",
         markdown_content=markdown_content,
     )
 
-    pubs_section_borderless = strip_table_borders(pubs_section)
+    # Drop instruction rows and keep only submitted publication content rows.
+    publication_lines = []
+    for line in pubs_section.splitlines():
+        if re.match(r"^\|\s*>\s*", line):
+            continue
+        if re.match(r"^\s*[\|\+\-=]+\s*$", line):
+            continue
+        publication_lines.append(line)
 
+    pubs_section_borderless = strip_table_borders("\n".join(publication_lines))
     return pubs_section_borderless.strip()
 
 
@@ -243,8 +360,11 @@ def extract_table_cells(table_block: str) -> dict[str, str]:
             field = match.group(1).strip()
             value = match.group(2).strip()
 
-            # Handle multi-line field
-            if current_field and field.endswith(":") and not field.startswith(">"):
+            # Handle wrapped/multi-line field names where the first line did not
+            # include a trailing colon (e.g. "English (common)" + "name:").
+            # Avoid merging normal consecutive fields like:
+            # "Scientific name:" then "English (common) name:".
+            if current_field and not current_field.endswith(":") and field.endswith(":") and not field.startswith(">"):
                 current_field = current_field + " " + field
                 if value:
                     current_value_lines.append(value)

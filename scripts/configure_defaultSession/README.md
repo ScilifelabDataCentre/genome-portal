@@ -87,10 +87,9 @@ python scripts/configure_defaultSession --yaml config/<SPECIES_NAME>/config.yml
 # Update ./data/<SPECIES_NAME>/config.json with the defaultSession settings from config/<SPECIES_NAME>/config.json
 ./scripts/dockermake -t local SPECIES=<SPECIES_NAME>
 
-# Calculate bioinformatics stats for the hugo pages and copy them over to the destination
-bash ./scripts/data_stewardship/generate_assembly_and_annotation_statistics.sh --fasta ./data/<SPECIES_NAME>/<ASSEMBLY_NAME>.fna.gz --gff ./data/<SPECIES_NAME>/<PROTEIN_CODING_GENES_TRACK>.gff.nozip
-
-cp scripts/data_stewardship/temp/species_stats_<ASSEMBLY_NAME>.fna.gz.yml ./hugo/data/<SPECIES_NAME>/species_stats.yml
+# Calculate bioinformatics stats for the Hugo pages and publish directly to
+# hugo/data/<SPECIES_NAME>/species_stats.yml
+python scripts/generate_species_stats --yaml config/<SPECIES_NAME>/config.yml
 
 # Build the hugo server image (can be skipped if already up-to-date)
 ./scripts/dockerbuild -u -t local -k hugo

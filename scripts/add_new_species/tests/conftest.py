@@ -1,12 +1,15 @@
+import json
 from pathlib import Path
 
 import pytest
+from add_content_files import TEMPLATE_DIR
 from form_parser import UserFormData
 from get_assembly_metadata_from_ENA_NCBI import AssemblyMetadata
 
 FIXTURES_DIR = Path(__file__).parent / "fixtures"
 IMG_FIXTURES_DIR = FIXTURES_DIR / "example_images"
 FORM_FIXTURES_DIR = FIXTURES_DIR / "submission_form_example"
+REPO_ROOT = Path(__file__).resolve().parents[3]
 
 
 @pytest.fixture
@@ -28,8 +31,8 @@ def example_excel_files() -> dict[str, Path]:
     Paths to example Excel files for testing.
     """
     excel_files = {
-        "excel_form_with_comments": FORM_FIXTURES_DIR / "02-Data_Tracks_Form_v1.1.0.xlsx",
-        "excel_form_wo_comments": FORM_FIXTURES_DIR / "02-Data_Tracks_Form_v1.1.0_fix.xlsx",
+        "excel_form_with_comments": FORM_FIXTURES_DIR / "02-test_Data_Tracks_Form_v1.1.0_w_comments.xlsx",
+        "excel_form_wo_comments": FORM_FIXTURES_DIR / "02-test-data-tracks_v1.3.xlsx",
     }
     return excel_files
 
@@ -40,8 +43,9 @@ def example_user_forms() -> dict[str, Path]:
     Paths to example user form files for testing.
     """
     form_files = {
-        "markdown_form": FORM_FIXTURES_DIR / "converted_species_submit_form.md",
-        "docx_form": FORM_FIXTURES_DIR / "01-species_submission_form_v1.1.0.docx",
+        "markdown_form": FORM_FIXTURES_DIR / "converted_test-species_submission_form_v1.1.0.md",
+        "docx_form": REPO_ROOT / "species_submission" / "submission_form_templates" / "01-species-submission_v1.3.docx",
+        "docx_form_v1_2": FORM_FIXTURES_DIR / "01-test-species-submission_v1.2.docx",
     }
     return form_files
 
@@ -55,6 +59,7 @@ def user_form_data() -> UserFormData:
         species_name="Aspergillus nidulans",
         species_slug="aspergillus_nidulans",
         common_name="A species of mold",
+        additional_descriptor="FGSC A4",
         description="Aspergillus nidulans is a filamentous fungus widely used as a model organism in genetics and cell biology.",
         references="- Reference 1: https://doi.org/10.1234/reference1\n- Reference 2: https://doi.org/10.5678/reference2",
         publication="Published in Journal of Mycology, 2025.",
@@ -89,6 +94,7 @@ def user_data_tracks() -> list[dict]:
         {
             "dataTrackName": "Genome",
             "description": "Reference genome sequence",
+            "assemblyGCAAccession": "GCA_000011425.1",
             "links": [
                 {"Download": "https://example.com/genome.fasta"},
                 {"Website": "https://doi.org/10.1234/repository"},
@@ -102,6 +108,7 @@ def user_data_tracks() -> list[dict]:
         {
             "dataTrackName": "Protein-coding genes",
             "description": "Structural annotation of protein-coding genes",
+            "assemblyGCAAccession": "",
             "links": [
                 {"Download": "https://example.com/track1.gff"},
                 {"Website": "https://doi.org/10.5678/repository"},
@@ -115,6 +122,7 @@ def user_data_tracks() -> list[dict]:
         {
             "dataTrackName": "Repeats",
             "description": "Annotation of the repetitive regions",
+            "assemblyGCAAccession": "",
             "links": [
                 {"Download": "https://example.com/track2.gff"},
                 {"Website": "https://doi.org/10.9101/repository"},
@@ -126,3 +134,13 @@ def user_data_tracks() -> list[dict]:
             "principalInvestigatorAffiliation": "University of Example",
         },
     ]
+
+
+@pytest.fixture
+def data_tracks_template_json() -> str:
+    """
+    The canonical single-track data_tracks JSON template as a serialized string.
+    """
+    template_file_path = TEMPLATE_DIR / "data_tracks.json"
+    with open(template_file_path, "r") as f:
+        return json.dumps(json.load(f)[0])

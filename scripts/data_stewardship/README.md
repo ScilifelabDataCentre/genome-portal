@@ -12,9 +12,11 @@ Some of the scripts will produce log files. These will be saved to the logs/ dir
 
 This script performs pairwise comparison of two versions of the same genome assembly to identify if there are any differences between the nucleotide sequences (the fasta headers are not considered). This can for instance be used to spot if an alternative version of an assembly contains scaffolds not found in the version on ENA or NCBI (such as mitochondrial scaffolds). Use-case example: compare that ENA (CAVLGL01.fasta.gz) and NCBI (GCA_963668995.1_Parnassius_mnemosyne_n_2023_11_genomic.fna.gz) versions of the Clouded Apollo assembly and check if they are identical.
 
-- **generate_assembly_and_annotation_statistics.sh**
+- **generate_assembly_and_annotation_statistics.sh** (legacy)
 
 This script runs Quast and AGAT analyses to collect statistics from a genome assembly FASTA and an annotation GFF from a species, and extracts the relevant statistics that are needed for the tables in the species' Assembly tab in the Genome Portal. The script is intended to be run with assembly and annotation files from the same species, but this is up to the user to control as it is not explicitly enforced by the code itself.
+
+New workflow (recommended): `python scripts/generate_species_stats --yaml config/<species>/config.yml`
 
 - **get_aliases_from_ENA_fasta.py**
 

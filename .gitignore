@@ -6,6 +6,10 @@ tests/data
 tests/public
 config/tiny_herb/*
 
+# Input dir for species submission form data. Mounted by dockeraddspecies script
+species_submission/local_inputs/*
+!species_submission/local_inputs/.gitkeep
+
 # Hugo data directory - from make install 
 hugo/static/data
 
@@ -19,10 +23,15 @@ hugo/static/api/metrics.json
 #data stewardship
 scripts/data_stewardship/temp/**
 scripts/data_stewardship/logs/**
+scripts/generate_species_stats/temp/**
+scripts/generate_species_stats/logs/**
 *.agat.log
 
 # MS Office temp files
-scripts/add_new_species/tests/fixtures/submission_form_example/~*
+scripts/add_new_species/tests/fixtures/submission_form_example/~$*.docx
+scripts/add_new_species/tests/fixtures/submission_form_example/~$*.xlsx
+species_submission/submission_form_templates/~$*.docx
+species_submission/submission_form_templates/~$*.xlsx
 
 # OSX
 *.DS_Store

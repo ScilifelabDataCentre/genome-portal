@@ -8,7 +8,6 @@ Notably, the ENA metadata lacks one field (assembly_type) that is present in the
 Hence, this submodule queries both ENA and NCBI APIs to get the desired metadata fields.
 """
 
-import re
 from dataclasses import dataclass
 from xml.etree import ElementTree
 
@@ -16,6 +15,8 @@ import requests
 
 ENA_API_XML_URL = r"https://www.ebi.ac.uk/ena/browser/api/xml"
 NCBI_API_JSON_URL = "https://api.ncbi.nlm.nih.gov/datasets/v2/genome/accession"
+PLACEHOLDER_VALUE = "[EDIT]"
+REQUEST_TIMEOUT = (5, 30)
 
 
 @dataclass
@@ -34,6 +35,82 @@ class AssemblyMetadata:
     species_name_abbrev: str
 
 
+class AssemblyMetadataApiException(Exception):
+    """
+    Raised when ENA/NCBI assembly metadata API calls fail or return unusable responses.
+    """
+
+    pass
+
+
+class MissingGenomeAccessionError(ValueError):
+    """
+    Raised when assembly_GCA_accession is missing for the Genome row.
+    """
+
+    pass
+
+
+def abbreviate_species_name(species_name: str) -> str:
+    """
+    Convert a species name to abbreviated form, e.g. 'Aspergillus nidulans' -> 'A. nidulans'.
+    Falls back to the original value for single-word names.
+    """
+    species_name_words = species_name.split()
+    if len(species_name_words) >= 2:
+        return f"{species_name_words[0][0].upper()}. {species_name_words[1]}"
+    if len(species_name_words) == 1:
+        return species_name_words[0]
+    return PLACEHOLDER_VALUE
+
+
+def build_assembly_metadata(
+    species_name: str,
+    assembly_accession: str,
+    assembly_name: str,
+    assembly_level: str,
+    genome_representation: str,
+    assembly_type: str,
+) -> AssemblyMetadata:
+    """
+    Construct AssemblyMetadata with consistently generated species abbreviation.
+    Used for both the ENA/NCBI fetch and the placeholder metadata creation to ensure the same format.
+    """
+    return AssemblyMetadata(
+        assembly_name=assembly_name,
+        assembly_level=assembly_level,
+        genome_representation=genome_representation,
+        assembly_accession=assembly_accession,
+        assembly_type=assembly_type,
+        species_name=species_name,
+        species_name_abbrev=abbreviate_species_name(species_name),
+    )
+
+
+def extract_genome_accession_or_placeholder(user_data_tracks: list[dict]) -> str:
+    """
+    Try to extract genome accession from tracks, otherwise return placeholder.
+    """
+    try:
+        return extract_genome_accession(user_data_tracks)
+    except (ValueError, AttributeError):
+        return PLACEHOLDER_VALUE
+
+
+def placeholder_assembly_metadata(user_data_tracks: list[dict], species_name: str) -> AssemblyMetadata:
+    """
+    Build placeholder assembly metadata when ENA/NCBI lookup is intentionally skipped.
+    """
+    return build_assembly_metadata(
+        species_name=species_name,
+        assembly_accession=extract_genome_accession_or_placeholder(user_data_tracks),
+        assembly_name=PLACEHOLDER_VALUE,
+        assembly_level=PLACEHOLDER_VALUE,
+        genome_representation=PLACEHOLDER_VALUE,
+        assembly_type=PLACEHOLDER_VALUE,
+    )
+
+
 def get_ena_assembly_metadata_xml(accession: str) -> dict:
     """
     Get the metadata from ENA for a given genome assembly accession
@@ -41,23 +118,36 @@ def get_ena_assembly_metadata_xml(accession: str) -> dict:
     """
     url = f"{ENA_API_XML_URL}/{accession}"
 
-    response = requests.get(url)
+    try:
+        response = requests.get(url, timeout=REQUEST_TIMEOUT)
+    except requests.exceptions.RequestException as e:
+        raise AssemblyMetadataApiException(f"Failed to query ENA metadata for {accession}: {e}") from e
 
     if response.status_code != 200:
-        raise Exception(
+        raise AssemblyMetadataApiException(
             f"Failed to get metadata for {accession} from the ENA API. Response code: {response.status_code}"
         )
 
     tree = ElementTree.fromstring(response.content)
 
-    name_element = tree.find(".//NAME")
-    assembly_level_element = tree.find(".//ASSEMBLY_LEVEL")
-    genome_representation_element = tree.find(".//GENOME_REPRESENTATION")
+    def required_xml_text(xpath: str, field_name: str) -> str:
+        element = tree.find(xpath)
+
+        if element is not None:
+            text = element.text
+        else:
+            text = None
+
+        if text is None or not text.strip():
+            raise AssemblyMetadataApiException(
+                f"ENA metadata for {accession} is missing required field '{field_name}' ({xpath})."
+            )
+        return text.strip()
 
     return {
-        "assembly_name": name_element.text.strip(),
-        "assembly_level": assembly_level_element.text.strip(),
-        "genome_representation": genome_representation_element.text.strip(),
+        "assembly_name": required_xml_text(".//NAME", "assembly_name"),
+        "assembly_level": required_xml_text(".//ASSEMBLY_LEVEL", "assembly_level"),
+        "genome_representation": required_xml_text(".//GENOME_REPRESENTATION", "genome_representation"),
     }
 
 
@@ -73,12 +163,18 @@ def get_ncbi_assembly_metadata_json(accession: str) -> dict:
     url = f"{NCBI_API_JSON_URL}/{accession}/dataset_report"
     headers = {"accept": "application/json"}
 
-    response = requests.get(url, headers=headers)
+    try:
+        response = requests.get(url, headers=headers, timeout=REQUEST_TIMEOUT)
+    except requests.exceptions.RequestException as e:
+        raise AssemblyMetadataApiException(f"Failed to query NCBI metadata for {accession}: {e}") from e
 
-    ncbi_json = response.json()
+    try:
+        ncbi_json = response.json()
+    except ValueError as e:
+        raise AssemblyMetadataApiException(f"Invalid JSON response from NCBI for {accession}: {e}") from e
 
     if not ncbi_json.get("reports"):
-        raise ValueError(f"No results found for accession {accession}. The accession may be invalid.")
+        raise AssemblyMetadataApiException(f"No results found for accession {accession}. The accession may be invalid.")
 
     reports = ncbi_json["reports"]
     assembly_type = reports[0]["assembly_info"]["assembly_type"]
@@ -88,24 +184,28 @@ def get_ncbi_assembly_metadata_json(accession: str) -> dict:
 
 def extract_genome_accession(user_data_tracks: list[dict]) -> str:
     """
-    Extract the GenBank genome assembly accession from the 'doi_link_to_repository' field
-    for the top-level key 'Genome' from the list of dictionaries.
-
-    Assumes that the url contains the accession in the format GCA_xxxxxxx.x
-
-    In dataTrackName, the url resides in 'Website' under 'links' for the 'Genome' data track.
+    Extract the GenBank genome assembly accession from the dedicated
+    'assembly_GCA_accession' spreadsheet column (stored in JSON as 'assemblyGCAAccession')
+    for the 'Genome' data track.
     """
     for data_track in user_data_tracks:
         if data_track.get("dataTrackName") == "Genome":
-            for link in data_track.get("links", []):
-                url = link.get("Website", "")
-                if url:
-                    accession = extract_accession_from_url(url)
-                    if accession.startswith("GCA"):
-                        return accession
-            break
-    raise ValueError(
-        "Genome assembly accession or DOI not found in the user spreadsheet. Please check the field is not empty or valid."
+            accession = data_track.get("assemblyGCAAccession")
+            if accession in ("", None, PLACEHOLDER_VALUE):
+                raise MissingGenomeAccessionError(
+                    "Genome assembly accession is mandatory for ENA/NCBI metadata lookup. "
+                    "Please populate 'assembly_GCA_accession' for the 'Genome' row, "
+                    "or run with '--skip-assembly-metadata-fetch' if no GCA accession is available."
+                )
+            if isinstance(accession, str) and accession.startswith("GCA"):
+                return accession
+            raise ValueError(
+                f"'{accession}' does not look like a GenBank genome assembly accession. It must start with 'GCA'."
+            )
+    raise MissingGenomeAccessionError(
+        "Genome assembly accession is mandatory for ENA/NCBI metadata lookup. "
+        "Please populate 'assembly_GCA_accession' for the 'Genome' row, "
+        "or run with '--skip-assembly-metadata-fetch' if no GCA accession is available."
     )
 
 
@@ -120,33 +220,11 @@ def fetch_assembly_metadata(user_data_tracks: dict, species_name: str) -> Assemb
     partial_metadata_dict = get_ena_assembly_metadata_xml(accession)
     assembly_type = get_ncbi_assembly_metadata_json(accession)
 
-    species_name_words = species_name.split()
-    species_name_abbrev = f"{species_name_words[0][0].upper()}. {species_name_words[1]}"
-
-    return AssemblyMetadata(
+    return build_assembly_metadata(
+        species_name=species_name,
+        assembly_accession=accession,
         assembly_name=partial_metadata_dict["assembly_name"],
         assembly_level=partial_metadata_dict["assembly_level"],
         genome_representation=partial_metadata_dict["genome_representation"],
-        assembly_accession=accession,
         assembly_type=assembly_type,
-        species_name=species_name,
-        species_name_abbrev=species_name_abbrev,
     )
-
-
-def extract_accession_from_url(url: str) -> str | None:
-    """
-    Extract a GenBank accession (GCA_xxxxxxx.x) from ENA/NCBI/DOI URLs.
-
-    ENA genome accession example: https://www.ebi.ac.uk/ena/browser/view/GCA_963668995.1
-    DOI pattern example: https://doi.org/10.17044/scilifelab.28606814.v1
-    """
-
-    acession_match = re.search(r"(GCA_\d+\.\d+)", url)
-    if acession_match:
-        return acession_match.group(1)
-
-    doi_match = re.search(r"doi\.org/([\w\.\-/]+)", url)
-    if doi_match:
-        return doi_match.group(1)
-    return None

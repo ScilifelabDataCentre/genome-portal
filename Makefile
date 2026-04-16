@@ -153,6 +153,12 @@ jbrowse-config: $(JBROWSE_CONFIGS)
 	$(call log_info,'Generated JBrowse configuration in directories')
 	@printf "  - %s\n" $(JBROWSE_CONFIGS:/config.json=)
 
+# Force rebuild of data/<species>/config.json to avoid stale JBrowse config state when input data changes in config/<SPECIES_NAME>/config.yml.
+.PHONY: FORCE # Always consider the FORCE target out of date to trigger rebuild of JBrowse config files
+FORCE:
+
+$(JBROWSE_CONFIGS): FORCE
+
 
 .PHONY: download
 download: $(DOWNLOAD_TARGETS)
@@ -223,7 +229,7 @@ $(FASTA_INDICES): %.fai: %
 
 $(JBROWSE_CONFIGS): $(DATA_DIR)/%/config.json: $(CONFIG_DIR)/%/config.yml $(CONFIG_DIR)/%/config.json
 	@echo "Generating JBrowse configuration for $*"; \
-	cp $(lastword $^) $@ && \
+	cp $(CONFIG_DIR)/$*/config.json $@ && \
 	$(SHELL) scripts/generate_jbrowse_config $@ $<; \
 	if [ -d "$(DATA_DIR)/$*/trix" ] && [ -n "$$(find $(DATA_DIR)/$*/trix -name '*.ix' 2>/dev/null)" ]; then \
 		has_adapters=$$(jq -e '.aggregateTextSearchAdapters | length > 0' "$@" 2>/dev/null || echo "false"); \

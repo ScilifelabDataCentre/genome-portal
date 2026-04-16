@@ -24,6 +24,9 @@ Usage:
     Run this script as a module or standalone script, providing the required arguments for the species submission form,
     data tracks spreadsheet, and species image. Use the --overwrite flag to allow overwriting existing species entries.
 
+    There is a related, but separate, script for deleting species entries created by this package:
+    scripts/add_new_species/removespecies.py.
+
 Example:
     python -m add_new_species -f path/to/species_form.docx -d path/to/data_tracks.xlsx -i path/to/image.png
 
@@ -33,18 +36,40 @@ Example:
     --data-tracks-sheet="scripts/add_new_species/tests/fixtures/submission_form_example/02-Data_Tracks_Form_v1.1.0_fix.xlsx" \\
     --species-image="scripts/add_new_species/tests/fixtures/example_images/image_4_3.png" \\
     --overwrite
+
+    # To remove the created species entry:
+    python scripts/add_new_species/removespecies.py -s <species_slug> [-f]
 """
 
 import argparse
+import io
+import logging
+from contextlib import redirect_stdout
 from pathlib import Path
 
 from add_config_yml import populate_config_yml
 from add_content_files import add_assembly_md, add_download_md, add_index_md
 from add_stats_file import add_stats_file
 from form_parser import parse_user_form
-from get_assembly_metadata_from_ENA_NCBI import fetch_assembly_metadata
+from get_assembly_metadata_from_ENA_NCBI import (
+    AssemblyMetadataApiException,
+    fetch_assembly_metadata,
+    placeholder_assembly_metadata,
+)
 from image_processer import process_species_image
 from process_data_tracks_Excel import parse_excel_file, populate_data_tracks_json
+from species_paths import SpeciesPaths, get_species_paths
+
+logger = logging.getLogger(__name__)
+
+
+def non_empty_path(value: str) -> Path:
+    """
+    Argparse type validator: reject empty/whitespace-only path strings.
+    """
+    if not value.strip():
+        raise argparse.ArgumentTypeError("must not be empty")
+    return Path(value)
 
 
 def run_argparse() -> argparse.Namespace:
@@ -56,7 +81,7 @@ def run_argparse() -> argparse.Namespace:
     parser.add_argument(
         "-f",
         "--species-submission-form",
-        type=Path,
+        type=non_empty_path,
         metavar="[user form location]",
         help="The path to the filled in user form, a word document.",
         required=True,
@@ -65,7 +90,7 @@ def run_argparse() -> argparse.Namespace:
     parser.add_argument(
         "-d",
         "--data-tracks-sheet",
-        type=Path,
+        type=non_empty_path,
         metavar="[user spreadsheet location]",
         help="The path to the filled in user spreadsheet, an excel file.",
         required=True,
@@ -83,9 +108,11 @@ def run_argparse() -> argparse.Namespace:
     parser.add_argument(
         "-i",
         "--species-image",
-        type=Path,
+        type=non_empty_path,
         metavar="[image file location]",
-        help="Path to the species image to be added. The image must be 4:3 aspect ratio.",
+        help="Path to the species image to be added. The image must be 4:3 aspect ratio. "
+        "If no image is available yet, use scripts/add_new_species/templates/placeholder_image_4-3_ratio.webp.",
+        required=True,
     )
 
     parser.add_argument(
@@ -95,44 +122,37 @@ def run_argparse() -> argparse.Namespace:
         help="""If the files for the species already exist, should they be overwritten?
             If flag NOT provided, no overwrite performed.""",
     )
+    parser.add_argument(
+        "--skip-assembly-metadata-fetch",
+        action="store_true",
+        help=(
+            "Skip ENA/NCBI assembly metadata lookup. "
+            "Use this for assemblies not available in ENA/NCBI. "
+            "Assembly metadata fields will be set to '[EDIT]' placeholders for manual completion."
+        ),
+    )
+    parser.add_argument(
+        "--print-species-slug-only",
+        action="store_true",
+        help=(
+            "Suppress normal stdout output and print only the derived species slug on success. Useful for scripting."
+        ),
+    )
 
     return parser.parse_args()
 
 
-def all_dir_paths(species_slug: str) -> dict[str, Path]:
-    """
-    Make a dict of all the output folder paths for the species.
-    Makes sure that any folders that need to be created are created.
-    """
-    content_dir_path = Path(__file__).parent / f"../../hugo/content/species/{species_slug}"
-    data_dir_path = Path(__file__).parent / f"../../hugo/data/{species_slug}"
-    assets_dir_path = Path(__file__).parent / f"../../hugo/assets/{species_slug}"
-    image_dir_path = Path(__file__).parent / "../../hugo/static/img/species"
-    config_dir_path = Path(__file__).parent / f"../../config/{species_slug}"
-
-    for path in (content_dir_path, data_dir_path, assets_dir_path, config_dir_path):
-        path.mkdir(parents=False, exist_ok=True)
-
-    return {
-        "content_dir_path": content_dir_path,
-        "data_dir_path": data_dir_path,
-        "assets_dir_path": assets_dir_path,
-        "image_dir_path": image_dir_path,
-        "config_dir_path": config_dir_path,
-    }
-
-
-def check_dirs_empty(all_dir_paths: dict[str, Path], species_name: str) -> None:
+def check_dirs_empty(output_paths: SpeciesPaths, species_name: str) -> None:
     """
     If overwrite mode not specificed in args, check that the folders are empty.
     Raise error if not.
     """
 
     empty_dirs = [
-        all_dir_paths["content_dir_path"],
-        all_dir_paths["data_dir_path"],
-        all_dir_paths["assets_dir_path"],
-        all_dir_paths["config_dir_path"],
+        output_paths.content_dir_path,
+        output_paths.data_dir_path,
+        output_paths.assets_dir_path,
+        output_paths.config_dir_path,
     ]
     for dir_path in empty_dirs:
         if any(dir_path.iterdir()):
@@ -144,53 +164,90 @@ def check_dirs_empty(all_dir_paths: dict[str, Path], species_name: str) -> None:
             )
 
 
-if __name__ == "__main__":
-    args = run_argparse()
-
+def run_add_new_species(args: argparse.Namespace) -> str:
+    """Run add_new_species workflow and return derived species slug."""
     user_form_data = parse_user_form(form_file_path=args.species_submission_form)
 
-    output_dir_paths = all_dir_paths(user_form_data.species_slug)
+    output_dir_paths = get_species_paths(species_slug=user_form_data.species_slug)
+    output_dir_paths.ensure_parent_dirs()
     if not args.overwrite:
-        check_dirs_empty(all_dir_paths=output_dir_paths, species_name=user_form_data.species_name)
+        check_dirs_empty(output_paths=output_dir_paths, species_name=user_form_data.species_name)
 
     user_data_tracks = parse_excel_file(
         spreadsheet_file_path=args.data_tracks_sheet,
         sheet_name=args.data_tracks_sheet_name,
     )
 
-    assembly_metadata = fetch_assembly_metadata(
-        user_data_tracks=user_data_tracks,
-        species_name=user_form_data.species_name,
-    )
+    if args.skip_assembly_metadata_fetch:
+        logger.warning(
+            "Skipping ENA/NCBI assembly metadata fetch (--skip-assembly-metadata-fetch). "
+            "Assembly metadata fields have been set to '[EDIT]' placeholders and need manual updates.",
+        )
+        assembly_metadata = placeholder_assembly_metadata(
+            user_data_tracks=user_data_tracks,
+            species_name=user_form_data.species_name,
+        )
+    else:
+        try:
+            assembly_metadata = fetch_assembly_metadata(
+                user_data_tracks=user_data_tracks,
+                species_name=user_form_data.species_name,
+            )
+        except AssemblyMetadataApiException as e:
+            # Fallback to placeholder metadata if ENA/NCBI API lookup fails (timeout, missing fields in the response), to allow the rest of the files to be created.
+            logger.warning("%s", e)
+            assembly_metadata = placeholder_assembly_metadata(
+                user_data_tracks=user_data_tracks,
+                species_name=user_form_data.species_name,
+            )
 
     add_index_md(
         user_form_data=user_form_data,
-        content_dir_path=output_dir_paths["content_dir_path"],
-        data_dir_path=output_dir_paths["data_dir_path"],
+        content_dir_path=output_dir_paths.content_dir_path,
+        data_dir_path=output_dir_paths.data_dir_path,
     )
 
     add_assembly_md(
         user_form_data=user_form_data,
         assembly_metadata=assembly_metadata,
-        content_dir_path=output_dir_paths["content_dir_path"],
+        content_dir_path=output_dir_paths.content_dir_path,
+        user_data_tracks=user_data_tracks,
     )
 
     add_download_md(
         species_slug=user_form_data.species_slug,
-        content_dir_path=output_dir_paths["content_dir_path"],
+        content_dir_path=output_dir_paths.content_dir_path,
     )
 
     add_stats_file(
-        data_dir_path=output_dir_paths["data_dir_path"],
+        data_dir_path=output_dir_paths.data_dir_path,
+        user_data_tracks=user_data_tracks,
     )
 
-    populate_data_tracks_json(user_data_tracks, assets_dir_path=output_dir_paths["assets_dir_path"])
+    populate_data_tracks_json(user_data_tracks, assets_dir_path=output_dir_paths.assets_dir_path)
 
     populate_config_yml(
         assembly_metadata=assembly_metadata,
         user_data_tracks=user_data_tracks,
-        config_dir_path=output_dir_paths["config_dir_path"],
+        config_dir_path=output_dir_paths.config_dir_path,
     )
 
-    out_img_path = output_dir_paths["image_dir_path"] / f"{user_form_data.species_slug}.webp"
-    process_species_image(in_img_path=Path(args.species_image), out_img_path=out_img_path)
+    out_img_path = output_dir_paths.image_file_path
+    process_species_image(in_img_path=args.species_image, out_img_path=out_img_path)
+    return user_form_data.species_slug
+
+
+def main() -> None:
+    args = run_argparse()
+    if args.print_species_slug_only:
+        # Suppress all output except the species slug, to allow for scripts that need just the slug.
+        with redirect_stdout(io.StringIO()):
+            species_slug = run_add_new_species(args)
+        print(species_slug)
+        return
+
+    run_add_new_species(args)
+
+
+if __name__ == "__main__":
+    main()
