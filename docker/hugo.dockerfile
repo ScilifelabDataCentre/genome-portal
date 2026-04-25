@@ -5,7 +5,7 @@ ARG GWAS_PLUGIN_VERSION=2.1.4
 ## Stage 1: Download HUGO + build static site. 
 
 # Use debian instead of alpine for build to avoid a MacOS + Rancher desktop build issue.
-FROM debian:stable-slim@sha256:85dfcffff3c1e193877f143d05eaba8ae7f3f95cb0a32e0bc04a448077e1ac69 AS build
+FROM debian:stable-slim@sha256:8f0c555de6a2f9c2bda1b170b67479d11f7f5e3b66bb4a7a1d8843361c9dd3ff AS build
 
 ARG HUGO_VERSION=0.138.0
 ARG JBROWSE_VERSION
@@ -61,7 +61,7 @@ RUN mkdir -p /tmp/browser/plugins /tmp/gwas-plugin-stage && \
 
 
 ## Stage 3: Serve the generated html using nginx
-FROM nginxinc/nginx-unprivileged:stable-alpine@sha256:7377697a821c131a924a7105fafbe7414db4e9fcc77a6f08f776f33f141ec3f8
+FROM nginxinc/nginx-unprivileged:stable-alpine@sha256:8a7fd2dfd8bfae329b96118207b7a9153293f71c7fee042ed7ffbc4461a8788d
 
 COPY docker/nginx-custom.conf /etc/nginx/conf.d/default.conf 
 
