@@ -2,7 +2,7 @@
 
 This guide describes the full workflow for creating pages for a new species in the Genome Portal. The guide is written with bioinformatics-skilled users or Genome Portal staff in mind and includes every step from filling out the submission forms and generating the files needed for the website and JBrowse configuration, to building a local test instance of the new pages and eventually opening a Pull Request for review.
 
-Throughout the guide there will be a tutorial case that uses public data from the algae _Volvox carteri_. If this is your first time adding a species to the Genome Portal, you may want to follow along by trying out those commands.
+Throughout the guide there will be a tutorial case that uses public data from the algae _Volvox carteri_. If this is your first time adding a species to the Genome Portal, you may want to follow along by trying out those commands. The pre-filled example forms are stored in the `./scripts/add_new_species/tests/fixtures/submission_form_example/` folder and are named `01-test-species-submission_v1.3.docx` and `02-test-data-tracks_v1.3.xlsx`.
 
 If you run into issues or have any questions, don't hesitate to contact the Genome Portal staff as described in the [main README at the top of the repository](https://github.com/ScilifelabDataCentre/genome-portal).
 There is also a [Manual Intervention Guide for Adding Species to the Genome Portal](species_submission/manual_intervention_guide.md) written for Genome Portal staff that could contain advice, should you be interested in doing the troubleshooting yourself.
