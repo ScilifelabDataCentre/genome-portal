@@ -4,12 +4,18 @@
   "schedule": "* 9-12 * * 1",
   "packageRules": [
     {
-      "matchFileNames": ["requirements.txt"],
+      "matchFileNames": ["requirements.txt", "add_species.dockerfile"],
       "enabled": false
     },
     {
       "matchManagers": ["github-actions"],
-      "matchPackageNames": ["python"],
+      "matchDepNames": ["python"],
+      "enabled": false
+    },
+    {
+      "matchFileNames": [".github/workflows/playwright.yml"],
+      "matchManagers": ["github-actions"],
+      "matchDepNames": ["python"],
       "enabled": false
     },
     {
