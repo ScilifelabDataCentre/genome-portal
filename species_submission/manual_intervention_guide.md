@@ -140,7 +140,9 @@ The `install` target is used for the Kubernetes deployment to copies the process
 
 Avoid editing `data/<species_name>/config.json` directly since any manual changes will be overwritten the next time `dockermake` runs. Since the data pipeline will be run separately on the Kubernetes deployment, all configurations for the species JBrowse render need to be recreatable from scratch from the two files in `config/<species_name>`.
 
->**Tip:** It can be a good idea to delete a previous `data/<species_name>/config.json` before running the `makefile` again, since there can be cases where `make` skips some recipes because it seems like the expected results file already exists.
+>**Tip:** If the JBrowse instance is not reflecting your changes after running `dockermake` (even after clearing the cache from the web browser and reloading the page), it can help to clear the build state before re-running. The `makefile` has dedicated clean-up targets for this:
+> - `./scripts/dockermake -t stable SPECIES=<species_name> clean-config` — removes `data/<species_name>/config.json` only. (You can also manually delete `data/<species_name>/config.json` to achive this.) Combining this with a rerun of the `makefile` for the species is often enough to clear stale JBrowse states. 
+> - `./scripts/dockermake -t stable SPECIES=<species_name> clean` — removes all build artefacts for the species, including downloaded and indexed data files. Use this when a full reset is needed. Note that downloading and processing files can take some time, so most likely this is overkill for troubleshooting stale JBrowse states.
 
 ### 2.5. What is baked into the Docker image vs mounted at runtime?
 
