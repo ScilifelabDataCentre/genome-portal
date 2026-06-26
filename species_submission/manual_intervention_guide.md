@@ -20,17 +20,17 @@ Some familiarity with the how the Genome Portal data pipeline works will be need
 4. [Spinning up a local JBrowse instance to test tracks](#4-spinning-up-a-local-jbrowse-instance-to-test-tracks)
    - [4.1 Full local site with dockerbuild + dockerserve](#41-full-local-site-with-dockerbuild--dockerserve)
    - [4.2 Alternative: JBrowse Desktop client](#42-alternative-jbrowse-desktop-client)
-5. [Understanding and editing `config.yaml` manually](#5-understanding-and-editing-configyml-manually)
+5. [Understanding and editing `config.yml` manually](#5-understanding-and-editing-configyml-manually)
    - [5.1 Structure overview](#51-structure-overview)
    - [5.2 The assembly section](#52-the-assembly-section)
    - [5.3 The tracks section](#53-the-tracks-section)
    - [5.4 Configuring the defaultSession](#54-configuring-the-defaultsession)
    - [5.5 Secondary (organellar) assemblies](#55-secondary-organellar-assemblies)
-6. [Adding feature tracks to `config.yaml`](#6-adding-feature-tracks-to-configyaml)
+6. [Adding feature tracks to `config.yml`](#6-adding-feature-tracks-to-configyml)
    - [6.1 Minimal example](#61-minimal-example)
    - [6.2 When addTrack: false is needed for a feature track](#62-when-addtrack-false-is-needed-for-a-feature-track)
    - [6.3 Enabling clickable database cross-references (dbxref plugin)](#63-enabling-clickable-database-cross-references-dbxref-plugin)
-7. [Adding quantitative (GWAS/Manhattan plot) tracks to `config.yaml`](#7-adding-quantitative-gwasmanhattan-plot-tracks-to-configyaml)
+7. [Adding quantitative (GWAS/Manhattan plot) tracks to `config.yml`](#7-adding-quantitative-gwasmanhattan-plot-tracks-to-configyml)
    - [7.1 Configuring `config.yml` for Manhattan plot tracks](#71-configuring-configyml-for-manhattan-plot-tracks)
    - [7.2 Building the data for Manhattan plot tracks](#72-building-the-data-for-manhattan-plot-tracks)
    - [7.3 Verifying the track renders correctly](#73-verifying-the-track-renders-correctly)
@@ -72,7 +72,7 @@ The inputs to the `makefile` are the configuration files in `config/<species_nam
 - `config.yml`: the main configuration file.
 - `config.json`: helper configuration file that stores the JBrowse `defaultSession`.
 
-The outputs are everything written to the ``data/<species_name>/` directory by the makefile. **The `data/` directory is never committed to git** — it is always regenerated on demand by running `dockermake`.
+The outputs are everything written to the `data/<species_name>/` directory by the makefile. **The `data/` directory is never committed to git** — it is always regenerated on demand by running `dockermake`.
 
 - Downloaded and processed data files: the bgzipped FASTA and its `.fai` index; sorted, bgzipped GFF/BED files and their `.csi` indexes; `aliases.txt`.
 - The final JBrowse configuration for the species: `data/<species_name>/config.json`.
@@ -165,7 +165,7 @@ Historically, the Genome Portal has used this hierarchy for choosing where to so
 2. **NCBI FTP** — used when the ENA version of the assembly has known problems, e.g. incomplete number of scaffolds, issues with the FASTA headers
 3. **SciLifeLab Data Repository (Figshare)** — for primary genome assemblies only resorted to for cases when neither ENA nor NCBI is usable; it is not the domain-standard for genome assemblies.
 
-The subheadings below describe how to find the URL to a genome assembly in the different repositories. For ENA/NCBI, find the assembly by its accession number, for SciLifeLab Data Repository, find it by its DOI. The URLs should go in either the submission for or in the `config.yaml`.
+The subheadings below describe how to find the URL to a genome assembly in the different repositories. For ENA/NCBI, find the assembly by its accession number, for SciLifeLab Data Repository, find it by its DOI. The URLs should go in either the submission for or in the `config.yml`.
 
 > **Always use `https://`, never `ftp://`.** URLs starting with `ftp://` are not compatible with the `curl` command used in the Genome Portal `makefile` download step and also cannot be opened by browsers on the species download (Hugo) page. If you ever see `ftp://ftp.ebi.ac.uk/...` in a config, change it to `https://ftp.ebi.ac.uk/...`. The Playwright test `playwright/tests/test_data_tracks_links.py` catches `ftp://` URLs in `hugo/assets/<species>/data_tracks.json` (the download-page source), so this issue should surface during CI.
 
@@ -239,7 +239,7 @@ A challenge with all other data tracks than the protein-coding genes is that the
 
 When advising users to submit their files to these repositories, it is important that they do not pack all their data files into a single archive (`.zip`, `.tar`, `.tar.gz`). That is not compatible with how the makefile expects to download data files on a single-file basis. Each file need to be a separate object with its of URL.
 
-> **Important: use `ndownloader.figshare.com`, not the URL shown in the browser.** When you right-click a file in the SciLifeLab Figshare web interface and copy the link, you get a URL of the form `https://figshare.scilifelab.se/ndownloader/files/<ID>`. This URL is blocked by an AWS WAF Bot Control and will fail when `curl` (and therefore the automated build pipeline) tries to download it. The correct URL for programmatic access replaces the subdomain: use `https://ndownloader.figshare.com/files/<ID>` instead; this means that the numeric file ID stays the same and only the hostname changes. When using a Figshare URL, the `fileName` key is always required in `config.yaml` since the Figshare download URLs are opaque numeric IDs that don't reveal the filename. 
+> **Important: use `ndownloader.figshare.com`, not the URL shown in the browser.** When you right-click a file in the SciLifeLab Figshare web interface and copy the link, you get a URL of the form `https://figshare.scilifelab.se/ndownloader/files/<ID>`. This URL is blocked by an AWS WAF Bot Control and will fail when `curl` (and therefore the automated build pipeline) tries to download it. The correct URL for programmatic access replaces the subdomain: use `https://ndownloader.figshare.com/files/<ID>` instead; this means that the numeric file ID stays the same and only the hostname changes. When using a Figshare URL, the `fileName` key is always required in `config.yml` since the Figshare download URLs are opaque numeric IDs that don't reveal the filename. 
 
 ### 3.4 Supported file formats
 
@@ -277,7 +277,7 @@ Some format-specific comments:
      ```bash
      awk '$NF != "nan"' input.bed > output.bed
      ```
-  See [Section 7](#7-adding-quantitative-gwasmanhattan-plot-tracks) for the full workflow to add tracks of this type to a species.
+  See [Section 7](#7-adding-quantitative-gwasmanhattan-plot-tracks-to-configyml) for the full workflow to add tracks of this type to a species.
 
 - **Mitochondrial GFF files** sometimes contain features that JBrowse cannot parse. Known problematic patterns: `exon` features with anti-codon notation in the attributes column (e.g. `(tca)` in a tRNA exon). One potential fix would be to drop the offending feature types before use:
   ```bash
@@ -339,7 +339,7 @@ tabix -p gff --csi /path/to/file.sorted.gff.bgz
 tabix -p bed --csi /path/to/file.sorted.bed.bgz
 ```
 
-*CSI became the pipeline default for all BED and GFF files in April 2025. Older configs (e.g. `bufotes_viridis`) used manual workarounds (edits to `config.yaml`, manual upload of files to the deployment) for the previous TBI-index based pipeline. These species configs remain functional but the manual step is no longer needed for new species.*
+*CSI became the pipeline default for all BED and GFF files in April 2025. Older configs (e.g. `bufotes_viridis`) used manual workarounds (edits to `config.yml`, manual upload of files to the deployment) for the previous TBI-index based pipeline. These species configs remain functional but the manual step is no longer needed for new species.*
 
 ### 3.6 Generating a refNameAlias file
 
@@ -414,7 +414,7 @@ For guides on how to use the desktop client, see the [official docs](https://jbr
 
 ## 5. Understanding and editing config.yml manually
 
-The species configuration file `config/<species_name>/config.yml` is the central file that the `makefile` reads in order to download, process, and configure data tracks. This file need to be edited by hand when the automated ingestion script does not or cannot produce the desired results, for instance when adding a [quantitative track](#7-adding-quantitative-gwasmanhattan-plot-tracks) with a custom defaultSession, or when tweaking track descriptions.
+The species configuration file `config/<species_name>/config.yml` is the central file that the `makefile` reads in order to download, process, and configure data tracks. This file need to be edited by hand when the automated ingestion script does not or cannot produce the desired results, for instance when adding a [quantitative track](#7-adding-quantitative-gwasmanhattan-plot-tracks-to-configyml) with a custom defaultSession, or when tweaking track descriptions.
 
 ### 5.1 Structure overview
 
@@ -471,13 +471,13 @@ tracks:
 | `url` | Direct URL to the data file. | Yes |
 | `fileName` | Required when the URL does not contain an explicit filename. Common for Figshare download links (e.g. `https://figshare.scilifelab.se/ndownloader/files/XXXXXXXX`). | When needed |
 | `defaultSession` | Set to `true` to include this track in the JBrowse defaultSession (turned on when the page loads). Omitting it leaves the track available in the selector but off by default. Protein-coding gene tracks are always enabled regardless of this key. | No |
-| `addTrack` | Set to `false` to prevent `dockermake` from running `jbrowse add-track` for this track. The track is still downloaded and processed and thus allows its config to be written by `configure_defaultSession`. Required for any track that uses `displayType: "gwas"` or `displayType: "wiggle"`. See [Section 6.2](#62-when-addtrack-false-is-needed-for-a-feature-track) (feature tracks) and [Section 7](#7-adding-quantitative-gwasmanhattan-plot-tracks) (GWAS tracks). | No |
+| `addTrack` | Set to `false` to prevent `dockermake` from running `jbrowse add-track` for this track. The track is still downloaded and processed and thus allows its config to be written by `configure_defaultSession`. Required for any track that uses `displayType: "gwas"` or `displayType: "wiggle"`. See [Section 6.2](#62-when-addtrack-false-is-needed-for-a-feature-track) (feature tracks) and [Section 7](#7-adding-quantitative-gwasmanhattan-plot-tracks-to-configyml) (GWAS tracks). | No |
 | `displayType` | Sets the JBrowse display type. One of `"linear"` (default, `LinearBasicDisplay`), `"arc"` (`LinearArcDisplay`), `"gwas"` (`LinearManhattanDisplay`, needs GWAS plugin), `"wiggle"` (`LinearWiggleDisplay`). Must be combined with `addTrack: false` for `"gwas"` and `"wiggle"`. | No |
 | `scoreColumn` | Name of the column in a BED-like file to use as the plotted score. Common values: `"PI"` (nucleotide diversity), `"TajimaD"`. Only relevant for quantitative tracks with `displayType: "gwas"` or `"wiggle"`. | When needed |
 
 > **Deprecated keys** — older configs (e.g. `config/anthophora_plagiata/config.yml`) use `GWAS: true`, `scoreColumnGWAS`, and `color`. These are no longer read by the pipeline; use `displayType: "gwas"` and `scoreColumn` instead. The deprecated keys can be left in place without breaking anything, but new tracks should use the current keys.
 
-See [Section 5.4](#54-configuring-the-defaultsession) for how to run `configure_defaultSession` after editing these keys. Specific details for different tracks are found in [Section 6](#6-adding-feature-tracks-to-configyaml) (feature tracks) and [Section 7](#7-adding-quantitative-gwasmanhattan-plot-tracks-to-configyaml) (quantitative/GWAS tracks).
+See [Section 5.4](#54-configuring-the-defaultsession) for how to run `configure_defaultSession` after editing these keys. Specific details for different tracks are found in [Section 6](#6-adding-feature-tracks-to-configyml) (feature tracks) and [Section 7](#7-adding-quantitative-gwasmanhattan-plot-tracks-to-configyml) (quantitative/GWAS tracks).
 
 ### 5.4 Configuring the defaultSession
 
@@ -485,7 +485,7 @@ Without a defaultSession, opening a species' JBrowse page would require the user
 
 The `configure_defaultSession` script reads `config/<species_name>/config.yml` and the downloaded FASTA to generate `config/<species_name>/config.json`. Because it reads the local FASTA to estimate a sensible zoom level and find the name of the first scaffold in the FASTA file, `dockermake` must have been run once before running `configure_defaultSession` to create `config/<species_name>/config.json`, and then `dockermake` will need to be run once more afterwards to apply the generated defaultSession config to `data/<species_name>/config.json`.
 
->**Note!** There is a `jbrowse set-default-session` command in the [JBrowse CLI tool](https://jbrowse.org/jb2/docs/cli/). For various historical design choices for the `makefile` and the species `config.yaml`, the codebase does not make use that CLI command. The custom tooling gives more flexibility to the needs of the Genome Portal, but adds some complexity.
+>**Note!** There is a `jbrowse set-default-session` command in the [JBrowse CLI tool](https://jbrowse.org/jb2/docs/cli/). For various historical design choices for the `makefile` and the species `config.yml`, the codebase does not make use that CLI command. The custom tooling gives more flexibility to the needs of the Genome Portal, but adds some complexity.
 
 Example of a typical workflow:
 
@@ -550,7 +550,7 @@ See `config/parnassius_mnemosyne/config.yml` for a live example.
 
 >**Note on JBrowse track selector UX.**  When a user switches to the secondary assembly's view panel, the track selector button at the top of the page still controls the primary panel. To return to the primary panel's track selector, the user must click its own track selector button or reload the species page. This is a known JBrowse limitation with multi-panel sessions, not a configuration error.
 
-## 6. Adding feature tracks to `config.yaml`
+## 6. Adding feature tracks to `config.yml`
 
 In JBrowse, a [FeatureTrack](https://jbrowse.org/jb2/docs/config/featuretrack/) renders discrete genomic intervals from a file and is typically used for gene annotations, repeat regions, transcript alignments, and similar data. The standard display type is `LinearBasicDisplay`, which draws coloured boxes at each feature position.
 
@@ -675,7 +675,7 @@ At the time of writing, this plugin must be manually enabled for each species. T
 See `config/parnassius_mnemosyne/config.json` for a complete working example.
 
 
-## 7. Adding quantitative tracks to `config.yaml`
+## 7. Adding quantitative (GWAS/Manhattan plot) tracks to `config.yml`
 
 [Quantiative tracks in JBrowse](https://jbrowse.org/jb2/docs/user_guides/quantitative_track/) have score column with values for a given chromosomal region. Typically, these tracks are BED-like files that follow the first columns of the BED format with an additional a score column (see [Section 3.4](#34-supported-file-formats) for details). The name of the score column will need to be explicitly stated in the JBrowse config; for convenience, this can be controlled in `config/<species_name>/config.yml`.
 
