@@ -28,15 +28,12 @@ Some familiarity with the how the Genome Portal data pipeline works will be need
    - [5.5 Secondary (organellar) assemblies](#55-secondary-organellar-assemblies)
 6. [Adding feature tracks to `config.yaml`](#6-adding-feature-tracks-to-configyaml)
    - [6.1 Minimal example](#61-minimal-example)
-   - [6.2 File format considerations](#62-file-format-considerations)
-   - [6.3 Standard workflow](#63-standard-workflow)
-   - [6.4 When addTrack: false is needed for a feature track](#64-when-addtrack-false-is-needed-for-a-feature-track)
-   - [6.5 Enabling clickable database cross-references (dbxref plugin)](#65-enabling-clickable-database-cross-references-dbxref-plugin)
+   - [6.2 When addTrack: false is needed for a feature track](#62-when-addtrack-false-is-needed-for-a-feature-track)
+   - [6.3 Enabling clickable database cross-references (dbxref plugin)](#63-enabling-clickable-database-cross-references-dbxref-plugin)
 7. [Adding quantitative (GWAS/Manhattan plot) tracks to `config.yaml`](#7-adding-quantitative-gwasmanhattan-plot-tracks-to-configyaml)
-   - [7.1 BED file preparation](#71-bed-file-preparation)
-   - [7.2 config.yml entries](#72-configyml-entries)
-   - [7.3 Workflow](#73-workflow)
-   - [7.4 Verifying the track renders correctly](#74-verifying-the-track-renders-correctly)
+   - [7.1 Configuring `config.yml` for Manhattan plot tracks](#71-configuring-configyml-for-manhattan-plot-tracks)
+   - [7.2 Building the data for Manhattan plot tracks](#72-building-the-data-for-manhattan-plot-tracks)
+   - [7.3 Verifying the track renders correctly](#73-verifying-the-track-renders-correctly)
 8. [Troubleshooting JBrowse rendering issues](#8-troubleshooting-jbrowse-rendering-issues)
    - [8.1 No features rendered at all (empty track)](#81-no-features-rendered-at-all-empty-track)
    - [8.2 Error messages and how to get stack traces](#82-error-messages-and-how-to-get-stack-traces)
@@ -122,7 +119,7 @@ The subsections below describe the parts of this process in more detail.
 Each species has two configuration files under `config/<species_name>/`:
 
 - **`config.yml`** — the main config file. This is intended to be human-edited, but a initial version of the file is created by the `scripts/add_new_species` script that is run when ingesting the species submission forms. It defines the assembly (URL, name, accession), and the list of data tracks (URLs, file names, JBrowse display options). This is the file you edit when adding or tweaking a species.
-- **`config.json`** — the generated defaultSession file. It is produced by the `configure_defaultSession` script, which reads `config.yml` and the locally downloaded FASTA and tells JBrowse which scaffold to open, at what zoom level, and with which tracks visible on page load. It is merged into the final `data/<species_name>/config.json` during the `makefile` build step (see below). You do not normally edit this file directly, but some manual interventions, such as enabling the dbxref plugin (see [Section 6.5](#65-enabling-clickable-database-cross-references-dbxref-plugin)), do require editing it.
+- **`config.json`** — the generated defaultSession file. It is produced by the `configure_defaultSession` script, which reads `config.yml` and the locally downloaded FASTA and tells JBrowse which scaffold to open, at what zoom level, and with which tracks visible on page load. It is merged into the final `data/<species_name>/config.json` during the `makefile` build step (see below). You do not normally edit this file directly, but some manual interventions, such as enabling the dbxref plugin (see [Section 6.3](#63-enabling-clickable-database-cross-references-dbxref-plugin)), do require editing it.
 
 From these two `config/<species_name>/` config files, the data pipeline generates the final config file that is read and rendered by the Genome Portal JBrowse instance. In local development, this file is created in `data/<species_name>/config.json`.
 
@@ -474,7 +471,7 @@ tracks:
 | `url` | Direct URL to the data file. | Yes |
 | `fileName` | Required when the URL does not contain an explicit filename. Common for Figshare download links (e.g. `https://figshare.scilifelab.se/ndownloader/files/XXXXXXXX`). | When needed |
 | `defaultSession` | Set to `true` to include this track in the JBrowse defaultSession (turned on when the page loads). Omitting it leaves the track available in the selector but off by default. Protein-coding gene tracks are always enabled regardless of this key. | No |
-| `addTrack` | Set to `false` to prevent `dockermake` from running `jbrowse add-track` for this track. The track is still downloaded and processed and thus allows its config to be written by `configure_defaultSession`. Required for any track that uses `displayType: "gwas"` or `displayType: "wiggle"`. See [Section 6.4](#64-when-addtrack-false-is-needed-for-a-feature-track) (feature tracks) and [Section 7](#7-adding-quantitative-gwasmanhattan-plot-tracks) (GWAS tracks). | No |
+| `addTrack` | Set to `false` to prevent `dockermake` from running `jbrowse add-track` for this track. The track is still downloaded and processed and thus allows its config to be written by `configure_defaultSession`. Required for any track that uses `displayType: "gwas"` or `displayType: "wiggle"`. See [Section 6.2](#62-when-addtrack-false-is-needed-for-a-feature-track) (feature tracks) and [Section 7](#7-adding-quantitative-gwasmanhattan-plot-tracks) (GWAS tracks). | No |
 | `displayType` | Sets the JBrowse display type. One of `"linear"` (default, `LinearBasicDisplay`), `"arc"` (`LinearArcDisplay`), `"gwas"` (`LinearManhattanDisplay`, needs GWAS plugin), `"wiggle"` (`LinearWiggleDisplay`). Must be combined with `addTrack: false` for `"gwas"` and `"wiggle"`. | No |
 | `scoreColumn` | Name of the column in a BED-like file to use as the plotted score. Common values: `"PI"` (nucleotide diversity), `"TajimaD"`. Only relevant for quantitative tracks with `displayType: "gwas"` or `"wiggle"`. | When needed |
 
@@ -524,7 +521,7 @@ In addition to the track keys in [Section 5.3](#53-the-tracks-section), the `con
 | `track.scoreColumn` | track | Score column name for quantitative tracks (BED-like). |
 | `track.addTrack: false` | track | Tells `dockermake` to skip `jbrowse add-track`; lets `configure_defaultSession` handle the full track config instead. Required for `"gwas"` and `"wiggle"` display types. |
 
-For the full technical reference — including how to add new display types or adapters — see [`scripts/configure_defaultSession/README.md`](../scripts/configure_defaultSession/README.md). For how this step fits into a complete track-addition workflow, see [Section 6.3](#63-standard-workflow) (feature tracks) and [Section 7.3](#73-workflow) (quantitative/GWAS tracks).
+For the full technical reference — including how to add new display types or adapters — see [`scripts/configure_defaultSession/README.md`](../scripts/configure_defaultSession/README.md). For how this step fits into a complete track-addition workflow, see [Section 6.1](#61-minimal-example) (feature tracks) and [Section 7.2](#72-building-the-data-for-manhattan-plot-tracks) (quantitative/GWAS tracks).
 
 ### 5.5 Secondary (organellar) assemblies
 
@@ -597,7 +594,7 @@ If you are adding a track to a species that already has pages (e.g. a newly avai
 ./scripts/dockermake -t stable SPECIES=<species_name>
 ```
 
-### 6.4 When addTrack: false is needed for a feature track
+### 6.2 When addTrack: false is needed for a feature track
 
 For most feature tracks `addTrack` can be omitted — the pipeline runs `jbrowse add-track` automatically. The two cases where `addTrack: false` is needed are:
 
@@ -615,7 +612,7 @@ Example for an arc track:
   displayType: "arc"
 ```
 
-### 6.5 Enabling clickable database cross-references (dbxref plugin)
+### 6.3 Enabling clickable database cross-references (dbxref plugin)
 
 There is a custom Genome Portal JBrowse plugin (`hugo/static/custom_jbrowse_plugins/dbxref_plugin.js`) that converts `dbxref` annotations in a GFF into clickable hyperlinks in the feature details panel.
 
@@ -631,7 +628,7 @@ Unknown accession prefixes render as plain text without a link.
 
 At the time of writing, this plugin must be manually enabled for each species. The steps for doing so are:
 
-1. **In `config.yml`**, set `addTrack: false` for the target track. This is required so that `configure_defaultSession` writes the complete track entry to `config/<species_name>/config.json`, where the `formatDetails` key can then be added manually (see [Section 6.4](#64-when-addtrack-false-is-needed-for-a-feature-track)):
+1. **In `config.yml`**, set `addTrack: false` for the target track. This is required so that `configure_defaultSession` writes the complete track entry to `config/<species_name>/config.json`, where the `formatDetails` key can then be added manually (see [Section 6.2](#62-when-addtrack-false-is-needed-for-a-feature-track)):
 
    ```yaml
    - name: "Protein-coding genes"
@@ -707,11 +704,11 @@ The `makefile`'s logic for adding new tracks was not designed to take this into 
 
 >**Note!** There are some deprecated alternative keys older configs (e.g. `config/anthophora_plagiata/config.yml`) that use `GWAS: true`, `scoreColumnGWAS`, and `color`. These keys are no longer read by `configure_defaultSession`; use `displayType: "gwas"` and `scoreColumn` for all new tracks.
 
-### 7.3 Building the data for for Manhattan plot tracks 
+### 7.2 Building the data for Manhattan plot tracks 
 
 ```bash
 # 1. Edit config.yml — add addTrack: false, displayType: "gwas", and scoreColumn to each GWAS track.
-#    Also prepare and upload the BED file (see Section 6.1 and 2.2).
+#    Also prepare and upload the BED file (see Section 3.4).
 
 # 2. Download and process the BED files (must run before configure_defaultSession
 #    so the FASTA is available locally for scaffold/zoom inference).
@@ -731,7 +728,7 @@ The `makefile`'s logic for adding new tracks was not designed to take this into 
 docker rm -f "genome-portal"; ./scripts/dockerserve -t local
 ```
 
-### 7.4 Verifying the track renders correctly
+### 7.3 Verifying the track renders correctly
 
 A correctly configured GWAS track will:
 - Appear as a scatter/Manhattan plot with one point per BED window.
