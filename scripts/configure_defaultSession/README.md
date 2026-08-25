@@ -1,6 +1,8 @@
 # configure_defaultSession README
 
-This document is describes what the configure_defaultSession package is designed to do, outlines supported key-value pairs (Table 1), gives an example that can be tried out with test fixtures, and an generalized example of how it fits in with other packages and scripts to generate a new species page in the Genome Portal.
+> **For workflow context** — see [`species_submission/manual_intervention_guide.md`](../../species_submission/manual_intervention_guide.md#44-configuring-the-defaultsession) for how this script fits into the species addition workflow. This README focuses on the technical design and full key reference.
+
+This document describes what the configure_defaultSession package is designed to do, outlines supported key-value pairs (Table 1), gives an example that can be tried out with test fixtures, and a generalized example of how it fits in with other packages and scripts to generate a new species page in the Genome Portal.
 
 ## What is the defaultSession used for?
 

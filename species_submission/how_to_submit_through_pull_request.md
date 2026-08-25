@@ -2,9 +2,31 @@
 
 This guide describes the full workflow for creating pages for a new species in the Genome Portal. The guide is written with bioinformatics-skilled users or Genome Portal staff in mind and includes every step from filling out the submission forms and generating the files needed for the website and JBrowse configuration, to building a local test instance of the new pages and eventually opening a Pull Request for review.
 
-Throughout the guide there will be a tutorial case that uses public data from the algae _Volvox carteri_. If this is your first time adding a species to the Genome Portal, you may want to follow along by trying out those commands.
+Throughout the guide there will be a tutorial case that uses public data from the algae _Volvox carteri_. If this is your first time adding a species to the Genome Portal, you may want to follow along by trying out those commands. The pre-filled example forms are stored at [`01-test-species-submission_v1.3.docx`](../scripts/add_new_species/tests/fixtures/submission_form_example/01-test-species-submission_v1.3.docx) and [`02-test-data-tracks_v1.3.xlsx`](../scripts/add_new_species/tests/fixtures/submission_form_example/02-test-data-tracks_v1.3.xlsx).
 
-If you run into issues or have any questions, don't hesitate to contact the Genome Portal staff as described in the [main README at the top of the repository](https://github.com/ScilifelabDataCentre/genome-portal).
+If you run into issues or have any questions, don't hesitate to contact the Genome Portal staff as described in the [main README of the `genome-portal` repository](../README.md). There is also a [Manual Intervention Guide for Adding Species to the Genome Portal](manual_intervention_guide.md) written for Genome Portal staff that could contain advice, should you be interested in doing the troubleshooting yourself.
+
+## Table of contents
+
+1. [Setup](#1-setup)
+2. [Fill out the submission forms and crop your picture to 4:3 ratio](#2-fill-out-the-submission-forms-and-crop-your-picture-to-43-ratio)
+   - [2.1 Submission forms](#21-submission-forms)
+     - [2.1.1 Mandatory track no 1: the primary genome assembly](#211-mandatory-track-no-1-the-primary-genome-assembly)
+     - [2.1.2 Mandatory track no 2: annotation of protein-coding genes](#212-mandatory-track-no-2-annotation-of-protein-coding-genes)
+   - [2.2 Species picture](#22-species-picture)
+3. [Run the form ingestion workflow](#3-run-the-form-ingestion-workflow)
+   - [3.1 Option 1: Run the whole workflow with an "I'm feeling lucky" script](#31-option-1-run-the-whole-workflow-with-an-im-feeling-lucky-script)
+   - [3.2 Option 2: Run the workflow step-by-step](#32-option-2-run-the-workflow-step-by-step)
+     - [3.2.1 Run the add_new_species script](#321-run-the-add_new_species-script)
+     - [3.2.2 Use the data builder to download the data](#322-use-the-data-builder-to-download-the-data)
+     - [3.2.3 Create a defaultSession configuration for the species](#323-create-a-defaultsession-configuration-for-the-species)
+     - [3.2.4 Collect statistics from the assembly and the protein-coding genes annotation](#324-collect-statistics-from-the-assembly-and-the-protein-coding-genes-annotation)
+     - [3.2.5 Build and spin up the local version of the site in localhost](#325-build-and-spin-up-the-local-version-of-the-site-in-localhost)
+   - [3.3 Make refinements](#33-make-refinements)
+   - [3.4 When files need to be deleted](#34-when-files-need-to-be-deleted)
+4. [Make a Pull Request](#4-make-a-pull-request)
+
+---
 
 ## 1. Setup
 
@@ -42,13 +64,13 @@ Fill out the forms and prepare the picture of the species as described in sectio
 
 To be able to accommodate a wide range of users with different technical skillsets, the Genome Portal submission forms are provided in MS Office format (`.docx` and `.xlsx`). Note that the form ingestion pipeline that we will be using below has only been tested with forms that have been edited with MS Word and MS Excel; your mileage may therefore vary if you use other document editing software to fill out the forms.
 
-The submission form templates are located in [`species_submission/submission_form_templates`](https://github.com/ScilifelabDataCentre/genome-portal/tree/main/species_submission/submission_form_templates). Make a copy of the forms, for instance at `species_submission/local_inputs`, and fill them out based on the instructions contained within the forms. Start with `01-species-submission_v1.3.docx`; that form will eventually tell you to switch to filling out `02-data-tracks_v1.3.xlsx`.
+The submission form templates are located in [`species_submission/submission_form_templates`](./submission_form_templates/). Make a copy of the forms at `species_submission/local_inputs` (this directory will be used by the ingestion script in [Section 3](#3-run-the-form-ingestion-workflow)) and fill them out based on the instructions contained within the forms. Start with [`01-species-submission_v1.3.docx`](./submission_form_templates/01-species-submission_v1.3.docx); that form will eventually tell you to switch to filling out [`02-data-tracks_v1.3.xlsx`](./submission_form_templates/02-data-tracks_v1.3.xlsx).
 
 The files that will be generated by the ingestion workflow will use a directory structure based on the species names like: `*/genus_species/*`. The name will be taken from field "Species scientific name (_Genus species_)" in `01-species-submission_v1.3.docx`. Please ensure that this name is correctly spelled and only contains genus and species name, since it will be used to fetch e.g. taxonomy data from remote APIs. 
 
-#### 2.1.1 The primary genome assembly and the annotation of its protein-coding genes
+#### 2.1.1 Mandatory track no 1: the primary genome assembly
 
-There are two special mandatory cases that we would like to emphasize here: namely the Genome and Protein-coding genes rows in the spreadsheet.
+There are two special mandatory cases that we would like to emphasize: the Genome and Protein-coding genes rows in the spreadsheet.
 
 The data track row for the primary genome assembly must have the value `Genome` in the column `data_track_name`. It is possible to add multiple assemblies to the Genome Portal, but only the primary genome can be named `Genome`. 
 
@@ -56,12 +78,14 @@ This row needs to have an ENA/NCBI accession number starting with `GCA_` in the 
 
 There is also an optional column `BUSCO_stats` for adding the BUSCO values and which odb-database that was used. This is optional, but we encourage users to add this to the genome assembly row since the ingestion workflow will not run any BUSCO analyses. 
 
-The protein-coding genes track is mandatory since that is the only required data track other than the primary genome assembly. This track must have the value `Protein-coding genes` in the column `data_track_name`. It is also possible to add BUSCO stats for the protein coding genes file too. Add it on this row under `BUSCO_stats` to make it show up in a separate table in the final pages.
+#### 2.1.2 Mandatory track no 2: annotation of protein-coding genes
+
+The second and final mandatory track is the protein-coding genes annotation. This track must have the value `Protein-coding genes` in the column `data_track_name`. It is also possible to add BUSCO stats for the protein coding genes file too. Add it on this row under `BUSCO_stats` to make it show up in a separate table in the final pages.
 
 
 ### 2.2. Species picture
 
-Each species in the Genome Portal will be represented with a picture. See the home page at [https://genomes.scilifelab.se/](https://genomes.scilifelab.se/) for previous examples. If you don't have a picture, please use a public domain image, for instance from [Wikimedia Commons](https://commons.wikimedia.org/wiki/Main_Page). You can also use this  placeholder image `/scripts/add_new_species/templates/placeholder_image_4-3_ratio.webp` for testing the ingestion workflow. Note that for the final published species pages, a non-placeholder picture is needed.
+Each species in the Genome Portal will be represented with a picture. See the home page at [https://genomes.scilifelab.se/](https://genomes.scilifelab.se/) for previous examples. If you don't have a picture, please use a public domain image, for instance from [Wikimedia Commons](https://commons.wikimedia.org/wiki/Main_Page). You can also use this  placeholder image [`/scripts/add_new_species/templates/placeholder_image_4-3_ratio.webp`](../scripts/add_new_species/templates/placeholder_image_4-3_ratio.webp) for testing the ingestion workflow. Note that for the final published species pages, a non-placeholder picture is needed.
 
 The image needs to be cropped to a 4:3 aspect ratio. The ingestion pipeline does not crop the image, but sends an error if it has another aspect ratio. Please use image editing software of your choice to crop the image, or ask the Genome Portal staff for assistance.
 
@@ -89,7 +113,7 @@ Note! If you have issues with the published remote images, it is also possible t
 
 The third Docker image contains the website data, and needs to be run every time you make an update to the content or data of the webpages. The guide will tell you when that Docker build step needs to be run.
 
-To follow along with the _Volvox carteri_ tutorial data, copy two pre-filled forms to `species_submission/local_inputs` with :
+To follow along with the _Volvox carteri_ tutorial data, copy the two pre-filled forms to `species_submission/local_inputs` with :
 
 ```bash
 cp scripts/add_new_species/tests/fixtures/submission_form_example/01-test-species-submission_v1.3.docx species_submission/local_inputs/ && \
@@ -256,10 +280,11 @@ For the example data, run:
 ./scripts/dockermake -t stable SPECIES=volvox_carteri clean uninstall && python scripts/add_new_species/removespecies.py -s volvox_carteri -f
 ```
 
-
 ## 4. Make a Pull Request
 
-Once you are happy with the files, commit them to your branch and push them to GitHub. Then open a Pull Request so that the Genome Portal staff can review the submission. If you are working from a fork branch, open the Pull Request to `ScilifelabDataCentre/genome-portal:main`
+Once you are happy with the files, commit them to your branch and push them to GitHub. Then open a Pull Request so that the Genome Portal staff can review the submission. If you are working from a fork branch, open the Pull Request to `ScilifelabDataCentre/genome-portal:main`, and if you are comfortable with it, please tick the box "Allow edits from maintainers", which will allow Genome Portal staff to make small changes directly on your branch if needed.
+
+When you create the pull request, Playwright tests will be run to check the content of each Genome Portal page for common issues, such as missing required sections, placeholder text left in place (e.g. [EDIT], TODO), and invalid URLs in footers and download tables. Note that the tests do not cover the JBrowse instances: no JBrowse content, behavior, or visualization is tested by Playwright. If you want, you can run the tests manually before opening your pull request to fix any potential errors ahead of time. Please see the guide in [playwright/Running_Playwright.md](../playwright/Running_Playwright.md) for instructions on how to do that.
 
 At the time of writing, the following 9 files are expected to have been generated by the species submission workflow:
 
