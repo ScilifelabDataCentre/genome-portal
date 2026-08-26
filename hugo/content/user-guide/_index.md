@@ -7,7 +7,7 @@ toc: true
 
 On this page, you will find documentation for the **Swedish Reference Genome Portal**, which provides a general overview of its graphical user interface, structure, and useful features.
 
-We gratefully welcome comments or questions via [email](mailto:dsn-eb@scilifelab.se).
+We gratefully welcome comments or questions via [email](mailto:srgp@scilifelab.se).
 
 ### 1. Website structure
 
