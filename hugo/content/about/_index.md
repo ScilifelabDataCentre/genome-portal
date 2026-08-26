@@ -4,15 +4,11 @@ title: About
 
 ## Overview
 
-The Swedish Reference Genome Portal is a free national data service for aggregating, discovering, and visualising non-human eukaryotic genome assemblies and genome annotations (co-)produced by researchers affiliated with a Swedish institution.
-
-This service is developed and maintained by the Data Science Node in Evolution and Biodiversity (DSN-EB) team as part of the <a href="https://data.scilifelab.se" target="_blank">SciLifeLab Data Platform</a>, operated by the SciLifeLab Data Centre.
-
-The DSN-EB team comprises system developers, data stewards, and bioinformaticians affiliated with <a href="https://www.scilifelab.se/data/" target="_blank">SciLifeLab Data Centre</a> and the <a href="https://nbis.se" target="_blank">National Bioinformatics Infrastructure Sweden (NBIS)</a>, based at Uppsala University and the Swedish Museum of Natural History.
+The Swedish Reference Genome Portal (SRGP) is a free national data service for aggregating, discovering, and visualising non-human eukaryotic genome assemblies and genome annotations (co-)produced by researchers affiliated with a Swedish institution. This service is developed and operated by the <a href="https://www.scilifelab.se/data/" target="_blank">SciLifeLab Data Centre</a>.
 
 The Swedish Reference Genome Portal aims to:
 
-- Highlight and showcase genome research performed in Sweden.
+- Highlight and showcase genomic research performed in Sweden.
 
 - Make it easier to access, visualise, and interpret genome data by lowering the barriers to entry.
 
@@ -44,4 +40,4 @@ This service is supported by SciLifeLab and the Knut and Alice Wallenberg Founda
 
 ### Getting help
 
-For questions, comments, or issues related to the Genome Portal, please contact us via email at [dsn-eb@scilifelab.se](mailto:dsn-eb@scilifelab.se).
+For questions, comments, or issues related to the Genome Portal, please contact us via email at [srgp@scilifelab.se](mailto:srgp@scilifelab.se).
