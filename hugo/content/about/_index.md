@@ -20,7 +20,7 @@ The Swedish Reference Genome Portal aims to:
 
 The Swedish Reference Genome Portal website was built using the static website builder <a href="https://gohugo.io/" target="_blank">Hugo</a>. The genome browser <a href="https://jbrowse.org/jb2/" target="_blank">JBrowse 2</a> is used to display genomic datasets and is embedded into the static website. All data shown on the portal is sourced from public repositories. We retrieve a copy of this data from the repositories to display on the genome browser.
 
-The source code for the portalis publicly available on <a href="https://github.com/ScilifelabDataCentre/genome-portal" target="_blank">GitHub</a> under an MIT (open source) license. The portal is deployed on a Kubernetes cluster located at the <a href="https://www.kth.se/" target="_blank">KTH Royal Institute of Technology</a> in Stockholm.
+The source code for the portal is publicly available on <a href="https://github.com/ScilifelabDataCentre/genome-portal" target="_blank">GitHub</a> under an MIT (open source) license. The portal is deployed on a Kubernetes cluster located at the <a href="https://www.kth.se/" target="_blank">KTH Royal Institute of Technology</a> in Stockholm.
 
 ### Citation guidelines
 
