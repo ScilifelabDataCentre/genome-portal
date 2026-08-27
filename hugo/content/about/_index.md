@@ -4,7 +4,7 @@ title: About
 
 ## Overview
 
-The Swedish Reference Genome Portal (SRGP) is a free national data service for aggregating, discovering, and visualising non-human eukaryotic genome assemblies and genome annotations (co-)produced by researchers affiliated with a Swedish institution. This service is developed and operated by the <a href="https://www.scilifelab.se/data/" target="_blank">SciLifeLab Data Centre</a>.
+The Swedish Reference Genome Portal (SRGP) is a free national data service for aggregating, discovering, and visualising non-human eukaryotic genome assemblies and genome annotations (co-)produced by researchers affiliated with a Swedish institution. This service is developed and operated by the <a href="https://www.scilifelab.se/data-ai/" target="_blank">SciLifeLab Data Centre</a>.
 
 The Swedish Reference Genome Portal aims to:
 
@@ -14,13 +14,13 @@ The Swedish Reference Genome Portal aims to:
 
 - Promote the sharing of genomic annotations that are rarely published.
 
-- Ensure all data displayed on the Genome Portal aligns with the <a href="https://www.go-fair.org/fair-principles/" target="_blank">FAIR principles</a> and is available in public repositories.
+- Ensure all data displayed on portal aligns with the <a href="https://www.go-fair.org/fair-principles/" target="_blank">FAIR principles</a>, and is available in public repositories.
 
 ### Technical implementation and source code
 
-The Swedish Reference Genome Portal website was built using the static website builder <a href="https://gohugo.io/" target="_blank">Hugo</a>. The genome browser <a href="https://jbrowse.org/jb2/" target="_blank">JBrowse 2</a> is used to display genomic datasets and is embedded into the static website. All data shown on the Genome Portal is sourced from public repositories. We retrieve a copy of this data from the repositories to display on the genome browser.
+The Swedish Reference Genome Portal website was built using the static website builder <a href="https://gohugo.io/" target="_blank">Hugo</a>. The genome browser <a href="https://jbrowse.org/jb2/" target="_blank">JBrowse 2</a> is used to display genomic datasets and is embedded into the static website. All data shown on the portal is sourced from public repositories. We retrieve a copy of this data from the repositories to display on the genome browser.
 
-The source code for the Genome Portal is publicly available on <a href="https://github.com/ScilifelabDataCentre/genome-portal" target="_blank">GitHub</a> under an MIT (open source) license. The Genome Portal is deployed on a Kubernetes cluster located at the <a href="https://www.kth.se/" target="_blank">KTH Royal Institute of Technology</a> in Stockholm.
+The source code for the portalis publicly available on <a href="https://github.com/ScilifelabDataCentre/genome-portal" target="_blank">GitHub</a> under an MIT (open source) license. The portal is deployed on a Kubernetes cluster located at the <a href="https://www.kth.se/" target="_blank">KTH Royal Institute of Technology</a> in Stockholm.
 
 ### Citation guidelines
 

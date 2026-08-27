@@ -2,7 +2,7 @@
 title: Privacy policy
 ---
 
-SciLifeLab operates the [genomes.scilifelab.se](https://genomes.scilifelab.se/) website, which provides the **Service**.
+SciLifeLab operates the [Swedish Reference Genome Portal](https://genomes.scilifelab.se/), which provides the **Service**.
 
 This page is used to inform website visitors regarding our personal and technical data processing policy. If you choose to use our **Service**, then your personal and technical data will be processed in accordance with this policy.
 

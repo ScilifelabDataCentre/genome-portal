@@ -4,24 +4,24 @@ title: Frequently Asked Questions
 
 ### FAQ
 
-#### About the Genome Portal
+#### About the Swedish Reference Genome Portal
 
 <div class="accordion mb-4" id="accordion-1">
 
 {{< faq_block accordionID="accordion-1" title="How does the Swedish Reference Genome Portal differ from other genome portal initiatives? (e.g., Ensembl, UCSC)" >}}
 The Swedish Reference Genome Portal (SRGP) does not replace existing genome portal initiatives, as it has specific aims and scope:
 
-- The SRGP targets the Swedish research community and is restricted to non-human eukaryotic species. Therefore, the species displayed here are typically limited to those submitted by researchers affiliated with Swedish institutions. In contrast, global genome portals such as Ensembl and UCSC have much broader taxonomic scope, aiming to include species from around the world, including humans and prokaryotes.
+- The portal targets the Swedish research community and is restricted to non-human eukaryotic species. Therefore, the species displayed here are typically limited to those submitted by researchers affiliated with Swedish institutions. In contrast, global genome portals such as Ensembl and UCSC have much broader taxonomic scope, aiming to include species from around the world, including humans and prokaryotes.
 
-- The SRGP's primary goal is to facilitate access, visualisation, and interpretation of genomic data, with a focus on offering a powerful genome browser. SRGP facilitates access and discovery by aggregating links to datasets associated with each genome assembly in a single page. Global genome portals like Ensembl and UCSC might, however, offer their own specific features besides their genome browser capabilities, such as support for comparative genomics analyses.
+- The portal's primary goal is to facilitate access, visualisation, and interpretation of genomic data, with a focus on offering a powerful genome browser. It facilitates access and discovery by aggregating links to datasets associated with each genome assembly in a single page. Global genome portals like Ensembl and UCSC might, however, offer their own specific features besides their genome browser capabilities, such as support for comparative genomics analyses.
 
-- The minimal requirement is that the species has a genome assembly in FASTA file format and an annotation of the protein-coding genes, preferably in GFF format. Other than that, the SRGP is unique in that it allows researchers to decide what, when, and how their genomic data is displayed on the Genome Portal. While global genome portals can also address researchers' inquiries, users can generally expect much shorter processing times with the SRGP, as it is maintained by a local team.
+- The minimal requirement is that the species has a genome assembly in FASTA file format and an annotation of the protein-coding genes, preferably in GFF format. Other than that, the portal is unique in that it allows researchers to decide what, when, and how their genomic data is displayed on the portal. While global genome portals can also address researchers' inquiries, users can generally expect much shorter processing times with the portal, as it is maintained by a local team.
 
-- The SRGP displays unique genomic annotations (annotation tracks) that are rarely published. Global genome portals often index and retrieve data from public genomic repositories such as NCBI or ENA, which means they may overlook the specific genomic annotations contributed by researchers in Sweden.
-{{< /faq_block >}}
+- The portal displays unique genomic annotations (annotation tracks) that are rarely published. Global genome portals often index and retrieve data from public genomic repositories such as NCBI or ENA, which means they may overlook the specific genomic annotations contributed by researchers in Sweden.
+  {{< /faq_block >}}
 
 {{< faq_block accordionID="accordion-1" title="What are the benefits of using the Swedish Reference Genome Portal?" >}}
-By using the Genome Portal, a free national data service, you can benefit from:
+By using the portal, a free national data service, you can benefit from:
 
 - Increasing the visibility of your research, which could lead to more citations and collaborations.
 
@@ -29,34 +29,34 @@ By using the Genome Portal, a free national data service, you can benefit from:
 
 - Save yourself time by not having to install a genome browser or download large data files to your local computer.
 
-- Having the flexibility to decide what, when, and how you want your genomic data be displayed on the Genome Portal.
+- Having the flexibility to decide what, when, and how you want your genomic data be displayed on the portal.
 
-- Having a weblink to your data displayed on the Genome Portal, which can be included in the Data Accessibility Statement of your scientific publication.
+- Having a weblink to your data displayed on the portal, which can be included in the Data Accessibility Statement of your scientific publication.
 
 - Receiving assistance with sharing valuable genomic annotations in the SciLifeLab Data Repository that are rarely published.
 
 - Enhancing your team work by being able to easily share links to genomic regions of interest with your colleagues.
-{{< /faq_block >}}
+  {{< /faq_block >}}
 
-{{< faq_block accordionID="accordion-1" title="How can I get my data displayed on the Genome Portal?" >}}
+{{< faq_block accordionID="accordion-1" title="How can I get my data displayed on the portal?" >}}
 Please begin by checking that your data meets the minimal requirements listed on the <a href="/contribute">Contribute</a> page.
 
 If it does, feel free to reach out via email to <srgp@scilifelab.se>. We would be happy to learn more about your genomic project, and will provide a brief form to collect additional details about your data.
 {{< /faq_block >}}
 
-{{< faq_block accordionID="accordion-1" title="What data file formats are supported for display on the Genome Portal?" >}}
-The Genome Portal uses the JBrowse 2 genome browser to display genomic datasets. <a href="https://jbrowse.org/jb2/features/#supported-data-formats">JBrowse 2 supports several formats</a> that are commonly used in genomics (e.g., BED, VCF, FASTA, GFF, among others), which could therefore be displayed in the Genome Portal. However, at the moment, we do not accept complete BAM files derived from shotgun sequencing, as they can be quite large and may impact performance. Users can, however, add and visualise BAM files as local data tracks in the Genome Portal’s genome browser.
+{{< faq_block accordionID="accordion-1" title="What data file formats are supported for display on the portal?" >}}
+The portal uses the JBrowse 2 genome browser to display genomic datasets. <a href="https://jbrowse.org/jb2/features/#supported-data-formats">JBrowse 2 supports several formats</a> that are commonly used in genomics (e.g., BED, VCF, FASTA, GFF, among others), which could therefore be displayed in the portal. However, at the moment, we do not accept complete BAM files derived from shotgun sequencing, as they can be quite large and may impact performance. Users can, however, add and visualise BAM files as local data tracks in the portal’s genome browser.
 {{< /faq_block >}}
 
-{{< faq_block accordionID="accordion-1" title="Can unpublished data be displayed on the Genome Portal?" >}}
+{{< faq_block accordionID="accordion-1" title="Can unpublished data be displayed on the portal?" >}}
 No, we require data be publicly available. However, we can begin adding data under embargo that will soon become available once the manuscript is accepted for publication. More details can be found in the next question.
 {{< /faq_block >}}
 
-{{< faq_block accordionID="accordion-1" title="Is it possible to add my data to the Genome Portal while a manuscript is under review?" >}}
-Yes, we accept data under embargo expected to become available after the manuscript under review is approved for publication. The data should be deposited in a public repository and have a reserved DOI and/or accession number. This allows you to indicate in the Data Availability Statement of your manuscript that your data can be visualised on the Genome Portal. Planning is key! Reach out to us via email <srgp@scilifelab.se> as soon as you wish to start this process.
+{{< faq_block accordionID="accordion-1" title="Is it possible to add my data to the portal while a manuscript is under review?" >}}
+Yes, we accept data under embargo expected to become available after the manuscript under review is approved for publication. The data should be deposited in a public repository and have a reserved DOI and/or accession number. This allows you to indicate in the Data Availability Statement of your manuscript that your data can be visualised on the portal. Planning is key! Reach out to us via email <srgp@scilifelab.se> as soon as you wish to start this process.
 {{< /faq_block >}}
 
-{{< faq_block accordionID="accordion-1" title="How long does it take for my data to be displayed on the Genome Portal?" >}}
+{{< faq_block accordionID="accordion-1" title="How long does it take for my data to be displayed on the portal?" >}}
 Once we have received the form listing the links and metadata associated with your genomic datasets, the webpage implementation process generally takes around one week. Please note that this may take a bit longer during public holidays and summer.
 {{< /faq_block >}}
 
@@ -72,7 +72,7 @@ A genome browser provides a graphical representation of diverse genomic and gene
 Genome browsers are essential tools for interpreting data, developing hypotheses, and communicating discoveries about relationships between various data types. By allowing different types of data to be viewed in relation to each another, genome browsers can provide valuable insights into potential correlations. For example, they can be used to infer phenotype-genotype associations when comparing genomic data from normal individuals versus diseased individuals.
 {{< /faq_block >}}
 
-{{< faq_block accordionID="accordion-2" title="Why is JBrowse 2 the genome browser used in the Genome Portal?" >}}
+{{< faq_block accordionID="accordion-2" title="Why is JBrowse 2 the genome browser used in the portal?" >}}
 We chose JBrowse 2 for several reasons. It is a robust, open-source genome browser with powerful features for visualising genomic data. It receives active maintenance and support from both system developers and the research community. Additionally, it is highly customisable and allows for the creation of new view types via a plugin system, making it more than a genome browser — it serves as a versatile platform for development.
 {{< /faq_block >}}
 
@@ -80,15 +80,15 @@ We chose JBrowse 2 for several reasons. It is a robust, open-source genome brows
 Yes, it is possible to modify several of the data track attributes, such as colors, labels, descriptions, groups, and more. To do this, it is necessary to change the settings of the JBrowse 2 default session by editing the `config.json` file associated with the species. Please contact us by email to <srgp@scilifelab.se> to help you with the customisation of your data tracks.
 {{< /faq_block >}}
 
-{{< faq_block accordionID="accordion-2" title="How can I open a data track within the genome browser of a species in the Genome Portal?" >}}
-To open a new data track within the genome browser for a species in the Genome Portal:
+{{< faq_block accordionID="accordion-2" title="How can I open a data track within the genome browser of a species in the portal?" >}}
+To open a new data track within the genome browser for a species in the portal:
 
 1. Access the 'Add a track' form by clicking on the **File** menu, then **Open track**, or by clicking the **circular plus (+) icon** in the bottom right corner of the 'Available tracks widget' (right-side panel).
 2. In the 'Add a track' form, provide a URL to a file to load, or open a file stored in your local machine.
 
-Remember that your data should have the same genomic coordinates as the genome assembly available in the Genome Portal.
+Remember that your data should have the same genomic coordinates as the genome assembly available in the portal.
 
-In some cases, you need to provide an index file for your data (e.g., a tabix files is required for VCF/GFF/BED files). Guidance on generating index files can be found in the <a href="/contribute/supported_file_formats/#data-file-indexing">data file indexing section of the Supported data file formats</a> page.
+In some cases, you need to provide an index file for your data (e.g., a tabix files is required for VCF/GFF/BED files). Guidance on generating index files can be found in the <a href="/contribute/supported_file_formats/#data-file-indexing">data file indexing section of the supported data file formats</a> page.
 {{< /faq_block >}}
 
 {{< faq_block accordionID="accordion-2" title="How can I share a genome browser session?" >}}
@@ -136,7 +136,7 @@ To view details or annotations for a specific genomic feature:
 
 1. Click on the genomic feature of interest (e.g., a protein-coding gene). A **Feature details** widget will appear on the right, in the Widget side panel area.
 2. Scroll down to browse the feature details. To obtain the full gene sequence, click the **Show feature sequence** button of the top panel, which corresponds to the gene. To obtain the coding sequence (CDS), go down to the **Subfeatures** section, and click on the correspondent **Show feature sequence** button.
-{{< /faq_block >}}
+   {{< /faq_block >}}
 
 {{< faq_block accordionID="accordion-2" title="What could be causing my data to display slowly?" >}}
 The genome browser tracks may display slowly for various reasons, including having too many tracks open at once, viewing a large genomic window, a high number of custom tracks, numerous large data files, or a slow/unstable internet connection. If the problems persist, please do not hesitate to contact us at <srgp@scilifelab.se>.
@@ -148,8 +148,8 @@ The genome browser tracks may display slowly for various reasons, including havi
 
 <div class="accordion mb-4" id="accordion-3">
 
-{{< faq_block accordionID="accordion-3" title="How can I cite the Genome Portal content?" >}}
-Depending on how you use the Genome Portal in your work (e.g., manuscript, presentation, etc.), there are various options for citing its content. For example, you can cite: the Genome Portal website, the website source code, the specific datasets from each species, or the JBrowse 2 genome browser. More details on citation guidelines can be found on the <a href="/citation">Cite us</a> page.
+{{< faq_block accordionID="accordion-3" title="How can I cite the portal content?" >}}
+Depending on how you use the portal in your work (e.g., manuscript, presentation, etc.), there are various options for citing its content. For example, you can cite: the portal website, the website source code, the specific datasets from each species, or the JBrowse 2 genome browser. More details on citation guidelines can be found on the <a href="/citation">Cite us</a> page.
 {{< /faq_block >}}
 
 </div>
