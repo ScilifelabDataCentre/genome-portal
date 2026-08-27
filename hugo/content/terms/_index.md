@@ -34,4 +34,4 @@ We may update our terms of use at any time and without notice. Thus, we advise y
 
 ### Contact us
 
-If you have any questions or suggestions about our terms of use, do not hesitate to contact us via email at [dsn-eb@scilifelab.se](mailto:dsn-eb@scilifelab.se).
+If you have any questions or suggestions about our terms of use, do not hesitate to contact us via email at [srgp@scilifelab.se](mailto:srgp@scilifelab.se).

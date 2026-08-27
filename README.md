@@ -74,7 +74,7 @@ as well as by the [Swedish Foundation for Strategic Research
 
 We welcome all questions and suggestions (including feature requests or bug reports).
 
-- Email us at [dsn-eb@scilifelab.se](mailto:dsn-eb@scilifelab.se).
+- Email us at [srgp@scilifelab.se](mailto:srgp@scilifelab.se).
 - [Create an issue on Github](https://github.com/ScilifelabDataCentre/genome-portal/issues/new).
 
 
@@ -215,10 +215,4 @@ This repository is responsible for making the 2 docker images needed for the dep
 
 ## Credits
 
-The Swedish Reference Genome Portal is developed and maintained by the DDLS 
-Data Science Node in Evolution and Biodiversity (DSN-EB) team as part of 
-the [SciLifeLab Data Platform](https://data.scilifelab.se/), operated by the 
-SciLifeLab Data Centre. Members if the DSN-EB team are affiliated 
-with [SciLifeLab Data Centre](https://www.scilifelab.se/data/) 
-and the [National Bioinformatics Infrastructure Sweden (NBIS)](https://nbis.se/), 
-based at Uppsala University and the Swedish Museum of Natural History. 
+The Swedish Reference Genome Portal is developed and operated by [SciLifeLab Data Centre](https://www.scilifelab.se/data-ai/).
