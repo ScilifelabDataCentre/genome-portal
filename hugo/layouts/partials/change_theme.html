@@ -1,12 +1,14 @@
 {{- /*
     This partial is used is used in the navbar to allow a user to swap between light and dark themes.
     The JS file associated with this partial is "change_theme.js."
+    As this partial is used multiple times on a page, it requires an "id" param so each button has a unique id to toggle.
 */ -}}
+{{- $id := .id | default "swap-theme" -}}
 <li class="nav-item dropdown">
-    <button class="btn btn-link nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-label="Toggle theme">
+    <button id="{{ $id }}" class="btn btn-link nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-label="Toggle theme">
         <i class="bi bi-circle-half me-1" fill="currentColor"></i>Theme
     </button>
-    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="swap-theme">
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="{{ $id }}">
         <li>
             <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light">
                 <i class="bi bi-brightness-high-fill me-1" fill="currentColor"></i>Light
