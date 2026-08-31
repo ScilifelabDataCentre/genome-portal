@@ -172,7 +172,7 @@ It requires the additional step of installing the JBrowse static
 bundle in `hugo/static/browser`:
 
 ```bash
-./scripts/download_jbrowse v2.15.4 hugo/static/browser
+./scripts/download_jbrowse v4.1.15 hugo/static/browser
 ./scripts/dockerserve -d
 ```
 
