@@ -1,11 +1,9 @@
 ---
 title: Contribute
-last_updated: "5 November 2024"
+last_updated: "31 August 2026"
 ---
 
-Are you a researcher affiliated with a Swedish institution who has genome data that you would like to see displayed on the Swedish Reference Genome Portal? Great! Please send us an email to [srgp@scilifelab.se](mailto:srgp@scilifelab.se). We would be happy to hear about your data and discuss how we can accommodate it.
-
-On this page, we have collected requirements and recommendations for researchers that want to add their data to the portal.
+Are you a researcher affiliated with a Swedish institution who has genome data that you would like to see displayed on the Swedish Reference Genome Portal? Great! On this page, we have collected requirements and recommendations for researchers that want to add their data to the portal, as well as instructions on how to submit it. If you have any questions or need support, feel free to email us at [srgp@scilifelab.se](mailto:srgp@scilifelab.se). We would be happy to hear about your data and discuss how we can accommodate it.
 
 ### Scope
 
