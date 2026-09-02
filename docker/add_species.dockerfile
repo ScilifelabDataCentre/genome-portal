@@ -1,4 +1,4 @@
-ARG PYTHON_IMAGE_TAG=3.14-slim@sha256:cad9a2c871761c413caa6fdd6441c783451e740a48aaeba60ae62a8b53525ef6
+ARG PYTHON_IMAGE_TAG=3.11-slim
 
 # Be careful with bumping Python in this image. Quast v5.3.0 (latest at the time of writing)
 # requires distutils, which was removed from the Python standard library in Python 3.12.
