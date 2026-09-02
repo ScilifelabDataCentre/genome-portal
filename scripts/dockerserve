@@ -63,7 +63,7 @@ main() {
 	Name '${container_name}' or '${hugo_container_name}' already taken by container(s):
 	${cid}
 	To stop and remove:
-	  docker rm -f ${cid}
+	  docker rm -f ${cid//$'\n'/ }
 EOF
     return 1
   fi
@@ -124,9 +124,9 @@ install_gwas_plugin () {
     return 1
   fi
 
-  mkdir -p "${install_dir}/plugins"
-  tar -xzf "${tmp_dir}/plugin.tgz" -C "${tmp_dir}" --strip-components=1
-  cp "${tmp_dir}/dist/jbrowse-plugin-gwas.umd.production.min.js" "${install_dir}/plugins/"
+  mkdir -p "${install_dir}/plugins" || return 1
+  tar -xzf "${tmp_dir}/plugin.tgz" -C "${tmp_dir}" --strip-components=1 || return 1
+  cp "${tmp_dir}/dist/jbrowse-plugin-gwas.umd.production.min.js" "${install_dir}/plugins/" || return 1
   echo "${version}" > "${version_file}"
   >&2 echo "Installed jbrowse-plugin-gwas ${version} to ${install_dir}/plugins"
 }
@@ -140,21 +140,30 @@ run() {
   if ((dev)); then
     install_gwas_plugin || return 1
 
-    ${network_cmd} "${network_name}" >/dev/null 2>&1 || true
+    if ((dry_run)); then
+      ${network_cmd} "${network_name}"
+    else
+      ${network_cmd} "${network_name}" >/dev/null 2>&1 || true
+    fi
 
-    ${run_cmd} --rm -d  \
+    if ! ${run_cmd} --rm -d  \
            --network "${network_name}" \
            -v "${CWD}/hugo":"/src" \
            --name "${hugo_container_name}" \
-           "${hugo_image}:${hugo_tag}" hugo server --bind 0.0.0.0 \
-    && ${run_cmd} --rm -d  \
+           "${hugo_image}:${hugo_tag}" hugo server --bind 0.0.0.0; then
+      return 1
+    fi
+
+    if ! ${run_cmd} --rm -d  \
            --network "${network_name}" \
            -p "${port}":8080 \
            -v "${CWD}/${datadir}":"/usr/share/nginx/html/data":ro \
            -v "${CWD}/docker/nginx-dev-proxy.conf":"/etc/nginx/conf.d/default.conf":ro \
            --name "${container_name}" \
-           "${proxy_image}" \
-    || { docker rm -f "${hugo_container_name}" >/dev/null 2>&1; return 1; }
+           "${proxy_image}"; then
+      docker rm -f "${hugo_container_name}" >/dev/null 2>&1
+      return 1
+    fi
   else
     ${run_cmd} -d  \
            -p "${port}":8080 \
