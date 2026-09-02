@@ -149,38 +149,34 @@ scope of the build:
 
 Then to run the website locally, you have several options:
 
-#### Using the latest development image
+#### i. Local development 
+
+**This method is recommened for local development as it ensures local changes to both the Hugo content files and the data files are reflected in the browser immediately.** 
+(Just refresh the page after making changes.)
+
+```bash
+# first command cleans up any prexisting containers
+docker rm -f "genome-portal" "genome-portal-hugo"
+./scripts/download_jbrowse hugo/static/browser  
+./scripts/dockerserve -d
+```
+
+
+#### ii. Using the latest development image from GitHub Container Registry
 
 ```bash
 docker pull ghcr.io/scilifelabdatacentre/swg-hugo-site:dev
 ./scripts/dockerserve -t dev
 ```
 
-#### Using a local build
+#### iii. Using a local build (in non-development mode)
 
 ```bash
 ./scripts/dockerbuild -t local -k hugo
 ./scripts/dockerserve -t local
 ```
 
-#### Using the Hugo development server
-
-This last method is adequate when you want to see changes to the
-source immediately reflected in the web browser. 
-
-It requires the additional step of installing the JBrowse static
-bundle in `hugo/static/browser`:
-
-```bash
-./scripts/download_jbrowse hugo/static/browser
-./scripts/dockerserve -d
-```
-
----
-
-Either of these methods will serve you the website at `http://localhost:8080/`.
-
-
+All of these methods will serve you the website at `http://localhost:8080/`.
 
 ### Making a new release/updating the dev cluster
 
