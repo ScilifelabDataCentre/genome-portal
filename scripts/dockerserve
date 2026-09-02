@@ -91,6 +91,46 @@ EOF
   fi
 }
 
+# Installs the jbrowse-plugin-gwas bundle into hugo/static/browser/plugins,
+# Used in dev mode only, since the built image already has this.
+install_gwas_plugin () {
+  local dockerfile="${CWD}/docker/hugo.dockerfile" \
+        install_dir="${CWD}/hugo/static/browser" \
+        version plugin_file version_file tmp_dir
+
+  version="$(sed -n 's/^ARG GWAS_PLUGIN_VERSION=//p' "${dockerfile}" | head -n1)"
+  if [[ -z "${version}" ]]; then
+    >&2 echo "Could not determine GWAS_PLUGIN_VERSION from ${dockerfile}."
+    return 1
+  fi
+
+  plugin_file="${install_dir}/plugins/jbrowse-plugin-gwas.umd.production.min.js"
+  version_file="${install_dir}/plugins/.jbrowse-plugin-gwas_version"
+
+  if [[ -f "${plugin_file}" && -f "${version_file}" && "$(<"${version_file}")" == "${version}" ]]; then
+    return 0
+  fi
+
+  if ((dry_run)); then
+    echo "install jbrowse-plugin-gwas ${version} to ${install_dir}/plugins"
+    return 0
+  fi
+
+  tmp_dir="$(mktemp -dt "jbrowse-plugin-gwas-${version}-XXX")"
+  trap 'rm -rf "${tmp_dir}"' RETURN
+
+  if ! curl -fsSL "https://registry.npmjs.org/jbrowse-plugin-gwas/-/jbrowse-plugin-gwas-${version}.tgz" -o "${tmp_dir}/plugin.tgz"; then
+    >&2 echo "Could not fetch jbrowse-plugin-gwas ${version}."
+    return 1
+  fi
+
+  mkdir -p "${install_dir}/plugins"
+  tar -xzf "${tmp_dir}/plugin.tgz" -C "${tmp_dir}" --strip-components=1
+  cp "${tmp_dir}/dist/jbrowse-plugin-gwas.umd.production.min.js" "${install_dir}/plugins/"
+  echo "${version}" > "${version_file}"
+  >&2 echo "Installed jbrowse-plugin-gwas ${version} to ${install_dir}/plugins"
+}
+
 run() {
   run_cmd="docker run"
   network_cmd="docker network create"
@@ -98,6 +138,8 @@ run() {
   ((dry_run)) && network_cmd="echo ${network_cmd}"
 
   if ((dev)); then
+    install_gwas_plugin || return 1
+
     ${network_cmd} "${network_name}" >/dev/null 2>&1 || true
 
     ${run_cmd} --rm -d  \
