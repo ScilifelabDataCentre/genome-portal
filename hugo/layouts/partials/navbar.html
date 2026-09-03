@@ -8,26 +8,28 @@
                 alt="The DDLS Evolution and Biodiveristy node's logo">
         </a>
 
-        <button class="navbar-toggler my-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler my-2" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContentMain, #navbarSupportedContentSub, #navbarSupportedContentMobile"
+            aria-controls="navbarSupportedContentMain navbarSupportedContentSub navbarSupportedContentMobile"
+            aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <!-- First 2 navbars show up on lg screens, mobile navbar shows up for smaller screens -->
         <div class="d-flex align-items-start align-items-lg-end flex-column collapse navbar-collapse borders">
 
-            <div class="collapse navbar-collapse scilife-navbar-main" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse scilife-navbar-main" id="navbarSupportedContentMain">
                 <ul class="navbar-nav d-none d-lg-flex">
                     {{ range .Site.Menus.main }}
                         <li class="nav-item">
                             <a class="nav-link" href="{{ .URL }}">{{ .Name }}</a>
                         </li>
                     {{ end }}
-                    {{ partial "change_theme.html" . }}
+                    {{ partial "change_theme.html" (dict "id" "swap-theme-main") }}
                 </ul>
             </div>
 
-            <div class="collapse navbar-collapse scilife-navbar-sub mb-0" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse scilife-navbar-sub mb-0" id="navbarSupportedContentSub">
                 <ul class="navbar-nav d-none d-lg-flex">
                     {{ range .Site.Menus.sub }}
                         <li class="nav-item">
@@ -37,14 +39,14 @@
                 </ul>
             </div>
 
-            <div class="collapse navbar-collapse scilife-navbar-main" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse scilife-navbar-main" id="navbarSupportedContentMobile">
                 <ul class="navbar-nav d-lg-none">
                     {{ range .Site.Menus.mobile }}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ .URL }}">{{ .Name }}</a>
                     </li>
                     {{ end }}
-                    {{ partial "change_theme.html" . }}
+                    {{ partial "change_theme.html" (dict "id" "swap-theme-mobile") }}
                 </ul>
             </div>
 

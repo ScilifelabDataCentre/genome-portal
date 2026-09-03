@@ -79,21 +79,35 @@ def test_has_title(home_page: Page) -> None:
     expect(home_page).to_have_title(re.compile("Swedish Reference Genome Portal"))
 
 
+NAVBAR_LINKS = {
+    "Home": "Home",
+    "Contribute": "Contribute",
+    "User guide": "User guide",
+    "Glossary": "Glossary",
+    "About": "About",
+    "Contact": "Contact",
+    "FAQ": "Frequently Asked Questions",
+    "Cite us": "How to cite the Genome Portal and the data",
+}
+
+
 def test_navbar_links(home_page: Page) -> None:
-    """Test navbar links redirect to the correct page."""
-    NAVBAR_LINKS = {
-        "Home": "Home",
-        "Contribute": "Contribute",
-        "User guide": "User guide",
-        "Glossary": "Glossary",
-        "About": "About",
-        "Contact": "Contact",
-        "FAQ": "Frequently Asked Questions",
-        "Cite us": "How to cite the Genome Portal and the data",
-    }
+    """Test desktop navbar links redirect to the correct page."""
+    for name, title in NAVBAR_LINKS.items():
+        home_page.locator("#navbarSupportedContentMain, #navbarSupportedContentSub").get_by_role(
+            "link", name=name
+        ).click()
+        expect(home_page).to_have_title(re.compile(title))
+
+
+def test_mobile_navbar_links(home_page: Page, base_url: str) -> None:
+    """Test navbar links in the collapsed hamburger menu (small screens) redirect to the correct page."""
+    home_page.set_viewport_size({"width": 375, "height": 812})
 
     for name, title in NAVBAR_LINKS.items():
-        home_page.locator("#navbarSupportedContent").get_by_role("link", name=name).click()
+        home_page.goto(f"{base_url}/")
+        home_page.locator(".navbar-toggler").click()
+        home_page.locator("#navbarSupportedContentMobile").get_by_role("link", name=name).click()
         expect(home_page).to_have_title(re.compile(title))
 
 
