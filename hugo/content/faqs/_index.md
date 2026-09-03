@@ -1,5 +1,6 @@
 ---
 title: Frequently Asked Questions
+last_updated: "31 August 2026"
 ---
 
 ### FAQ
@@ -41,7 +42,9 @@ By using the portal, a free national data service, you can benefit from:
 {{< faq_block accordionID="accordion-1" title="How can I get my data displayed on the portal?" >}}
 Please begin by checking that your data meets the minimal requirements listed on the <a href="/contribute">Contribute</a> page.
 
-If it does, feel free to reach out via email to <srgp@scilifelab.se>. We would be happy to learn more about your genomic project, and will provide a brief form to collect additional details about your data.
+That page also describes how to download the submission forms and the two ways to submit your data: via a Pull Request on GitHub, or by emailing us the completed forms.
+
+Feel free to reach out via email to <srgp@scilifelab.se> at any point if you have questions or need support with the submission process.
 {{< /faq_block >}}
 
 {{< faq_block accordionID="accordion-1" title="What data file formats are supported for display on the portal?" >}}
