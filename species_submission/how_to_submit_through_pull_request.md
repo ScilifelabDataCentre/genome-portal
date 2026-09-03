@@ -258,10 +258,13 @@ When making such refinements, it is often helpful to rerun the specific steps in
 
 
 ```bash
-./scripts/dockerbuild -u -t local -k hugo 
-
-docker rm -f "genome-portal"; ./scripts/dockerserve -t local
+# first command cleans up any prexisting containers
+docker rm -f "genome-portal" "genome-portal-hugo"
+./scripts/download_jbrowse hugo/static/browser  
+./scripts/dockerserve -d
 ```
+
+This runs the Hugo development server instead of building and serving a full Docker image, so both Hugo content changes and data changes (from re-running `dockermake`) are reflected in the browser immediately, without needing to rebuild anything in between. (Just refresh the page after making changes.)
 
 
 ### 3.4. When files need to be deleted

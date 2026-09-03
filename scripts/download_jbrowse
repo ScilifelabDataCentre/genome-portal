@@ -8,16 +8,28 @@ set -ue
 # of static files of interest to us, rename the entrypoint to `main.js`.
 #
 # Arguments:
-#   TAG: Version tag of the release to be fetched
+#   TAG: (optional) Version tag of the release to be fetched. Defaults to
+#        the version pinned by ARG JBROWSE_VERSION in docker/hugo.dockerfile.
 #   DIR: Directory where assets should be unpacked
 main () {
-    TAG="${1}"
-    JBROWSE_INSTALL_DIR="${2}"
+    case "$#" in
+	1) JBROWSE_INSTALL_DIR="${1}"; TAG="$(default_tag)" ;;
+	2) TAG="${1}"; JBROWSE_INSTALL_DIR="${2}" ;;
+	*) exit 1 ;;
+    esac
+
     JRBOWSE_TMP_DIR=$(mktemp -dt "jbrowse-${TAG}-XXX")
+    VERSION_FILE="${JBROWSE_INSTALL_DIR}/.jbrowse_version"
 
     if [[ -d "${JBROWSE_INSTALL_DIR}/static" ]]; then
-	log_stderr "${JBROWSE_INSTALL_DIR}/static already exists. Not attempting anything."
-	return 1
+	ALREADY_HANDLED=1
+	if [[ -f "${VERSION_FILE}" && "$(<"${VERSION_FILE}")" == "${TAG}" ]]; then
+	    log_stderr "${JBROWSE_INSTALL_DIR}/static already exists and is already at ${TAG}. Already installed."
+	    return 0
+	else
+	    log_stderr "${JBROWSE_INSTALL_DIR}/static already exists but is not confirmed to be ${TAG}. Remove ${JBROWSE_INSTALL_DIR} first if you want to install ${TAG}."
+	    return 1
+	fi
     fi
 
     if command -v jbrowse > /dev/null; then
@@ -47,6 +59,7 @@ from_github_api() {
     log_stderr "Unzipping static files to ${JBROWSE_INSTALL_DIR}"
     mkdir -p "${JBROWSE_INSTALL_DIR}" && unzip -o -q "${JRBOWSE_TMP_DIR}/jbrowse-web-${TAG}.zip" 'static/*' -x 'static/*.map' -d "${JBROWSE_INSTALL_DIR}"
     find "${JBROWSE_INSTALL_DIR}/static/js" -type f -name 'main.*.js' -execdir mv '{}' 'main.js' ';'
+    echo "${TAG}" > "${VERSION_FILE}"
 }
 
 from_jbrowse_create () {
@@ -55,6 +68,27 @@ from_jbrowse_create () {
     find "${JRBOWSE_TMP_DIR}/static/js" -name '*.js.map' -exec rm '{}' '+' -o \
 	 -name 'main.*.js' -execdir mv '{}' 'main.js' ';'
     mkdir -p "${JBROWSE_INSTALL_DIR}" && mv "${JRBOWSE_TMP_DIR}/static" "${JBROWSE_INSTALL_DIR}"
+    echo "${TAG}" > "${VERSION_FILE}"
+}
+
+default_tag () {
+    local script_dir dockerfile version
+    script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+    dockerfile="${script_dir}/../docker/hugo.dockerfile"
+
+    if [[ ! -f "${dockerfile}" ]]; then
+	log_stderr "No TAG given, and could not find ${dockerfile} to determine a default. Please specify a TAG."
+	exit 1
+    fi
+
+    version="$(sed -n 's/^ARG JBROWSE_VERSION=//p' "${dockerfile}" | head -n1)"
+
+    if [[ -z "${version}" ]]; then
+	log_stderr "No TAG given, and could not determine a default JBROWSE_VERSION from ${dockerfile}. Please specify a TAG."
+	exit 1
+    fi
+
+    echo "v${version}"
 }
 
 get_archive_url () {
@@ -72,12 +106,12 @@ cleanup() {
     result="$?"
     # Provide feedback depending on exit status
     if [[ "${result}" != 0 ]]; then
-	if [[ -z "${TAG:-}" || -z "${JBROWSE_INSTALL_DIR=:-}" ]]; then
-	    log_stderr "Usage: download_jbrowse TAG INSTALL_DIR"
-	else
+	if [[ -z "${TAG:-}" || -z "${JBROWSE_INSTALL_DIR:-}" ]]; then
+	    log_stderr "Usage: download_jbrowse [TAG] INSTALL_DIR"
+	elif [[ "${ALREADY_HANDLED:-0}" != 1 ]]; then
 	    log_stderr "Failed to install JBrowse ${TAG:-} in ${JBROWSE_INSTALL_DIR}"
 	fi
-    else
+    elif [[ "${ALREADY_HANDLED:-0}" != 1 ]]; then
 	log_stderr "Successfully install JBrowse ${TAG:-} in ${JBROWSE_INSTALL_DIR:-}"
     fi
 

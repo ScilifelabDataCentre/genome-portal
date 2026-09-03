@@ -2,3 +2,4 @@
 # This data would instead be attached as a volume to the image though
 hugo/static/data/
 hugo/static/browser
+hugo/public/

@@ -13,6 +13,10 @@ Options:
   -d            Use Hugo development server (formerly --dev)
   -n            Dry run
 
+In dev mode, Hugo (genome-portal-hugo) only serves hugo/, and a small
+nginx proxy (genome-portal) sits in front of it: It serves the genome data (data/)
+directly. This means both Hugo content changes and data changes (from re-running `dockermake`) are reflected in the browser immediately,
+
 Legacy SWG-prefixed environment variables are still supported
 (but command line counterparts take precedence). For example, to serve on
 port 8000 with the 'latest' tag, the following are equivalent:
@@ -33,9 +37,14 @@ main() {
         datadir="${SWG_DATA_DIR:-data}" \
         hugo_image="${SWG_HUGO_IMAGE:=hugomods/hugo}" \
         hugo_tag="${SWG_HUGO_TAG:=std-base-0.138.0}" \
+        proxy_image="${SWG_PROXY_IMAGE:=nginxinc/nginx-unprivileged:stable-alpine}" \
         dev=0 \
         container_name=genome-portal \
         dry_run=0
+
+  # This network used in dev mode so the hugo container and the proxy container can communicate
+  local hugo_container_name="${container_name}-hugo" \
+        network_name="genome-portal-dev"
 
   while getopts t:p:dhn opt; do
     case "${opt}" in
@@ -48,39 +57,113 @@ main() {
     esac
   done
 
-  if [[ -n "${cid:=$(docker ps -qaf name=${container_name})}" ]]; then
+  cid="$(docker ps -qaf "name=^/${container_name}$" -f "name=^/${hugo_container_name}$")"
+  if [[ -n "${cid}" ]]; then
     cat <<-EOF
-	Name '${container_name}' already taken by container ${cid}.
+	Name '${container_name}' or '${hugo_container_name}' already taken by container(s):
+	${cid}
 	To stop and remove:
-	  docker rm -f ${cid}
+	  docker rm -f ${cid//$'\n'/ }
 EOF
     return 1
   fi
 
   if run 2>/tmp/dockerserve.log && ! ((dry_run)); then
-    cat <<-EOF
+    if ((dev)); then
+      cat <<-EOF
+	- Web server is running in containers "${container_name}" (proxy) and "${hugo_container_name}" (Hugo dev server).
+	- Site can be visited at http://localhost:${port}
+
+	To shut down:
+	  docker rm -f "${container_name}" "${hugo_container_name}"
+EOF
+    else
+      cat <<-EOF
 	- Web server is running in container "${container_name}".
 	- Site can be visited at http://localhost:${port}
 
 	To shut down:
 	  docker rm -f "${container_name}"
 EOF
+    fi
   else
     cat /tmp/dockerserve.log
   fi
 }
 
+# Installs the jbrowse-plugin-gwas bundle into hugo/static/browser/plugins,
+# Used in dev mode only, since the built image already has this.
+install_gwas_plugin () {
+  local dockerfile="${CWD}/docker/hugo.dockerfile" \
+        install_dir="${CWD}/hugo/static/browser" \
+        version plugin_file version_file tmp_dir
+
+  version="$(sed -n 's/^ARG GWAS_PLUGIN_VERSION=//p' "${dockerfile}" | head -n1)"
+  if [[ -z "${version}" ]]; then
+    >&2 echo "Could not determine GWAS_PLUGIN_VERSION from ${dockerfile}."
+    return 1
+  fi
+
+  plugin_file="${install_dir}/plugins/jbrowse-plugin-gwas.umd.production.min.js"
+  version_file="${install_dir}/plugins/.jbrowse-plugin-gwas_version"
+
+  if [[ -f "${plugin_file}" && -f "${version_file}" && "$(<"${version_file}")" == "${version}" ]]; then
+    return 0
+  fi
+
+  if ((dry_run)); then
+    echo "install jbrowse-plugin-gwas ${version} to ${install_dir}/plugins"
+    return 0
+  fi
+
+  tmp_dir="$(mktemp -dt "jbrowse-plugin-gwas-${version}-XXX")"
+  trap 'rm -rf "${tmp_dir}"' RETURN
+
+  if ! curl -fsSL "https://registry.npmjs.org/jbrowse-plugin-gwas/-/jbrowse-plugin-gwas-${version}.tgz" -o "${tmp_dir}/plugin.tgz"; then
+    >&2 echo "Could not fetch jbrowse-plugin-gwas ${version}."
+    return 1
+  fi
+
+  mkdir -p "${install_dir}/plugins" || return 1
+  tar -xzf "${tmp_dir}/plugin.tgz" -C "${tmp_dir}" --strip-components=1 || return 1
+  cp "${tmp_dir}/dist/jbrowse-plugin-gwas.umd.production.min.js" "${install_dir}/plugins/" || return 1
+  echo "${version}" > "${version_file}"
+  >&2 echo "Installed jbrowse-plugin-gwas ${version} to ${install_dir}/plugins"
+}
+
 run() {
   run_cmd="docker run"
+  network_cmd="docker network create"
   ((dry_run)) && run_cmd="echo ${run_cmd}"
+  ((dry_run)) && network_cmd="echo ${network_cmd}"
 
   if ((dev)); then
-    ${run_cmd} --rm -d  \
-           -p "${port}":1313 \
-           -p 1313:1313 \
+    install_gwas_plugin || return 1
+
+    if ((dry_run)); then
+      ${network_cmd} "${network_name}"
+    else
+      ${network_cmd} "${network_name}" >/dev/null 2>&1 || true
+    fi
+
+    if ! ${run_cmd} --rm -d  \
+           --network "${network_name}" \
            -v "${CWD}/hugo":"/src" \
+           --name "${hugo_container_name}" \
+           "${hugo_image}:${hugo_tag}" hugo server --bind 0.0.0.0; then
+      return 1
+    fi
+
+    if ! ${run_cmd} --rm -d  \
+           --network "${network_name}" \
+           -p "${port}":8080 \
+           -v "${CWD}/${datadir}":"/usr/share/nginx/html/data":ro \
+           -v "${CWD}/docker/nginx-dev-proxy.conf":"/etc/nginx/conf.d/default.conf":ro \
            --name "${container_name}" \
-           "${hugo_image}:${hugo_tag}" hugo server --bind 0.0.0.0
+           "${proxy_image}"; then
+      docker rm -f "${hugo_container_name}" >/dev/null 2>&1
+      return 1
+    fi
   else
     ${run_cmd} -d  \
            -p "${port}":8080 \
