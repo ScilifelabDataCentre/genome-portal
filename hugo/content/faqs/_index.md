@@ -42,7 +42,7 @@ By using the portal, a free national data service, you can benefit from:
 {{< faq_block accordionID="accordion-1" title="How can I get my data displayed on the portal?" >}}
 Please begin by checking that your data meets the minimal requirements listed on the <a href="/contribute">Contribute</a> page.
 
-That page also describes how to download the submission forms and the two ways to submit your data: via a Pull Request on GitHub, or by emailing us the completed forms.
+The <a href="/contribute">Contribute page</a> also describes the two methods available for submitting data; by making a Pull Request on GitHub, or by completing forms (available for download on the <a href="/contribute">Contribute page</a>) and sending them to <srgp@scilifelab.se>.
 
 Feel free to reach out via email to <srgp@scilifelab.se> at any point if you have questions or need support with the submission process.
 {{< /faq_block >}}
