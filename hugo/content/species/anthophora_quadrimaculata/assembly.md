@@ -29,7 +29,7 @@ The data for _Anthophora quadrimaculata_ displayed in the genome portal comes fr
 Taliadoros, D., Soares, A. E. R., Dias, G., Bunikis, I., Pippel, M., Olsson, A., Mosbech, M.-B., Heintz, J., Lager, N., Strand, A.-S., Pettersson, M., Pettersson, O. V., Lantz, H., Cederberg, B., Lindblad-Toh, K., & Webster, M. T. (2025). Genome Variation in Three *Anthophora* Bee Species Reflects Divergent Demographic Histories. Molecular Ecology, n/a(n/a), e70204. https://doi.org/10.1111/mec.70204
 ```
 
-The tools used by to calculate the statistics shown on top of this page are described in:
+The tools used to calculate the statistics shown on top of this page are described in:
 
 - Dainat J. (2024). AGAT: Another Gff Analysis Toolkit to handle annotations in any GTF/GFF format.
 (Version v1.4.1). Zenodo. <https://www.doi.org/10.5281/zenodo.3552717>

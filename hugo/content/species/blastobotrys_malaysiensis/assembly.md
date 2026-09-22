@@ -37,7 +37,7 @@ Shen, X.-X., Opulente, D. A., Kominek, J., Zhou, X., Steenwyk, J. L., Buh, K. V.
 Ravn, J.; Sörensen Ristinmaa, A.; Mazurkewich, ScotS.t; Borges Dias, G.; Larsbrink, J.; Geijer, C. (2025). Gene annotation of _Blastobotrys mokoenaii_, _Blastobotrys illinoisensis_, and _Blastobotrys malaysiensis_. Chalmers University of Technology. Dataset. https://doi.org/10.17044/scilifelab.28606814.v1
 ```
 
-The tools used by the Genome Portal staff to calculate the statistics shown on top of this page are described in:
+The tools used to calculate the statistics shown on top of this page are described in:
 
 - Dainat J. (2024). AGAT: Another Gff Analysis Toolkit to handle annotations in any GTF/GFF format.
 (Version v1.4.1). Zenodo. <https://www.doi.org/10.5281/zenodo.3552717>
