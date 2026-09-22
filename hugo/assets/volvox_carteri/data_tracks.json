@@ -1,0 +1,112 @@
+[
+  {
+    "dataTrackName": "Genome",
+    "description": "Reference genome sequence",
+    "links": [
+      {
+        "Download": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/143/455/GCF_000143455.1_v1.0/GCF_000143455.1_v1.0_genomic.fna.gz"
+      },
+      {
+        "Website": "https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000143455.1/"
+      },
+      {
+        "Article": "https://doi.org/10.1126/science.1188800"
+      }
+    ],
+    "accessionOrDOI": "GCA_000143455.1",
+    "fileName": "GCF_000143455.1_v1.0_genomic.fna.gz",
+    "principalInvestigator": "Daniel S Rokhsar",
+    "principalInvestigatorAffiliation": "US DOE Joint Genome Institute\u00a0",
+    "firstDateOnPortal": "22 September 2026",
+    "assemblyGCAAccession": "GCA_000143455.1",
+    "buscoStats": "C:98% [S:95.5%, D:0.5%], F:0.5%, M:1.5%, n:3500 (MADEUP_TEST_DATA_odb10)"
+  },
+  {
+    "dataTrackName": "Protein-coding genes",
+    "description": "Functional annotation of protein-coding genes in the primary genome assembly",
+    "links": [
+      {
+        "Download": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/143/455/GCF_000143455.1_v1.0/GCF_000143455.1_v1.0_genomic.gff.gz"
+      },
+      {
+        "Website": "https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000143455.1/"
+      },
+      {
+        "Article": "https://doi.org/10.1126/science.1188800"
+      }
+    ],
+    "accessionOrDOI": "[EDIT]",
+    "fileName": "GCF_000143455.1_v1.0_genomic.gff.gz",
+    "principalInvestigator": "Daniel S Rokhsar",
+    "principalInvestigatorAffiliation": "US DOE Joint Genome Institute\u00a0",
+    "firstDateOnPortal": "22 September 2026",
+    "assemblyGCAAccession": "-",
+    "buscoStats": "C:99% [S:97.0%, D:1.0%], F:0.3%, M:0.7%, n:3500 (MADEUP_TEST_DATA_odb10)"
+  },
+  {
+    "dataTrackName": "Repeats",
+    "description": "RepeatMasker",
+    "links": [
+      {
+        "Download": "https://hgdownload.soe.ucsc.edu/hubs/GCF/000/143/455/GCF_000143455.1/bbi/GCF_000143455.1_v1.0.rmsk.bb"
+      },
+      {
+        "Website": "https://hgdownload.soe.ucsc.edu/hubs/GCF/000/143/455/GCF_000143455.1/"
+      },
+      {
+        "Article": "[EDIT]"
+      }
+    ],
+    "accessionOrDOI": "[EDIT]",
+    "fileName": "GCF_000143455.1_v1.0.rmsk.bb",
+    "principalInvestigator": "UCSC Track Data Hubs",
+    "principalInvestigatorAffiliation": "UCSC",
+    "firstDateOnPortal": "22 September 2026",
+    "assemblyGCAAccession": "-",
+    "buscoStats": "-"
+  },
+  {
+    "dataTrackName": "CpG Islands",
+    "description": "CpG Islands",
+    "links": [
+      {
+        "Download": "https://hgdownload.soe.ucsc.edu/hubs/GCF/000/143/455/GCF_000143455.1/bbi/GCF_000143455.1_v1.0.cpgIslandExt.bb"
+      },
+      {
+        "Website": "https://hgdownload.soe.ucsc.edu/hubs/GCF/000/143/455/GCF_000143455.1/"
+      },
+      {
+        "Article": "[EDIT]"
+      }
+    ],
+    "accessionOrDOI": "[EDIT]",
+    "fileName": "GCF_000143455.1_v1.0.cpgIslandExt.bb",
+    "principalInvestigator": "UCSC Track Data Hubs",
+    "principalInvestigatorAffiliation": "UCSC",
+    "firstDateOnPortal": "22 September 2026",
+    "assemblyGCAAccession": "-",
+    "buscoStats": "-"
+  },
+  {
+    "dataTrackName": "GC Percent",
+    "description": "GC Percent",
+    "links": [
+      {
+        "Download": "https://hgdownload.soe.ucsc.edu/hubs/GCF/000/143/455/GCF_000143455.1/bbi/GCF_000143455.1_v1.0.gc5Base.bw"
+      },
+      {
+        "Website": "https://hgdownload.soe.ucsc.edu/hubs/GCF/000/143/455/GCF_000143455.1/"
+      },
+      {
+        "Article": "[EDIT]"
+      }
+    ],
+    "accessionOrDOI": "[EDIT]",
+    "fileName": "GCF_000143455.1_v1.0.gc5Base.bw",
+    "principalInvestigator": "UCSC Track Data Hubs",
+    "principalInvestigatorAffiliation": "UCSC",
+    "firstDateOnPortal": "22 September 2026",
+    "assemblyGCAAccession": "-",
+    "buscoStats": "-"
+  }
+]
