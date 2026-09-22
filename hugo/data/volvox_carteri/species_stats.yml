@@ -1,0 +1,25 @@
+---
+assembly:
+- Assembly length (Mbp): '137.68'
+- GC %: '55.97'
+- 'Contig #': '11352'
+- Contig N50 (Mbp): '0.04'
+- Contig L50: '754'
+- Contig N90 (Mbp): '0.00'
+- Contig L90: '3877'
+- 'Scaffold #': '1251'
+- Scaffold N50 (Mbp): '1.49'
+- Scaffold L50: '33'
+- Scaffold N90 (Mbp): '0.22'
+- Scaffold L90: '113'
+- Scaffolds >= 10 kb: '365'
+- BUSCO % [EDIT]: C:98% [S:95.5%, D:0.5%], F:0.5%, M:1.5%, n:3500 (MADEUP_TEST_DATA_odb10)
+annotation:
+- 'Gene #': '14331'
+- 'Transcript #': '14336'
+- Avg exons per transcript: '8.1'
+- Avg gene length (bp): '5359'
+- Avg transcript length (bp): '5357'
+- Avg exon length (bp): '232'
+- Avg intron length (bp): '490'
+- BUSCO % [EDIT]: C:99% [S:97.0%, D:1.0%], F:0.3%, M:0.7%, n:3500 (MADEUP_TEST_DATA_odb10)

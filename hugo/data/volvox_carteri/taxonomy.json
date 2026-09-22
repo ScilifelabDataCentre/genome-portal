@@ -1,0 +1,58 @@
+{
+    "Species": {
+        "science_name": "Volvox carteri",
+        "tax_id": "3067",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:3067",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=3067",
+        "display_order": 1
+    },
+    "Genus": {
+        "science_name": "Volvox",
+        "tax_id": "3066",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:3066",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=3066",
+        "display_order": 2
+    },
+    "Family": {
+        "science_name": "Volvocaceae",
+        "tax_id": "3065",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:3065",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=3065",
+        "display_order": 3
+    },
+    "Order": {
+        "science_name": "Chlamydomonadales",
+        "tax_id": "3042",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:3042",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=3042",
+        "display_order": 4
+    },
+    "Class": {
+        "science_name": "Chlorophyceae",
+        "tax_id": "3166",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:3166",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=3166",
+        "display_order": 5
+    },
+    "Phylum": {
+        "science_name": "Chlorophyta",
+        "tax_id": "3041",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:3041",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=3041",
+        "display_order": 6
+    },
+    "Kingdom": {
+        "science_name": "Viridiplantae",
+        "tax_id": "33090",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:33090",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=33090",
+        "display_order": 7
+    },
+    "Domain": {
+        "science_name": "Eukaryota",
+        "tax_id": "2759",
+        "ena_link": "https://www.ebi.ac.uk/ena/browser/view/Taxon:2759",
+        "ncbi_link": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=2759",
+        "display_order": 8
+    }
+}

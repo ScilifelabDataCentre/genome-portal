@@ -1,0 +1,23 @@
+organism: Volvox carteri
+assembly:
+  name: v1.0
+  displayName: V. carteri genome assembly GCA_000143455.1
+  accession: GCA_000143455.1
+  url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/143/455/GCF_000143455.1_v1.0/GCF_000143455.1_v1.0_genomic.fna.gz
+  fileName: GCF_000143455.1_v1.0_genomic.fna.gz
+tracks:
+- name: Protein-coding genes
+  url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/143/455/GCF_000143455.1_v1.0/GCF_000143455.1_v1.0_genomic.gff.gz
+  fileName: GCF_000143455.1_v1.0_genomic.gff.gz
+  defaultSession: true
+- name: Repeats
+  url: https://hgdownload.soe.ucsc.edu/hubs/GCF/000/143/455/GCF_000143455.1/bbi/GCF_000143455.1_v1.0.rmsk.bb
+  fileName: GCF_000143455.1_v1.0.rmsk.bb
+  defaultSession: true
+- name: CpG Islands
+  url: https://hgdownload.soe.ucsc.edu/hubs/GCF/000/143/455/GCF_000143455.1/bbi/GCF_000143455.1_v1.0.cpgIslandExt.bb
+  fileName: GCF_000143455.1_v1.0.cpgIslandExt.bb
+  defaultSession: true
+- name: GC Percent
+  url: https://hgdownload.soe.ucsc.edu/hubs/GCF/000/143/455/GCF_000143455.1/bbi/GCF_000143455.1_v1.0.gc5Base.bw
+  fileName: GCF_000143455.1_v1.0.gc5Base.bw

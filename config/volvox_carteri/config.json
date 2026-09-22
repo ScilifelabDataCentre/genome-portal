@@ -1,0 +1,88 @@
+{
+  "defaultSession": {
+    "id": "vcar_default_session",
+    "name": "Volvox carteri",
+    "widgets": {
+      "hierarchicalTrackSelector": {
+        "id": "hierarchicalTrackSelector",
+        "type": "HierarchicalTrackSelectorWidget",
+        "view": "vcar_default_session_view_0",
+        "faceted": {
+          "showSparse": false,
+          "showFilters": true,
+          "showOptions": false,
+          "panelWidth": 400
+        }
+      }
+    },
+    "activeWidgets": {
+      "hierarchicalTrackSelector": "hierarchicalTrackSelector"
+    },
+    "views": [
+      {
+        "id": "vcar_default_session_view_0",
+        "minimized": false,
+        "type": "LinearGenomeView",
+        "trackLabels": "offset",
+        "offsetPx": 0,
+        "bpPerPx": 50,
+        "displayedRegions": [
+          {
+            "refName": "NW_003307545.1",
+            "start": 0,
+            "end": 5981844,
+            "reversed": false,
+            "assemblyName": "v1.0"
+          }
+        ],
+        "tracks": [
+          {
+            "id": "vcar_default_Protein-coding_genes",
+            "type": "FeatureTrack",
+            "configuration": "GCF_000143455.1_v1.0_genomic.gff",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "vcar_default_Protein-coding_genes_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 150,
+                "configuration": "GCF_000143455.1_v1.0_genomic.gff-LinearBasicDisplay"
+              }
+            ]
+          },
+          {
+            "id": "vcar_default_Repeats",
+            "type": "FeatureTrack",
+            "configuration": "GCF_000143455.1_v1.0.rmsk",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "vcar_default_Repeats_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 150,
+                "configuration": "GCF_000143455.1_v1.0.rmsk-LinearBasicDisplay"
+              }
+            ]
+          },
+          {
+            "id": "vcar_default_CpG_Islands",
+            "type": "FeatureTrack",
+            "configuration": "GCF_000143455.1_v1.0.cpgIslandExt",
+            "minimized": false,
+            "displays": [
+              {
+                "id": "vcar_default_CpG_Islands_display",
+                "type": "LinearBasicDisplay",
+                "heightPreConfig": 150,
+                "configuration": "GCF_000143455.1_v1.0.cpgIslandExt-LinearBasicDisplay"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "configuration": {
+    "disableAnalytics": true
+  }
+}
