@@ -1,6 +1,6 @@
 ---
 title: Frequently Asked Questions
-last_updated: "31 August 2026"
+last_updated: "5 October 2026"
 ---
 
 ### FAQ
@@ -52,11 +52,11 @@ The portal uses the JBrowse 2 genome browser to display genomic datasets. <a hre
 {{< /faq_block >}}
 
 {{< faq_block accordionID="accordion-1" title="Can unpublished data be displayed on the portal?" >}}
-No, we require data be publicly available. However, we can begin adding data under embargo that will soon become available once the manuscript is accepted for publication. More details can be found in the next question.
+No, we require data to be publicly available. We do not accept privately held data, including data under embargo. If your data is not yet public, we recommend depositing it in the <a href="https://figshare.scilifelab.se/" target="_blank">SciLifeLab Data Repository</a>, where it can be kept private until you choose to publish it. Once the data has been made public, you can follow <a href="/contribute">our contributing guide</a> in order to add it to the portal.
 {{< /faq_block >}}
 
 {{< faq_block accordionID="accordion-1" title="Is it possible to add my data to the portal while a manuscript is under review?" >}}
-Yes, we accept data under embargo expected to become available after the manuscript under review is approved for publication. The data should be deposited in a public repository and have a reserved DOI and/or accession number. This allows you to indicate in the Data Availability Statement of your manuscript that your data can be visualised on the portal. Planning is key! Reach out to us via email <srgp@scilifelab.se> as soon as you wish to start this process.
+No, we can only add data to the portal once it has been made public. You can then follow <a href="/contribute">our contributing guide</a> to add it.
 {{< /faq_block >}}
 
 {{< faq_block accordionID="accordion-1" title="How long does it take for my data to be displayed on the portal?" >}}

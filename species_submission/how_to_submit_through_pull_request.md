@@ -58,6 +58,8 @@ git checkout -b add-<species-name>
 
 The species ingestion pipeline takes two submission forms and one picture file and uses that to create and populate the pages for the species. In order for this to work, all data from the species that are to be displayed in JBrowse needs to be publicly available in an end-repository, such as ENA/NCBI, Zenodo, or SciLifeLab Data Repository (Figshare). This allows the ingestion pipeline to download the data, and ensures the data is properly archived in an end-repository.
 
+The Genome Portal does not accept privately held data, including data under embargo. If your data is not yet public, we recommend depositing it in the [SciLifeLab Data Repository](https://figshare.scilifelab.se/), where it can be kept private until you choose to publish it. Once the data has been made public, you can submit it to the Genome Portal. When your species pages are live, you can add a link to them in your SciLifeLab Data Repository entry.
+
 Fill out the forms and prepare the picture of the species as described in sections [2.1](#21-submission-forms) and [2.2](#22-species-picture) below. Save the final files to `species_submission/local_inputs`. This directory will be mounted by one of the Docker images we will be using; it is also not under source control since we do not need these versions of the files to be committed to the repository.
 
 ### 2.1. Submission forms
