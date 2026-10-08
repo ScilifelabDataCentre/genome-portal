@@ -26,7 +26,7 @@ BUSCO notation: C: Complete; S: Single-copy; D: Duplicated; F: Fragmented; M: Mi
 
 There is currently no publication associated with the genome of *S. marinoi* R05AC. In the meantime, please cite the genome assembly submission: GCA_030871285.1. A list of the submitting authors can be found at the [JATAAI000000000.1 record at NCBI](https://www.ncbi.nlm.nih.gov/nuccore/JATAAI000000000).
 
-The tools used by to calculate the statistics shown on top of this page are described in:
+The tools used to calculate the statistics shown on top of this page are described in:
 
 - Dainat J. (2024). AGAT: Another Gff Analysis Toolkit to handle annotations in any GTF/GFF format.
 (Version v1.4.1). Zenodo. <https://www.doi.org/10.5281/zenodo.3552717>

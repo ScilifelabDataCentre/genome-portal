@@ -30,7 +30,7 @@ The data for *Amphiura filiformis* displayed in the genome portal comes from:
 Parey, E., Ortega-Martinez, O., Delroisse, J., Piovani, L., Czarkwiani, A., Dylus, D., Arya, S., Dupont, S., Thorndyke, M., Larsson, T., Johannesson, K., Buckley, K. M., Martinez, P., Oliveri, P., & Marlétaz, F. (2024). The brittle star genome illuminates the genetic basis of animal appendage regeneration. Nature Ecology & Evolution, 8(8), 1505–1521. <https://doi.org/10.1038/s41559-024-02456-y>
 ```
 
-The tools used by to calculate the statistics shown on top of this page are described in:
+The tools used to calculate the statistics shown on top of this page are described in:
 
 - Dainat J. (2024). AGAT: Another Gff Analysis Toolkit to handle annotations in any GTF/GFF format.
 (Version v1.4.1). Zenodo. <https://www.doi.org/10.5281/zenodo.3552717>

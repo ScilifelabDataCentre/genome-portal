@@ -30,7 +30,7 @@ The data for *Linum tenue* displayed in the genome portal comes from:
 Gutiérrez-Valencia, J., Fracassetti, M., Berdan, E. L., Bunikis, I., Soler, L., Dainat, J., Kutschera, V. E., Losvik, A., Désamoré, A., Hughes, P. W., Foroozani, A., Laenen, B., Pesquet, E., Abdelaziz, M., Pettersson, O. V., Nystedt, B., Brennan, A. C., Arroyo, J., & Slotte, T. (2022). Genomic analyses of the *Linum* distyly supergene reveal convergent evolution at the molecular level. Current Biology, 32(20), 4360-4371.e6. <https://doi.org/10.1016/j.cub.2022.08.042>
 ```
 
-The tools used by to calculate the statistics shown on top of this page are described in:
+The tools used to calculate the statistics shown on top of this page are described in:
 
 - Dainat J. (2024). AGAT: Another Gff Analysis Toolkit to handle annotations in any GTF/GFF format.
 (Version v1.4.1). Zenodo. <https://www.doi.org/10.5281/zenodo.3552717>
