@@ -56,7 +56,7 @@ No, we require data to be publicly available. We do not accept privately held da
 {{< /faq_block >}}
 
 {{< faq_block accordionID="accordion-1" title="Is it possible to add my data to the portal while a manuscript is under review?" >}}
-No, we can only add data to the portal once it has been made public. You can then follow <a href="/contribute">our contributing guide</a> to add it.
+No, we can only add data to the portal once it has been made public.  We encourage you to deposit data in manuscripts under review to the <a href="https://figshare.scilifelab.se/" target="_blank">SciLifeLab Data Repository</a>. There, the data can be held privately, but made accessible to reviewers, until you choose to publish it (see the <a href="https://www.scilifelab.se/data-ai/repository/submission/" target="_blank">SciLifeLab Data Repository submission guidelines</a> for details). Once the data is public, you can follow <a href="/contribute">our contributing guide</a> to add it to the portal.  You can then link the species pages to your SciLifeLab Data Repository entry, which will enable them to be linked to your paper.
 {{< /faq_block >}}
 
 {{< faq_block accordionID="accordion-1" title="How long does it take for my data to be displayed on the portal?" >}}

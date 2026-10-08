@@ -26,7 +26,7 @@ For a species dataset to be included in the portal, it needs to fulfil the follo
 {{< info_block >}}
 We do not accept privately held data, including data under embargo. All data must be publicly available before it can be displayed on the portal.
 <br><br>
-If your data is not yet public, for example while a manuscript is under review, you can deposit it in the <a href="https://figshare.scilifelab.se/" target="_blank">SciLifeLab Data Repository</a>, where it can be kept private until you choose to publish it. Once the data has been made public, you can follow one of the submission options at the top of this page to add it to the portal. When your species pages are live, you can add a link to them in your SciLifeLab Data Repository entry.
+If you intend to make your data publicly available at a later date (e.g. when your manuscript is published), we encourage you to deposit it in the <a href="https://figshare.scilifelab.se/" target="_blank">SciLifeLab Data Repository</a>. There, the data can be held privately, but made accessible to reviewers, until you choose to publish it (see the <a href="https://www.scilifelab.se/data-ai/repository/submission/" target="_blank">SciLifeLab Data Repository submission guidelines</a> for details). Once the data is public, you can follow one of the submission options at the top of this page to add it to the portal. When your species pages are live, you can add a link to them in your SciLifeLab Data Repository entry. This will enable a link to them that is accessible from your paper.
 {{< /info_block >}}
 
 _Please note that these requirements may be subject to change at any time and without notice, so we recommend checking them regularly_.
