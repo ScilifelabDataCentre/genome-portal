@@ -1,0 +1,168 @@
+organism: Acanthoscelides obtectus
+assembly:
+  name: AobtHiC_assembly
+  displayName: A. obtectus genome assembly GCA_963669975.1
+  accession: GCA_963669975.1
+  url: https://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/cav/CAVLJG01.fasta.gz
+  fileName: CAVLJG01.fasta.gz
+# All tracks except "Protein-coding genes" are configured manually in config.json
+tracks:
+- name: Protein-coding genes
+  url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/963/669/975/GCA_963669975.1_AobtHiC_assembly/GCA_963669975.1_AobtHiC_assembly_genomic.gff.gz
+  fileName: GCA_963669975.1_AobtHiC_assembly_genomic.gff.gz
+- name: Selective sweeps, Early regime
+  url: https://ndownloader.figshare.com/files/69583413
+  fileName: selective_sweeps_consistent_Early.bed.gz
+  addTrack: false
+- name: Selective sweeps, Late regime
+  url: https://ndownloader.figshare.com/files/69583407
+  fileName: selective_sweeps_consistent_Late.bed.gz
+  addTrack: false
+- name: Coverage, Early regime median
+  url: https://ndownloader.figshare.com/files/69583554
+  fileName: coverage_median_corrected_100bp_Early.bw
+  addTrack: false
+- name: Coverage, Late regime median
+  url: https://ndownloader.figshare.com/files/69583551
+  fileName: coverage_median_corrected_100bp_Late.bw
+  addTrack: false
+- name: Coverage log2 ratio, Late vs Early
+  url: https://ndownloader.figshare.com/files/69583557
+  fileName: coverage_log2_ratio_Late_vs_Early_100bp.bw
+  addTrack: false
+- name: Coverage log2 ratio, Late vs Early, denoised
+  url: https://ndownloader.figshare.com/files/69583560
+  fileName: coverage_log2_ratio_Late_vs_Early_100bp_denoised.bw
+  addTrack: false
+- name: CNV segmentation, Late vs Early
+  url: https://ndownloader.figshare.com/files/69583515
+  fileName: CNV_segmentation_log2_ratio_Late_vs_Early.bw
+  addTrack: false
+- name: CNV calls, Early regime
+  url: https://ndownloader.figshare.com/files/69583395
+  fileName: CNV_calls_Early.bed.gz
+  addTrack: false
+- name: CNV calls, Late regime
+  url: https://ndownloader.figshare.com/files/69583392
+  fileName: CNV_calls_Late.bed.gz
+  addTrack: false
+- name: CNV calls, Early regime (signal)
+  url: https://ndownloader.figshare.com/files/69583521
+  fileName: CNV_calls_Early.bw
+  addTrack: false
+- name: CNV calls, Late regime (signal)
+  url: https://ndownloader.figshare.com/files/69583518
+  fileName: CNV_calls_Late.bw
+  addTrack: false
+- name: Lifespan QTL LOD, interval mapping (markers)
+  url: https://ndownloader.figshare.com/files/69583428
+  fileName: QTL_LOD_lifespan_IM_markers.bw
+  addTrack: false
+- name: Lifespan QTL LOD, interval mapping (100 kb interpolated)
+  url: https://ndownloader.figshare.com/files/69583425
+  fileName: QTL_LOD_lifespan_IM_100kb_interpolated.bw
+  addTrack: false
+- name: Body weight QTL LOD, interval mapping (markers)
+  url: https://ndownloader.figshare.com/files/69583461
+  fileName: QTL_LOD_bodyweight_IM_markers.bw
+  addTrack: false
+- name: Body weight QTL LOD, interval mapping (100 kb interpolated)
+  url: https://ndownloader.figshare.com/files/69583464
+  fileName: QTL_LOD_bodyweight_IM_100kb_interpolated.bw
+  addTrack: false
+- name: Lifespan QTL LOD, MQM (markers)
+  url: https://ndownloader.figshare.com/files/69583419
+  fileName: QTL_LOD_lifespan_MQM_markers.bw
+  addTrack: false
+- name: Lifespan QTL LOD, MQM (100 kb interpolated)
+  url: https://ndownloader.figshare.com/files/69583416
+  fileName: QTL_LOD_lifespan_MQM_100kb_interpolated.bw
+  addTrack: false
+- name: Body weight QTL chr2 22.9 cM LOD, MQM (100 kb interpolated)
+  url: https://ndownloader.figshare.com/files/69583458
+  fileName: QTL_LOD_bodyweight_MQM_chr2-22.9cM_100kb_interpolated.bw
+  addTrack: false
+- name: Body weight QTL chr4 25.3 cM LOD, MQM (100 kb interpolated)
+  url: https://ndownloader.figshare.com/files/69583455
+  fileName: QTL_LOD_bodyweight_MQM_chr4-25.3cM_100kb_interpolated.bw
+  addTrack: false
+- name: Body weight QTL chr4 28.3 cM LOD, MQM (100 kb interpolated)
+  url: https://ndownloader.figshare.com/files/69583446
+  fileName: QTL_LOD_bodyweight_MQM_chr4-28.3cM_100kb_interpolated.bw
+  addTrack: false
+- name: Body weight QTL chr6 12.6 cM LOD, MQM (100 kb interpolated)
+  url: https://ndownloader.figshare.com/files/69583440
+  fileName: QTL_LOD_bodyweight_MQM_chr6-12.6cM_100kb_interpolated.bw
+  addTrack: false
+- name: Body weight QTL chr9 90.5 cM LOD, MQM (100 kb interpolated)
+  url: https://ndownloader.figshare.com/files/69583434
+  fileName: QTL_LOD_bodyweight_MQM_chr9-90.5cM_100kb_interpolated.bw
+  addTrack: false
+- name: Recombination rate, 100 kb
+  url: https://ndownloader.figshare.com/files/69583410
+  fileName: recombination_rate_cM_per_Mb_100kb.bw
+  addTrack: false
+- name: Recombination rate, 2 Mb smoothed
+  url: https://ndownloader.figshare.com/files/69583422
+  fileName: recombination_rate_cM_per_Mb_2Mb_smoothed.bw
+  addTrack: false
+- name: F0 founder coverage, Early line 2 mean
+  url: https://ndownloader.figshare.com/files/69583542
+  fileName: F0_coverage_mean_100bp_E2.bw
+  addTrack: false
+- name: F0 founder coverage, Late line 5 mean
+  url: https://ndownloader.figshare.com/files/69583545
+  fileName: F0_coverage_mean_100bp_L5.bw
+  addTrack: false
+- name: F0 founder coverage log2 ratio, L5 vs E2
+  url: https://ndownloader.figshare.com/files/69583548
+  fileName: F0_coverage_log2_ratio_L5_vs_E2_100bp.bw
+  addTrack: false
+- name: Genes, gene-level with ortholog annotation
+  url: https://ndownloader.figshare.com/files/69583527
+  fileName: Aobtectus_GCA_963669975.1_genes_eggNOG.gff3.gz
+  addTrack: false
+- name: Drosophila melanogaster orthologs
+  url: https://ndownloader.figshare.com/files/69583536
+  fileName: Aobtectus_GCA_963669975.1_Drosophila_orthologs.gff3.gz
+  addTrack: false
+- name: Differentially expressed genes, female abdomen
+  url: https://ndownloader.figshare.com/files/69583512
+  fileName: DEGs_Early_vs_Late_female_abdomen.gff3.gz
+  addTrack: false
+- name: Differentially expressed genes, female head and thorax
+  url: https://ndownloader.figshare.com/files/69583506
+  fileName: DEGs_Early_vs_Late_female_head_thorax.gff3.gz
+  addTrack: false
+- name: Differentially expressed genes, male abdomen
+  url: https://ndownloader.figshare.com/files/69583500
+  fileName: DEGs_Early_vs_Late_male_abdomen.gff3.gz
+  addTrack: false
+- name: Differentially expressed genes, male head and thorax
+  url: https://ndownloader.figshare.com/files/69583494
+  fileName: DEGs_Early_vs_Late_male_head_thorax.gff3.gz
+  addTrack: false
+- name: Excluded regions, high coverage
+  url: https://ndownloader.figshare.com/files/69583482
+  fileName: excluded_regions_high_coverage.bed.gz
+  addTrack: false
+- name: Excluded regions, low coverage
+  url: https://ndownloader.figshare.com/files/69583476
+  fileName: excluded_regions_low_coverage.bed.gz
+  addTrack: false
+- name: Excluded regions, low mapping quality
+  url: https://ndownloader.figshare.com/files/69583470
+  fileName: excluded_regions_low_mapping_quality.bed.gz
+  addTrack: false
+- name: Excluded regions, assembly gaps and small contigs
+  url: https://ndownloader.figshare.com/files/69583488
+  fileName: excluded_regions_assembly_gaps_small_contigs.bed.gz
+  addTrack: false
+- name: GC content
+  url: https://ndownloader.figshare.com/files/69583539
+  fileName: GC_fraction_100bp.bw
+  addTrack: false
+- name: Mappability
+  url: https://ndownloader.figshare.com/files/69583530
+  fileName: mappability_100bp.bw
+  addTrack: false

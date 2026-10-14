@@ -1,0 +1,1647 @@
+{
+  "defaultSession": {
+    "id": "aobt_default_session",
+    "name": "Acanthoscelides obtectus",
+    "widgets": {
+      "hierarchicalTrackSelector": {
+        "id": "hierarchicalTrackSelector",
+        "type": "HierarchicalTrackSelectorWidget",
+        "view": "aobt_default_session_view_0",
+        "faceted": {
+          "showSparse": false,
+          "showFilters": true,
+          "showOptions": false,
+          "panelWidth": 400
+        }
+      }
+    },
+    "activeWidgets": {
+      "hierarchicalTrackSelector": "hierarchicalTrackSelector"
+    },
+    "views": [
+      {
+        "type": "LinearGenomeView",
+        "displayName": "Chromosome 1: CNVs, lifespan QTLs and selective sweeps",
+        "trackLabels": "offset",
+        "init": {
+          "assembly": "AobtHiC_assembly",
+          "tracks": [
+            "GCA_963669975.1_AobtHiC_assembly_genomic.gff",
+            "aobt_cnv_calls_overlay",
+            "QTL_LOD_lifespan_MQM_100kb_interpolated",
+            "selective_sweeps_consistent_Early.bed",
+            "selective_sweeps_consistent_Late.bed"
+          ],
+          "loc": "ENA|CAVLJG010000001|CAVLJG010000001.1"
+        },
+        "id": "aobt_default_session_view_0"
+      }
+    ]
+  },
+  "configuration": {
+    "disableAnalytics": true
+  },
+  "tracks": [
+    {
+      "type": "FeatureTrack",
+      "trackId": "selective_sweeps_consistent_Early.bed",
+      "name": "Selective sweeps, Early regime",
+      "description": "Candidate selective-sweep regions consistently detected in the Early (short-lived) experimental evolution regime: Pool-HMM calls present in at least 6 of 8 pooled samples (4 lines x 2 sexes). Autosomes only.",
+      "category": [
+        "Selective sweeps"
+      ],
+      "assemblyNames": [
+        "AobtHiC_assembly"
+      ],
+      "adapter": {
+        "type": "BedTabixAdapter",
+        "bedGzLocation": {
+          "uri": "selective_sweeps_consistent_Early.bed.bgz",
+          "locationType": "UriLocation"
+        },
+        "index": {
+          "location": {
+            "uri": "selective_sweeps_consistent_Early.bed.bgz.csi",
+            "locationType": "UriLocation"
+          },
+          "indexType": "CSI"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "selective_sweeps_consistent_Early.bed-LinearBasicDisplay",
+          "type": "LinearBasicDisplay",
+          "height": 30,
+          "renderer": {
+            "type": "CanvasFeatureRenderer",
+            "displayMode": "collapse",
+            "color1": "rgb(255, 127, 0)"
+          }
+        }
+      ]
+    },
+    {
+      "type": "FeatureTrack",
+      "trackId": "selective_sweeps_consistent_Late.bed",
+      "name": "Selective sweeps, Late regime",
+      "description": "Candidate selective-sweep regions consistently detected in the Late (long-lived) experimental evolution regime: Pool-HMM calls present in at least 6 of 8 pooled samples (4 lines x 2 sexes). Autosomes only.",
+      "category": [
+        "Selective sweeps"
+      ],
+      "assemblyNames": [
+        "AobtHiC_assembly"
+      ],
+      "adapter": {
+        "type": "BedTabixAdapter",
+        "bedGzLocation": {
+          "uri": "selective_sweeps_consistent_Late.bed.bgz",
+          "locationType": "UriLocation"
+        },
+        "index": {
+          "location": {
+            "uri": "selective_sweeps_consistent_Late.bed.bgz.csi",
+            "locationType": "UriLocation"
+          },
+          "indexType": "CSI"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "selective_sweeps_consistent_Late.bed-LinearBasicDisplay",
+          "type": "LinearBasicDisplay",
+          "height": 30,
+          "renderer": {
+            "type": "CanvasFeatureRenderer",
+            "displayMode": "collapse",
+            "color1": "rgb(152, 78, 163)"
+          }
+        }
+      ]
+    },
+    {
+      "type": "QuantitativeTrack",
+      "trackId": "coverage_median_corrected_100bp_Early",
+      "name": "Coverage, Early regime median",
+      "description": "Median read depth across the four Early lines (female and male pools summed per line), corrected for GC content and mappability, in 100 bp bins.",
+      "category": [
+        "Copy-number variation"
+      ],
+      "assemblyNames": [
+        "AobtHiC_assembly"
+      ],
+      "adapter": {
+        "type": "BigWigAdapter",
+        "bigWigLocation": {
+          "uri": "https://ndownloader.figshare.com/files/69583554",
+          "locationType": "UriLocation"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "coverage_median_corrected_100bp_Early-LinearWiggleDisplay",
+          "type": "LinearWiggleDisplay",
+          "defaultRendering": "xyplot",
+          "minScore": 0,
+          "maxScore": 5,
+          "height": 120,
+          "renderers": {
+            "XYPlotRenderer": {
+              "color": "rgb(255, 127, 0)"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "QuantitativeTrack",
+      "trackId": "coverage_median_corrected_100bp_Late",
+      "name": "Coverage, Late regime median",
+      "description": "Median read depth across the four Late lines (female and male pools summed per line), corrected for GC content and mappability, in 100 bp bins.",
+      "category": [
+        "Copy-number variation"
+      ],
+      "assemblyNames": [
+        "AobtHiC_assembly"
+      ],
+      "adapter": {
+        "type": "BigWigAdapter",
+        "bigWigLocation": {
+          "uri": "https://ndownloader.figshare.com/files/69583551",
+          "locationType": "UriLocation"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "coverage_median_corrected_100bp_Late-LinearWiggleDisplay",
+          "type": "LinearWiggleDisplay",
+          "defaultRendering": "xyplot",
+          "minScore": 0,
+          "maxScore": 5,
+          "height": 120,
+          "renderers": {
+            "XYPlotRenderer": {
+              "color": "rgb(152, 78, 163)"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "QuantitativeTrack",
+      "trackId": "coverage_log2_ratio_Late_vs_Early_100bp",
+      "name": "Coverage log2 ratio, Late vs Early",
+      "description": "log2 ratio of median corrected read depth, Late vs Early, in 100 bp bins. Positive values indicate higher coverage in Late lines.",
+      "category": [
+        "Copy-number variation"
+      ],
+      "assemblyNames": [
+        "AobtHiC_assembly"
+      ],
+      "adapter": {
+        "type": "BigWigAdapter",
+        "bigWigLocation": {
+          "uri": "https://ndownloader.figshare.com/files/69583557",
+          "locationType": "UriLocation"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "coverage_log2_ratio_Late_vs_Early_100bp-LinearWiggleDisplay",
+          "type": "LinearWiggleDisplay",
+          "defaultRendering": "line",
+          "minScore": -4,
+          "maxScore": 4
+        }
+      ]
+    },
+    {
+      "type": "QuantitativeTrack",
+      "trackId": "coverage_log2_ratio_Late_vs_Early_100bp_denoised",
+      "name": "Coverage log2 ratio, Late vs Early, denoised",
+      "description": "log2 ratio of median corrected read depth, Late vs Early, in 100 bp bins, denoised with a stationary wavelet transform. Input to the CNV segmentation.",
+      "category": [
+        "Copy-number variation"
+      ],
+      "assemblyNames": [
+        "AobtHiC_assembly"
+      ],
+      "adapter": {
+        "type": "BigWigAdapter",
+        "bigWigLocation": {
+          "uri": "https://ndownloader.figshare.com/files/69583560",
+          "locationType": "UriLocation"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "coverage_log2_ratio_Late_vs_Early_100bp_denoised-LinearWiggleDisplay",
+          "type": "LinearWiggleDisplay",
+          "defaultRendering": "line",
+          "minScore": -4,
+          "maxScore": 4,
+          "height": 145
+        }
+      ]
+    },
+    {
+      "type": "QuantitativeTrack",
+      "trackId": "CNV_segmentation_log2_ratio_Late_vs_Early",
+      "name": "CNV segmentation, Late vs Early",
+      "description": "Circular binary segmentation of the denoised Late vs Early log2 coverage ratio; the value is the segment mean. All segments, before significance filtering.",
+      "category": [
+        "Copy-number variation"
+      ],
+      "assemblyNames": [
+        "AobtHiC_assembly"
+      ],
+      "adapter": {
+        "type": "BigWigAdapter",
+        "bigWigLocation": {
+          "uri": "https://ndownloader.figshare.com/files/69583515",
+          "locationType": "UriLocation"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "CNV_segmentation_log2_ratio_Late_vs_Early-LinearWiggleDisplay",
+          "type": "LinearWiggleDisplay",
+          "defaultRendering": "xyplot",
+          "minScore": -4,
+          "maxScore": 4,
+          "renderers": {
+            "XYPlotRenderer": {
+              "filled": false,
+              "minSize": 2
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "FeatureTrack",
+      "trackId": "CNV_calls_Early.bed",
+      "name": "CNV calls, Early regime",
+      "description": "Copy-number variants (deletions and gains) differentiated between regimes, called for the Early regime (fold change >= 1.5, permutation P <= 0.05). Columns: call type and population-level copy number minus 2.",
+      "category": [
+        "Copy-number variation"
+      ],
+      "assemblyNames": [
+        "AobtHiC_assembly"
+      ],
+      "adapter": {
+        "type": "BedTabixAdapter",
+        "bedGzLocation": {
+          "uri": "CNV_calls_Early.bed.bgz",
+          "locationType": "UriLocation"
+        },
+        "index": {
+          "location": {
+            "uri": "CNV_calls_Early.bed.bgz.csi",
+            "locationType": "UriLocation"
+          },
+          "indexType": "CSI"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "CNV_calls_Early.bed-LinearBasicDisplay",
+          "type": "LinearBasicDisplay",
+          "height": 40,
+          "mouseover": "jexl:get(feature,'call') + ', copy-number deviation ' + get(feature,'cn_deviation')",
+          "renderer": {
+            "type": "CanvasFeatureRenderer",
+            "displayMode": "collapse",
+            "showDescriptions": false,
+            "color1": "jexl:get(feature,'call') == 'deletion' ? 'rgb(215, 48, 39)' : 'rgb(69, 117, 180)'",
+            "labels": {
+              "name": "jexl:get(feature,'call')"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "FeatureTrack",
+      "trackId": "CNV_calls_Late.bed",
+      "name": "CNV calls, Late regime",
+      "description": "Copy-number variants (deletions and gains) differentiated between regimes, called for the Late regime (fold change >= 1.5, permutation P <= 0.05). Columns: call type and population-level copy number minus 2.",
+      "category": [
+        "Copy-number variation"
+      ],
+      "assemblyNames": [
+        "AobtHiC_assembly"
+      ],
+      "adapter": {
+        "type": "BedTabixAdapter",
+        "bedGzLocation": {
+          "uri": "CNV_calls_Late.bed.bgz",
+          "locationType": "UriLocation"
+        },
+        "index": {
+          "location": {
+            "uri": "CNV_calls_Late.bed.bgz.csi",
+            "locationType": "UriLocation"
+          },
+          "indexType": "CSI"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "CNV_calls_Late.bed-LinearBasicDisplay",
+          "type": "LinearBasicDisplay",
+          "height": 40,
+          "mouseover": "jexl:get(feature,'call') + ', copy-number deviation ' + get(feature,'cn_deviation')",
+          "renderer": {
+            "type": "CanvasFeatureRenderer",
+            "displayMode": "collapse",
+            "showDescriptions": false,
+            "color1": "jexl:get(feature,'call') == 'deletion' ? 'rgb(215, 48, 39)' : 'rgb(69, 117, 180)'",
+            "labels": {
+              "name": "jexl:get(feature,'call')"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "QuantitativeTrack",
+      "trackId": "CNV_calls_Early",
+      "name": "CNV calls, Early regime (signal)",
+      "description": "The Early CNV calls as a signal track. Value is population-level copy number minus 2 (negative = deletion, positive = gain).",
+      "category": [
+        "Copy-number variation"
+      ],
+      "assemblyNames": [
+        "AobtHiC_assembly"
+      ],
+      "adapter": {
+        "type": "BigWigAdapter",
+        "bigWigLocation": {
+          "uri": "https://ndownloader.figshare.com/files/69583521",
+          "locationType": "UriLocation"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "CNV_calls_Early-LinearWiggleDisplay",
+          "type": "LinearWiggleDisplay",
+          "defaultRendering": "density",
+          "height": 30
+        }
+      ]
+    },
+    {
+      "type": "QuantitativeTrack",
+      "trackId": "CNV_calls_Late",
+      "name": "CNV calls, Late regime (signal)",
+      "description": "The Late CNV calls as a signal track. Value is population-level copy number minus 2 (negative = deletion, positive = gain).",
+      "category": [
+        "Copy-number variation"
+      ],
+      "assemblyNames": [
+        "AobtHiC_assembly"
+      ],
+      "adapter": {
+        "type": "BigWigAdapter",
+        "bigWigLocation": {
+          "uri": "https://ndownloader.figshare.com/files/69583518",
+          "locationType": "UriLocation"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "CNV_calls_Late-LinearWiggleDisplay",
+          "type": "LinearWiggleDisplay",
+          "defaultRendering": "density",
+          "height": 30
+        }
+      ]
+    },
+    {
+      "type": "QuantitativeTrack",
+      "trackId": "QTL_LOD_lifespan_IM_markers",
+      "name": "Lifespan QTL LOD, interval mapping (markers)",
+      "description": "LOD scores for lifespan from interval mapping (sex as additive covariate) in an Early x Late F2 intercross (1,334 F2 individuals). Original values at marker positions.",
+      "category": [
+        "QTL mapping",
+        "Lifespan"
+      ],
+      "assemblyNames": [
+        "AobtHiC_assembly"
+      ],
+      "adapter": {
+        "type": "BigWigAdapter",
+        "bigWigLocation": {
+          "uri": "https://ndownloader.figshare.com/files/69583428",
+          "locationType": "UriLocation"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "QTL_LOD_lifespan_IM_markers-LinearWiggleDisplay",
+          "type": "LinearWiggleDisplay",
+          "defaultRendering": "xyplot",
+          "autoscale": "global",
+          "height": 303
+        }
+      ]
+    },
+    {
+      "type": "QuantitativeTrack",
+      "trackId": "QTL_LOD_lifespan_IM_100kb_interpolated",
+      "name": "Lifespan QTL LOD, interval mapping (100 kb interpolated)",
+      "description": "LOD scores for lifespan from interval mapping (sex as additive covariate) in an Early x Late F2 intercross (1,334 F2 individuals). Linearly interpolated onto 100 kb bins for display.",
+      "category": [
+        "QTL mapping",
+        "Lifespan"
+      ],
+      "assemblyNames": [
+        "AobtHiC_assembly"
+      ],
+      "adapter": {
+        "type": "BigWigAdapter",
+        "bigWigLocation": {
+          "uri": "https://ndownloader.figshare.com/files/69583425",
+          "locationType": "UriLocation"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "QTL_LOD_lifespan_IM_100kb_interpolated-LinearWiggleDisplay",
+          "type": "LinearWiggleDisplay",
+          "defaultRendering": "xyplot",
+          "autoscale": "global",
+          "height": 303
+        }
+      ]
+    },
+    {
+      "type": "QuantitativeTrack",
+      "trackId": "QTL_LOD_bodyweight_IM_markers",
+      "name": "Body weight QTL LOD, interval mapping (markers)",
+      "description": "LOD scores for body weight from interval mapping (sex as additive covariate) in an Early x Late F2 intercross (1,334 F2 individuals). Original values at marker positions.",
+      "category": [
+        "QTL mapping",
+        "Body weight"
+      ],
+      "assemblyNames": [
+        "AobtHiC_assembly"
+      ],
+      "adapter": {
+        "type": "BigWigAdapter",
+        "bigWigLocation": {
+          "uri": "https://ndownloader.figshare.com/files/69583461",
+          "locationType": "UriLocation"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "QTL_LOD_bodyweight_IM_markers-LinearWiggleDisplay",
+          "type": "LinearWiggleDisplay",
+          "defaultRendering": "xyplot",
+          "autoscale": "global",
+          "height": 221
+        }
+      ]
+    },
+    {
+      "type": "QuantitativeTrack",
+      "trackId": "QTL_LOD_bodyweight_IM_100kb_interpolated",
+      "name": "Body weight QTL LOD, interval mapping (100 kb interpolated)",
+      "description": "LOD scores for body weight from interval mapping (sex as additive covariate) in an Early x Late F2 intercross (1,334 F2 individuals). Linearly interpolated onto 100 kb bins for display.",
+      "category": [
+        "QTL mapping",
+        "Body weight"
+      ],
+      "assemblyNames": [
+        "AobtHiC_assembly"
+      ],
+      "adapter": {
+        "type": "BigWigAdapter",
+        "bigWigLocation": {
+          "uri": "https://ndownloader.figshare.com/files/69583464",
+          "locationType": "UriLocation"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "QTL_LOD_bodyweight_IM_100kb_interpolated-LinearWiggleDisplay",
+          "type": "LinearWiggleDisplay",
+          "defaultRendering": "xyplot",
+          "autoscale": "global",
+          "height": 221
+        }
+      ]
+    },
+    {
+      "type": "QuantitativeTrack",
+      "trackId": "QTL_LOD_lifespan_MQM_markers",
+      "name": "Lifespan QTL LOD, MQM (markers)",
+      "description": "LOD profiles of the six lifespan QTLs from multiple QTL mapping (MQM; sex as interactive covariate) in an Early x Late F2 intercross (1,334 F2 individuals). Original values at marker positions.",
+      "category": [
+        "QTL mapping",
+        "Lifespan"
+      ],
+      "assemblyNames": [
+        "AobtHiC_assembly"
+      ],
+      "adapter": {
+        "type": "BigWigAdapter",
+        "bigWigLocation": {
+          "uri": "https://ndownloader.figshare.com/files/69583419",
+          "locationType": "UriLocation"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "QTL_LOD_lifespan_MQM_markers-LinearWiggleDisplay",
+          "type": "LinearWiggleDisplay",
+          "defaultRendering": "xyplot",
+          "autoscale": "global",
+          "height": 220
+        }
+      ]
+    },
+    {
+      "type": "QuantitativeTrack",
+      "trackId": "QTL_LOD_lifespan_MQM_100kb_interpolated",
+      "name": "Lifespan QTL LOD, MQM (100 kb interpolated)",
+      "description": "LOD profiles of the six lifespan QTLs from multiple QTL mapping (MQM; sex as interactive covariate) in an Early x Late F2 intercross (1,334 F2 individuals). Linearly interpolated onto 100 kb bins for display.",
+      "category": [
+        "QTL mapping",
+        "Lifespan"
+      ],
+      "assemblyNames": [
+        "AobtHiC_assembly"
+      ],
+      "adapter": {
+        "type": "BigWigAdapter",
+        "bigWigLocation": {
+          "uri": "https://ndownloader.figshare.com/files/69583416",
+          "locationType": "UriLocation"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "QTL_LOD_lifespan_MQM_100kb_interpolated-LinearWiggleDisplay",
+          "type": "LinearWiggleDisplay",
+          "defaultRendering": "xyplot",
+          "autoscale": "global",
+          "height": 220
+        }
+      ]
+    },
+    {
+      "type": "QuantitativeTrack",
+      "trackId": "QTL_LOD_bodyweight_MQM_chr2-22.9cM_100kb_interpolated",
+      "name": "Body weight QTL chr2 22.9 cM LOD, MQM (100 kb interpolated)",
+      "description": "LOD profile of the body weight QTL on chromosome 2 at 22.9 cM from multiple QTL mapping (MQM; sex as interactive covariate) in an Early x Late F2 intercross (1,334 F2 individuals). Linearly interpolated onto 100 kb bins for display.",
+      "category": [
+        "QTL mapping",
+        "Body weight"
+      ],
+      "assemblyNames": [
+        "AobtHiC_assembly"
+      ],
+      "adapter": {
+        "type": "BigWigAdapter",
+        "bigWigLocation": {
+          "uri": "https://ndownloader.figshare.com/files/69583458",
+          "locationType": "UriLocation"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "QTL_LOD_bodyweight_MQM_chr2-22.9cM_100kb_interpolated-LinearWiggleDisplay",
+          "type": "LinearWiggleDisplay",
+          "defaultRendering": "xyplot",
+          "autoscale": "global",
+          "height": 140
+        }
+      ]
+    },
+    {
+      "type": "QuantitativeTrack",
+      "trackId": "QTL_LOD_bodyweight_MQM_chr4-25.3cM_100kb_interpolated",
+      "name": "Body weight QTL chr4 25.3 cM LOD, MQM (100 kb interpolated)",
+      "description": "LOD profile of the body weight QTL on chromosome 4 at 25.3 cM from multiple QTL mapping (MQM; sex as interactive covariate) in an Early x Late F2 intercross (1,334 F2 individuals). Linearly interpolated onto 100 kb bins for display.",
+      "category": [
+        "QTL mapping",
+        "Body weight"
+      ],
+      "assemblyNames": [
+        "AobtHiC_assembly"
+      ],
+      "adapter": {
+        "type": "BigWigAdapter",
+        "bigWigLocation": {
+          "uri": "https://ndownloader.figshare.com/files/69583455",
+          "locationType": "UriLocation"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "QTL_LOD_bodyweight_MQM_chr4-25.3cM_100kb_interpolated-LinearWiggleDisplay",
+          "type": "LinearWiggleDisplay",
+          "defaultRendering": "xyplot",
+          "autoscale": "global",
+          "height": 140
+        }
+      ]
+    },
+    {
+      "type": "QuantitativeTrack",
+      "trackId": "QTL_LOD_bodyweight_MQM_chr4-28.3cM_100kb_interpolated",
+      "name": "Body weight QTL chr4 28.3 cM LOD, MQM (100 kb interpolated)",
+      "description": "LOD profile of the body weight QTL on chromosome 4 at 28.3 cM from multiple QTL mapping (MQM; sex as interactive covariate) in an Early x Late F2 intercross (1,334 F2 individuals). Linearly interpolated onto 100 kb bins for display.",
+      "category": [
+        "QTL mapping",
+        "Body weight"
+      ],
+      "assemblyNames": [
+        "AobtHiC_assembly"
+      ],
+      "adapter": {
+        "type": "BigWigAdapter",
+        "bigWigLocation": {
+          "uri": "https://ndownloader.figshare.com/files/69583446",
+          "locationType": "UriLocation"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "QTL_LOD_bodyweight_MQM_chr4-28.3cM_100kb_interpolated-LinearWiggleDisplay",
+          "type": "LinearWiggleDisplay",
+          "defaultRendering": "xyplot",
+          "autoscale": "global",
+          "height": 140
+        }
+      ]
+    },
+    {
+      "type": "QuantitativeTrack",
+      "trackId": "QTL_LOD_bodyweight_MQM_chr6-12.6cM_100kb_interpolated",
+      "name": "Body weight QTL chr6 12.6 cM LOD, MQM (100 kb interpolated)",
+      "description": "LOD profile of the body weight QTL on chromosome 6 at 12.6 cM from multiple QTL mapping (MQM; sex as interactive covariate) in an Early x Late F2 intercross (1,334 F2 individuals). Linearly interpolated onto 100 kb bins for display.",
+      "category": [
+        "QTL mapping",
+        "Body weight"
+      ],
+      "assemblyNames": [
+        "AobtHiC_assembly"
+      ],
+      "adapter": {
+        "type": "BigWigAdapter",
+        "bigWigLocation": {
+          "uri": "https://ndownloader.figshare.com/files/69583440",
+          "locationType": "UriLocation"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "QTL_LOD_bodyweight_MQM_chr6-12.6cM_100kb_interpolated-LinearWiggleDisplay",
+          "type": "LinearWiggleDisplay",
+          "defaultRendering": "xyplot",
+          "autoscale": "global",
+          "height": 140
+        }
+      ]
+    },
+    {
+      "type": "QuantitativeTrack",
+      "trackId": "QTL_LOD_bodyweight_MQM_chr9-90.5cM_100kb_interpolated",
+      "name": "Body weight QTL chr9 90.5 cM LOD, MQM (100 kb interpolated)",
+      "description": "LOD profile of the body weight QTL on chromosome 9 at 90.5 cM from multiple QTL mapping (MQM; sex as interactive covariate) in an Early x Late F2 intercross (1,334 F2 individuals). Linearly interpolated onto 100 kb bins for display.",
+      "category": [
+        "QTL mapping",
+        "Body weight"
+      ],
+      "assemblyNames": [
+        "AobtHiC_assembly"
+      ],
+      "adapter": {
+        "type": "BigWigAdapter",
+        "bigWigLocation": {
+          "uri": "https://ndownloader.figshare.com/files/69583434",
+          "locationType": "UriLocation"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "QTL_LOD_bodyweight_MQM_chr9-90.5cM_100kb_interpolated-LinearWiggleDisplay",
+          "type": "LinearWiggleDisplay",
+          "defaultRendering": "xyplot",
+          "autoscale": "global",
+          "height": 140
+        }
+      ]
+    },
+    {
+      "type": "QuantitativeTrack",
+      "trackId": "recombination_rate_cM_per_Mb_100kb",
+      "name": "Recombination rate, 100 kb",
+      "description": "Local recombination rate (cM/Mb) estimated from crossovers in the Early x Late F2 intercross, per 100 kb, unsmoothed.",
+      "category": [
+        "QTL mapping",
+        "Recombination rate"
+      ],
+      "assemblyNames": [
+        "AobtHiC_assembly"
+      ],
+      "adapter": {
+        "type": "BigWigAdapter",
+        "bigWigLocation": {
+          "uri": "https://ndownloader.figshare.com/files/69583410",
+          "locationType": "UriLocation"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "recombination_rate_cM_per_Mb_100kb-LinearWiggleDisplay",
+          "type": "LinearWiggleDisplay",
+          "defaultRendering": "xyplot",
+          "height": 327
+        }
+      ]
+    },
+    {
+      "type": "QuantitativeTrack",
+      "trackId": "recombination_rate_cM_per_Mb_2Mb_smoothed",
+      "name": "Recombination rate, 2 Mb smoothed",
+      "description": "Local recombination rate (cM/Mb) estimated from crossovers in the Early x Late F2 intercross, 2 Mb moving average.",
+      "category": [
+        "QTL mapping",
+        "Recombination rate"
+      ],
+      "assemblyNames": [
+        "AobtHiC_assembly"
+      ],
+      "adapter": {
+        "type": "BigWigAdapter",
+        "bigWigLocation": {
+          "uri": "https://ndownloader.figshare.com/files/69583422",
+          "locationType": "UriLocation"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "recombination_rate_cM_per_Mb_2Mb_smoothed-LinearWiggleDisplay",
+          "type": "LinearWiggleDisplay",
+          "defaultRendering": "line",
+          "height": 150
+        }
+      ]
+    },
+    {
+      "type": "QuantitativeTrack",
+      "trackId": "F0_coverage_mean_100bp_E2",
+      "name": "F0 founder coverage, Early line 2 mean",
+      "description": "Mean read depth of the four F0 founders from Early line 2 (E2) of the QTL intercross, each normalized by its median depth, in 100 bp bins.",
+      "category": [
+        "QTL mapping",
+        "F0 founder coverage"
+      ],
+      "assemblyNames": [
+        "AobtHiC_assembly"
+      ],
+      "adapter": {
+        "type": "BigWigAdapter",
+        "bigWigLocation": {
+          "uri": "https://ndownloader.figshare.com/files/69583542",
+          "locationType": "UriLocation"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "F0_coverage_mean_100bp_E2-LinearWiggleDisplay",
+          "type": "LinearWiggleDisplay",
+          "defaultRendering": "xyplot",
+          "minScore": 0,
+          "maxScore": 2,
+          "height": 150,
+          "renderers": {
+            "XYPlotRenderer": {
+              "color": "rgb(255, 127, 0)",
+              "filled": false,
+              "minSize": 2
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "QuantitativeTrack",
+      "trackId": "F0_coverage_mean_100bp_L5",
+      "name": "F0 founder coverage, Late line 5 mean",
+      "description": "Mean read depth of the four F0 founders from Late line 5 (L5) of the QTL intercross, each normalized by its median depth, in 100 bp bins.",
+      "category": [
+        "QTL mapping",
+        "F0 founder coverage"
+      ],
+      "assemblyNames": [
+        "AobtHiC_assembly"
+      ],
+      "adapter": {
+        "type": "BigWigAdapter",
+        "bigWigLocation": {
+          "uri": "https://ndownloader.figshare.com/files/69583545",
+          "locationType": "UriLocation"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "F0_coverage_mean_100bp_L5-LinearWiggleDisplay",
+          "type": "LinearWiggleDisplay",
+          "defaultRendering": "xyplot",
+          "minScore": 0,
+          "maxScore": 2,
+          "height": 150,
+          "renderers": {
+            "XYPlotRenderer": {
+              "color": "rgb(152, 78, 163)",
+              "filled": false,
+              "minSize": 2
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "QuantitativeTrack",
+      "trackId": "F0_coverage_log2_ratio_L5_vs_E2_100bp",
+      "name": "F0 founder coverage log2 ratio, L5 vs E2",
+      "description": "log2 ratio of mean F0 founder read depth, Late line 5 vs Early line 2, in 100 bp bins, capped at -5 to 5. Positive values indicate higher coverage in L5 founders.",
+      "category": [
+        "QTL mapping",
+        "F0 founder coverage"
+      ],
+      "assemblyNames": [
+        "AobtHiC_assembly"
+      ],
+      "adapter": {
+        "type": "BigWigAdapter",
+        "bigWigLocation": {
+          "uri": "https://ndownloader.figshare.com/files/69583548",
+          "locationType": "UriLocation"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "F0_coverage_log2_ratio_L5_vs_E2_100bp-LinearWiggleDisplay",
+          "type": "LinearWiggleDisplay",
+          "defaultRendering": "xyplot",
+          "minScore": -5,
+          "maxScore": 5
+        }
+      ]
+    },
+    {
+      "type": "FeatureTrack",
+      "trackId": "Aobtectus_GCA_963669975.1_genes_eggNOG.gff",
+      "name": "Genes, gene-level with ortholog annotation",
+      "description": "Gene-level version of the GCA_963669975.1 gene annotation (one feature per gene, pseudogenes removed) with functional annotation from eggNOG-mapper v2.1.12.",
+      "category": [
+        "Genes and orthologs"
+      ],
+      "assemblyNames": [
+        "AobtHiC_assembly"
+      ],
+      "adapter": {
+        "type": "Gff3TabixAdapter",
+        "gffGzLocation": {
+          "uri": "Aobtectus_GCA_963669975.1_genes_eggNOG.gff.bgz",
+          "locationType": "UriLocation"
+        },
+        "index": {
+          "location": {
+            "uri": "Aobtectus_GCA_963669975.1_genes_eggNOG.gff.bgz.csi",
+            "locationType": "UriLocation"
+          },
+          "indexType": "CSI"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "Aobtectus_GCA_963669975.1_genes_eggNOG.gff-LinearBasicDisplay",
+          "type": "LinearBasicDisplay",
+          "height": 271,
+          "renderer": {
+            "type": "CanvasFeatureRenderer",
+            "labels": {
+              "name": "jexl:get(feature,'standard_name') || (get(feature,'ortholog_name') != '-' ? get(feature,'ortholog_name') : get(feature,'name'))",
+              "description": "jexl:(get(feature, 'product') == 'hypothetical protein' && get(feature, 'ortholog_description'))\n  ? 'Ortholog: ' + get(feature, 'ortholog_description')\n  : (get(feature, 'product') || ('Ortholog: ' + get(feature, 'ortholog_description')))\n"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "FeatureTrack",
+      "trackId": "Aobtectus_GCA_963669975.1_Drosophila_orthologs.gff",
+      "name": "Drosophila melanogaster orthologs",
+      "description": "Drosophila melanogaster orthologs of A. obtectus protein-coding genes inferred with InParanoid-DIAMOND v5.1, placed at the position of the A. obtectus gene.",
+      "category": [
+        "Genes and orthologs"
+      ],
+      "assemblyNames": [
+        "AobtHiC_assembly"
+      ],
+      "adapter": {
+        "type": "Gff3TabixAdapter",
+        "gffGzLocation": {
+          "uri": "Aobtectus_GCA_963669975.1_Drosophila_orthologs.gff.bgz",
+          "locationType": "UriLocation"
+        },
+        "index": {
+          "location": {
+            "uri": "Aobtectus_GCA_963669975.1_Drosophila_orthologs.gff.bgz.csi",
+            "locationType": "UriLocation"
+          },
+          "indexType": "CSI"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "Aobtectus_GCA_963669975.1_Drosophila_orthologs.gff-LinearBasicDisplay",
+          "type": "LinearBasicDisplay",
+          "height": 245,
+          "mouseover": "jexl:'Ortholog: ' + get(feature, 'id')",
+          "renderer": {
+            "type": "CanvasFeatureRenderer",
+            "color1": "rgb(247, 129, 191)",
+            "labels": {
+              "name": "jexl:get(feature,'symbol')",
+              "description": "jexl:get(feature,'description')"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "FeatureTrack",
+      "trackId": "DEGs_Early_vs_Late_female_abdomen.gff",
+      "name": "Differentially expressed genes, female abdomen",
+      "description": "Genes differentially expressed between Early and Late lines in female abdomen (FDR < 0.05, absolute log2 fold change > 1; Immonen et al. 2023), placed on this assembly by aligning transcripts with GMAP. Score is the log2 fold change; positive = higher expression in Early lines.",
+      "category": [
+        "Gene expression, Early vs Late"
+      ],
+      "assemblyNames": [
+        "AobtHiC_assembly"
+      ],
+      "adapter": {
+        "type": "Gff3TabixAdapter",
+        "gffGzLocation": {
+          "uri": "DEGs_Early_vs_Late_female_abdomen.gff.bgz",
+          "locationType": "UriLocation"
+        },
+        "index": {
+          "location": {
+            "uri": "DEGs_Early_vs_Late_female_abdomen.gff.bgz.csi",
+            "locationType": "UriLocation"
+          },
+          "indexType": "CSI"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "DEGs_Early_vs_Late_female_abdomen.gff-LinearBasicDisplay",
+          "type": "LinearBasicDisplay",
+          "mouseover": "jexl:\"Gene ID: \" + get(feature,'geneid') + \", Log2 Fold Change: \" + get(feature, 'score')",
+          "renderer": {
+            "type": "CanvasFeatureRenderer",
+            "color1": "jexl:get(feature, 'color_fold_change')",
+            "labels": {
+              "name": "jexl:get(feature,'corresponding_transcriptid')",
+              "description": "jexl:get(feature,'mapping_type')"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "FeatureTrack",
+      "trackId": "DEGs_Early_vs_Late_female_head_thorax.gff",
+      "name": "Differentially expressed genes, female head and thorax",
+      "description": "Genes differentially expressed between Early and Late lines in female head and thorax (FDR < 0.05, absolute log2 fold change > 1; Immonen et al. 2023), placed on this assembly by aligning transcripts with GMAP. Score is the log2 fold change; positive = higher expression in Early lines.",
+      "category": [
+        "Gene expression, Early vs Late"
+      ],
+      "assemblyNames": [
+        "AobtHiC_assembly"
+      ],
+      "adapter": {
+        "type": "Gff3TabixAdapter",
+        "gffGzLocation": {
+          "uri": "DEGs_Early_vs_Late_female_head_thorax.gff.bgz",
+          "locationType": "UriLocation"
+        },
+        "index": {
+          "location": {
+            "uri": "DEGs_Early_vs_Late_female_head_thorax.gff.bgz.csi",
+            "locationType": "UriLocation"
+          },
+          "indexType": "CSI"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "DEGs_Early_vs_Late_female_head_thorax.gff-LinearBasicDisplay",
+          "type": "LinearBasicDisplay",
+          "mouseover": "jexl:\"Gene ID: \" + get(feature,'geneid') + \", Log2 Fold Change: \" + get(feature, 'score')",
+          "renderer": {
+            "type": "CanvasFeatureRenderer",
+            "color1": "jexl:get(feature, 'color_fold_change')",
+            "labels": {
+              "name": "jexl:get(feature,'corresponding_transcriptid')",
+              "description": "jexl:get(feature,'mapping_type')"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "FeatureTrack",
+      "trackId": "DEGs_Early_vs_Late_male_abdomen.gff",
+      "name": "Differentially expressed genes, male abdomen",
+      "description": "Genes differentially expressed between Early and Late lines in male abdomen (FDR < 0.05, absolute log2 fold change > 1; Immonen et al. 2023), placed on this assembly by aligning transcripts with GMAP. Score is the log2 fold change; positive = higher expression in Early lines.",
+      "category": [
+        "Gene expression, Early vs Late"
+      ],
+      "assemblyNames": [
+        "AobtHiC_assembly"
+      ],
+      "adapter": {
+        "type": "Gff3TabixAdapter",
+        "gffGzLocation": {
+          "uri": "DEGs_Early_vs_Late_male_abdomen.gff.bgz",
+          "locationType": "UriLocation"
+        },
+        "index": {
+          "location": {
+            "uri": "DEGs_Early_vs_Late_male_abdomen.gff.bgz.csi",
+            "locationType": "UriLocation"
+          },
+          "indexType": "CSI"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "DEGs_Early_vs_Late_male_abdomen.gff-LinearBasicDisplay",
+          "type": "LinearBasicDisplay",
+          "mouseover": "jexl:\"Gene ID: \" + get(feature,'geneid') + \", Log2 Fold Change: \" + get(feature, 'score')",
+          "renderer": {
+            "type": "CanvasFeatureRenderer",
+            "color1": "jexl:get(feature, 'color_fold_change')",
+            "labels": {
+              "name": "jexl:get(feature,'corresponding_transcriptid')",
+              "description": "jexl:get(feature,'mapping_type')"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "FeatureTrack",
+      "trackId": "DEGs_Early_vs_Late_male_head_thorax.gff",
+      "name": "Differentially expressed genes, male head and thorax",
+      "description": "Genes differentially expressed between Early and Late lines in male head and thorax (FDR < 0.05, absolute log2 fold change > 1; Immonen et al. 2023), placed on this assembly by aligning transcripts with GMAP. Score is the log2 fold change; positive = higher expression in Early lines.",
+      "category": [
+        "Gene expression, Early vs Late"
+      ],
+      "assemblyNames": [
+        "AobtHiC_assembly"
+      ],
+      "adapter": {
+        "type": "Gff3TabixAdapter",
+        "gffGzLocation": {
+          "uri": "DEGs_Early_vs_Late_male_head_thorax.gff.bgz",
+          "locationType": "UriLocation"
+        },
+        "index": {
+          "location": {
+            "uri": "DEGs_Early_vs_Late_male_head_thorax.gff.bgz.csi",
+            "locationType": "UriLocation"
+          },
+          "indexType": "CSI"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "DEGs_Early_vs_Late_male_head_thorax.gff-LinearBasicDisplay",
+          "type": "LinearBasicDisplay",
+          "mouseover": "jexl:\"Gene ID: \" + get(feature,'geneid') + \", Log2 Fold Change: \" + get(feature, 'score')",
+          "renderer": {
+            "type": "CanvasFeatureRenderer",
+            "color1": "jexl:get(feature, 'color_fold_change')",
+            "labels": {
+              "name": "jexl:get(feature,'corresponding_transcriptid')",
+              "description": "jexl:get(feature,'mapping_type')"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "FeatureTrack",
+      "trackId": "excluded_regions_high_coverage.bed",
+      "name": "Excluded regions, high coverage",
+      "description": "Regions with abnormally high read depth (above the 99th percentile) in the pooled samples of both regimes; masked in the analyses.",
+      "category": [
+        "Genome quality"
+      ],
+      "assemblyNames": [
+        "AobtHiC_assembly"
+      ],
+      "adapter": {
+        "type": "BedTabixAdapter",
+        "bedGzLocation": {
+          "uri": "excluded_regions_high_coverage.bed.bgz",
+          "locationType": "UriLocation"
+        },
+        "index": {
+          "location": {
+            "uri": "excluded_regions_high_coverage.bed.bgz.csi",
+            "locationType": "UriLocation"
+          },
+          "indexType": "CSI"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "excluded_regions_high_coverage.bed-LinearBasicDisplay",
+          "type": "LinearBasicDisplay",
+          "height": 20,
+          "renderer": {
+            "type": "CanvasFeatureRenderer",
+            "displayMode": "collapse",
+            "showLabels": false,
+            "showDescriptions": false
+          }
+        }
+      ]
+    },
+    {
+      "type": "FeatureTrack",
+      "trackId": "excluded_regions_low_coverage.bed",
+      "name": "Excluded regions, low coverage",
+      "description": "Regions with abnormally low read depth (below the 7th percentile) in the pooled samples of both regimes; masked in the analyses.",
+      "category": [
+        "Genome quality"
+      ],
+      "assemblyNames": [
+        "AobtHiC_assembly"
+      ],
+      "adapter": {
+        "type": "BedTabixAdapter",
+        "bedGzLocation": {
+          "uri": "excluded_regions_low_coverage.bed.bgz",
+          "locationType": "UriLocation"
+        },
+        "index": {
+          "location": {
+            "uri": "excluded_regions_low_coverage.bed.bgz.csi",
+            "locationType": "UriLocation"
+          },
+          "indexType": "CSI"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "excluded_regions_low_coverage.bed-LinearBasicDisplay",
+          "type": "LinearBasicDisplay",
+          "height": 31,
+          "renderer": {
+            "type": "CanvasFeatureRenderer",
+            "displayMode": "collapse",
+            "showLabels": false,
+            "showDescriptions": false
+          }
+        }
+      ]
+    },
+    {
+      "type": "FeatureTrack",
+      "trackId": "excluded_regions_low_mapping_quality.bed",
+      "name": "Excluded regions, low mapping quality",
+      "description": "Regions where fewer than 40% of reads have mapping quality >= 10 in the pooled samples of both regimes; masked in the analyses.",
+      "category": [
+        "Genome quality"
+      ],
+      "assemblyNames": [
+        "AobtHiC_assembly"
+      ],
+      "adapter": {
+        "type": "BedTabixAdapter",
+        "bedGzLocation": {
+          "uri": "excluded_regions_low_mapping_quality.bed.bgz",
+          "locationType": "UriLocation"
+        },
+        "index": {
+          "location": {
+            "uri": "excluded_regions_low_mapping_quality.bed.bgz.csi",
+            "locationType": "UriLocation"
+          },
+          "indexType": "CSI"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "excluded_regions_low_mapping_quality.bed-LinearBasicDisplay",
+          "type": "LinearBasicDisplay",
+          "height": 27,
+          "renderer": {
+            "type": "CanvasFeatureRenderer",
+            "displayMode": "collapse",
+            "showLabels": false,
+            "showDescriptions": false
+          }
+        }
+      ]
+    },
+    {
+      "type": "FeatureTrack",
+      "trackId": "excluded_regions_assembly_gaps_small_contigs.bed",
+      "name": "Excluded regions, assembly gaps and small contigs",
+      "description": "Regions within 150 bp of an assembly gap, and contigs shorter than 20 kb; masked in the analyses.",
+      "category": [
+        "Genome quality"
+      ],
+      "assemblyNames": [
+        "AobtHiC_assembly"
+      ],
+      "adapter": {
+        "type": "BedTabixAdapter",
+        "bedGzLocation": {
+          "uri": "excluded_regions_assembly_gaps_small_contigs.bed.bgz",
+          "locationType": "UriLocation"
+        },
+        "index": {
+          "location": {
+            "uri": "excluded_regions_assembly_gaps_small_contigs.bed.bgz.csi",
+            "locationType": "UriLocation"
+          },
+          "indexType": "CSI"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "excluded_regions_assembly_gaps_small_contigs.bed-LinearBasicDisplay",
+          "type": "LinearBasicDisplay",
+          "height": 90,
+          "renderer": {
+            "type": "CanvasFeatureRenderer",
+            "displayMode": "collapse",
+            "showLabels": false,
+            "showDescriptions": false
+          }
+        }
+      ]
+    },
+    {
+      "type": "QuantitativeTrack",
+      "trackId": "GC_fraction_100bp",
+      "name": "GC content",
+      "description": "GC content per 100 bp bin, as a fraction (0-1).",
+      "category": [
+        "Genome quality"
+      ],
+      "assemblyNames": [
+        "AobtHiC_assembly"
+      ],
+      "adapter": {
+        "type": "BigWigAdapter",
+        "bigWigLocation": {
+          "uri": "https://ndownloader.figshare.com/files/69583539",
+          "locationType": "UriLocation"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "GC_fraction_100bp-LinearWiggleDisplay",
+          "type": "LinearWiggleDisplay",
+          "defaultRendering": "density",
+          "minScore": 0,
+          "maxScore": 1
+        }
+      ]
+    },
+    {
+      "type": "QuantitativeTrack",
+      "trackId": "mappability_100bp",
+      "name": "Mappability",
+      "description": "Mappability per 100 bp bin, as depth of simulated paired-end reads mapped back to the assembly (0-300; divide by 300 for a 0-1 scale).",
+      "category": [
+        "Genome quality"
+      ],
+      "assemblyNames": [
+        "AobtHiC_assembly"
+      ],
+      "adapter": {
+        "type": "BigWigAdapter",
+        "bigWigLocation": {
+          "uri": "https://ndownloader.figshare.com/files/69583530",
+          "locationType": "UriLocation"
+        }
+      },
+      "displays": [
+        {
+          "displayId": "mappability_100bp-LinearWiggleDisplay",
+          "type": "LinearWiggleDisplay",
+          "defaultRendering": "density",
+          "minScore": 0,
+          "maxScore": 300
+        }
+      ]
+    },
+    {
+      "type": "MultiQuantitativeTrack",
+      "trackId": "aobt_coverage_median_overlay",
+      "name": "Coverage, Early and Late regime medians (overlay)",
+      "description": "The Early and Late median corrected read depths (100 bp bins) in one plot. Early in orange, Late in purple. See the two single tracks for details.",
+      "category": [
+        "Copy-number variation"
+      ],
+      "assemblyNames": [
+        "AobtHiC_assembly"
+      ],
+      "adapter": {
+        "type": "MultiWiggleAdapter",
+        "subadapters": [
+          {
+            "type": "BigWigAdapter",
+            "bigWigLocation": {
+              "uri": "https://ndownloader.figshare.com/files/69583554",
+              "locationType": "UriLocation"
+            },
+            "name": "Early",
+            "source": "Early",
+            "color": "rgb(255, 127, 0)"
+          },
+          {
+            "type": "BigWigAdapter",
+            "bigWigLocation": {
+              "uri": "https://ndownloader.figshare.com/files/69583551",
+              "locationType": "UriLocation"
+            },
+            "name": "Late",
+            "source": "Late",
+            "color": "rgb(152, 78, 163)"
+          }
+        ]
+      },
+      "displays": [
+        {
+          "displayId": "aobt_coverage_median_overlay-MultiLinearWiggleDisplay",
+          "type": "MultiLinearWiggleDisplay",
+          "defaultRendering": "multiline",
+          "minScore": 0,
+          "maxScore": 5,
+          "height": 250
+        }
+      ]
+    },
+    {
+      "type": "MultiQuantitativeTrack",
+      "trackId": "aobt_cnv_calls_overlay",
+      "name": "CNV calls, Early and Late regimes (overlay)",
+      "description": "The Early and Late CNV call signals as two density rows. The value is the population-level copy number minus 2 (negative = deletion, positive = gain).",
+      "category": [
+        "Copy-number variation"
+      ],
+      "assemblyNames": [
+        "AobtHiC_assembly"
+      ],
+      "adapter": {
+        "type": "MultiWiggleAdapter",
+        "subadapters": [
+          {
+            "type": "BigWigAdapter",
+            "bigWigLocation": {
+              "uri": "https://ndownloader.figshare.com/files/69583521",
+              "locationType": "UriLocation"
+            },
+            "name": "Early",
+            "source": "Early",
+            "color": "rgb(255, 127, 0)"
+          },
+          {
+            "type": "BigWigAdapter",
+            "bigWigLocation": {
+              "uri": "https://ndownloader.figshare.com/files/69583518",
+              "locationType": "UriLocation"
+            },
+            "name": "Late",
+            "source": "Late",
+            "color": "rgb(152, 78, 163)"
+          }
+        ]
+      },
+      "displays": [
+        {
+          "displayId": "aobt_cnv_calls_overlay-MultiLinearWiggleDisplay",
+          "type": "MultiLinearWiggleDisplay",
+          "defaultRendering": "multirowdensity",
+          "height": 80
+        }
+      ]
+    },
+    {
+      "type": "MultiQuantitativeTrack",
+      "trackId": "aobt_f0_coverage_mean_overlay",
+      "name": "F0 founder coverage, E2 and L5 means (overlay)",
+      "description": "Mean read depth of the four F0 founders from Early line 2 (E2, orange) and from Late line 5 (L5, purple) of the QTL intercross, in one plot.",
+      "category": [
+        "QTL mapping",
+        "F0 founder coverage"
+      ],
+      "assemblyNames": [
+        "AobtHiC_assembly"
+      ],
+      "adapter": {
+        "type": "MultiWiggleAdapter",
+        "subadapters": [
+          {
+            "type": "BigWigAdapter",
+            "bigWigLocation": {
+              "uri": "https://ndownloader.figshare.com/files/69583542",
+              "locationType": "UriLocation"
+            },
+            "name": "E2 (Early regime)",
+            "source": "E2 (Early regime)",
+            "color": "rgb(255, 127, 0)"
+          },
+          {
+            "type": "BigWigAdapter",
+            "bigWigLocation": {
+              "uri": "https://ndownloader.figshare.com/files/69583545",
+              "locationType": "UriLocation"
+            },
+            "name": "L5 (Late regime)",
+            "source": "L5 (Late regime)",
+            "color": "rgb(152, 78, 163)"
+          }
+        ]
+      },
+      "displays": [
+        {
+          "displayId": "aobt_f0_coverage_mean_overlay-MultiLinearWiggleDisplay",
+          "type": "MultiLinearWiggleDisplay",
+          "defaultRendering": "xyplot",
+          "minScore": 0,
+          "maxScore": 2,
+          "height": 560,
+          "renderers": {
+            "MultiXYPlotRenderer": {
+              "filled": false,
+              "minSize": 2
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "MultiQuantitativeTrack",
+      "trackId": "aobt_qtl_bodyweight_mqm_interpolated_overlay",
+      "name": "Body weight QTL LOD, MQM, all five QTLs (100 kb interpolated)",
+      "description": "LOD profiles of the five body-weight QTLs from multiple QTL mapping (MQM; sex as interactive covariate), one row per QTL, interpolated onto 100 kb bins.",
+      "category": [
+        "QTL mapping",
+        "Body weight"
+      ],
+      "assemblyNames": [
+        "AobtHiC_assembly"
+      ],
+      "adapter": {
+        "type": "MultiWiggleAdapter",
+        "subadapters": [
+          {
+            "type": "BigWigAdapter",
+            "bigWigLocation": {
+              "uri": "https://ndownloader.figshare.com/files/69583458",
+              "locationType": "UriLocation"
+            },
+            "name": "chr2 22.9 cM",
+            "source": "chr2 22.9 cM"
+          },
+          {
+            "type": "BigWigAdapter",
+            "bigWigLocation": {
+              "uri": "https://ndownloader.figshare.com/files/69583455",
+              "locationType": "UriLocation"
+            },
+            "name": "chr4 25.3 cM",
+            "source": "chr4 25.3 cM"
+          },
+          {
+            "type": "BigWigAdapter",
+            "bigWigLocation": {
+              "uri": "https://ndownloader.figshare.com/files/69583446",
+              "locationType": "UriLocation"
+            },
+            "name": "chr4 28.3 cM",
+            "source": "chr4 28.3 cM"
+          },
+          {
+            "type": "BigWigAdapter",
+            "bigWigLocation": {
+              "uri": "https://ndownloader.figshare.com/files/69583440",
+              "locationType": "UriLocation"
+            },
+            "name": "chr6 12.6 cM",
+            "source": "chr6 12.6 cM"
+          },
+          {
+            "type": "BigWigAdapter",
+            "bigWigLocation": {
+              "uri": "https://ndownloader.figshare.com/files/69583434",
+              "locationType": "UriLocation"
+            },
+            "name": "chr9 90.5 cM",
+            "source": "chr9 90.5 cM"
+          }
+        ]
+      },
+      "displays": [
+        {
+          "displayId": "aobt_qtl_bodyweight_mqm_interpolated_overlay-MultiLinearWiggleDisplay",
+          "type": "MultiLinearWiggleDisplay",
+          "defaultRendering": "multirowxy",
+          "autoscale": "global",
+          "height": 696
+        }
+      ]
+    },
+    {
+      "type": "MultiQuantitativeTrack",
+      "trackId": "aobt_qtl_bodyweight_mqm_markers_overlay",
+      "name": "Body weight QTL LOD, MQM, all five QTLs (markers)",
+      "description": "LOD profiles of the five body-weight QTLs from multiple QTL mapping (MQM; sex as interactive covariate), one row per QTL, at marker resolution.",
+      "category": [
+        "QTL mapping",
+        "Body weight"
+      ],
+      "assemblyNames": [
+        "AobtHiC_assembly"
+      ],
+      "adapter": {
+        "type": "MultiWiggleAdapter",
+        "subadapters": [
+          {
+            "type": "BigWigAdapter",
+            "bigWigLocation": {
+              "uri": "https://ndownloader.figshare.com/files/69583452",
+              "locationType": "UriLocation"
+            },
+            "name": "chr2 22.9 cM",
+            "source": "chr2 22.9 cM"
+          },
+          {
+            "type": "BigWigAdapter",
+            "bigWigLocation": {
+              "uri": "https://ndownloader.figshare.com/files/69583449",
+              "locationType": "UriLocation"
+            },
+            "name": "chr4 25.3 cM",
+            "source": "chr4 25.3 cM"
+          },
+          {
+            "type": "BigWigAdapter",
+            "bigWigLocation": {
+              "uri": "https://ndownloader.figshare.com/files/69583443",
+              "locationType": "UriLocation"
+            },
+            "name": "chr4 28.3 cM",
+            "source": "chr4 28.3 cM"
+          },
+          {
+            "type": "BigWigAdapter",
+            "bigWigLocation": {
+              "uri": "https://ndownloader.figshare.com/files/69583437",
+              "locationType": "UriLocation"
+            },
+            "name": "chr6 12.6 cM",
+            "source": "chr6 12.6 cM"
+          },
+          {
+            "type": "BigWigAdapter",
+            "bigWigLocation": {
+              "uri": "https://ndownloader.figshare.com/files/69583431",
+              "locationType": "UriLocation"
+            },
+            "name": "chr9 90.5 cM",
+            "source": "chr9 90.5 cM"
+          }
+        ]
+      },
+      "displays": [
+        {
+          "displayId": "aobt_qtl_bodyweight_mqm_markers_overlay-MultiLinearWiggleDisplay",
+          "type": "MultiLinearWiggleDisplay",
+          "defaultRendering": "multirowxy",
+          "autoscale": "global",
+          "height": 696
+        }
+      ]
+    }
+  ]
+}

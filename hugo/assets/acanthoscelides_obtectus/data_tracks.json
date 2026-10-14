@@ -1,0 +1,796 @@
+[
+  {
+    "dataTrackName": "Genome",
+    "description": "Reference genome sequence (Hi-C scaffolded assembly AobtHiC)",
+    "links": [
+      {
+        "Download": "https://ftp.ebi.ac.uk/pub/databases/ena/wgs/public/cav/CAVLJG01.fasta.gz"
+      },
+      {
+        "Website": "https://www.ebi.ac.uk/ena/browser/view/GCA_963669975.1"
+      },
+      {
+        "Article": "https://doi.org/10.1093/gbe/evac177"
+      }
+    ],
+    "accessionOrDOI": "GCA_963669975.1",
+    "fileName": "CAVLJG01.fasta.gz",
+    "principalInvestigator": "G\u00f6ran Arnqvist",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "13 October 2026",
+    "assemblyGCAAccession": "GCA_963669975.1",
+    "buscoStats": "C:98.6% [S:86.6%, D:12.0%], F:0.4%, M:1.0%, n:1367 (insecta_odb10)"
+  },
+  {
+    "dataTrackName": "Protein-coding genes",
+    "description": "Annotation of protein-coding genes in the primary genome assembly, transferred with Liftoff from the earlier assembly GCA_933228535.1 (Immonen et al. 2023)",
+    "links": [
+      {
+        "Download": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/963/669/975/GCA_963669975.1_AobtHiC_assembly/GCA_963669975.1_AobtHiC_assembly_genomic.gff.gz"
+      },
+      {
+        "Website": "https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_963669975.1/"
+      }
+    ],
+    "accessionOrDOI": "GCA_963669975.1",
+    "fileName": "GCA_963669975.1_AobtHiC_assembly_genomic.gff.gz",
+    "principalInvestigator": "G\u00f6ran Arnqvist",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "13 October 2026",
+    "assemblyGCAAccession": "-",
+    "buscoStats": "-"
+  },
+  {
+    "dataTrackName": "Selective sweeps, Early regime",
+    "description": "Candidate selective-sweep regions consistently detected in the Early (short-lived) experimental evolution regime: Pool-HMM calls present in at least 6 of 8 pooled samples (4 lines x 2 sexes). Autosomes only.",
+    "links": [
+      {
+        "Download": "https://ndownloader.figshare.com/files/69583413"
+      },
+      {
+        "Website": "https://doi.org/10.17044/scilifelab.34059444"
+      }
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.34059444.v1",
+    "fileName": "selective_sweeps_consistent_Early.bed.gz",
+    "principalInvestigator": "G\u00f6ran Arnqvist",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "13 October 2026",
+    "assemblyGCAAccession": "-",
+    "buscoStats": "-"
+  },
+  {
+    "dataTrackName": "Selective sweeps, Late regime",
+    "description": "Candidate selective-sweep regions consistently detected in the Late (long-lived) experimental evolution regime: Pool-HMM calls present in at least 6 of 8 pooled samples (4 lines x 2 sexes). Autosomes only.",
+    "links": [
+      {
+        "Download": "https://ndownloader.figshare.com/files/69583407"
+      },
+      {
+        "Website": "https://doi.org/10.17044/scilifelab.34059444"
+      }
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.34059444.v1",
+    "fileName": "selective_sweeps_consistent_Late.bed.gz",
+    "principalInvestigator": "G\u00f6ran Arnqvist",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "13 October 2026",
+    "assemblyGCAAccession": "-",
+    "buscoStats": "-"
+  },
+  {
+    "dataTrackName": "Coverage, Early regime median",
+    "description": "Median read depth across the four Early lines (female and male pools summed per line), corrected for GC content and mappability, in 100 bp bins.",
+    "links": [
+      {
+        "Download": "https://ndownloader.figshare.com/files/69583554"
+      },
+      {
+        "Website": "https://doi.org/10.17044/scilifelab.34059444"
+      }
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.34059444.v1",
+    "fileName": "coverage_median_corrected_100bp_Early.bw",
+    "principalInvestigator": "G\u00f6ran Arnqvist",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "13 October 2026",
+    "assemblyGCAAccession": "-",
+    "buscoStats": "-"
+  },
+  {
+    "dataTrackName": "Coverage, Late regime median",
+    "description": "Median read depth across the four Late lines (female and male pools summed per line), corrected for GC content and mappability, in 100 bp bins.",
+    "links": [
+      {
+        "Download": "https://ndownloader.figshare.com/files/69583551"
+      },
+      {
+        "Website": "https://doi.org/10.17044/scilifelab.34059444"
+      }
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.34059444.v1",
+    "fileName": "coverage_median_corrected_100bp_Late.bw",
+    "principalInvestigator": "G\u00f6ran Arnqvist",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "13 October 2026",
+    "assemblyGCAAccession": "-",
+    "buscoStats": "-"
+  },
+  {
+    "dataTrackName": "Coverage log2 ratio, Late vs Early",
+    "description": "log2 ratio of median corrected read depth, Late vs Early, in 100 bp bins. Positive values indicate higher coverage in Late lines.",
+    "links": [
+      {
+        "Download": "https://ndownloader.figshare.com/files/69583557"
+      },
+      {
+        "Website": "https://doi.org/10.17044/scilifelab.34059444"
+      }
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.34059444.v1",
+    "fileName": "coverage_log2_ratio_Late_vs_Early_100bp.bw",
+    "principalInvestigator": "G\u00f6ran Arnqvist",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "13 October 2026",
+    "assemblyGCAAccession": "-",
+    "buscoStats": "-"
+  },
+  {
+    "dataTrackName": "Coverage log2 ratio, Late vs Early, denoised",
+    "description": "log2 ratio of median corrected read depth, Late vs Early, in 100 bp bins, denoised with a stationary wavelet transform. Input to the CNV segmentation.",
+    "links": [
+      {
+        "Download": "https://ndownloader.figshare.com/files/69583560"
+      },
+      {
+        "Website": "https://doi.org/10.17044/scilifelab.34059444"
+      }
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.34059444.v1",
+    "fileName": "coverage_log2_ratio_Late_vs_Early_100bp_denoised.bw",
+    "principalInvestigator": "G\u00f6ran Arnqvist",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "13 October 2026",
+    "assemblyGCAAccession": "-",
+    "buscoStats": "-"
+  },
+  {
+    "dataTrackName": "CNV segmentation, Late vs Early",
+    "description": "Circular binary segmentation of the denoised Late vs Early log2 coverage ratio; the value is the segment mean. All segments, before significance filtering.",
+    "links": [
+      {
+        "Download": "https://ndownloader.figshare.com/files/69583515"
+      },
+      {
+        "Website": "https://doi.org/10.17044/scilifelab.34059444"
+      }
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.34059444.v1",
+    "fileName": "CNV_segmentation_log2_ratio_Late_vs_Early.bw",
+    "principalInvestigator": "G\u00f6ran Arnqvist",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "13 October 2026",
+    "assemblyGCAAccession": "-",
+    "buscoStats": "-"
+  },
+  {
+    "dataTrackName": "CNV calls, Early regime",
+    "description": "Copy-number variants (deletions and gains) differentiated between regimes, called for the Early regime (fold change >= 1.5, permutation P <= 0.05). Columns: call type and population-level copy number minus 2.",
+    "links": [
+      {
+        "Download": "https://ndownloader.figshare.com/files/69583395"
+      },
+      {
+        "Website": "https://doi.org/10.17044/scilifelab.34059444"
+      }
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.34059444.v1",
+    "fileName": "CNV_calls_Early.bed.gz",
+    "principalInvestigator": "G\u00f6ran Arnqvist",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "13 October 2026",
+    "assemblyGCAAccession": "-",
+    "buscoStats": "-"
+  },
+  {
+    "dataTrackName": "CNV calls, Late regime",
+    "description": "Copy-number variants (deletions and gains) differentiated between regimes, called for the Late regime (fold change >= 1.5, permutation P <= 0.05). Columns: call type and population-level copy number minus 2.",
+    "links": [
+      {
+        "Download": "https://ndownloader.figshare.com/files/69583392"
+      },
+      {
+        "Website": "https://doi.org/10.17044/scilifelab.34059444"
+      }
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.34059444.v1",
+    "fileName": "CNV_calls_Late.bed.gz",
+    "principalInvestigator": "G\u00f6ran Arnqvist",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "13 October 2026",
+    "assemblyGCAAccession": "-",
+    "buscoStats": "-"
+  },
+  {
+    "dataTrackName": "CNV calls, Early regime (signal)",
+    "description": "The Early CNV calls as a signal track. Value is population-level copy number minus 2 (negative = deletion, positive = gain).",
+    "links": [
+      {
+        "Download": "https://ndownloader.figshare.com/files/69583521"
+      },
+      {
+        "Website": "https://doi.org/10.17044/scilifelab.34059444"
+      }
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.34059444.v1",
+    "fileName": "CNV_calls_Early.bw",
+    "principalInvestigator": "G\u00f6ran Arnqvist",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "13 October 2026",
+    "assemblyGCAAccession": "-",
+    "buscoStats": "-"
+  },
+  {
+    "dataTrackName": "CNV calls, Late regime (signal)",
+    "description": "The Late CNV calls as a signal track. Value is population-level copy number minus 2 (negative = deletion, positive = gain).",
+    "links": [
+      {
+        "Download": "https://ndownloader.figshare.com/files/69583518"
+      },
+      {
+        "Website": "https://doi.org/10.17044/scilifelab.34059444"
+      }
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.34059444.v1",
+    "fileName": "CNV_calls_Late.bw",
+    "principalInvestigator": "G\u00f6ran Arnqvist",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "13 October 2026",
+    "assemblyGCAAccession": "-",
+    "buscoStats": "-"
+  },
+  {
+    "dataTrackName": "Lifespan QTL LOD, interval mapping (markers)",
+    "description": "LOD scores for lifespan from interval mapping (sex as additive covariate) in an Early x Late F2 intercross (1,334 F2 individuals). Original values at marker positions.",
+    "links": [
+      {
+        "Download": "https://ndownloader.figshare.com/files/69583428"
+      },
+      {
+        "Website": "https://doi.org/10.17044/scilifelab.34059444"
+      }
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.34059444.v1",
+    "fileName": "QTL_LOD_lifespan_IM_markers.bw",
+    "principalInvestigator": "G\u00f6ran Arnqvist",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "13 October 2026",
+    "assemblyGCAAccession": "-",
+    "buscoStats": "-"
+  },
+  {
+    "dataTrackName": "Lifespan QTL LOD, interval mapping (100 kb interpolated)",
+    "description": "LOD scores for lifespan from interval mapping (sex as additive covariate) in an Early x Late F2 intercross (1,334 F2 individuals). Linearly interpolated onto 100 kb bins for display.",
+    "links": [
+      {
+        "Download": "https://ndownloader.figshare.com/files/69583425"
+      },
+      {
+        "Website": "https://doi.org/10.17044/scilifelab.34059444"
+      }
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.34059444.v1",
+    "fileName": "QTL_LOD_lifespan_IM_100kb_interpolated.bw",
+    "principalInvestigator": "G\u00f6ran Arnqvist",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "13 October 2026",
+    "assemblyGCAAccession": "-",
+    "buscoStats": "-"
+  },
+  {
+    "dataTrackName": "Body weight QTL LOD, interval mapping (markers)",
+    "description": "LOD scores for body weight from interval mapping (sex as additive covariate) in an Early x Late F2 intercross (1,334 F2 individuals). Original values at marker positions.",
+    "links": [
+      {
+        "Download": "https://ndownloader.figshare.com/files/69583461"
+      },
+      {
+        "Website": "https://doi.org/10.17044/scilifelab.34059444"
+      }
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.34059444.v1",
+    "fileName": "QTL_LOD_bodyweight_IM_markers.bw",
+    "principalInvestigator": "G\u00f6ran Arnqvist",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "13 October 2026",
+    "assemblyGCAAccession": "-",
+    "buscoStats": "-"
+  },
+  {
+    "dataTrackName": "Body weight QTL LOD, interval mapping (100 kb interpolated)",
+    "description": "LOD scores for body weight from interval mapping (sex as additive covariate) in an Early x Late F2 intercross (1,334 F2 individuals). Linearly interpolated onto 100 kb bins for display.",
+    "links": [
+      {
+        "Download": "https://ndownloader.figshare.com/files/69583464"
+      },
+      {
+        "Website": "https://doi.org/10.17044/scilifelab.34059444"
+      }
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.34059444.v1",
+    "fileName": "QTL_LOD_bodyweight_IM_100kb_interpolated.bw",
+    "principalInvestigator": "G\u00f6ran Arnqvist",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "13 October 2026",
+    "assemblyGCAAccession": "-",
+    "buscoStats": "-"
+  },
+  {
+    "dataTrackName": "Lifespan QTL LOD, MQM (markers)",
+    "description": "LOD profiles of the six lifespan QTLs from multiple QTL mapping (MQM; sex as interactive covariate) in an Early x Late F2 intercross (1,334 F2 individuals). Original values at marker positions.",
+    "links": [
+      {
+        "Download": "https://ndownloader.figshare.com/files/69583419"
+      },
+      {
+        "Website": "https://doi.org/10.17044/scilifelab.34059444"
+      }
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.34059444.v1",
+    "fileName": "QTL_LOD_lifespan_MQM_markers.bw",
+    "principalInvestigator": "G\u00f6ran Arnqvist",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "13 October 2026",
+    "assemblyGCAAccession": "-",
+    "buscoStats": "-"
+  },
+  {
+    "dataTrackName": "Lifespan QTL LOD, MQM (100 kb interpolated)",
+    "description": "LOD profiles of the six lifespan QTLs from multiple QTL mapping (MQM; sex as interactive covariate) in an Early x Late F2 intercross (1,334 F2 individuals). Linearly interpolated onto 100 kb bins for display.",
+    "links": [
+      {
+        "Download": "https://ndownloader.figshare.com/files/69583416"
+      },
+      {
+        "Website": "https://doi.org/10.17044/scilifelab.34059444"
+      }
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.34059444.v1",
+    "fileName": "QTL_LOD_lifespan_MQM_100kb_interpolated.bw",
+    "principalInvestigator": "G\u00f6ran Arnqvist",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "13 October 2026",
+    "assemblyGCAAccession": "-",
+    "buscoStats": "-"
+  },
+  {
+    "dataTrackName": "Body weight QTL chr2 22.9 cM LOD, MQM (100 kb interpolated)",
+    "description": "LOD profile of the body weight QTL on chromosome 2 at 22.9 cM from multiple QTL mapping (MQM; sex as interactive covariate) in an Early x Late F2 intercross (1,334 F2 individuals). Linearly interpolated onto 100 kb bins for display.",
+    "links": [
+      {
+        "Download": "https://ndownloader.figshare.com/files/69583458"
+      },
+      {
+        "Website": "https://doi.org/10.17044/scilifelab.34059444"
+      }
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.34059444.v1",
+    "fileName": "QTL_LOD_bodyweight_MQM_chr2-22.9cM_100kb_interpolated.bw",
+    "principalInvestigator": "G\u00f6ran Arnqvist",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "13 October 2026",
+    "assemblyGCAAccession": "-",
+    "buscoStats": "-"
+  },
+  {
+    "dataTrackName": "Body weight QTL chr4 25.3 cM LOD, MQM (100 kb interpolated)",
+    "description": "LOD profile of the body weight QTL on chromosome 4 at 25.3 cM from multiple QTL mapping (MQM; sex as interactive covariate) in an Early x Late F2 intercross (1,334 F2 individuals). Linearly interpolated onto 100 kb bins for display.",
+    "links": [
+      {
+        "Download": "https://ndownloader.figshare.com/files/69583455"
+      },
+      {
+        "Website": "https://doi.org/10.17044/scilifelab.34059444"
+      }
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.34059444.v1",
+    "fileName": "QTL_LOD_bodyweight_MQM_chr4-25.3cM_100kb_interpolated.bw",
+    "principalInvestigator": "G\u00f6ran Arnqvist",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "13 October 2026",
+    "assemblyGCAAccession": "-",
+    "buscoStats": "-"
+  },
+  {
+    "dataTrackName": "Body weight QTL chr4 28.3 cM LOD, MQM (100 kb interpolated)",
+    "description": "LOD profile of the body weight QTL on chromosome 4 at 28.3 cM from multiple QTL mapping (MQM; sex as interactive covariate) in an Early x Late F2 intercross (1,334 F2 individuals). Linearly interpolated onto 100 kb bins for display.",
+    "links": [
+      {
+        "Download": "https://ndownloader.figshare.com/files/69583446"
+      },
+      {
+        "Website": "https://doi.org/10.17044/scilifelab.34059444"
+      }
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.34059444.v1",
+    "fileName": "QTL_LOD_bodyweight_MQM_chr4-28.3cM_100kb_interpolated.bw",
+    "principalInvestigator": "G\u00f6ran Arnqvist",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "13 October 2026",
+    "assemblyGCAAccession": "-",
+    "buscoStats": "-"
+  },
+  {
+    "dataTrackName": "Body weight QTL chr6 12.6 cM LOD, MQM (100 kb interpolated)",
+    "description": "LOD profile of the body weight QTL on chromosome 6 at 12.6 cM from multiple QTL mapping (MQM; sex as interactive covariate) in an Early x Late F2 intercross (1,334 F2 individuals). Linearly interpolated onto 100 kb bins for display.",
+    "links": [
+      {
+        "Download": "https://ndownloader.figshare.com/files/69583440"
+      },
+      {
+        "Website": "https://doi.org/10.17044/scilifelab.34059444"
+      }
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.34059444.v1",
+    "fileName": "QTL_LOD_bodyweight_MQM_chr6-12.6cM_100kb_interpolated.bw",
+    "principalInvestigator": "G\u00f6ran Arnqvist",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "13 October 2026",
+    "assemblyGCAAccession": "-",
+    "buscoStats": "-"
+  },
+  {
+    "dataTrackName": "Body weight QTL chr9 90.5 cM LOD, MQM (100 kb interpolated)",
+    "description": "LOD profile of the body weight QTL on chromosome 9 at 90.5 cM from multiple QTL mapping (MQM; sex as interactive covariate) in an Early x Late F2 intercross (1,334 F2 individuals). Linearly interpolated onto 100 kb bins for display.",
+    "links": [
+      {
+        "Download": "https://ndownloader.figshare.com/files/69583434"
+      },
+      {
+        "Website": "https://doi.org/10.17044/scilifelab.34059444"
+      }
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.34059444.v1",
+    "fileName": "QTL_LOD_bodyweight_MQM_chr9-90.5cM_100kb_interpolated.bw",
+    "principalInvestigator": "G\u00f6ran Arnqvist",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "13 October 2026",
+    "assemblyGCAAccession": "-",
+    "buscoStats": "-"
+  },
+  {
+    "dataTrackName": "Recombination rate, 100 kb",
+    "description": "Local recombination rate (cM/Mb) estimated from crossovers in the Early x Late F2 intercross, per 100 kb, unsmoothed.",
+    "links": [
+      {
+        "Download": "https://ndownloader.figshare.com/files/69583410"
+      },
+      {
+        "Website": "https://doi.org/10.17044/scilifelab.34059444"
+      }
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.34059444.v1",
+    "fileName": "recombination_rate_cM_per_Mb_100kb.bw",
+    "principalInvestigator": "G\u00f6ran Arnqvist",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "13 October 2026",
+    "assemblyGCAAccession": "-",
+    "buscoStats": "-"
+  },
+  {
+    "dataTrackName": "Recombination rate, 2 Mb smoothed",
+    "description": "Local recombination rate (cM/Mb) estimated from crossovers in the Early x Late F2 intercross, 2 Mb moving average.",
+    "links": [
+      {
+        "Download": "https://ndownloader.figshare.com/files/69583422"
+      },
+      {
+        "Website": "https://doi.org/10.17044/scilifelab.34059444"
+      }
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.34059444.v1",
+    "fileName": "recombination_rate_cM_per_Mb_2Mb_smoothed.bw",
+    "principalInvestigator": "G\u00f6ran Arnqvist",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "13 October 2026",
+    "assemblyGCAAccession": "-",
+    "buscoStats": "-"
+  },
+  {
+    "dataTrackName": "F0 founder coverage, Early line 2 mean",
+    "description": "Mean read depth of the four F0 founders from Early line 2 (E2) of the QTL intercross, each normalized by its median depth, in 100 bp bins.",
+    "links": [
+      {
+        "Download": "https://ndownloader.figshare.com/files/69583542"
+      },
+      {
+        "Website": "https://doi.org/10.17044/scilifelab.34059444"
+      }
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.34059444.v1",
+    "fileName": "F0_coverage_mean_100bp_E2.bw",
+    "principalInvestigator": "G\u00f6ran Arnqvist",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "13 October 2026",
+    "assemblyGCAAccession": "-",
+    "buscoStats": "-"
+  },
+  {
+    "dataTrackName": "F0 founder coverage, Late line 5 mean",
+    "description": "Mean read depth of the four F0 founders from Late line 5 (L5) of the QTL intercross, each normalized by its median depth, in 100 bp bins.",
+    "links": [
+      {
+        "Download": "https://ndownloader.figshare.com/files/69583545"
+      },
+      {
+        "Website": "https://doi.org/10.17044/scilifelab.34059444"
+      }
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.34059444.v1",
+    "fileName": "F0_coverage_mean_100bp_L5.bw",
+    "principalInvestigator": "G\u00f6ran Arnqvist",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "13 October 2026",
+    "assemblyGCAAccession": "-",
+    "buscoStats": "-"
+  },
+  {
+    "dataTrackName": "F0 founder coverage log2 ratio, L5 vs E2",
+    "description": "log2 ratio of mean F0 founder read depth, Late line 5 vs Early line 2, in 100 bp bins, capped at -5 to 5. Positive values indicate higher coverage in L5 founders.",
+    "links": [
+      {
+        "Download": "https://ndownloader.figshare.com/files/69583548"
+      },
+      {
+        "Website": "https://doi.org/10.17044/scilifelab.34059444"
+      }
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.34059444.v1",
+    "fileName": "F0_coverage_log2_ratio_L5_vs_E2_100bp.bw",
+    "principalInvestigator": "G\u00f6ran Arnqvist",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "13 October 2026",
+    "assemblyGCAAccession": "-",
+    "buscoStats": "-"
+  },
+  {
+    "dataTrackName": "Genes, gene-level with ortholog annotation",
+    "description": "Gene-level version of the GCA_963669975.1 gene annotation (one feature per gene, pseudogenes removed) with functional annotation from eggNOG-mapper v2.1.12.",
+    "links": [
+      {
+        "Download": "https://ndownloader.figshare.com/files/69583527"
+      },
+      {
+        "Website": "https://doi.org/10.17044/scilifelab.34059444"
+      }
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.34059444.v1",
+    "fileName": "Aobtectus_GCA_963669975.1_genes_eggNOG.gff3.gz",
+    "principalInvestigator": "G\u00f6ran Arnqvist",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "13 October 2026",
+    "assemblyGCAAccession": "-",
+    "buscoStats": "-"
+  },
+  {
+    "dataTrackName": "Drosophila melanogaster orthologs",
+    "description": "Drosophila melanogaster orthologs of A. obtectus protein-coding genes inferred with InParanoid-DIAMOND v5.1, placed at the position of the A. obtectus gene.",
+    "links": [
+      {
+        "Download": "https://ndownloader.figshare.com/files/69583536"
+      },
+      {
+        "Website": "https://doi.org/10.17044/scilifelab.34059444"
+      }
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.34059444.v1",
+    "fileName": "Aobtectus_GCA_963669975.1_Drosophila_orthologs.gff3.gz",
+    "principalInvestigator": "G\u00f6ran Arnqvist",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "13 October 2026",
+    "assemblyGCAAccession": "-",
+    "buscoStats": "-"
+  },
+  {
+    "dataTrackName": "Differentially expressed genes, female abdomen",
+    "description": "Genes differentially expressed between Early and Late lines in female abdomen (FDR < 0.05, absolute log2 fold change > 1; Immonen et al. 2023), placed on this assembly by aligning transcripts with GMAP. Score is the log2 fold change; positive = higher expression in Early lines.",
+    "links": [
+      {
+        "Download": "https://ndownloader.figshare.com/files/69583512"
+      },
+      {
+        "Website": "https://doi.org/10.17044/scilifelab.34059444"
+      },
+      {
+        "Article": "https://doi.org/10.1093/gbe/evac177"
+      }
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.34059444.v1",
+    "fileName": "DEGs_Early_vs_Late_female_abdomen.gff3.gz",
+    "principalInvestigator": "G\u00f6ran Arnqvist",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "13 October 2026",
+    "assemblyGCAAccession": "-",
+    "buscoStats": "-"
+  },
+  {
+    "dataTrackName": "Differentially expressed genes, female head and thorax",
+    "description": "Genes differentially expressed between Early and Late lines in female head and thorax (FDR < 0.05, absolute log2 fold change > 1; Immonen et al. 2023), placed on this assembly by aligning transcripts with GMAP. Score is the log2 fold change; positive = higher expression in Early lines.",
+    "links": [
+      {
+        "Download": "https://ndownloader.figshare.com/files/69583506"
+      },
+      {
+        "Website": "https://doi.org/10.17044/scilifelab.34059444"
+      },
+      {
+        "Article": "https://doi.org/10.1093/gbe/evac177"
+      }
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.34059444.v1",
+    "fileName": "DEGs_Early_vs_Late_female_head_thorax.gff3.gz",
+    "principalInvestigator": "G\u00f6ran Arnqvist",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "13 October 2026",
+    "assemblyGCAAccession": "-",
+    "buscoStats": "-"
+  },
+  {
+    "dataTrackName": "Differentially expressed genes, male abdomen",
+    "description": "Genes differentially expressed between Early and Late lines in male abdomen (FDR < 0.05, absolute log2 fold change > 1; Immonen et al. 2023), placed on this assembly by aligning transcripts with GMAP. Score is the log2 fold change; positive = higher expression in Early lines.",
+    "links": [
+      {
+        "Download": "https://ndownloader.figshare.com/files/69583500"
+      },
+      {
+        "Website": "https://doi.org/10.17044/scilifelab.34059444"
+      },
+      {
+        "Article": "https://doi.org/10.1093/gbe/evac177"
+      }
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.34059444.v1",
+    "fileName": "DEGs_Early_vs_Late_male_abdomen.gff3.gz",
+    "principalInvestigator": "G\u00f6ran Arnqvist",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "13 October 2026",
+    "assemblyGCAAccession": "-",
+    "buscoStats": "-"
+  },
+  {
+    "dataTrackName": "Differentially expressed genes, male head and thorax",
+    "description": "Genes differentially expressed between Early and Late lines in male head and thorax (FDR < 0.05, absolute log2 fold change > 1; Immonen et al. 2023), placed on this assembly by aligning transcripts with GMAP. Score is the log2 fold change; positive = higher expression in Early lines.",
+    "links": [
+      {
+        "Download": "https://ndownloader.figshare.com/files/69583494"
+      },
+      {
+        "Website": "https://doi.org/10.17044/scilifelab.34059444"
+      },
+      {
+        "Article": "https://doi.org/10.1093/gbe/evac177"
+      }
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.34059444.v1",
+    "fileName": "DEGs_Early_vs_Late_male_head_thorax.gff3.gz",
+    "principalInvestigator": "G\u00f6ran Arnqvist",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "13 October 2026",
+    "assemblyGCAAccession": "-",
+    "buscoStats": "-"
+  },
+  {
+    "dataTrackName": "Excluded regions, high coverage",
+    "description": "Regions with abnormally high read depth (above the 99th percentile) in the pooled samples of both regimes; masked in the analyses.",
+    "links": [
+      {
+        "Download": "https://ndownloader.figshare.com/files/69583482"
+      },
+      {
+        "Website": "https://doi.org/10.17044/scilifelab.34059444"
+      }
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.34059444.v1",
+    "fileName": "excluded_regions_high_coverage.bed.gz",
+    "principalInvestigator": "G\u00f6ran Arnqvist",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "13 October 2026",
+    "assemblyGCAAccession": "-",
+    "buscoStats": "-"
+  },
+  {
+    "dataTrackName": "Excluded regions, low coverage",
+    "description": "Regions with abnormally low read depth (below the 7th percentile) in the pooled samples of both regimes; masked in the analyses.",
+    "links": [
+      {
+        "Download": "https://ndownloader.figshare.com/files/69583476"
+      },
+      {
+        "Website": "https://doi.org/10.17044/scilifelab.34059444"
+      }
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.34059444.v1",
+    "fileName": "excluded_regions_low_coverage.bed.gz",
+    "principalInvestigator": "G\u00f6ran Arnqvist",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "13 October 2026",
+    "assemblyGCAAccession": "-",
+    "buscoStats": "-"
+  },
+  {
+    "dataTrackName": "Excluded regions, low mapping quality",
+    "description": "Regions where fewer than 40% of reads have mapping quality >= 10 in the pooled samples of both regimes; masked in the analyses.",
+    "links": [
+      {
+        "Download": "https://ndownloader.figshare.com/files/69583470"
+      },
+      {
+        "Website": "https://doi.org/10.17044/scilifelab.34059444"
+      }
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.34059444.v1",
+    "fileName": "excluded_regions_low_mapping_quality.bed.gz",
+    "principalInvestigator": "G\u00f6ran Arnqvist",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "13 October 2026",
+    "assemblyGCAAccession": "-",
+    "buscoStats": "-"
+  },
+  {
+    "dataTrackName": "Excluded regions, assembly gaps and small contigs",
+    "description": "Regions within 150 bp of an assembly gap, and contigs shorter than 20 kb; masked in the analyses.",
+    "links": [
+      {
+        "Download": "https://ndownloader.figshare.com/files/69583488"
+      },
+      {
+        "Website": "https://doi.org/10.17044/scilifelab.34059444"
+      }
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.34059444.v1",
+    "fileName": "excluded_regions_assembly_gaps_small_contigs.bed.gz",
+    "principalInvestigator": "G\u00f6ran Arnqvist",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "13 October 2026",
+    "assemblyGCAAccession": "-",
+    "buscoStats": "-"
+  },
+  {
+    "dataTrackName": "GC content",
+    "description": "GC content per 100 bp bin, as a fraction (0-1).",
+    "links": [
+      {
+        "Download": "https://ndownloader.figshare.com/files/69583539"
+      },
+      {
+        "Website": "https://doi.org/10.17044/scilifelab.34059444"
+      }
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.34059444.v1",
+    "fileName": "GC_fraction_100bp.bw",
+    "principalInvestigator": "G\u00f6ran Arnqvist",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "13 October 2026",
+    "assemblyGCAAccession": "-",
+    "buscoStats": "-"
+  },
+  {
+    "dataTrackName": "Mappability",
+    "description": "Mappability per 100 bp bin, as depth of simulated paired-end reads mapped back to the assembly (0-300; divide by 300 for a 0-1 scale).",
+    "links": [
+      {
+        "Download": "https://ndownloader.figshare.com/files/69583530"
+      },
+      {
+        "Website": "https://doi.org/10.17044/scilifelab.34059444"
+      }
+    ],
+    "accessionOrDOI": "10.17044/scilifelab.34059444.v1",
+    "fileName": "mappability_100bp.bw",
+    "principalInvestigator": "G\u00f6ran Arnqvist",
+    "principalInvestigatorAffiliation": "Uppsala University",
+    "firstDateOnPortal": "13 October 2026",
+    "assemblyGCAAccession": "-",
+    "buscoStats": "-"
+  }
+]
