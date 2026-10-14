@@ -149,6 +149,8 @@ run() {
     if ! ${run_cmd} --rm -d  \
            --network "${network_name}" \
            -v "${CWD}/hugo":"/src" \
+           -e HUGO_GIT_REF_NAME="$(git -C "${CWD}" rev-parse --abbrev-ref HEAD)" \
+           -e HUGO_GIT_SHA="$(git -C "${CWD}" rev-parse HEAD)" \
            --name "${hugo_container_name}" \
            "${hugo_image}:${hugo_tag}" hugo server --bind 0.0.0.0; then
       return 1
