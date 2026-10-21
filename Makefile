@@ -65,6 +65,9 @@ GTF := $(filter %.gtf,$(unzipped))
 BED := $(addsuffix .bgz,$(filter %.bed,$(unzipped)))
 BED_INDICES := $(addsuffix .csi,$(BED))
 
+# BigWig files
+BIGWIG := $(filter %.bw,$(unzipped))
+
 # trix files and subdirectories. Since trix indexing creates multiple files based on the assembly name, use wildcard to capture them.
 TRIX_FILES := $(foreach dir,$(TRIX_DATA_DIRS),$(wildcard $(dir)/trix/*.ix*) $(wildcard $(dir)/trix/*_meta.json))
 
@@ -92,6 +95,7 @@ LOCAL_FILES := $(GFF) $(GFF_INDICES) \
 	$(FASTA) $(FASTA_INDICES) $(FASTA_GZINDICES) \
 	$(GTF) \
 	$(BED) $(BED_INDICES) \
+	$(BIGWIG) \
 	$(ALIASES) \
 	$(TRIX_FILES)
 
@@ -128,6 +132,7 @@ debug:
 	$(call log_list, "JBrowse configuration files:", $(JBROWSE_CONFIGS))
 	$(call log_list, "Files to download:", $(DOWNLOAD_TARGETS))
 	$(call log_list, "Recompressed files:", $(FASTA) $(GFF) $(GTF) $(BED))
+	$(call log_list, "BigWig files:", $(BIGWIG))
 	$(call log_list, "FASTA indices:", $(FASTA_INDICES) $(FASTA_GZINDICES))
 	$(call log_list, "GFF indices:", $(GFF_INDICES))
 	$(call log_list, "BED indices:", $(BED_INDICES))
@@ -186,7 +191,7 @@ clean-local:
 clean: clean-upstream clean-local clean-config clean-trix
 
 .PHONY: recompress
-recompress: $(GFF) $(FASTA) $(GTF) $(BED);
+recompress: $(GFF) $(FASTA) $(GTF) $(BED) $(BIGWIG);
 
 # Copy data and configuration to hugo static folder
 .PHONY: install
@@ -271,7 +276,7 @@ _pattern = %
 $(FASTA) $(GFF) $(BED): %.bgz: $$(filter $$*$$(_pattern),$$(DOWNLOAD_TARGETS))
 	@$(SHELL) -o pipefail -c "zcat -f < $< | ./scripts/filter $(<F) | bgzip > $@"
 
-$(GTF): $$(filter $$@$$(_pattern),$$(DOWNLOAD_TARGETS))
+$(GTF) $(BIGWIG): $$(filter $$@$$(_pattern),$$(DOWNLOAD_TARGETS))
 	@$(SHELL) -o pipefail -c "zcat -f < $< > $@"
 
 # The prerequisites of an alias file are all the FASTA files
