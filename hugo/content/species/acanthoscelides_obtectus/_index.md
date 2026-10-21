@@ -38,17 +38,16 @@ initialZoom: 1
 
 ### Description
 
-*Acanthoscelides obtectus* (Coleoptera: Chrysomelidae: Bruchinae), the bean weevil, is a seed-feeding beetle whose larvae develop within the seeds of common bean (*Phaseolus vulgaris*) and related legumes. It is widespread in agricultural systems and is an important post-harvest pest, particularly because adults can emerge from stored beans and reproduce over successive generations. Females oviposit on the surface of bean seeds, and larvae burrow into the seed shortly after hatching, where they complete development while feeding on the seed's nutritional reserves. The species is consequently well suited to laboratory experimental evolution, with relatively short generation times and substantial reproductive output.
+*Acanthoscelides obtectus* (Coleoptera: Chrysomelidae: Bruchinae), the bean beetle, is a seed-feeding species whose larvae develop within the seeds of common bean (*Phaseolus vulgaris*) and related legumes. It is widespread in agricultural systems and is an important post-harvest pest, particularly because adults can emerge from stored beans and reproduce over successive generations. Females oviposit on the surface of bean seeds, and larvae burrow into the seed shortly after hatching, where they complete development while feeding on the seed's nutritional reserves. The species is consequently well suited to laboratory experimental evolution, with relatively short generation times and substantial reproductive output.
 
 *A. obtectus* also exhibits considerable genetic and phenotypic variation in life-history traits, including development, reproductive timing, fecundity, longevity, and body size. Experimental-evolution studies have demonstrated that these traits can respond rapidly to artificial selection, providing evidence for substantial standing genetic variation and evolutionary potential. In particular, selection on the timing of reproduction can produce correlated responses in longevity and other life-history traits. The species has therefore become a useful model for investigating evolutionary trade-offs, life-history evolution, sexual selection, and the genetic architecture of fitness-related traits.
-
 
 #### How to cite
 
 If you use the data presented in the genome portal from this species in your research, please cite the original publication:
 
 ```{style=citation}
-Immonen, E., Sayadi, A., Stojković, B., Savković, U., Đorđević, M., Liljestrand-Rönn, J., Wiberg, R. A. W., & Arnqvist, G. (2023). Experimental life history evolution results in sex-specific evolution of gene expression in seed beetles. Genome Biology and Evolution, 15(1), evac177. https://doi.org/10.1093/gbe/evac177
+Toros, A. et al., in submission.
 ```
 
 If you have used the pages for this species in the Genome Portal, please refer to it in-text as: "The *Acanthoscelides obtectus* entry in the Swedish Reference Genome Portal (Retrieved <span class="todays-date"></span>)." and use the following for the bibliography:
@@ -60,6 +59,7 @@ Swedish Reference Genome Portal (Retrieved DATE_ACCESSED), SciLifeLab Data Centr
 #### References
 
 - Immonen, E., Sayadi, A., Stojković, B., Savković, U., Đorđević, M., Liljestrand-Rönn, J., Wiberg, R. A. W., & Arnqvist, G. (2023). Experimental life history evolution results in sex-specific evolution of gene expression in seed beetles. Genome Biology and Evolution, 15(1), evac177. <https://doi.org/10.1093/gbe/evac177>
+- Toros, A., Pettersson, M. E., Fuentes-Pardo, A. P., Rêgo, A., Rubin, C.-J., Sayadi, A., Đorđević, M., Savković, U., Stojković, B., Immonen, E., Kucka, M., Chan, Y. F., Andersson, L., & Arnqvist, G. (in submission). Experimental evolution unveils a role for structural variants and sex-specificity in the genetic architecture of lifespan.
 
 #### Changelog
 

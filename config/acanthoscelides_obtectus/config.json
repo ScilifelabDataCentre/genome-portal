@@ -26,7 +26,7 @@
         "init": {
           "assembly": "AobtHiC_assembly",
           "tracks": [
-            "GCA_963669975.1_AobtHiC_assembly_genomic.gff",
+            "Aobtectus_GCA_963669975.1_genes_eggNOG.gff",
             "aobt_cnv_calls_overlay",
             "QTL_LOD_lifespan_MQM_100kb_interpolated",
             "selective_sweeps_consistent_Early.bed",

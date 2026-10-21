@@ -26,6 +26,10 @@ BUSCO notation: C: Complete; S: Single-copy; D: Duplicated; F: Fragmented; M: Mi
 The data for *Acanthoscelides obtectus* displayed in the genome portal comes from:
 
 ```{style=citation}
+Toros, A., Pettersson, M. E., Fuentes-Pardo, A. P., Rêgo, A., Rubin, C.-J., Sayadi, A., Đorđević, M., Savković, U., Stojković, B., Immonen, E., Kucka, M., Chan, Y. F., Andersson, L., & Arnqvist, G. (in submission). Experimental evolution unveils a role for structural variants and sex-specificity in the genetic architecture of lifespan.
+```
+
+```{style=citation}
 Immonen, E., Sayadi, A., Stojković, B., Savković, U., Đorđević, M., Liljestrand-Rönn, J., Wiberg, R. A. W., & Arnqvist, G. (2023). Experimental life history evolution results in sex-specific evolution of gene expression in seed beetles. Genome Biology and Evolution, 15(1), evac177. https://doi.org/10.1093/gbe/evac177
 ```
 
@@ -40,7 +44,7 @@ The tools used to calculate the statistics shown on top of this page are describ
 
 ### Funding
 
-*The study in which the genome data was generated ([EDIT:publication_reference]) acknowledge funding by:*
+*The study in which the genome data was generated (Toros et al., in submission) acknowledge funding by:*
 
 - Swedish Research Council 2019-03611
 - Swedish Research Council 2023-03730
