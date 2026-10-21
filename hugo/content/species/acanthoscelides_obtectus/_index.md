@@ -44,10 +44,14 @@ initialZoom: 1
 
 #### How to cite
 
-If you use the data presented in the genome portal from this species in your research, please cite the original publication:
+If you use the data presented in the genome portal from this species in your research, please cite the upcoming publication or dataset:
 
 ```{style=citation}
-Toros, A. et al., in submission.
+Toros, A., Pettersson, M. E., Fuentes-Pardo, A. P., Rêgo, A., Rubin, C.-J., Sayadi, A., Đorđević, M., Savković, U., Stojković, B., Immonen, E., Kucka, M., Chan, Y. F., Andersson, L., & Arnqvist, G. (in submission). Experimental evolution unveils a role for structural variants and sex-specificity in the genetic architecture of lifespan.
+```
+
+```{style=citation}
+Toros, A., Pettersson, M., Fuentes-Pardo, A. P., Rego, A., Rubin, C.-J., Đorđević, M., Savković, U., Stojković, B., Immonen, E., Kučka, M., Chan, Y. F., Andersson, L., & Arnqvist, G. (2026). Candidate regions under consistent selection in seed beetle (*Acanthoscelides obtectus*) lines experimentally evolved for early or late reproduction (Version 1) [Data set]. Uppsala University. https://doi.org/10.17044/scilifelab.34059444.v1
 ```
 
 If you have used the pages for this species in the Genome Portal, please refer to it in-text as: "The *Acanthoscelides obtectus* entry in the Swedish Reference Genome Portal (Retrieved <span class="todays-date"></span>)." and use the following for the bibliography:
