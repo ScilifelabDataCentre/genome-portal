@@ -98,6 +98,28 @@ tracks:
   url: https://ndownloader.figshare.com/files/69583434
   fileName: QTL_LOD_bodyweight_MQM_chr9-90.5cM_100kb_interpolated.bw
   addTrack: false
+# NOTE: The five marker files below are only used in the
+# "Body weight QTL LOD, MQM, all five QTLs (markers)" overlay track
+- name: Body weight QTL chr2 22.9 cM LOD, MQM (markers)
+  url: https://ndownloader.figshare.com/files/69583452
+  fileName: QTL_LOD_bodyweight_MQM_chr2-22.9cM_markers.bw
+  addTrack: false
+- name: Body weight QTL chr4 25.3 cM LOD, MQM (markers)
+  url: https://ndownloader.figshare.com/files/69583449
+  fileName: QTL_LOD_bodyweight_MQM_chr4-25.3cM_markers.bw
+  addTrack: false
+- name: Body weight QTL chr4 28.3 cM LOD, MQM (markers)
+  url: https://ndownloader.figshare.com/files/69583443
+  fileName: QTL_LOD_bodyweight_MQM_chr4-28.3cM_markers.bw
+  addTrack: false
+- name: Body weight QTL chr6 12.6 cM LOD, MQM (markers)
+  url: https://ndownloader.figshare.com/files/69583437
+  fileName: QTL_LOD_bodyweight_MQM_chr6-12.6cM_markers.bw
+  addTrack: false
+- name: Body weight QTL chr9 90.5 cM LOD, MQM (markers)
+  url: https://ndownloader.figshare.com/files/69583431
+  fileName: QTL_LOD_bodyweight_MQM_chr9-90.5cM_markers.bw
+  addTrack: false
 - name: Recombination rate, 100 kb
   url: https://ndownloader.figshare.com/files/69583410
   fileName: recombination_rate_cM_per_Mb_100kb.bw
