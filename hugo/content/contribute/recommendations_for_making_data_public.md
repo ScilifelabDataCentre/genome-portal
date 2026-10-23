@@ -10,7 +10,7 @@ The Swedish Reference Genome Portal follows the <a href="https://www.go-fair.org
 {{< info_block >}}
 Recommendations for finding a suitable repository for a given data type can be found in the <a href="https://data-guidelines.scilifelab.se/data-life-cycle/share/" target="_blank">SciLifeLab Research Data Management guidelines</a>.
 
-Assistance to submit genome assemblies and protein-coding gene models to ENA can be obtained from <a href="https://nbis.se/services/data-management-support/apply" target="_blank">NBIS</a>. NBIS also provides <a href="https://github.com/NBISweden/data-submission-documentation/tree/main/ENA" target="_blank">examples</a> of submissions to ENA, including standard operating procedures (SOPs). These are exemplified in the <a href="/topics/ena-submission-tutorial">ENA submission tutorial</a> provided by SciLifeLab RDM Guidelines.</p>
+Assistance to submit genome assemblies and protein-coding gene models to ENA can be obtained from <a href="https://nbis.se/services/data-management-support/apply" target="_blank">NBIS</a>. NBIS also provides <a href="https://github.com/NBISweden/data-submission-documentation/tree/main/ENA" target="_blank">examples</a> of submissions to ENA, including standard operating procedures (SOPs). These are exemplified in the <a href="https://rdm-guidelines.scilifelab.se/topics/ena-submission-tutorial/" target="_blank">ENA submission tutorial</a> provided by SciLifeLab RDM Guidelines.
 
 {{< /info_block >}}
 
