@@ -2,6 +2,7 @@ baseURL: "https://genomes.scilifelab.se/"
 languageCode: "en-us"
 title: "Swedish Reference Genome Portal, hosted by SciLifeLab"
 buildFuture: true
+enableRobotsTXT: true
 
 params:
   maxSpeciesPerPage: 8
